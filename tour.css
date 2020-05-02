@@ -9,6 +9,11 @@ a {
  color: black;   
 }
 
+.title a {
+    text-decoration: none;
+    color: white;
+}
+
 .highlight {
     background: #444;
     color: white;
