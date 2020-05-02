@@ -1,0 +1,54 @@
+.page {
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+
+.page h1, p{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.page p {
+    font-size: 22px;
+}
+
+.code {
+    width:50%;
+    display:inline-block;
+}
+
+.header {
+    background-color: #f74c00;
+    height: 40px;
+    padding: 4px;
+    line-height: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    padding-left: 10px;
+}
+
+html, body {
+    padding:0px;
+    margin: 0px;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.next a, .back a{
+    color: white;
+}
+
+.nav {
+    float:right;
+    padding-right: 10px;
+}
+
+.code iframe, .page {
+    height: calc(100% - 48px);
+    height: -webkit-cal(100% - 48px);
+}
+
+.page {
+    overflow-y: auto;
+}
