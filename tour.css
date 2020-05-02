@@ -4,6 +4,15 @@
     float: left;
 }
 
+
+a {
+ color: black;   
+}
+
+.emoji {
+    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+}
+
 .page h1, p{
     margin-left: 40px;
     margin-right: 40px;
