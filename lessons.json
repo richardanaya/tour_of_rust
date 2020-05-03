@@ -12,7 +12,7 @@
     {
         "title":"Modules",
         "code":"DarkDarlingPress",
-        "content":"<p>Every Rust program or library is a <b>crate</b>.</p><p>Every crate is made of a heirarchy of <b>modules</b>.</p><p>Programs start running in the root module of a crate at the <span class=\"highlight\">main()</span> function in a file called \"main.rs\".<p></p><p>Libraries have a root module in the file \"lib.rs\"</p><p>To prevent typing out full paths like <span class=\"highlight\">std::time::SystemTime</span>. The <b>use</b> keyword allows us to specify particular items from modules we want to use throughout our code without a full path. For instance <span class=\"highlight\">use std::time::SystemTime</span> allows me to just use the identifier <span class=\"highlight\">SystemTime</span> in my main function.</p><p><b>std</b> is the crate of the <b>standard library</b> of Rust which is full of useful data structures and functions for interacting with your operating system.</p><p>A searchable directory of crates created by the community can be found at <a href=\"https://crates.io/\">https://crates.io</a></p>"
+        "content":"<p>Every Rust program or library is a <b>crate</b>.</p><p>Every crate is made of a heirarchy of <b>modules</b>.</p><p>Programs start running in the root module of a crate at the <highlight>main()</highlight> function in a file called \"main.rs\".<p></p><p>Libraries have a root module in the file \"lib.rs\"</p><p>To prevent typing out full paths like <highlight>std::time::SystemTime</highlight>. The <b>use</b> keyword allows us to specify particular items from modules we want to use throughout our code without a full path. For instance <highlight>use std::time::SystemTime</highlight> allows me to just use the identifier <highlight>SystemTime</highlight> in my main function.</p><p><b>std</b> is the crate of the <b>standard library</b> of Rust which is full of useful data structures and functions for interacting with your operating system.</p><p>A searchable directory of crates created by the community can be found at <a href=\"https://crates.io/\">https://crates.io</a></p>"
     },
     {
         "title":"Exporting",
@@ -22,7 +22,7 @@
     {
         "title":"Functions",
         "code":"FickleInsistentThing",
-        "content":"<p>A function can take zero or more arguments.</p><p>In this example, add takes two parameters of type <span class=\"highlight\">i32</span> (integer of 32 bit length).</p>"
+        "content":"<p>A function can take zero or more arguments.</p><p>In this example, add takes two parameters of type <highlight>i32</highlight> (integer of 32 bit length).</p>"
     },
     {
         "title":"Variables",

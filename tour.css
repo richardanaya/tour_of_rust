@@ -14,13 +14,6 @@ a {
     color: white;
 }
 
-.highlight {
-    background: #444;
-    color: white;
-    padding-left: 3px;
-    padding-right: 3px;
-}
-
 .emoji {
     font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
 }
@@ -72,4 +65,13 @@ html, body {
 
 .page {
     overflow-y: auto;
+}
+
+
+highlight {
+    display: inline;
+    background: #444;
+    color: white;
+    padding-left: 3px;
+    padding-right: 3px;
 }
