@@ -86,3 +86,7 @@ li {
 .nav span {
     padding-left: 10px;
 }
+
+.toc a{
+    color: white;
+}
