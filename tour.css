@@ -103,4 +103,12 @@ li {
     .code {
         height: 100%;
     }
+
+    .header {
+        font-size: 14px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
 }
