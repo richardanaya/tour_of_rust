@@ -1,0 +1,37 @@
+[
+    {
+        "title":"Hello, <span class=\"emoji\">🦀</span>",
+        "code":"TechnologicalHumiliatingProblems",
+        "content":"<p>Welcome to the tour of Rust. This is meant to be a step by step guide through the most basic features of the language.  Rust is often considered a language with a steep learning curve, I hope we can convince you there's alot to explore before we even get to complex things like generics or lifetimes.</p> <p>In this example we show Rust's support for unicode strings in this classic example.</p>"
+    },
+    {
+        "title":"The Rust Playground",
+        "code":"UnrealisticSnarlingPlanes",
+        "content":"<p>This tour uses a REPL at <a href=\"https://repl.it\">https://repl.it</a></p><p>You might alternatively enjoy the Rust Playground at <a href=\"https://play.rust-lang.org\">https://play.rust-lang.org</a> for a more advanced up to date playground.</p>"
+    },
+    {
+        "title":"Modules",
+        "code":"DarkDarlingPress",
+        "content":"<p>Every Rust program or library is a <b>crate</b>.</p><p>Every crate is made of a heirarchy of <b>modules</b>.</p><p>Programs start running in the root module of a crate at the <span class=\"highlight\">main()</span> function in a file called \"main.rs\".<p></p><p>Libraries have a root module in the file \"lib.rs\"</p><p>To prevent typing out full paths like <span class=\"highlight\">std::time::SystemTime</span>. The <b>use</b> keyword allows us to specify particular items from modules we want to use throughout our code without a full path. For instance <span class=\"highlight\">use std::time::SystemTime</span> allows me to just use the identifier <span class=\"highlight\">SystemTime</span> in my main function.</p><p><b>std</b> is the crate of the <b>standard library</b> of Rust which is full of useful data structures and functions for interacting with your operating system.</p><p>A searchable directory of crates created by the community can be found at <a href=\"https://crates.io/\">https://crates.io</a></p>"
+    },
+    {
+        "title":"Exporting",
+        "code":"ArcticBreakableMacroinstruction",
+        "content":"<p>In Rust, we export members of a module using the <b>pub</b> keyword.</p><p>When using a module either within your own code or an external crate, you can only refer to members that have been marked public.</p><p>The code in this example is broken, add the <b>pub</b> keyword in the appropriate place to fix it.</p>"
+    },
+    {
+        "title":"Functions",
+        "code":"FickleInsistentThing",
+        "content":"<p>A function can take zero or more arguments.</p><p>In this example, add takes two parameters of type <span class=\"highlight\">i32</span> (integer of 32 bit length).</p>"
+    },
+    {
+        "title":"Variables",
+        "code":"FilthyPapayawhipFrontend",
+        "content":" <p>Variables are declared using the <b>let</b> keyword.</p><p>When assigning a value, Rust will be able to infer the type of your variable 99% of the time. If it cannot you may add the type to your variable declaration.</p><p>Notice how we can assign to the same variable name multiple times. This is called variable shadowing and the type can be changed for subsequent references to that name.</b></p>"
+    },
+    {
+        "title":"Multiple return variables",
+        "code":"PoorAptLibrary",
+        "content":"<p>Functions can return multiple values by returning a <b>tuple</b> of values.</p><p>The values can be referenced by their position in the tuple.</p><p>Rust supports various kinds of destructuring that we will see in many forms. It allows us to extract sub-pieces of data structures in ergonomic ways. Be on the look out!</p>"
+    }
+]
