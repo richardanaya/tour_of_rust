@@ -1,7 +1,7 @@
 [
     {
         "title":"Hello, <span class=\"emoji\">🦀</span>",
-        "code":"TechnologicalHumiliatingProblems",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D",
         "content":"<p>Welcome to the <b>Tour of Rust</b>. This is meant to be a step by step guide through the features of the language.  Rust is often considered a language with a steep learning curve, I hope I can convince you there's alot to explore before we even get to complex parts.</p> <p>In this example we show Rust's support for unicode strings in this classic example.</p>"
     },
     {
@@ -10,52 +10,52 @@
     },
     {
         "title":"The Rust Playground",
-        "code":"UnrealisticSnarlingPlanes",
-        "content":"<p>This tour uses a REPL at <a href=\"https://repl.it\">https://repl.it</a></p><p>You might alternatively enjoy the Rust Playground at <a href=\"https://play.rust-lang.org\">https://play.rust-lang.org</a> for a more advanced up to date playground.</p>"
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D",
+        "content":"<p>This tour uses an interactive coding tool at <a href=\"https://play.rust-lang.org/\">https://play.rust-lang.org</a></p><p>It's a great way to play around with Rust and show others your creativity and challenges!.</p>"
     },
     {
         "title":"Modules",
-        "code":"DarkDarlingPress",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A",
         "content":"<p>Every Rust program or library is a <b>crate</b>.</p><p>Every crate is made of a heirarchy of <b>modules</b>.</p><p>Programs start running in the root module of a crate at the <highlight>main()</highlight> function in a file called \"main.rs\".<p></p><p>Libraries have a root module in the file \"lib.rs\"</p><p>To prevent typing out full paths like <highlight>std::f64::consts::PI</highlight>. The <b>use</b> keyword allows us to specify particular items from modules we want to use throughout our code without a full path. For instance <highlight>use std::f64::consts::PI</highlight> allows me to just use the identifier <highlight>PI</highlight> in my main function.</p><p><b>std</b> is the crate of the <b>standard library</b> of Rust which is full of useful data structures and functions for interacting with your operating system.</p><p>A searchable directory of crates created by the community can be found at <a href=\"https://crates.io/\">https://crates.io</a></p>"
     },
     {
         "title":"Exporting",
-        "code":"ArcticBreakableMacroinstruction",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20my_sub_module%20%7B%0A%20%20fn%20do_something()%20%7B%0A%20%20%20%20println!(%22doing%20something%22)%0A%20%20%7D%0A%0A%20%20pub%20fn%20do_something_else()%20%7B%0A%20%20%20%20println!(%22doing%20something%20else%22)%0A%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20my_sub_module%3A%3Ado_something()%3B%0A%7D%0A",
         "content":"<p>In Rust, we export members of a module using the <b>pub</b> keyword.</p><p>When using a module either within your own code or an external crate, you can only refer to members that have been marked public.</p><p>The code in this example is broken, add the <b>pub</b> keyword in the appropriate place to fix it.</p>"
     },
     {
         "title":"Functions",
-        "code":"FickleInsistentThing",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3Ai32%2C%20y%3Ai32)%20-%3E%20i32%20%7B%0A%09return%20x%20%2B%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%09println!(%22%7B%7D%22%2Cadd(42%2C%2013))%3B%0A%7D",
         "content":"<p>A function can take zero or more arguments.</p><p>In this example, add takes two parameters of type <highlight>i32</highlight> (integer of 32 bit length).</p><p>Function names are always in <highlight>snake_case</highlight></p>"
     },
     {
         "title":"Variables",
-        "code":"FilthyPapayawhipFrontend",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20let%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20let%20x%3Af64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20let%20x%3B%0A%20%20x%20%3D%200%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D",
         "content":" <p>Variables are declared using the <b>let</b> keyword.</p><p>When assigning a value, Rust will be able to infer the type of your variable 99% of the time. If it cannot you may add the type to your variable declaration.</p><p>Notice how we can assign to the same variable name multiple times. This is called variable shadowing and the type can be changed for subsequent references to that name.</b></p><p>Variable names are always in <highlight>snake_case</highlight></p>"
     },
     {
         "title":"Changing values",
-        "code":"SqueakyBestTwintext",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%20%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D",
         "content":" <p>Rust cares a great deal about what values are modified. Values fall into two types:</p><ul><li><b>mutable</b> - the location in memory can be written to and read</li><li><b>immutable</b> - the location in memory can only be read</li></ul><p>Mutable values are always denoted with a <b>mut</b> keyword in some manner</p><p>We will have alot more to say on this concept, but for now just keep an eye out for this keyword for what things can be modified</p>"
     },
     {
         "title":"Multiple return variables",
-        "code":"PoorAptLibrary",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3Ai32%2C%20y%3Ai32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%09return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%09let%20result%20%3D%20swap(123%2C%20321)%3B%0A%09println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%09let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%09println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A",
         "content":"<p>Functions can return multiple values by returning a <b>tuple</b> of values.</p><p>The values can be referenced by their position in the tuple.</p><p>Rust supports various kinds of destructuring that we will see in many forms. It allows us to extract sub-pieces of data structures in ergonomic ways. Be on the look out!</p>"
     },
     {
         "title":"Basic types",
-        "code":"FlatScentedCustomers",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20x%20%3D%2012%3B%0A%20%20let%20a%20%3D%2012u8%3B%0A%20%20let%20b%20%3D%204.3%3B%0A%20%20let%20c%20%3D%204.3f64%3B%0A%20%20let%20bv%20%3D%20true%3B%0A%20%20let%20t%20%3D%20(13%2Cfalse)%3B%0A%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20println!(%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2Cx%2Ca%2Cb%2Cc%2Cbv%2Ct.0%2Ct.1%2Csentence)%3B%0A%7D",
         "content":"<p>Rust has a variety of familiar types <ul><li>booleans - <highlight>bool</highlight> for representing true/false</li><li>unsigned integers - <highlight>u8</highlight><highlight>u32</highlight><highlight>u64</highlight> for representing positive whole numbers</li><li>signed integers - <highlight>i8</highlight><highlight>i32</highlight><highlight>i64</highlight> for representing positive/negative whole numbers</li><li>pointer sized integers - <highlight>uint</highlight><highlight>isize</highlight> for representing indexes and sizes of things in memory</li><li>floating point - <highlight>f32</highlight><highlight>f64</highlight></li><li>text related - <highlight>str</highlight><highlight>char</highlight></li><li>tuple - <highlight>(value,value,...)</highlight> for passing fixed sequences of values on the stack<li>slices - <highlight>&[T]</highlight> for referencing views into sequences of values in memory</ul></p><p>We will be talking about a few of these in detail later.</p><p>Fair warning: text might be more complex than you are used to in other languages, since Rust is a systems programming language, it's oriented toward caring about memory issues you might not be used to. We will be going into detail on text later.</p><p>Note how numeric types can be explicitly specified by appending the type to the end of the number (e.g. <highlight>13u32</highlight>)</p>"
     },
     {
         "title":"Basic type conversion",
-        "code":"SneakyBigheartedHashfunction",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20a%20%3D%2013u8%3B%0A%20%20let%20b%20%3D%207u32%3B%0A%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20let%20t%20%3D%20true%3B%0A%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D",
         "content":"<p>Rust requires explicitness when it comes to numeric types. One cannot use a <highlight>u8</highlight> for a <highlight>u32</highlight> casually without error.</p><p>Luckily rust makes numeric type conversions very easy with the <b>as</b> keyword.</p>"
     },
     {
         "title":"Constants",
-        "code":"ActiveElectricInformationtechnology",
+        "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3Af32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20println!(%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2CPI)%3B%0A%7D",
         "content":"<p>Constants allow a us to specify a common value that's used through out our code many times efficiently.  Instead of copying values like variables where they are used, constants directly replace the text identifier where they are used with their value.</p><p>Unlike variables, constants must always have explicit types</p><p>Constant names are always in <highlight>SCREAMING_SNAKE_CASE</highlight></p>"
     },
     {
