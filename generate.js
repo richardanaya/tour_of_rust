@@ -87,7 +87,7 @@ fs.writeFileSync(fileName,`<html>
             <span class="title"><a href="index.html">Tour of Rust</a></span>
             <span class="nav">
             <span class="back"><a href="TOC.html">Table of Contents</a></span>
-            <span class="back"><a href="${getFileName(lessons.length-1)}.html">Back</a></span>
+            <span class="back"><a href="${getFileName(lessons.length-1)}">Back</a></span>
             </span>
         </div>
         <div class="page">
