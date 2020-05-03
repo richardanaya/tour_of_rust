@@ -82,3 +82,7 @@ li {
     padding-top: 3px;
     padding-bottom: 3px;
 }
+
+.nav span {
+    padding-left: 10px;
+}
