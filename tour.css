@@ -90,4 +90,17 @@ li {
 
 .toc a{
     color: white;
+} 
+
+@media screen and (max-width: 600px) {
+    .code, .page {
+        width: 100%;
+        display: block;
+        height: auto;
+        padding-bottom: 40px;
+    }
+
+    .code {
+        height: 100%;
+    }
 }

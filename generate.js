@@ -5,6 +5,7 @@ let lessons = JSON.parse(fs.readFileSync('lessons.json'));
 function template(title,code,content,index,isLast){
     return `<html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
         <title>Tour of Rust -${title}</title>
         <link rel="stylesheet" href="tour.css">
@@ -54,6 +55,7 @@ for(var i in lessons){
 let fileName = "TOC.html";
 fs.writeFileSync(fileName,`<html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
     <title>Tour of Rust - Table of Contents</title>
     <link rel="stylesheet" href="tour.css">
@@ -80,6 +82,7 @@ ${lessons.map((x,i)=>`<li><a href="${getFileName(i)}">${i}. ${x.title}</a></li>`
 fileName = "end.html";
 fs.writeFileSync(fileName,`<html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
     <title>Tour of Rust - The End</title>
     <link rel="stylesheet" href="tour.css">
