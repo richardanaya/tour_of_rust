@@ -30,8 +30,18 @@
         "content":" <p>Variables are declared using the <b>let</b> keyword.</p><p>When assigning a value, Rust will be able to infer the type of your variable 99% of the time. If it cannot you may add the type to your variable declaration.</p><p>Notice how we can assign to the same variable name multiple times. This is called variable shadowing and the type can be changed for subsequent references to that name.</b></p>"
     },
     {
+        "title":"Changing values",
+        "code":"SqueakyBestTwintext",
+        "content":" <p>Rust cares a great deal about what values are modified. Values fall into two types:</p><ul><li>mutable - a value location in memory can be written to</li><li>immutable - a values location in memory can only be read</li></ul><p>Mutable values are always denoted with a <b>mut</b> keyword in some manner</p><p>We will have alot more to say on this concept, but for now just keep an eye out for this keyword for what things can be modified</p>"
+    },
+    {
         "title":"Multiple return variables",
         "code":"PoorAptLibrary",
         "content":"<p>Functions can return multiple values by returning a <b>tuple</b> of values.</p><p>The values can be referenced by their position in the tuple.</p><p>Rust supports various kinds of destructuring that we will see in many forms. It allows us to extract sub-pieces of data structures in ergonomic ways. Be on the look out!</p>"
+    },
+    {
+        "title":"Basic types",
+        "code":"FlatScentedCustomers",
+        "content":"<p>Rust has a variety of familiar types <ul><li>booleans - <highlight>bool</highlight> for representing true/false</li><li>unsigned integers - <highlight>u8</highlight><highlight>u32</highlight><highlight>u64</highlight> for representing positive whole numbers</li><li>signed integers - <highlight>i8</highlight><highlight>i32</highlight><highlight>i64</highlight> for representing positive/negative whole numbers</li><li>pointer sized integers - <highlight>uint</highlight><highlight>isize</highlight> for representing indexes and sizes of things in memory</li><li>floating point - <highlight>f32</highlight><highlight>f64</highlight></li><li>text related - <highlight>str</highlight><highlight>char</highlight></li><li>tuple - <highlight>(value,value,...)</highlight> for passing fixed sequences of values on the stack<li>slices - <highlight>&[T]</highlight> for referencing views into sequences of values in memory</ul></p><p>We will be talking about a few of these in detail later.</p><p>Fair warning: text might be more complex than you are used to in other languages, since Rust is a systems programming language, it's oriented toward caring about memory issues you might not be used to.</p><p>Note how numeric types can be explicitly specified by appending the type to the end of the number (e.g. <highlight>13u32</highlight>)</p>"
     }
 ]

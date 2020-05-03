@@ -74,4 +74,11 @@ highlight {
     color: white;
     padding-left: 3px;
     padding-right: 3px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+li {
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
