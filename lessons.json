@@ -2,7 +2,7 @@
     {
         "title":"Hello, <span class=\"emoji\">🦀</span>",
         "code":"TechnologicalHumiliatingProblems",
-        "content":"<p>Welcome to the tour of Rust. This is meant to be a step by step guide through the features of the language.  Rust is often considered a language with a steep learning curve, I hope I can convince you there's alot to explore before we even get to complex parts.</p> <p>In this example we show Rust's support for unicode strings in this classic example.</p>"
+        "content":"<p>Welcome to the <b>Tour of Rust</b>. This is meant to be a step by step guide through the features of the language.  Rust is often considered a language with a steep learning curve, I hope I can convince you there's alot to explore before we even get to complex parts.</p> <p>In this example we show Rust's support for unicode strings in this classic example.</p>"
     },
     {
         "title":"Chapter 1 - The Basics",
