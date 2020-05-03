@@ -14,7 +14,7 @@ function template(title,code,content,index,isLast){
             <div class="header">
                 <span class="title"><a href="index.html">Tour of Rust</a></span>
                 <span class="nav">
-                <span class="back"><a href="TOC.html">Table of Contents</a></span>
+                <span class="toc"><a href="TOC.html">Table of Contents</a></span>
                 ${index!=0?`<span class="back"><a href="${getFileName(index-1)}">Back</a></span>`:""}
                 <span class="next"><a href="${!isLast?getFileName(index+1):"end.html"}">Next</a></span>
                 </span>
@@ -62,6 +62,9 @@ fs.writeFileSync(fileName,`<html>
     <div class="tour">
         <div class="header">
             <span class="title"><a href="index.html">Tour of Rust</a></span>
+            <span class="nav">
+            <span class="toc"><a href="TOC.html">Table of Contents</a></span>
+            </span>
         </div>
         <div class="page">
         <h1>Lessons</h1>
@@ -86,7 +89,7 @@ fs.writeFileSync(fileName,`<html>
         <div class="header">
             <span class="title"><a href="index.html">Tour of Rust</a></span>
             <span class="nav">
-            <span class="back"><a href="TOC.html">Table of Contents</a></span>
+            <span class="toc"><a href="TOC.html">Table of Contents</a></span>
             <span class="back"><a href="${getFileName(lessons.length-1)}">Back</a></span>
             </span>
         </div>
