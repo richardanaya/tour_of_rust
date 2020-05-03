@@ -6,7 +6,7 @@
 
 
 a {
- color: #333;   
+ color: #555;   
 }
 
 .title a {
@@ -114,6 +114,6 @@ li {
     }
 }
 
-b {
+b, h1 {
     color: black;
 }
