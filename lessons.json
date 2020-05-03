@@ -22,12 +22,12 @@
     {
         "title":"Functions",
         "code":"FickleInsistentThing",
-        "content":"<p>A function can take zero or more arguments.</p><p>In this example, add takes two parameters of type <highlight>i32</highlight> (integer of 32 bit length).</p>"
+        "content":"<p>A function can take zero or more arguments.</p><p>In this example, add takes two parameters of type <highlight>i32</highlight> (integer of 32 bit length).</p><p>Function names are always in <highlight>snake_case</highlight></p>"
     },
     {
         "title":"Variables",
         "code":"FilthyPapayawhipFrontend",
-        "content":" <p>Variables are declared using the <b>let</b> keyword.</p><p>When assigning a value, Rust will be able to infer the type of your variable 99% of the time. If it cannot you may add the type to your variable declaration.</p><p>Notice how we can assign to the same variable name multiple times. This is called variable shadowing and the type can be changed for subsequent references to that name.</b></p>"
+        "content":" <p>Variables are declared using the <b>let</b> keyword.</p><p>When assigning a value, Rust will be able to infer the type of your variable 99% of the time. If it cannot you may add the type to your variable declaration.</p><p>Notice how we can assign to the same variable name multiple times. This is called variable shadowing and the type can be changed for subsequent references to that name.</b></p><p>Variable names are always in <highlight>snake_case</highlight></p>"
     },
     {
         "title":"Changing values",
