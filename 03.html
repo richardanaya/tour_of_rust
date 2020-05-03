@@ -1,7 +1,7 @@
 <html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust -Exporting</title>
+        <title>Tour of Rust -Modules</title>
         <link rel="stylesheet" href="tour.css">
     </head>
     <body>
@@ -15,11 +15,11 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Exporting</h1>
-            <p>In Rust, we export members of a module using the <b>pub</b> keyword.</p><p>When using a module either within your own code or an external crate, you can only refer to members that have been marked public.</p><p>The code in this example is broken, add the <b>pub</b> keyword in the appropriate place to fix it.</p>
+            <h1>Modules</h1>
+            <p>Every Rust program or library is a <b>crate</b>.</p><p>Every crate is made of a heirarchy of <b>modules</b>.</p><p>Programs start running in the root module of a crate at the <highlight>main()</highlight> function in a file called "main.rs".<p></p><p>Libraries have a root module in the file "lib.rs"</p><p>To prevent typing out full paths like <highlight>std::time::SystemTime</highlight>. The <b>use</b> keyword allows us to specify particular items from modules we want to use throughout our code without a full path. For instance <highlight>use std::time::SystemTime</highlight> allows me to just use the identifier <highlight>SystemTime</highlight> in my main function.</p><p><b>std</b> is the crate of the <b>standard library</b> of Rust which is full of useful data structures and functions for interacting with your operating system.</p><p>A searchable directory of crates created by the community can be found at <a href="https://crates.io/">https://crates.io</a></p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://repl.it/@richardanaya/ArcticBreakableMacroinstruction?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://repl.it/@richardanaya/DarkDarlingPress?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

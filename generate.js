@@ -23,9 +23,9 @@ function template(title,code,content,index,isLast){
             <h1>${title}</h1>
             ${content}
             </div>
-            <div class="code">
+            ${code?`<div class="code">
             <iframe width="100%" src="https://repl.it/@richardanaya/${code}?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            </div>`:`<div class="code"><center><br><br><br><br><br><img src="ferris.png"></center></div>`}
         </div>
     </body>
 </html>`
