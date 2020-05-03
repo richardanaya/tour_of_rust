@@ -7,7 +7,7 @@ function template(title,code,content,index,isLast){
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - ${title}</title>
+        <title>Tour of Rust - ${index==0?"Hello Rust":title}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -53,7 +53,7 @@ let c = 0;
 for(var i in lessons){
     let fileName = getFileName(i);
     let lesson = lessons[i];
-    fs.writeFileSync(fileName, template(i==0?"Hello Rust":lesson.title,lesson.code,lesson.content,c,i==lessons.length-1))
+    fs.writeFileSync(fileName, template(lesson.title,lesson.code,lesson.content,c,i==lessons.length-1))
     c++;
 }
 let fileName = "TOC.html";
