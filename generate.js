@@ -92,7 +92,7 @@ fs.writeFileSync(fileName,`<html>
         </div>
         <div class="page">
         <h1>The End</h1>
-        <p>We hope you enjoy the journey ahead.</p>
+        <p>That's all for now. Stay tuned for new chapters. I hope you enjoy the journey ahead!</p>
         </div>
     </div>
 </body>
