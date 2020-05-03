@@ -6,7 +6,7 @@
 
 
 a {
- color: black;   
+ color: #333;   
 }
 
 .title a {
@@ -47,6 +47,7 @@ html, body {
     padding:0px;
     margin: 0px;
     font-family: 'Fira Sans', sans-serif;
+    color: #333;
 }
 
 .next a, .back a{
@@ -111,4 +112,8 @@ li {
     .title {
         font-size: 18px;
     }
+}
+
+b {
+    color: black;
 }
