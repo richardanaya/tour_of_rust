@@ -16,7 +16,7 @@
     {
         "title_en":"The Rust Playground",
         "code":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A",
-        "content_en":"<p>This tour uses an interactive coding tool at <a href=\"https://play.rust-lang.org/\">https://play.rust-lang.org</a></p><p>It's a great way to play around with Rust and show others your creativity and challenges!.</p>",
+        "content_en":"<p>This tour uses an interactive coding tool at <a href=\"https://play.rust-lang.org/\">https://play.rust-lang.org</a></p><p>It's a great way to play around with Rust and show others your creativity and challenges!</p>",
         "title_ie":"Li Lud-terren Rust",
         "code_ie":"https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Benevenit%20al%20lude-terren!%20Tu%20posse%20modificar%20li%20code%20ci.%22)%3B%0A%7D",
         "content_ie":"<p>Ti-ci tur usa un instrument interactiv por codar quel trova se a <a href=\"https://play.rust-lang.org/\">https://play.rust-lang.org</a></p><p>It es un bonissim metode por luder con Rust e monstrar li altres tui creativitá e defís!</p>"
