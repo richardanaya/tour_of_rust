@@ -102,6 +102,11 @@ li {
     }
 
     .code {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .code iframe{
         height: 100%;
     }
 
