@@ -24,7 +24,7 @@
              <p>Rust cares a great deal about what values are modified. Values fall into two types:</p><ul><li><b>mutable</b> - the location in memory can be written to and read</li><li><b>immutable</b> - the location in memory can only be read</li></ul><p>Mutable values are always denoted with a <b>mut</b> keyword in some manner</p><p>We will have alot more to say on this concept, but for now just keep an eye out for this keyword for what things can be modified</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%20%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>
