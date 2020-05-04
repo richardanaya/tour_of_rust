@@ -47,13 +47,13 @@ function getFileName(lang,i){
         if(lang == "en"){
             fileName = "index.html";
         } else {
-            filename = `index_${lang}.html`
+            fileName = `index_${lang}.html`
         }
     }
     return fileName;
 }
 
-let languages = ["en"];
+let languages = ["en","ie"];
 
 for(var l in languages){
     let lang = languages[l];
