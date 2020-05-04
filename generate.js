@@ -61,7 +61,7 @@ for(var l in languages){
     for(var i in lessons){
         let fileName = getFileName(lang,i);
         let lesson = lessons[i];
-        fs.writeFileSync(fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] | lesson.code,lesson["content_"+lang],c,i==lessons.length-1))
+        fs.writeFileSync(fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==lessons.length-1))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
