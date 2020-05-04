@@ -17,7 +17,7 @@ function template(lang,title,code,content,index,isLast){
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index.html">Tour of Rust</a></span>
+                <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
                 ${index!=0?`<span class="back"><a href="${getFileName(lang,index-1)}">Back</a></span>`:""}
@@ -44,7 +44,11 @@ function pad(num, size) {
 function getFileName(lang,i){
     let fileName = pad(i,2)+`_${lang}.html`;
     if(i==0){
-        fileName = "index.html";
+        if(lang == "en"){
+            fileName = "index.html";
+        } else {
+            filename = `index_${lang}.html`
+        }
     }
     return fileName;
 }
@@ -57,7 +61,7 @@ for(var l in languages){
     for(var i in lessons){
         let fileName = getFileName(lang,i);
         let lesson = lessons[i];
-        fs.writeFileSync(fileName, template(lang,lesson["title_"+lang],lesson.code,lesson["content_"+lang],c,i==lessons.length-1))
+        fs.writeFileSync(fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] | lesson.code,lesson["content_"+lang],c,i==lessons.length-1))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
@@ -75,7 +79,7 @@ for(var l in languages){
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index.html">Tour of Rust</a></span>
+                <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
                 </span>
@@ -106,7 +110,7 @@ for(var l in languages){
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index.html">Tour of Rust</a></span>
+                <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
                 <span class="back"><a href="${getFileName(lang,lessons.length-1)}">Back</a></span>
