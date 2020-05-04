@@ -121,3 +121,7 @@ li {
 b, h1 {
     color: black;
 }
+
+ul {
+    margin-left: 40px;
+}
