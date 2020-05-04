@@ -33,15 +33,6 @@ function template(lang,title,code,content,index,isLast){
             </div>`:`<div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>`}
         </div>
     </body>
-    <script>
-        document.body.addEventListener("keyup",(event)=>{
-            if(event.keyCode == 34){
-                ${!isLast?`window.location = "${!isLast?getFileName(lang,index+1):`end_${lang}.html`}"`:""};
-            } else if(event.keyCode == 33){
-               ${index>0?`window.location = "${getFileName(lang,index-1)}";`:""}
-            }
-        });
-    </script>
 </html>`
 }
 
