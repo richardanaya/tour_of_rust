@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tour of Rust - Variablenwerte ändern</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_de.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_de.html">Table of Contents</a></span>
+                <span class="back"><a href="06_de.html">Previous</a></span>
+                <span class="next"><a href="08_de.html">Next</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Variablenwerte ändern</h1>
+             <p>Rust sorgt sich sehr darum, welche Variablen verändert werden könne und welche nicht. Daher gibt es die folgende Einteilung:</p><ul><li><b>mutable</b> - der Speicherort der Variable kann beschrieben und gelesen werden</li><li><b>immutable</b> - der Speicherort der Variable kann nur gelesen werden</li></ul><p>Variablen, die verändert werden können, werden mit einem extra <b>mut</b> Schlüsselwort gekennzeichnet.</p><p>Auf dieses Konzept wird im späteren Verlauf noch mehr eingegangen, für jetzt ist es wichtig zu wissen, dass mit mutable Variablen beschrieben werden, die beschrieben werden können.</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

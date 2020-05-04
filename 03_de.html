@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tour of Rust - Module</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_de.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_de.html">Table of Contents</a></span>
+                <span class="back"><a href="02_de.html">Previous</a></span>
+                <span class="next"><a href="04_de.html">Next</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Module</h1>
+            <p>Jedes Programm bzw. jede Bibliothek in Rust ist ein <b>crate</b> (Kiste).</p><p>Jedes crate besteht aus einer hierarchischen Ansammlung von <b>modules</b>.</p><p>Programme werden aus einem root module (Wurzelelement) eines crates gestartet, die Funktion <highlight>main()</highlight> in einer Datei namens "main.rs" bildet den Startpunkt.<p></p><p>Bibliotheken haben ein root module in der Datei "lib.rs" und exportieren nützliche Elemente.</p><p>Um komplette Pfade wie <highlight>std::f64::consts::PI</highlight> austippen zu müssen, wurde das <b>use</b> Schlüsselwort eingeführt, um die Verwendung von Attributen zu erleichtern. Beispielsweise erlaubt <highlight>use std::f64::consts::PI</highlight> uns den Identifier <highlight>PI</highlight> in der main-Funktion zu verwenden.</p><p><b>std</b> ist das crate der <b>Standardbibliothek</b> von Rust, das allerlei nützliche Datenstrukturen und Funktionen beinhalten, durch welche wir mit dem Betriebssystem kommunizieren können.</p><p>Eine nützliche Ressource, um crates zu finden, bildet <a href="https://crates.io/">https://crates.io</a>, die von einer Fanbase aufrechterhalten wird.</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

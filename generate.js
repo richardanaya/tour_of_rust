@@ -53,7 +53,7 @@ function getFileName(lang,i){
     return fileName;
 }
 
-let languages = ["en","ie"];
+let languages = ["en","ie","de"];
 
 for(var l in languages){
     let lang = languages[l];

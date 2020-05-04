@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tour of Rust - Basistypen konvertieren</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_de.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_de.html">Table of Contents</a></span>
+                <span class="back"><a href="09_de.html">Previous</a></span>
+                <span class="next"><a href="11_de.html">Next</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Basistypen konvertieren</h1>
+            <p>Rust vordert explizite Konvertierungen, wenn es um Zahlentypen geht. Ein <highlight>u8</highlight> (8-bit unsigned integer) kann nicht mit einem <highlight>u32</highlight> locker aus dem Handgelenk berechnen ohne das Programm zum Absturz zu bringen.</p><p>Glücklicherweise ist auf die Konvertierung mit dem <b>as</b> Schlüsselwort Verlass!</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+</html>
