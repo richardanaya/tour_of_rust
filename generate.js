@@ -61,11 +61,11 @@ for(var l in languages){
     for(var i in lessons){
         let fileName = getFileName(lang,i);
         let lesson = lessons[i];
-        fs.writeFileSync(fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==lessons.length-1))
+        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==lessons.length-1))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
-    fs.writeFileSync(fileName,`<html>
+    fs.writeFileSync("docs/"+fileName,`<html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@ for(var l in languages){
     </body>
     </html>`)
     fileName = `end_${lang}.html`;
-    fs.writeFileSync(fileName,`<html>
+    fs.writeFileSync("docs/"+fileName,`<html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
