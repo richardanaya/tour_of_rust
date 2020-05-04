@@ -20,7 +20,7 @@ function template(lang,title,code,content,index,isLast){
                 <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
-                ${index!=0?`<span class="back"><a href="${getFileName(lang,index-1)}">Back</a></span>`:""}
+                ${index!=0?`<span class="back"><a href="${getFileName(lang,index-1)}">Previous</a></span>`:""}
                 <span class="next"><a href="${!isLast?getFileName(lang,index+1):`end_${lang}.html`}">Next</a></span>
                 </span>
             </div>
@@ -113,7 +113,7 @@ for(var l in languages){
                 <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
-                <span class="back"><a href="${getFileName(lang,lessons.length-1)}">Back</a></span>
+                <span class="back"><a href="${getFileName(lang,lessons.length-1)}">Previous</a></span>
                 </span>
             </div>
             <div class="page">
