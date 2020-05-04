@@ -93,6 +93,11 @@ li {
     color: white;
 } 
 
+
+ul {
+    margin-left: 40px;
+}
+
 @media screen and (max-width: 600px) {
     .code, .page {
         width: 100%;
@@ -116,12 +121,25 @@ li {
     .title {
         font-size: 18px;
     }
+
+    .page p, .page h1 {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .page h1 {
+        font-size: 20px;
+    }
+
+    .page p {
+        font-size: 16px;
+    }
+
+    ul {
+        margin-left: 20px;
+    }
 }
 
 b, h1 {
     color: black;
-}
-
-ul {
-    margin-left: 40px;
 }
