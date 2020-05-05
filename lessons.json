@@ -5,6 +5,12 @@
     "previous_en": "Previous",
     "toc_en": "Table of Contents",
     "lessons_en": "Lessons"
+    ,
+    "tor_de": "Tour in Rust",
+    "next_de": "Weiter",
+    "previous_de": "Zurück",
+    "toc_de": "Inhaltsverzeichnis",
+    "lessons_de": "Kapitel"
   },
   "pages": [
     {
