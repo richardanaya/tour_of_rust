@@ -4,7 +4,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Changing values</title>
+        <title>Tour of Rust - Изменение переменных</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -14,16 +14,16 @@
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index.html">Tour of Rust</a></span>
+                <span class="title"><a href="index_ru.html">Tour of Rust</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
-                <span class="back"><a href="06_en.html">Previous</a></span>
-                <span class="next"><a href="08_en.html">Next</a></span>
+                <span class="toc"><a href="TOC_ru.html">Table of Contents</a></span>
+                <span class="back"><a href="06_ru.html">Previous</a></span>
+                <span class="next"><a href="08_ru.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Changing values</h1>
-             <p>Rust cares a great deal about what values are modified. Values fall into two types:</p><ul><li><b>mutable</b> - the location in memory can be written to and read</li><li><b>immutable</b> - the location in memory can only be read</li></ul><p>Mutable values are always denoted with a <b>mut</b> keyword in some manner</p><p>We will have a lot more to say on this concept, but for now just keep an eye out for this keyword for what things can be modified</p>
+            <h1>Изменение переменных</h1>
+             <p>Rust приделяет много внимания тому какие значения могут быть изменены. Значения(переменные) делятся на два типа:</p><ul><li><b>mutable</b> - область памяти в которую можно записать и считать</li><li><b>immutable</b> - область памяти с которой можно только считать</li></ul><p>Mutable значения всегда обозначены с помощью ключевого слова <b>mut</b> каким то образом.</p><p>Мы поговорим об этом позже, а сейчас просто следите за этим ключевым словом и тем какие элементи могут быть измененны.</p>
             </div>
             <div class="code">
             <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>

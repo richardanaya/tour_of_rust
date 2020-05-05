@@ -5,6 +5,8 @@ let lessons = JSON.parse(fs.readFileSync('lessons.json'));
 function template(lang,title,code,content,index,isLast){
     return `<html>
     <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
         <title>Tour of Rust - ${index==0?"Hello Rust":title}</title>
@@ -53,7 +55,7 @@ function getFileName(lang,i){
     return fileName;
 }
 
-let languages = ["en","ie","de"];
+let languages = ["en","ie","de","ru"];
 
 for(var l in languages){
     let lang = languages[l];
@@ -68,6 +70,8 @@ for(var l in languages){
     let fileName = `TOC_${lang}.html`;
     fs.writeFileSync("docs/"+fileName,`<html>
     <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
         <title>Tour of Rust - Table of Contents</title>
@@ -99,6 +103,8 @@ for(var l in languages){
     fileName = `end_${lang}.html`;
     fs.writeFileSync("docs/"+fileName,`<html>
     <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
         <title>Tour of Rust - The End</title>
