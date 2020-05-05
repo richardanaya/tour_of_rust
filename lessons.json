@@ -179,35 +179,35 @@
   },
   {
     "title_en": "Chapter 2 - Basic Control Flow",
-    "content_en": "<p></p>"
+    "unereleased_content_en": "<p></p>"
   },
   {
     "title_en": "if/else if/else",
-    "content_en": "<p></p>",
+    "unereleased_content_en": "<p></p>",
     "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20return%20-1%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20return%200%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20return%201%3B%0A%20%20%20%20%7D%0A%7D%0A"
   },
   {
     "title_en": "loop",
-    "content_en": "<p></p>",
+    "unereleased_content_en": "<p></p>",
     "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A"
   },
   {
     "title_en": "while",
-    "content_en": "<p></p>",
+    "unereleased_content_en": "<p></p>",
     "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A"
   },
   {
     "title_en": "for",
-    "content_en": "<p></p>",
+    "unereleased_content_en": "<p></p>",
     "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A"
   },
   {
     "title_en": "Returning values from block expressions",
-    "content_en": "<p></p>",
+    "unereleased_content_en": "<p></p>",
     "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%2013%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A"
   },
   {
     "title_en": "Chapter 2 Conclusion",
-    "content_en": "<p></p>"
+    "unereleased_content_en": "<p></p>"
   }
 ]

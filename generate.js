@@ -58,7 +58,7 @@ let languages = ["en","ie","de"];
 for(var l in languages){
     let lang = languages[l];
     let c = 0;
-    let langLessons = lessons.filter(x=>x["title_"+lang])
+    let langLessons = lessons.filter(x=>x["content_"+lang])
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
         let lesson = langLessons[i];
