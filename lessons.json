@@ -223,7 +223,13 @@
     "next_de": "Weiter",
     "previous_de": "Zurück",
     "toc_de": "Inhaltsverzeichnis",
-    "lessons_de": "Kapitel"
+    "lessons_de": "Kapitel",
+
+    "tor_ru": "Тур по Rust",
+    "next_ru": "Далее",
+    "previous_ru": "Назад",
+    "toc_ru": "Содержание",
+    "lessons_ru": "Занятия"
   },
   "pages": [
     {
