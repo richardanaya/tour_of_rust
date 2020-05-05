@@ -4,7 +4,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Експорт</title>
+        <title>Тур по Rust - Експорт</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -14,16 +14,16 @@
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index_ru.html">Tour of Rust</a></span>
+                <span class="title"><a href="index_ru.html">Тур по Rust</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_ru.html">Table of Contents</a></span>
-                <span class="back"><a href="03_ru.html">Previous</a></span>
-                <span class="next"><a href="05_ru.html">Next</a></span>
+                <span class="toc"><a href="TOC_ru.html">Содержание</a></span>
+                <span class="back"><a href="03_ru.html">Назад</a></span>
+                <span class="next"><a href="05_ru.html">Далее</a></span>
                 </span>
             </div>
             <div class="page">
             <h1>Експорт</h1>
-            <p>В Rust, мы экспортируем элементы модуля используя ключевое слово <b>pub</b>.</p><p>Используя модуль внутри вашего кода или во внешнем крейте, вы можете получить доступ только к элементам что были помечены публичными.</p><p>Код в этом примере не работает, добавьте ключевое слово <b>pub</b> в нужном месте что бы пример успешно скомпилировался.</p>
+            <p>В Rust мы экспортируем элементы модуля, используя ключевое слово <b>pub</b>.</p><p>Используя модуль внутри вашего кода или во внешнем крейте, вы можете получить доступ только к элементам, что были помечены публичными.</p><p>Код в этом примере не работает, добавьте ключевое слово <b>pub</b> в нужном месте, чтобы пример успешно скомпилировался.</p>
             </div>
             <div class="code">
             <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20my_sub_module%20%7B%0A%20%20%20%20fn%20do_something()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20do_something_else()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%20else%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20my_sub_module%3A%3Ado_something()%3B%0A%20%20%20%20my_sub_module%3A%3Ado_something_else()%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
