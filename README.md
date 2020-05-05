@@ -2,6 +2,13 @@
 
 Welcome to the source repo of [Tour of Rust](https://tourofrust.com/).
 
+# Contributors
+
+* Deutsch - [Felix](https://github.com/jassler)
+* English - [Richard Anaya](https://github.com/richardanaya)
+* Interlingue -
+* Русский -
+
 # Looking for translators!
 
 If you would like to contribute translations in a language that doesn't exist yet.  Feel free to make an issue and I will modify the generator for your language.

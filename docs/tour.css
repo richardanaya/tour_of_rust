@@ -138,6 +138,10 @@ ul {
     ul {
         margin-left: 20px;
     }
+    
+    .nav span {
+        padding-left: 5px;
+    }
 }
 
 b, h1 {

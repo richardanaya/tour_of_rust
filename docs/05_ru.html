@@ -1,10 +1,10 @@
-<html lang="de">
+<html lang="ru">
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour in Rust - Funktionen</title>
+        <title>Tour of Rust - Функции</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -14,16 +14,16 @@
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index_de.html">Tour in Rust</a></span>
+                <span class="title"><a href="index_ru.html">Tour of Rust</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
-                <span class="back"><a href="04_de.html">Zurück</a></span>
-                <span class="next"><a href="06_de.html">Weiter</a></span>
+                <span class="toc"><a href="TOC_ru.html">Table of Contents</a></span>
+                <span class="back"><a href="04_ru.html">Previous</a></span>
+                <span class="next"><a href="06_ru.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Funktionen</h1>
-            <p>Eine Funktion kann 0, 1 oder mehrere Argumente bzw. Parameter aufnehmen.</p><p>In diesem Beispiel verlangt die Funktion add zwei Parameter vom Typ <highlight>i32</highlight> (32 Bit Ganzzahl).</p><p>Funktionsnamen sollten im <highlight>snake_case</highlight> Format erstellt werden.</p>
+            <h1>Функции</h1>
+            <p>Функция может принимать ноль или больше аргументов.</p><p>В этом примере, функция <b>add</b> принимает два аргумента типа <highlight>i32</highlight> (целочисленое длинной в 32 бита).</p><p>Имена функций всегда пишутся в <highlight>змеином_регистре</highlight>(<highlight>snake_case</highlight>)</p>
             </div>
             <div class="code">
             <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>

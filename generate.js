@@ -2,12 +2,28 @@ const fs = require('fs');
 
 let lessons = JSON.parse(fs.readFileSync('lessons.json'));
 
-function template(lang,title,code,content,index,isLast){
-    return `<html>
+function getWord(words,lang,w){
+    if(words[w+"_"+lang]){
+        return words[w+"_"+lang];
+    }
+    return words[w+"_en"];
+}
+
+function titleClean(title){
+    title = title.replace("<span class=\"emoji\">","");
+    title = title.replace("</span>","");
+    title = title.replace("🦀","Rust");
+    return title;
+}
+
+function template(lang,title,code,content,index,isLast, words){
+    return `<html lang="${lang}">
     <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - ${index==0?"Hello Rust":title}</title>
+        <title>${getWord(words,lang,"tor")} - ${titleClean(title)}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -17,11 +33,11 @@ function template(lang,title,code,content,index,isLast){
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
+                <span class="title"><a href="${getFileName(lang,0)}">${getWord(words,lang,"tor")}</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
-                ${index!=0?`<span class="back"><a href="${getFileName(lang,index-1)}">Previous</a></span>`:""}
-                <span class="next"><a href="${!isLast?getFileName(lang,index+1):`end_${lang}.html`}">Next</a></span>
+                <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
+                ${index!=0?`<span class="back"><a href="${getFileName(lang,index-1)}">${getWord(words,lang,"previous")}</a></span>`:""}
+                <span class="next"><a href="${!isLast?getFileName(lang,index+1):`end_${lang}.html`}">${getWord(words,lang,"next")}</a></span>
                 </span>
             </div>
             <div class="page">
@@ -53,24 +69,27 @@ function getFileName(lang,i){
     return fileName;
 }
 
-let languages = ["en","ie","de"];
+let languages = ["en","ie","de","ru"];
 
 for(var l in languages){
     let lang = languages[l];
     let c = 0;
-    let langLessons = lessons.filter(x=>x["title_"+lang])
+    let words = lessons.common_words;
+    let langLessons = lessons.pages.filter(x=>x["content_"+lang])
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
         let lesson = langLessons[i];
-        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==langLessons.length-1))
+        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==langLessons.length-1,words))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
-    fs.writeFileSync("docs/"+fileName,`<html>
+    fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
     <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Table of Contents</title>
+        <title>${getWord(words,lang,"tor")} - ${getWord(words,lang,"toc")}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -80,13 +99,12 @@ for(var l in languages){
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
+                <span class="title"><a href="${getFileName(lang,0)}">${getWord(words,lang,"tor")}</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Lessons</h1>
+            <h1>${getWord(words,lang,"lessons")}</h1>
             <p>
             <ul>
     ${langLessons.map((x,i)=>`<li><a href="${getFileName(lang,i)}">${i}. ${x["title_"+lang]}</a></li>`).join("\n")}
@@ -97,11 +115,13 @@ for(var l in languages){
     </body>
     </html>`)
     fileName = `end_${lang}.html`;
-    fs.writeFileSync("docs/"+fileName,`<html>
+    fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
     <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - The End</title>
+        <title>${getWord(words,lang,"tor")}- The End</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -111,10 +131,10 @@ for(var l in languages){
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
+                <span class="title"><a href="${getFileName(lang,0)}">${getWord(words,lang,"tor")}</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
-                <span class="back"><a href="${getFileName(lang,langLessons.length-1)}">Previous</a></span>
+                <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
+                <span class="back"><a href="${getFileName(lang,langLessons.length-1)}">${getWord(words,lang,"previous")}</a></span>
                 </span>
             </div>
             <div class="page">
