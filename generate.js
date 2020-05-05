@@ -3,7 +3,7 @@ const fs = require('fs');
 let lessons = JSON.parse(fs.readFileSync('lessons.json'));
 
 function template(lang,title,code,content,index,isLast){
-    return `<html>
+    return `<html lang="${lang}">
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
@@ -60,7 +60,7 @@ let languages = ["en","ie","de","ru"];
 for(var l in languages){
     let lang = languages[l];
     let c = 0;
-    let langLessons = lessons.filter(x=>x["content_"+lang])
+    let langLessons = lessons.pages.filter(x=>x["content_"+lang])
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
         let lesson = langLessons[i];
@@ -68,7 +68,7 @@ for(var l in languages){
         c++;
     }
     let fileName = `TOC_${lang}.html`;
-    fs.writeFileSync("docs/"+fileName,`<html>
+    fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
@@ -101,7 +101,7 @@ for(var l in languages){
     </body>
     </html>`)
     fileName = `end_${lang}.html`;
-    fs.writeFileSync("docs/"+fileName,`<html>
+    fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
