@@ -7,7 +7,7 @@ Welcome to the source repo of [Tour of Rust](https://tourofrust.com/).
 * Deutsch - [Felix](https://github.com/jassler)
 * English - [Richard Anaya](https://github.com/richardanaya)
 * Interlingue -
-* Русский -
+* Русский - [Danil Kondratiev](https://github.com/knightpp)
 
 # Looking for translators!
 
