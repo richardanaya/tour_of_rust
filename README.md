@@ -4,7 +4,7 @@ Welcome to the source repo of [Tour of Rust](https://tourofrust.com/).
 
 # Contributors
 
-* Deutsche - 
+* Deutsch - [Felix](https://github.com/jassler)
 * English - [Richard Anaya](https://github.com/richardanaya)
 * Interlingue -
 * Русский -
