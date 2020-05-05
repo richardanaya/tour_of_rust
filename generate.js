@@ -2,14 +2,21 @@ const fs = require('fs');
 
 let lessons = JSON.parse(fs.readFileSync('lessons.json'));
 
-function template(lang,title,code,content,index,isLast){
+function titleClean(title){
+    title = title.replace("<span class=\"emoji\">","");
+    title = title.replace("</span>","");
+    title = title.replace("🦀","Rust");
+    return title;
+}
+
+function template(lang,title,code,content,index,isLast, words){
     return `<html lang="${lang}">
     <head>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - ${index==0?"Hello Rust":title}</title>
+        <title>Tour of Rust - ${titleClean(title)}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -64,7 +71,7 @@ for(var l in languages){
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
         let lesson = langLessons[i];
-        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==langLessons.length-1))
+        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==langLessons.length-1,lessons.common_words))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
