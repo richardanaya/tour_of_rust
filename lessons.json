@@ -213,23 +213,25 @@
 ]
 {
   "common_words": {
+    "chapter_en": "Chapter",
     "tor_en": "Tour of Rust",
     "next_en": "Next",
     "previous_en": "Previous",
     "toc_en": "Table of Contents",
-    "lessons_en": "Lessons"
-    ,
+    "lessons_en": "Lessons",
     "tor_de": "Tour in Rust",
     "next_de": "Weiter",
     "previous_de": "Zurück",
     "toc_de": "Inhaltsverzeichnis",
     "lessons_de": "Kapitel",
-
+    "chapter_de": "Kapitel",
+    "chapter_ru": "Глава",
     "tor_ru": "Тур по Rust",
     "next_ru": "Далее",
     "previous_ru": "Назад",
     "toc_ru": "Содержание",
     "lessons_ru": "Занятия"
+    
   },
   "pages": [
     {
