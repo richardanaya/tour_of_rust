@@ -58,10 +58,11 @@ let languages = ["en","ie","de"];
 for(var l in languages){
     let lang = languages[l];
     let c = 0;
-    for(var i in lessons){
+    let langLessons = lessons.filter(x=>x["title_"+lang])
+    for(var i in langLessons){
         let fileName = getFileName(lang,i);
-        let lesson = lessons[i];
-        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==lessons.length-1))
+        let lesson = langLessons[i];
+        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==langLessons.length-1))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
@@ -88,7 +89,7 @@ for(var l in languages){
             <h1>Lessons</h1>
             <p>
             <ul>
-    ${lessons.map((x,i)=>`<li><a href="${getFileName(lang,i)}">${i}. ${x["title_"+lang]}</a></li>`).join("\n")}
+    ${langLessons.map((x,i)=>`<li><a href="${getFileName(lang,i)}">${i}. ${x["title_"+lang]}</a></li>`).join("\n")}
             <ul>
             </p>
             </div>
@@ -113,7 +114,7 @@ for(var l in languages){
                 <span class="title"><a href="${getFileName(lang,0)}">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">Table of Contents</a></span>
-                <span class="back"><a href="${getFileName(lang,lessons.length-1)}">Previous</a></span>
+                <span class="back"><a href="${getFileName(lang,langLessons.length-1)}">Previous</a></span>
                 </span>
             </div>
             <div class="page">

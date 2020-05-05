@@ -6,3 +6,5 @@ publish: generate
 	git add .
 	git commit -m 'new pages'
 	git push
+lint:
+	prettier --write lessons.json
