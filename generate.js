@@ -19,6 +19,15 @@ function titleClean(title){
 function template(lang,title,code,content,index,isLast, words){
     return `<html lang="${lang}">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,6 +94,15 @@ for(var l in languages){
     let fileName = `TOC_${lang}.html`;
     fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,6 +135,15 @@ for(var l in languages){
     fileName = `end_${lang}.html`;
     fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
