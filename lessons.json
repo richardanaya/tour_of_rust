@@ -200,36 +200,36 @@
     },
     {
       "title_en": "Chapter 2 - Basic Control Flow",
-      "unereleased_content_en": "<p></p>"
+      "content_en": "<p>In this chapter let's talk about the basic control flow methods in Rust. If you are familiar with C based languages you'll feel right at home and maybe enjoy a surprise or two.</p>"
     },
     {
       "title_en": "if/else if/else",
-      "unereleased_content_en": "<p></p>",
+      "content_en": "<p>Code branching in Rust is not surprising.</p><p>Conditions don't have parentheses!</p><p>All your usual logical operators still work: <highlight>!</highlight><highlight>!=</highlight><highlight>||</highlight><highlight>&&</highlight><highlight>&lt;</highlight><highlight>&gt;</highlight><highlight>&lt;=</highlight><highlight>&gt;=</highlight></p>",
       "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20return%20-1%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20return%200%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20return%201%3B%0A%20%20%20%20%7D%0A%7D%0A"
     },
     {
       "title_en": "loop",
-      "unereleased_content_en": "<p></p>",
-      "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A"
+      "content_en": "<p>Need an infinite loop?</p><p>Rust makes it easy.</p><p><highlight>break</highlight> will escape a loop when you are ready.</p><p><highlight>loop</highlight> has a secret we'll talk about soon.</p>",
+      "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A"
     },
     {
       "title_en": "while",
-      "unereleased_content_en": "<p></p>",
+      "content_en": "<p><highlight>while</highlight> lets you easily add a condition to a loop.</p><p>If the condition evaluates to <highlight>false</highlight>, the loop will exit.</p>",
       "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A"
     },
     {
       "title_en": "for",
-      "unereleased_content_en": "<p></p>",
+      "content_en": "<p>Rust's <highlight>for</highlight> loop is a powerful upgrade. It iterates over values from any iterator expression. We'll explore this more in a future chapter, in the meantime just know Rust makes it easy to create iterators that generate a sequence of numbers.</p><p>The <highlight>..</highlight> operator creates an iterator that generates numbers from a start number up to but not including an end number.</p><p>The <highlight>..=</highlight> operator creates an iterator that generates numbers from a start number up to and including an end number.</p>",
       "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A"
     },
     {
       "title_en": "Returning values from block expressions",
-      "unereleased_content_en": "<p></p>",
-      "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%2013%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A"
+      "content_en": "<p><highlight>if</highlight>,<highlight>loop</highlight>, functions, and scope blocks all have a unique way of returning values in Rust.</p><p><highlight>loop</highlight> can break to return a value.</p><p>If the last statement in an <highlight>if</highlight>,<highlight>loop</highlight>, functions, or scope block is an expression without a <highlight>;</highlight>, Rust will return it as a value from the block. This is a great way to create concise logic that returns a result to a new variable.</p><p>Notice that is also allows an <highlight>if</highlight> statement to operate like a concise ternary expression.</a>",
+      "code": "https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A"
     },
     {
       "title_en": "Chapter 2 Conclusion",
-      "unereleased_content_en": "<p></p>"
+      "content_en": "<p>And that's it for now! We have one more powerful form of branching called a <highlight>match</highlight>, but we need to build up to it with some other knowledge first.  I promise you it will be worth the wait. Next time we'll get into Rust's foundational data structure and data abstraction.</p>"
     }
   ]
 }
