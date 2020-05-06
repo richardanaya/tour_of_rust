@@ -234,7 +234,7 @@
     },
     {
       "title_en": "Chapter 2 Conclusion",
-      "content_en": "<p>And that's it for now! Next time we'll get into Rust's foundational data structures.</p>"
+      "content_en": "<p>And that's it for now! Hopefully I've shown a glimpse of Rust's power even in the most basic statements. We'll be talking about a <highlight>for</highlight> and <highlight>match</highlight> even more as we gain more knowledge that can utilize their capabilities. Next time we'll get into Rust's foundational data structures.</p>"
     }
   ]
 }
