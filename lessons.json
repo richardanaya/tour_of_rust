@@ -229,7 +229,7 @@
     },
     {
       "title_en": "Chapter 2 Conclusion",
-      "content_en": "<p>And that's it for now! We have one more powerful form of branching called a <highlight>match</highlight>, but we need to build up to it with some other knowledge first.  I promise you it will be worth the wait. Next time we'll get into Rust's foundational data structure and data abstraction.</p>"
+      "content_en": "<p>And that's it for now! We have one more powerful form of branching called a <highlight>match</highlight>, but we need to build up to it with some other knowledge first.  I promise you it will be worth the wait. Next time we'll get into Rust's foundational data structures.</p>"
     }
   ]
 }
