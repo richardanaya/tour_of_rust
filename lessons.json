@@ -259,7 +259,7 @@
     },
     {
       "title_en": "Chapter 2 Conclusion",
-      "content_en": "<p>And that's it for now! Hopefully I've shown a glimpse of Rust's power even in the most basic statements. We'll be talking about <highlight>for</highlight> and <highlight>match</highlight> even more in depth as we gain more knowledge that can utilize their capabilities. Next time we'll get into Rust's foundational data structures.</p>",
+      "content_en": "<p>Hopefully I've shown a glimpse of Rust's power even in the most basic language features. We'll be talking about <highlight>for</highlight> and <highlight>match</highlight> even more in depth as we gain more knowledge that can utilize their capabilities. Next time we'll get into Rust's foundational data structures.</p>",
 
       "title_de": "Kapitel 2 Fazit",
       "content_de": "<p>Was? Das war's schon?</p><p>Keine Bange, es gibt noch viel zu erforschen! Insbesondere <highlight>match</highlight> wurde hier außer Acht gelassen, das viele mächtige Features beinhaltet, dementsprechend aber auch etwas mehr Hintergrundwissen erfordert.</p><p>Im nächsten Kapitel werden wir uns dafür ein bisschen in die Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?</p><p>(eine Übersetzung? ok, die Ausrede ist legitim...)</p>"
