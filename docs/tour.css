@@ -141,6 +141,10 @@ ul {
     
     .nav span {
         padding-left: 5px;
+    }
+    
+    .nav {
+        padding-right: 0px;
         letter-spacing: -.6px;
     }
 }
