@@ -875,16 +875,19 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
   - beta: true
     en:
+      title: Memory
+      content_markdown: |
+        Rust programs have a few distinct regions that data is placed:
+        * **read-only memory** - this place in a program's memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from therefore they are placed in this region.
+        * **stack memory** - this is a place in a program's memory where data that is defined within a function goes. The location of this memory never changes, because of this compilers can optimize code so stack data is very fast to use. 
+        * **heap memory** - this is a place in a program's memory is for data that is created while the application is running. Memory in this region may be added, moved, removed. Because locations aren't fixed, it's generally considered slower to use, but it allows for much more creative usages of memory.  When data is added to this region we call it an **allocation**. When data is removed from this section we call it a **deallocation**.
+  - beta: true
+    en:
       title: Creating Data In Memory
       content_markdown: |
         When we **instantiate** a **struct** we have defined, our program creates a set of values that are put side by side in memory.
 
-        Programs have a few distinct regions that data can be placed:
-        * **read-only memory** - this place in a program's memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from therefore they are placed in this region.
-        * **stack memory** - this is a place in a program's memory where data that is defined within a function goes. The location of this memory never changes, because of this compilers can optimize code so stack data is very fast to use. 
-        * **heap memory** - this is a place in a program's memory is for data that is created while the application is running. Memory in this region may be added, moved, removed. Because locations aren't fixed, it's generally considered slower to use, but it allows for much more creative usages of memory.  When data is added to this region we call it an **allocation**. When data is removed from this section we call it a **deallocation**.
-
-        Look in our example to the right:
+        Look in our example:
         * The text inside the quotes is read only data (e.g. "fred"), therefore it is placed in read only memory
         * The function call `String::from` creates a struct `String` that is placed side by side with the values of Creature. A String represents text that can be changed and does this by:
           1. Creating memory on the heap for the text where it can be modified
