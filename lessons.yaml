@@ -879,8 +879,8 @@ pages:
       content_markdown: |
         Rust programs have a few distinct regions that data is placed in memory:
         * **read-only memory** - For data that never changes. Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from therefore they are placed in this region.
-        * **stack memory** - For data that is declared within a function. The location of this memory never changes, because of this compilers can optimize code so stack data is very fast to use. 
-        * **heap memory** - For data that is created while the application is running. Memory in this region may be added, moved, removed. Because locations aren't fixed, it's generally considered slower to use, but it allows for much more creative usages of memory.  When data is added to this region we call it an **allocation**. When data is removed from this section we call it a **deallocation**.
+        * **stack memory** - For data that is declared as variables within a function. The location of this memory never changes, because of this compilers can optimize code so stack data is very fast to use. 
+        * **heap memory** - For data that is created while the application is running. Data in this region may be added, moved, removed, resized, etc. Because locations aren't fixed, it's generally considered slower to use, but it allows for much more creative usages of memory.  When data is added to this region we call it an **allocation**. When data is removed from this section we call it a **deallocation**.
   - beta: true
     en:
       title: Creating Data In Memory
