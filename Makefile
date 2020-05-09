@@ -1,3 +1,5 @@
+serve: beta
+	@python3 -m http.server 8080
 beta:
 	@rm docs/*.html || true
 	@cat lessons.yaml | yq . > lessons.json
@@ -8,8 +10,6 @@ generate:
 	@cat lessons.yaml | yq . > lessons.json
 	@node generate.js
 	@rm lessons.json
-serve: beta
-	@python3 -m http.server 8080
 publish: generate lint
 	git add .
 	git commit -m 'new pages'
