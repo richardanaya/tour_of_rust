@@ -854,6 +854,14 @@ pages:
         еще глубже, когда обретём больше знаний, которые позволят применить больше возможностей
         языка. В следующий раз мы перейдем к основополагающим структурам данных Rust.</p>"
   - en:
+      title: Chapter 3 - Basic Data Structures
+      unreleased_content_markdown: |
+        Rust has some awesome **pointers**!
+
+        * lets 
+        * `make`
+        * this
+  - en:
       title: Pointers
       unreleased_content_markdown: |
         Rust has some awesome **pointers**!
@@ -862,3 +870,11 @@ pages:
         * `make`
         * this
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20pointer_to_a%20%3D%20%26a%3B%0A%20%20%20%20%2F%2F%20We%20can%20read%20from%20the%20value%20pointed%20at%0A%20%20%20%20let%20b%20%3D%20*pointer_to_a%20%2B%208%3B%0A%20%20%20%20%2F%2F%20Trying%20to%20modify%20a%20non-mutable%20reference%20would%20create%20a%20compile%20error%0A%20%20%20%20%2F%2F%20*pointer_to_a%20%3D%2013%3B%0A%0A%20%20%20%20%2F%2F%20Lets%20make%20a%20mutable%20variable%20this%20time%0A%20%20%20%20let%20mut%20a%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Note%20the%20reference%20must%20be%20mutable%20as%20well%0A%20%20%20%20let%20pointer_to_a%20%3D%20%26mut%20a%3B%0A%20%20%20%20%2F%2F%20Now%20we%20can%20write%20to%20the%20value%20pointed%20at%0A%20%20%20%20*pointer_to_a%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20And%20also%20read%20from%20it%20as%20before%0A%20%20%20%20let%20c%20%3D%20*pointer_to_a%20%2B%207%3B%0A%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%20%7B%7D%22%2C%20pointer_to_a%2C%20b%2C%20c)%0A%7D%0A
+  - en:
+      title: Chapter 3 - Conclusion
+      unreleased_content_markdown: |
+        Rust has some awesome **pointers**!
+
+        * lets 
+        * `make`
+        * this
