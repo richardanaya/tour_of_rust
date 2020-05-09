@@ -94,7 +94,7 @@ li {
 } 
 
 
-ul {
+ul, ol {
     margin-left: 40px;
 }
 
@@ -137,7 +137,7 @@ ul {
         font-size: 16px;
     }
 
-    ul {
+    ul,ol {
         margin-left: 20px;
     }
     
