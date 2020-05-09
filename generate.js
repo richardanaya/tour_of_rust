@@ -3,10 +3,10 @@ const fs = require('fs');
 let lessons = JSON.parse(fs.readFileSync('lessons.json'));
 
 function getWord(words,lang,w){
-    if(words[w+"_"+lang]){
-        return words[w+"_"+lang];
+    if(words[lang][w]){
+        return words[lang][w];
     }
-    return words[w+"_en"];
+    return words["en"][w];
 }
 
 function titleClean(title){

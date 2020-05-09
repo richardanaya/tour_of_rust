@@ -1,29 +1,33 @@
 ---
 common_words:
-  chapter_en: Chapter
-  tor_en: Tour of Rust
-  next_en: Next
-  previous_en: Previous
-  toc_en: Table of Contents
-  lessons_en: Lessons
-  tor_de: Tour zu Rust
-  next_de: Weiter
-  previous_de: Zurück
-  toc_de: Inhaltsverzeichnis
-  lessons_de: Kapitel
-  chapter_de: Kapitel
-  tor_ie: Tur de Rust
-  next_ie: Sequent
-  previous_ie: Precedent
-  toc_ie: Tabelle de contenete
-  lessons_ie: Lectiones
-  chapter_ie: Capitul
-  chapter_ru: Глава
-  tor_ru: Тур по Rust
-  next_ru: Далее
-  previous_ru: Назад
-  toc_ru: Содержание
-  lessons_ru: Занятия
+  en:
+    chapter: Chapter
+    tor: Tour of Rust
+    next: Next
+    previous: Previous
+    toc: Table of Contents
+    lessons: Lessons
+  de:
+    tor: Tour zu Rust
+    next: Weiter
+    previous: Zurück
+    toc: Inhaltsverzeichnis
+    lessons: Kapitel
+    chapter: Kapitel
+  ie:
+    tor: Tur de Rust
+    next: Sequent
+    previous: Precedent
+    toc: Tabelle de contenete
+    lessons: Lectiones
+    chapter: Capitul
+  ru:
+    chapter: Глава
+    tor: Тур по Rust
+    next: Далее
+    previous: Назад
+    toc: Содержание
+    lessons: Занятия
 pages:
   - title_en: "Hello, <span class=\"emoji\">\U0001F980</span>"
     code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
