@@ -10,4 +10,4 @@ publish: generate lint
 	git commit -m 'new pages'
 	git push
 lint:
-	prettier --write lessons.json
+	prettier --write lessons.yaml
