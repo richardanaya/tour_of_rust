@@ -23,7 +23,7 @@ To generate a language specific code example go to https://play.rust-lang.org/, 
 
 
 ## Release 1 - May 10 2020
-* Chapter 2
+* Deutsch, Interlingue, Русский translations for chapter 2
 * Deutsch, Interlingue, Русский translations for chapter 1
 * Domain name setup
 * Mobile improvements
