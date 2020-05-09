@@ -1,4 +1,6 @@
 const fs = require('fs');
+let showdown = require("./showdown.js");
+converter = new showdown.Converter();
 
 let lessons = JSON.parse(fs.readFileSync('lessons.json'));
 
@@ -84,11 +86,15 @@ for(var l in languages){
     let lang = languages[l];
     let c = 0;
     let words = lessons.common_words;
-    let langLessons = lessons.pages.filter(x=>x["content_"+lang])
+    let langLessons = lessons.pages.filter(x=>x["content_"+lang] || x["markdown_"+lang])
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
         let lesson = langLessons[i];
-        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,lesson["content_"+lang],c,i==langLessons.length-1,words))
+        let content = lesson["content_"+lang];
+        if(!content){
+            content = converter.makeHtml(lesson["markdown_"+lang]);
+        }
+        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,content,c,i==langLessons.length-1,words))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
