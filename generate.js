@@ -19,7 +19,7 @@ function titleClean(title){
     return title;
 }
 
-function template(lang,title,code,content,index,isLast, words){
+function template(lang,title,code,content,index,isLast, words, is_beta){
     return `<html lang="${lang}">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -46,11 +46,11 @@ function template(lang,title,code,content,index,isLast, words){
         <div class="tour">
             <div class="header">
                 <span class="title"><a href="${getFileName(lang,0)}">${getWord(words,lang,"tor")}</a></span>
-                <span class="nav">
+                ${is_beta?"":`<span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
                 ${index!=0?`<span class="back"><a href="${getFileName(lang,index-1)}">${getWord(words,lang,"previous")}</a></span>`:""}
                 <span class="next"><a href="${!isLast?getFileName(lang,index+1):`end_${lang}.html`}">${getWord(words,lang,"next")}</a></span>
-                </span>
+                </span>`}
             </div>
             <div class="page">
             <h1>${title}</h1>
@@ -69,9 +69,9 @@ function pad(num, size) {
     return s.padStart(2, '0')
 }
 
-function getFileName(lang,i){
+function getFileName(lang,i,is_beta){
     let fileName = pad(i,2)+`_${lang}.html`;
-    if(i==0){
+    if(i==0 && !is_beta){
         if(lang == "en"){
             fileName = "index.html";
         } else {
@@ -96,6 +96,7 @@ for(var l in languages){
         }
         return x[lang]["content_html"] || x[lang]["content_markdown"];
     });
+    let betaLessons = lessons.pages.filter(x=>x.beta == true);
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
        
@@ -104,7 +105,19 @@ for(var l in languages){
         if(!content){
             content = converter.makeHtml(lesson[lang]["content_markdown"]);
         }
-        fs.writeFileSync("docs/"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words))
+        fs.writeFileSync("docs/"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words,false))
+        c++;
+    }
+    c = 0;
+    for(var i in betaLessons){
+        let fileName = getFileName(lang,i,true);
+       
+        let lesson = langLessons[i];
+        let content = lesson[lang]["content_html"];
+        if(!content){
+            content = converter.makeHtml(lesson[lang]["content_markdown"]);
+        }
+        fs.writeFileSync("docs/beta_"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words,true))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
