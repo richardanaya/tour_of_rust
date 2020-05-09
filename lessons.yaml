@@ -879,7 +879,7 @@ pages:
       content_markdown: |
         When we **instantiate** a **struct** we have defined, our program creates a set of values that are put side by side in memory.
 
-        Programs have a few distinct regions that data is placed:
+        Programs have a few distinct regions that data can be placed:
         * **read-only memory** - this place in a program's memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from therefore they are placed in this region.
         * **stack memory** - this is a place in a program's memory where data that is defined within a function goes. The location of this memory never changes, because of this compilers can optimize code so stack data is very fast to use. 
         * **heap memory** - this is a place in a program's memory is for data that is created while the application is running. Memory in this region maybe added, moved, removed. Because locations aren't fixed, it's generally considered slower to use.  When data is added to this region we call it an **allocation**. When data is removed from this section we call it a **deallocation**.
