@@ -90,15 +90,15 @@ for(var l in languages){
         if(!x[lang]){
             return false;
         }
-        return x[lang]["content"] || x[lang]["markdown"];
+        return x[lang]["content_html"] || x[lang]["content_markdown"];
     });
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
        
         let lesson = langLessons[i];
-        let content = lesson[lang]["content"];
+        let content = lesson[lang]["content_html"];
         if(!content){
-            content = converter.makeHtml(lesson[lang]["markdown"]);
+            content = converter.makeHtml(lesson[lang]["content_markdown"]);
         }
         fs.writeFileSync("docs/"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words))
         c++;
