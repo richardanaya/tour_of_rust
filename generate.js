@@ -1,5 +1,4 @@
 let generate_beta_content = process.argv.length >= 2 && process.argv[2]=="beta";
-
 const fs = require('fs');
 let showdown = require("./showdown.js");
 converter = new showdown.Converter();
