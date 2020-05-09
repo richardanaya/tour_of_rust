@@ -1,3 +1,5 @@
+let generate_beta_content = process.argv.length >= 2 && process.argv[2]=="beta";
+
 const fs = require('fs');
 let showdown = require("./showdown.js");
 converter = new showdown.Converter();
@@ -88,6 +90,9 @@ for(var l in languages){
     let words = lessons.common_words;
     let langLessons = lessons.pages.filter(x=>{
         if(!x[lang]){
+            return false;
+        }
+        if(!generate_beta_content && x.beta == true){
             return false;
         }
         return x[lang]["content_html"] || x[lang]["content_markdown"];

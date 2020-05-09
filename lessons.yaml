@@ -853,28 +853,39 @@ pages:
         языка. Мы будем говорить про <code>for</code> и <code>match</code>
         еще глубже, когда обретём больше знаний, которые позволят применить больше возможностей
         языка. В следующий раз мы перейдем к основополагающим структурам данных Rust.</p>"
-  - en:
-      title: Chapter 3 - Basic Data Structures
-      unreleased_content_markdown: |
-        Rust has some awesome **pointers**!
+  - beta: true
+    en:
+      title: Chapter 3 - Basic Data Structure Types
+      content_markdown: |
+        It's time we explore beyond basic types! In this chapter we will look the most primitive data structures in Rust, paying close attention to their representations in memory. I think you will enjoy how little Rust hides from you how things work.
+  - beta: true
+    en:
+      title: Structures
+      content_markdown: |
+        When we think about ideas we wish to represent in code. They tend to have more than one property we are trying to represent.  Consider the representation of some friends of mine. Out in the ocean there are a variety of individuals of different properties:
+          * animal type
+          * name
+          * number of arms
+          * number of legs
+          * and sometimes a weapon!
 
-        * lets 
-        * `make`
-        * this
-  - en:
-      title: Pointers
-      unreleased_content_markdown: |
-        Rust has some awesome **pointers**!
+        Let's consider a simple way we could represent them using the `struct` keyword.
 
-        * lets 
-        * `make`
-        * this
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20pointer_to_a%20%3D%20%26a%3B%0A%20%20%20%20%2F%2F%20We%20can%20read%20from%20the%20value%20pointed%20at%0A%20%20%20%20let%20b%20%3D%20*pointer_to_a%20%2B%208%3B%0A%20%20%20%20%2F%2F%20Trying%20to%20modify%20a%20non-mutable%20reference%20would%20create%20a%20compile%20error%0A%20%20%20%20%2F%2F%20*pointer_to_a%20%3D%2013%3B%0A%0A%20%20%20%20%2F%2F%20Lets%20make%20a%20mutable%20variable%20this%20time%0A%20%20%20%20let%20mut%20a%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Note%20the%20reference%20must%20be%20mutable%20as%20well%0A%20%20%20%20let%20pointer_to_a%20%3D%20%26mut%20a%3B%0A%20%20%20%20%2F%2F%20Now%20we%20can%20write%20to%20the%20value%20pointed%20at%0A%20%20%20%20*pointer_to_a%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20And%20also%20read%20from%20it%20as%20before%0A%20%20%20%20let%20c%20%3D%20*pointer_to_a%20%2B%207%3B%0A%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%20%7B%7D%22%2C%20pointer_to_a%2C%20b%2C%20c)%0A%7D%0A
-  - en:
+        Notice how each member value of a struct has they type specified. We will be using some `String` typed members to represent text in memory.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+  - beta: true
+    en:
+      title: Creating Structures In Memory
+      content_markdown: |
+        Structures allow us to declare a set of values that are put side by side in memory.
+
+        Programs have two distinct regions of memory
+        * read-only memory - this place of a programs memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text never changes and is placed in this region.
+        * stack memory - this is a place of a programs memory where data that is defined within a function goes. The location of this memory never changes, so it is generally considered very fast to use. 
+        * heap memory - this is a place in memory where data that is created while the application is running goes. Memory in this region maybe added, moved, removed. Because locations aren't fixed, it's generally considered slower to use.  When data is added to this region we call it an **allocation*. When data is removed from this section we call it a **deallocation**.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20fred%20%3D%20Creature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Fred%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22beak%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20Creature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22fish%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%20and%20%7B%7D%20legs.%20And%20a%20%7B%7D%20weapon.%22%2C%0A%20%20%20%20%20%20%20%20fred.name%2C%20fred.animal_type%2C%20fred.arms%2C%20fred.legs%2C%20fred.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%20and%20%7B%7D%20legs.%20And%20no%20weapon.%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
+  - beta: true
+    en:
       title: Chapter 3 - Conclusion
-      unreleased_content_markdown: |
-        Rust has some awesome **pointers**!
-
-        * lets 
-        * `make`
-        * this
+      content_markdown: |
+        How exciting! We now have a basic way to represent ideas as a structure of values in memory. We've come to see how Rust gives us a powerful way of expressing optional, generic representations, as well as well as linking them within memory.
