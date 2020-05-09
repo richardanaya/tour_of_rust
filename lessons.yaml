@@ -877,7 +877,7 @@ pages:
     en:
       title: Creating Data In Memory
       content_markdown: |
-        When we **instantiate** a **struct** we have defined, our program create a set of values that are put side by side in memory.
+        When we **instantiate** a **struct** we have defined, our program creates a set of values that are put side by side in memory.
 
         Programs have a few distinct regions that data is placed:
         * **read-only memory** - this place in a program's memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from therefore they are placed in this region.
