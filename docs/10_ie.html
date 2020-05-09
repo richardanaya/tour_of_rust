@@ -32,7 +32,7 @@
             </div>
             <div class="page">
             <h1>Conversion de basic tipes</h1>
-            <p>Rust exige explicitá quande it acte se pri tipes numeric. On ne posse usar un <highlight>u8</highlight> hasardalmen por un <highlight>u32</highlight> sin un erra.</p><p>Felicimen, conversiones de tipes numeric es facil in Rust con li clave-parol <b>as</b>.</p>
+            <p>Rust exige explicitá quande it acte se pri tipes numeric. On ne posse usar un <code>u8</code> hasardalmen por un <code>u32</code> sin un erra.</p><p>Felicimen, conversiones de tipes numeric es facil in Rust con li clave-parol <b>as</b>.</p>
             </div>
             <div class="code">
             <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20a%20%3D%2013u8%3B%0A%20%20let%20b%20%3D%207u32%3B%0A%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20let%20t%20%3D%20true%3B%0A%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>

@@ -69,7 +69,7 @@ html, body {
 }
 
 
-highlight {
+code {
     display: inline;
     background: #444;
     color: white;
