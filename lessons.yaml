@@ -880,7 +880,7 @@ pages:
         Structures allow us to create a set of values that are put side by side in memory.
 
         Programs have a few distinct regions of memory
-        * **read-only memory** - this place of a programs memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text never changes and is placed in this region.
+        * **read-only memory** - this place of a programs memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from therefore they are placed in this region.
         * **stack memory** - this is a place of a programs memory where data that is defined within a function goes. The location of this memory never changes, because of this compilers can optimize code so stack data is very fast to use. 
         * **heap memory** - this is a place in memory where data that is created while the application is running goes. Memory in this region maybe added, moved, removed. Because locations aren't fixed, it's generally considered slower to use.  When data is added to this region we call it an **allocation**. When data is removed from this section we call it a **deallocation**.
 
