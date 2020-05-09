@@ -13,7 +13,7 @@ Welcome to the source repo of [Tour of Rust](https://tourofrust.com/).
 
 If you would like to contribute translations in a language that doesn't exist yet.  Feel free to make an issue and I will modify the generator for your language.
 
-The only file you should modify is: **lessons.json**
+The only file you should modify is: **lessons.yaml**
 
 Adding new languages should be as simple as adding new properites per page. Let's assume we're doing spanish and your language code is "es":
 
