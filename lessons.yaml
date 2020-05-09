@@ -885,7 +885,9 @@ pages:
     en:
       title: Creating Data In Memory
       content_markdown: |
-        When we **instantiate** a **struct** we have defined, our program creates a set of values that are put side by side in memory.
+        When we **instantiate** a **struct** our program creates a set of values that are put side by side in memory.
+
+        We instantiate by specifying all the member's values within `StructName { ... }`
 
         Look in our example:
         * The text inside the quotes is read only data (e.g. "fred"), therefore it is placed in read only memory
