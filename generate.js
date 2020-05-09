@@ -86,15 +86,21 @@ for(var l in languages){
     let lang = languages[l];
     let c = 0;
     let words = lessons.common_words;
-    let langLessons = lessons.pages.filter(x=>x["content_"+lang] || x["markdown_"+lang])
+    let langLessons = lessons.pages.filter(x=>{
+        if(!x[lang]){
+            return false;
+        }
+        return x[lang]["content"] || x[lang]["markdown"];
+    });
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
+       
         let lesson = langLessons[i];
-        let content = lesson["content_"+lang];
+        let content = lesson[lang]["content"];
         if(!content){
-            content = converter.makeHtml(lesson["markdown_"+lang]);
+            content = converter.makeHtml(lesson[lang]["markdown"]);
         }
-        fs.writeFileSync("docs/"+fileName, template(lang,lesson["title_"+lang],lesson["code_"+lang] || lesson.code,content,c,i==langLessons.length-1,words))
+        fs.writeFileSync("docs/"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words))
         c++;
     }
     let fileName = `TOC_${lang}.html`;
@@ -131,7 +137,7 @@ for(var l in languages){
             <h1>${getWord(words,lang,"lessons")}</h1>
             <p>
             <ul>
-    ${langLessons.map((x,i)=>`<li><a href="${getFileName(lang,i)}">${i}. ${x["title_"+lang]}</a></li>`).join("\n")}
+    ${langLessons.map((x,i)=>`<li><a href="${getFileName(lang,i)}">${i}. ${x[lang]["title"]}</a></li>`).join("\n")}
             <ul>
             </p>
             </div>
