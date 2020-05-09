@@ -39,7 +39,7 @@
 <ul>
 <li>The text inside the quotes is read only data (e.g. "fred"), therefore it is placed in read only memory</li>
 <li>The function call <code>String::from</code> creates a String (text that can be changed at runtime) from the read-only text. Because strings often get changed at runtime, the data is placed on the heap. The function <code>from</code> returns a reference to that location in memory (More on this in an upcoming chapter.)</li>
-<li>Finally our two friends <em>fred</em> and <em>sara</em> have data structures that will always have fixed locations in our program, so they are placed in stack memory.</li>
+<li>Finally our two friends <em>fred</em> and <em>sara</em> have data structures that will always have fixed locations in our program, so they are placed in stack memory. Note that only a reference ( represented by a integer ) is stored in the data structure within the stack that points to the String in the heap.</li>
 </ul>
             </div>
             <div class="code">
