@@ -38,7 +38,9 @@
 <p>Look in our example to the right:</p>
 <ul>
 <li>The text inside the quotes is read only data (e.g. "fred"), therefore it is placed in read only memory</li>
-<li>The function call <code>String::from</code> creates a struct <code>String</code> (text that can be changed at runtime) from the read-only text. Because strings often get changed at runtime, the struct <code>String</code> creates and holds a reference to data that is placed on the heap that can be potentially modified (We'll talk more on this later).</li>
+<li>The function call <code>String::from</code> creates a struct <code>String</code> that is placed side by side with the values of Creature. A String represents text that can be changed and does this by:
+# Creating memory on the heap for the text where it can be modified
+# Storing a reference to that memory location on the heap and storing it in String's struct </li>
 <li>Finally our two friends <em>fred</em> and <em>sara</em> have data structures that will always have fixed locations in our program, so they are placed in stack memory. Note that only a reference ( represented by a integer ) is stored in the data structure within the stack that points to the String in the heap.</li>
 </ul>
             </div>
