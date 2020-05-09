@@ -13,7 +13,7 @@ Welcome to the source repo of [Tour of Rust](https://tourofrust.com/).
 
 If you would like to contribute translations in a language that doesn't exist yet.  Feel free to make an issue and I will modify the generator for your language.
 
-The only file you should modify is: **lessons.json**
+The only file you should modify is: **lessons.yaml**
 
 Adding new languages should be as simple as adding new "title"/"content"/"code" properties to the lessons.json per lesson postfixed with the appropriate language code (e.g. "content_es").
 
