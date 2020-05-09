@@ -30,7 +30,7 @@ Adding new languages should be as simple as adding new properites per page under
         * A
         * `let`
         * C
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%7D%0A
 
 ```
 
