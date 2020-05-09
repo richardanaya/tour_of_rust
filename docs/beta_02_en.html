@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - The Rust Playground</title>
+        <title>Tour of Rust - Creating Data In Memory</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -27,11 +27,23 @@
                 
             </div>
             <div class="page">
-            <h1>The Rust Playground</h1>
-            <p>This tour uses an interactive coding tool at <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a></p><p>It's a great way to play around with Rust and show others your creativity and challenges!</p>
+            <h1>Creating Data In Memory</h1>
+            <p>Structures allow us to create a set of values that are put side by side in memory.</p>
+<p>Programs have a few distinct regions of memory</p>
+<ul>
+<li><strong>read-only memory</strong> - this place of a programs memory is for data that never changes. Consider the text in your program (e.g. "Hello World!"), this text never changes and is placed in this region.</li>
+<li><strong>stack memory</strong> - this is a place of a programs memory where data that is defined within a function goes. The location of this memory never changes, because of this compilers can optimize code so stack data is very fast to use. </li>
+<li><strong>heap memory</strong> - this is a place in memory where data that is created while the application is running goes. Memory in this region maybe added, moved, removed. Because locations aren't fixed, it's generally considered slower to use.  When data is added to this region we call it an <strong>allocation</strong>. When data is removed from this section we call it a <strong>deallocation</strong>.</li>
+</ul>
+<p>Look in our example to the right:</p>
+<ul>
+<li>The text inside the quotes is read only data (e.g. "fred"), therefore it is placed in read only memory</li>
+<li>The function call <code>String::from</code> creates a String (text that can be changed at runtime) from the read-only text. Because strings often get changed at runtime, the data is placed on the heap. The function <code>from</code> returns a reference to that location in memory (More on this in an upcoming chapter.)</li>
+<li>Finally our two friends <em>fred</em> and <em>sara</em> have data structures that will always have fixed locations in our program, so they are placed in stack memory.</li>
+</ul>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20fred%20%3D%20Creature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Fred%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22beak%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20Creature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22fish%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

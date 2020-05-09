@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Chapter 1 - The Basics</title>
+        <title>Tour of Rust - Structures</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -27,10 +27,21 @@
                 
             </div>
             <div class="page">
-            <h1>Chapter 1 - The Basics</h1>
-            <p>In this first chapter we're going to be exploring the very basics with functions, variables, and the most primitive types. Glad to have you on board!</p><p>Also! In case you are wondering who this adorable crab is speaking to you, I am <b>Ferris</b>, the unofficial mascot for the Rust programming language. Nice to meet you.</p>
+            <h1>Structures</h1>
+            <p>When we think about ideas we wish to represent in code. They tend to have more than one property we are trying to represent.  Consider the representation of some friends of mine. Out in the ocean there are a variety of individuals of different properties:</p>
+<ul>
+<li>animal type</li>
+<li>name</li>
+<li>number of arms</li>
+<li>number of legs</li>
+<li>and sometimes a weapon!</li>
+</ul>
+<p>Let's consider a simple way we could represent them using the <code>struct</code> keyword.</p>
+<p>Notice how each member value of a struct has they type specified. We will be using some <code>String</code> typed members to represent text in memory.</p>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
 </html>

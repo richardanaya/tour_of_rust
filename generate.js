@@ -110,15 +110,17 @@ for(var l in languages){
     }
     c = 0;
     for(var i in betaLessons){
-        let fileName = getFileName(lang,i,true);
+        let lesson = betaLessons[i];
+        if(lesson[lang]){
+            let fileName = getFileName(lang,i,true);
        
-        let lesson = langLessons[i];
-        let content = lesson[lang]["content_html"];
-        if(!content){
-            content = converter.makeHtml(lesson[lang]["content_markdown"]);
+            let content = lesson[lang]["content_html"];
+            if(!content){
+                content = converter.makeHtml(lesson[lang]["content_markdown"]);
+            }
+            fs.writeFileSync("docs/beta_"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==betaLessons.length-1,words,true))
+            c++;
         }
-        fs.writeFileSync("docs/beta_"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words,true))
-        c++;
     }
     let fileName = `TOC_${lang}.html`;
     fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
