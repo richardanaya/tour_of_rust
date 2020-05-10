@@ -920,4 +920,6 @@ pages:
     en:
       title: Chapter 3 - Conclusion
       content_markdown: |
-        How exciting! We now have a basic way to represent ideas as a structure of values in memory. We've come to see how Rust gives us a powerful way of expressing optional, generic representations, as well as well as linking them within memory.
+        How exciting! We now have a basic way to represent ideas as a structure of values in memory. 
+        We've come to see how Rust gives us a powerful way of expressing optional, generic 
+        representations, as well as well as linking them within memory.
