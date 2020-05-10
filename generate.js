@@ -152,14 +152,18 @@ for(var l in languages){
                 <span class="nav">
                 </span>
             </div>
-            <div class="page">
             <h1>${getWord(words,lang,"lessons")}</h1>
             <p>
             <ul>
-    ${langLessons.map((x,i)=>`<li><a href="${getFileName(lang,i)}">${i}. ${x[lang]["title"]}</a></li>`).join("\n")}
+        ${langLessons.map((x,i)=> {
+            let s = `<li><a href="${getFileName(lang,i)}">${x[lang]["title"]}</a></li>`;
+            if(x.chapter != undefined){
+                s = `</ul><h3>${getWord(words,lang,"chapter")} ${x.chapter}</h3><ul>` + s;
+            }
+            return s;
+        }).join("\n")}
             <ul>
             </p>
-            </div>
         </div>
     </body>
     </html>`)

@@ -101,7 +101,8 @@ pages:
         <li><a href=\"index_ru.html\">Русский</a></li></ul></p><p>Si tienes alguna
         sugerencia sobre el contenido o quieres contribuir a las traducciones, puedes encontrar el repositorio del Tour de Rust
         en <a href="https://github.com/richardanaya/tour_of_rust">github</a>.</p><p>En este ejemplo te mostramos el uso de cadenas unicode con Rust.</p>
-  - en:
+  - chapter: 1
+    en:
       title: Chapter 1 - The Basics
       content_html:
         "<p>In this first chapter we're going to be exploring the very basics
@@ -618,7 +619,8 @@ pages:
         превью принципов <b>безопасности</b>(safety), которые так распространены в Rust.
         Компилятор всего лишь хочет, что бы ваш код делал то, что вы ожидаете! Далее мы
         рассмотрим конструкцию <code>if</code> и цикл <code>for</code>.</p>"
-  - en:
+  - chapter: 2
+    en:
       title: Chapter 2 - Basic Control Flow
       content_html:
         "<p>In this chapter let's talk about basic control flow methods in Rust.
@@ -902,7 +904,8 @@ pages:
         языка. Мы будем говорить про <code>for</code> и <code>match</code>
         еще глубже, когда обретём больше знаний, которые позволят применить больше возможностей
         языка. В следующий раз мы перейдем к основополагающим структурам данных Rust.</p>"
-  - beta: true
+  - chapter: 3
+    beta: true
     en:
       title: Chapter 3 - Basic Data Structure Types
       content_markdown: |
