@@ -864,14 +864,14 @@ pages:
     en:
       title: Structures
       content_markdown: |
-        A `struct` is a collection of fields.
+        A `struct` is blueprint for creating a collection of fields in memory.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
   - beta: true
     en:
       title: Memory
       content_markdown: |
-        Rust programs 3 memory regions where data is placed:
+        Rust programs have 3 memory regions where data is placed:
         * **read-only memory** - For data that never changes. Consider the text in your 
           program (e.g. "Hello World!"), this text's bytes are only ever read from 
           therefore they are placed in this region.
@@ -890,7 +890,9 @@ pages:
       content_markdown: |
         When we **instantiate** a **struct** our program creates a set of values that are put side by side in memory.
 
-        We instantiate by specifying all field values within `StructName { ... }`.
+        We instantiate by specifying all field values within 
+
+        `StructName { ... }`.
 
         `struct` fields are accessed using a dot operator `.`.
 
