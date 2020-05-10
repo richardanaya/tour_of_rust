@@ -81,7 +81,7 @@ function getFileName(lang,i,is_beta){
     return fileName;
 }
 
-let languages = ["en","ie","de","ru"];
+let languages = Object.keys(lessons.pages[0]);
 
 for(var l in languages){
     let lang = languages[l];

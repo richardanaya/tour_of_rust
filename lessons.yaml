@@ -45,8 +45,8 @@ pages:
         considered a language with a steep learning curve, I hope I can convince you there's
         a lot to explore before we even get to complex parts.</p><p>You can find this
         guide in these languages:<ul><li><a href="index_de.html">Deutsch</a></li><li><a
-        href="index.html">English</a></li><li><a href="index_ie.html">Interlingue</a></li><li><a
-        href="index_ru.html">Русский</a></li><li><a href=\"index_es.html\">Español</a></li></ul></p><p>If you have suggestions on content
+        href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a href="index_ie.html">Interlingue</a></li><li><a
+        href="index_ru.html">Русский</a></li></ul></p><p>If you have suggestions on content
         or would like to contribute to translations, checkout out Tour of Rust's <a href="https://github.com/richardanaya/tour_of_rust">github
         repository</a>.</p><p>In this classic example we show Rust's support for unicode
         strings.</p>
@@ -61,8 +61,8 @@ pages:
         von Unicode Strings.</p><p>Wenn du dieses Projekt mit Inhalten und Übersetzungen
         (wie diese hier) unterstützen willst, wirf einen Blick auf die <a href="https://github.com/richardanaya/tour_of_rust">GitHub
         Repository</a>.</p><p>Translations:<ul><li><a href="index_de.html">Deutsch</a></li><li><a
-        href="index.html">English</a></li><li><a href="index_ie.html">Interlingue</a></li><li><a
-        href="index_ru.html">Русский</a></li><li><a href=\"index_es.html\">Español</a></li></ul></p>
+        href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a href="index_ie.html">Interlingue</a></li><li><a
+        href="index_ru.html">Русский</a></li></ul></p>
     ie:
       title: "Salute, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Salute%2C%20%F0%9F%A6%80%22)%3B%0A%7D
@@ -73,8 +73,8 @@ pages:
         convicter te que hay multcos a explorar e aprender ante que veni li complexitá.</p>
         <p>In ti-ci exemple on vide li exemple classic de programmation quel monstra li
         subtention de strings (catenes) unicode in Rust.</p><p>Translations:<ul><li><a
-        href="index_de.html">Deutsch</a></li><li><a href="index.html">English</a></li><li><a
-        href="index_ie.html">Interlingue</a></li><li><a href="index_ru.html">Русский</a></li><li><a href=\"index_es.html\">Español</a></li></ul></p><p>Si
+        href="index_de.html">Deutsch</a></li><li><a href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a
+        href="index_ie.html">Interlingue</a></li><li><a href="index_ru.html">Русский</a></li></ul></p><p>Si
         tu have suggestiones pri contenete o vole contribuer un traduction, ples visitar
         li <a href="https://github.com/richardanaya/tour_of_rust">repositoria github</a>
         del Tur de Rust.</p>
@@ -85,8 +85,8 @@ pages:
         по возможностям языка программирования Rust. Rust часто ассоциируется как язык,
         который сложен в обучении, я надеюсь, что смогу объяснить многое до того,  как
         мы перейдём к более сложным частям.</p><p>Вы можете пройти это руководство в таких
-        языках:<ul><li><a href="index_de.html">Deutsch</a></li><li><a href="index.html">English</a></li><li><a
-        href="index_ie.html">Interlingue</a></li><li><a href="index_ru.html">Русский</a></li><li><a href=\"index_es.html\">Español</a></li></ul></p><p>Если
+        языках:<ul><li><a href="index_de.html">Deutsch</a></li><li><a href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a
+        href="index_ie.html">Interlingue</a></li><li><a href="index_ru.html">Русский</a></li></ul></p><p>Если
         у вас есть предложения по содержимому или вы бы хотели помочь с переводом, проверьте
         Тур по Rust <a href="https://github.com/richardanaya/tour_of_rust">github репозиторий</a>.</p><p>В
         этом классическом примере мы показываем поддержку юникод строк в Rust.</p>
@@ -94,7 +94,13 @@ pages:
       title: "Hola, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hola%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
       content_html:
-        <p>Bienvenido al <b>Tour de Rust</b>. Esta es una guía paso a paso de las características del lenguaje de programación Rust. Rust está considerado como un lenguaje con una elevada curva de aprendizaje, por lo que hay mucho que explorar antes de llegar a las partes complejas.</p><p>Puedes encontrar esta guía en los siguientes idiomas:<ul><li><a href=\"index_de.html\">Deutsch</a></li><li><a href=\"index.html\">English</a></li><li><a href=\"index_ie.html\">Interlingue</a></li><li><a href=\"index_ru.html\">Русский</a></li><li><a href=\"index_es.html\">Español</a></li></ul></p><p>Si tienes alguna sugerencia sobre el contenido o quieres contribuir a las traducciones, puedes encontrar el repositorio del Tour de Rust en <a href="https://github.com/richardanaya/tour_of_rust">github</a>.</p><p>En este ejemplo te mostramos el uso de cadenas unicode con Rust.</p>
+        <p>Bienvenido al <b>Tour de Rust</b>. Esta es una guía paso a paso de las características del lenguaje de programación
+        Rust. Rust está considerado como un lenguaje con una elevada curva de aprendizaje, por lo que hay mucho que explorar
+        antes de llegar a las partes complejas.</p><p>Puedes encontrar esta guía en los siguientes idiomas:<ul><li>
+        <a href=\"index_de.html\">Deutsch</a></li><li><a href=\"index.html\">English</a></li><li><a href=\"index_es.html\">Español</a></li><li><a href=\"index_ie.html\">Interlingue</a></li>
+        <li><a href=\"index_ru.html\">Русский</a></li></ul></p><p>Si tienes alguna
+        sugerencia sobre el contenido o quieres contribuir a las traducciones, puedes encontrar el repositorio del Tour de Rust
+        en <a href="https://github.com/richardanaya/tour_of_rust">github</a>.</p><p>En este ejemplo te mostramos el uso de cadenas unicode con Rust.</p>
   - en:
       title: Chapter 1 - The Basics
       content_html:
@@ -128,7 +134,9 @@ pages:
     es:
       title: Capítulo 1 - Lo Básico
       content_html:
-        "<p>En este primer capítulo vamos a ver lo más básico respecto a funciones, variables y los tipos de datos primitivos. ¡Bienvenido a bordo!</p><p>Y por si te estas preguntando quién es el adorable cangrejo parlante, me llamo <b>Ferris</b>, y soy la mascota no oficial del lenguaje de programación Rust. Encantado de conocerte.</p>"
+        "<p>En este primer capítulo vamos a ver lo más básico respecto a funciones, variables y los tipos de datos primitivos.
+        ¡Bienvenido a bordo!</p><p>Y por si te estas preguntando quién es el adorable cangrejo parlante, me llamo <b>Ferris</b>,
+        y soy la mascota no oficial del lenguaje de programación Rust. Encantado de conocerte.</p>"
   - en:
       title: The Rust Playground
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
@@ -158,8 +166,9 @@ pages:
     es:
       title: Familiarízate con Rust
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Puedes%20empezar%20a%20trastear%20modificando%20el%20código%20aquí.%22)%3B%0A%7D%0A
-      content_html:
-        "<p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a></p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>"
+      content_html: >
+        <p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
+        </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>
   - en:
       title: Modules
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
