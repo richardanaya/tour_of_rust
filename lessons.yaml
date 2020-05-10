@@ -894,7 +894,7 @@ pages:
 
         `struct` fields are accessed using a `.`
 
-        Memort details of our example:
+        Memory details of our example:
         * The text inside the quotes is read only data (e.g. "fred"), therefore it is 
           placed in read only memory
         * The function call `String::from` creates a struct `String` that is placed side 
