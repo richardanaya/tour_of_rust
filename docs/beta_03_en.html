@@ -29,14 +29,14 @@
             <div class="page">
             <h1>Creating Data In Memory</h1>
             <p>When we <strong>instantiate</strong> a <strong>struct</strong> our program creates a set of values that are put side by side in memory.</p>
-<p>We instantiate by specifying all the member's values within: </p>
-<p><code>StructName { ... }</code></p>
-<p>Look in our example:</p>
+<p>We instantiate by specifying all field values within <code>StructName { ... }</code></p>
+<p><code>struct</code> fields are accessed using a <code>.</code></p>
+<p>Memort details of our example:</p>
 <ul>
 <li>The text inside the quotes is read only data (e.g. "fred"), therefore it is 
 placed in read only memory</li>
 <li>The function call <code>String::from</code> creates a struct <code>String</code> that is placed side 
-by side with the values of Creature. A String represents text that can be changed 
+by side with the fields of Creature. A String represents text that can be changed 
 and does this by:</li>
 </ul>
 <ol>
@@ -48,7 +48,6 @@ struct (More on this in future lessons) </li>
 <li>Finally our two friends <em>fred</em> and <em>sara</em> have data structures that will always have 
 fixed locations in our program, so they are placed in stack memory.</li>
 </ul>
-<p>We can access our structures member values using the . operator.</p>
             </div>
             <div class="code">
             <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Creature's%20data%20is%20on%20stack%0A%20%20%20%20let%20fred%20%3D%20Creature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Fred%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22beak%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20Creature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22fish%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%20and%20%7B%7D%20legs.%20And%20a%20%7B%7D%20weapon.%22%2C%0A%20%20%20%20%20%20%20%20fred.name%2C%20fred.animal_type%2C%20fred.arms%2C%20fred.legs%2C%20fred.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%20and%20%7B%7D%20legs.%20And%20no%20weapon.%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
