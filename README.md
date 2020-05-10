@@ -6,9 +6,9 @@ Welcome to the source repo of [Tour of Rust](https://tourofrust.com/).
 
 * Deutsch - [Felix](https://github.com/jassler)
 * English - [Richard Anaya](https://github.com/richardanaya)
+* Español - [Alba Martínez Martínez](https://github.com/albatraduce)
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
 * Русский - [Danil Kondratiev](https://github.com/knightpp)
-* Español - [Alba Martínez Martínez](https://github.com/albatraduce)
 
 # Looking for translators!
 
