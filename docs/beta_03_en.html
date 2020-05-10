@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Memory</title>
+        <title>Tour of Rust - Structure Visibility</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -27,26 +27,12 @@
                 
             </div>
             <div class="page">
-            <h1>Memory</h1>
-            <p>Rust programs have 3 memory regions where data is placed:</p>
-<ul>
-<li><strong>read-only memory</strong> - For data that never changes. Consider the text in your 
-program (e.g. "Hello World!"), this text's bytes are only ever read from 
-therefore they are placed in this region. Compilers make lots of optimizations 
-with this kind of data, they are generally considered very fast to use since
-locations are fixed.</li>
-<li><strong>stack memory</strong> - For data that is declared as variables within a function. 
-The location of this memory never changes, because of this compilers 
-can optimize code so stack data is very fast to use. </li>
-<li><strong>heap memory</strong> - For data that is created while the application is running. 
-Data in this region may be added, moved, removed, resized, etc. Because of 
-it's dynamic nature it's generally considered slower to use, but it allows 
-for much more creative usages of memory.  When data is added to this region we 
-call it an <strong>allocation</strong>. When data is removed from this section we call it a 
-<strong>deallocation</strong>.</li>
-</ul>
+            <h1>Structure Visibility</h1>
+            <p>Just like functions structures can declare what they want exposed outside of their module using <code>pub</code>.</p>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
 </html>
