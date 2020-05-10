@@ -33,15 +33,20 @@
 <p><code>StructName { ... }</code></p>
 <p>Look in our example:</p>
 <ul>
-<li>The text inside the quotes is read only data (e.g. "fred"), therefore it is placed in read only memory</li>
-<li>The function call <code>String::from</code> creates a struct <code>String</code> that is placed side by side with the values of Creature. A String represents text that can be changed and does this by:</li>
+<li>The text inside the quotes is read only data (e.g. "fred"), therefore it is 
+placed in read only memory</li>
+<li>The function call <code>String::from</code> creates a struct <code>String</code> that is placed side 
+by side with the values of Creature. A String represents text that can be changed 
+and does this by:</li>
 </ul>
 <ol>
 <li>Creating memory on the heap for the text where it can be modified</li>
-<li>Storing a reference to that memory location on the heap and storing it in <code>String</code> struct (More on this in future lessons) </li>
+<li>Storing a reference to that memory location on the heap and storing it in <code>String</code> 
+struct (More on this in future lessons) </li>
 </ol>
 <ul>
-<li>Finally our two friends <em>fred</em> and <em>sara</em> have data structures that will always have fixed locations in our program, so they are placed in stack memory.</li>
+<li>Finally our two friends <em>fred</em> and <em>sara</em> have data structures that will always have 
+fixed locations in our program, so they are placed in stack memory.</li>
 </ul>
 <p>We can access our structures member values using the . operator.</p>
             </div>
