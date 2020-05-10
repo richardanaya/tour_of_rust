@@ -864,7 +864,9 @@ pages:
     en:
       title: Structures
       content_markdown: |
-        A `struct` is blueprint for creating a collection of fields in memory.
+        A `struct` a collection of fields.
+
+        It's definition is like a blueprint for how to layout the fields in memory.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
   - beta: true
