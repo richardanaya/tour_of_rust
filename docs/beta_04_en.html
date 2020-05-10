@@ -30,13 +30,13 @@
             <h1>Memory</h1>
             <p>Rust programs have 3 memory regions where data is placed:</p>
 <ul>
-<li><strong>data memory</strong> - For data that fixed size and static (i.e always available through life of program ). 
+<li><strong>data memory</strong> - For data that fixed size and <strong>static</strong> (i.e always available through life of program ). 
 consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from 
 therefore they are placed in this region. Compilers make lots of optimizations 
 with this kind of data, they are generally considered very fast to use since
 locations are known and fixed.</li>
 <li><strong>stack memory</strong> - For data that is declared as variables within a function. 
-The location of this memory never changes, because of this compilers 
+The location of this memory never changes for the duration of a function call, because of this compilers 
 can optimize code so stack data is very fast to use. </li>
 <li><strong>heap memory</strong> - For data that is created while the application is running. 
 Data in this region may be added, moved, removed, resized, etc. Because of 
