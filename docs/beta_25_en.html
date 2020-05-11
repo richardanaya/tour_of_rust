@@ -1,0 +1,56 @@
+<html lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tour of Rust - Memory</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
+                <span class="back"><a href="beta_24_en.html">Previous</a></span>
+                <span class="next"><a href="beta_26_en.html">Next</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Memory</h1>
+            <p>Rust programs have 3 memory regions where data is placed:</p>
+<ul>
+<li><strong>data memory</strong> - For data that fixed size and <strong>static</strong> (i.e always available through life of program ). 
+consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from 
+therefore they are placed in this region. Compilers make lots of optimizations 
+with this kind of data, they are generally considered very fast to use since
+locations are known and fixed.</li>
+<li><strong>stack memory</strong> - For data that is declared as variables within a function. 
+The location of this memory never changes for the duration of a function call, because of this compilers 
+can optimize code so stack data is very fast to use. </li>
+<li><strong>heap memory</strong> - For data that is created while the application is running. 
+Data in this region may be added, moved, removed, resized, etc. Because of 
+it's dynamic nature it's generally considered slower to use, but it allows 
+for much more creative usages of memory.  When data is added to this region we 
+call it an <strong>allocation</strong>. When data is removed from this section we call it a 
+<strong>deallocation</strong>.</li>
+</ul>
+            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+        </div>
+    </body>
+</html>

@@ -46,11 +46,11 @@ function template(lang,title,code,content,index,isLast, words, is_beta){
         <div class="tour">
             <div class="header">
                 <span class="title"><a href="${getFileName(lang,0)}">${getWord(words,lang,"tor")}</a></span>
-                ${is_beta?"":`<span class="nav">
+                <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
-                ${index!=0?`<span class="back"><a href="${getFileName(lang,index-1)}">${getWord(words,lang,"previous")}</a></span>`:""}
-                <span class="next"><a href="${!isLast?getFileName(lang,index+1):`end_${lang}.html`}">${getWord(words,lang,"next")}</a></span>
-                </span>`}
+                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1)}">${getWord(words,lang,"previous")}</a></span>`:""}
+                <span class="next"><a href="${is_beta?"beta_":""}${!isLast?getFileName(lang,index+1):`end_${lang}.html`}">${getWord(words,lang,"next")}</a></span>
+                </span>
             </div>
             <div class="page">
             <h1>${title}</h1>
@@ -96,7 +96,12 @@ for(var l in languages){
         }
         return x[lang]["content_html"] || x[lang]["content_markdown"];
     });
-    let betaLessons = lessons.pages.filter(x=>x.beta == true);
+    let betaLessons = lessons.pages.filter(x=>{
+        if(!x[lang]){
+            return false;
+        }
+        return x[lang]["content_html"] || x[lang]["content_markdown"];
+    });
     for(var i in langLessons){
         let fileName = getFileName(lang,i);
        
