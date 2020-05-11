@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Tagged Unions</title>
+        <title>Tour of Rust - Enumerations With Data</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -31,14 +31,18 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Tagged Unions</h1>
-            <p><code>enum</code> is actually a <em>tagged union</em>.  Meaning, each enum element can have data types.</p>
-<p>When a tagged union <code>enum</code> is matched, you can bind a variable name to each data value.</p>
-<p>The combining of types to make a new type is what people mean when they say Rust has <em>algebraic types</em>.</p>
+            <h1>Enumerations With Data</h1>
+            <p><code>enum</code> elements can also have have one or more data types allowing them to behave like <em>union</em> from C.</p>
+<p>When a <code>enum</code> is pattern matched using <code>match</code>, you can bind a variable name to each data value.</p>
 <p>Memory details of <code>enum</code>:</p>
 <ul>
 <li>An enum data value will have a memory size equal to it's largest element. This allows for all potential values to fit in the same space of memory.</li>
 <li>In addition to element data types (if any), each element also has a numeric value that represents which tag it is.</li>
+</ul>
+<p>Other details:</p>
+<ul>
+<li>Rust's <code>enum</code> is something also known as a <em>tagged-union</em></li>
+<li>The combining of types to make a new type is what people mean when they say Rust has <em>algebraic types</em>.</li>
 </ul>
             </div>
             <div class="code">
