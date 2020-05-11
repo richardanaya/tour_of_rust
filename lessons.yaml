@@ -1013,6 +1013,8 @@ pages:
 
         When a tagged union `enum` is matched, you can bind a variable name to each data value.
 
+        The combining of types to make a new type is what people mean when they say Rust has algebraic types.
+
         Memory details of `enum`:
         * An enum data value will have a memory size equal to it's largest element. This allows for all potential values to fit in the same space of memory.
         * In addition to element data types (if any), each element also has a numeric value that represents which tag it is.
