@@ -1013,7 +1013,7 @@ pages:
 
         When a tagged union `enum` is matched, you can bind a variable name to each data value.
 
-        The combining of types to make a new type is what people mean when they say Rust has algebraic types.
+        The combining of types to make a new type is what people mean when they say Rust has *algebraic types*.
 
         Memory details of `enum`:
         * An enum data value will have a memory size equal to it's largest element. This allows for all potential values to fit in the same space of memory.
@@ -1023,6 +1023,6 @@ pages:
     en:
       title: Chapter 3 - Conclusion
       content_markdown: |
-        How exciting! We now have a basic way to represent ideas as a struct of fields in memory. 
-        We've come to see how Rust gives us a powerful way of expressing optional and heap 
-        allocated representations.
+        How exciting! We now have a the most basic tools for representing the form of our ideas in code. Hopefully now we 
+        can see a glimmer of how Rust's fundamental operations work in harmony and conciseness with its types.  Next up we will talk about 
+        a concept that gives our data types even more flexability of representation: *generics*.
