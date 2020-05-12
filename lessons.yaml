@@ -421,8 +421,13 @@ pages:
         Using `()` is uncommon, but will come up often enough that it's good to know whats happening.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
     de:
-      title: Returning nothing
-      content_markdown: need translation
+      title: Keine return-Variablen
+      content_markdown: |
+        Wenn kein Variablentyp als Rückgabewert einer Funktion angegeben wird, gibt die Funktion ein leeres Tupel zurück, auch bekannt als *unit*.
+        
+        Ein leeres Tupel wird durch ein `()` repräsentiert.
+        
+        Die leeren Klammern werden selten verwendet, finden trotzdem an manchen Orten ihren Platz, weshalb wir diese hier kurz zum Vorschein bringen wollen.
     ie:
       title: Retornar necos
       content_markdown: |
@@ -893,8 +898,7 @@ pages:
         Insbesondere <code>match</code> wurde hier außer Acht gelassen, das
         viele mächtige Features beinhaltet, dementsprechend aber auch etwas mehr Hintergrundwissen
         erfordert.</p><p>Im nächsten Kapitel werden wir uns dafür ein bisschen in die
-        Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?</p><p>(eine
-        Übersetzung? ok, die Ausrede ist legitim...)</p>"
+        Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?</p>"
     ie:
       title: Conclusion de Capitul 2
       content_html:
@@ -918,6 +922,12 @@ pages:
         It's time we explore beyond basic types! In this chapter we will look the most primitive 
         data structures in Rust, paying close attention to their representations in memory. I think 
         you will enjoy how little Rust hides from you how things work.
+    de:
+      title: Kapitel 3 - Datenstrukturen
+      content_markdown: |
+        Zeit die Basisdatentypen zu erweitern! Hier werden wir leicht komplexere Datenstrukturen
+        in Rust betrachten, speziell wie die Daten im Speicher verteilt werden. Alle low-level-Enthusiasten
+        (mitunter dir) werden sicherlich Gefallen daran haben, wie wenig Rust vor einem versteckt.
   - beta: true
     en:
       title: Structures
@@ -929,6 +939,14 @@ pages:
         It's definition is like a blueprint for a compiler on how to layout the fields in memory nearby each other.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+    de:
+      title: Strukturen
+      content_markdown: |
+        Ein `struct` (dt. "Struktur") ist eine Ansammlung von fields (dt. Feldern).
+        
+        Ein *field* ist ein Wert, der mit einer Datenstruktur assoziiert wird. Dies kann ein primitiver Datentyp oder ein weiteres `struct` sein.
+        
+        Die Definition eines structs ist wie ein Entwurf für den Compiler, der ihm besagt, welche Felder im Speicher zueinander gehören.
   - beta: true
     en:
       title: Structure Visibility
@@ -936,6 +954,11 @@ pages:
         Just like functions structures can declare what they want exposed outside of their module using `pub`.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+    de:
+      title: Struktursichtbarkeit
+      content_markdown: |
+        Genau wie bei Modulen kann in Strukturen angegeben werden, welche Felder nach außen hin sichtbar sein sollen.
+        Diese sind wieder mit dem Schlüsselwort `pub` versehen.
   - beta: true
     en:
       title: Memory
@@ -955,6 +978,23 @@ pages:
           for much more creative usages of memory.  When data is added to this region we 
           call it an **allocation**. When data is removed from this section we call it a 
           **deallocation**.
+    de:
+      title: Speicher
+      content_markdown: |
+        In Rust gibt es 3 unterschiedliche Speicher-Regionen:
+        * **data memory** (Datenspeicher) - Für Daten mit fester Größe und die **statisch** sind (zur Gesamtlebenszeit
+          eines Programms verfügbar). Nehmen wir beispielsweise festen Text her (z.B. `"Hallo Welt"`). Die Bytes in
+          diesem Schnipsel werden nur gelesen und sind bereits zur Kompilierzeit bekannt, daher kommen sie in den
+          Datenspeicher. Compiler können dementsprechend den Code optimieren und sind in der Laufzeit am schnellsten
+          "auszuwerten."
+        * **stack memory** (Stackspeicher) - Variablen, die innerhalb einer Funktion deklariert werden. Während eines
+          Funktionsaufrufs ändert sich der Standort nicht. Wird eine weitere Funktion aufgerufen, werden die von der
+          Unterfunktion benötigen Variablen weiter auf den Stack gelegt. Erreicht man das Ende der Funktion, werden die
+          entsprechenden Variablen wieder vom Stack runtergenommen.
+        * **heap memory** (Heapspeicher) - Speicher, der zur Laufzeit für Daten reserviert wird. In dieser Region kann
+          Speicher reserviert, bewegt, vergrößert, verkleinert und freigegeben werden. Dieses dynamische
+          Speichermanagement kann etwas mehr Zeit in Anspruch nehmen. Beim Reservieren spricht man von **memory allocationt**
+          (allozieren), beim Freigeben von **memory deallocation**.
   - beta: true
     en:
       title: Creating Data In Memory
@@ -979,6 +1019,27 @@ pages:
         * Finally our two friends *ferris* and *sara* have data structures that will always have 
           fixed locations in our program, so they are placed on the *stack*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
+    de:
+      title: Structs initialisieren
+      content_markdown: |
+        Wenn ein struct **instanziiert** wird, legt das Programm die Felder des structs Seite an Seite im Speicher an.
+
+        Die Initialisierung erfolgt mit folgendem Syntax:
+
+        `StructName { feld1, feld2, ... }`.
+
+        Auf die Felder des structs werden mit einem `.` zugegriffen.
+        
+        In unserem Beispiel bedeutet das:
+        * Text innerhalb der Anführungszeichen sind read-only Daten (z.B. "ferris"), daher sind sie
+          in **data memory**
+        * Der Funktionsaufruf `String::from` erstellt ein struct `String` das Seite an Seite der anderen
+          Felder in `SeaCreature` auf den **stack** gelegt wird. Ein String repräsentiert (veränderbaren) Text,
+          der...
+          1. ... im **heap** angelegt wird und daher dort verändert werden kann,
+          2. ... die Adresse (Referenz) zum Speicherstück im heap im `String` struct speichert
+        * Nachdem unsere Freunde *ferris* und *sara* Datenstrukturen sind, die in der main-Funktion
+          erstellt wurden, werden diese auf den **stack** platziert.
   - beta: true
     en:
       title: Tuple-like Structs
@@ -986,6 +1047,10 @@ pages:
         For conciseness, you can create structs that are used like a tuple.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20This%20is%20still%20a%20struct%20on%20a%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+    de:
+      title: Tuple-Structs
+      content_markdown: |
+        Eine verkürzte Schreibweiße bietet das Instanziieren von structs mittels von **Tupeln**.
   - beta: true
     en:
       title: Unit-like Structs
@@ -997,6 +1062,14 @@ pages:
         This type of struct is rarely used.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20This%20is%20still%20a%20struct%20on%20a%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+    de:
+      title: Unit-Structs
+      content_markdown: |
+        Structs müssen keine Felder enthalten.
+
+        Wie in Kapitel 1 ist ein *unit* ein anderes Wort für ein leeres Tupel `()`. Daher werden diese structs auch *unit-like* (unit-ähnlich) genannt.
+
+        Sowas wird allerdings nur selten verwendet.
   - beta: true
     en:
       title: Enumerations
@@ -1005,6 +1078,17 @@ pages:
 
         `match` helps ensure exhaustive handling of all possible enum values making it a powerful tool in ensuring quality code.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20enum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%2C%0A%7D%0A%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20species%3A%20Species%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20pub%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22ferris%20is%20a%20crab%22)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22ferris%20is%20a%20octopus%22)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22ferris%20is%20a%20fish%22)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22ferris%20is%20a%20clam%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+    de:
+      title: Enumerations
+      content_markdown: |
+        Aufzählungen (enumerations) erlauben das Erzeugen eines neuen Typs, die nur eine fixe Liste an Werten zulassen.
+        Die gültigen Werte werden mit dem `enum` Schlüsselwort eingeleitet.
+
+        `enum` ist besonders im Zusammenhang mit `match` nützlich: da `match` exhaustive ist, versucht es den Programmierer darüber zu
+        informieren, falls nicht alle möglichen Testfälle durchgegangen wurden.
+
+        Versuche unser Beispielcode zum Laufen zu bringen. Welcher Fall wurde in `match` nicht berücksichtigt? Kannst du diesen noch einfügen?
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20enum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%2C%0A%7D%0A%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20species%3A%20Species%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20pub%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22ferris%20is%20a%20crab%22)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22ferris%20is%20a%20octopus%22)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22ferris%20is%20a%20fish%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
   - beta: true
     en:
       title: Enumerations With Data
@@ -1021,6 +1105,22 @@ pages:
         * Rust's `enum` is something also known as a *tagged-union*
         * The combining of types to make a new type is what people mean when they say Rust has *algebraic types*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20enum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Apub%20enum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Apub%20enum%20Size%20%7B%20Big%2C%20Small%20%7D%0Apub%20enum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20species%3A%20Species%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20pub%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22big%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22small%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20is%20a%20crab%20with%20%7B%7D%20%7B%7D%20claws%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20a%20crab%20with%20some%20other%20weapon%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20some%20other%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+    de:
+      title: Enumerations mit Daten
+      content_markdown: |
+        `enum` Elemente können auch Daten (oder Felder) beinhalten, vergleichbar mit *unions* aus C (nicht der Arbeitergewerkschaft haha).
+
+        Wenn ein `enum` in einem Fall im `match` übereinstimmt, können die Werte aus dem struct direkt an Variablen gebunden werden
+        (im Beispiel in Zeile 32 zu sehen).
+
+        Weitere Details zu `enum`:
+        * Der Speicherbedarf eines enums entspricht dem des größten Elements (hier wäre `Claw` das größte Element).
+        * Neben den Datentypen (sollte es welche geben) kann jedes Element mittels einer Zahl erreicht werden.
+
+        Mehr Details!
+        * `enum` ist in Rust auch bekannt als *tagged-union*.
+        * Das Kombinieren von verschiedenen Typen wird in Rust auch als *algebraischer Typ* bezeichnet (eng. algebraic type).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20enum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Apub%20enum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Apub%20enum%20Size%20%7B%20Big%2C%20Small%20%7D%0A%0A%2F%2F%20Claw%20has%20additional%20information%20about%20number%20of%20claws%20and%20size%0A%2F%2F%20Poison%20has%20additional%20information%20about%20the%20type%20of%20poison%0Apub%20enum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20species%3A%20Species%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20pub%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20number%20of%20claws%20and%20size%20is%20bound%20to%20the%20variables%20num_claws%20and%20size%0A%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22big%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22small%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20is%20a%20crab%20with%20%7B%7D%20%7B%7D%20claws%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20a%20crab%20with%20some%20other%20weapon%22)%0A%20%20%20%20%7D%0A%7D%0A
   - beta: true
     en:
       title: Chapter 3 - Conclusion
@@ -1028,3 +1128,9 @@ pages:
         How exciting! We now have a the most basic tools for representing the form of our ideas in code. Hopefully now we 
         can see a glimmer of how Rust's fundamental operations work in harmony and conciseness with its types.  Next up we will talk about 
         a concept that gives our data types even more flexability of representation: *generics*.
+    de:
+      title: Kapitel 3 - Fazit
+      content_markdown: |
+        Wie aufregend! Wir haben jetzt das Werkzeug, womit wir unsere Ideen im Code repräsentieren können.
+        Diese Einblicke in Rust's fundamentale Operationen und wie sie im Einklang zueinander stehen, sollte bei so manchen von euch
+        hoffentlich einen Funken verursacht haben. Als nächstes wagen wir uns in noch mehr Flexibilität: den *generics*.
