@@ -424,9 +424,9 @@ pages:
       title: Keine return-Variablen
       content_markdown: |
         Wenn kein Variablentyp als Rückgabewert einer Funktion angegeben wird, gibt die Funktion ein leeres Tupel zurück, auch bekannt als *unit*.
-        
+
         Ein leeres Tupel wird durch ein `()` repräsentiert.
-        
+
         Die leeren Klammern werden selten verwendet, finden trotzdem an manchen Orten ihren Platz, weshalb wir diese hier kurz zum Vorschein bringen wollen.
     ie:
       title: Retornar necos
@@ -943,9 +943,9 @@ pages:
       title: Strukturen
       content_markdown: |
         Ein `struct` (dt. "Struktur") ist eine Ansammlung von fields (dt. Feldern).
-        
+
         Ein *field* ist ein Wert, der mit einer Datenstruktur assoziiert wird. Dies kann ein primitiver Datentyp oder ein weiteres `struct` sein.
-        
+
         Die Definition eines structs ist wie ein Entwurf für den Compiler, der ihm besagt, welche Felder im Speicher zueinander gehören.
   - beta: true
     en:
@@ -1029,7 +1029,7 @@ pages:
         `StructName { feld1, feld2, ... }`.
 
         Auf die Felder des structs werden mit einem `.` zugegriffen.
-        
+
         In unserem Beispiel bedeutet das:
         * Text innerhalb der Anführungszeichen sind read-only Daten (z.B. "ferris"), daher sind sie
           in **data memory**
