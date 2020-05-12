@@ -939,9 +939,9 @@ pages:
       content_markdown: |
         A `struct` a collection of fields.
 
-        A *field* is simply a data value associated with a data structure. It's value can be of a primitive type or a data structure.
+        A *field* is simply a data value associated with a data structure. Its value can be of a primitive type or a data structure.
 
-        It's definition is like a blueprint for a compiler on how to layout the fields in memory nearby each other.
+        Its definition is like a blueprint for a compiler on how to layout the fields in memory nearby each other.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
     de:
@@ -1172,10 +1172,10 @@ pages:
       content_markdown: |
         `enum` elements can also have have one or more data types allowing them to behave like *union* from C.
 
-        When a `enum` is pattern matched using `match`, you can bind a variable name to each data value.
+        When an `enum` is pattern matched using `match`, you can bind a variable name to each data value.
 
         Memory details of `enum`:
-        * An enum data value will have a memory size equal to it's largest element. This allows for all potential values to fit in the same space of memory.
+        * An enum data value will have a memory size equal to its largest element. This allows for all potential values to fit in the same space of memory.
         * In addition to element data types (if any), each element also has a numeric value that represents which tag it is.
 
         Other details:
@@ -1222,7 +1222,7 @@ pages:
       content_markdown: |
         How exciting! We now have a the most basic tools for representing the form of our ideas in code. Hopefully now we 
         can see a glimmer of how Rust's fundamental operations work in harmony and conciseness with its types.  Next up we will talk about 
-        a concept that gives our data types even more flexability of representation: *generics*.
+        a concept that gives our data types even more flexibility of representation: *generics*.
     de:
       title: Kapitel 3 - Fazit
       content_markdown: |
