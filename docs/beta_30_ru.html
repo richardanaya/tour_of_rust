@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="ru">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Enumerations With Data</title>
+        <title>Тур по Rust - Перечисления с данными</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -23,26 +23,30 @@
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index.html">Tour of Rust</a></span>
+                <span class="title"><a href="index_ru.html">Тур по Rust</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
-                <span class="back"><a href="beta_29_en.html">Previous</a></span>
-                <span class="next"><a href="beta_31_en.html">Next</a></span>
+                <span class="toc"><a href="TOC_ru.html">Содержание</a></span>
+                <span class="back"><a href="beta_29_ru.html">Назад</a></span>
+                <span class="next"><a href="beta_31_ru.html">Далее</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Enumerations With Data</h1>
-            <p><code>enum</code> elements can also have have one or more data types allowing them to behave like <em>union</em> from C.</p>
-<p>When an <code>enum</code> is pattern matched using <code>match</code>, you can bind a variable name to each data value.</p>
-<p>Memory details of <code>enum</code>:</p>
+            <h1>Перечисления с данными</h1>
+            <p>Элементы <code>enum</code> также могут иметь один и больше типов данных (например, структуру или кортеж-структуру). 
+Это чем-то похоже на <em>union</em> с языка C.</p>
+<p>Когда <code>enum</code> сравнивается с серией шаблонов (или матчится, англ. is pattern matched), вы можете
+связать имя переменной к каждому значению или полю структуры.</p>
+<p>Как <code>enum</code> представлен в памяти:</p>
 <ul>
-<li>An enum data value will have a memory size equal to its largest element. This allows for all potential values to fit in the same space of memory.</li>
-<li>In addition to element data types (if any), each element also has a numeric value that represents which tag it is.</li>
+<li>Перечисление будет иметь размер, равный наибольшему из его элементов. Это позволяет всем потенциальным
+значениям вместиться в одну и ту же область памяти (без дополнительных выделений памяти).</li>
+<li>Элементы перечисления имеют невидимый числовой тэг в дополнении к данным, что этот елемент уже и так несет.</li>
 </ul>
-<p>Other details:</p>
+<p>Еще немного информации:</p>
 <ul>
-<li>Rust's <code>enum</code> is something also known as a <em>tagged-union</em></li>
-<li>The combining of types to make a new type is what people mean when they say Rust has <em>algebraic types</em>.</li>
+<li><code>enum</code> Rust(а) иногда называют <em>типом-сумой</em> (tagged-union)</li>
+<li>Комбинирование разных типов, чтобы создать новый тип - это то, что люди имеют ввиду, когда говорят, что
+Rust имеет <em>алгебраические типы</em></li>
 </ul>
             </div>
             <div class="code">
