@@ -1562,7 +1562,7 @@ pages:
     en:
       title: Graceful Error Handling
       content_markdown: |
-        Working with results is so common that Rust has a powerful operator `?` for working with them. These two statements are equivalent:
+        `Result` is so common that Rust has a powerful operator `?` for working with them. These two statements are equivalent:
 
         ```
         do_something_that_might_fail()?
