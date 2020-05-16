@@ -26,3 +26,5 @@ if(iframe){
 } else {
     setupKeys();
 }
+
+hljs.initHighlightingOnLoad();

@@ -19,12 +19,12 @@ a {
     font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
 }
 
-h1, p{
+h1, p, pre{
     margin-left: 40px;
     margin-right: 40px;
 }
 
-.page p {
+.page p, .page pre {
     font-size: 22px;
 }
 
@@ -126,7 +126,7 @@ ul, ol, h3 {
         font-size: 18px;
     }
 
-    .page p, h1 {
+    .page p, h1, pre {
         margin-left: 20px;
         margin-right: 20px;
     }
@@ -135,7 +135,7 @@ ul, ol, h3 {
         font-size: 20px;
     }
 
-    .page p {
+    .page p, .page pre {
         font-size: 16px;
     }
 
