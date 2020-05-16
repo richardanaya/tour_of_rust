@@ -1538,7 +1538,7 @@ pages:
       title: Result
       content_markdown: |
         Rust has a built in generic enum called `Result` that allows us to return a value that has the possibility of failing.
-        It is the idiomatic way in which Rust does error handling.
+        It is the idiomatic way in which the language does error handling.
 
          ```
         enum Result<T,Q>{
