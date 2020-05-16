@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - What are generics?</title>
+        <title>Tour of Rust - What are generic types?</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,10 +33,10 @@
                 </span>
             </div>
             <div class="page">
-            <h1>What are generics?</h1>
-            <p>Generic structures allow us to partially define a struct or enum. Allowing a compiler to create a fully 
+            <h1>What are generic types?</h1>
+            <p>Generic types allow us to partially define a struct or enum. Allowing a compiler to create a fully 
 defined version at compile-time based off our code usage.</p>
-<p>Rust generally can infer the final type by looking at our instantiation, but if it needs help you 
+<p>Rust generally can often times infer the final type by looking at our instantiation, but if it needs help you 
 can always be explicit using the <code>::&lt;T&gt;</code> operator, also known by the name <code>turbofish</code> (he's a good friend of mine!).</p>
             </div>
             <div class="code">
