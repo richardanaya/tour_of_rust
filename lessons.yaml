@@ -1511,7 +1511,7 @@ pages:
     en:
       title: What are generic types?
       content_markdown: |
-        Generic types allow us to partially define a struct or enum. Allowing a compiler to create a fully 
+        Generic types allow us to partially define a `struct` or `enum`. Allowing a compiler to create a fully 
         defined version at compile-time based off our code usage.
 
         Rust generally can often times infer the final type by looking at our instantiation, but if it needs help you 
