@@ -1356,3 +1356,14 @@ pages:
         of nullable-types (i.e. values which might not have a value yet!), error handling, and 
         collections. In this section we will be jumping into the foundational generic structures 
         you will likely be using all the time!
+  - beta: true
+    en:
+      title: Chapter 4 - Representing Nothing
+      content_markdown: |
+        In other languages, the term `null` is used to represent an absense of value. It creates
+        alot of difficulty in languages because it introduces the possibility of a variable/field to 
+        fail when interacted with.
+
+        Rust does not have null. But it is not ignorant to the importance of representing nothing! 
+        Consider a naive representation using a tool we already know.
+
