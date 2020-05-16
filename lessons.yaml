@@ -1487,21 +1487,21 @@ pages:
   - beta: true
     chapter: 4
     en:
-      title: Chapter 4 - Generic Structures
+      title: Chapter 4 - Generic Types
       content_markdown: |
-        Generic structures are incredibly important in Rust. They are used in the representation 
+        Generic types are incredibly important in Rust. They are used in the representation 
         of nullable-types (i.e. values which might not have a value yet!), error handling, and 
-        collections. In this section we will be jumping into the foundational generic structures 
-        you will likely be using all the time!
+        collections, and more! In this section we will be jumping into the foundational generic types 
+        you will likely be using all the time.
   - beta: true
     en:
       title: Representing Nothing
       content_markdown: |
-        In other languages, the keyword `null` is used to represent an absense of value. It creates
-        alot of difficulty in languages because it creates the possibility our program might fail 
+        In other languages, the keyword `null` is used to represent an absense of a value. It creates
+        alot of difficulty in programming languages because it creates the possibility our program might fail 
         when interacting with a variable/field.
 
-        Rust does not have null. But it is not ignorant to the importance of representing nothing! 
+        Rust does not have `null`. But it is not ignorant to the importance of representing nothing! 
         Consider a naive representation using a tool we already know.
 
         This pattern of providing a `None` alternative representation for one or many values is so 
