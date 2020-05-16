@@ -113,14 +113,26 @@ pages:
     es:
       title: "Hola, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hola%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
-      content_html:
-        <p>Bienvenido al <b>Tour de Rust</b>. Esta es una guía paso a paso de las características del lenguaje de programación
-        Rust. Rust está considerado como un lenguaje con una elevada curva de aprendizaje, por lo que hay mucho que explorar
-        antes de llegar a las partes complejas.</p><p>Puedes encontrar esta guía en los siguientes idiomas:<ul><li>
-        <a href="index_de.html">Deutsch</a></li><li><a href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a href="index_ie.html">Interlingue</a></li>
-        <li><a href="index_ru.html">Русский</a></li></ul></p><p>Si tienes alguna
-        sugerencia sobre el contenido o quieres contribuir a las traducciones, puedes encontrar el repositorio del Tour de Rust
-        en <a href="https://github.com/richardanaya/tour_of_rust">github</a>.</p><p>En este ejemplo te mostramos el uso de cadenas unicode con Rust.</p>
+      content_markdown: |
+        Bienvenido al *Tour de Rust*. Esta es una guía paso a
+        paso de las características del lenguaje de programación Rust. Rust está considerado
+        como un lenguaje con una elevada curva de aprendizaje, por lo que hay mucho que explorar
+        antes de llegar a las partes complejas.</p><p>Puedes encontrar esta
+        guía en los siguientes idiomas:
+
+        * [Deutsch](index_de.html)
+        * [English](index_en.html)
+        * [Español](index_es.html)
+        * [Interlingue](index_ie.html)
+        * [Русский](index_ru.html)
+
+        Si tienes alguna sugerencia sobre el contenido
+        o quieres contribuir a las traducciones, puedes encontrar el repositorio del 
+        Tour de Rust en [github](https://github.com/richardanaya/tour_of_rust).
+
+        Puedes navegar por el curso usando <span class="emoji">⬅️</span> y <span class="emoji">➡️</span>
+
+        En este clásico ejemplo te mostramos el uso de cadenas unicode con Rust.
   - chapter: 1
     en:
       title: Chapter 1 - The Basics
@@ -186,7 +198,7 @@ pages:
         хороший способ попробовать Rust, показать другим вашу креативность и сложные задачи!</p>
     es:
       title: Familiarízate con Rust
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Puedes%20empezar%20a%20trastear%20modificando%20el%20código%20aquí.%22)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%20Puedes%20modificar%20tu%20c%C3%B3digo%20aqu%C3%AD.%22)%3B%0A%7D%0A
       content_html: |
         <p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
         </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>
@@ -252,6 +264,21 @@ pages:
         крейт <b>стандартной библиотеки</b> Rust(a), который полон полезных структур данных
         и функций для взаимодействия с операционной системой.</p><p>Регистр крейтов, созданный
         сообществом, находится на <a href="https://crates.io/">https://crates.io</a></p>
+    es:
+      title: Módulos
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%22)%3B%0A%20%20%20%20println!(%22%C2%A1Quiero%20un%20trozo%20de%20%7B%7Dzza!%22%2C%20PI)%3B%0A%7D%0A
+      content_html:
+        <p>Cada programa o librería en Rust es un <b>crate</b>.</p><p>Cada crate
+        está compuesto por una jerarquía de <b>módulos</b>.</p><p>Los programas comienzan su ejecución en el
+        módulo raíz de un crate en la función <code>main()</code> en un fichero llamado
+        "main.rs".<p></p><p>Las librerías tienen un módulo raíz en el archivo "lib.rs" que
+        proporciona elementos útiles.</p><p>Para evitar escribir rutas completas como <code>std::f64::consts::PI</code>.
+        La palabra reservada <b>use</b> nos permite especificar qué elementos de los módulos queremos
+        usar en nuestro código sin especificar una ruta completa. Por ejemplo, el uso de <code>use std::f64::consts::PI</code>
+        me permite referenciar el valor de <code>PI</code> en mi función principal.</p><p><b>std</b>
+        es el crate de la <b>librería estándar</b> de Rust que contiene estructuras de datos
+        y funciones útiles para interactuar con tu sistema operativo.</p><p>Aquí encontrarás
+        un repositorio de crates creado por la comunidad Rust: <a href="https://crates.io/">https://crates.io</a></p>
   - en:
       title: Exporting
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20my_sub_module%20%7B%0A%20%20%20%20fn%20do_something()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20do_something_else()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%20else%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20my_sub_module%3A%3Ado_something()%3B%0A%20%20%20%20my_sub_module%3A%3Ado_something_else()%3B%0A%7D%0A
@@ -287,6 +314,14 @@ pages:
         можете получить доступ только к элементам, что были помечены публичными.</p><p>Код
         в этом примере не работает, добавьте ключевое слово <b>pub</b> в нужном месте,
         чтобы пример успешно скомпилировался.</p>"
+    es:
+      title: Exportar
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_modulo%20%7B%0A%20%20%20%20fn%20haz_algo()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20haz_algo_mas()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%20m%C3%A1s%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo()%3B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo_mas()%3B%0A%7D%0A
+      content_html:
+        "<p>En Rust, exportamos elementos de un módulo usando la palabra reservada <b>pub</b>.</p><p>Cuando
+        se utiliza un módulo dentro de su propio código o en un crate externo, sólo se
+        permiten referencias a aquellos elementos que hayan sido marcados como públicos.</p><p>El código en este ejemplo
+        da error, añade la palabra reservada <b>pub</b> en el lugar apropiado para arreglarlo.</p>"
   - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
@@ -315,6 +350,12 @@ pages:
         "<p>Функция может принимать ноль или больше аргументов.</p><p>В этом
         примере, функция <b>add</b> принимает два аргумента типа <code>i32</code>
         (целочисленное, длиной в 32 бита).</p><p>Имена функций всегда пишутся в <code>змеином_регистре</code>(<code>snake_case</code>)</p>"
+    es:
+      title: Funciones
+      content_html:
+        "<p>Una función puede recibir cero o más argumentos.</p><p>En este ejemplo,
+        <i>add</i> recibe dos parámetros de tipo <code>i32</code> (entero de 32 bits).</p>
+        <p>Los nombres de las funciones se escriben siempre en <code>snake_case</code></p>"
   - en:
       title: Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -356,6 +397,16 @@ pages:
         как мы можем присвоить значение одной и той же переменной несколько раз. Это называется
         сокрытие переменной(variable shadowing), её тип может быть изменен в последующих
         присваиваниях.</b></p><p>Название переменных всегда <code>snake_case</code></p>"
+    es:
+      title: Variables
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20deduce%20el%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20ser%20expl%C3%ADcito%20con%20el%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20declarar%20primero%20e%20inicializar%20despu%C3%A9s%2C%20pero%20es%20poco%20com%C3%BAn%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_html:
+        " <p>Para declarar variables usaremos la palabra reservada <b>let</b></p><p>Al
+        asignar un valor, Rust podrá deducir el tipo de la variable el 99% de las veces.
+        Si no puede, tú mismo podrás especificar el tipo al declarar una variable.</p><p>Fíjate
+        en cómo podemos declarar variables con el mismo nombre varias veces. Esto se llama
+        sombreado <i>(shadowing)</i> de variables y se puede modificar el tipo para futuras referencias a ese nombre.</b></p>
+        <p>Los nombres de las variables se escriben siempre en <code>snake_case</code></p>"
   - en:
       title: Changing values
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -397,6 +448,15 @@ pages:
         образом обозначены с помощью ключевого слова <b>mut</b>.</p><p>Мы поговорим об
         этом позже, сейчас просто следите за этим ключевым словом и тем, какие элементы
         могут быть изменены.</p>"
+    es:
+      title: Modificar valores
+      content_html:
+        " <p>En Rust es importante tener en cuenta qué valores se modifican. Los valores
+        se dividen en dos tipos:</p><ul><li><b>mutables</b> - la ubicación en memoria 
+        puede ser escrita y leída</li><li><b>inmutables</b> - la ubicación en la memoria sólo pueded
+        ser leída</li></ul><p>Los valores mutables siempre se denotan con la palabra reservada <b>mut</b></p>
+        <p>Hay mucho más que explicar aún sobre este concepto, pero de momento
+        presta atención solamente a la palabra reservada para saber lo que se puede modificar y lo que no.</p>"
   - en:
       title: Multiple return variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
@@ -430,6 +490,15 @@ pages:
         поддерживает разные виды деструктуризации, которые вы увидите в разных формах.
         Это позволяет нам извлекать частички структур данных удобным способом. Смотрите
         внимательно!</p>"
+    es:
+      title: Múltiples variables de retorno
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20intercambiar(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Devuelve%20una%20tupla%20de%20valores%0A%20%20%20%20let%20result%20%3D%20intercambiar(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20Desestructura%20la%20tupla%20en%20dos%20variables%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20intercambiar(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+      content_html:
+        "<p>Las funciones pueden devolver múltiples valores utilizando una <b>tupla</b>
+        de valores.</p><p>Los valores se pueden referenciar por su posición en la tupla.</p><p>Rust
+        soporta varios modos de desestructuración que veremos en diferentes formas, esto nos
+        permite extraer subconjuntos de estructuras de datos de manera práctica.
+        ¡Presta mucha atención!</p>"
   - en:
       title: Returning nothing
       content_markdown: |
@@ -459,6 +528,15 @@ pages:
     ru:
       title: Returning nothing
       content_markdown: need translation
+    es:
+      title: No devolver nada
+      content_markdown: |
+        Si no se especifica un tipo de retorno para una función, esta devuelve una tupla vacía, también conocida como *unidad*.
+
+        Una tupla vacía se representa mediante `()`
+
+        El uso de `()` es poco común, pero es necesario saber su significado ya que aparecerá de vez en cuando.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20no_hagas_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20El%20valor%20de%20retorno%20es%20impl%C3%ADcitamente%20()%0Afn%20no_hagas_nada2()%20%7B%0A%20%20%20%20%2F%2F%20Esta%20funci%C3%B3n%20devuelve%20()%20si%20no%20se%20especifica%20nada%20que%20devolver%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20no_hagas_nada()%3B%0A%20%20%20%20let%20b%20%3D%20no_hagas_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Mostrando%20una%20sentencia%20de%20depuraci%C3%B3n%20para%20a%20y%20b%0A%20%20%20%20%2F%2F%20porque%20es%20dif%C3%ADcil%20no%20mostrar%20nada%0A%20%20%20%20println!(%22El%20valor%20de%20a%20es%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22El%20valor%20de%20b%20es%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
   - en:
       title: Basic types
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
@@ -540,6 +618,25 @@ pages:
         с памятью, с которыми вы, возможно, не сталкивались. Мы поговорим о текстовых
         данных позже.</p><p>Заметьте, как числа могут быть приведены к определенному типу,
         если явно указать тип в конце числа (пример <code>13u32</code>)</p>"
+    es:
+      title: Tipos básicos
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20Por%20defecto%20es%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20Por%20defecto%20es%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22%C2%A1Hola%2C%20mundo!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+      content_html:
+        "<p>Rust tiene una variedad de tipos que puede que te resulten familiares: <ul><li>booleanos - <code>bool</code>
+        para representar verdadero/falso</li><li>números enteros sin signo - <code>u8</code><code>u32</code><code>u64</code><code>u128</code>
+        para representar números enteros positivos</li><li>números enteros con signo - <code>i8</code><code>i32</code><code>i64</code><code>i128</code>
+        para representar números enteros positivos y negativos</li><li>números enteros de tamaño de puntero
+        - <code>usize</code><code>isize</code> se usan para representar índices y tamaños de elementos en memoria
+        </li><li>números en coma flotante - <code>f32</code><code>f64</code></li>
+        <li>En relación a textos - <code>str</code><code>char</code></li><li>tuplas
+        - <code>(valor,valor,...)</code> para pasar secuencias fijas de valores en la pila
+        <li>slices - <code>&[T]</code> para referenciar “vistas” en
+        secuencias de valores en la memoria</ul></p><p>Profundizaremos en algunos más adelante.</p>
+        <p>Advertencia: los formatos de texto pueden ser más complejos de lo que estás acostumbrado
+        en otros lenguajes, ya que Rust es un lenguaje de programación de sistemas, está orientado
+        a gestionar los problemas de la memoria, algo a lo que puedes no estar acostumbrado.
+        Entraremos en detalles sobre los textos más tarde.</p><p>Observa cómo los tipos numéricos pueden especificarse
+        explícitamente añadiendo el tipo al final del número (por ejemplo, <code>13u32</code>)</p>"
   - en:
       title: Basic type conversion
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -571,6 +668,13 @@ pages:
         <code>u8</code> вместо <code>u32</code> случайно, это ошибка.</p><p>К
         счастью, Rust имеет ключевое слово <b>as</b>, которое позволяет очень легко преобразовывать
         типы.</p>"
+    es:
+      title: Conversión de tipos básica
+      content_html:
+        "<p>Rust requiere ser explícito cuando se trata de tipos numéricos. No se
+        puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que se produzca
+        un error.</p><p>Por suerte, Rust hace que las conversiones de tipos numéricos sean
+        muy fáciles con la palabra reservada <b>as</b>.</p>"
   - en:
       title: Constants
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -606,6 +710,16 @@ pages:
         как делают переменные, имя константы заменяется на значение во время компиляции.</p><p>В
         отличии от переменных, константам нужно явно обозначать их тип.</p><p>Имена констант
         всегда пишутся в верхнем регистре <code>SCREAMING_SNAKE_CASE</code></p>"
+    es:
+      title: Constantes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Vamos%20de%20paseo%2C%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20PI%2C%20PI%2C%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_html:
+        "<p>Las constantes nos permiten especificar un valor común que se utiliza
+        muchas veces a lo largo de nuestro código de manera eficiente. En vez de copiar valores
+        como variables en el lugar donde se usan, las constantes reemplazan directamente el
+        identificador de texto (donde se haya usado) por su valor en tiempo de compilación.</p>
+        <p>A diferencia de las variables, el tipo de las constantes se debe especificar explícitamente.</p>
+        <p>Los nombres de las constantes se escriben siempre en <code>SCREAMING_SNAKE_CASE</code></p>"
   - en:
       title: Chapter 1 Conclusion
       content_html:
@@ -649,6 +763,17 @@ pages:
         превью принципов <b>безопасности</b>(safety), которые так распространены в Rust.
         Компилятор всего лишь хочет, что бы ваш код делал то, что вы ожидаете! Далее мы
         рассмотрим конструкцию <code>if</code> и цикл <code>for</code>.</p>"
+    es:
+      title: Capítulo 1 - Conclusión
+      content_html:
+        "<p>¡Buen trabajo! No ha sido tan complicado, ¿verdad? Esta ha sido
+        una visión general de cómo trabaja el compilador de Rust. Como ya has comprobado,
+        hay que tener muy en cuenta el tamaño de los valores en memoria, las cosas que se
+        pueden modificar y las que no, y asegurarse de que tu código de el resultado que esperas.
+        Estos son pequeños avances de un principio de <b>seguridad</b> que prevalece a través
+        de Rust. Este compilador pretende asegurarse de que tu código hace lo que esperas.
+        A continuación echaremos un vistazo a algunos viejos conocidos: <code>if</code>
+        y <code>for</code>.</p>"
   - chapter: 2
     en:
       title: Chapter 2 - Basic Control Flow
