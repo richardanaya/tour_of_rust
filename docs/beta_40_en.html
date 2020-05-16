@@ -34,14 +34,14 @@
             </div>
             <div class="page">
             <h1>Vectors</h1>
-            <p>One of the most useful kind of generic structure are collection types. A vector is a variable list of items
+            <p>One of the most useful kind of generic type are collection types. A vector is a dynamically sized list of items
 represented in rust by the struct <code>Vec</code>.</p>
 <p>The macro <code>vec!</code> lets us easily create a vector rather than manually constructing one.</p>
 <p><code>Vec</code> as the method <code>iter()</code> which creates an iterator from a vector, allowing us to easily
 put a vector into a <code>for</code> loop.</p>
 <p>Memory Details:</p>
 <ul>
-<li><code>Vec</code> is a struct, but internally it contains a reference to a list of it's items on the heap.</li>
+<li><code>Vec</code> is a struct, but internally it contains a reference to a fixed list of it's items on the heap.</li>
 <li>A vector starts with a default capacity, when more items are added than it has capacity for, it 
 reallocates it's data on the heap to have a large capacity.</li>
 </ul>
