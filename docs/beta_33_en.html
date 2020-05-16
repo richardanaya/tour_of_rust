@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Chapter 4 - Generic Structures</title>
+        <title>Tour of Rust - Chapter 4 - Representing Nothing</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -26,16 +26,17 @@
                 <span class="title"><a href="index.html">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
-                <span class="back"><a href="beta_31_en.html">Previous</a></span>
-                <span class="next"><a href="beta_33_en.html">Next</a></span>
+                <span class="back"><a href="beta_32_en.html">Previous</a></span>
+                <span class="next"><a href="beta_end_en.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Chapter 4 - Generic Structures</h1>
-            <p>Generic structures are incredibly important in Rust. They are used in the representation 
-of nullable-types (i.e. values which might not have a value yet!), error handling, and 
-collections. In this section we will be jumping into the foundational generic structures 
-you will likely be using all the time!</p>
+            <h1>Chapter 4 - Representing Nothing</h1>
+            <p>In other languages, the term <code>null</code> is used to represent an absense of value. It creates
+alot of difficulty in languages because it introduces the possibility of a variable/field to 
+fail when interacted with.</p>
+<p>Rust does not have null. But it is not ignorant to the importance of representing nothing! 
+Consider a naive representation using a tool we already know.</p>
             </div>
             <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>

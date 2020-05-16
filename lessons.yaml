@@ -67,16 +67,16 @@ pages:
         mit einer steilen Lernkurve in Verbindung gebracht - allerdings gibt es schon
         zu Beginn viele spannende Besonderheiten zu entdecken, die hoffentlich dein Interesse
         wecken werden!
-        
+
         In diesem klassischen Beispiel sehen wir Rust's Unterstützung
         von Unicode Strings.
-        
+
         Du kannst mittels der rechten <span class="emoji">➡️</span> und linken <span class="emoji">⬅️</span> Pfeiltaste durch die Tour navigieren.
-        
+
         Wenn du dieses Projekt mit Übersetzungen
         (wie diese hier) oder anderweitig unterstützen willst, wirf einen Blick auf die
         [Github Repository](https://github.com/richardanaya/tour_of_rust).
-        
+
         Translations:
         * [Deutsch](index_de.html)
         * [English](index_en.html)
@@ -1377,4 +1377,3 @@ pages:
 
         Rust does not have null. But it is not ignorant to the importance of representing nothing! 
         Consider a naive representation using a tool we already know.
-
