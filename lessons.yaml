@@ -61,17 +61,28 @@ pages:
         strings.
     de:
       title: "Hallo, <span class=\"emoji\">\U0001F980</span>"
-      content_html:
-        <p>Willkommen auf der <b>Tour zu Rust</b>. Hier werden die Features
+      content_markdown: |
+        Willkommen auf der *Tour zu Rust*. Hier werden die Features
         aus der Programmiersprache Rust Schritt für Schritt eingeführt. Rust wird oft
         mit einer steilen Lernkurve in Verbindung gebracht - allerdings gibt es schon
         zu Beginn viele spannende Besonderheiten zu entdecken, die hoffentlich dein Interesse
-        wecken werden!</p> <p>In diesem klassischen Beispiel sehen wir Rust's Unterstützung
-        von Unicode Strings.</p><p>Wenn du dieses Projekt mit Inhalten und Übersetzungen
-        (wie diese hier) unterstützen willst, wirf einen Blick auf die <a href="https://github.com/richardanaya/tour_of_rust">GitHub
-        Repository</a>.</p><p>Translations:<ul><li><a href="index_de.html">Deutsch</a></li><li><a
-        href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a href="index_ie.html">Interlingue</a></li><li><a
-        href="index_ru.html">Русский</a></li></ul></p>
+        wecken werden!
+        
+        In diesem klassischen Beispiel sehen wir Rust's Unterstützung
+        von Unicode Strings.
+        
+        Du kannst mittels der rechten <span class="emoji">➡️</span> und linken <span class="emoji">⬅️</span> Pfeiltaste durch die Tour navigieren.
+        
+        Wenn du dieses Projekt mit Übersetzungen
+        (wie diese hier) oder anderweitig unterstützen willst, wirf einen Blick auf die
+        [Github Repository](https://github.com/richardanaya/tour_of_rust).
+        
+        Translations:
+        * [Deutsch](index_de.html)
+        * [English](index_en.html)
+        * [Español](index_es.html)
+        * [Interlingue](index_ie.html)
+        * [Русский](index_ru.html)
     ie:
       title: "Salute, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Salute%2C%20%F0%9F%A6%80%22)%3B%0A%7D
