@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Konstanten</title>
+        <title>Tour zu Rust - Basistypen konvertieren</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -31,11 +31,11 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Konstanten</h1>
-            <p>Konstanten (<code>const</code>) erlauben uns einen Wert in der Kompilierzeit zu setzen, die in unserem Code eingesetzt werden. Kompilierzeit ist hier das Stichwort: anstelle von Variablen sitzen dann an Orten, an denen Konstanten eingestetzt werden, die Werte selbst.</p><p>Anders als bei Variablen muss bei Konstanten der Datentyp explizit angeben werden.</p><p>Die Namensgebung erfolgt generell in <code>SCREAMING_SNAKE_CASE</code>.</p>
+            <h1>Basistypen konvertieren</h1>
+            <p>Rust vordert explizite Konvertierungen, wenn es um Zahlentypen geht. Ein <code>u8</code> (8-bit unsigned integer) kann nicht mit einem <code>u32</code> locker aus dem Handgelenk zusammengerechnet werden ohne das Programm zum Absturz zu bringen.</p><p>Glücklicherweise ist auf die Konvertierung mit dem <code>as</code> Schlüsselwort Verlass.</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

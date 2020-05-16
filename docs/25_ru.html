@@ -1,0 +1,55 @@
+<html lang="ru">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Тур по Rust - Память</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_ru.html">Тур по Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ru.html">Содержание</a></span>
+                <span class="back"><a href="24_ru.html">Назад</a></span>
+                <span class="next"><a href="26_ru.html">Далее</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Память</h1>
+            <p>Программы на Rust имеют 3 региона, в которых хранятся данные:</p>
+<ul>
+<li><strong>data memory</strong> (память данных) - для данных фиксированного размера и <strong>статические</strong> (доступны в любой момент
+времени выполнения программы). Рассмотрим текст в вашей программе (пример строка "Hello World!"). Эта строка - 
+это набор байт, которые нельзя изменить и можно только считать, поэтому они размещены в этом регионе. Компиляторы
+делают очень много оптимизаций с таким типом данных. Этот регион памяти считается очень быстрым, так как 
+местоположение данные известно и фиксировано заранее.</li>
+<li><strong>stack memory</strong> (стек) - для данных, что объявляются как переменные внутри блока видимости (например функция).
+Местоположение этого типа памяти никогда не меняется на протяжении вызова функции, из-за этого компиляторы
+могут оптимизировать код, поэтому стек очень быстро работает.</li>
+<li><strong>heap memory</strong> (куча) - для данных, которые создаются, пока приложение работает.
+Данные в этом регионе могут быть добавлены, перемещены, удалены, изменены в размере, и т.д. Из-за своей 
+динамической природы, считается что этот регион медленней остальных, но он позволяет более креативное использование
+памяти. Когда данные добавляются в этот регион, это называется <strong>allocation</strong> (выделение памяти). Когда данные 
+удаляются - deallocation (освобождение памяти).</li>
+</ul>
+            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+        </div>
+    </body>
+</html>

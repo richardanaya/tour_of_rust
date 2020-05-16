@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Basistypen</title>
+        <title>Tour zu Rust - Keine return-Variablen</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -31,11 +31,13 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Basistypen</h1>
-            <p>Rust besitzt eine vielzahl an bekannten Datentypen <ul><li>booleans - <code>bool</code> für true/false bzw. wahr/falsch Werte</li><li>unsigned integers - <code>u8</code><code>u32</code><code>u64</code> für positive Ganzzahlen (inkl. 0 für die Mathematiker)</li><li>signed integers - <code>i8</code><code>i32</code><code>i64</code> für vorzeichenbehaftete Ganzzahlen</li><li>pointer sized integers - <code>uint</code><code>isize</code> für Indizes und Größen im Speicher</li><li>floating point - <code>f32</code><code>f64</code> für Dezimalzahlen</li><li>text zeug - <code>str</code><code>char</code></li><li>tuple - <code>(value,value,...)</code> zum Übergeben von Wertsequenzen auf dem Stack<li>slices - <code>&[T]</code> um Views in Sequenzen zu referenzieren (hier evt bessere Übersetzung finden)</ul></p><p>Wir sehen schon, dass es einiges zum Anpacken geben wird!</p><p>Eine Warnung vorweg: text-Zeug wird etwas komplexer sein als du es vielleicht von anderen Programmiersprachen gewohnt bist, da Rust eine Systemprogrammiersprache ist und daher mehr auf effektives Speichermanagement fokussiert. Keine Panik auf der Titanic aber, wir werden unser Bestes geben, dich darauf vorzubereiten!</p><p>Noch ein Hinweis: Numerische Datentypen können auch nach dem Zahlenliteral spezifiziert werden (z.B. <code>13u32</code>)</p>
+            <h1>Keine return-Variablen</h1>
+            <p>Wenn kein Variablentyp als Rückgabewert einer Funktion angegeben wird, gibt die Funktion ein leeres Tupel zurück, auch bekannt als <em>unit</em>.</p>
+<p>Ein leeres Tupel wird durch ein <code>()</code> repräsentiert.</p>
+<p>Die leeren Klammern werden selten verwendet, finden trotzdem an manchen Orten ihren Platz, weshalb wir diese hier kurz zum Vorschein bringen wollen.</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

@@ -410,8 +410,7 @@ pages:
         поддерживает разные виды деструктуризации, которые вы увидите в разных формах.
         Это позволяет нам извлекать частички структур данных удобным способом. Смотрите
         внимательно!</p>"
-  - beta: true
-    en:
+  - en:
       title: Returning nothing
       content_markdown: |
         If no return type is specified for a function, it returns an empty tuple, also known as a *unit*
@@ -915,7 +914,6 @@ pages:
         еще глубже, когда обретём больше знаний, которые позволят применить больше возможностей
         языка. В следующий раз мы перейдем к основополагающим структурам данных Rust.</p>"
   - chapter: 3
-    beta: true
     en:
       title: Chapter 3 - Basic Data Structure Types
       content_markdown: |
@@ -939,8 +937,7 @@ pages:
       content_markdown: |
         Время посмотреть на что-то помимо базовых типов! В этой главе мы посмотрим на самые примитивные структуры данных в Rust, уделив особое внимание их представлению в памяти. 
         Я думаю, вам понравится, что Rust так мало скрывает от вас то, как всё работает.
-  - beta: true
-    en:
+  - en:
       title: Structures
       content_markdown: |
         A `struct` a collection of fields.
@@ -978,8 +975,7 @@ pages:
         Определение структуры - это как чертеж для компилятора, который указывает на то, как поля должны быть расположены в памяти.
 
         Поля в структуре расположены в памяти один за другим (компилятор может менять их местами для оптимизаций).
-  - beta: true
-    en:
+  - en:
       title: Structure Visibility
       content_markdown: |
         Just like functions structures can declare what they want exposed outside of their module using `pub`.
@@ -1000,8 +996,7 @@ pages:
       content_markdown: |
         Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
 
-  - beta: true
-    en:
+  - en:
       title: Memory
       content_markdown: |
         Rust programs have 3 memory regions where data is placed:
@@ -1069,8 +1064,7 @@ pages:
           динамической природы, считается что этот регион медленней остальных, но он позволяет более креативное использование
           памяти. Когда данные добавляются в этот регион, это называется **allocation** (выделение памяти). Когда данные 
           удаляются - deallocation (освобождение памяти).
-  - beta: true
-    en:
+  - en:
       title: Creating Data In Memory
       content_markdown: |
         When we **instantiate** a **struct** in our code our program creates the associated field data side by side in memory.
@@ -1159,8 +1153,7 @@ pages:
           2. Берет ссылку на выделенную память с *кучи* и сохраняет ее в `String` (больше в следующих занятиях)
         * Наши два друга *ferris* и *sara* имеют структуры данных, которые всегда будут иметь фиксированные
           местоположения в нашей программе, так как они расположены на *стеке*.
-  - beta: true
-    en:
+  - en:
       title: Tuple-like Structs
       content_markdown: |
         For conciseness, you can create structs that are used like a tuple.
@@ -1179,8 +1172,7 @@ pages:
       title: Кортежи-структуры
       content_markdown: |
         Для краткости, вы можете создавать структуры, которые используются точно так же как кортежи (tuple).
-  - beta: true
-    en:
+  - en:
       title: Unit-like Structs
       content_markdown: |
         Structs do not have to have any fields at all.
@@ -1216,8 +1208,7 @@ pages:
         Как было упомянуто в Главе 1, *юнит* - это то же самое, что и пустой кортеж `()`. Вот почему этот вид структур называют *юнит-структуры*.
 
         Этот тип не так распространен как остальные.
-  - beta: true
-    en:
+  - en:
       title: Enumerations
       content_markdown: |
         Enumerations allow you allow you to create a new type that can have a value of several tagged elements using the `enum` keyword.
@@ -1252,8 +1243,7 @@ pages:
       content_markdown: |
         Перечисления `enum` позволяют вам создавать новый тип, который имеет одно определенное значение из 
         списка перечисленных вами возможных значений.
-  - beta: true
-    en:
+  - en:
       title: Enumerations With Data
       content_markdown: |
         `enum` elements can also have have one or more data types allowing them to behave like *union* from C.
@@ -1322,8 +1312,7 @@ pages:
         * `enum` Rust(а) иногда называют *типом-сумой* (tagged-union)
         * Комбинирование разных типов, чтобы создать новый тип - это то, что люди имеют ввиду, когда говорят, что
           Rust имеет *алгебраические типы*
-  - beta: true
-    en:
+  - en:
       title: Chapter 3 - Conclusion
       content_markdown: |
         How exciting! We now have a the most basic tools for representing the form of our ideas in code. Hopefully now we 
