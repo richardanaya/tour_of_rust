@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour de Rust - Hola, Rust</title>
+        <title>Tour de Rust - Variables</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,32 +28,16 @@
                 <span class="title"><a href="index_es.html">Tour de Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
-                
-                <span class="next"><a href="01_es.html">Siguiente</a></span>
+                <span class="back"><a href="05_es.html">Anterior</a></span>
+                <span class="next"><a href="07_es.html">Siguiente</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Hola, <span class="emoji">🦀</span></h1>
-            <p>Bienvenido al <em>Tour de Rust</em>. Esta es una guía paso a
-paso de las características del lenguaje de programación Rust. Rust está considerado
-como un lenguaje con una elevada curva de aprendizaje, por lo que hay mucho que explorar
-antes de llegar a las partes complejas.</p><p>Puedes encontrar esta
-guía en los siguientes idiomas:</p>
-<ul>
-<li><a href="index_de.html">Deutsch</a></li>
-<li><a href="index_en.html">English</a></li>
-<li><a href="index_es.html">Español</a></li>
-<li><a href="index_ie.html">Interlingue</a></li>
-<li><a href="index_ru.html">Русский</a></li>
-</ul>
-<p>Si tienes alguna sugerencia sobre el contenido
-o quieres contribuir a las traducciones, puedes encontrar el repositorio del 
-Tour de Rust en <a href="https://github.com/richardanaya/tour_of_rust">github</a>.</p>
-<p>Puedes navegar por el curso usando <span class="emoji">⬅️</span> y <span class="emoji">➡️</span></p>
-<p>En este clásico ejemplo te mostramos el uso de cadenas unicode con Rust.</p>
+            <h1>Variables</h1>
+             <p>Para declarar variables usaremos la palabra reservada <b>let</b></p><p>Al asignar un valor, Rust podrá deducir el tipo de la variable el 99% de las veces. Si no puede, tú mismo podrás especificar el tipo al declarar una variable.</p><p>Fíjate en cómo podemos declarar variables con el mismo nombre varias veces. Esto se llama sombreado <i>(shadowing)</i> de variables y se puede modificar el tipo para futuras referencias a ese nombre.</b></p> <p>Los nombres de las variables se escriben siempre en <code>snake_case</code></p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hola%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20deduce%20el%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20ser%20expl%C3%ADcito%20con%20el%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20declarar%20primero%20e%20inicializar%20despu%C3%A9s%2C%20pero%20es%20poco%20com%C3%BAn%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

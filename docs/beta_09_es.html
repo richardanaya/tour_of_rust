@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour de Rust- The End</title>
+        <title>Tour de Rust - No devolver nada</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,14 +28,20 @@
                 <span class="title"><a href="index_es.html">Tour de Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
-                <span class="back"><a href="13_es.html">Anterior</a></span>
+                <span class="back"><a href="beta_08_es.html">Anterior</a></span>
+                <span class="next"><a href="beta_10_es.html">Siguiente</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>The End</h1>
-            <p>That's all for now. Stay tuned for new chapters. I hope you enjoy the journey ahead!</p>
+            <h1>No devolver nada</h1>
+            <p>Si no se especifica un tipo de retorno para una función, esta devuelve una tupla vacía, también conocida como <em>unidad</em>.</p>
+<p>Una tupla vacía se representa mediante <code>()</code></p>
+<p>El uso de <code>()</code> es poco común, pero es necesario saber su significado ya que aparecerá de vez en cuando.</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20no_hagas_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20El%20valor%20de%20retorno%20es%20impl%C3%ADcitamente%20()%0Afn%20no_hagas_nada2()%20%7B%0A%20%20%20%20%2F%2F%20Esta%20funci%C3%B3n%20devuelve%20()%20si%20no%20se%20especifica%20nada%20que%20devolver%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20no_hagas_nada()%3B%0A%20%20%20%20let%20b%20%3D%20no_hagas_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Mostrando%20una%20sentencia%20de%20depuraci%C3%B3n%20para%20a%20y%20b%0A%20%20%20%20%2F%2F%20porque%20es%20dif%C3%ADcil%20no%20mostrar%20nada%0A%20%20%20%20println!(%22El%20valor%20de%20a%20es%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22El%20valor%20de%20b%20es%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>
     <script src="tour.js"></script>
-    </html>
+</html>

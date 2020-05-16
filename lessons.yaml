@@ -267,7 +267,7 @@ pages:
     es:
       title: Módulos
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%22)%3B%0A%20%20%20%20println!(%22%C2%A1Quiero%20un%20trozo%20de%20%7B%7Dzza!%22%2C%20PI)%3B%0A%7D%0A
-      content_html:
+      content_html: >
         <p>Cada programa o librería en Rust es un <b>crate</b>.</p><p>Cada crate
         está compuesto por una jerarquía de <b>módulos</b>.</p><p>Los programas comienzan su ejecución en el
         módulo raíz de un crate en la función <code>main()</code> en un fichero llamado
@@ -452,7 +452,7 @@ pages:
       title: Modificar valores
       content_html:
         " <p>En Rust es importante tener en cuenta qué valores se modifican. Los valores
-        se dividen en dos tipos:</p><ul><li><b>mutables</b> - la ubicación en memoria 
+        se dividen en dos tipos:</p><ul><li><b>mutables</b> - la ubicación en memoria
         puede ser escrita y leída</li><li><b>inmutables</b> - la ubicación en la memoria sólo pueded
         ser leída</li></ul><p>Los valores mutables siempre se denotan con la palabra reservada <b>mut</b></p>
         <p>Hay mucho más que explicar aún sobre este concepto, pero de momento
