@@ -7,6 +7,7 @@
 
 a {
  color: #555;   
+ outline: none;
 }
 
 .title a {

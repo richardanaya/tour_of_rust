@@ -61,6 +61,7 @@ function template(lang,title,code,content,index,isLast, words, is_beta){
             </div>`:`<div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>`}
         </div>
     </body>
+    <script src="tour.js"></script>
 </html>`
 }
 
@@ -171,6 +172,7 @@ for(var l in languages){
             </p>
         </div>
     </body>
+    <script src="tour.js"></script>
     </html>`)
     fileName = `end_${lang}.html`;
     fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
@@ -210,5 +212,6 @@ for(var l in languages){
             </div>
         </div>
     </body>
+    <script src="tour.js"></script>
     </html>`)
 }
