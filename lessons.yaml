@@ -1515,7 +1515,7 @@ pages:
         Consider a naive representation using a tool we already know.
 
         This pattern of providing a `None` alternative representation for one or many alternate values is so 
-        common Rust because of it's lack of a `null` value. Generics help solve this challenge.
+        common Rust because of it's lack of a `null` value. Generic types help solve this challenge.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20represents%20the%20absence%20of%20an%20item%0A%20%20%20%20None%2C%0A%7D%0A%0Apub%20struct%20BagOfHolding%20%7B%0A%20%20%20%20pub%20item%3A%20Item%2C%0A%7D%0A
   - beta: true
     en:
