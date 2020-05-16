@@ -1491,20 +1491,20 @@ pages:
       content_markdown: |
         Generic types are incredibly important in Rust. They are used in the representation 
         of nullable values (i.e. variables which might not have a value yet), error handling, 
-        collections, and more! In this section we will be jumping into the foundational generic types 
+        collections, and more! In this section we will be learning about the foundational generic types 
         you will likely be using all the time.
   - beta: true
     en:
       title: Representing Nothing
       content_markdown: |
         In other languages, the keyword `null` is used to represent an absense of a value. It creates
-        alot of difficulty in programming languages because it creates the possibility our program might fail 
+        difficulty in programming languages because it creates the possibility that our program might fail 
         when interacting with a variable/field.
 
-        Rust does not have `null`. But it is not ignorant to the importance of representing nothing! 
+        Rust does not have `null`, but it is not ignorant of the importance of representing nothing! 
         Consider a naive representation using a tool we already know.
 
-        This pattern of providing a `None` alternative representation for one or many values is so 
+        This pattern of providing a `None` alternative representation for one or many alternate values is so 
         common Rust because of it's lack of a `null` value. Generics help solve this challenge.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20represents%20the%20absence%20of%20an%20item%0A%20%20%20%20None%2C%0A%7D%0A%0Apub%20struct%20BagOfHolding%20%7B%0A%20%20%20%20pub%20item%3A%20Item%2C%0A%7D%0A
   - beta: true
