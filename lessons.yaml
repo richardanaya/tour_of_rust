@@ -146,7 +146,7 @@ pages:
       content_markdown: |
         In this first chapter we're going to be exploring the very basics
         with functions, variables, and the most primitive types. Glad to have you on board!
-        
+
         Also! In case you are wondering who this adorable crab is speaking to you, I am **Ferris**,
         the unofficial mascot for the Rust programming language. Nice to meet you.
     de:
@@ -185,7 +185,7 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
       content_markdown: |
         This tour uses an interactive coding tool at [Rust Playground](https://play.rust-lang.org)
-        
+
         It's a great way to play around with Rust and show others your creativity and challenges!
     de:
       title: The Rust Playground
@@ -219,22 +219,22 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
       content_markdown: |
         Every Rust program or library is a **crate**.
-        
+
         Every crate is made of a heirarchy of **modules**.
-        
+
         Programs start running in the root module of a crate at the `main()` function in a file
         called `main.rs`.
-        
+
         Libraries have a root module in the file `lib.rs` and export useful members.
-        
+
         To prevent typing out full paths like `std::f64::consts::PI`.
         The **use** keyword allows us to specify particular items from modules we want
         to use throughout our code without a full path. For instance `use std::f64::consts::PI`
         allows me to just use the identifier `PI` in my main function.
-        
+
         **std** is the crate of the **standard library** of Rust which is full of useful data
         structures and functions for interacting with your operating system.
-        
+
         A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/)
     de:
       title: Module
@@ -359,10 +359,10 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
       content_markdown: |
         A function can take zero or more arguments.
-        
+
         In this example, add takes two parameters of type `i32` (integer of 32-bit
         length).
-        
+
         Function names are always in `snake_case`
     de:
       title: Funktionen
@@ -399,13 +399,13 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
       content_markdown: |
         Variables are declared using the **let** keyword.
-        
+
         When assigning a value, Rust will be able to infer the type of your variable 99% of
         the time. If it cannot you may add the type to your variable declaration.
-        
+
         Notice how we can assign to the same variable name multiple times. This is called variable
         shadowing and the type can be changed for subsequent references to that name.
-        
+
         Variable names are always in `snake_case`
     de:
       title: Variablen
@@ -458,12 +458,12 @@ pages:
       content_markdown: |
         Rust cares a great deal about what values are modified. Values
         fall into two types:
-        
+
         * **mutable** - the location in memory can be written to and read
         * **immutable** - the location in memory can only be read
-        
+
         Mutable values are always denoted with a **mut** keywordc in some manner
-        
+
         We will have a lot more to say on this concept, but for now
         just keep an eye out for this keyword for what things can be modified
     de:
@@ -515,9 +515,9 @@ pages:
       content_markdown: |
         Functions can return multiple values by returning a **tuple**
         of values.
-        
+
         The values can be referenced by their position in the tuple.
-        
+
         Rust supports various kinds of destructuring that we will see in many forms. It allows
         us to extract sub-pieces of data structures in ergonomic ways. Be on the lookout!
     de:
@@ -615,14 +615,14 @@ pages:
         * tuple - `(value,value,...)` for passing fixed sequences of values on the stack
         * slices - `&[T]` for referencing views into
         sequences of values in memory
-        
+
         We will be talking about a few of these in detail later.
-        
+
         Fair warning: text might be more complex than you are used to in other languages,
         since Rust is a systems programming language, it's oriented
         toward caring about memory issues you might not be used to. We will be going into
         detail on text later.
-        
+
         Note how numeric types can be explicitly specified by appending the type to the end of the number (e.g. `13u32`)
     de:
       title: Basistypen
@@ -758,9 +758,9 @@ pages:
         out our code many times efficiently.  Instead of copying values like variables
         where they are used, constants directly replace the text identifier where they
         are used with their value at compile time.
-        
+
         Unlike variables, constants must always have explicit types
-        
+
         Constant names are always in `SCREAMING_SNAKE_CASE`
     de:
       title: Konstanten
@@ -890,9 +890,9 @@ pages:
       title: if/else if/else
       content_markdown: |
         Code branching in Rust is not surprising.
-        
+
         Conditions don't have parentheses! Did we ever really need them? Our logic now looks nice and clean.
-        
+
         All your usual logical operators still work: `!``!=``||``&&``&lt;``&gt;``&lt;=``&gt;=`
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     de:
@@ -931,9 +931,9 @@ pages:
       title: loop
       content_markdown: |
         Need an infinite loop?
-        
+
         Rust makes it easy.
-        
+
         `break` will escape a loop when you are ready.</p><p>`loop` has a secret we'll talk about soon.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
     de:
@@ -969,7 +969,7 @@ pages:
       title: while
       content_markdown: |
         `while` lets you easily add a condition to a loop.
-        
+
         If the condition evaluates to `false`, the loop will exit.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
     de:
@@ -1000,13 +1000,13 @@ pages:
         iterates over values from any expression that evaluates into an iterator. What's
         an iterator? An iterator is an object that you can ask the question "What's the
         next item you have?" until there are no more items.
-        
+
         We'll explore this more in a future chapter, in the meantime just know Rust makes 
         it easy to create iterators that generate a sequence of integer numbers.
-        
+
         The `..` operator creates an iterator that generates numbers from a start number up to
         but not including an end number.
-        
+
         The `..=` operator creates an iterator that generates numbers from a start number up to 
         and including an end number.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
@@ -1075,10 +1075,10 @@ pages:
         match is true. Let's see how this works for numbers. We will have more to say
         in future chapters on pattern matching more complex data, I promise you it will
         be worth the wait.
-        
+
         `match` is exhaustive so all cases
         must be handled.
-        
+
         Matching combined with destructuring is by far one of the
         most common patterns you will see in all of Rust.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20iterators%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
@@ -1136,14 +1136,14 @@ pages:
       title: Returning values from block expressions
       content_markdown: |
         `if`,`loop`,`match`,functions, and scope blocks all have a unique way of returning values in Rust.
-        
+
         `loop` can break to return a value.
-        
+
         If the last statement in an `if`, `match`, function, or scope block is an expression without
         a `;`, Rust will return it as a value from the block. This
         is a great way to create concise logic that returns a value that can be put into
         a new variable.
-        
+
         Notice that it also allows an `if` statement to operate like a concise ternary expression.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22is%20hotdog%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
     de:
