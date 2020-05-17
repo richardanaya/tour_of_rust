@@ -1158,9 +1158,16 @@ pages:
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Using%20a%20static%20method%20to%20create%20an%20instance%20of%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20Using%20a%20method%20on%20the%20instance%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20charcters%20long.%22%2C%20s%2C%20s.length())%3B%0A%7D%0A
     de:
-      title: Calling Methods
+      title: Methoden aufrufen
       content_markdown: |
-        Need translation.
+        Einen feinen Unterschied zu Funktionen bilden Methoden. Methoden sind Erweiterungen zu Datentypen,
+        bzw. Funktionen die auf Datentypen anzuwenden sind.
+        
+        *statische Methoden* - Methoden, die zum Datentyp selber assoziiert sind. Werden mit dem `::` Operator aufgerufen.
+        
+        *instanz Methoden* (instance methods) - Methoden, die bei einer Instanz (oder Objekt) mit dem `.` Operator aufgerufen werden können.
+        
+        Wir werden im späteren Verlauf sehen, wie wir selber Methoden erstellen können.
     ie:
       title: Calling Methods
       content_markdown: |
