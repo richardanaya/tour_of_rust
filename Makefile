@@ -12,7 +12,7 @@ generate:
 	@rm lessons.json
 publish: generate lint
 	git add .
-	git commit -m 'new pages'
+	git commit -m 'generating new html'
 	git push
 lint:
 	prettier --write lessons.yaml
