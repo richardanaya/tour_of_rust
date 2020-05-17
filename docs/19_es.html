@@ -1,0 +1,45 @@
+<html lang="es">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tour de Rust - match</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_es.html">Tour de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
+                <span class="back"><a href="18_es.html">Anterior</a></span>
+                <span class="next"><a href="20_es.html">Siguiente</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>match</h1>
+            <p>¿Echas de menos el “switch”? Rust tiene una palabra reservada muy útil para hacer coincidir (matching) todas las condiciones posibles de un valor y ejecutar una ruta de código si la condición es verdadera. Veamos cómo funciona esto para los números. Nos centraremos en los patrones de coincidencia con datos más complejos en próximos capítulos, te prometo que valdrá la pena la espera.</p><p><code>match</code> es exhaustivo, así que todos los casos deben ser evaluados.</p><p>El emparejamiento (matching) combinado con la desestructuración es uno de los patrones más comunes que verás en Rust</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%200%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20m%C3%BAltiples%20valores%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%201%20o%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20iteradores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20un%20numero%20entre%203%20y%209%2C%20ambos%20incluidos%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20asignar%20el%20valor%20encontrado%20a%20una%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20%7B%7D%2C%20un%20n%C3%BAmero%20entre%2010%20y%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20esta%20es%20la%20condici%C3%B3n%20por%20defecto%20que%20debe%20existir%20%0A%20%20%20%20%20%20%20%20%2F%2F%20si%20no%20se%20han%20evaluado%20todos%20los%20casos%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20otra%20cosa!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>

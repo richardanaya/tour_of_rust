@@ -296,10 +296,10 @@ pages:
       content_markdown: |
         Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch zugänglich.
         Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das `pub` Schlüsselwortes *exportiert* werden.
-        
+
         Die Inhalte einer Kiste (crate) sind ebenfalls außerhalb des Crates nicht automatisch zugänglich.
         Die zu exportierenden Teile werden im *root Modul* durch das `pub` Schlüsselwort exportiert (`lib.rs` oder `main.rs`).
-        
+
         Mehr dazu später, für jetzt reicht es zu wissen, dass durch `pub` die Sichtbarkeit
         von Funktionen und Attributen gesteuert werden kann.
     ie:
@@ -843,7 +843,7 @@ pages:
     es:
       title: if/else if/else
       content_html:
-        "<p>La ramificación de código en Rust te resultará familiar.</p><p>Las condiciones no 
+        "<p>La ramificación de código en Rust te resultará familiar.</p><p>Las condiciones no
         van entre paréntesis, ¿acaso son necesarios? De esta manera nuestra lógica se ve más limpia y sencilla.</p>
         <p>Los demás operadores lógicos conocidos siguen funcionando: <code>!</code><code>!=</code><code>||</code><code>&&</code><code>&lt;</code><code>&gt;</code><code>&lt;=</code><code>&gt;=</code></p>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%20menor%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%20mayor%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
@@ -902,8 +902,9 @@ pages:
         закончится.</p>"
     es:
       title: while
-      content_html: "<p><code>while</code> permite añadir fácilmente una condición
-         al bucle.</p><p>El bucle terminará cuando la condición se evalúe a <code>false</code></p>"
+      content_html:
+        "<p><code>while</code> permite añadir fácilmente una condición
+        al bucle.</p><p>El bucle terminará cuando la condición se evalúe a <code>false</code></p>"
   - en:
       title: for
       content_html: <p>Rust's <code>for</code> loop is a powerful upgrade. It
@@ -960,7 +961,8 @@ pages:
         ними в том что в первом случае проитерируем пятёрку, а втором нет.</p>
     es:
       title: for
-      content_html: <p>El bucle <code>for</code> en Rust es una gran mejora, ya que
+      content_html: >
+        <p>El bucle <code>for</code> en Rust es una gran mejora, ya que
         itera sobre valores en cualquier expresión que se evalúe como un iterador. ¿Qué
         es un iterador? Un iterador es un objeto al que le puedes hacer la pregunta: "¿Cuál es el
         siguiente elemento?" hasta que ya no queden más elementos.</p><p>Nos centraremos más en esto
@@ -1025,9 +1027,9 @@ pages:
         los patrones de coincidencia con datos más complejos en próximos capítulos, te prometo
         que valdrá la pena la espera.</p><p><code>match</code> es exhaustivo, así que todos los
         casos deben ser evaluados.</p><p>El emparejamiento (matching) combinado con la desestructuración es uno de los
-        patrones más comunes que verás en Rust</p>" 
+        patrones más comunes que verás en Rust</p>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%200%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20m%C3%BAltiples%20valores%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%201%20o%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20iteradores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20un%20numero%20entre%203%20y%209%2C%20ambos%20incluidos%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20asignar%20el%20valor%20encontrado%20a%20una%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20%7B%7D%2C%20un%20n%C3%BAmero%20entre%2010%20y%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20esta%20es%20la%20condici%C3%B3n%20por%20defecto%20que%20debe%20existir%20%0A%20%20%20%20%20%20%20%20%2F%2F%20si%20no%20se%20han%20evaluado%20todos%20los%20casos%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20otra%20cosa!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
-    
+
   - en:
       title: Returning values from block expressions
       content_html:
@@ -1125,7 +1127,7 @@ pages:
     es:
       title: Capítulo 2 - Conclusión
       content_html:
-        "<p>Con esto ya hemos echado un vistazo a las características más 
+        "<p>Con esto ya hemos echado un vistazo a las características más
         básicas del lenguaje Rust. Hablaremos de <code>for</code> y
         <code>match</code> en más profundidad a medida que aumentemos
         nuestro conocimiento sobre cómo aplicar sus capacidades.
@@ -1230,11 +1232,11 @@ pages:
       content_markdown: |
         Einen feinen Unterschied zu Funktionen bilden Methoden. Methoden sind Erweiterungen zu Datentypen,
         bzw. Funktionen die auf Datentypen anzuwenden sind.
-        
+
         *statische Methoden* - Methoden, die zum Datentyp selber assoziiert sind. Werden mit dem `::` Operator aufgerufen.
-        
+
         *instanz Methoden* (instance methods) - Methoden, die bei einer Instanz (oder Objekt) mit dem `.` Operator aufgerufen werden können.
-        
+
         Wir werden im späteren Verlauf sehen, wie wir selber Methoden erstellen können.
     ie:
       title: Calling Methods
