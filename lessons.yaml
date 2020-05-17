@@ -283,7 +283,7 @@ pages:
       title: Exporting
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A
       content_markdown: |
-        By default members of a module are not accessible from the outside of the module. We make members 
+        By default members of a module are not accessible from outside of the module. We make members 
         of a module accessible using the `pub` keyword.
 
         By default members of a crate are not accessible outside of the crate. We make members of
