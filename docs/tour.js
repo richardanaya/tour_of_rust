@@ -20,7 +20,7 @@ if(iframe){
     iframe.addEventListener( "load", function(e) {
         setTimeout(()=>{
             document.querySelector('a').focus();
-        },50)
+        },100)
         setupKeys();
     });
 } else {
