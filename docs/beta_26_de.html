@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Structs initialisieren</title>
+        <title>Tour zu Rust - Speicher</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,31 +33,25 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Structs initialisieren</h1>
-            <p>Wenn ein struct <strong>instanziiert</strong> wird, legt das Programm die Felder des structs Seite an Seite im Speicher an.</p>
-<p>Die Initialisierung erfolgt mit folgendem Syntax:</p>
-<p><code>StructName { feld1, feld2, ... }</code>.</p>
-<p>Auf die Felder des structs werden mit einem <code>.</code> zugegriffen.</p>
-<p>In unserem Beispiel bedeutet das:</p>
+            <h1>Speicher</h1>
+            <p>In Rust gibt es 3 unterschiedliche Speicher-Regionen:</p>
 <ul>
-<li>Text innerhalb der Anführungszeichen sind read-only Daten (z.B. "ferris"), daher sind sie
-in <strong>data memory</strong></li>
-<li>Der Funktionsaufruf <code>String::from</code> erstellt ein struct <code>String</code> das Seite an Seite der anderen
-Felder in <code>SeaCreature</code> auf den <strong>stack</strong> gelegt wird. Ein String repräsentiert (veränderbaren) Text,
-der…</li>
-</ul>
-<ol>
-<li>… im <strong>heap</strong> angelegt wird und daher dort verändert werden kann,</li>
-<li>… die Adresse (Referenz) zum Speicherstück im heap im <code>String</code> struct speichert</li>
-</ol>
-<ul>
-<li>Nachdem unsere Freunde <em>ferris</em> und <em>sara</em> Datenstrukturen sind, die in der main-Funktion
-erstellt wurden, werden diese auf den <strong>stack</strong> platziert.</li>
+<li><strong>data memory</strong> (Datenspeicher) - Für Daten mit fester Größe und die <strong>statisch</strong> sind (zur Gesamtlebenszeit
+eines Programms verfügbar). Nehmen wir beispielsweise festen Text her (z.B. <code>"Hallo Welt"</code>). Die Bytes in
+diesem Schnipsel werden nur gelesen und sind bereits zur Kompilierzeit bekannt, daher kommen sie in den
+Datenspeicher. Compiler können dementsprechend den Code optimieren und sind in der Laufzeit am schnellsten
+"auszuwerten."</li>
+<li><strong>stack memory</strong> (Stackspeicher) - Variablen, die innerhalb einer Funktion deklariert werden. Während eines
+Funktionsaufrufs ändert sich der Standort nicht. Wird eine weitere Funktion aufgerufen, werden die von der
+Unterfunktion benötigen Variablen weiter auf den Stack gelegt. Erreicht man das Ende der Funktion, werden die
+entsprechenden Variablen wieder vom Stack runtergenommen.</li>
+<li><strong>heap memory</strong> (Heapspeicher) - Speicher, der zur Laufzeit für Daten reserviert wird. In dieser Region kann
+Speicher reserviert, bewegt, vergrößert, verkleinert und freigegeben werden. Dieses dynamische
+Speichermanagement kann etwas mehr Zeit in Anspruch nehmen. Beim Reservieren spricht man von <strong>memory allocationt</strong>
+(allozieren), beim Freigeben von <strong>memory deallocation</strong>.</li>
 </ul>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>

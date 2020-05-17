@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Тур по Rust - Глава 3 - Заключение</title>
+        <title>Тур по Rust - Перечисления с данными</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -29,17 +29,31 @@
                 <span class="nav">
                 <span class="toc"><a href="TOC_ru.html">Содержание</a></span>
                 <span class="back"><a href="beta_30_ru.html">Назад</a></span>
-                <span class="next"><a href="beta_end_ru.html">Далее</a></span>
+                <span class="next"><a href="beta_32_ru.html">Далее</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Глава 3 - Заключение</h1>
-            <p>Как здорово! Теперь у нас есть базовые инструменты для представления форм наших идей в коде. 
-Надеемся, что теперь мы можем увидеть проблеск того, как основные операции Rust работают в 
-гармонии и согласии с его типами. Далее мы поговорим о концепции, которая дает нашим типам данных 
-ещё большую гибкость представления: <em>дженерики</em> (шаблонные типы данных).</p>
+            <h1>Перечисления с данными</h1>
+            <p>Элементы <code>enum</code> также могут иметь один и больше типов данных (например, структуру или кортеж-структуру). 
+Это чем-то похоже на <em>union</em> с языка C.</p>
+<p>Когда <code>enum</code> сравнивается с серией шаблонов (или матчится, англ. is pattern matched), вы можете
+связать имя переменной к каждому значению или полю структуры.</p>
+<p>Как <code>enum</code> представлен в памяти:</p>
+<ul>
+<li>Перечисление будет иметь размер, равный наибольшему из его элементов. Это позволяет всем потенциальным
+значениям вместиться в одну и ту же область памяти (без дополнительных выделений памяти).</li>
+<li>Элементы перечисления имеют невидимый числовой тэг в дополнении к данным, что этот елемент уже и так несет.</li>
+</ul>
+<p>Еще немного информации:</p>
+<ul>
+<li><code>enum</code> Rust(а) иногда называют <em>типом-сумой</em> (tagged-union)</li>
+<li>Комбинирование разных типов, чтобы создать новый тип - это то, что люди имеют ввиду, когда говорят, что
+Rust имеет <em>алгебраические типы</em></li>
+</ul>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20enum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Apub%20enum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Apub%20enum%20Size%20%7B%20Big%2C%20Small%20%7D%0Apub%20enum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20species%3A%20Species%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20pub%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22big%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22small%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20is%20a%20crab%20with%20%7B%7D%20%7B%7D%20claws%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20a%20crab%20with%20some%20other%20weapon%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20some%20other%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
     <script src="tour.js"></script>

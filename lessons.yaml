@@ -1144,7 +1144,31 @@ pages:
       title: Область видимости структур
       content_markdown: |
         Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
+  - beta: true
+    en:
+      title: Calling Methods
+      content_markdown: |
+        Unlike functions, methods are a function associated with a specific data type.
 
+        *static methods* — methods that belong to a type itself are called using the `::` operator.
+
+        *methods* — methods that belong to an instance of a type itself are called using the `.` operator.
+
+        We will talk more on making your own methods in future chapters.
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+    de:
+      title: Calling Methods
+      content_markdown: |
+        Need translation.
+    ie:
+      title: Calling Methods
+      content_markdown: |
+        Need translation.
+    ru:
+      title: Calling Methods
+      content_markdown: |
+        Need translation.
   - en:
       title: Memory
       content_markdown: |
