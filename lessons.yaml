@@ -293,14 +293,15 @@ pages:
         of the visibility of your functions and data structures.
     de:
       title: Export
-      content_html:
-        "<p>Auch wenn von Kisten (crates) in Rust gesprochen wird, werden nicht
-        ganze Schiffscontainer an andere Developer exportiert, sondern lediglich Teile
-        aus der Kiste. Diese Teile (oder members) sind mit dem Schlüsselwort <b>pub</b>
-        (für 'public') versehen.</p><p>Wenn externe oder interne Module verwendet werden,
-        können lediglich auf members zugegriffen werden, die mit <b>pub</b> exportiert
-        wurden.</p><p>Folgendes Codebeispiel ist fehlerhaft. Füge ein <b>pub</b> an der
-        richtigen Stelle ein, um es wieder zum Laufen zu bringen.</p>"
+      content_markdown: |
+        Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch zugänglich.
+        Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das `pub` Schlüsselwortes *exportiert* werden.
+        
+        Die Inhalte einer Kiste (crate) sind ebenfalls außerhalb des Crates nicht automatisch zugänglich.
+        Die zu exportierenden Teile werden im *root Modul* durch das `pub` Schlüsselwort exportiert (`lib.rs` oder `main.rs`).
+        
+        Mehr dazu später, für jetzt reicht es zu wissen, dass durch `pub` die Sichtbarkeit
+        von Funktionen und Attributen gesteuert werden kann.
     ie:
       title: Exportation
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_module%20%7B%0A%20%20fn%20far_alquo()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%22)%0A%20%20%7D%0A%0A%20%20pub%20fn%20far_alquo_in_plu()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%20in%20plu%22)%0A%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20mi_sub_module%3A%3Afar_alquo()%3B%0A%20%20mi_sub_module%3A%3Afar_alquo_in_plu()%3B%0A%7D%0A
