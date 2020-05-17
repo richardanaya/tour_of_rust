@@ -209,7 +209,7 @@ pages:
         <p>Every Rust program or library is a <b>crate</b>.</p><p>Every crate
         is made of a heirarchy of <b>modules</b>.</p><p>Programs start running in the
         root module of a crate at the <code>main()</code> function in a file
-        called "main.rs".<p></p><p>Libraries have a root module in the file "lib.rs" and
+        called `main.rs`.<p></p><p>Libraries have a root module in the file `lib.rs` and
         export useful members.</p><p>To prevent typing out full paths like <code>std::f64::consts::PI</code>.
         The <b>use</b> keyword allows us to specify particular items from modules we want
         to use throughout our code without a full path. For instance <code>use std::f64::consts::PI</code>
@@ -224,7 +224,7 @@ pages:
         (Kiste).</p><p>Jedes crate besteht aus einer hierarchischen Ansammlung von <b>modules</b>.</p><p>Programme
         werden aus einem root module (Wurzelelement) eines crates gestartet, Startpunkt
         bildet hierbei die Funktion <code>main()</code> in einer Datei namens
-        "main.rs".<p></p><p>Bibliotheken haben ein root module in der Datei "lib.rs" und
+        `main.rs`.<p></p><p>Bibliotheken haben ein root module in der Datei `lib.rs` und
         exportieren nützliche Elemente.</p><p>Um komplette Namespaces wie <code>std::f64::consts::PI</code>
         nicht austippen zu müssen, wurde das <b>use</b> Schlüsselwort eingeführt. Beispielsweise
         erlaubt <code>use std::f64::consts::PI</code> uns den Identifier <code>PI</code>
@@ -240,8 +240,8 @@ pages:
         <p>Chascun programma o biblioteca in Rust es un <b>crate</b> (significant
         un corbe o un chest).</p><p>Chascun crate es composit ex un hierarchie de <b>modules</b>.</p><p>Programmas
         comensa functionar in li module radical de un crate in li function <code>main()</code>
-        in un archive nominat "main.rs".<p></p><p>Bibliotecas have un module radical in
-        li archive "lib.rs" e exporta membres util.</p><p>Por prevenir li tipada de plen
+        in un archive nominat `main.rs`.<p></p><p>Bibliotecas have un module radical in
+        li archive `lib.rs` e exporta membres util.</p><p>Por prevenir li tipada de plen
         percurses quam <code>std::f64::consts::PI</code>, li clave-parol <b>use</b>
         fa it possibil por nos specificar li articules particulari in modules queles noi
         vole usar tra nor code sin un plen percurse. Por exemple, <code>use std::f64::consts::PI</code>
@@ -254,8 +254,8 @@ pages:
       content_html:
         <p>Каждая программа или библиотека на Rust это <b>crate</b>.</p><p>Каждый
         crate сделан из иерархии <b>модулей</b>.</p><p>Программы начинают работать в корневом(root)
-        модуле крейта(crate) в <code>main()</code> функции с файла "main.rs".<p></p><p>Библиотеки
-        имеют корневой модуль в файле "lib.rs" и  экспортируют полезные элементы.</p><p>Для
+        модуле крейта(crate) в <code>main()</code> функции с файла `main.rs`.<p></p><p>Библиотеки
+        имеют корневой модуль в файле `lib.rs` и  экспортируют полезные элементы.</p><p>Для
         того, чтобы не писать полные пути, например <code>std::f64::consts::PI</code>,
         существует ключевое слово <b>use</b>. Оно позволяет нам указать отдельные элементы
         с модулей, которые мы хотим использовать в коде без указания полного пути. Например,
@@ -271,7 +271,7 @@ pages:
         <p>Cada programa o librería en Rust es un <b>crate</b>.</p><p>Cada crate
         está compuesto por una jerarquía de <b>módulos</b>.</p><p>Los programas comienzan su ejecución en el
         módulo raíz de un crate en la función <code>main()</code> en un fichero llamado
-        "main.rs".<p></p><p>Las librerías tienen un módulo raíz en el archivo "lib.rs" que
+        `main.rs`.<p></p><p>Las librerías tienen un módulo raíz en el archivo `lib.rs` que
         proporciona elementos útiles.</p><p>Para evitar escribir rutas completas como <code>std::f64::consts::PI</code>.
         La palabra reservada <b>use</b> nos permite especificar qué elementos de los módulos queremos
         usar en nuestro código sin especificar una ruta completa. Por ejemplo, el uso de <code>use std::f64::consts::PI</code>
