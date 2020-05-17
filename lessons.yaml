@@ -281,7 +281,7 @@ pages:
         un repositorio de crates creado por la comunidad Rust: <a href="https://crates.io/">https://crates.io</a></p>
   - en:
       title: Exporting
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20my_sub_module%20%7B%0A%20%20%20%20fn%20do_something()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20do_something_else()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%20else%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20my_sub_module%3A%3Ado_something()%3B%0A%20%20%20%20my_sub_module%3A%3Ado_something_else()%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A
       content_markdown: |
         By default members of a module are not accessible from the outside of the module. We make members 
         of a module accessible using the `pub` keyword.

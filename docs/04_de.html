@@ -37,7 +37,7 @@
             <p>Auch wenn von Kisten (crates) in Rust gesprochen wird, werden nicht ganze Schiffscontainer an andere Developer exportiert, sondern lediglich Teile aus der Kiste. Diese Teile (oder members) sind mit dem Schlüsselwort <b>pub</b> (für 'public') versehen.</p><p>Wenn externe oder interne Module verwendet werden, können lediglich auf members zugegriffen werden, die mit <b>pub</b> exportiert wurden.</p><p>Folgendes Codebeispiel ist fehlerhaft. Füge ein <b>pub</b> an der richtigen Stelle ein, um es wieder zum Laufen zu bringen.</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20my_sub_module%20%7B%0A%20%20%20%20fn%20do_something()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20do_something_else()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22doing%20something%20else%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20my_sub_module%3A%3Ado_something()%3B%0A%20%20%20%20my_sub_module%3A%3Ado_something_else()%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>
