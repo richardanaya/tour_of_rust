@@ -47,7 +47,7 @@ pages:
         guide in these languages:
 
         * [Deutsch](index_de.html)
-        * [English](index_en.html)
+        * [English](index.html)
         * [Español](index_es.html)
         * [Русский](index_ru.html)
 
@@ -79,7 +79,7 @@ pages:
 
         Translations:
         * [Deutsch](index_de.html)
-        * [English](index_en.html)
+        * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
         * [Русский](index_ru.html)
@@ -108,7 +108,7 @@ pages:
 
         Тур доступен на таких языках:
         * [Deutsch](index_de.html)
-        * [English](index_en.html)
+        * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
         * [Русский](index_ru.html)
@@ -128,7 +128,7 @@ pages:
         guía en los siguientes idiomas:
 
         * [Deutsch](index_de.html)
-        * [English](index_en.html)
+        * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
         * [Русский](index_ru.html)
@@ -214,146 +214,6 @@ pages:
       content_html: |
         <p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
         </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>
-  - en:
-      title: Modules
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
-      content_markdown: |
-        Every Rust program or library is a **crate**.
-
-        Every crate is made of a heirarchy of **modules**.
-
-        Programs start running in the root module of a crate at the `main()` function in a file
-        called `main.rs`.
-
-        Libraries have a root module in the file `lib.rs` and export useful members.
-
-        To prevent typing out full paths like `std::f64::consts::PI`.
-        The **use** keyword allows us to specify particular items from modules we want
-        to use throughout our code without a full path. For instance `use std::f64::consts::PI`
-        allows me to just use the identifier `PI` in my main function.
-
-        **std** is the crate of the **standard library** of Rust which is full of useful data
-        structures and functions for interacting with your operating system.
-
-        A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/)
-    de:
-      title: Module
-      content_html:
-        <p>Jedes Programm bzw. jede Bibliothek in Rust ist ein <b>crate</b>
-        (Kiste).</p><p>Jedes crate besteht aus einer hierarchischen Ansammlung von <b>modules</b>.</p><p>Programme
-        werden aus einem root module (Wurzelelement) eines crates gestartet, Startpunkt
-        bildet hierbei die Funktion <code>main()</code> in einer Datei namens
-        `main.rs`.<p></p><p>Bibliotheken haben ein root module in der Datei `lib.rs` und
-        exportieren nützliche Elemente.</p><p>Um komplette Namespaces wie <code>std::f64::consts::PI</code>
-        nicht austippen zu müssen, wurde das <b>use</b> Schlüsselwort eingeführt. Beispielsweise
-        erlaubt <code>use std::f64::consts::PI</code> uns den Identifier <code>PI</code>
-        in der main-Funktion einfach zu verwenden.</p><p><b>std</b> ist das crate der
-        <b>Standardbibliothek</b> von Rust, das allerlei nützliche Datenstrukturen und
-        Funktionen beinhalten, durch welche wir mit dem Betriebssystem kommunizieren können.</p><p>Die
-        Fanbase von Rust hält die Seite <a href="https://crates.io/">https://crates.io</a>
-        am Laufen, auf der es sämtliche crates im Überblick zu finden gibt.</p>
-    ie:
-      title: Modules
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20println!(%22Benevenit%20al%20lud-terren!%22)%3B%0A%20%20println!(%22Yo%20tant%20desira%20un%20tranche%20de%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
-      content_html:
-        <p>Chascun programma o biblioteca in Rust es un <b>crate</b> (significant
-        un corbe o un chest).</p><p>Chascun crate es composit ex un hierarchie de <b>modules</b>.</p><p>Programmas
-        comensa functionar in li module radical de un crate in li function <code>main()</code>
-        in un archive nominat `main.rs`.<p></p><p>Bibliotecas have un module radical in
-        li archive `lib.rs` e exporta membres util.</p><p>Por prevenir li tipada de plen
-        percurses quam <code>std::f64::consts::PI</code>, li clave-parol <b>use</b>
-        fa it possibil por nos specificar li articules particulari in modules queles noi
-        vole usar tra nor code sin un plen percurse. Por exemple, <code>use std::f64::consts::PI</code>
-        possibilisa li sol usation de  <code>PI</code> in mi function main.</p><p><b>std</b>
-        es li nómine del biblioteca standard (<b>standard library</b>) de Rust quel es
-        plen de util data-structuras e functiones por interacter con tui sistema de operation.</p><p>Un
-        searchabil directoria de crates creat per li comunité trova se sur <a href="https://crates.io/">https://crates.io</a></p>
-    ru:
-      title: Модули
-      content_markdown: |
-        Каждая программа или библиотека на Rust это **crate**.
-
-        Каждый crate сделан из иерархии *модулей*.
-
-        Программы начинают работать в корневом(root) модуле крейта(crate) в `main()` функции с файла "main.rs".
-
-        Библиотеки имеют корневой модуль в файле "lib.rs" и  экспортируют полезные элементы.
-
-        Для того, чтобы не писать полные пути, например `std::f64::consts::PI`,
-        существует ключевое слово *use*. Оно позволяет нам указать отдельные элементы
-        с модулей, которые мы хотим использовать в коде без указания полного пути. Например,
-        `use std::f64::consts::PI` позволяет просто использовать идентификатор `PI` 
-        в главной функции.
-
-        **std** это крейт **стандартной библиотеки** Rust(a), который полон полезных структур данных
-        и функций для взаимодействия с операционной системой.
-
-        Регистр крейтов, созданный сообществом, находится на [https://crates.io](https://crates.io/)
-    es:
-      title: Módulos
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%22)%3B%0A%20%20%20%20println!(%22%C2%A1Quiero%20un%20trozo%20de%20%7B%7Dzza!%22%2C%20PI)%3B%0A%7D%0A
-      content_html: >
-        <p>Cada programa o librería en Rust es un <b>crate</b>.</p><p>Cada crate
-        está compuesto por una jerarquía de <b>módulos</b>.</p><p>Los programas comienzan su ejecución en el
-        módulo raíz de un crate en la función <code>main()</code> en un fichero llamado
-        `main.rs`.<p></p><p>Las librerías tienen un módulo raíz en el archivo `lib.rs` que
-        proporciona elementos útiles.</p><p>Para evitar escribir rutas completas como <code>std::f64::consts::PI</code>.
-        La palabra reservada <b>use</b> nos permite especificar qué elementos de los módulos queremos
-        usar en nuestro código sin especificar una ruta completa. Por ejemplo, el uso de <code>use std::f64::consts::PI</code>
-        me permite referenciar el valor de <code>PI</code> en mi función principal.</p><p><b>std</b>
-        es el crate de la <b>librería estándar</b> de Rust que contiene estructuras de datos
-        y funciones útiles para interactuar con tu sistema operativo.</p><p>Aquí encontrarás
-        un repositorio de crates creado por la comunidad Rust: <a href="https://crates.io/">https://crates.io</a></p>
-  - en:
-      title: Exporting
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A
-      content_markdown: |
-        By default members of a module are not accessible from outside of the module. We make members 
-        of a module accessible using the `pub` keyword.
-
-        By default members of a crate are not accessible outside of the crate. We make members of
-        a crate accessible by marking them as `pub` in the *root module* of your crate (`lib.rs` or `main.rs`).
-
-        We will talk more about modules later, for now, just know that `pub` gives you control
-        of the visibility of your functions and data structures.
-    de:
-      title: Export
-      content_markdown: |
-        Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch zugänglich.
-        Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das `pub` Schlüsselwortes *exportiert* werden.
-
-        Die Inhalte einer Kiste (crate) sind ebenfalls außerhalb des Crates nicht automatisch zugänglich.
-        Die zu exportierenden Teile werden im *root Modul* durch das `pub` Schlüsselwort exportiert (`lib.rs` oder `main.rs`).
-
-        Mehr dazu später, für jetzt reicht es zu wissen, dass durch `pub` die Sichtbarkeit
-        von Funktionen und Attributen gesteuert werden kann.
-    ie:
-      title: Exportation
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_module%20%7B%0A%20%20fn%20far_alquo()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%22)%0A%20%20%7D%0A%0A%20%20pub%20fn%20far_alquo_in_plu()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%20in%20plu%22)%0A%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20mi_sub_module%3A%3Afar_alquo()%3B%0A%20%20mi_sub_module%3A%3Afar_alquo_in_plu()%3B%0A%7D%0A
-      content_html:
-        "<p>In Rust, noi exporta membres de un module usante li clave-parol
-        <b>pub</b>.</p><p>Quande on usa un module, sive in su propri code sive in un crate
-        extern, on posse solmen aluder a membres possedent li marcation public.</p><p>Li
-        code in ti-ci exemple es ruptet; ples adjunter li clave-parol <b>pub</b> in li
-        loc necessi por reparar it.</p>"
-    ru:
-      title: Експорт
-      content_markdown: |
-        В Rust мы экспортируем элементы модуля, используя ключевое слово **pub**.
-
-        Используя модуль внутри вашего кода или во внешнем крейте, вы
-        можете получить доступ только к элементам, что были помечены публичными.
-
-        Код в этом примере не работает, добавьте ключевое слово **pub** в нужном месте,
-        чтобы пример успешно скомпилировался.
-    es:
-      title: Exportar
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_modulo%20%7B%0A%20%20%20%20fn%20haz_algo()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20haz_algo_mas()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%20m%C3%A1s%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo()%3B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo_mas()%3B%0A%7D%0A
-      content_html:
-        "<p>En Rust, exportamos elementos de un módulo usando la palabra reservada <b>pub</b>.</p><p>Cuando
-        se utiliza un módulo dentro de su propio código o en un crate externo, sólo se
-        permiten referencias a aquellos elementos que hayan sido marcados como públicos.</p><p>El código en este ejemplo
-        da error, añade la palabra reservada <b>pub</b> en el lugar apropiado para arreglarlo.</p>"
   - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
@@ -1853,3 +1713,166 @@ pages:
         In one chapter we've learned how much power generic types give us! Don't worry if you don't 
         know fully how to use everything, right now it's just good to be aware of the major ideas you will
         see again and again in code. In the next chapter we will explore how to associate methods and traits with our types!
+  - beta: true
+    en: 
+      title: Chapter 6 - Project Structure and Organization
+      content: |
+        So far all of our code examples have been a single file. Let's discuss our code structures and functions are organized and shared others!
+    de:
+      title: Chapter 6 - Project Structure and Organization
+      content: |
+        Needs translation.
+    ie:
+      title: Chapter 6 - Project Structure and Organization
+      content: |
+        Needs translation.
+    ru:
+      title: Chapter 6 - Project Structure and Organization
+      content: |
+        Needs translation.
+    es:
+      title: Chapter 6 - Project Structure and Organization
+      content: |
+        Needs translation.
+  - beta: true
+    en:
+      title: Modules
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+      content_markdown: |
+        Every Rust program or library is a **crate**.
+
+        Every crate is made of a heirarchy of **modules**.
+
+        Programs start running in the root module of a crate at the `main()` function in a file
+        called `main.rs`.
+
+        Libraries have a root module in the file `lib.rs` and export useful members.
+
+        To prevent typing out full paths like `std::f64::consts::PI`.
+        The **use** keyword allows us to specify particular items from modules we want
+        to use throughout our code without a full path. For instance `use std::f64::consts::PI`
+        allows me to just use the identifier `PI` in my main function.
+
+        **std** is the crate of the **standard library** of Rust which is full of useful data
+        structures and functions for interacting with your operating system.
+
+        A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/)
+    de:
+      title: Module
+      content_html:
+        <p>Jedes Programm bzw. jede Bibliothek in Rust ist ein <b>crate</b>
+        (Kiste).</p><p>Jedes crate besteht aus einer hierarchischen Ansammlung von <b>modules</b>.</p><p>Programme
+        werden aus einem root module (Wurzelelement) eines crates gestartet, Startpunkt
+        bildet hierbei die Funktion <code>main()</code> in einer Datei namens
+        `main.rs`.<p></p><p>Bibliotheken haben ein root module in der Datei `lib.rs` und
+        exportieren nützliche Elemente.</p><p>Um komplette Namespaces wie <code>std::f64::consts::PI</code>
+        nicht austippen zu müssen, wurde das <b>use</b> Schlüsselwort eingeführt. Beispielsweise
+        erlaubt <code>use std::f64::consts::PI</code> uns den Identifier <code>PI</code>
+        in der main-Funktion einfach zu verwenden.</p><p><b>std</b> ist das crate der
+        <b>Standardbibliothek</b> von Rust, das allerlei nützliche Datenstrukturen und
+        Funktionen beinhalten, durch welche wir mit dem Betriebssystem kommunizieren können.</p><p>Die
+        Fanbase von Rust hält die Seite <a href="https://crates.io/">https://crates.io</a>
+        am Laufen, auf der es sämtliche crates im Überblick zu finden gibt.</p>
+    ie:
+      title: Modules
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20println!(%22Benevenit%20al%20lud-terren!%22)%3B%0A%20%20println!(%22Yo%20tant%20desira%20un%20tranche%20de%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+      content_html:
+        <p>Chascun programma o biblioteca in Rust es un <b>crate</b> (significant
+        un corbe o un chest).</p><p>Chascun crate es composit ex un hierarchie de <b>modules</b>.</p><p>Programmas
+        comensa functionar in li module radical de un crate in li function <code>main()</code>
+        in un archive nominat `main.rs`.<p></p><p>Bibliotecas have un module radical in
+        li archive `lib.rs` e exporta membres util.</p><p>Por prevenir li tipada de plen
+        percurses quam <code>std::f64::consts::PI</code>, li clave-parol <b>use</b>
+        fa it possibil por nos specificar li articules particulari in modules queles noi
+        vole usar tra nor code sin un plen percurse. Por exemple, <code>use std::f64::consts::PI</code>
+        possibilisa li sol usation de  <code>PI</code> in mi function main.</p><p><b>std</b>
+        es li nómine del biblioteca standard (<b>standard library</b>) de Rust quel es
+        plen de util data-structuras e functiones por interacter con tui sistema de operation.</p><p>Un
+        searchabil directoria de crates creat per li comunité trova se sur <a href="https://crates.io/">https://crates.io</a></p>
+    ru:
+      title: Модули
+      content_markdown: |
+        Каждая программа или библиотека на Rust это **crate**.
+
+        Каждый crate сделан из иерархии *модулей*.
+
+        Программы начинают работать в корневом(root) модуле крейта(crate) в `main()` функции с файла "main.rs".
+
+        Библиотеки имеют корневой модуль в файле "lib.rs" и  экспортируют полезные элементы.
+
+        Для того, чтобы не писать полные пути, например `std::f64::consts::PI`,
+        существует ключевое слово *use*. Оно позволяет нам указать отдельные элементы
+        с модулей, которые мы хотим использовать в коде без указания полного пути. Например,
+        `use std::f64::consts::PI` позволяет просто использовать идентификатор `PI` 
+        в главной функции.
+
+        **std** это крейт **стандартной библиотеки** Rust(a), который полон полезных структур данных
+        и функций для взаимодействия с операционной системой.
+
+        Регистр крейтов, созданный сообществом, находится на [https://crates.io](https://crates.io/)
+    es:
+      title: Módulos
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%22)%3B%0A%20%20%20%20println!(%22%C2%A1Quiero%20un%20trozo%20de%20%7B%7Dzza!%22%2C%20PI)%3B%0A%7D%0A
+      content_html: >
+        <p>Cada programa o librería en Rust es un <b>crate</b>.</p><p>Cada crate
+        está compuesto por una jerarquía de <b>módulos</b>.</p><p>Los programas comienzan su ejecución en el
+        módulo raíz de un crate en la función <code>main()</code> en un fichero llamado
+        `main.rs`.<p></p><p>Las librerías tienen un módulo raíz en el archivo `lib.rs` que
+        proporciona elementos útiles.</p><p>Para evitar escribir rutas completas como <code>std::f64::consts::PI</code>.
+        La palabra reservada <b>use</b> nos permite especificar qué elementos de los módulos queremos
+        usar en nuestro código sin especificar una ruta completa. Por ejemplo, el uso de <code>use std::f64::consts::PI</code>
+        me permite referenciar el valor de <code>PI</code> en mi función principal.</p><p><b>std</b>
+        es el crate de la <b>librería estándar</b> de Rust que contiene estructuras de datos
+        y funciones útiles para interactuar con tu sistema operativo.</p><p>Aquí encontrarás
+        un repositorio de crates creado por la comunidad Rust: <a href="https://crates.io/">https://crates.io</a></p>
+  - beta: true
+    en:
+      title: Exporting
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A
+      content_markdown: |
+        By default members of a module are not accessible from outside of the module. We make members 
+        of a module accessible using the `pub` keyword.
+
+        By default members of a crate are not accessible outside of the crate. We make members of
+        a crate accessible by marking them as `pub` in the *root module* of your crate (`lib.rs` or `main.rs`).
+
+        We will talk more about modules later, for now, just know that `pub` gives you control
+        of the visibility of your functions and data structures.
+    de:
+      title: Export
+      content_markdown: |
+        Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch zugänglich.
+        Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das `pub` Schlüsselwortes *exportiert* werden.
+
+        Die Inhalte einer Kiste (crate) sind ebenfalls außerhalb des Crates nicht automatisch zugänglich.
+        Die zu exportierenden Teile werden im *root Modul* durch das `pub` Schlüsselwort exportiert (`lib.rs` oder `main.rs`).
+
+        Mehr dazu später, für jetzt reicht es zu wissen, dass durch `pub` die Sichtbarkeit
+        von Funktionen und Attributen gesteuert werden kann.
+    ie:
+      title: Exportation
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_module%20%7B%0A%20%20fn%20far_alquo()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%22)%0A%20%20%7D%0A%0A%20%20pub%20fn%20far_alquo_in_plu()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%20in%20plu%22)%0A%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20mi_sub_module%3A%3Afar_alquo()%3B%0A%20%20mi_sub_module%3A%3Afar_alquo_in_plu()%3B%0A%7D%0A
+      content_html:
+        "<p>In Rust, noi exporta membres de un module usante li clave-parol
+        <b>pub</b>.</p><p>Quande on usa un module, sive in su propri code sive in un crate
+        extern, on posse solmen aluder a membres possedent li marcation public.</p><p>Li
+        code in ti-ci exemple es ruptet; ples adjunter li clave-parol <b>pub</b> in li
+        loc necessi por reparar it.</p>"
+    ru:
+      title: Експорт
+      content_markdown: |
+        В Rust мы экспортируем элементы модуля, используя ключевое слово **pub**.
+
+        Используя модуль внутри вашего кода или во внешнем крейте, вы
+        можете получить доступ только к элементам, что были помечены публичными.
+
+        Код в этом примере не работает, добавьте ключевое слово **pub** в нужном месте,
+        чтобы пример успешно скомпилировался.
+    es:
+      title: Exportar
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_modulo%20%7B%0A%20%20%20%20fn%20haz_algo()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20haz_algo_mas()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%20m%C3%A1s%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo()%3B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo_mas()%3B%0A%7D%0A
+      content_html:
+        "<p>En Rust, exportamos elementos de un módulo usando la palabra reservada <b>pub</b>.</p><p>Cuando
+        se utiliza un módulo dentro de su propio código o en un crate externo, sólo se
+        permiten referencias a aquellos elementos que hayan sido marcados como públicos.</p><p>El código en este ejemplo
+        da error, añade la palabra reservada <b>pub</b> en el lugar apropiado para arreglarlo.</p>"
