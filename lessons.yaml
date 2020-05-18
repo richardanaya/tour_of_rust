@@ -1813,10 +1813,10 @@ pages:
       title: Export
       content_markdown: |
         Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch zugänglich.
-        Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das `pub` Schlüsselwortes *exportiert* werden.
+        Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das `pub` Schlüsselwort *exportiert* werden.
 
         Die Inhalte einer Kiste (crate) sind ebenfalls außerhalb des Crates nicht automatisch zugänglich.
-        Die zu exportierenden Teile werden im *root Modul* durch das `pub` Schlüsselwort exportiert (`lib.rs` oder `main.rs`).
+        Die zu exportierenden Teile werden im *root Modul* (`lib.rs` oder `main.rs`) durch das `pub` Schlüsselwort exportiert.
 
         Mehr dazu später, für jetzt reicht es zu wissen, dass durch `pub` die Sichtbarkeit
         von Funktionen und Attributen gesteuert werden kann.
@@ -1857,7 +1857,7 @@ pages:
     de:
       title: Struktursichtbarkeit
       content_markdown: |
-        Genau wie bei Modulen kann in Strukturen angegeben werden, welche Felder nach außen hin sichtbar sein sollen.
+        Genau wie bei Funktionen kann in Strukturen angegeben werden, welche Felder nach außen hin sichtbar sein sollen.
         Diese sind wieder mit dem Schlüsselwort `pub` versehen.
     ie:
       title: Visibilitá de Structuras
