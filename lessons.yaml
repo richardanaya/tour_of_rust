@@ -358,12 +358,12 @@ pages:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
       content_markdown: |
-        A function can take zero or more arguments.
+        A function has zero or more parameters.
 
-        In this example, add takes two parameters of type `i32` (integer of 32-bit
+        In this example, add takes two arguments of type `i32` (integer of 32-bit
         length).
 
-        Function names are always in `snake_case`
+        Function names are always in `snake_case`.
     de:
       title: Funktionen
       content_html:
