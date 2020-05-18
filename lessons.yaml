@@ -1167,9 +1167,9 @@ pages:
       content_markdown: |
         Unlike functions, methods are a function associated with a specific data type.
 
-        *static methods* — methods that belong to a type itself are called using the `::` operator.
+        **static methods** — methods that belong to a type itself are called using the `::` operator.
 
-        *instance methods* — methods that belong to an instance of a type are called using the `.` operator.
+        **instance methods** — methods that belong to an instance of a type are called using the `.` operator.
 
         We will talk more on making your own methods in future chapters.
 
@@ -1180,9 +1180,9 @@ pages:
         Einen feinen Unterschied zu Funktionen bilden Methoden. Methoden sind Erweiterungen zu Datentypen,
         bzw. Funktionen die auf Datentypen anzuwenden sind.
 
-        *statische Methoden* - Methoden, die zum Datentyp selber assoziiert sind. Werden mit dem `::` Operator aufgerufen.
+        **statische Methoden** - Methoden, die zum Datentyp selber assoziiert sind. Werden mit dem `::` Operator aufgerufen.
 
-        *instanz Methoden* (instance methods) - Methoden, die bei einer Instanz (oder Objekt) mit dem `.` Operator aufgerufen werden können.
+        **instanz Methoden** (instance methods) - Methoden, die bei einer Instanz (oder Objekt) mit dem `.` Operator aufgerufen werden können.
 
         Wir werden im späteren Verlauf sehen, wie wir selber Methoden erstellen können.
     ie:
