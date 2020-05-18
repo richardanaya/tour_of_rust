@@ -184,7 +184,7 @@ pages:
       title: The Rust Playground
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
       content_markdown: |
-        This tour uses an interactive coding tool at [Rust Playground](https://play.rust-lang.org)
+        This tour uses an interactive coding tool from [Rust Playground](https://play.rust-lang.org)
 
         It's a great way to play around with Rust and show others your creativity and challenges!
     de:
@@ -453,7 +453,7 @@ pages:
         sombreado <i>(shadowing)</i> de variables y se puede modificar el tipo para futuras referencias a ese nombre.</b></p>
         <p>Los nombres de las variables se escriben siempre en <code>snake_case</code></p>"
   - en:
-      title: Changing values
+      title: Changing Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
       content_markdown: |
         Rust cares a great deal about what variables are modifiable. Values
@@ -556,7 +556,7 @@ pages:
         permite extraer subconjuntos de estructuras de datos de manera práctica.
         ¡Presta mucha atención!</p>"
   - en:
-      title: Returning nothing
+      title: Returning Nothing
       content_markdown: |
         If no return type is specified for a function, it returns an empty tuple, also known as a *unit*
 
@@ -600,7 +600,7 @@ pages:
         El uso de `()` es poco común, pero es necesario saber su significado ya que aparecerá de vez en cuando.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20no_hagas_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20El%20valor%20de%20retorno%20es%20impl%C3%ADcitamente%20()%0Afn%20no_hagas_nada2()%20%7B%0A%20%20%20%20%2F%2F%20Esta%20funci%C3%B3n%20devuelve%20()%20si%20no%20se%20especifica%20nada%20que%20devolver%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20no_hagas_nada()%3B%0A%20%20%20%20let%20b%20%3D%20no_hagas_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Mostrando%20una%20sentencia%20de%20depuraci%C3%B3n%20para%20a%20y%20b%0A%20%20%20%20%2F%2F%20porque%20es%20dif%C3%ADcil%20no%20mostrar%20nada%0A%20%20%20%20println!(%22El%20valor%20de%20a%20es%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22El%20valor%20de%20b%20es%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
   - en:
-      title: Basic types
+      title: Basic Types
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
       content_markdown: |
         Rust has a variety of familiar types 
@@ -710,7 +710,7 @@ pages:
         Entraremos en detalles sobre los textos más tarde.</p><p>Observa cómo los tipos numéricos pueden especificarse
         explícitamente añadiendo el tipo al final del número (por ejemplo, <code>13u32</code>)</p>"
   - en:
-      title: Basic type conversion
+      title: Basic Type Conversion
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
       content_markdown: |
         Rust requires explicitness when it comes to numeric types. One cannot
@@ -1132,7 +1132,7 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%200%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20m%C3%BAltiples%20valores%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%201%20o%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20iteradores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20un%20numero%20entre%203%20y%209%2C%20ambos%20incluidos%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20asignar%20el%20valor%20encontrado%20a%20una%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20%7B%7D%2C%20un%20n%C3%BAmero%20entre%2010%20y%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20esta%20es%20la%20condici%C3%B3n%20por%20defecto%20que%20debe%20existir%20%0A%20%20%20%20%20%20%20%20%2F%2F%20si%20no%20se%20han%20evaluado%20todos%20los%20casos%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20otra%20cosa!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
 
   - en:
-      title: Returning values from block expressions
+      title: Returning Values From Block Expressions
       content_markdown: |
         `if`,`loop`,`match`,functions, and scope blocks all have a unique way of returning values in Rust.
 
@@ -1707,7 +1707,7 @@ pages:
         you will likely be using all the time.
   - beta: true
     en:
-      title: What are generic types?
+      title: What Are Generic Types?
       content_markdown: |
         Generic types allow us to partially define a `struct` or `enum`, enabling a compiler to create a fully 
         defined version at compile-time based off our code usage.
