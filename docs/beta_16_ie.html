@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tur de Rust - loop (cicle)</title>
+        <title>Tur de Rust - for (por)</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,11 +33,11 @@
                 </span>
             </div>
             <div class="page">
-            <h1>loop (cicle)</h1>
-            <p>Tu besona un cicle ínfinit?</p><p>Con Rust it es simplic.</p><p>Con <code>break</code> on exea un cicle quande on es pret.</p><p><code>loop</code> have un secrete pri quel noi va parlar max bentost.</p>
+            <h1>for (por)</h1>
+            <p>Li cicle <code>for</code> de Rust es un potent amelioration. It itera sur valores de quelcunc expression queles evalua se ad-in un iterator. Quo es un iterator? Un iterator es un object a quel on posse demandar: "Quo es li cose sequent quel tu possede?" til quande ti coses es exhaustet.</p><p>Noi va explorar pri to in plu detallie in un capitul futuri, ma por li moment it mey suficer a saver que in Rust it es facil crear iteratores queles genera un sequentie de ciffres integral.</p><p>Li operator <code>..</code> crea un iterator quel genera ciffres ex un comensant ciffre til, ma ne includent, un final ciffre.</p><p>Con li operator <code>..=</code> on crea un iterator quel genera ciffres ex un comensant ciffre til, e includent, un final ciffre.</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

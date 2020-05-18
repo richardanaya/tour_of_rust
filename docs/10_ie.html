@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tur de Rust - Basic tipes</title>
+        <title>Tur de Rust - Constantes</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,11 +33,11 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Basic tipes</h1>
-            <p>Rust possede un varietá de tipes familiari <ul><li>booleanes - <code>bool</code> por representar true/false (ver/fals)</li><li>unsigned integers (integrales ínsignat) - <code>u8</code><code>u32</code><code>u64</code><code>u128</code> por representar integrales positiv</li><li>signed integers (integrales signat) - <code>i8</code><code>i32</code><code>i64</code><code>i128</code> por representar integrales sive positiv sive negativ</li><li>pointer sized integers (integrales con puntator-mesurat grandore) - <code>usize</code><code>isize</code> por representar indexes e grandores de coses in memorie</li><li>floating point (punctu flottant) - <code>f32</code><code>f64</code></li><li>con relation a textu - <code>str</code><code>char</code></li><li>tuple - <code>(value, value,...)</code> por passar fixat sequenties de valore sur li stack (li cumul)<li>slices (tranches) - <code>&[T]</code> por referer visus ad-in sequenties de valores in memorie</ul></p><p>Noi va parlar pri alcunes ex ili plu detalliatmen plu tard.</p><p>Un avise in prim: textu va posser esser plu complicat quam tui experientie con altri lingues, pro que Rust es un lingue de programmation por sistemas quel orienta se pri problemas de memorie con quel fórsan tu ne ha experientie. Noi va parlar plu detalliatmen pri textu plu tard.</p><p>Nota qualmen on posse explicitmen specificar tipes numeric per afixar li tip directmen pos li numeró (p.e. <code>13u32</code>)</p>
+            <h1>Constantes</h1>
+            <p>Constantes possibilisa li specification de valores comun quel noi usa tra nor code con un eficientie mult vezes plu grand.  Vice copiar valores quam variabiles chascun vez ú ili es usat, constantes remplazza li textu-identificator directmen con lor valore in li locs ú on usa les.</p><p>In contraste a variabiles, constantes deve sempre posseder un tip explicit</p><p>Nómines de constantes es sempre in <code>SCREAMING_SNAKE_CASE</code> (majuscules con infra-strecs)</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%0A%20%20%20%20let%20c%20%3D%204.3f64%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20frase%20%3D%20%22salute%20munde!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20frase%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Por%20crear%20un%20%7B%7D%20de%20pom%20desde%20li%20comense%2C%20on%20deve%20in%20prim%20crear%20un%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

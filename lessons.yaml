@@ -1714,7 +1714,7 @@ pages:
         know fully how to use everything, right now it's just good to be aware of the major ideas you will
         see again and again in code. In the next chapter we will explore how to associate methods and traits with our types!
   - beta: true
-    en: 
+    en:
       title: Chapter 6 - Project Structure and Organization
       content: |
         So far all of our code examples have been a single file. Let's discuss our code structures and functions are organized and shared others!

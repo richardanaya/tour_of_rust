@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Multiple Return Values</title>
+        <title>Tour of Rust - Basic Types</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,15 +33,29 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Multiple Return Values</h1>
-            <p>Functions can return multiple values by returning a <strong>tuple</strong>
-of values.</p>
-<p>Tuple elements can be referenced by their index number.</p>
-<p>Rust supports various kinds of destructuring that we will see in many forms, allowing
-us to extract sub-pieces of data structures in ergonomic ways. Be on the lookout!</p>
+            <h1>Basic Types</h1>
+            <p>Rust has a variety of familiar types </p>
+<ul>
+<li>booleans - <code>bool</code> for representing true/false
+&amp; unsigned integers - <code>u8``u32``u64``u128</code> for representing positive whole numbers</li>
+<li>signed integers - <code>i8``i32``i64``i128</code> for representing positive/negative whole numbers</li>
+<li>pointer sized integers - <code>usize``isize</code> for representing indexes
+and sizes of things in memory</li>
+<li>floating point - <code>f32``f64</code></li>
+<li>text related - <code>str``char</code></li>
+<li>tuple - <code>(value,value,...)</code> for passing fixed sequences of values on the stack</li>
+<li>slices - <code>&amp;[T]</code> for referencing views into
+sequences of values in memory</li>
+</ul>
+<p>We will be talking about a few of these in detail later.</p>
+<p>Fair warning: text might be more complex than you are used to in other languages,
+since Rust is a systems programming language, it's oriented
+toward caring about memory issues you might not be used to. We will be going into
+detail on text later.</p>
+<p>Note how numeric types can be explicitly specified by appending the type to the end of the number (e.g. <code>13u32</code>)</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Chapter 2 Conclusion</title>
+        <title>Tour of Rust - Structures</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,19 +28,19 @@
                 <span class="title"><a href="index.html">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
-                <span class="back"><a href="20_en.html">Previous</a></span>
-                <span class="next"><a href="chapter_3_en.html">Next</a></span>
+                <span class="back"><a href="chapter_3_en.html">Previous</a></span>
+                <span class="next"><a href="22_en.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Chapter 2 Conclusion</h1>
-            <p>Hopefully I've shown a glimpse of Rust's power even in the most
-basic language features. We'll be talking about <code>for</code> and
-<code>match</code> even more in depth as we gain more knowledge that
-can utilize their capabilities. Next time we'll get into Rust's foundational data
-structures.</p>
+            <h1>Structures</h1>
+            <p>A <code>struct</code> a collection of fields.</p>
+<p>A <em>field</em> is simply a data value associated with a data structure. Its value can be of a primitive type or a data structure.</p>
+<p>Its definition is like a blueprint for a compiler on how to layout the fields in memory nearby each other.</p>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
     <script src="tour.js"></script>

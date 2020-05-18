@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Strukturen</title>
+        <title>Tour zu Rust - Speicher</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,19 +28,30 @@
                 <span class="title"><a href="index_de.html">Tour zu Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
-                <span class="back"><a href="chapter_3_de.html">Zurück</a></span>
+                <span class="back"><a href="22_de.html">Zurück</a></span>
                 <span class="next"><a href="24_de.html">Weiter</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Strukturen</h1>
-            <p>Ein <code>struct</code> (dt. "Struktur") ist eine Ansammlung von fields (dt. Feldern).</p>
-<p>Ein <em>field</em> ist ein Wert, der mit einer Datenstruktur assoziiert wird. Dies kann ein primitiver Datentyp oder ein weiteres <code>struct</code> sein.</p>
-<p>Die Definition eines structs ist wie ein Entwurf für den Compiler, der ihm besagt, welche Felder im Speicher zueinander gehören.</p>
+            <h1>Speicher</h1>
+            <p>In Rust gibt es 3 unterschiedliche Speicher-Regionen:</p>
+<ul>
+<li><strong>data memory</strong> (Datenspeicher) - Für Daten mit fester Größe und die <strong>statisch</strong> sind (zur Gesamtlebenszeit
+eines Programms verfügbar). Nehmen wir beispielsweise festen Text her (z.B. <code>"Hallo Welt"</code>). Die Bytes in
+diesem Schnipsel werden nur gelesen und sind bereits zur Kompilierzeit bekannt, daher kommen sie in den
+Datenspeicher. Compiler können dementsprechend den Code optimieren und sind in der Laufzeit am schnellsten
+"auszuwerten."</li>
+<li><strong>stack memory</strong> (Stackspeicher) - Variablen, die innerhalb einer Funktion deklariert werden. Während eines
+Funktionsaufrufs ändert sich der Standort nicht. Wird eine weitere Funktion aufgerufen, werden die von der
+Unterfunktion benötigen Variablen weiter auf den Stack gelegt. Erreicht man das Ende der Funktion, werden die
+entsprechenden Variablen wieder vom Stack runtergenommen.</li>
+<li><strong>heap memory</strong> (Heapspeicher) - Speicher, der zur Laufzeit für Daten reserviert wird. In dieser Region kann
+Speicher reserviert, bewegt, vergrößert, verkleinert und freigegeben werden. Dieses dynamische
+Speichermanagement kann etwas mehr Zeit in Anspruch nehmen. Beim Reservieren spricht man von <strong>memory allocationt</strong>
+(allozieren), beim Freigeben von <strong>memory deallocation</strong>.</li>
+</ul>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>

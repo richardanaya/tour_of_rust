@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour de Rust - Conversión de tipos básica</title>
+        <title>Tour de Rust - Capítulo 1 - Conclusión</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -29,16 +29,14 @@
                 <span class="nav">
                 <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
                 <span class="back"><a href="beta_10_es.html">Anterior</a></span>
-                <span class="next"><a href="beta_12_es.html">Siguiente</a></span>
+                <span class="next"><a href="beta_chapter_2_es.html">Siguiente</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Conversión de tipos básica</h1>
-            <p>Rust requiere ser explícito cuando se trata de tipos numéricos. No se puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que se produzca un error.</p><p>Por suerte, Rust hace que las conversiones de tipos numéricos sean muy fáciles con la palabra reservada <b>as</b>.</p>
+            <h1>Capítulo 1 - Conclusión</h1>
+            <p>¡Buen trabajo! No ha sido tan complicado, ¿verdad? Esta ha sido una visión general de cómo trabaja el compilador de Rust. Como ya has comprobado, hay que tener muy en cuenta el tamaño de los valores en memoria, las cosas que se pueden modificar y las que no, y asegurarse de que tu código de el resultado que esperas. Estos son pequeños avances de un principio de <b>seguridad</b> que prevalece a través de Rust. Este compilador pretende asegurarse de que tu código hace lo que esperas. A continuación echaremos un vistazo a algunos viejos conocidos: <code>if</code> y <code>for</code>.</p>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>

@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Kapitel 2 Fazit</title>
+        <title>Tour zu Rust - Strukturen</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,15 +28,19 @@
                 <span class="title"><a href="00_de.html">Tour zu Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
-                <span class="back"><a href="beta_20_de.html">Zurück</a></span>
-                <span class="next"><a href="beta_chapter_3_de.html">Weiter</a></span>
+                <span class="back"><a href="beta_chapter_3_de.html">Zurück</a></span>
+                <span class="next"><a href="beta_22_de.html">Weiter</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Kapitel 2 Fazit</h1>
-            <p>Was? Das war's schon?</p><p>Keine Bange, es gibt noch viel zu erforschen! Insbesondere <code>match</code> wurde hier außer Acht gelassen, das viele mächtige Features beinhaltet, dementsprechend aber auch etwas mehr Hintergrundwissen erfordert.</p><p>Im nächsten Kapitel werden wir uns dafür ein bisschen in die Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?</p>
+            <h1>Strukturen</h1>
+            <p>Ein <code>struct</code> (dt. "Struktur") ist eine Ansammlung von fields (dt. Feldern).</p>
+<p>Ein <em>field</em> ist ein Wert, der mit einer Datenstruktur assoziiert wird. Dies kann ein primitiver Datentyp oder ein weiteres <code>struct</code> sein.</p>
+<p>Die Definition eines structs ist wie ein Entwurf für den Compiler, der ihm besagt, welche Felder im Speicher zueinander gehören.</p>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
     <script src="tour.js"></script>

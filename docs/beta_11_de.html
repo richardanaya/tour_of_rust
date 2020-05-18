@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Basistypen konvertieren</title>
+        <title>Tour zu Rust - Kapitel 1 Fazit</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -29,16 +29,14 @@
                 <span class="nav">
                 <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
                 <span class="back"><a href="beta_10_de.html">Zurück</a></span>
-                <span class="next"><a href="beta_12_de.html">Weiter</a></span>
+                <span class="next"><a href="beta_chapter_2_de.html">Weiter</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Basistypen konvertieren</h1>
-            <p>Rust vordert explizite Konvertierungen, wenn es um Zahlentypen geht. Ein <code>u8</code> (8-bit unsigned integer) kann nicht mit einem <code>u32</code> locker aus dem Handgelenk zusammengerechnet werden ohne das Programm zum Absturz zu bringen.</p><p>Glücklicherweise ist auf die Konvertierung mit dem <code>as</code> Schlüsselwort Verlass.</p>
+            <h1>Kapitel 1 Fazit</h1>
+            <p>Puh! Das wäre schon mal geschafft! War nicht so übel, oder? Wir wissen schon ein wenig, wie der Compiler denkt. Er setzt viel Wert auf Speichermanagement, wie groß Variablen sind, ob diese "mutable" sind oder nicht, und ob du garantiert weißt, welche Datentypen zusammenaddiert werden. Das sind erste kleine Einblicke in die <b>Sicherheit</b>, die sich durch die gesamte Rustsprache hindurchzieht - nicht unbedingt die Sicherheit des Systems, aber die Sicherheit, dass du weißt, was du tust.</p><p>Im nächsten Kapitel werden wir uns mit den altbekannten Datenkontrollstrukturen <code>if</code> und <code>for</code> Schleifen beschäftigen! Worauf wartest du noch!</p>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>

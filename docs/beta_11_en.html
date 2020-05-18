@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Basic Type Conversion</title>
+        <title>Tour of Rust - Chapter 1 Conclusion</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -29,19 +29,20 @@
                 <span class="nav">
                 <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
                 <span class="back"><a href="beta_10_en.html">Previous</a></span>
-                <span class="next"><a href="beta_12_en.html">Next</a></span>
+                <span class="next"><a href="beta_chapter_2_en.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Basic Type Conversion</h1>
-            <p>Rust requires explicitness when it comes to numeric types. One cannot
-use a <code>u8</code> for a <code>u32</code> casually without
-error.</p>
-<p>Luckily rust makes numeric type conversions very easy with the <strong>as</strong> keyword.</p>
+            <h1>Chapter 1 Conclusion</h1>
+            <p>Nice job so far! The basics of Rust aren't so bad, right?  We're
+getting a peek into how the Rust compiler thinks.  It cares a lot about the size
+of values in memory, whether things can be modified or not, and making sure your
+math is what you want it to be. These are small previews of a principle of <strong>safety</strong>
+that is prevalent through Rust. The compiler just wants to make sure your code
+does what it expects! Next up we'll be looking at some old friends <code>if</code>
+and <code>for</code> loops.</p>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>
