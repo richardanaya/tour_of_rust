@@ -1161,26 +1161,6 @@ pages:
         Определение структуры - это как чертеж для компилятора, который указывает на то, как поля должны быть расположены в памяти.
 
         Поля в структуре расположены в памяти один за другим (компилятор может менять их местами для оптимизаций).
-  - en:
-      title: Structure Visibility
-      content_markdown: |
-        Just like functions structures can declare what they want exposed outside of their module using `pub`.
-
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
-    de:
-      title: Struktursichtbarkeit
-      content_markdown: |
-        Genau wie bei Modulen kann in Strukturen angegeben werden, welche Felder nach außen hin sichtbar sein sollen.
-        Diese sind wieder mit dem Schlüsselwort `pub` versehen.
-    ie:
-      title: Visibilitá de Structuras
-      content_markdown: |
-        Just quam functiones, structuras posse usar `pub` por declarar to quo ili desira esser exposit éxter su modul.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Li%20struct%20CreaturaMarin%20va%20esser%20usabil%20%C3%A9xter%20nor%20modul%0Apub%20struct%20CreaturaMarin%20%7B%0A%20%20%20%20%2F%2F%20String%20es%20un%20struct%0A%20%20%20%20pub%20tip_de_animale%3A%20String%2C%0A%20%20%20%20pub%20nomine%3A%20String%2C%0A%20%20%20%20pub%20brasses%3A%20i32%2C%0A%20%20%20%20pub%20jambes%3A%20i32%2C%0A%20%20%20%20%2F%2F%20ma%20noi%20vole%20que%20li%20arme%20mey%20esser%20privat%0A%20%20%20%20arme%3A%20String%2C%0A%7D
-    ru:
-      title: Область видимости структур
-      content_markdown: |
-        Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
   - beta: true
     en:
       title: Calling Methods
@@ -1861,3 +1841,24 @@ pages:
         se utiliza un módulo dentro de su propio código o en un crate externo, sólo se
         permiten referencias a aquellos elementos que hayan sido marcados como públicos.</p><p>El código en este ejemplo
         da error, añade la palabra reservada <b>pub</b> en el lugar apropiado para arreglarlo.</p>"
+  - beta: true
+    en:
+      title: Structure Visibility
+      content_markdown: |
+        Just like functions structures can declare what they want exposed outside of their module using `pub`.
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+    de:
+      title: Struktursichtbarkeit
+      content_markdown: |
+        Genau wie bei Modulen kann in Strukturen angegeben werden, welche Felder nach außen hin sichtbar sein sollen.
+        Diese sind wieder mit dem Schlüsselwort `pub` versehen.
+    ie:
+      title: Visibilitá de Structuras
+      content_markdown: |
+        Just quam functiones, structuras posse usar `pub` por declarar to quo ili desira esser exposit éxter su modul.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Li%20struct%20CreaturaMarin%20va%20esser%20usabil%20%C3%A9xter%20nor%20modul%0Apub%20struct%20CreaturaMarin%20%7B%0A%20%20%20%20%2F%2F%20String%20es%20un%20struct%0A%20%20%20%20pub%20tip_de_animale%3A%20String%2C%0A%20%20%20%20pub%20nomine%3A%20String%2C%0A%20%20%20%20pub%20brasses%3A%20i32%2C%0A%20%20%20%20pub%20jambes%3A%20i32%2C%0A%20%20%20%20%2F%2F%20ma%20noi%20vole%20que%20li%20arme%20mey%20esser%20privat%0A%20%20%20%20arme%3A%20String%2C%0A%7D
+    ru:
+      title: Область видимости структур
+      content_markdown: |
+        Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
