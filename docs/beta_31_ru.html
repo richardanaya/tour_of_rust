@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Тур по Rust - Експорт</title>
+        <title>Тур по Rust - Экспорт</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,12 +33,13 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Експорт</h1>
-            <p>В Rust мы экспортируем элементы модуля, используя ключевое слово <strong>pub</strong>.</p>
-<p>Используя модуль внутри вашего кода или во внешнем крейте, вы
-можете получить доступ только к элементам, что были помечены публичными.</p>
-<p>Код в этом примере не работает, добавьте ключевое слово <strong>pub</strong> в нужном месте,
-чтобы пример успешно скомпилировался.</p>
+            <h1>Экспорт</h1>
+            <p>По умолчанию элементы модуля недоступны вне этого модуля. Их можно сделать "видимыми" или 
+доступными, используя ключевое слово <code>pub</code>.</p>
+<p>Также элементы крейта(crate) недоступны по умолчанию вне этого крейта. Но их можно 
+сделать доступными ключевым словом <code>pub</code> в <strong>корневом модуле</strong> крейта (<code>lib.rs</code> или <code>main.rs</code>).</p>
+<p>Мы поговорим о модулях в деталях позже, сейчас знайте, что <code>pub</code> контролирует видимость
+функций или структур данных.</p>
             </div>
             <div class="code">
             <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
