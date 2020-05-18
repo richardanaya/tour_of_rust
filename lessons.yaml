@@ -1716,25 +1716,9 @@ pages:
   - beta: true
     chapter: 6
     en:
-      title: Chapter 6 - Project Structure and Organization
-      content: |
+      title: Chapter 6 - Project Organization and Structure
+      content_markdown: |
         So far all of our code examples have been a single file. Let's discuss how our code structures and functions can be organized and shared others!
-    de:
-      title: Chapter 6 - Project Structure and Organization
-      content: |
-        Needs translation.
-    ie:
-      title: Chapter 6 - Project Structure and Organization
-      content: |
-        Needs translation.
-    ru:
-      title: Chapter 6 - Project Structure and Organization
-      content: |
-        Needs translation.
-    es:
-      title: Chapter 6 - Project Structure and Organization
-      content: |
-        Needs translation.
   - beta: true
     en:
       title: Modules
