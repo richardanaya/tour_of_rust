@@ -1718,7 +1718,7 @@ pages:
     en:
       title: Chapter 6 - Project Structure and Organization
       content: |
-        So far all of our code examples have been a single file. Let's discuss our code structures and functions are organized and shared others!
+        So far all of our code examples have been a single file. Let's discuss how our code structures and functions can be organized and shared others!
     de:
       title: Chapter 6 - Project Structure and Organization
       content: |
