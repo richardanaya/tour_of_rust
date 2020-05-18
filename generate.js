@@ -19,7 +19,7 @@ function titleClean(title){
     return title;
 }
 
-function template(lang,title,code,content,index,isLast, words, is_beta){
+function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
     return `<html lang="${lang}">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -47,11 +47,11 @@ function template(lang,title,code,content,index,isLast, words, is_beta){
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="${getFileName(lang,0)}">${getWord(words,lang,"tor")}</a></span>
+                <span class="title"><a href="${getFileName(lang,0,is_beta,lessons[0].chapter)}">${getWord(words,lang,"tor")}</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
-                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1)}">${getWord(words,lang,"previous")}</a></span>`:""}
-                <span class="next"><a href="${is_beta?"beta_":""}${!isLast?getFileName(lang,index+1):`end_${lang}.html`}">${getWord(words,lang,"next")}</a></span>
+                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}">${getWord(words,lang,"previous")}</a></span>`:""}
+                <span class="next"><a href="${is_beta?"beta_":""}${!isLast?getFileName(lang,index+1,is_beta,!isLast?lessons[index+1].chapter:undefined):`end_${lang}.html`}">${getWord(words,lang,"next")}</a></span>
                 </span>
             </div>
             <div class="page">
@@ -72,7 +72,7 @@ function pad(num, size) {
     return s.padStart(2, '0')
 }
 
-function getFileName(lang,i,is_beta){
+function getFileName(lang,i,is_beta,chapter){
     let fileName = pad(i,2)+`_${lang}.html`;
     if(i==0 && !is_beta){
         if(lang == "en"){
@@ -80,6 +80,9 @@ function getFileName(lang,i,is_beta){
         } else {
             fileName = `index_${lang}.html`
         }
+    }
+    if(chapter !== undefined){
+        fileName = `chapter_${chapter}_${lang}.html`
     }
     return fileName;
 }
@@ -106,27 +109,27 @@ for(var l in languages){
         return x[lang]["content_html"] || x[lang]["content_markdown"];
     });
     for(var i in langLessons){
-        let fileName = getFileName(lang,i);
-       
         let lesson = langLessons[i];
+        let fileName = getFileName(lang,i,false,lesson.chapter);
+       
         let content = lesson[lang]["content_html"];
         if(!content){
             content = converter.makeHtml(lesson[lang]["content_markdown"]);
         }
-        fs.writeFileSync("docs/"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words,false))
+        fs.writeFileSync("docs/"+fileName, template(langLessons, lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words,false))
         c++;
     }
     c = 0;
     for(var i in betaLessons){
         let lesson = betaLessons[i];
         if(lesson[lang]){
-            let fileName = getFileName(lang,i,true);
+            let fileName = getFileName(lang,i,true,lesson.chapter);
        
             let content = lesson[lang]["content_html"];
             if(!content){
                 content = converter.makeHtml(lesson[lang]["content_markdown"]);
             }
-            fs.writeFileSync("docs/beta_"+fileName, template(lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==betaLessons.length-1,words,true))
+            fs.writeFileSync("docs/beta_"+fileName, template(betaLessons, lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==betaLessons.length-1,words,true))
             c++;
         }
     }
@@ -140,7 +143,7 @@ for(var l in languages){
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-155199982-1');
+        gtag('config', 'UA-1 55199982-1');
         </script>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
@@ -166,7 +169,7 @@ for(var l in languages){
             <p>
             <ul>
         ${langLessons.map((x,i)=> {
-            let s = `<li><a href="${getFileName(lang,i)}">${x[lang]["title"]}</a></li>`;
+            let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]["title"]}</a></li>`;
             if(x.chapter != undefined){
                 s = `</ul><h3>${getWord(words,lang,"chapter")} ${x.chapter}</h3><ul>` + s;
             }
