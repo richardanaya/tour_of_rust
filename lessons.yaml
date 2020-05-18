@@ -456,16 +456,15 @@ pages:
       title: Changing values
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
       content_markdown: |
-        Rust cares a great deal about what values are modified. Values
+        Rust cares a great deal about what variables are modifiable. Values
         fall into two types:
 
-        * **mutable** - the location in memory can be written to and read
+        * **mutable** - the location in memory can be written to and read from
         * **immutable** - the location in memory can only be read
 
-        Mutable values are always denoted with a **mut** keywordc in some manner
+        Mutable values are denoted with a **mut** keyword.
 
-        We will have a lot more to say on this concept, but for now
-        just keep an eye out for this keyword for what things can be modified
+        We will have more to say on this concept later, but for now just keep an eye out for this keyword.
     de:
       title: Variablenwerte ändern
       content_html:
