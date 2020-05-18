@@ -40,7 +40,13 @@ Lastly, there is a section for common words you should fill out your localized t
 
 # Releases
 
-## Unreleased
+## Release 3 - Unreleased
+* Chapter 4 
+* Spanish for Chapter 2
+
+## Release 2 - May 16, 2020
+* Deutsch, English, Interlingue, Русский translations for chapter 2
+* Spanish for chapter 1
 * New markdown formatting for pages
 
 ## Release 1 - May 10 2020
