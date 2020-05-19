@@ -1677,7 +1677,7 @@ pages:
     en:
       title: Vectors
       content_markdown: |
-        Some of the most useful generic types are collection types. A vector is a dynamically sized list of items
+        Some of the most useful generic types are collection types. A vector is a variably sized list of items
         represented by the struct `Vec`.
 
         The macro `vec!` lets us easily create a vector rather than manually constructing one.
