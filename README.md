@@ -16,10 +16,11 @@ This project is meant to give an experienced programmer a swift introduction to 
 * Chapter 8 - Smart Pointers
 * Chapter 9 - Project Organization and Structure
 
-Chapter 1-4 should give you a strong taste of Rust's aesthetic
-Chapter 1-6 should give a a person from C a good idea how their ideas translate
-Chapter 1-8 should give a a person from C++ a good idea how their ideas translate
-Chapter 9+ should talk about Rust specific concepts that doesn't fit well into the above
+Content goals:
+* Chapter 1-4 should give you a strong taste of Rust's aesthetic
+* Chapter 1-6 should give a a person from C a good idea how their ideas translate
+* Chapter 1-8 should give a a person from C++ a good idea how their ideas translate
+* Chapter 9+ should talk about Rust specific concepts that doesn't fit well into the above
 
 This project also aims to provide this book in as many languages as possible.
 
