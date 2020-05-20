@@ -220,7 +220,7 @@ pages:
       content_markdown: |
         Rust has a variety of familiar types 
         * booleans - `bool` for representing true/false
-        & unsigned integers - `u8` `u32` `u64` `u128` for representing positive whole numbers
+        * unsigned integers - `u8` `u32` `u64` `u128` for representing positive whole numbers
         * signed integers - `i8` `i32` `i64` `i128` for representing positive/negative whole numbers
         * pointer sized integers - `usize` `isize` for representing indexes
         and sizes of things in memory
