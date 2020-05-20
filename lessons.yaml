@@ -225,7 +225,6 @@ pages:
         * pointer sized integers - `usize` `isize` for representing indexes
         and sizes of things in memory
         * floating point - `f32` `f64`
-        * text related - `str` `char`
         * tuple - `(value, value, ...)` for passing fixed sequences of values on the stack
         * arrays - a collection of similar elements with fixed length known at compile time
         * slices - a collection of similar elements with length known at runtime
