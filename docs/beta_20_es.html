@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour de Rust - Módulos</title>
+        <title>Tour de Rust - Capítulo 2 - Conclusión</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,13 +33,10 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Módulos</h1>
-            <p>Cada programa o librería en Rust es un <b>crate</b>.</p><p>Cada crate está compuesto por una jerarquía de <b>módulos</b>.</p><p>Los programas comienzan su ejecución en el módulo raíz de un crate en la función <code>main()</code> en un fichero llamado `main.rs`.<p></p><p>Las librerías tienen un módulo raíz en el archivo `lib.rs` que proporciona elementos útiles.</p><p>Para evitar escribir rutas completas como <code>std::f64::consts::PI</code>. La palabra reservada <b>use</b> nos permite especificar qué elementos de los módulos queremos usar en nuestro código sin especificar una ruta completa. Por ejemplo, el uso de <code>use std::f64::consts::PI</code> me permite referenciar el valor de <code>PI</code> en mi función principal.</p><p><b>std</b> es el crate de la <b>librería estándar</b> de Rust que contiene estructuras de datos y funciones útiles para interactuar con tu sistema operativo.</p><p>Aquí encontrarás un repositorio de crates creado por la comunidad Rust: <a href="https://crates.io/">https://crates.io</a></p>
-
+            <h1>Capítulo 2 - Conclusión</h1>
+            <p>Con esto ya hemos echado un vistazo a las características más básicas del lenguaje Rust. Hablaremos de <code>for</code> y <code>match</code> en más profundidad a medida que aumentemos nuestro conocimiento sobre cómo aplicar sus capacidades. Lo siguiente será adentrarnos en las estructuras de datos fundamentales de Rust.</p>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%22)%3B%0A%20%20%20%20println!(%22%C2%A1Quiero%20un%20trozo%20de%20%7B%7Dzza!%22%2C%20PI)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>

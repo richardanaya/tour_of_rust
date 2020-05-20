@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Kapitel 2 Fazit</title>
+        <title>Tour zu Rust - Rückgabewerte aus Blockausdrücken</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -29,14 +29,16 @@
                 <span class="nav">
                 <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
                 <span class="back"><a href="beta_18_de.html">Zurück</a></span>
-                <span class="next"><a href="beta_chapter_3_de.html">Weiter</a></span>
+                <span class="next"><a href="beta_20_de.html">Weiter</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Kapitel 2 Fazit</h1>
-            <p>Was? Das war's schon?</p><p>Keine Bange, es gibt noch viel zu erforschen! Insbesondere <code>match</code> wurde hier außer Acht gelassen, das viele mächtige Features beinhaltet, dementsprechend aber auch etwas mehr Hintergrundwissen erfordert.</p><p>Im nächsten Kapitel werden wir uns dafür ein bisschen in die Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?</p>
+            <h1>Rückgabewerte aus Blockausdrücken</h1>
+            <p>Als <b>Block</b> wird in Rust ein Codestück zwischen zwei geschweiften Klammern bezeichnet (<code>{ /* code block */ }</code>).</p><p>Hier ist eine Besonderheit in Rust: Blockausdrücke, die in <code>if</code>,<code>loop</code>, Funktionen etc. zu finden sind, können Werte zurückgeben (return).</p><p><code>loop</code> kann mittels <code>break</code> den Wert returnen.</p><p>Noch etwas idiomatisches in Rust: wenn die letzte Zeile in einem solchen Codeblock ein Ausdruck (expression) ohne <code>;</code> am Ende ist, interpretiert Rust dies als den Rückgabewert.</p><p>Für Leute, die ein Fan von ternary Operatoren sind und das Fragezeichensymbol in Rust vermissen, <code>if</code> Statements bilden dazu die Alternative.</p>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%2213%20gefunden!%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22aus%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20food%20%3D%20%22nutella%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22nutella%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22ist%20nutella%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22nein%2C%20das%20ist%20keine%20nutella%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Essen%20identifizieren%3A%20%7B%7D%22%2C%20%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22aus%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
     <script src="tour.js"></script>

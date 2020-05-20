@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour de Rust - Conversión de tipos básica</title>
+        <title>Tour de Rust - Múltiples variables de retorno</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,11 +33,11 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Conversión de tipos básica</h1>
-            <p>Rust requiere ser explícito cuando se trata de tipos numéricos. No se puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que se produzca un error.</p><p>Por suerte, Rust hace que las conversiones de tipos numéricos sean muy fáciles con la palabra reservada <b>as</b>.</p>
+            <h1>Múltiples variables de retorno</h1>
+            <p>Las funciones pueden devolver múltiples valores utilizando una <b>tupla</b> de valores.</p><p>Los valores se pueden referenciar por su posición en la tupla.</p><p>Rust soporta varios modos de desestructuración que veremos en diferentes formas, esto nos permite extraer subconjuntos de estructuras de datos de manera práctica. ¡Presta mucha atención!</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20intercambiar(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Devuelve%20una%20tupla%20de%20valores%0A%20%20%20%20let%20result%20%3D%20intercambiar(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20Desestructura%20la%20tupla%20en%20dos%20variables%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20intercambiar(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

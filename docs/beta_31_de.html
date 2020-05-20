@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Export</title>
+        <title>Tour zu Rust - Module</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,16 +33,11 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Export</h1>
-            <p>Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch zugänglich.
-Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das <code>pub</code> Schlüsselwort <em>exportiert</em> werden.</p>
-<p>Die Inhalte einer Kiste (crate) sind ebenfalls außerhalb des Crates nicht automatisch zugänglich.
-Die zu exportierenden Teile werden im <em>root Modul</em> (<code>lib.rs</code> oder <code>main.rs</code>) durch das <code>pub</code> Schlüsselwort exportiert.</p>
-<p>Mehr dazu später, für jetzt reicht es zu wissen, dass durch <code>pub</code> die Sichtbarkeit
-von Funktionen und Attributen gesteuert werden kann.</p>
+            <h1>Module</h1>
+            <p>Jedes Programm bzw. jede Bibliothek in Rust ist ein <b>crate</b> (Kiste).</p><p>Jedes crate besteht aus einer hierarchischen Ansammlung von <b>modules</b>.</p><p>Programme werden aus einem root module (Wurzelelement) eines crates gestartet, Startpunkt bildet hierbei die Funktion <code>main()</code> in einer Datei namens `main.rs`.<p></p><p>Bibliotheken haben ein root module in der Datei `lib.rs` und exportieren nützliche Elemente.</p><p>Um komplette Namespaces wie <code>std::f64::consts::PI</code> nicht austippen zu müssen, wurde das <b>use</b> Schlüsselwort eingeführt. Beispielsweise erlaubt <code>use std::f64::consts::PI</code> uns den Identifier <code>PI</code> in der main-Funktion einfach zu verwenden.</p><p><b>std</b> ist das crate der <b>Standardbibliothek</b> von Rust, das allerlei nützliche Datenstrukturen und Funktionen beinhalten, durch welche wir mit dem Betriebssystem kommunizieren können.</p><p>Die Fanbase von Rust hält die Seite <a href="https://crates.io/">https://crates.io</a> am Laufen, auf der es sämtliche crates im Überblick zu finden gibt.</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>
