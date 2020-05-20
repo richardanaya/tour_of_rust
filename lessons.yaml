@@ -1734,7 +1734,19 @@ pages:
   - beta: true
     chapter: 6
     en:
-      title: Chapter 6 - Project Organization and Structure
+      title: Chapter 6 - Text
+      content_markdown: |
+        TODO
+  - beta: true
+    chapter: 7
+    en:
+      title: Chapter 7 - Object Oriented Programming
+      content_markdown: |
+        TODO
+  - beta: true
+    chapter: 8
+    en:
+      title: Chapter 8 - Project Organization and Structure
       content_markdown: |
         So far all of our code examples have been a single file. Let's discuss how our code structures and functions can be organized and shared others!
   - beta: true
