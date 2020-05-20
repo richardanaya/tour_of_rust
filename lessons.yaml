@@ -220,15 +220,16 @@ pages:
       content_markdown: |
         Rust has a variety of familiar types 
         * booleans - `bool` for representing true/false
-        & unsigned integers - `u8``u32``u64``u128` for representing positive whole numbers
-        * signed integers - `i8``i32``i64``i128` for representing positive/negative whole numbers
-        * pointer sized integers - `usize``isize` for representing indexes
+        & unsigned integers - `u8` `u32` `u64` `u128` for representing positive whole numbers
+        * signed integers - `i8` `i32` `i64` `i128` for representing positive/negative whole numbers
+        * pointer sized integers - `usize` `isize` for representing indexes
         and sizes of things in memory
-        * floating point - `f32``f64`
-        * text related - `str``char`
-        * tuple - `(value,value,...)` for passing fixed sequences of values on the stack
-        * slices - `&[T]` for referencing views into
-        sequences of values in memory
+        * floating point - `f32` `f64`
+        * text related - `str` `char`
+        * tuple - `(value, value, ...)` for passing fixed sequences of values on the stack
+        * arrays - a collection of similar elements with fixed length known at compile time
+        * slices - a collection of similar elements with length known at runtime
+        * `str`/string slice - text with a length known at runtime
 
         We will be talking about a few of these in detail later.
 
@@ -414,6 +415,32 @@ pages:
         identificador de texto (donde se haya usado) por su valor en tiempo de compilación.</p>
         <p>A diferencia de las variables, el tipo de las constantes se debe especificar explícitamente.</p>
         <p>Los nombres de las constantes se escriben siempre en <code>SCREAMING_SNAKE_CASE</code></p>"
+  - beta: true
+    en:
+      title: Arrays
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%20%3D%20%5B1%2C%202%2C%203%5D%3B%20%2F%2F%20type%20is%20%5Bi32%2C3%5D%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+      content_markdown: |
+        An *array* is a fixed length collection of data elements all of the same type.
+
+        The data type for an *array* is `[T;N]` where T is the elements' type, and N is the fixed length known at compile-time.
+
+        Individual elements can be retrieved with `[x]` operator where *x* is a *usize* index (starting at 0) of the element you want.
+    de:
+      title: Arrays
+      content_markdown: |
+        Need translation
+    ie:
+      title: Arrays
+      content_markdown: |
+        Need translation
+    ru:
+      title: Arrays
+      content_markdown: 
+        Need translation
+    es:
+      title: Arrays
+      content_markdown: |
+        Need translation
   - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
