@@ -1723,8 +1723,7 @@ pages:
         In one chapter we've learned how much power generic types give us! Don't worry if you don't 
         know fully how to use everything, right now it's just good to be aware of the major ideas you will
         see again and again in code. Our functions are getting quite lengthy! In our next chapter we will 
-        spend a whole chapter to discuss passing data between functions so we can break 
-        things down and get some insights into how Rust sees memory.
+        spend talk about an important concept in Rust: data ownership.
   - beta: true
     chapter: 5
     en:
@@ -1744,9 +1743,15 @@ pages:
       content_markdown: |
         TODO
   - beta: true
-    chapter: 8
+    chapter: 7
     en:
-      title: Chapter 8 - Project Organization and Structure
+      title: Chapter 8 - Smart Pointers
+      content_markdown: |
+        TODO
+  - beta: true
+    chapter: 9
+    en:
+      title: Chapter 9 - Project Organization and Structure
       content_markdown: |
         So far all of our code examples have been a single file. Let's discuss how our code structures and functions can be organized and shared others!
   - beta: true
