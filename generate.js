@@ -51,7 +51,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
                 ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}">${getWord(words,lang,"previous")}</a></span>`:""}
-                <span class="next"><a href="${is_beta?"beta_":""}${!isLast?getFileName(lang,index+1,is_beta,!isLast?lessons[index+1].chapter:undefined):`end_${lang}.html`}">${getWord(words,lang,"next")}</a></span>
+                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}">${getWord(words,lang,"next")}</a></span>`}
                 </span>
             </div>
             <div class="page">
@@ -177,48 +177,6 @@ for(var l in languages){
         }).join("\n")}
             <ul>
             </p>
-        </div>
-    </body>
-    <script src="tour.js"></script>
-    </html>`)
-    fileName = `end_${lang}.html`;
-    fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-155199982-1');
-        </script>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <meta content="utf-8" http-equiv="encoding">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>${getWord(words,lang,"tor")}- The End</title>
-        <link rel="stylesheet" href="tour.css">
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
-    </head>
-    <body>
-        <div class="tour">
-            <div class="header">
-                <span class="title"><a href="${getFileName(lang,0)}">${getWord(words,lang,"tor")}</a></span>
-                <span class="nav">
-                <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
-                <span class="back"><a href="${getFileName(lang,langLessons.length-1)}">${getWord(words,lang,"previous")}</a></span>
-                </span>
-            </div>
-            <div class="page">
-            <h1>The End</h1>
-            <p>That's all for now. Stay tuned for new chapters. I hope you enjoy the journey ahead!</p>
-            </div>
         </div>
     </body>
     <script src="tour.js"></script>
