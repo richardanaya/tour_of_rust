@@ -481,7 +481,7 @@ pages:
         <p>Los nombres de las funciones se escriben siempre en <code>snake_case</code></p>"
   - en:
       title: Variables
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
       content_markdown: |
         Variables are declared using the **let** keyword.
 
@@ -505,7 +505,7 @@ pages:
         werden ebenfalls in <code>snake_case</code> geschrieben.</p>
     ie:
       title: Variables
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%2F%2F%20rust%20infere%20li%20tip%20de%20x%0A%20%20let%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20specificar%20li%20tip%20explicitmen%0A%20%20let%20x%3Af64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20declarar%20in%20prim%2C%20poy%20inicialisar%2C%20ma%20ti-ci%20metode%0A%20%20%2F%2F%20es%20rarmen%20usat%0A%20%20let%20x%3B%0A%20%20x%20%3D%200%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%2F%2F%20rust%20infere%20li%20tip%20de%20x%0A%20%20let%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20specificar%20li%20tip%20explicitmen%0A%20%20let%20x%3Af64%20%3D%203.14159%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20declarar%20in%20prim%2C%20poy%20inicialisar%2C%20ma%20ti-ci%20metode%0A%20%20%2F%2F%20es%20rarmen%20usat%0A%20%20let%20x%3B%0A%20%20x%20%3D%200%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
       content_html:
         ' <p>On declara variabiles con li clave-parol <b>let</b>.</p><p>Quande
         on assigna un valore, Rust va posser inferer li tip del variabile con un certitá
@@ -529,7 +529,7 @@ pages:
         Название переменных всегда `snake_case`
     es:
       title: Variables
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20deduce%20el%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20ser%20expl%C3%ADcito%20con%20el%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20declarar%20primero%20e%20inicializar%20despu%C3%A9s%2C%20pero%20es%20poco%20com%C3%BAn%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20deduce%20el%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20ser%20expl%C3%ADcito%20con%20el%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20declarar%20primero%20e%20inicializar%20despu%C3%A9s%2C%20pero%20es%20poco%20com%C3%BAn%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
       content_html:
         " <p>Para declarar variables usaremos la palabra reservada <b>let</b></p><p>Al
         asignar un valor, Rust podrá deducir el tipo de la variable el 99% de las veces.
