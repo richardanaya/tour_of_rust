@@ -171,7 +171,7 @@ for(var l in languages){
         ${langLessons.map((x,i)=> {
             let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]["title"]}</a></li>`;
             if(x.chapter != undefined){
-                s = `</ul><h3>${getWord(words,lang,"chapter")} ${x.chapter}</h3><ul>` + s;
+                s = `</ul><h3><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]["title"]}</a></h3><ul>`;
             }
             return s;
         }).join("\n")}
