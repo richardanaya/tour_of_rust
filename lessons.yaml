@@ -228,7 +228,7 @@ pages:
         * tuple - `(value, value, ...)` for passing fixed sequences of values on the stack
         * arrays - a collection of similar elements with fixed length known at compile time
         * slices - a collection of similar elements with length known at runtime
-        * `str`/string slice - text with a length known at runtime
+        * `str`(string slice) - text with a length known at runtime
 
         We will be talking about a few of these in detail later.
 
