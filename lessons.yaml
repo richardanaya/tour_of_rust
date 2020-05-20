@@ -215,6 +215,120 @@ pages:
         <p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
         </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>
   - en:
+      title: Variables
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        Variables are declared using the **let** keyword.
+
+        When assigning a value, Rust will be able to infer the type of your variable 99% of
+        the time. If it cannot you may add the type to your variable declaration.
+
+        Notice how we can assign to the same variable name multiple times. This is called variable
+        shadowing and the type can be changed for subsequent references to that name.
+
+        Variable names are always in `snake_case`
+    de:
+      title: Variablen
+      content_html: <p>Variablen werden mit dem Schlüsselwort <code>let</code>
+        deklariert.</p><p>Im Regelfall sollte man Rust die Entscheidung überlassen, um
+        welchen Datentypen es sich handelt. In Sonderfällen kann der Typ explizit angegeben
+        werden.</p><p>Huch, was ist denn bei dem Beispiel los? Die Variable <code>x</code>
+        wird mehrmals deklariert?</p><p>Das ist kein Fehler - Rust erlaubt sogenanntes
+        <b>variable shadowing</b> (Variable überschatten). Bei Neudeklaration "verfällt"
+        die vorige Deklaration und wir können mit der Variable arbeiten, als ob es sie
+        davor noch nie gegeben hätte. Der Datentyp darf sich dabei auch ändern.</p><p>Variablennamen
+        werden ebenfalls in <code>snake_case</code> geschrieben.</p>
+    ie:
+      title: Variables
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%2F%2F%20rust%20infere%20li%20tip%20de%20x%0A%20%20let%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20specificar%20li%20tip%20explicitmen%0A%20%20let%20x%3Af64%20%3D%203.14159%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20declarar%20in%20prim%2C%20poy%20inicialisar%2C%20ma%20ti-ci%20metode%0A%20%20%2F%2F%20es%20rarmen%20usat%0A%20%20let%20x%3B%0A%20%20x%20%3D%200%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
+      content_html:
+        ' <p>On declara variabiles con li clave-parol <b>let</b>.</p><p>Quande
+        on assigna un valore, Rust va posser inferer li tip del variabile con un certitá
+        de 99%. Si it ne posse, tu posse adjunter li tip al declaration por li variabile.</p><p>A
+        notar es qualmen noi posse assignar li sam nómine por un variabile plu quam un
+        vez. Ti-ci metode es nominat variable shadowing ("variabil-ombration") in quel
+        li tip va posser changear se por referenties sequent por ti nómine.</b></p><p>Nómines
+        por variabiles sempre usa <code>snake_case</code> (minuscules con infra-strecs)</p>'
+    ru:
+      title: Переменные
+      content_markdown: |
+        Переменные объявляются с помощью ключевого слова **let**.
+
+        Когда ей присваивается значение, Rust в состоянии вывести тип переменной в 99% случаях.
+        Если вывод невозможен, вы можете добавить тип в объявлении переменной.
+
+        Заметьте, как мы можем присвоить значение одной и той же переменной несколько раз. Это называется
+        сокрытие переменной (variable shadowing), её тип может быть изменен в последующих
+        присваиваниях.
+
+        Название переменных всегда `snake_case`
+    es:
+      title: Variables
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20deduce%20el%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20ser%20expl%C3%ADcito%20con%20el%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20declarar%20primero%20e%20inicializar%20despu%C3%A9s%2C%20pero%20es%20poco%20com%C3%BAn%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_html:
+        " <p>Para declarar variables usaremos la palabra reservada <b>let</b></p><p>Al
+        asignar un valor, Rust podrá deducir el tipo de la variable el 99% de las veces.
+        Si no puede, tú mismo podrás especificar el tipo al declarar una variable.</p><p>Fíjate
+        en cómo podemos declarar variables con el mismo nombre varias veces. Esto se llama
+        sombreado <i>(shadowing)</i> de variables y se puede modificar el tipo para futuras referencias a ese nombre.</b></p>
+        <p>Los nombres de las variables se escriben siempre en <code>snake_case</code></p>"
+  - en:
+      title: Changing Variables
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        Rust cares a great deal about what variables are modifiable. Values
+        fall into two types:
+
+        * **mutable** - the location in memory can be written to and read from
+        * **immutable** - the location in memory can only be read
+
+        Mutable values are denoted with a **mut** keyword.
+
+        We will have more to say on this concept later, but for now just keep an eye out for this keyword.
+    de:
+      title: Variablenwerte ändern
+      content_html:
+        ' <p>Rust sorgt sich sehr darum, welche Variablen verändert werden können
+        und welche nicht. Daher gibt es die folgende Unterscheidung:</p><ul><li><b>mutable</b>
+        - der Speicherort der Variable kann beschrieben und gelesen werden</li><li><b>immutable</b>
+        - der Speicherort der Variable kann nur gelesen werden</li></ul><p>Variablen,
+        die verändert werden können, werden mit einem extra <code>mut</code>
+        Schlüsselwort gekennzeichnet.</p><p>Auf dieses Konzept wird im späteren Verlauf
+        noch mehr eingegangen, für jetzt ist es wichtig zu wissen, dass "mutable" Variablen
+        beschrieben werden können.</p>'
+    ie:
+      title: Changear valores
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%20%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
+      content_html:
+        " <p>Rust sucia se mult pri li valores queles es modificat. Valores
+        possede du tipes:</p><ul><li><b>mutabil</b> - li loc in memorie posse esser inscrit
+        e leet</li><li><b>ínmutabil</b> - li loc in memorie posse esser solmen leet</li></ul><p>On
+        denota sempre li valores mutabil con li clave-parol <b>mut</b></p><p>Pri to noi
+        va parlar plu con detallies, ma por li momente ples solmen atenter pri ti-ci parol-clave
+        quel monstra que un cose es modificabil</p>"
+    ru:
+      title: Изменение переменных
+      content_markdown: |
+        Rust уделяет много внимания тому, какие значения могут быть изменены.
+        Значения (переменные) делятся на два типа:
+
+        * **mutable** - область памяти, в которую можно записать и считать
+        * **immutable** - область памяти, с которой можно только считать
+
+        Mutable значения всегда каким-то образом обозначены с помощью ключевого слова **mut**.
+
+        Мы поговорим об этом позже, сейчас просто следите за этим ключевым словом и тем, какие элементы
+        могут быть изменены.
+    es:
+      title: Modificar valores
+      content_html:
+        " <p>En Rust es importante tener en cuenta qué valores se modifican. Los valores
+        se dividen en dos tipos:</p><ul><li><b>mutables</b> - la ubicación en memoria
+        puede ser escrita y leída</li><li><b>inmutables</b> - la ubicación en la memoria sólo pueded
+        ser leída</li></ul><p>Los valores mutables siempre se denotan con la palabra reservada <b>mut</b></p>
+        <p>Hay mucho más que explicar aún sobre este concepto, pero de momento
+        presta atención solamente a la palabra reservada para saber lo que se puede modificar y lo que no.</p>"
+  - en:
       title: Basic Types
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
       content_markdown: |
@@ -479,120 +593,6 @@ pages:
         "<p>Una función puede recibir cero o más argumentos.</p><p>En este ejemplo,
         <i>add</i> recibe dos parámetros de tipo <code>i32</code> (entero de 32 bits).</p>
         <p>Los nombres de las funciones se escriben siempre en <code>snake_case</code></p>"
-  - en:
-      title: Variables
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
-      content_markdown: |
-        Variables are declared using the **let** keyword.
-
-        When assigning a value, Rust will be able to infer the type of your variable 99% of
-        the time. If it cannot you may add the type to your variable declaration.
-
-        Notice how we can assign to the same variable name multiple times. This is called variable
-        shadowing and the type can be changed for subsequent references to that name.
-
-        Variable names are always in `snake_case`
-    de:
-      title: Variablen
-      content_html: <p>Variablen werden mit dem Schlüsselwort <code>let</code>
-        deklariert.</p><p>Im Regelfall sollte man Rust die Entscheidung überlassen, um
-        welchen Datentypen es sich handelt. In Sonderfällen kann der Typ explizit angegeben
-        werden.</p><p>Huch, was ist denn bei dem Beispiel los? Die Variable <code>x</code>
-        wird mehrmals deklariert?</p><p>Das ist kein Fehler - Rust erlaubt sogenanntes
-        <b>variable shadowing</b> (Variable überschatten). Bei Neudeklaration "verfällt"
-        die vorige Deklaration und wir können mit der Variable arbeiten, als ob es sie
-        davor noch nie gegeben hätte. Der Datentyp darf sich dabei auch ändern.</p><p>Variablennamen
-        werden ebenfalls in <code>snake_case</code> geschrieben.</p>
-    ie:
-      title: Variables
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%2F%2F%20rust%20infere%20li%20tip%20de%20x%0A%20%20let%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20specificar%20li%20tip%20explicitmen%0A%20%20let%20x%3Af64%20%3D%203.14159%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20declarar%20in%20prim%2C%20poy%20inicialisar%2C%20ma%20ti-ci%20metode%0A%20%20%2F%2F%20es%20rarmen%20usat%0A%20%20let%20x%3B%0A%20%20x%20%3D%200%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
-      content_html:
-        ' <p>On declara variabiles con li clave-parol <b>let</b>.</p><p>Quande
-        on assigna un valore, Rust va posser inferer li tip del variabile con un certitá
-        de 99%. Si it ne posse, tu posse adjunter li tip al declaration por li variabile.</p><p>A
-        notar es qualmen noi posse assignar li sam nómine por un variabile plu quam un
-        vez. Ti-ci metode es nominat variable shadowing ("variabil-ombration") in quel
-        li tip va posser changear se por referenties sequent por ti nómine.</b></p><p>Nómines
-        por variabiles sempre usa <code>snake_case</code> (minuscules con infra-strecs)</p>'
-    ru:
-      title: Переменные
-      content_markdown: |
-        Переменные объявляются с помощью ключевого слова **let**.
-
-        Когда ей присваивается значение, Rust в состоянии вывести тип переменной в 99% случаях.
-        Если вывод невозможен, вы можете добавить тип в объявлении переменной.
-
-        Заметьте, как мы можем присвоить значение одной и той же переменной несколько раз. Это называется
-        сокрытие переменной (variable shadowing), её тип может быть изменен в последующих
-        присваиваниях.
-
-        Название переменных всегда `snake_case`
-    es:
-      title: Variables
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20deduce%20el%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20ser%20expl%C3%ADcito%20con%20el%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20declarar%20primero%20e%20inicializar%20despu%C3%A9s%2C%20pero%20es%20poco%20com%C3%BAn%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
-      content_html:
-        " <p>Para declarar variables usaremos la palabra reservada <b>let</b></p><p>Al
-        asignar un valor, Rust podrá deducir el tipo de la variable el 99% de las veces.
-        Si no puede, tú mismo podrás especificar el tipo al declarar una variable.</p><p>Fíjate
-        en cómo podemos declarar variables con el mismo nombre varias veces. Esto se llama
-        sombreado <i>(shadowing)</i> de variables y se puede modificar el tipo para futuras referencias a ese nombre.</b></p>
-        <p>Los nombres de las variables se escriben siempre en <code>snake_case</code></p>"
-  - en:
-      title: Changing Variables
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
-      content_markdown: |
-        Rust cares a great deal about what variables are modifiable. Values
-        fall into two types:
-
-        * **mutable** - the location in memory can be written to and read from
-        * **immutable** - the location in memory can only be read
-
-        Mutable values are denoted with a **mut** keyword.
-
-        We will have more to say on this concept later, but for now just keep an eye out for this keyword.
-    de:
-      title: Variablenwerte ändern
-      content_html:
-        ' <p>Rust sorgt sich sehr darum, welche Variablen verändert werden können
-        und welche nicht. Daher gibt es die folgende Unterscheidung:</p><ul><li><b>mutable</b>
-        - der Speicherort der Variable kann beschrieben und gelesen werden</li><li><b>immutable</b>
-        - der Speicherort der Variable kann nur gelesen werden</li></ul><p>Variablen,
-        die verändert werden können, werden mit einem extra <code>mut</code>
-        Schlüsselwort gekennzeichnet.</p><p>Auf dieses Konzept wird im späteren Verlauf
-        noch mehr eingegangen, für jetzt ist es wichtig zu wissen, dass "mutable" Variablen
-        beschrieben werden können.</p>'
-    ie:
-      title: Changear valores
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%20%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
-      content_html:
-        " <p>Rust sucia se mult pri li valores queles es modificat. Valores
-        possede du tipes:</p><ul><li><b>mutabil</b> - li loc in memorie posse esser inscrit
-        e leet</li><li><b>ínmutabil</b> - li loc in memorie posse esser solmen leet</li></ul><p>On
-        denota sempre li valores mutabil con li clave-parol <b>mut</b></p><p>Pri to noi
-        va parlar plu con detallies, ma por li momente ples solmen atenter pri ti-ci parol-clave
-        quel monstra que un cose es modificabil</p>"
-    ru:
-      title: Изменение переменных
-      content_markdown: |
-        Rust уделяет много внимания тому, какие значения могут быть изменены.
-        Значения (переменные) делятся на два типа:
-
-        * **mutable** - область памяти, в которую можно записать и считать
-        * **immutable** - область памяти, с которой можно только считать
-
-        Mutable значения всегда каким-то образом обозначены с помощью ключевого слова **mut**.
-
-        Мы поговорим об этом позже, сейчас просто следите за этим ключевым словом и тем, какие элементы
-        могут быть изменены.
-    es:
-      title: Modificar valores
-      content_html:
-        " <p>En Rust es importante tener en cuenta qué valores se modifican. Los valores
-        se dividen en dos tipos:</p><ul><li><b>mutables</b> - la ubicación en memoria
-        puede ser escrita y leída</li><li><b>inmutables</b> - la ubicación en la memoria sólo pueded
-        ser leída</li></ul><p>Los valores mutables siempre se denotan con la palabra reservada <b>mut</b></p>
-        <p>Hay mucho más que explicar aún sobre este concepto, pero de momento
-        presta atención solamente a la palabra reservada para saber lo que se puede modificar y lo que no.</p>"
   - en:
       title: Multiple Return Values
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
