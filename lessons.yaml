@@ -333,7 +333,7 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
       content_markdown: |
         Rust has a variety of familiar types:
-          
+
         * booleans - `bool` for representing true/false
         * unsigned integers - `u8` `u32` `u64` `u128` for representing positive whole numbers
         * signed integers - `i8` `i32` `i64` `i128` for representing positive/negative whole numbers
@@ -346,11 +346,10 @@ pages:
         * `str`(string slice) - text with a length known at runtime
 
         Text might be more complex than you are used to in other languages,
-        since Rust is a systems programming language, it's oriented
-        toward caring about memory issues you might not be used to. We will be going into
-        detail on text later.
+        since Rust is a system programming language, it's cares about memory 
+        issues you might not be used to. We will be going into this in detail later.
 
-        Numeric types can be explicitly specified by appending the type to the end of the number (e.g. `13u32`)
+        Numeric types can be explicitly specified by appending the type to the end of the number (e.g. `13u32`, `2u8`)
     de:
       title: Basistypen
       content_html:
