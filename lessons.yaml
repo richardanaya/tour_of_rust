@@ -215,6 +215,206 @@ pages:
         <p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
         </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>
   - en:
+      title: Basic Types
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        Rust has a variety of familiar types 
+        * booleans - `bool` for representing true/false
+        & unsigned integers - `u8``u32``u64``u128` for representing positive whole numbers
+        * signed integers - `i8``i32``i64``i128` for representing positive/negative whole numbers
+        * pointer sized integers - `usize``isize` for representing indexes
+        and sizes of things in memory
+        * floating point - `f32``f64`
+        * text related - `str``char`
+        * tuple - `(value,value,...)` for passing fixed sequences of values on the stack
+        * slices - `&[T]` for referencing views into
+        sequences of values in memory
+
+        We will be talking about a few of these in detail later.
+
+        Fair warning: text might be more complex than you are used to in other languages,
+        since Rust is a systems programming language, it's oriented
+        toward caring about memory issues you might not be used to. We will be going into
+        detail on text later.
+
+        Note how numeric types can be explicitly specified by appending the type to the end of the number (e.g. `13u32`)
+    de:
+      title: Basistypen
+      content_html:
+        "<p>Rust besitzt eine vielzahl an bekannten Datentypen <ul><li>booleans
+        - <code>bool</code> für true/false bzw. wahr/falsch Werte</li><li>unsigned
+        integers - <code>u8</code><code>u32</code><code>u64</code>
+        für positive Ganzzahlen (inkl. 0 für die Mathematiker)</li><li>signed integers
+        - <code>i8</code><code>i32</code><code>i64</code>
+        für vorzeichenbehaftete Ganzzahlen</li><li>pointer sized integers - <code>uint</code><code>isize</code>
+        für Indizes und Größen im Speicher</li><li>floating point - <code>f32</code><code>f64</code>
+        für Dezimalzahlen</li><li>text zeug - <code>str</code><code>char</code></li><li>tuple
+        - <code>(value,value,...)</code> zum Übergeben von Wertsequenzen auf
+        dem Stack<li>slices - <code>&[T]</code> um Views in Sequenzen zu referenzieren
+        (hier evt bessere Übersetzung finden)</ul></p><p>Wir sehen schon, dass es einiges
+        zum Anpacken geben wird!</p><p>Eine Warnung vorweg: text-Zeug wird etwas komplexer
+        sein als du es vielleicht von anderen Programmiersprachen gewohnt bist, da Rust
+        eine Systemprogrammiersprache ist und daher mehr auf effektives Speichermanagement
+        fokussiert. Keine Panik auf der Titanic aber, wir werden unser Bestes geben, dich
+        darauf vorzubereiten!</p><p>Noch ein Hinweis: Numerische Datentypen können auch
+        nach dem Zahlenliteral spezifiziert werden (z.B. <code>13u32</code>)</p>"
+    ie:
+      title: Basic tipes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%0A%20%20%20%20let%20c%20%3D%204.3f64%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20frase%20%3D%20%22salute%20munde!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20frase%0A%20%20%20%20)%3B%0A%7D%0A
+      content_html:
+        "<p>Rust possede un varietá de tipes familiari <ul><li>booleanes - <code>bool</code>
+        por representar true/false (ver/fals)</li><li>unsigned integers (integrales ínsignat)
+        - <code>u8</code><code>u32</code><code>u64</code><code>u128</code>
+        por representar integrales positiv</li><li>signed integers (integrales signat)
+        - <code>i8</code><code>i32</code><code>i64</code><code>i128</code>
+        por representar integrales sive positiv sive negativ</li><li>pointer sized integers
+        (integrales con puntator-mesurat grandore) - <code>usize</code><code>isize</code>
+        por representar indexes e grandores de coses in memorie</li><li>floating point
+        (punctu flottant) - <code>f32</code><code>f64</code></li><li>con
+        relation a textu - <code>str</code><code>char</code></li><li>tuple
+        - <code>(value, value,...)</code> por passar fixat sequenties de valore
+        sur li stack (li cumul)<li>slices (tranches) - <code>&[T]</code> por
+        referer visus ad-in sequenties de valores in memorie</ul></p><p>Noi va parlar
+        pri alcunes ex ili plu detalliatmen plu tard.</p><p>Un avise in prim: textu va
+        posser esser plu complicat quam tui experientie con altri lingues, pro que Rust
+        es un lingue de programmation por sistemas quel orienta se pri problemas de memorie
+        con quel fórsan tu ne ha experientie. Noi va parlar plu detalliatmen pri textu
+        plu tard.</p><p>Nota qualmen on posse explicitmen specificar tipes numeric per
+        afixar li tip directmen pos li numeró (p.e. <code>13u32</code>)</p>"
+    ru:
+      title: Базовые типы
+      content_markdown: |
+        Rust имеет много знакомых типов: 
+
+        * булевые - `bool` представляет true/false
+        * беззнаковые целочисленные - `u8`, `u32`, `u64`, `u128` представляют положительные числа
+        * знаковые целочисленные - `i8`, `i32`, `i64`, `i128` представляют положительные/отрицательные числа 
+        * целочисленные размером указателя - `usize`, `isize` представляют индексы и размеры
+        * числа с плавающей точкой - `f32`, `f64`
+        * относятся к тексту - `str`, `char`
+        * кортежи - `(значение,значение,...)` представляют фиксированную последовательность
+        значений, размещаются на стеке
+        * слайсы (slices) - `&[T]` представляют указатель на последовательность значений в памяти
+
+        Мы поговорим о нескольких из пунктов в деталях чуть позже.
+
+        Справедливое предупреждение: текст может быть более сложным, чем вы привыкли на 
+        других языках, поскольку Rust является языком системного программирования,
+        он ориентирован на решение проблем, свясвязанных с памятью, с которыми вы,
+        возможно, не сталкивались. Мы поговорим о текстовых данных позже.
+         
+        Заметьте, как числа могут быть приведены к определенному типу, если явно указать 
+        тип в конце числа (пример `13u32`)
+    es:
+      title: Tipos básicos
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20Por%20defecto%20es%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20Por%20defecto%20es%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22%C2%A1Hola%2C%20mundo!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+      content_html:
+        "<p>Rust tiene una variedad de tipos que puede que te resulten familiares: <ul><li>booleanos - <code>bool</code>
+        para representar verdadero/falso</li><li>números enteros sin signo - <code>u8</code><code>u32</code><code>u64</code><code>u128</code>
+        para representar números enteros positivos</li><li>números enteros con signo - <code>i8</code><code>i32</code><code>i64</code><code>i128</code>
+        para representar números enteros positivos y negativos</li><li>números enteros de tamaño de puntero
+        - <code>usize</code><code>isize</code> se usan para representar índices y tamaños de elementos en memoria
+        </li><li>números en coma flotante - <code>f32</code><code>f64</code></li>
+        <li>En relación a textos - <code>str</code><code>char</code></li><li>tuplas
+        - <code>(valor,valor,...)</code> para pasar secuencias fijas de valores en la pila
+        <li>slices - <code>&[T]</code> para referenciar “vistas” en
+        secuencias de valores en la memoria</ul></p><p>Profundizaremos en algunos más adelante.</p>
+        <p>Advertencia: los formatos de texto pueden ser más complejos de lo que estás acostumbrado
+        en otros lenguajes, ya que Rust es un lenguaje de programación de sistemas, está orientado
+        a gestionar los problemas de la memoria, algo a lo que puedes no estar acostumbrado.
+        Entraremos en detalles sobre los textos más tarde.</p><p>Observa cómo los tipos numéricos pueden especificarse
+        explícitamente añadiendo el tipo al final del número (por ejemplo, <code>13u32</code>)</p>"
+  - en:
+      title: Basic Type Conversion
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+      content_markdown: |
+        Rust requires explicitness when it comes to numeric types. One cannot
+        use a `u8` for a `u32` casually without
+        error.
+
+        Luckily rust makes numeric type conversions very easy with the **as** keyword.
+    de:
+      title: Basistypen konvertieren
+      content_html:
+        "<p>Rust vordert explizite Konvertierungen, wenn es um Zahlentypen geht.
+        Ein <code>u8</code> (8-bit unsigned integer) kann nicht mit einem <code>u32</code>
+        locker aus dem Handgelenk zusammengerechnet werden ohne das Programm zum Absturz
+        zu bringen.</p><p>Glücklicherweise ist auf die Konvertierung mit dem <code>as</code>
+        Schlüsselwort Verlass.</p>"
+    ie:
+      title: Conversion de basic tipes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20a%20%3D%2013u8%3B%0A%20%20let%20b%20%3D%207u32%3B%0A%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20let%20t%20%3D%20true%3B%0A%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D
+      content_html:
+        "<p>Rust exige explicitá quande it acte se pri tipes numeric. On ne
+        posse usar un <code>u8</code> hasardalmen por un <code>u32</code>
+        sin un erra.</p><p>Felicimen, conversiones de tipes numeric es facil in Rust con
+        li clave-parol <b>as</b>.</p>"
+    ru:
+      title: Преобразование базовых типов
+      content_markdown: |
+        Rust требует явности, когда речь идет о числовых типах. Нельзя использовать
+        `u8` вместо `u32` случайно, это ошибка.
+
+        К счастью, Rust имеет ключевое слово **as**, которое позволяет очень легко преобразовывать
+        типы.
+    es:
+      title: Conversión de tipos básica
+      content_html:
+        "<p>Rust requiere ser explícito cuando se trata de tipos numéricos. No se
+        puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que se produzca
+        un error.</p><p>Por suerte, Rust hace que las conversiones de tipos numéricos sean
+        muy fáciles con la palabra reservada <b>as</b>.</p>"
+  - en:
+      title: Constants
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        Constants allow us to specify a common value that's used through
+        out our code many times efficiently.  Instead of copying values like variables
+        where they are used, constants directly replace the text identifier where they
+        are used with their value at compile time.
+
+        Unlike variables, constants must always have explicit types
+
+        Constant names are always in `SCREAMING_SNAKE_CASE`
+    de:
+      title: Konstanten
+      content_html: "<p>Konstanten (<code>const</code>) erlauben uns einen Wert
+        in der Kompilierzeit zu setzen, die in unserem Code eingesetzt werden. Kompilierzeit
+        ist hier das Stichwort: anstelle von Variablen sitzen dann an Orten, an denen
+        Konstanten eingestetzt werden, die Werte selbst.</p><p>Anders als bei Variablen
+        muss bei Konstanten der Datentyp explizit angeben werden.</p><p>Die Namensgebung
+        erfolgt generell in <code>SCREAMING_SNAKE_CASE</code>.</p>"
+    ie:
+      title: Constantes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Por%20crear%20un%20%7B%7D%20de%20pom%20desde%20li%20comense%2C%20on%20deve%20in%20prim%20crear%20un%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_html:
+        "<p>Constantes possibilisa li specification de valores comun quel noi
+        usa tra nor code con un eficientie mult vezes plu grand.  Vice copiar valores
+        quam variabiles chascun vez ú ili es usat, constantes remplazza li textu-identificator
+        directmen con lor valore in li locs ú on usa les.</p><p>In contraste a variabiles,
+        constantes deve sempre posseder un tip explicit</p><p>Nómines de constantes es
+        sempre in <code>SCREAMING_SNAKE_CASE</code> (majuscules con infra-strecs)</p>"
+    ru:
+      title: Константы
+      content_markdown: |
+        Константы (**const**) позволяют нам указать неизменяемую переменную,
+        которую можно использовать много раз. Вместо того, чтобы копировать значение,
+        как делают переменные, имя константы заменяется на значение во время компиляции.
+
+        В отличии от переменных, константам нужно явно обозначать их тип.
+
+        Имена констант всегда пишутся в верхнем регистре `SCREAMING_SNAKE_CASE`
+    es:
+      title: Constantes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Vamos%20de%20paseo%2C%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20PI%2C%20PI%2C%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_html:
+        "<p>Las constantes nos permiten especificar un valor común que se utiliza
+        muchas veces a lo largo de nuestro código de manera eficiente. En vez de copiar valores
+        como variables en el lugar donde se usan, las constantes reemplazan directamente el
+        identificador de texto (donde se haya usado) por su valor en tiempo de compilación.</p>
+        <p>A diferencia de las variables, el tipo de las constantes se debe especificar explícitamente.</p>
+        <p>Los nombres de las constantes se escriben siempre en <code>SCREAMING_SNAKE_CASE</code></p>"
+  - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
       content_markdown: |
@@ -459,206 +659,6 @@ pages:
 
         El uso de `()` es poco común, pero es necesario saber su significado ya que aparecerá de vez en cuando.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20no_hagas_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20El%20valor%20de%20retorno%20es%20impl%C3%ADcitamente%20()%0Afn%20no_hagas_nada2()%20%7B%0A%20%20%20%20%2F%2F%20Esta%20funci%C3%B3n%20devuelve%20()%20si%20no%20se%20especifica%20nada%20que%20devolver%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20no_hagas_nada()%3B%0A%20%20%20%20let%20b%20%3D%20no_hagas_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Mostrando%20una%20sentencia%20de%20depuraci%C3%B3n%20para%20a%20y%20b%0A%20%20%20%20%2F%2F%20porque%20es%20dif%C3%ADcil%20no%20mostrar%20nada%0A%20%20%20%20println!(%22El%20valor%20de%20a%20es%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22El%20valor%20de%20b%20es%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
-  - en:
-      title: Basic Types
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
-      content_markdown: |
-        Rust has a variety of familiar types 
-        * booleans - `bool` for representing true/false
-        & unsigned integers - `u8``u32``u64``u128` for representing positive whole numbers
-        * signed integers - `i8``i32``i64``i128` for representing positive/negative whole numbers
-        * pointer sized integers - `usize``isize` for representing indexes
-        and sizes of things in memory
-        * floating point - `f32``f64`
-        * text related - `str``char`
-        * tuple - `(value,value,...)` for passing fixed sequences of values on the stack
-        * slices - `&[T]` for referencing views into
-        sequences of values in memory
-
-        We will be talking about a few of these in detail later.
-
-        Fair warning: text might be more complex than you are used to in other languages,
-        since Rust is a systems programming language, it's oriented
-        toward caring about memory issues you might not be used to. We will be going into
-        detail on text later.
-
-        Note how numeric types can be explicitly specified by appending the type to the end of the number (e.g. `13u32`)
-    de:
-      title: Basistypen
-      content_html:
-        "<p>Rust besitzt eine vielzahl an bekannten Datentypen <ul><li>booleans
-        - <code>bool</code> für true/false bzw. wahr/falsch Werte</li><li>unsigned
-        integers - <code>u8</code><code>u32</code><code>u64</code>
-        für positive Ganzzahlen (inkl. 0 für die Mathematiker)</li><li>signed integers
-        - <code>i8</code><code>i32</code><code>i64</code>
-        für vorzeichenbehaftete Ganzzahlen</li><li>pointer sized integers - <code>uint</code><code>isize</code>
-        für Indizes und Größen im Speicher</li><li>floating point - <code>f32</code><code>f64</code>
-        für Dezimalzahlen</li><li>text zeug - <code>str</code><code>char</code></li><li>tuple
-        - <code>(value,value,...)</code> zum Übergeben von Wertsequenzen auf
-        dem Stack<li>slices - <code>&[T]</code> um Views in Sequenzen zu referenzieren
-        (hier evt bessere Übersetzung finden)</ul></p><p>Wir sehen schon, dass es einiges
-        zum Anpacken geben wird!</p><p>Eine Warnung vorweg: text-Zeug wird etwas komplexer
-        sein als du es vielleicht von anderen Programmiersprachen gewohnt bist, da Rust
-        eine Systemprogrammiersprache ist und daher mehr auf effektives Speichermanagement
-        fokussiert. Keine Panik auf der Titanic aber, wir werden unser Bestes geben, dich
-        darauf vorzubereiten!</p><p>Noch ein Hinweis: Numerische Datentypen können auch
-        nach dem Zahlenliteral spezifiziert werden (z.B. <code>13u32</code>)</p>"
-    ie:
-      title: Basic tipes
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%0A%20%20%20%20let%20c%20%3D%204.3f64%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20frase%20%3D%20%22salute%20munde!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20frase%0A%20%20%20%20)%3B%0A%7D%0A
-      content_html:
-        "<p>Rust possede un varietá de tipes familiari <ul><li>booleanes - <code>bool</code>
-        por representar true/false (ver/fals)</li><li>unsigned integers (integrales ínsignat)
-        - <code>u8</code><code>u32</code><code>u64</code><code>u128</code>
-        por representar integrales positiv</li><li>signed integers (integrales signat)
-        - <code>i8</code><code>i32</code><code>i64</code><code>i128</code>
-        por representar integrales sive positiv sive negativ</li><li>pointer sized integers
-        (integrales con puntator-mesurat grandore) - <code>usize</code><code>isize</code>
-        por representar indexes e grandores de coses in memorie</li><li>floating point
-        (punctu flottant) - <code>f32</code><code>f64</code></li><li>con
-        relation a textu - <code>str</code><code>char</code></li><li>tuple
-        - <code>(value, value,...)</code> por passar fixat sequenties de valore
-        sur li stack (li cumul)<li>slices (tranches) - <code>&[T]</code> por
-        referer visus ad-in sequenties de valores in memorie</ul></p><p>Noi va parlar
-        pri alcunes ex ili plu detalliatmen plu tard.</p><p>Un avise in prim: textu va
-        posser esser plu complicat quam tui experientie con altri lingues, pro que Rust
-        es un lingue de programmation por sistemas quel orienta se pri problemas de memorie
-        con quel fórsan tu ne ha experientie. Noi va parlar plu detalliatmen pri textu
-        plu tard.</p><p>Nota qualmen on posse explicitmen specificar tipes numeric per
-        afixar li tip directmen pos li numeró (p.e. <code>13u32</code>)</p>"
-    ru:
-      title: Базовые типы
-      content_markdown: |
-        Rust имеет много знакомых типов: 
-
-        * булевые - `bool` представляет true/false
-        * беззнаковые целочисленные - `u8`, `u32`, `u64`, `u128` представляют положительные числа
-        * знаковые целочисленные - `i8`, `i32`, `i64`, `i128` представляют положительные/отрицательные числа 
-        * целочисленные размером указателя - `usize`, `isize` представляют индексы и размеры
-        * числа с плавающей точкой - `f32`, `f64`
-        * относятся к тексту - `str`, `char`
-        * кортежи - `(значение,значение,...)` представляют фиксированную последовательность
-        значений, размещаются на стеке
-        * слайсы (slices) - `&[T]` представляют указатель на последовательность значений в памяти
-
-        Мы поговорим о нескольких из пунктов в деталях чуть позже.
-
-        Справедливое предупреждение: текст может быть более сложным, чем вы привыкли на 
-        других языках, поскольку Rust является языком системного программирования,
-        он ориентирован на решение проблем, свясвязанных с памятью, с которыми вы,
-        возможно, не сталкивались. Мы поговорим о текстовых данных позже.
-         
-        Заметьте, как числа могут быть приведены к определенному типу, если явно указать 
-        тип в конце числа (пример `13u32`)
-    es:
-      title: Tipos básicos
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20Por%20defecto%20es%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20Por%20defecto%20es%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22%C2%A1Hola%2C%20mundo!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
-      content_html:
-        "<p>Rust tiene una variedad de tipos que puede que te resulten familiares: <ul><li>booleanos - <code>bool</code>
-        para representar verdadero/falso</li><li>números enteros sin signo - <code>u8</code><code>u32</code><code>u64</code><code>u128</code>
-        para representar números enteros positivos</li><li>números enteros con signo - <code>i8</code><code>i32</code><code>i64</code><code>i128</code>
-        para representar números enteros positivos y negativos</li><li>números enteros de tamaño de puntero
-        - <code>usize</code><code>isize</code> se usan para representar índices y tamaños de elementos en memoria
-        </li><li>números en coma flotante - <code>f32</code><code>f64</code></li>
-        <li>En relación a textos - <code>str</code><code>char</code></li><li>tuplas
-        - <code>(valor,valor,...)</code> para pasar secuencias fijas de valores en la pila
-        <li>slices - <code>&[T]</code> para referenciar “vistas” en
-        secuencias de valores en la memoria</ul></p><p>Profundizaremos en algunos más adelante.</p>
-        <p>Advertencia: los formatos de texto pueden ser más complejos de lo que estás acostumbrado
-        en otros lenguajes, ya que Rust es un lenguaje de programación de sistemas, está orientado
-        a gestionar los problemas de la memoria, algo a lo que puedes no estar acostumbrado.
-        Entraremos en detalles sobre los textos más tarde.</p><p>Observa cómo los tipos numéricos pueden especificarse
-        explícitamente añadiendo el tipo al final del número (por ejemplo, <code>13u32</code>)</p>"
-  - en:
-      title: Basic Type Conversion
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
-      content_markdown: |
-        Rust requires explicitness when it comes to numeric types. One cannot
-        use a `u8` for a `u32` casually without
-        error.
-
-        Luckily rust makes numeric type conversions very easy with the **as** keyword.
-    de:
-      title: Basistypen konvertieren
-      content_html:
-        "<p>Rust vordert explizite Konvertierungen, wenn es um Zahlentypen geht.
-        Ein <code>u8</code> (8-bit unsigned integer) kann nicht mit einem <code>u32</code>
-        locker aus dem Handgelenk zusammengerechnet werden ohne das Programm zum Absturz
-        zu bringen.</p><p>Glücklicherweise ist auf die Konvertierung mit dem <code>as</code>
-        Schlüsselwort Verlass.</p>"
-    ie:
-      title: Conversion de basic tipes
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20a%20%3D%2013u8%3B%0A%20%20let%20b%20%3D%207u32%3B%0A%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20let%20t%20%3D%20true%3B%0A%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D
-      content_html:
-        "<p>Rust exige explicitá quande it acte se pri tipes numeric. On ne
-        posse usar un <code>u8</code> hasardalmen por un <code>u32</code>
-        sin un erra.</p><p>Felicimen, conversiones de tipes numeric es facil in Rust con
-        li clave-parol <b>as</b>.</p>"
-    ru:
-      title: Преобразование базовых типов
-      content_markdown: |
-        Rust требует явности, когда речь идет о числовых типах. Нельзя использовать
-        `u8` вместо `u32` случайно, это ошибка.
-
-        К счастью, Rust имеет ключевое слово **as**, которое позволяет очень легко преобразовывать
-        типы.
-    es:
-      title: Conversión de tipos básica
-      content_html:
-        "<p>Rust requiere ser explícito cuando se trata de tipos numéricos. No se
-        puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que se produzca
-        un error.</p><p>Por suerte, Rust hace que las conversiones de tipos numéricos sean
-        muy fáciles con la palabra reservada <b>as</b>.</p>"
-  - en:
-      title: Constants
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
-      content_markdown: |
-        Constants allow us to specify a common value that's used through
-        out our code many times efficiently.  Instead of copying values like variables
-        where they are used, constants directly replace the text identifier where they
-        are used with their value at compile time.
-
-        Unlike variables, constants must always have explicit types
-
-        Constant names are always in `SCREAMING_SNAKE_CASE`
-    de:
-      title: Konstanten
-      content_html: "<p>Konstanten (<code>const</code>) erlauben uns einen Wert
-        in der Kompilierzeit zu setzen, die in unserem Code eingesetzt werden. Kompilierzeit
-        ist hier das Stichwort: anstelle von Variablen sitzen dann an Orten, an denen
-        Konstanten eingestetzt werden, die Werte selbst.</p><p>Anders als bei Variablen
-        muss bei Konstanten der Datentyp explizit angeben werden.</p><p>Die Namensgebung
-        erfolgt generell in <code>SCREAMING_SNAKE_CASE</code>.</p>"
-    ie:
-      title: Constantes
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Por%20crear%20un%20%7B%7D%20de%20pom%20desde%20li%20comense%2C%20on%20deve%20in%20prim%20crear%20un%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
-      content_html:
-        "<p>Constantes possibilisa li specification de valores comun quel noi
-        usa tra nor code con un eficientie mult vezes plu grand.  Vice copiar valores
-        quam variabiles chascun vez ú ili es usat, constantes remplazza li textu-identificator
-        directmen con lor valore in li locs ú on usa les.</p><p>In contraste a variabiles,
-        constantes deve sempre posseder un tip explicit</p><p>Nómines de constantes es
-        sempre in <code>SCREAMING_SNAKE_CASE</code> (majuscules con infra-strecs)</p>"
-    ru:
-      title: Константы
-      content_markdown: |
-        Константы (**const**) позволяют нам указать неизменяемую переменную,
-        которую можно использовать много раз. Вместо того, чтобы копировать значение,
-        как делают переменные, имя константы заменяется на значение во время компиляции.
-
-        В отличии от переменных, константам нужно явно обозначать их тип.
-
-        Имена констант всегда пишутся в верхнем регистре `SCREAMING_SNAKE_CASE`
-    es:
-      title: Constantes
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Vamos%20de%20paseo%2C%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20PI%2C%20PI%2C%20PI%0A%20%20%20%20)%3B%0A%7D%0A
-      content_html:
-        "<p>Las constantes nos permiten especificar un valor común que se utiliza
-        muchas veces a lo largo de nuestro código de manera eficiente. En vez de copiar valores
-        como variables en el lugar donde se usan, las constantes reemplazan directamente el
-        identificador de texto (donde se haya usado) por su valor en tiempo de compilación.</p>
-        <p>A diferencia de las variables, el tipo de las constantes se debe especificar explícitamente.</p>
-        <p>Los nombres de las constantes se escriben siempre en <code>SCREAMING_SNAKE_CASE</code></p>"
   - en:
       title: Chapter 1 Conclusion
       content_markdown: |
