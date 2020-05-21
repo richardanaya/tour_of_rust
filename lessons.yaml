@@ -1916,8 +1916,7 @@ pages:
       title: Область видимости структур
       content_markdown: |
         Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
-  -
-    chapter: 10
+  - chapter: 10
     en:
       title: The End
       content_markdown: |
