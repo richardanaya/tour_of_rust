@@ -1916,9 +1916,9 @@ pages:
       title: Область видимости структур
       content_markdown: |
         Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
-  - beta: true
+  -
     chapter: 10
     en:
-      title: Chapter 10 - The End
+      title: The End
       content_markdown: |
-        That's all for now. Stay tuned for new chapters. I hope you enjoy the journey ahead!
+        That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!

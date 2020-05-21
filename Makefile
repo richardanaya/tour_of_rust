@@ -1,5 +1,7 @@
 serve: beta
 	@cd docs && python3 -m http.server 8080
+test: generate
+	@cd docs && python3 -m http.server 8080
 beta:
 	@rm docs/*.html || true
 	@cat lessons.yaml | yq . > lessons.json
