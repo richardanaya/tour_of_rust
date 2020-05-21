@@ -1,4 +1,4 @@
----
+﻿---
 common_words:
   en:
     chapter: Chapter
@@ -34,6 +34,13 @@ common_words:
     next: Siguiente
     previous: Anterior
     toc: Tabla de Contenidos
+    lessons: Unidades
+  pt:
+    chapter: Capítulo
+    tor: Um tour por Rust
+    next: Próximo
+    previous: Anterior
+    toc: Índice
     lessons: Unidades
 pages:
   - en:
@@ -118,7 +125,7 @@ pages:
 
         В этом классическом примере мы показываем поддержку юникод строк в Rust.
     es:
-      title: "Hola, <span class=\"emoji\">\U0001F980</span>"
+      title: "Olá, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hola%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
       content_markdown: |
         Bienvenido al *Tour de Rust*. Esta es una guía paso a
@@ -140,6 +147,31 @@ pages:
         Puedes navegar por el curso usando <span class="emoji">⬅️</span> y <span class="emoji">➡️</span>
 
         En este clásico ejemplo te mostramos el uso de cadenas unicode con Rust.
+    pt:
+      title: "Olá, <span class=\"emoji\">\U0001F980</span>"
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Ol%C3%A1%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+      content_markdown: |
+        Bem-vindo ao *Tour por Rust*. Este é um guia passo-a-passo pelas características da
+        linguagem de programação Rust. Rust é considerada uma linguagem com uma curva de 
+        aprendizado elevada, e espero convencê-lo que há muito a explorar antes de chegar 
+        às partes complexas.
+        
+        Você pode ver este guia nestes idiomas:
+
+        * [Deutsch](index_de.html)
+        * [English](index.html)
+        * [Español](index_es.html)
+        * [Interlingue](index_ie.html)
+        * [Portugês](index_pt.html)
+        * [Русский](index_ru.html)
+
+        Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
+        traduções, veja o repositório do Tour por Rust no 
+        [github](https://github.com/richardanaya/tour_of_rust).
+
+        Você pode navegar pelo curso usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
+
+        Neste exemplo clássico mostramos o suporte de strings Unicode em Rust.
   - chapter: 1
     en:
       title: Chapter 1 - The Basics
@@ -180,6 +212,15 @@ pages:
         "<p>En este primer capítulo vamos a ver lo más básico respecto a funciones, variables y los tipos de datos primitivos.
         ¡Bienvenido a bordo!</p><p>Y por si te estas preguntando quién es el adorable cangrejo parlante, me llamo <b>Ferris</b>,
         y soy la mascota no oficial del lenguaje de programación Rust. Encantado de conocerte.</p>"
+    pt:
+      title: Capítulo 1 - O Básico
+      content_markdown: |
+        Neste primeiro capítulo iremos explorar o mais básico sobre funções, variáveis e os
+        tipos de dados mais primitivos. Bem-vindo a bordo!
+
+        E se por acaso você está se perguntando quem é este adorável caranguejo falante, eu me 
+        chamo **Ferris** e sou o mascote não oficial da linguagem de programação Rust.
+        Prazer em conhecê-lo.
   - en:
       title: The Rust Playground
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
@@ -214,6 +255,13 @@ pages:
       content_html: |
         <p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
         </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>
+    pt:
+      title: O Playgroung Rust
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Bem-vindo%20%C3%A0%20%C3%A1rea%20de%20testes!%20Voc%C3%AA%20pode%20modificar%20seu%20c%C3%B3digo%20aqui.%22)%3B%0A%7D%0A
+      content_markdown: |
+        Este tour usa a ferramenta de codificação interativa [Rust Playground](https://play.rust-lang.org)
+
+        É uma boa maneira de brincar com Rust e mostrar aos outros a sua criatividade e desafios!
   - en:
       title: Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -272,6 +320,20 @@ pages:
         en cómo podemos declarar variables con el mismo nombre varias veces. Esto se llama
         sombreado <i>(shadowing)</i> de variables y se puede modificar el tipo para futuras referencias a ese nombre.</b></p>
         <p>Los nombres de las variables se escriben siempre en <code>snake_case</code></p>"
+    pt:
+      title: Variáveis
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20infere%20o%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tamb%C3%A9m%20pode%20ser%20expl%C3%ADcito%20com%20o%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tamb%C3%A9m%20pode%20declarar%20primero%20e%20inicializar%20depois%2C%20mas%20%C3%A9%20incomum%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        Variáveis são declaradas usando a palavra-chave **let**.
+
+        Quando atribuimos um valor, o Rust poderá inferir o tipo da sua variável em 99% dos casos.
+        Se não for possível, você poderá especificar o tipo ao declarar a variável.
+
+        Veja que podemos atribuir valores à mesma variável várias vezes. Isto é chamado
+        *sobreamento* de variáveis (shadowing) e podemos mudar o seu tipo para referências
+        futuras a esse nome.
+
+        Os nomes das variáveis são sempre em `snake_case`.
   - en:
       title: Changing Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -328,6 +390,19 @@ pages:
         ser leída</li></ul><p>Los valores mutables siempre se denotan con la palabra reservada <b>mut</b></p>
         <p>Hay mucho más que explicar aún sobre este concepto, pero de momento
         presta atención solamente a la palabra reservada para saber lo que se puede modificar y lo que no.</p>"
+    pt:
+      title: Modificando valores
+      content_markdown: |
+        Em Rust é importante levar em consideração quais valores serão alterados. Os valores
+        se dividem em dois tipos:
+
+        * **mutáveis** - a localidade na mamória pode ser lida e gravada
+        * **imutáveis** - a localidade na mamória pode ser somente lida
+
+        Valores mutáveis são marcados com a palavra-chave **mut**.
+
+        Temos muito a explicar ainda sobre este conceito, mas por enquanto apenas preste atenção 
+        nesta palavra-chave.
   - en:
       title: Basic Types
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
@@ -436,6 +511,28 @@ pages:
         a gestionar los problemas de la memoria, algo a lo que puedes no estar acostumbrado.
         Entraremos en detalles sobre los textos más tarde.</p><p>Observa cómo los tipos numéricos pueden especificarse
         explícitamente añadiendo el tipo al final del número (por ejemplo, <code>13u32</code>)</p>"
+    pt:
+      title: Tipos básicos
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20infere%20o%20tipo%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20infere%20o%20tipo%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22Ol%C3%A1%2C%20mundo!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        Rust tem uma variedade tipos que lhe serão familiares:
+
+        * booleanos - `bool` para representar verdadeiro/falso
+        * números inteiros sem sinal - `u8` `u32` `u64` `u128` para representar números inteiros positivos
+        * números inteiros com sinal - `i8` `i32` `i64` `i128` para representar números interiso positivos e negativos
+        * ponteiros de números inteiros - `usize` `isize` para representar índices e o comprimento de coleções em memória
+        * números de ponto flutuante - `f32` `f64`
+        * tuplas - `(value, value, ...)` para passar sequências de valores fixas para a pilha
+        * matriz - uma coleção de elementos similares com comprimento fixo conhecidos em tempo de compilação
+        * slices - uma coleção de elementos similares com comprimento conhecido em tempo de execução
+        * `str`(string slice) - texto com comprimento conhecido em tempo de execução
+
+        Textos podem ser mais complexos do que você está acostumado com outras linguagens. Uma vez que o Rust 
+        é uma linguagem de programação de sistemas, ele cuida do gerenciamento de memória de uma maneira que
+        pode não estar familiarizado. Entraremos em detalhes mais adiante.
+
+        Tipos numéricos podem ser especificados explicitamente adicionando o tipo ao final do 
+        número (por exemplo: `13u32`, `2u8`)
   - en:
       title: Basic Type Conversion
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -476,6 +573,14 @@ pages:
         puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que se produzca
         un error.</p><p>Por suerte, Rust hace que las conversiones de tipos numéricos sean
         muy fáciles con la palabra reservada <b>as</b>.</p>"
+    pt:
+      title: Conversão de tipos básica
+      content_markdown: |
+        O Rust requer que sejamos explícitos quando se trata de tipos numéricos. Não podemos
+        usar um `u8` quando precisamos usar um `u32` sem que se produza um erro.
+
+        Por sorte o Rust faz com que as conversões de tipos numéricos sejam muito siples usando 
+        a plavra-chave **as**.
   - en:
       title: Constants
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -526,6 +631,18 @@ pages:
         identificador de texto (donde se haya usado) por su valor en tiempo de compilación.</p>
         <p>A diferencia de las variables, el tipo de las constantes se debe especificar explícitamente.</p>
         <p>Los nombres de las constantes se escriben siempre en <code>SCREAMING_SNAKE_CASE</code></p>"
+    pt:
+      title: Constantes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Para%20fazer%20uma%20%7B%7Dzza%2C%20voc%C3%AA%20deve%20primeiro%20criar%20o%20Universo.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+        As constantes nos permitem especificar um valor comum que pode ser usado
+        muitas vezes por todos o nosso código de maneira eficiente. Ao invés de
+        copiar os valores como variáveis onde serão utilizadas, as constantes substituirão
+        o identificador de texto pelo seu valor onde quer que estejam sendo usadas em tempo 
+        de compilação.
+
+        Diferentemente das variáveis, o tipo das constantes devem ter sempre declarados.
+
+        Os nomes das constantes são sempre em `SCREAMING_SNAKE_CASE`.
   - beta: true
     en:
       title: Arrays
@@ -551,6 +668,16 @@ pages:
       title: Arrays
       content_markdown: |
         Need translation
+    pt:
+      title: Matrizes
+      content_markdown: |
+        Uma *matriz* é uma coleção de elementos de tamanho fixo todos os seu valores do mesmo tipo.
+
+        O tipo de dado para uma *matriz* é `[T;N]`, onde T é o tipo dos valores e
+        N é o comprimento fixo conhecido em tempo de compilação.
+
+        Os elementos podem ser recuperados individualmente com o operador `[x]`, onde *x* 
+        é o índice do tipo *usize* (começando de 0) do elemento que deseja recuperar.
   - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
@@ -591,6 +718,14 @@ pages:
         "<p>Una función puede recibir cero o más argumentos.</p><p>En este ejemplo,
         <i>add</i> recibe dos parámetros de tipo <code>i32</code> (entero de 32 bits).</p>
         <p>Los nombres de las funciones se escriben siempre en <code>snake_case</code></p>"
+    pt:
+      title: Funções
+      content_markdown: |
+        Uma função pode receber zero ou mais parâmetros.
+
+        Neste exemplo, *add* recebe dois parâmetros do tipo `i32` (número inteiro de 32 bits).
+
+        Os nomes das funções são sempre em `snake_case`.
   - en:
       title: Multiple Return Values
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
@@ -638,6 +773,16 @@ pages:
         soporta varios modos de desestructuración que veremos en diferentes formas, esto nos
         permite extraer subconjuntos de estructuras de datos de manera práctica.
         ¡Presta mucha atención!</p>"
+    pt:
+      title: Returno de Múltiplos Valores
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20devolve%20uma%20tupla%20de%20valores%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20desestrutura%20a%20tupla%20para%20duas%20vari%C3%A1veis%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+      content_markdown: |
+        Funções podem devolver múltiplos valores retornando uma **tupla** de valores.
+
+        Os elementos da tupla podem ser referenciados pelo seu índice.
+
+        O Rust suporta vários modos de desestruturação que veremos em diferentes formas, 
+        permintindo extrair subconjuntos de dados de maneira prática.
   - en:
       title: Returning Nothing
       content_markdown: |
@@ -682,6 +827,16 @@ pages:
 
         El uso de `()` es poco común, pero es necesario saber su significado ya que aparecerá de vez en cuando.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20no_hagas_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20El%20valor%20de%20retorno%20es%20impl%C3%ADcitamente%20()%0Afn%20no_hagas_nada2()%20%7B%0A%20%20%20%20%2F%2F%20Esta%20funci%C3%B3n%20devuelve%20()%20si%20no%20se%20especifica%20nada%20que%20devolver%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20no_hagas_nada()%3B%0A%20%20%20%20let%20b%20%3D%20no_hagas_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Mostrando%20una%20sentencia%20de%20depuraci%C3%B3n%20para%20a%20y%20b%0A%20%20%20%20%2F%2F%20porque%20es%20dif%C3%ADcil%20no%20mostrar%20nada%0A%20%20%20%20println!(%22El%20valor%20de%20a%20es%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22El%20valor%20de%20b%20es%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+    pt:
+      title: Retornando nada
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20faz_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20o%20tipo%20de%20retorno%20%C3%A9%20implicitamente%20()%0Afn%20faz_nada2()%20%7B%0A%20%20%20%20%2F%2F%20esta%20fun%C3%A7%C3%A3o%20ir%C3%A1%20devolver%20()%20se%20nada%20for%20especificado%20para%20retornar%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20faz_nada()%3B%0A%20%20%20%20let%20b%20%3D%20faz_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Exibindo%20uma%20string%20de%20depura%C3%A7%C3%A3o%20para%20a%20e%20b%0A%20%20%20%20%2F%2F%20Porque%20%C3%A9%20dif%C3%ADcil%20n%C3%A3o%20mostrar%20nada%0A%20%20%20%20println!(%22O%20valor%20de%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22O%20valor%20de%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+      content_markdown: |
+        Se nenhum tipo for especificado para o retorno de uma função, ele devolve uma tupla vazia,
+        também conhecida como *unit*.
+
+        Uma tupla vazia é representada por `()`.
+
+        O uso de `()` é incomum, mas é necessário saber o seu significado uma vez que aparecerá de vez em quando.
   - en:
       title: Chapter 1 Conclusion
       content_markdown: |
@@ -736,6 +891,16 @@ pages:
         de Rust. Este compilador pretende asegurarse de que tu código hace lo que esperas.
         A continuación echaremos un vistazo a algunos viejos conocidos: <code>if</code>
         y <code>for</code>.</p>"
+    pt:
+      title: Capítulo 1 Conclusão
+      content_markdown: |
+        Bom trabalho! O básico do Rust não foi tão ruim, não é? Este foi só o
+        comecinho de como o compilador Rust trabalha. Ele se preocupa muito a respeito
+        dos tamanhos dos valores em memória, quais coisas podem ser modificadas ou não,
+        e garantir que as coisas funcionem do jeito que você quer que funcionem. Estes são
+        pequenos previews de um princípio de **segurança** que prevalece através do Rust.
+        O compilador apenas quer ter certeza que o seu código faça o que se espera dele!
+        A seguir veremos alguns velhos conhecidos: `if` e `for`.
   - chapter: 2
     en:
       title: Chapter 2 - Basic Control Flow
