@@ -1582,7 +1582,7 @@ pages:
         (t.e. variabiles ancor ne possedent un valore), por tractar errores, colectiones e plu!
         In ti-ci section noi va aprender pri li fundamental tipes géneric queles tu va max possibilmen
         sempre utilisar.
-    
+
   - beta: true
     en:
       title: What Are Generic Types?
@@ -1598,7 +1598,7 @@ pages:
       content_markdown: |
         Tipes géneric possibilisa li partial definition de un `struct` o `enum`, con quel li compilator va posser
         crear un version completmen definat quande it compila se secun li code quel noi scri.
-        
+
         Rust por li pluparte posse inferer li tip final per regardar nor instantiation, ma si it besona auxilie tu posse
         sempre esser plu explicit con li operator `::<T>`, anc conosset con li nómine `turbofish` (un pisc quel es un
         de mi bon amics!).
@@ -1623,10 +1623,10 @@ pages:
         In altri lingues, on usa li clave-parol `null` por representar li absentie de un valore. To crea 
         desfacilitás in lingues de programmation pro que it crea li possibilitá de fallition de nor programma 
         quande it interacte con un variabile/camp.
-        
+
         Rust ne possede `null`, ma it conosse tre bon li importantie de posser representar nullcos!
         Lass nos considerar un representation naiv usante un utensile quel noi ja conosse.
-        
+
         Ti-ci mustre quel provide un alternativ represantation usante `None` es tam comun in Rust pro su 
         manca de un valore `null`. Tipes géneric auxilia soluer ti-ci defí.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Articul%20%7B%0A%20%20%20%20Inventarie(String)%2C%0A%20%20%20%20%2F%2F%20None%20representa%20li%20absentie%20de%20un%20articul%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20SacSinFunde%20%7B%0A%20%20%20%20articul%3A%20Articul%2C%0A%7D%0A
@@ -1651,17 +1651,17 @@ pages:
       content_markdown: |
         Rust possede ja un enum géneric nominat `Option` quel lassa nos posser representar valores nullabil
         sin li usation de `null.`
-        
+
         ```
         enum Option<T>{
           Some(T),
           None
         }
         ```
-        
+
         Ti enum es tam frequent que on posse crear instanties de it úcunc con li clave-paroles `Some` e `None`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Un%20partialmen%20definit%20tip%20de%20un%20struct%0Astruct%20SacSinFunde%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20articul%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20A%20notar%3A%20un%20sac%20por%20i32%2C%20possedente%20nullcos!%20Noi%20deve%20specificar%20li%20tip%0A%20%20%20%20%2F%2F%20pro%20que%20altrimen%20Rust%20ne%20vell%20saver%20pri%20quel%20tip%20de%20sac%20it%20acte%20se.%0A%20%20%20%20let%20sac_i32%20%3D%20SacSinFunde%3A%3A%3Ci32%3E%20%7B%20articul%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20sac_i32.articul.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20nequo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20alquo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20sac_i32%20%3D%20SacSinFunde%3A%3A%3Ci32%3E%20%7B%20articul%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20sac_i32.articul.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20alquo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20nequo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20con%20match%20noi%20posse%20elegantmen%20deconstructer%20Option%20e%20esser%20cert%20que%0A%20%20%20%20%2F%2F%20omni%20casus%20es%20tractat!%0A%20%20%20%20match%20sac_i32.articul%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22Trovat%20%7B%7D%20in%20li%20sac!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22Nequo%20trovat%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
-        
+
   - beta: true
     en:
       title: Result
@@ -1685,16 +1685,16 @@ pages:
       content_markdown: |
         Rust possede su propri enum géneric nominat `Result` (resultate) quel lassa nos posser retornar un valore quel posse fallir.
         To es li maniere idiomatic in ti lingue por tractar errores.
-        
+
         ```
         enum Result<T,Q>{
           Ok(T),
           Err(Q)
         }
         ```
-        
+
         A notar que nor tip géneric possede pluri *tipes parametrisat* separat per commas.
-        
+
         Ti enum es tam frequent que on posse crear instanties de it úcunc con li clave-paroles `Ok` e `Err`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20far_alquo_quel_posse_fallir(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22Li%20numer%C3%B3%20ne%20es%20just%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20far_alquo_quel_posse_fallir(12)%3B%0A%0A%20%20%20%20%2F%2F%20con%20match%20noi%20posse%20elegantmen%20deconstructer%20Result%20e%20tracter%20pri%0A%20%20%20%20%2F%2F%20omni%20possibil%20casus!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%7B%7D%20trovat%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Errore%3A%20%7B%7D%22%2C%20e)%2C%0A%20%20%20%20%7D%0A%7D%0A
 
@@ -1709,7 +1709,7 @@ pages:
       content_markdown: |
         Anc `main` posse retornar un `Result`!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20far_alquo_quel_posse_fallir(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22Li%20numer%C3%B3%20ne%20es%20just%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20retorna%20null%20valore%2C%20ma%20posse%20retornar%20un%20errore!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20far_alquo_quel_posse_fallir(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%7B%7D%20trovat%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20tractar%20ti-ci%20errore%20gracilmen%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20retornar%20un%20nov%20errore%20de%20main%20quel%20informar%20pri%20quo%20ha%20evenit!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22alquo%20fals%20ha%20evenit%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20A%20notar%20que%20noi%20usa%20in%20valore%20unit%20intra%20un%20Result%20Ok%0A%20%20%20%20%2F%2F%20por%20monstrar%20que%20omnicos%20standa%20bon%0A%20%20%20%20Ok(())%0A%7D%0A
-  - beta: true  
+  - beta: true
     en:
       title: Graceful Error Handling
       content_markdown: |
@@ -1731,7 +1731,7 @@ pages:
       title: Gracil Tractation de Errores
       content_markdown: |
         `Result` es tam frequent que Rust possede li potent operator `?` por tractar con ili. Ti du declarationes es egal:
-      
+
         ```
         do_something_that_might_fail()?
         ```
@@ -1786,12 +1786,12 @@ pages:
       content_markdown: |
         Sempre usar `Option`/`Result` posse devenir íncomod quande on simplicmen vole scrir un poc code. Ambi `Option` e `Result`
         have un metode nominat `unwrap` (aperter) quel es comod por strax obtenir un valore ma con un poc desbellesse. `unwrap` va:
-        
+
         1. trovar li valore intra Option/Result
         2. si li valore es de tip None/Err, `panic`!
-        
+
         Ti du pezzes de code es egal:
-        
+
         ```
         mi_option.unwrap()
         ```
@@ -1841,12 +1841,12 @@ pages:
       content_markdown: |
         Li tipes por colectiones es un del max util tipes géneric. Un vector es un variabilmen mesurat 
         liste de articules representat per li struct `Vec`.
-        
+
         Li macro `vec!` lassa nos facilmen crear un vector vice crear un manualmen.
-        
+
         `Vec` have li metode `iter()` quel crea un iterator de un vector, con quel noi posse facilmen
         plazzar un vector in un loop `for`.
-        
+
         Detallies pri memorie:
         * `Vec` es un struct, ma internmen it contene un referentie a un fix liste de su articules sur li heap.
         * Un vector comensa con un capacitá decidet, ma quande on adjunte coses a it queles superpassa su capacitá, it
@@ -1861,7 +1861,7 @@ pages:
         know fully how to use everything, right now it's just good to be aware of the major ideas you will
         see again and again in code. Our functions are getting quite lengthy! In our next chapter we will 
         spend talk about an important concept in Rust: data ownership.
-        
+
     ie:
       title: Capitul 4 - Conclusion
       content_markdown: |
