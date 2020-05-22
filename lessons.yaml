@@ -156,7 +156,7 @@ pages:
         linguagem de programação Rust. Rust é considerada uma linguagem com uma curva de 
         aprendizado elevada, e espero convencê-lo que há muito a explorar antes de chegar 
         às partes complexas.
-        
+
         Você pode ver este guia nestes idiomas:
 
         * [Deutsch](index_de.html)
@@ -634,11 +634,12 @@ pages:
         <p>Los nombres de las constantes se escriben siempre en <code>SCREAMING_SNAKE_CASE</code></p>"
     pt:
       title: Constantes
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Para%20fazer%20uma%20%7B%7Dzza%2C%20voc%C3%AA%20deve%20primeiro%20criar%20o%20Universo.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      code:
+        https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Para%20fazer%20uma%20%7B%7Dzza%2C%20voc%C3%AA%20deve%20primeiro%20criar%20o%20Universo.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
         As constantes nos permitem especificar um valor comum que pode ser usado
         muitas vezes por todos o nosso código de maneira eficiente. Ao invés de
         copiar os valores como variáveis onde serão utilizadas, as constantes substituirão
-        o identificador de texto pelo seu valor onde quer que estejam sendo usadas em tempo 
+        o identificador de texto pelo seu valor onde quer que estejam sendo usadas em tempo
         de compilação.
 
         Diferentemente das variáveis, o tipo das constantes devem ter sempre declarados.
