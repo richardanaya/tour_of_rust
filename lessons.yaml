@@ -1703,14 +1703,12 @@ pages:
       content_markdown: |
         `main` has the capability of returning a `Result`!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20returns%20no%20value%2C%20but%20could%20return%20an%20error!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20handle%20this%20error%20gracefully%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20a%20new%20error%20from%20main%20that%20said%20what%20happened!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22something%20went%20wrong%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Notice%20we%20use%20a%20unit%20value%20inside%20a%20Result%20Ok%0A%20%20%20%20%2F%2F%20to%20represent%20everything%20is%20fine%0A%20%20%20%20Ok(())%0A%7D%0A
-  - beta: true
-  
     ie:
       title: Un Main Fallibil
       content_markdown: |
         Anc `main` posse retornar un `Result`!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20far_alquo_quel_posse_fallir(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22Li%20numer%C3%B3%20ne%20es%20just%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20retorna%20null%20valore%2C%20ma%20posse%20retornar%20un%20errore!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20far_alquo_quel_posse_fallir(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%7B%7D%20trovat%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20tractar%20ti-ci%20errore%20gracilmen%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20retornar%20un%20nov%20errore%20de%20main%20quel%20informar%20pri%20quo%20ha%20evenit!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22alquo%20fals%20ha%20evenit%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20A%20notar%20que%20noi%20usa%20in%20valore%20unit%20intra%20un%20Result%20Ok%0A%20%20%20%20%2F%2F%20por%20monstrar%20que%20omnicos%20standa%20bon%0A%20%20%20%20Ok(())%0A%7D%0A
-    
+  - beta: true  
     en:
       title: Graceful Error Handling
       content_markdown: |
@@ -1728,7 +1726,6 @@ pages:
         ```
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Look%20at%20how%20much%20code%20we%20saved!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
-      
     ie:
       title: Gracil Tractation de Errores
       content_markdown: |
@@ -1786,7 +1783,7 @@ pages:
     ie:
       title: Desbell Tractation de Errores
       content_markdown: |
-         Sempre usar `Option`/`Result` posse devenir íncomod quande on simplicmen vole scrir un poc code. Ambi `Option` e `Result`
+        Sempre usar `Option`/`Result` posse devenir íncomod quande on simplicmen vole scrir un poc code. Ambi `Option` e `Result`
         have un metode nominat `unwrap` (aperter) quel es comod por strax obtenir un valore ma con un poc desbellesse. `unwrap` va:
         
         1. trovar li valore intra Option/Result
@@ -1820,7 +1817,6 @@ pages:
 
         Esse un bon Rustaceane e usa `match` sempre quande tu posse!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20far_alquo_quel_posse_fallir(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22Li%20numer%C3%B3%20ne%20es%20just!%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concis%20ma%20basat%20pri%20assumptiones%20e%20strax%20desbell%0A%20%20%20%20let%20v%20%3D%20far_alquo_quel_posse_fallir(42).unwrap()%3B%0A%20%20%20%20println!(%22%7B%7D%20trovat%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20to-ci%20va%20generar%20un%20panic!%0A%20%20%20%20let%20v%20%3D%20far_alquo_quel_posse_fallir(1).unwrap()%3B%0A%20%20%20%20println!(%22%7B%7D%20trovat%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
-
   - beta: true
     en:
       title: Vectors
@@ -1867,12 +1863,12 @@ pages:
         
     ie:
       title: Capitul 4 - Conclusion
-        content_markdown: |
-          In un sol capitul noi ha aprendet pri li potentie quel li tipes géneric da nos! Ne sucia te si tu ancor
-          ne save qualmen usar omnicos. Por li moment, it es plu important solmen esser conscient pri li grand
-          idés queles tu va vider denov e denov in code. Nor functiones ha tam agrandat se! In li capitul a sequer
-          noi va transpassa li tot capitul per discusser qualmen passar data inter functioner por que noi mey posser
-          vider li detallies e devenir plu clar pri qualmen Rust regarda memorie.
+      content_markdown: |
+        In un sol capitul noi ha aprendet pri li potentie quel li tipes géneric da nos! Ne sucia te si tu ancor
+        ne save qualmen usar omnicos. Por li moment, it es plu important solmen esser conscient pri li grand
+        idés queles tu va vider denov e denov in code. Nor functiones ha tam agrandat se! In li capitul a sequer
+        noi va transpassa li tot capitul per discusser qualmen passar data inter functioner por que noi mey posser
+        vider li detallies e devenir plu clar pri qualmen Rust regarda memorie.
   - beta: true
     chapter: 5
     en:
