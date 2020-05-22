@@ -1,0 +1,49 @@
+<html lang="pt">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Um tour por Rust - Matrizes</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt.html">Índice</a></span>
+                <span class="back"><a href="beta_06_pt.html">Anterior</a></span>
+                <span class="next"><a href="beta_08_pt.html">Próximo</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Matrizes</h1>
+            <p>Uma <em>matriz</em> é uma coleção de elementos de tamanho fixo todos os seu valores do mesmo tipo.</p>
+<p>O tipo de dado para uma <em>matriz</em> é <code>[T;N]</code>, onde T é o tipo dos valores e
+N é o comprimento fixo conhecido em tempo de compilação.</p>
+<p>Os elementos podem ser recuperados individualmente com o operador <code>[x]</code>, onde <em>x</em> 
+é o índice do tipo <em>usize</em> (começando de 0) do elemento que deseja recuperar.</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%20%3D%20%5B1%2C%202%2C%203%5D%3B%20%2F%2F%20type%20is%20%5Bi32%2C3%5D%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>
