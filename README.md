@@ -62,9 +62,12 @@ Lastly, there is a section for common words you should fill out your localized t
 
 # Releases
 
-## Release 3 - Unreleased
-* Chapter 4 
+## Release 3 - May 23, 2020
+* Chapter 4 released on generic data structures
 * Spanish for Chapter 2
+* Chapter 1 in brazillian portuguese
+* Updates for german and russian
+* New pages and rewrites and reordering
 
 ## Release 2 - May 16, 2020
 * Deutsch, English, Interlingue, Русский translations for chapter 2
