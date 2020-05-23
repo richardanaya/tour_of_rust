@@ -2084,6 +2084,23 @@ pages:
         Ownership can also be returned from a function.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
   - beta: true
+    en:
+      title: Chapter 5 Conclusion
+      content_markdown: |
+        Whew, congrats for making it through! I know it's alot to take in but you are well
+        under way to becoming a Rustacean. Hopefully it's clear how Rust as a language aims to 
+        solve many of these common challenges in systems programming:
+
+        * Unintentional modification of resources
+        * Forgetting to deconstruct resources 
+        * Resources accidently being deconstructed twice
+        * Using resources after they have been deconstructed 
+        * Data races caused by writing to resources while others are reading from resources 
+        * Modifying lists while iterating through  them
+        * Seeing clearly areas of the code where compiler can’t make guarantees
+
+        In the next chapter we'll apply some of this knowledge as we look how Rust handles text.
+  - beta: true
     chapter: 6
     en:
       title: Chapter 6 - Text

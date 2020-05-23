@@ -1,4 +1,4 @@
-<html lang="de">
+<html lang="en">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - Export</title>
+        <title>Tour of Rust - Chapter 5 Conclusion</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -25,25 +25,30 @@
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="00_de.html">Tour zu Rust</a></span>
+                <span class="title"><a href="00_en.html">Tour of Rust</a></span>
                 <span class="nav">
-                <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
-                <span class="back"><a href="beta_chapter_4_de.html">Zurück</a></span>
-                <span class="next"><a href="beta_33_de.html">Weiter</a></span>
+                <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
+                <span class="back"><a href="beta_46_en.html">Previous</a></span>
+                <span class="next"><a href="beta_chapter_6_en.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Export</h1>
-            <p>Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch zugänglich.
-Stattdessen müssen die Teile, die im Modul erreichbar sein sollen, durch das <code>pub</code> Schlüsselwort <em>exportiert</em> werden.</p>
-<p>Die Inhalte einer Kiste (crate) sind ebenfalls außerhalb des Crates nicht automatisch zugänglich.
-Die zu exportierenden Teile werden im <em>root Modul</em> (<code>lib.rs</code> oder <code>main.rs</code>) durch das <code>pub</code> Schlüsselwort exportiert.</p>
-<p>Mehr dazu später, für jetzt reicht es zu wissen, dass durch <code>pub</code> die Sichtbarkeit
-von Funktionen und Attributen gesteuert werden kann.</p>
+            <h1>Chapter 5 Conclusion</h1>
+            <p>Whew, congrats for making it through! I know it's alot to take in but you are well
+under way to becoming a Rustacean. Hopefully it's clear how Rust as a language aims to 
+solve many of these common challenges in systems programming:</p>
+<ul>
+<li>Unintentional modification of resources</li>
+<li>Forgetting to deconstruct resources </li>
+<li>Resources accidently being deconstructed twice</li>
+<li>Using resources after they have been deconstructed </li>
+<li>Data races caused by writing to resources while others are reading from resources </li>
+<li>Modifying lists while iterating through  them</li>
+<li>Seeing clearly areas of the code where compiler can’t make guarantees</li>
+</ul>
+<p>In the next chapter we'll apply some of this knowledge as we look how Rust handles text.</p>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>
