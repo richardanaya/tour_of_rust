@@ -35,7 +35,7 @@ common_words:
     previous: Anterior
     toc: Tabla de Contenidos
     lessons: Unidades
-  pt:
+  pt-br:
     chapter: Capítulo
     tor: Um tour por Rust
     next: Próximo
@@ -53,9 +53,11 @@ pages:
         a lot to explore before we even get to complex parts.</p><p>You can find this
         guide in these languages:
 
+        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
+        * [Interlingue](index_ie.html)
         * [Русский](index_ru.html)
 
         if you have suggestions on content
@@ -85,6 +87,7 @@ pages:
         [Github Repository](https://github.com/richardanaya/tour_of_rust).
 
         Translations:
+        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
@@ -114,6 +117,7 @@ pages:
         мы перейдём к более сложным частям.
 
         Тур доступен на таких языках:
+        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
@@ -134,6 +138,7 @@ pages:
         antes de llegar a las partes complejas.</p><p>Puedes encontrar esta
         guía en los siguientes idiomas:
 
+        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
@@ -147,22 +152,23 @@ pages:
         Puedes navegar por el curso usando <span class="emoji">⬅️</span> y <span class="emoji">➡️</span>
 
         En este clásico ejemplo te mostramos el uso de cadenas unicode con Rust.
-    pt:
+    pt-br:
       title: "Olá, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Ol%C3%A1%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
       content_markdown: |
         Bem-vindo ao *Tour por Rust*. Este é um guia passo-a-passo pelas características da
-        linguagem de programação Rust. Rust é considerada uma linguagem com uma curva de 
+        linguagem de programação Rust. Ela é considerada uma linguagem com uma curva de 
         aprendizado elevada, e espero convencê-lo que há muito a explorar antes de chegar 
         às partes complexas.
-        
+
         Você pode ver este guia nestes idiomas:
 
+        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
-        * [Portugês](index_pt.html)
+        * [Portugês](index_pt-br.html)
         * [Русский](index_ru.html)
 
         Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
@@ -212,7 +218,7 @@ pages:
         "<p>En este primer capítulo vamos a ver lo más básico respecto a funciones, variables y los tipos de datos primitivos.
         ¡Bienvenido a bordo!</p><p>Y por si te estas preguntando quién es el adorable cangrejo parlante, me llamo <b>Ferris</b>,
         y soy la mascota no oficial del lenguaje de programación Rust. Encantado de conocerte.</p>"
-    pt:
+    pt-br:
       title: Capítulo 1 - O Básico
       content_markdown: |
         Neste primeiro capítulo iremos explorar o mais básico sobre funções, variáveis e os
@@ -255,8 +261,8 @@ pages:
       content_html: |
         <p>En el tour usaremos la siguiente herramienta de programación interactiva: <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
         </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y aptitudes.</p>
-    pt:
-      title: O Playgroung Rust
+    pt-br:
+      title: O playgroung do Rust
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Bem-vindo%20%C3%A0%20%C3%A1rea%20de%20testes!%20Voc%C3%AA%20pode%20modificar%20seu%20c%C3%B3digo%20aqui.%22)%3B%0A%7D%0A
       content_markdown: |
         Este tour usa a ferramenta de codificação interativa [Rust Playground](https://play.rust-lang.org)
@@ -320,7 +326,7 @@ pages:
         en cómo podemos declarar variables con el mismo nombre varias veces. Esto se llama
         sombreado <i>(shadowing)</i> de variables y se puede modificar el tipo para futuras referencias a ese nombre.</b></p>
         <p>Los nombres de las variables se escriben siempre en <code>snake_case</code></p>"
-    pt:
+    pt-br:
       title: Variáveis
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20infere%20o%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tamb%C3%A9m%20pode%20ser%20expl%C3%ADcito%20com%20o%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tamb%C3%A9m%20pode%20declarar%20primero%20e%20inicializar%20depois%2C%20mas%20%C3%A9%20incomum%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
       content_markdown: |
@@ -390,7 +396,7 @@ pages:
         ser leída</li></ul><p>Los valores mutables siempre se denotan con la palabra reservada <b>mut</b></p>
         <p>Hay mucho más que explicar aún sobre este concepto, pero de momento
         presta atención solamente a la palabra reservada para saber lo que se puede modificar y lo que no.</p>"
-    pt:
+    pt-br:
       title: Modificando valores
       content_markdown: |
         Em Rust é importante levar em consideração quais valores serão alterados. Os valores
@@ -511,7 +517,7 @@ pages:
         a gestionar los problemas de la memoria, algo a lo que puedes no estar acostumbrado.
         Entraremos en detalles sobre los textos más tarde.</p><p>Observa cómo los tipos numéricos pueden especificarse
         explícitamente añadiendo el tipo al final del número (por ejemplo, <code>13u32</code>)</p>"
-    pt:
+    pt-br:
       title: Tipos básicos
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20infere%20o%20tipo%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20infere%20o%20tipo%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22Ol%C3%A1%2C%20mundo!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
       content_markdown: |
@@ -527,8 +533,8 @@ pages:
         * slices - uma coleção de elementos similares com comprimento conhecido em tempo de execução
         * `str`(string slice) - texto com comprimento conhecido em tempo de execução
 
-        Textos podem ser mais complexos do que você está acostumado com outras linguagens. Uma vez que o Rust 
-        é uma linguagem de programação de sistemas, ele cuida do gerenciamento de memória de uma maneira que
+        Textos no Rust podem ser mais complexos do que você está acostumado com outras linguagens. Uma vez que o 
+        Rust é uma linguagem de programação de sistemas, ele cuida do gerenciamento de memória de uma maneira que
         pode não estar familiarizado. Entraremos em detalhes mais adiante.
 
         Tipos numéricos podem ser especificados explicitamente adicionando o tipo ao final do 
@@ -573,7 +579,7 @@ pages:
         puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que se produzca
         un error.</p><p>Por suerte, Rust hace que las conversiones de tipos numéricos sean
         muy fáciles con la palabra reservada <b>as</b>.</p>"
-    pt:
+    pt-br:
       title: Conversão de tipos básica
       content_markdown: |
         O Rust requer que sejamos explícitos quando se trata de tipos numéricos. Não podemos
@@ -631,9 +637,10 @@ pages:
         identificador de texto (donde se haya usado) por su valor en tiempo de compilación.</p>
         <p>A diferencia de las variables, el tipo de las constantes se debe especificar explícitamente.</p>
         <p>Los nombres de las constantes se escriben siempre en <code>SCREAMING_SNAKE_CASE</code></p>"
-    pt:
+    pt-br:
       title: Constantes
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Para%20fazer%20uma%20%7B%7Dzza%2C%20voc%C3%AA%20deve%20primeiro%20criar%20o%20Universo.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
         As constantes nos permitem especificar um valor comum que pode ser usado
         muitas vezes por todos o nosso código de maneira eficiente. Ao invés de
         copiar os valores como variáveis onde serão utilizadas, as constantes substituirão
@@ -643,8 +650,7 @@ pages:
         Diferentemente das variáveis, o tipo das constantes devem ter sempre declarados.
 
         Os nomes das constantes são sempre em `SCREAMING_SNAKE_CASE`.
-  - beta: true
-    en:
+  - en:
       title: Arrays
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%20%3D%20%5B1%2C%202%2C%203%5D%3B%20%2F%2F%20type%20is%20%5Bi32%2C3%5D%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
       content_markdown: |
@@ -668,8 +674,9 @@ pages:
       title: Arrays
       content_markdown: |
         Need translation
-    pt:
+    pt-br:
       title: Matrizes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%20%3D%20%5B1%2C%202%2C%203%5D%3B%20%2F%2F%20o%20tipo%20%C3%A9%20%5Bi32%2C3%5D%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
       content_markdown: |
         Uma *matriz* é uma coleção de elementos de tamanho fixo todos os seu valores do mesmo tipo.
 
@@ -718,7 +725,7 @@ pages:
         "<p>Una función puede recibir cero o más argumentos.</p><p>En este ejemplo,
         <i>add</i> recibe dos parámetros de tipo <code>i32</code> (entero de 32 bits).</p>
         <p>Los nombres de las funciones se escriben siempre en <code>snake_case</code></p>"
-    pt:
+    pt-br:
       title: Funções
       content_markdown: |
         Uma função pode receber zero ou mais parâmetros.
@@ -773,7 +780,7 @@ pages:
         soporta varios modos de desestructuración que veremos en diferentes formas, esto nos
         permite extraer subconjuntos de estructuras de datos de manera práctica.
         ¡Presta mucha atención!</p>"
-    pt:
+    pt-br:
       title: Returno de Múltiplos Valores
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20devolve%20uma%20tupla%20de%20valores%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20desestrutura%20a%20tupla%20para%20duas%20vari%C3%A1veis%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
       content_markdown: |
@@ -782,7 +789,7 @@ pages:
         Os elementos da tupla podem ser referenciados pelo seu índice.
 
         O Rust suporta vários modos de desestruturação que veremos em diferentes formas, 
-        permintindo extrair subconjuntos de dados de maneira prática.
+        permitindo extrair subconjuntos de dados de maneira prática.
   - en:
       title: Returning Nothing
       content_markdown: |
@@ -827,7 +834,7 @@ pages:
 
         El uso de `()` es poco común, pero es necesario saber su significado ya que aparecerá de vez en cuando.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20no_hagas_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20El%20valor%20de%20retorno%20es%20impl%C3%ADcitamente%20()%0Afn%20no_hagas_nada2()%20%7B%0A%20%20%20%20%2F%2F%20Esta%20funci%C3%B3n%20devuelve%20()%20si%20no%20se%20especifica%20nada%20que%20devolver%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20no_hagas_nada()%3B%0A%20%20%20%20let%20b%20%3D%20no_hagas_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Mostrando%20una%20sentencia%20de%20depuraci%C3%B3n%20para%20a%20y%20b%0A%20%20%20%20%2F%2F%20porque%20es%20dif%C3%ADcil%20no%20mostrar%20nada%0A%20%20%20%20println!(%22El%20valor%20de%20a%20es%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22El%20valor%20de%20b%20es%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
-    pt:
+    pt-br:
       title: Retornando nada
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20faz_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20o%20tipo%20de%20retorno%20%C3%A9%20implicitamente%20()%0Afn%20faz_nada2()%20%7B%0A%20%20%20%20%2F%2F%20esta%20fun%C3%A7%C3%A3o%20ir%C3%A1%20devolver%20()%20se%20nada%20for%20especificado%20para%20retornar%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20faz_nada()%3B%0A%20%20%20%20let%20b%20%3D%20faz_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Exibindo%20uma%20string%20de%20depura%C3%A7%C3%A3o%20para%20a%20e%20b%0A%20%20%20%20%2F%2F%20Porque%20%C3%A9%20dif%C3%ADcil%20n%C3%A3o%20mostrar%20nada%0A%20%20%20%20println!(%22O%20valor%20de%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22O%20valor%20de%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
       content_markdown: |
@@ -891,13 +898,13 @@ pages:
         de Rust. Este compilador pretende asegurarse de que tu código hace lo que esperas.
         A continuación echaremos un vistazo a algunos viejos conocidos: <code>if</code>
         y <code>for</code>.</p>"
-    pt:
+    pt-br:
       title: Capítulo 1 Conclusão
       content_markdown: |
         Bom trabalho! O básico do Rust não foi tão ruim, não é? Este foi só o
         comecinho de como o compilador Rust trabalha. Ele se preocupa muito a respeito
-        dos tamanhos dos valores em memória, quais coisas podem ser modificadas ou não,
-        e garantir que as coisas funcionem do jeito que você quer que funcionem. Estes são
+        do tamanho dos valores em memória, quais coisas podem ser modificadas ou não,
+        e garantir que as coisas funcionem do jeito que você quer. Estes são
         pequenos previews de um princípio de **segurança** que prevalece através do Rust.
         O compilador apenas quer ter certeza que o seu código faça o que se espera dele!
         A seguir veremos alguns velhos conhecidos: `if` e `for`.
@@ -1349,8 +1356,7 @@ pages:
         Определение структуры - это как чертеж для компилятора, который указывает на то, как поля должны быть расположены в памяти.
 
         Поля в структуре расположены в памяти один за другим (компилятор может менять их местами для оптимизаций).
-  - beta: true
-    en:
+  - en:
       title: Calling Methods
       content_markdown: |
         Unlike functions, methods are a function associated with a specific data type.
@@ -1730,8 +1736,7 @@ pages:
         гармонии и согласии с его типами. Далее мы поговорим о концепции, которая дает нашим типам данных 
         ещё большую гибкость представления: *дженерики* (шаблонные типы данных).
 
-  - beta: true
-    chapter: 4
+  - chapter: 4
     en:
       title: Chapter 4 - Generic Types
       content_markdown: |
@@ -1739,8 +1744,15 @@ pages:
         of nullable values (i.e. variables which might not have a value yet), error handling, 
         collections, and more! In this section we will be learning about the foundational generic types 
         you will likely be using all the time.
-  - beta: true
-    en:
+    ie:
+      title: Capitul 4 - Tipes Géneric
+      content_markdown: |
+        Tipes géneric es íncredibilmen important in Rust. On usa les por representar valores nullabil
+        (t.e. variabiles ancor ne possedent un valore), por tractar errores, colectiones e plu!
+        In ti-ci section noi va aprender pri li fundamental tipes géneric queles tu va max possibilmen
+        sempre utilisar.
+
+  - en:
       title: What Are Generic Types?
       content_markdown: |
         Generic types allow us to partially define a `struct` or `enum`, enabling a compiler to create a fully 
@@ -1749,8 +1761,17 @@ pages:
         Rust generally can infer the final type by looking at our instantiation, but if it needs help you 
         can always be explicit using the `::<T>` operator, also known by the name `turbofish` (he's a good friend of mine!).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20by%20using%20generic%20types%20here%2C%20we%20create%20compile-time%20created%20types%0A%20%20%20%20%2F%2F%20making%20our%20code-size%20bigger.%20Turbofish%20let's%20us%20be%20explicit.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20can%20infer%20types%20for%20generics%20too!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20never%20put%20a%20bag%20of%20holding%20in%20a%20bag%20of%20holding%20in%20real%20life%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
-  - beta: true
-    en:
+    ie:
+      title: Quo es Tipes Géneric?
+      content_markdown: |
+        Tipes géneric possibilisa li partial definition de un `struct` o `enum`, con quel li compilator va posser
+        crear un version completmen definat quande it compila se secun li code quel noi scri.
+
+        Rust por li pluparte posse inferer li tip final per regardar nor instantiation, ma si it besona auxilie tu posse
+        sempre esser plu explicit con li operator `::<T>`, anc conosset con li nómine `turbofish` (un pisc quel es un
+        de mi bon amics!).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Un%20partialmen%20definit%20tip%20de%20un%20struct%0Astruct%20SacSinFunde%3CT%3E%20%7B%0A%20%20%20%20articul%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20A%20notar%3A%20per%20li%20usation%20ci%20de%20tipes%20g%C3%A9neric%2C%20noi%20crea%20tipes%20creat%20durant%0A%20%20%20%20%2F%2F%20li%20compilation%2C%20agrandante%20li%20grandore%20de%20nor%20code.%20Turbofish%20auxilia%20nos%0A%20%20%20%20%2F%2F%20esser%20explicit.%0A%20%20%20%20let%20sac_i32%20%3D%20SacSinFunde%3A%3A%3Ci32%3E%20%7B%20articul%3A%2042%20%7D%3B%0A%20%20%20%20let%20sac_bool%20%3D%20SacSinFunde%3A%3A%3Cbool%3E%20%7B%20articul%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20posse%20inferer%20tipes%20anc%20por%20g%C3%A9nerics!%0A%20%20%20%20let%20sac_quel_plana%20%3D%20SacSinFunde%20%7B%20articul%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20A%20notar%3A%20nequande%20plazzar%20un%20sac%20sin%20funde%20in%20un%20sac%20sin%20funde%20%0A%20%20%20%20%2F%2F%20in%20li%20ver%20vive%0A%20%20%20%20let%20sac_in_sac%20%3D%20SacSinFunde%20%7B%0A%20%20%20%20%20%20%20%20articul%3A%20SacSinFunde%20%7B%20articul%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20sac_i32.articul%2C%20sac_bool.articul%2C%20sac_quel_plana.articul%2C%20sac_in_sac.articul.articul%0A%20%20%20%20)%3B%0A%7D%0A
+  - en:
       title: Representing Nothing
       content_markdown: |
         In other languages, the keyword `null` is used to represent an absense of a value. It creates
@@ -1761,10 +1782,22 @@ pages:
         Consider a naive representation using a tool we already know.
 
         This pattern of providing a `None` alternative representation for one or many alternate values is so 
-        common Rust because of it's lack of a `null` value. Generic types help solve this challenge.
+        common Rust because of its lack of a `null` value. Generic types help solve this challenge.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20represents%20the%20absence%20of%20an%20item%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
-  - beta: true
-    en:
+    ie:
+      title: Representar Nullcos
+      content_markdown: |
+        In altri lingues, on usa li clave-parol `null` por representar li absentie de un valore. To crea 
+        desfacilitás in lingues de programmation pro que it crea li possibilitá de fallition de nor programma 
+        quande it interacte con un variabile/camp.
+
+        Rust ne possede `null`, ma it conosse tre bon li importantie de posser representar nullcos!
+        Lass nos considerar un representation naiv usante un utensile quel noi ja conosse.
+
+        Ti-ci mustre quel provide un alternativ represantation usante `None` es tam comun in Rust pro su 
+        manca de un valore `null`. Tipes géneric auxilia soluer ti-ci defí.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Articul%20%7B%0A%20%20%20%20Inventarie(String)%2C%0A%20%20%20%20%2F%2F%20None%20representa%20li%20absentie%20de%20un%20articul%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20SacSinFunde%20%7B%0A%20%20%20%20articul%3A%20Articul%2C%0A%7D%0A
+  - en:
       title: Option
       content_markdown: |
         Rust has a built in generic enum called `Option` that allows us to represent nullable values 
@@ -1779,8 +1812,23 @@ pages:
 
         This enum is so common, instances of the enum can be created anywhere with the keyword `Some` and `None`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20A%20bag%20for%20i32%2C%20holding%20nothing!%20We%20have%20to%20specify%20the%20type%0A%20%20%20%20%2F%2F%20because%20otherwise%20Rust%20would%20not%20know%20what%20type%20of%20bag%20it%20is.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22found%20%7B%7D%20in%20bag!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22found%20nothing%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
-  - beta: true
-    en:
+    ie:
+      title: Option
+      content_markdown: |
+        Rust possede ja un enum géneric nominat `Option` quel lassa nos posser representar valores nullabil
+        sin li usation de `null.`
+
+        ```
+        enum Option<T>{
+          Some(T),
+          None
+        }
+        ```
+
+        Ti enum es tam frequent que on posse crear instanties de it úcunc con li clave-paroles `Some` e `None`.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Un%20partialmen%20definit%20tip%20de%20un%20struct%0Astruct%20SacSinFunde%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20articul%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20A%20notar%3A%20un%20sac%20por%20i32%2C%20possedente%20nullcos!%20Noi%20deve%20specificar%20li%20tip%0A%20%20%20%20%2F%2F%20pro%20que%20altrimen%20Rust%20ne%20vell%20saver%20pri%20quel%20tip%20de%20sac%20it%20acte%20se.%0A%20%20%20%20let%20sac_i32%20%3D%20SacSinFunde%3A%3A%3Ci32%3E%20%7B%20articul%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20sac_i32.articul.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20nequo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20alquo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20sac_i32%20%3D%20SacSinFunde%3A%3A%3Ci32%3E%20%7B%20articul%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20sac_i32.articul.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20alquo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Hay%20nequo%20in%20li%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20con%20match%20noi%20posse%20elegantmen%20deconstructer%20Option%20e%20esser%20cert%20que%0A%20%20%20%20%2F%2F%20omni%20casus%20es%20tractat!%0A%20%20%20%20match%20sac_i32.articul%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22Trovat%20%7B%7D%20in%20li%20sac!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22Nequo%20trovat%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+
+  - en:
       title: Result
       content_markdown: |
         Rust has a built in generic enum called `Result` that allows us to return a value that has the possibility of failing.
@@ -1797,15 +1845,35 @@ pages:
 
         This enum is so common, instances of the enum can be created anywhere with the keyword `Ok` and `Err`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Result%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Error%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
+    ie:
+      title: Result
+      content_markdown: |
+        Rust possede su propri enum géneric nominat `Result` (resultate) quel lassa nos posser retornar un valore quel posse fallir.
+        To es li maniere idiomatic in ti lingue por tractar errores.
 
-  - beta: true
-    en:
+        ```
+        enum Result<T,Q>{
+          Ok(T),
+          Err(Q)
+        }
+        ```
+
+        A notar que nor tip géneric possede pluri *tipes parametrisat* separat per commas.
+
+        Ti enum es tam frequent que on posse crear instanties de it úcunc con li clave-paroles `Ok` e `Err`.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20far_alquo_quel_posse_fallir(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22Li%20numer%C3%B3%20ne%20es%20just%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20far_alquo_quel_posse_fallir(12)%3B%0A%0A%20%20%20%20%2F%2F%20con%20match%20noi%20posse%20elegantmen%20deconstructer%20Result%20e%20tracter%20pri%0A%20%20%20%20%2F%2F%20omni%20possibil%20casus!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%7B%7D%20trovat%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Errore%3A%20%7B%7D%22%2C%20e)%2C%0A%20%20%20%20%7D%0A%7D%0A
+
+  - en:
       title: Failable Main
       content_markdown: |
         `main` has the capability of returning a `Result`!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20returns%20no%20value%2C%20but%20could%20return%20an%20error!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20handle%20this%20error%20gracefully%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20a%20new%20error%20from%20main%20that%20said%20what%20happened!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22something%20went%20wrong%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Notice%20we%20use%20a%20unit%20value%20inside%20a%20Result%20Ok%0A%20%20%20%20%2F%2F%20to%20represent%20everything%20is%20fine%0A%20%20%20%20Ok(())%0A%7D%0A
-  - beta: true
-    en:
+    ie:
+      title: Un Main Fallibil
+      content_markdown: |
+        Anc `main` posse retornar un `Result`!
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20far_alquo_quel_posse_fallir(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22Li%20numer%C3%B3%20ne%20es%20just%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20retorna%20null%20valore%2C%20ma%20posse%20retornar%20un%20errore!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20far_alquo_quel_posse_fallir(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%7B%7D%20trovat%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20tractar%20ti-ci%20errore%20gracilmen%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20retornar%20un%20nov%20errore%20de%20main%20quel%20informar%20pri%20quo%20ha%20evenit!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22alquo%20fals%20ha%20evenit%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20A%20notar%20que%20noi%20usa%20in%20valore%20unit%20intra%20un%20Result%20Ok%0A%20%20%20%20%2F%2F%20por%20monstrar%20que%20omnicos%20standa%20bon%0A%20%20%20%20Ok(())%0A%7D%0A
+  - en:
       title: Graceful Error Handling
       content_markdown: |
         `Result` is so common that Rust has a powerful operator `?` for working with them. These two statements are equivalent:
@@ -1822,8 +1890,22 @@ pages:
         ```
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Look%20at%20how%20much%20code%20we%20saved!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
-  - beta: true
-    en:
+    ie:
+      title: Gracil Tractation de Errores
+      content_markdown: |
+        `Result` es tam frequent que Rust possede li potent operator `?` por tractar con ili. Ti du declarationes es egal:
+
+        ```
+        do_something_that_might_fail()?
+        ```
+
+        ```
+        match do_something_that_might_fail() {
+          Ok(v) => v,
+          Err(e) => { return e; },
+        }
+        ```
+  - en:
       title: Ugly Option/Error Handling
       content_markdown: |
         Working with `Option`/`Result` can be tedious when you are just trying to write some quick code.  Both `Option` and `Result` have a 
@@ -1861,8 +1943,44 @@ pages:
         Be a good rustacean and properly use `match` when you can!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concise%20but%20assumptive%20and%20gets%20ugly%20fast%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20will%20panic!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
 
-  - beta: true
-    en:
+    ie:
+      title: Desbell Tractation de Errores
+      content_markdown: |
+        Sempre usar `Option`/`Result` posse devenir íncomod quande on simplicmen vole scrir un poc code. Ambi `Option` e `Result`
+        have un metode nominat `unwrap` (aperter) quel es comod por strax obtenir un valore ma con un poc desbellesse. `unwrap` va:
+
+        1. trovar li valore intra Option/Result
+        2. si li valore es de tip None/Err, `panic`!
+
+        Ti du pezzes de code es egal:
+
+        ```
+        mi_option.unwrap()
+        ```
+
+        ```
+        match mi_option {
+          Some(v) => v,
+          None => panic!("alquel erra-missage generat de Rust!")
+        }
+        ```
+
+        Similmen:
+
+        ```
+        mi_result.unwrap()
+        ```
+
+        ```
+        match mi_result {
+          Ok(v) => v,
+          Err(e) => panic!("alquel erra-missage generat de Rust!")
+        }
+        ```
+
+        Esse un bon Rustaceane e usa `match` sempre quande tu posse!
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20far_alquo_quel_posse_fallir(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22Li%20numer%C3%B3%20ne%20es%20just!%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concis%20ma%20basat%20pri%20assumptiones%20e%20strax%20desbell%0A%20%20%20%20let%20v%20%3D%20far_alquo_quel_posse_fallir(42).unwrap()%3B%0A%20%20%20%20println!(%22%7B%7D%20trovat%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20to-ci%20va%20generar%20un%20panic!%0A%20%20%20%20let%20v%20%3D%20far_alquo_quel_posse_fallir(1).unwrap()%3B%0A%20%20%20%20println!(%22%7B%7D%20trovat%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
+  - en:
       title: Vectors
       content_markdown: |
         Some of the most useful generic types are collection types. A vector is a variably sized list of items
@@ -1874,19 +1992,44 @@ pages:
         put a vector into a `for` loop.
 
         Memory Details:
-        * `Vec` is a struct, but internally it contains a reference to a fixed list of it's items on the heap.
+        * `Vec` is a struct, but internally it contains a reference to a fixed list of its items on the heap.
         * A vector starts with a default capacity, when more items are added than it has capacity for, it 
-          reallocates it's data on the heap to have a new fixed list with large capacity.
+          reallocates its data on the heap to have a new fixed list with large capacity.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20can%20be%20explicit%20with%20type%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20But%20look%20how%20clever%20Rust%20is%20about%20determining%20the%20type%20automatically%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20That's%20a%20beautiful%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
 
-  - beta: true
-    en:
+    ie:
+      title: Vectors
+      content_markdown: |
+        Li tipes por colectiones es un del max util tipes géneric. Un vector es un variabilmen mesurat 
+        liste de articules representat per li struct `Vec`.
+
+        Li macro `vec!` lassa nos facilmen crear un vector vice crear un manualmen.
+
+        `Vec` have li metode `iter()` quel crea un iterator de un vector, con quel noi posse facilmen
+        plazzar un vector in un loop `for`.
+
+        Detallies pri memorie:
+        * `Vec` es un struct, ma internmen it contene un referentie a un fix liste de su articules sur li heap.
+        * Un vector comensa con un capacitá decidet, ma quande on adjunte coses a it queles superpassa su capacitá, it
+        realoca li data sur li heap por haver un nov liste fix con un plu grand capacitá
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Noi%20posse%20esser%20explicit%20pri%20tipes%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbopisc%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20Ma%20vide%20quam%20inteligent%20es%20Rust%20pri%20automaticmen%20determinar%20li%20lip%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20Quam%20bell%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Salute%22)%2C%20String%3A%3Afrom(%22Munde%22)%5D%3B%0A%0A%20%20%20%20for%20parol%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20parol)%3B%0A%20%20%20%20%7D%0A%7D%0A
+
+  - en:
       title: Chapter 4 - Conclusion
       content_markdown: |
         In one chapter we've learned how much power generic types give us! Don't worry if you don't 
         know fully how to use everything, right now it's just good to be aware of the major ideas you will
         see again and again in code. Our functions are getting quite lengthy! In our next chapter we will 
         spend talk about an important concept in Rust: data ownership.
+
+    ie:
+      title: Capitul 4 - Conclusion
+      content_markdown: |
+        In un sol capitul noi ha aprendet pri li potentie quel li tipes géneric da nos! Ne sucia te si tu ancor
+        ne save qualmen usar omnicos. Por li moment, it es plu important solmen esser conscient pri li grand
+        idés queles tu va vider denov e denov in code. Nor functiones ha tam agrandat se! In li capitul a sequer
+        noi va transpassa li tot capitul per discusser qualmen passar data inter functioner por que noi mey posser
+        vider li detallies e devenir plu clar pri qualmen Rust regarda memorie.
   - beta: true
     chapter: 5
     en:
