@@ -2032,7 +2032,7 @@ pages:
   - beta: true
     chapter: 5
     en:
-      title: Chapter 5 - Ownership & Sharing Data
+      title: Chapter 5 - Ownership & Borrowing Data
       content_markdown: |
         Rust offers a different paradigm for managing memory than many other languages. We're going to look at
         thes rules of it's compiler one by one so it's not overwhelming. It's important to remember that 
@@ -2066,6 +2066,23 @@ pages:
         * By automically freeing memory Rust helps ensure that there are less memory leaks 
         * Memory resources can only be dropped once.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo.bar%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo%20is%20dropped%0A%7D%0A
+  - beta: true
+    en:
+      title: Moving Ownership
+      content_markdown: |
+        When a owner is passed as an argument to a function, ownership is moved to the function parameter.
+
+        After a **move** the variable in the original function can no longer be used.
+
+        Memory details:
+        * During a **move** the stack memory of the owners value is copied to the function call's parameter stack memory.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20can%20no%20longer%20be%20used%0A%7D%0A
+  - beta: true
+    en:
+      title: Returning Ownership
+      content_markdown: |
+        Ownership can also be returned from a function.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
   - beta: true
     chapter: 6
     en:
