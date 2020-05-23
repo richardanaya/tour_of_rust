@@ -94,29 +94,32 @@ for(var l in languages){
     let c = 0;
     let words = lessons.common_words;
     let langLessons = lessons.pages.filter(x=>{
-        if(!x[lang]){
-            return false;
-        }
         if(!generate_beta_content && x.beta == true){
             return false;
         }
-        return x[lang]["content_html"] || x[lang]["content_markdown"];
+        return true;
     });
     let betaLessons = lessons.pages.filter(x=>{
-        if(!x[lang]){
-            return false;
-        }
-        return x[lang]["content_html"] || x[lang]["content_markdown"];
+        return true;
     });
     for(var i in langLessons){
         let lesson = langLessons[i];
         let fileName = getFileName(lang,i,false,lesson.chapter);
        
-        let content = lesson[lang]["content_html"];
-        if(!content){
-            content = converter.makeHtml(lesson[lang]["content_markdown"]);
+        let lesson_title = lesson["en"].title + " [untranslated]";
+        let lesson_content = converter.makeHtml(lesson["en"].content_markdown)
+        let lesson_code = lesson["en"].code 
+        if(lesson[lang]){
+            lesson_title = lesson[lang].title;
+            let content = lesson[lang]["content_html"];
+            if(!content){
+                content = converter.makeHtml(lesson[lang]["content_markdown"]);
+            }
+            lesson_content = content;
+            lesson_code = lesson[lang].code || lesson["en"].code;
         }
-        fs.writeFileSync("docs/"+fileName, template(langLessons, lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==langLessons.length-1,words,false))
+        
+        fs.writeFileSync("docs/"+fileName, template(langLessons, lang,lesson_title,lesson_code,lesson_content,c,i==langLessons.length-1,words,false))
         c++;
     }
     c = 0;
@@ -125,11 +128,19 @@ for(var l in languages){
         if(lesson[lang]){
             let fileName = getFileName(lang,i,true,lesson.chapter);
        
-            let content = lesson[lang]["content_html"];
-            if(!content){
-                content = converter.makeHtml(lesson[lang]["content_markdown"]);
+            let lesson_title = lesson["en"].title + " [untranslated]";
+            let lesson_content = lesson["en"].content_markdown
+            let lesson_code = lesson["en"].code 
+            if(lesson[lang]){
+                lesson_title = lesson[lang].title;
+                let content = lesson[lang]["content_html"];
+                if(!content){
+                    content = converter.makeHtml(lesson[lang]["content_markdown"]);
+                }
+                lesson_content = content;
+                lesson_code = lesson[lang].code || lesson["en"].code;
             }
-            fs.writeFileSync("docs/beta_"+fileName, template(betaLessons, lang,lesson[lang]["title"],lesson[lang]["code"] || lesson["en"].code,content,c,i==betaLessons.length-1,words,true))
+            fs.writeFileSync("docs/beta_"+fileName, template(betaLessons, lang, lesson_title,lesson_code,lesson_content,c,i==betaLessons.length-1,words,true))
             c++;
         }
     }
@@ -169,9 +180,9 @@ for(var l in languages){
             <p>
             <ul>
         ${langLessons.map((x,i)=> {
-            let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]["title"]}</a></li>`;
+            let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:x["en"].title + " [untranslated]"}</a></li>`;
             if(x.chapter != undefined){
-                s = `</ul><h3><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]["title"]}</a></h3><ul>`;
+                s = `</ul><h3><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:x["en"].title + " [untranslated]"}</a></h3><ul>`;
             }
             return s;
         }).join("\n")}
