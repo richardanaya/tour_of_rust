@@ -26,6 +26,7 @@ This project also aims to provide this book in as many languages as possible.
 
 # Contributors
 
+* Brazilian Portuguese - [Denstone](https://github.com/denstone)
 * Deutsch - [Felix](https://github.com/jassler)
 * English - [Richard Anaya](https://github.com/richardanaya)
 * Español - [Alba Martínez Martínez](https://github.com/albatraduce)
