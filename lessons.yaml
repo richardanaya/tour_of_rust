@@ -2035,8 +2035,8 @@ pages:
       title: Chapter 5 - Ownership & Borrowing Data
       content_markdown: |
         Rust has a unique paradigm for managing memory compared to other programming languages. We're going to look at
-        the behavior of the compiler one by one so it's not overwhelming. It's important to remember that 
-        ultimately the rules we show don't exist to make your life hard, but to help you make less error-prone code!
+        the behaviors and validations of the compiler one by one so it's not overwhelming. It's important to remember that 
+        ultimately the rules we show don't exist to make your life hard, but to help you make your code less error-prone!
   - beta: true
     en:
       title: Ownership
