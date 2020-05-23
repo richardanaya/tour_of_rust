@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour zu Rust - for</title>
+        <title>Tour zu Rust - while</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,11 +33,11 @@
                 </span>
             </div>
             <div class="page">
-            <h1>for</h1>
-            <p><code>for</code>-Schleifen in Rust sind ein großes Upgrade. Wird ein Ausdruck (expression) in einen Iterator evaluiert, kann dieser in eine for-Schleife eingebaut werden.</p><p>Was ist ein Iterator? Ein Iterator ist ein Objekt, dem die Frage "Was kommt als nächstes?" gestellt werden kann. Sind keine Elemente mehr vorhanden, wird die Schleife abgebrochen.</p><p>In diesem Beispiel sehen wir, wie in Rust eine Zahlensequenz erstellt wird, über die wir iterieren können. Hierbei gibt es zwei unterschiedliche Notationen:</p><p><ul><li><code>x..y</code> erstellt einen Iterator, der bei <code>x</code> anfängt und <b>vor</b> <code>y</code> aufhört (exklusives <code>y</code> also)</li><li><code>x..=y</code> erstellt einen Iterator, der bei <code>x</code> anfängt und <b>mit</b> <code>y</code> aufhört (inklusives <code>y</code>)</li></ul></p>
+            <h1>while</h1>
+            <p><code>while</code> Schleifen werden so lange ausgeführt, bis aus der angegeben Kondition <code>false</code> evaluiert wird.</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20print!(%220..5%20%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20print!(%22%5Cn0..5%3D%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>

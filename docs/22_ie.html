@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tur de Rust - Memorie</title>
+        <title>Tur de Rust - Structuras</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,28 +28,19 @@
                 <span class="title"><a href="index_ie.html">Tur de Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_ie.html">Tabelle de contenete</a></span>
-                <span class="back"><a href="21_ie.html">Precedent</a></span>
+                <span class="back"><a href="chapter_3_ie.html">Precedent</a></span>
                 <span class="next"><a href="23_ie.html">Sequent</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Memorie</h1>
-            <p>Programmas in Rust have 3 regiones de memorie ú es plazzat li data:</p>
-<ul>
-<li><strong>data-memorie</strong> - Por data con un grandore fix e <strong>static</strong> (a saver, sempre disponibil durant li vive del programma). 
-Ples considerar li textu in tui programma (p.ex. "Salute Munde!"); li bytes de ti-ci textu es solmen leet e pro to 
-on plazza les in ti-ci loc. Li compilatores sovente optimisa ti tip data, on considera les rapidissim a usar pro que 
-lor locs es conosset e fix.</li>
-<li><strong>stack memory</strong> (cumul-memorie) - Por data declarat quam variabiles intra un function. Li loc de ti-ci memorie 
-ne changea se durant li duration del vocation de un function, e pro to li compilatores posse optimisar li code 
-por far data in li cumul rapid a utilisar.</li>
-<li><strong>heap memory</strong> (amasse-memorie) - Por data creat durant que li aplication execute se. Li data in ti-ci loc posse esser 
-adjuntet, movet, removet, mesurat, etc. Pro su natura dinamic on considera it plu lent a utilisar, ma it possibilisa 
-plu creativ usationes de memorie. Quande on adjunte data a ti-ci region on nomina it un <strong>alocation</strong>. Quande on remove data 
-de it on nomina it un <strong>dealocation</strong>.</li>
-</ul>
+            <h1>Structuras</h1>
+            <p>Un <code>struct</code> es un colection de fields (campes).</p>
+<p>Un <em>field</em> es simplicmen un valore de data asociat a un data-structura. Su valore posse esser un tip primitiv o un data-structura.</p>
+<p>Su definition es simil a un plan por li compilator pri qualmen plazzar li campes in memorie proxim unaltru.</p>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMarin%20%7B%0A%20%20%20%20%2F%2F%20String%20es%20un%20struct%0A%20%20%20%20tip_de_animale%3A%20String%2C%0A%20%20%20%20nomine%3A%20String%2C%0A%20%20%20%20brasses%3A%20i32%2C%0A%20%20%20%20jambes%3A%20i32%2C%0A%20%20%20%20arme%3A%20String%2C%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
     <script src="tour.js"></script>

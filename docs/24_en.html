@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Tuple-like Structs</title>
+        <title>Tour of Rust - Memory</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,12 +33,26 @@
                 </span>
             </div>
             <div class="page">
-            <h1>Tuple-like Structs</h1>
-            <p>For conciseness, you can create structs that are used like a tuple.</p>
+            <h1>Memory</h1>
+            <p>Rust programs have 3 memory regions where data is placed:</p>
+<ul>
+<li><strong>data memory</strong> - For data that fixed size and <strong>static</strong> (i.e always available through life of program ). 
+consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from 
+therefore they are placed in this region. Compilers make lots of optimizations 
+with this kind of data, they are generally considered very fast to use since
+locations are known and fixed.</li>
+<li><strong>stack memory</strong> - For data that is declared as variables within a function. 
+The location of this memory never changes for the duration of a function call, because of this compilers 
+can optimize code so stack data is very fast to use. </li>
+<li><strong>heap memory</strong> - For data that is created while the application is running. 
+Data in this region may be added, moved, removed, resized, etc. Because of 
+it's dynamic nature it's generally considered slower to use, but it allows 
+for much more creative usages of memory.  When data is added to this region we 
+call it an <strong>allocation</strong>. When data is removed from this section we call it a 
+<strong>deallocation</strong>.</li>
+</ul>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20This%20is%20still%20a%20struct%20on%20a%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>
