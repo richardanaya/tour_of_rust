@@ -34,11 +34,21 @@
             </div>
             <div class="page">
             <h1>Static Lifetimes</h1>
-            <p>Some resources in Rust have static lifetimes (i.e. they exist throughout the whole life of the application). These have
-a special lifetime specifier <code>'static</code>.</p>
+            <p>A <strong>static</strong> variable is a memory resource created at compile-time that exists through a program start to 
+finish and can only contain static references (anything less would not live long enough). Static variables
+must have their types explicitly specified.</p>
+<p>A <strong>static lifetime</strong> is a memory resource that lasts indefinitely to the end of a program.  Note that by this definition
+some static lifetime resources can be created at runtime.</p>
+<p>Resources with static lifetimes have a special lifetime specifier <code>'static</code>.</p>
+<p><code>'static</code> resources will never <strong>drop</strong></p>
+<p>Memory detail:</p>
+<ul>
+<li>modifying static variables is inherently dangerous because they are globally accessable to be read from by anyone
+introducing the possibility of a data race. We'll talk about the challenges of global data later.</li>
+</ul>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%20%20%20%20%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>
