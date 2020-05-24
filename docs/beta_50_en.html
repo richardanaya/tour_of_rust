@@ -42,7 +42,7 @@
 <p>This doesn't tend to be a problem when passing around references to functions.</p>
 <p>Memory details:</p>
 <ul>
-<li>The first rule of references prevents data races. What's a data race? It's when reading from data has the possibility of being out of sync due to a writer to the data existing. This particularly can happen in multithreaded programming.</li>
+<li>The first rule of references prevents data races. What's a data race? A data race when reading from data has the possibility of being out of sync due to the existance of a writer to the data at the same time. This happens often in multi-threaded programming.</li>
 <li>The second rule of references prevents the misuse of references that refer to non-existant data ( called dangling pointers in C ).</li>
 </ul>
             </div>
