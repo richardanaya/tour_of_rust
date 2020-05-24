@@ -1498,22 +1498,22 @@ pages:
           памяти. Когда данные добавляются в этот регион, это называется **allocation** (выделение памяти). Когда данные 
           удаляются - deallocation (освобождение памяти).
       es:
-      title: Memoria
-      content_markdown: |
-        Los programas Rust tienen 3 regiones de memoria donde almacenar los datos:
-        * **Data memory (o memoria de datos)** - Para datos de tamaño fijo y **estáticos** (es decir, siempre disponibles a lo largo
-          de la vida del programa). Considera el texto del programa (por ejemplo, "¡Hola, Mundo!"), los bytes de este texto son de sólo
-          lectura, por lo tanto se almacenan en esta región. Los compiladores hacen muchas optimizaciones
-          con este tipo de datos, generalmente se consideran muy rápidos de usar ya que
-          las ubicaciones son conocidas y fijas.
-        * **stack memory (o memoria de pila)** - Para los datos que se declaran como variables dentro de
-          una función. La ubicación de esta memoria nunca cambia durante la duración de la llamada a la función, debido a esto los
-          compiladores pueden optimizar el código para que los datos de la pila sean rápidos de usar.
-        * **heap memory (memoria de montículo o dinámica)** - Para los datos que se crean mientras la aplicación se está ejecutando.
-          Los datos de esta región pueden ser añadidos, movidos, eliminados, redimensionados, etc.
-          Debido a su naturaleza dinámica, se considera generalmente más lento de usar, pero permite
-          usos mucho más creativos de la memoria. Cuando se añaden datos a esta región, lo llamamos
-          **asignación**. Cuando los datos se eliminan de esta sección lo llamamos **desasignación**.
+        title: Memoria
+        content_markdown: |
+          Los programas Rust tienen 3 regiones de memoria donde almacenar los datos:
+          * **Data memory (o memoria de datos)** - Para datos de tamaño fijo y **estáticos** (es decir, siempre disponibles a lo largo
+            de la vida del programa). Considera el texto del programa (por ejemplo, "¡Hola, Mundo!"), los bytes de este texto son de sólo
+            lectura, por lo tanto se almacenan en esta región. Los compiladores hacen muchas optimizaciones
+            con este tipo de datos, generalmente se consideran muy rápidos de usar ya que
+            las ubicaciones son conocidas y fijas.
+          * **stack memory (o memoria de pila)** - Para los datos que se declaran como variables dentro de
+            una función. La ubicación de esta memoria nunca cambia durante la duración de la llamada a la función, debido a esto los
+            compiladores pueden optimizar el código para que los datos de la pila sean rápidos de usar.
+          * **heap memory (memoria de montículo o dinámica)** - Para los datos que se crean mientras la aplicación se está ejecutando.
+            Los datos de esta región pueden ser añadidos, movidos, eliminados, redimensionados, etc.
+            Debido a su naturaleza dinámica, se considera generalmente más lento de usar, pero permite
+            usos mucho más creativos de la memoria. Cuando se añaden datos a esta región, lo llamamos
+            **asignación**. Cuando los datos se eliminan de esta sección lo llamamos **desasignación**.
   - en:
       title: Creating Data In Memory
       content_markdown: |
@@ -2501,7 +2501,7 @@ pages:
       title: The End
       content_markdown: |
         That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!
-    en:
+    es:
       title: Fin
       content_markdown: |
         Esto es todo por ahora, pero aún quedan más capítulos, así que ¡muy atento! Esperamos que disfrutes del viaje.

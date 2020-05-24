@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour de Rust - Arrays</title>
+        <title>Tour de Rust - Llamadas a Métodos</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,18 +28,19 @@
                 <span class="title"><a href="00_es.html">Tour de Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
-                <span class="back"><a href="beta_07_es.html">Anterior</a></span>
-                <span class="next"><a href="beta_09_es.html">Siguiente</a></span>
+                <span class="back"><a href="beta_22_es.html">Anterior</a></span>
+                <span class="next"><a href="beta_24_es.html">Siguiente</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Arrays</h1>
-            <p>Un <em>array</em> es una colección de longitud fija de elementos de datos del mismo tipo.</p>
-<p>El tipo de datos para un <em>array</em> es <code>[T;N]</code> siendo T el tipo del elemento, y N la longitud fija conocida en tiempo de compilación.</p>
-<p>Los elementos individuales se pueden recuperar con el operador <code>[x]</code>, siendo <em>x</em> un índice de tipo <em>usize</em> (empezando por 0) del elemento que quieras.</p>
+            <h1>Llamadas a Métodos</h1>
+            <p>A diferencia de las funciones, los métodos son funciones asociadas con un tipo de datos específico.</p>
+<p><strong>Métodos estáticos</strong> — los métodos que pertenecen a un tipo determinado se llaman usando el operador <code>::</code>.</p>
+<p><strong>Métodos de instancia</strong> — los métodos que pertenecen a una instancia de un tipo se llaman usando el operador <code>.</code>.</p>
+<p>Hablaremos de cómo hacer tus propios métodos en próximos capítulos.</p>
             </div>
             <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%20%3D%20%5B1%2C%202%2C%203%5D%3B%20%2F%2F%20type%20is%20%5Bi32%2C3%5D%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Using%20a%20static%20method%20to%20create%20an%20instance%20of%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20Using%20a%20method%20on%20the%20instance%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.length())%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
             </div>
         </div>
     </body>
