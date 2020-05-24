@@ -2166,6 +2166,15 @@ pages:
 
   - beta: true
     en:
+      title: Lifetimes In Data Types
+      content_markdown: |
+        Similarly to functions, data types can be parameterized with lifetime specifiers of it's members.
+
+        Rust validates that references within a structure live longer than the instance of the data type.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20type%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%7D%0A
+
+  - beta: true
+    en:
       title: Chapter 5 Conclusion
       content_markdown: |
         Whew, congrats for making it through! I know it's alot to take in but you are well
