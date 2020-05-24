@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Modules</title>
+        <title>Tour of Rust - Chapter 5 Conclusion</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -28,28 +28,25 @@
                 <span class="title"><a href="00_en.html">Tour of Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
-                <span class="back"><a href="beta_chapter_9_en.html">Previous</a></span>
-                <span class="next"><a href="beta_56_en.html">Next</a></span>
+                <span class="back"><a href="beta_54_en.html">Previous</a></span>
+                <span class="next"><a href="beta_chapter_6_en.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Modules</h1>
-            <p>Every Rust program or library is a <strong>crate</strong>.</p>
-<p>Every crate is made of a heirarchy of <strong>modules</strong>.</p>
-<p>Programs start running in the root module of a crate at the <code>main()</code> function in a file
-called <code>main.rs</code>.</p>
-<p>Libraries have a root module in the file <code>lib.rs</code> and export useful members.</p>
-<p>To prevent typing out full paths like <code>std::f64::consts::PI</code>.
-The <strong>use</strong> keyword allows us to specify particular items from modules we want
-to use throughout our code without a full path. For instance <code>use std::f64::consts::PI</code>
-allows me to just use the identifier <code>PI</code> in my main function.</p>
-<p><strong>std</strong> is the crate of the <strong>standard library</strong> of Rust which is full of useful data
-structures and functions for interacting with your operating system.</p>
-<p>A searchable directory of crates created by the community can be found at <a href="https://crates.io/">https://crates.io</a></p>
+            <h1>Chapter 5 Conclusion</h1>
+            <p>Whew, congrats for making it through! I know it's alot to take in but you are well
+under way to becoming a Rustacean. Hopefully it's clear how Rust as a language aims to 
+solve many of these common challenges in systems programming:</p>
+<ul>
+<li>Unintentional modification of resources</li>
+<li>Forgetting to deconstruct resources </li>
+<li>Resources accidently being deconstructed twice</li>
+<li>Using resources after they have been deconstructed </li>
+<li>Data races caused by writing to resources while others are reading from resources </li>
+</ul>
+<p>In the next chapter we'll apply some of this knowledge as we look how Rust handles text.</p>
             </div>
-            <div class="code">
-            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
         </div>
     </body>
     <script src="tour.js"></script>

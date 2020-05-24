@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Tour of Rust - Chapter 5 Conclusion</title>
+        <title>Tour of Rust - Passing Around Borrowed Data</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -29,26 +29,26 @@
                 <span class="nav">
                 <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
                 <span class="back"><a href="beta_49_en.html">Previous</a></span>
-                <span class="next"><a href="beta_chapter_6_en.html">Next</a></span>
+                <span class="next"><a href="beta_51_en.html">Next</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Chapter 5 Conclusion</h1>
-            <p>Whew, congrats for making it through! I know it's alot to take in but you are well
-under way to becoming a Rustacean. Hopefully it's clear how Rust as a language aims to 
-solve many of these common challenges in systems programming:</p>
+            <h1>Passing Around Borrowed Data</h1>
+            <p>Rust's rules for references might best be summarized by:</p>
 <ul>
-<li>Unintentional modification of resources</li>
-<li>Forgetting to deconstruct resources </li>
-<li>Resources accidently being deconstructed twice</li>
-<li>Using resources after they have been deconstructed </li>
-<li>Data races caused by writing to resources while others are reading from resources </li>
-<li>Modifying lists while iterating through  them</li>
-<li>Seeing clearly areas of the code where compiler can’t make guarantees</li>
+<li>Rust only allows there to be one mutable reference <strong>or</strong> multiple non-mutable references <strong>but not both</strong></li>
+<li>A reference must never <strong>live longer</strong> than it's owner.</li>
 </ul>
-<p>In the next chapter we'll apply some of this knowledge as we look how Rust handles text.</p>
+<p>This doesn't tend to be a problem when passing around references to functions.</p>
+<p>Memory details:</p>
+<ul>
+<li>The first rule of references prevents data races. What's a data race? It's when reading from data has the possibility of being out of sync due to a writer to the data existing. This particularly can happen in multithreaded programming.</li>
+<li>The second rule of references prevents the misuse of references that refer to non-existant data ( called dangling pointers in C ).</li>
+</ul>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20because%20all%20mutable%20references%20are%20dropped%20within%0A%20%20%20%20%2F%2F%20the%20function%20do_something.%20We%20can%20create%20another.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
     <script src="tour.js"></script>
