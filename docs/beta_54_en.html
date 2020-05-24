@@ -35,17 +35,17 @@
             <div class="page">
             <h1>Static Lifetimes</h1>
             <p>A <strong>static</strong> variable is a memory resource created at compile-time that exists through a program start to 
-finish and can only contain static references (anything less would not live long enough). Static variables
-must have their types explicitly specified.</p>
+finish. They must have their types explicitly specified.</p>
 <p>A <strong>static lifetime</strong> is a memory resource that lasts indefinitely to the end of a program.  Note that by this definition
 some static lifetime resources can be created at runtime.</p>
 <p>Resources with static lifetimes have a special lifetime specifier <code>'static</code>.</p>
 <p><code>'static</code> resources will never <strong>drop</strong></p>
+<p>If static lifetime resources contain references they must all be <code>'static</code> (anything less would not live long enough).</p>
 <p>Memory detail:</p>
 <ul>
-<li>modifying static variables is inherently dangerous because they are globally accessable to be read from by anyone
+<li>Modifying static variables is inherently dangerous because they are globally accessable to be read from by anyone
 introducing the possibility of a data race. We'll talk about the challenges of global data later.</li>
-<li>rust allows the use of <code>unsafe { }</code> block to perform some operations that the compiler cannot make gaurantees about.</li>
+<li>Rust allows the use of <code>unsafe { ... }</code> block to perform some operations that the compiler cannot make memory gaurantees. The <a href="https://doc.rust-lang.org/nomicon/"><span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span></a> should not be talked about casually.</li>
 </ul>
             </div>
             <div class="code">
