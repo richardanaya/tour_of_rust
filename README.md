@@ -10,7 +10,7 @@ This project is meant to give an experienced programmer a swift introduction to 
 * Chapter 2 - Basic Control Flow
 * Chapter 3 - Basic Data Structure Types
 * Chapter 4 - Generic Types
-* Chapter 5 - Ownership & Sharing Data
+* Chapter 5 - Ownership & Borrowing Data
 * Chapter 6 - Text
 * Chapter 7 - Object Oriented Programming
 * Chapter 8 - Smart Pointers
