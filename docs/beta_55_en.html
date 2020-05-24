@@ -35,7 +35,7 @@
             <div class="page">
             <h1>Lifetimes In Data Types</h1>
             <p>Similarly to functions, data types can be parameterized with lifetime specifiers of it's members.</p>
-<p>Rust validates that references within a structure never last longer than the owners they point to.</p>
+<p>Rust validates that the containing data type of the references never lasts longer than the owners the references point to.</p>
 <p>We can't have structs running around with references pointing to nothingness!</p>
             </div>
             <div class="code">
