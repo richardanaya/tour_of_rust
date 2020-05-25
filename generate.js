@@ -1,9 +1,12 @@
-let generate_beta_content = process.argv.length >= 2 && process.argv[2]=="beta";
+let lessonSource = process.argv[2];
+let target_dir = process.argv[3];
+let generate_beta_content = process.argv.length >= 4 && process.argv[4]=="beta";
+
 const fs = require('fs');
 let showdown = require("./showdown.js");
 converter = new showdown.Converter();
 
-let lessons = JSON.parse(fs.readFileSync('lessons.json'));
+let lessons = JSON.parse(fs.readFileSync(lessonSource));
 
 function getWord(words,lang,w){
     if(words[lang][w]){
@@ -119,7 +122,7 @@ for(var l in languages){
             lesson_code = lesson[lang].code || lesson["en"].code;
         }
         
-        fs.writeFileSync("docs/"+fileName, template(langLessons, lang,lesson_title,lesson_code,lesson_content,c,i==langLessons.length-1,words,false))
+        fs.writeFileSync(target_dir+"/"+fileName, template(langLessons, lang,lesson_title,lesson_code,lesson_content,c,i==langLessons.length-1,words,false))
         c++;
     }
     c = 0;
@@ -140,12 +143,12 @@ for(var l in languages){
                 lesson_content = content;
                 lesson_code = lesson[lang].code || lesson["en"].code;
             }
-            fs.writeFileSync("docs/beta_"+fileName, template(betaLessons, lang, lesson_title,lesson_code,lesson_content,c,i==betaLessons.length-1,words,true))
+            fs.writeFileSync(target_dir+"/beta_"+fileName, template(betaLessons, lang, lesson_title,lesson_code,lesson_content,c,i==betaLessons.length-1,words,true))
             c++;
         }
     }
     let fileName = `TOC_${lang}.html`;
-    fs.writeFileSync("docs/"+fileName,`<html lang="${lang}">
+    fs.writeFileSync(target_dir+"/"+fileName,`<html lang="${lang}">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>

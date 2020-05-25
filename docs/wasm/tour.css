@@ -1,0 +1,164 @@
+body {
+    background: rgb(28, 32, 34);;
+    color: white;
+}
+
+.page {
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+
+
+a {
+ color: #aaa;   
+ outline: none;
+}
+
+.title a {
+    text-decoration: none;
+    color: white;
+}
+
+.emoji {
+    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+}
+
+h1, p, pre{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.page p, .page pre {
+    font-size: 22px;
+}
+
+.code {
+    width:50%;
+    display:inline-block;
+}
+
+.header {
+    background-color: rgb(101, 79, 240);
+    height: 40px;
+    padding: 4px;
+    line-height: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    padding-left: 10px;
+}
+
+html, body {
+    padding:0px;
+    margin: 0px;
+    font-family: 'Fira Sans', sans-serif;
+    color: #ccc;
+}
+
+.next a, .back a{
+    color: white;
+}
+
+.nav {
+    float:right;
+    padding-right: 10px;
+}
+
+.code iframe, .page {
+    height: calc(100% - 48px);
+    height: -webkit-cal(100% - 48px);
+}
+
+.page {
+    overflow-y: auto;
+}
+
+
+code {
+    display: inline;
+    background: #bbb;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 3px;
+    
+    margin-left: 3px;
+}
+
+li {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.nav span {
+    padding-left: 10px;
+}
+
+.toc a{
+    color: white;
+} 
+
+
+ul, ol, h3 {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+@media screen and (max-width: 600px) {
+    .code, .page {
+        width: 100%;
+        display: block;
+        height: auto;
+        padding-bottom: 40px;
+    }
+
+    .code {
+        margin-bottom: 40px;
+    }
+
+    .code iframe{
+        height: 100%;
+    }
+
+    .header {
+        font-size: 12px;
+        padding-left: 7PX;
+        padding-right: 7px;    
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .page p, h1, pre {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .page h1 {
+        font-size: 20px;
+    }
+
+    .page p, .page pre {
+        font-size: 16px;
+    }
+
+    ul,ol, h3 {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    .nav span {
+        padding-left: 5px;
+    }
+
+    .nav {
+        padding-right: 0px;
+        letter-spacing: -.6px;
+    }
+}
+
+b, h1 {
+    color: white;
+}
