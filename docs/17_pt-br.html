@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Um tour por Rust - for [untranslated]</title>
+        <title>Um tour por Rust - for</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -33,17 +33,18 @@
                 </span>
             </div>
             <div class="page">
-            <h1>for [untranslated]</h1>
-            <p>Rust's <code>for</code> loop is a powerful upgrade. It
-iterates over values from any expression that evaluates into an iterator. What's
-an iterator? An iterator is an object that you can ask the question "What's the
-next item you have?" until there are no more items.</p>
-<p>We'll explore this more in a future chapter, in the meantime just know Rust makes 
-it easy to create iterators that generate a sequence of integer numbers.</p>
-<p>The <code>..</code> operator creates an iterator that generates numbers from a start number up to
-but not including an end number.</p>
-<p>The <code>..=</code> operator creates an iterator that generates numbers from a start number up to 
-and including an end number.</p>
+            <h1>for</h1>
+            <p>O loop <code>for</code> do Rust é uma grande melhoria, uma vez que ele itera
+sobre valores de qualquer expressão que se avalie como um iterador.
+O que é um iterador? Um iterador é um objeto ao qual você pode perguntar
+"qual o seu próximo item?" até que não haja mais itens.</p>
+<p>Iremos explorar mais isso em um capítulo futuro, mas por enquanto basta
+saber que em Rust é fácil criar iteradores que geram uma seqüência de
+números inteiros.</p>
+<p>O operador <code>..</code> cria um iterador que gera uma seqüência a partir de um 
+número inicial até, mas não incluso, um número final.</p>
+<p>O operador <code>..=</code> cria um iterador que gera uma seqüência a partir de um 
+número inicial até um número final, inclusive.</p>
             </div>
             <div class="code">
             <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>

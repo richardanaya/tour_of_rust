@@ -1339,7 +1339,7 @@ pages:
 
         Se a última instrução de um `if`, `match`, função ou bloco de código 
         for uma expressão sem `;`, o Rust vai retorná-la como um valor do bloco.
-        
+
         Esta é uma ótima maneira de criar uma lógica concisa que rotorna um valor que
         pode ser atribuída a uma nova variável.
 

@@ -13,7 +13,7 @@
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-        <title>Um tour por Rust - Capítulo 2 - Conclusão</title>
+        <title>Um tour por Rust - if/else if/else</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -25,22 +25,24 @@
     <body>
         <div class="tour">
             <div class="header">
-                <span class="title"><a href="index_pt-br.html">Um tour por Rust</a></span>
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
-                <span class="back"><a href="19_pt-br.html">Anterior</a></span>
-                <span class="next"><a href="chapter_3_pt-br.html">Próximo</a></span>
+                <span class="back"><a href="beta_chapter_2_pt-br.html">Anterior</a></span>
+                <span class="next"><a href="beta_15_pt-br.html">Próximo</a></span>
                 </span>
             </div>
             <div class="page">
-            <h1>Capítulo 2 - Conclusão</h1>
-            <p>Espero ter mostrado um vislumbre do poder de Rust, mesmo nos recursos
-mais básicos de linguagem. Nós iremos falar do <code>for</code> e
-<code>match</code> com mais profundidade à medida que formos adquirindo mais 
-conhecimento para aproveitar os seus recursos. A seguir entraremos nos 
-fundamentos das estruturas de dados do Rust.</p>
+            <h1>if/else if/else</h1>
+            <p>A ramificação de código em Rust não tem nenhuma novidade.</p>
+<p>Não há parêntesis nas condições! Realmente precisamos deles? Assim a nossa
+lógica fica mais simples e limpa.</p>
+<p>Todos os nossos operadores lógicos habituais continuam funcionando: 
+<code>!</code>, <code>!=</code>, <code>||</code>, <code>&amp;&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></p>
             </div>
-            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22menor%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22igual%20a%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22maior%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
         </div>
     </body>
     <script src="tour.js"></script>
