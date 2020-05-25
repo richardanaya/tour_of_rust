@@ -66,11 +66,14 @@ pages:
         In this classic example we add 1 + 1, we'll go through how it's done step by step.
   - chapter: 1
     en:
-      title: "What is web assembly?"
+      title: "What Is Web Assembly?"
       content_markdown: |
         Web assembly is a binary format for representating isolated executable code.  It was developed for web
         browsers as an alternative to javascript with some distinct advantages:
 
         * Because its a low level bytecode, it's able to perform math quickly and manage memory more concisely.
-        * Web Assembly was built with existing compilers in mind, allowing native languages like C/C++ and Rust to compile to it as a target
+        * Web Assembly was built with existing compilers in mind, allowing native languages like C/C++ and Rust to compile to it as a target.
         * Built with isolation in mind, allowing finer grain access control.
+        * Web Assembly was built rather host agnostic, allowing some people to use web assembly [outside of browsers](https://wasmer.io/) too!
+
+        Web Assembly is often called **WASM**
