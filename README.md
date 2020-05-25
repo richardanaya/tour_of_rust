@@ -64,6 +64,13 @@ Lastly, there is a section for common words you should fill out your localized t
 
 # Releases
 
+## Release 4 - Unreleased
+* Chapter 5 released on ownership and sharing
+* French translations for chapter 1
+* Brazillian portuguese translations for chapter 2
+* Spanish translations for chapter 3
+* Starting new section for web assembly
+
 ## Release 3 - May 23, 2020
 * Chapter 4 released on generic data structures
 * Spanish for Chapter 2
