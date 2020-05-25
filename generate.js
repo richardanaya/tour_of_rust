@@ -106,7 +106,7 @@ for(var l in languages){
         let lesson = langLessons[i];
         let fileName = getFileName(lang,i,false,lesson.chapter);
        
-        let lesson_title = lesson["en"].title + " [untranslated]";
+        let lesson_title = "["+getWord(words,lang,"untranslated")+"] "+lesson["en"].title;
         let lesson_content = converter.makeHtml(lesson["en"].content_markdown)
         let lesson_code = lesson["en"].code 
         if(lesson[lang]){
@@ -128,7 +128,7 @@ for(var l in languages){
         if(lesson[lang]){
             let fileName = getFileName(lang,i,true,lesson.chapter);
        
-            let lesson_title = lesson["en"].title + " [untranslated]";
+            let lesson_title = "["+getWord(words,lang,"untranslated")+"] "+lesson["en"].title;
             let lesson_content = lesson["en"].content_markdown
             let lesson_code = lesson["en"].code 
             if(lesson[lang]){
@@ -180,9 +180,9 @@ for(var l in languages){
             <p>
             <ul>
         ${langLessons.map((x,i)=> {
-            let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:x["en"].title + " [untranslated]"}</a></li>`;
+            let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:"["+getWord(words,lang,"untranslated")+"] "+x["en"].title}</a></li>`;
             if(x.chapter != undefined){
-                s = `</ul><h3><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:x["en"].title + " [untranslated]"}</a></h3><ul>`;
+                s = `</ul><h3><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:"["+getWord(words,lang,"untranslated")+"] "+x["en"].title}</a></h3><ul>`;
             }
             return s;
         }).join("\n")}

@@ -7,6 +7,7 @@ common_words:
     previous: Previous
     toc: Table of Contents
     lessons: Lessons
+    untranslated: Untranslated
   de:
     tor: Tour zu Rust
     next: Weiter
@@ -53,11 +54,11 @@ pages:
         a lot to explore before we even get to complex parts.</p><p>You can find this
         guide in these languages:
 
-        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
+        * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
 
         if you have suggestions on content
@@ -87,11 +88,11 @@ pages:
         [Github Repository](https://github.com/richardanaya/tour_of_rust).
 
         Translations:
-        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
+        * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
     ie:
       title: "Salute, <span class=\"emoji\">\U0001F980</span>"
@@ -117,11 +118,11 @@ pages:
         мы перейдём к более сложным частям.
 
         Тур доступен на таких языках:
-        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
+        * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
 
         Если у вас есть предложения по содержимому или вы бы хотели помочь с переводом, проверьте
@@ -138,11 +139,11 @@ pages:
         antes de llegar a las partes complejas.</p><p>Puedes encontrar esta
         guía en los siguientes idiomas:
 
-        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
+        * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
 
         Si tienes alguna sugerencia sobre el contenido
@@ -163,11 +164,11 @@ pages:
 
         Você pode ver este guia nestes idiomas:
 
-        * [Português Brasileiro](index_pt-br.html)
         * [Deutsch](index_de.html)
         * [English](index.html)
         * [Español](index_es.html)
         * [Interlingue](index_ie.html)
+        * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
 
         Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
