@@ -11,7 +11,7 @@ beta_generate_lessons:
 beta_generate_wasm:
 	@rm docs/wasm/*.html || true
 	@cat wasm.yaml | yq . > wasm.json
-	@node generate.js wasm.json docs/wasm beta
+	@node generate.js wasm.json docs/webassembly beta
 	@rm wasm.json
 generate: generate_lessons generate_wasm
 generate_lessons:
@@ -22,7 +22,7 @@ generate_lessons:
 generate_wasm:
 	@rm docs/wasm/*.html || true
 	@cat wasm.yaml | yq . > wasm.json
-	@node generate.js wasm.json docs/wasm
+	@node generate.js wasm.json docs/webassembly
 	@rm wasm.json
 publish: generate lint
 	git add .
