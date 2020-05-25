@@ -13,22 +13,25 @@ beta_generate_wasm:
 	@cat wasm.yaml | yq . > wasm.json
 	@node generate.js wasm.json docs/webassembly beta
 	@rm wasm.json
-generate: generate_lessons generate_wasm
-generate_lessons:
+publish:
+	git checkout -b gh-pages
+
 	@rm docs/*.html || true
 	@cat lessons.yaml | yq . > lessons.json
 	@node generate.js lessons.json docs
 	@rm lessons.json
-generate_wasm:
+
 	@rm docs/wasm/*.html || true
 	@cat wasm.yaml | yq . > wasm.json
 	@node generate.js wasm.json docs/webassembly
 	@rm wasm.json
-publish: generate lint
-	git checkout website
+
+	mv docs/* .
+
 	git add . || true
 	git commit -m 'generating new html' || true
-	git push || true
+	git push origin gh-pages || true
+
 	git checkout master
 lint:
 	prettier --write lessons.yaml
