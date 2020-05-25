@@ -25,12 +25,10 @@ generate_wasm:
 	@node generate.js wasm.json docs/webassembly
 	@rm wasm.json
 publish: generate lint
-	git checkout -b website
+	git checkout website
 	git add . || true
 	git commit -m 'generating new html' || true
-	git push origin website || true
+	git push || true
 	git checkout master
-	@rm docs/wasm/*.html || true
-	@rm docs/*.html || true
 lint:
 	prettier --write lessons.yaml

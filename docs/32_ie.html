@@ -1,0 +1,49 @@
+<html lang="ie">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tur de Rust - Quo es Tipes Géneric?</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_ie.html">Tur de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ie.html">Tabelle de contenete</a></span>
+                <span class="back"><a href="chapter_4_ie.html">Precedent</a></span>
+                <span class="next"><a href="33_ie.html">Sequent</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Quo es Tipes Géneric?</h1>
+            <p>Tipes géneric possibilisa li partial definition de un <code>struct</code> o <code>enum</code>, con quel li compilator va posser
+crear un version completmen definat quande it compila se secun li code quel noi scri.</p>
+<p>Rust por li pluparte posse inferer li tip final per regardar nor instantiation, ma si it besona auxilie tu posse
+sempre esser plu explicit con li operator <code>::&lt;T&gt;</code>, anc conosset con li nómine <code>turbofish</code> (un pisc quel es un
+de mi bon amics!).</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Un%20partialmen%20definit%20tip%20de%20un%20struct%0Astruct%20SacSinFunde%3CT%3E%20%7B%0A%20%20%20%20articul%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20A%20notar%3A%20per%20li%20usation%20ci%20de%20tipes%20g%C3%A9neric%2C%20noi%20crea%20tipes%20creat%20durant%0A%20%20%20%20%2F%2F%20li%20compilation%2C%20agrandante%20li%20grandore%20de%20nor%20code.%20Turbofish%20auxilia%20nos%0A%20%20%20%20%2F%2F%20esser%20explicit.%0A%20%20%20%20let%20sac_i32%20%3D%20SacSinFunde%3A%3A%3Ci32%3E%20%7B%20articul%3A%2042%20%7D%3B%0A%20%20%20%20let%20sac_bool%20%3D%20SacSinFunde%3A%3A%3Cbool%3E%20%7B%20articul%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20posse%20inferer%20tipes%20anc%20por%20g%C3%A9nerics!%0A%20%20%20%20let%20sac_quel_plana%20%3D%20SacSinFunde%20%7B%20articul%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20A%20notar%3A%20nequande%20plazzar%20un%20sac%20sin%20funde%20in%20un%20sac%20sin%20funde%20%0A%20%20%20%20%2F%2F%20in%20li%20ver%20vive%0A%20%20%20%20let%20sac_in_sac%20%3D%20SacSinFunde%20%7B%0A%20%20%20%20%20%20%20%20articul%3A%20SacSinFunde%20%7B%20articul%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20sac_i32.articul%2C%20sac_bool.articul%2C%20sac_quel_plana.articul%2C%20sac_in_sac.articul.articul%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>

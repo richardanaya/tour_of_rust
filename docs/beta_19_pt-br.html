@@ -1,0 +1,52 @@
+<html lang="pt-br">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Um tour por Rust - Retornando Valores de um Bloco de Códígo</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+                <span class="back"><a href="beta_18_pt-br.html">Anterior</a></span>
+                <span class="next"><a href="beta_20_pt-br.html">Próximo</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Retornando Valores de um Bloco de Códígo</h1>
+            <p><code>if</code>, <code>loop</code>, <code>match</code>, funções e blocos de código têm maneiras únicas de retornar
+valores em Rust.</p>
+<p><code>loop</code> podem ser interrompidos para retornar um valor.</p>
+<p>Se a última instrução de um <code>if</code>, <code>match</code>, função ou bloco de código 
+for uma expressão sem <code>;</code>, o Rust vai retorná-la como um valor do bloco.</p>
+<p>Esta é uma ótima maneira de criar uma lógica concisa que rotorna um valor que
+pode ser atribuída a uma nova variável.</p>
+<p>Note isso também permite que o operador <code>if</code> funcione como uma expressão ternária concisa.</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontrei%20o%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20express%C3%A3o%20tern%C3%A1ria%20em%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22do%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20food%20%3D%20%22hamb%C3%BArger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22cachorro-quente%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%C3%A9%20cachorro-quente%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20repare%20que%20as%20chaves%20s%C3%A3o%20opcionais%20quando%20o%20retorno%20%C3%A9%20s%C3%B3%20uma%20express%C3%A3o%20%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22n%C3%A3o%20%C3%A9%20cachorro-quente%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identificando%20o%20lanche%3A%20%7B%7D%22%2C%20%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloco%20de%20c%C3%B3digo%20nos%20permite%20obter%20um%20resultado%20sem%20poluir%20o%20escopo%20da%20fun%C3%A7%C3%A3o%20%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20bloco%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Assim%20retornamos%20um%20valor%20en%20Rust%20no%20final%20de%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22da%20fun%C3%A7%C3%A3o%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>

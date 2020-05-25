@@ -1,0 +1,46 @@
+<html lang="es">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tour de Rust - Módulos</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_es.html">Tour de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
+                <span class="back"><a href="beta_30_es.html">Anterior</a></span>
+                <span class="next"><a href="beta_32_es.html">Siguiente</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Módulos</h1>
+            <p>Cada programa o librería en Rust es un <b>crate</b>.</p><p>Cada crate está compuesto por una jerarquía de <b>módulos</b>.</p><p>Los programas comienzan su ejecución en el módulo raíz de un crate en la función <code>main()</code> en un fichero llamado `main.rs`.<p></p><p>Las librerías tienen un módulo raíz en el archivo `lib.rs` que proporciona elementos útiles.</p><p>Para evitar escribir rutas completas como <code>std::f64::consts::PI</code>. La palabra reservada <b>use</b> nos permite especificar qué elementos de los módulos queremos usar en nuestro código sin especificar una ruta completa. Por ejemplo, el uso de <code>use std::f64::consts::PI</code> me permite referenciar el valor de <code>PI</code> en mi función principal.</p><p><b>std</b> es el crate de la <b>librería estándar</b> de Rust que contiene estructuras de datos y funciones útiles para interactuar con tu sistema operativo.</p><p>Aquí encontrarás un repositorio de crates creado por la comunidad Rust: <a href="https://crates.io/">https://crates.io</a></p>
+
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%22)%3B%0A%20%20%20%20println!(%22%C2%A1Quiero%20un%20trozo%20de%20%7B%7Dzza!%22%2C%20PI)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>

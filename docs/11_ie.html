@@ -1,0 +1,47 @@
+<html lang="ie">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tur de Rust - Retornar necos</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_ie.html">Tur de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ie.html">Tabelle de contenete</a></span>
+                <span class="back"><a href="10_ie.html">Precedent</a></span>
+                <span class="next"><a href="12_ie.html">Sequent</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Retornar necos</h1>
+            <p>Si null tip de retorn es specificat por un function, it retorna un vacui tuple, anc conosset quam un <em>unit</em> (li tal-nominat tip unitic)</p>
+<p>On representa un vacui tuple per <code>()</code></p>
+<p>In Rust it passa presc ínvisibil por que on ne mey esser distractet de it, ma it es bon a saver que un functiona retornant necos retorna un fact un vacui tuple.</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20crear_necos()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20li%20tip%20de%20retorn%20es%20implicat%20quam%20()%0Afn%20crear_necos2()%20%7B%0A%20%20%20%20%2F%2F%20ti-ci%20functiona%20va%20retornar%20()%20si%20on%20specifica%20nullcos%20a%20retornar%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20crear_necos()%3B%0A%20%20%20%20let%20b%20%3D%20crear_necos2()%3B%0A%0A%20%20%20%20%2F%2F%20Printant%20un%20string%20(catene)%20debug%20por%20a%20e%20b%0A%20%20%20%20%2F%2F%20Pro%20que%20printar%20%27necosit%C3%A1%27%20es%20desfacil%0A%20%20%20%20println!(%22Li%20valore%20de%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22Li%20valore%20de%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>

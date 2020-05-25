@@ -1,0 +1,45 @@
+<html lang="ie">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tur de Rust - Multiplic retorn-valores</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ie.html">Tur de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ie.html">Tabelle de contenete</a></span>
+                <span class="back"><a href="beta_09_ie.html">Precedent</a></span>
+                <span class="next"><a href="beta_11_ie.html">Sequent</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Multiplic retorn-valores</h1>
+            <p>Functiones posse retornar multiplic valores per retornar un <b>tuple</b> de valores. (N.B. un tuple es parent con -tuplic in Interlingue-Occidental)</p><p>On posse referer al valores per lor position in li tuple.</p><p>Rust subtene varie tipes de destructuration quel noi va vider in pluri formes. To possibilisa li extraction de sub-pezzes de data ergonomicmen. Esse atentiv por it!</p>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20interchangear(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20retorna%20un%20tuple%20de%20retorn-valores%0A%20%20%20%20let%20resulta%20%3D%20interchangear(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20resulta.0%2C%20resulta.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructura%20li%20tuple%20in%20du%20n%C3%B3mines%20de%20variabiles%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20interchangear(resulta.0%2C%20resulta.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>

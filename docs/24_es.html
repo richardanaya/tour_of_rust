@@ -1,0 +1,58 @@
+<html lang="es">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <title>Tour de Rust - Memoria</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index_es.html">Tour de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
+                <span class="back"><a href="23_es.html">Anterior</a></span>
+                <span class="next"><a href="25_es.html">Siguiente</a></span>
+                </span>
+            </div>
+            <div class="page">
+            <h1>Memoria</h1>
+            <p>Los programas Rust tienen 3 regiones de memoria donde almacenar los datos:</p>
+<ul>
+<li><strong>Data memory (o memoria de datos)</strong> - Para datos de tamaño fijo y <strong>estáticos</strong> (es decir, siempre disponibles a lo largo
+de la vida del programa). Considera el texto del programa (por ejemplo, "¡Hola, Mundo!"), los bytes de este texto son de sólo
+lectura, por lo tanto se almacenan en esta región. Los compiladores hacen muchas optimizaciones
+con este tipo de datos, generalmente se consideran muy rápidos de usar ya que
+las ubicaciones son conocidas y fijas.</li>
+<li><strong>stack memory (o memoria de pila)</strong> - Para los datos que se declaran como variables dentro de
+una función. La ubicación de esta memoria nunca cambia durante la duración de la llamada a la función, debido a esto los
+compiladores pueden optimizar el código para que los datos de la pila sean rápidos de usar.</li>
+<li><strong>heap memory (memoria de montículo o dinámica)</strong> - Para los datos que se crean mientras la aplicación se está ejecutando.
+Los datos de esta región pueden ser añadidos, movidos, eliminados, redimensionados, etc.
+Debido a su naturaleza dinámica, se considera generalmente más lento de usar, pero permite
+usos mucho más creativos de la memoria. Cuando se añaden datos a esta región, lo llamamos
+<strong>asignación</strong>. Cuando los datos se eliminan de esta sección lo llamamos <strong>desasignación</strong>.</li>
+</ul>
+            </div>
+            <div class="code"><center><br><br><br><br><br><img src="ferris.png"><br><br><br><br><br></center></div>
+        </div>
+    </body>
+    <script src="tour.js"></script>
+</html>
