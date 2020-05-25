@@ -67,7 +67,6 @@ pages:
   - chapter: 1
     en:
       title: "What is web assembly?"
-      code: https://webassembly.studio/?embed&f=hvoajwx0cve
       content_markdown: |
         Web assembly is a binary format for representating isolated executable code.  It was developed for web
         browsers as an alternative to javascript with some distinct advantages:
