@@ -50,7 +50,7 @@ common_words:
     untranslated: Untranslated
 pages:
   - en:
-      title: "Hello, Web Assembly"
+      title: Hello, Web Assembly
       code: https://webassembly.studio/?embed&f=hvoajwx0cve
       content_markdown: |
         Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
@@ -66,7 +66,7 @@ pages:
         In this classic example we add 1 + 1, we'll go through how it's done step by step.
   - chapter: 1
     en:
-      title: "What Is Web Assembly?"
+      title: Chapter 1 - What Is Web Assembly?
       content_markdown: |
         Web assembly is a binary format for representating isolated executable code.  It was developed for web
         browsers as an alternative to javascript with some distinct advantages:
@@ -77,3 +77,12 @@ pages:
         * Web Assembly was built rather host agnostic, allowing some people to use web assembly [outside of browsers](https://wasmer.io/) too!
 
         Web Assembly is often called **WASM**
+  - en:
+      title: Inside A Module
+      content_markdown: |
+        When you compile to web assembly you get a file ending in `.wasm` called a web assembly **module**.
+
+        The module is a [binary format](https://webassembly.github.io/spec/core/index.html) full of information on how it should be setup and interacted with:
+        * a list of functions
+        * what functions should be exported/imported
+        * what data should initially be in the wasm modules memory
