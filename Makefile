@@ -14,6 +14,7 @@ beta_generate_wasm:
 	@node generate.js wasm.json docs/webassembly beta
 	@rm wasm.json
 publish:
+	git branch -D gh-pages
 	git checkout -b gh-pages
 
 	@rm docs/*.html || true
@@ -30,7 +31,7 @@ publish:
 
 	git add . || true
 	git commit -m 'generating new html' || true
-	git push origin gh-pages || true
+	git push -f origin gh-pages || true
 
 	git checkout master
 lint:
