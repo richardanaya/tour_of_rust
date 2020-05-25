@@ -1523,7 +1523,7 @@ pages:
         Se a última instrução de um `if`, `match`, função ou bloco de código 
         for uma expressão sem `;`, o Rust vai retorná-la como um valor do bloco.
 
-        Esta é uma ótima maneira de criar uma lógica concisa que rotorna um valor que
+        Esta é uma ótima maneira de criar uma lógica concisa que retorna um valor que
         pode ser atribuída a uma nova variável.
 
         Note isso também permite que o operador `if` funcione como uma expressão ternária concisa.
@@ -1722,7 +1722,7 @@ pages:
 
         **Métodos estáticos** — os métodos que pertencem a um tipo determinado são chamados usando o operador `::`.
 
-        **Métodos de instância** — os métodos que pertencem a uma instância de um tipo são chamados usando o operador `.
+        **Métodos de instância** — os métodos que pertencem a uma instância de um tipo são chamados usando o operador `.`.
 
         Falaremos mais sobre como criar seus próprios métodos nos próximos capítulos.
   - en:
@@ -1821,8 +1821,8 @@ pages:
           geralmente são considerados muito rápidos de usar pois onde estão armazenados são 
           conhecidos e fixos.
         * **stack memory (memória de pilha)** - Para dados declarados como variáveis dentro de uma
-          função. O local dessa memória nunca muda durante a duração de uma chamada de função, por 
-          isso os compiladores podem otimizar o código, por isso a pilha de dados é muito rápida de 
+          função. O local dessa memória nunca muda durante a duração de uma chamada de função, assim
+          os compiladores podem otimizar o código e por isso a pilha de dados é muito rápida de 
           usar.
         * **heap memory** - Para dados criados enquanto o aplicativo está em execução. Os dados 
           nessa região podem ser adicionados, movidos, removidos, redimensionados etc. Por causa da 
@@ -1952,7 +1952,7 @@ pages:
         Os campos são acessados usando o operador de ponto `.`.
 
         Detalhes da memória do nosso exemplo:
-        * O texto dentro das aspas é somente leitura (por exemplo "Ferris"), portanto é colocado
+        * O texto dentro das aspas é somente leitura (por exemplo, "Ferris"), portanto é colocado
           na *região da memória de dados*
         * A chamada da função `String::from` cria uma struct `String` que é colocada lado-a-lado 
           com os campos de SeaCreature na *pilha*. Uma String representa um texto que pode ser 
@@ -2094,7 +2094,7 @@ pages:
         As enumerações permitem criar um novo tipo que pode conter o valor de vários elementos etiquetados
         usando a palavra-chave `enum`.
 
-        O `match` ajuda a garantir o tratamento exaustivo de todos os valores possíveis de enum, tornando-o uma ferramenta poderosa para garantir um código de qualidade.
+        O `match` ajuda a garantir o tratamento exaustivo de todos os valores possíveis de *enum*, tornando-o uma ferramenta poderosa para garantir um código de qualidade.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20esta%20linha%20evita%20avisos%20do%20compilador%0A%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20caranguejo%22%2C%20ferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20polvo%22%2C%20ferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20peixe%22%2C%20ferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20molusco%22%2C%20ferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: Enumerations With Data
@@ -2185,16 +2185,16 @@ pages:
       title: Enumerações com Dados
       content_markdown: |
         Os elementos `enum` também podem ter um ou mais tipos de dados permitindo que eles se comportem
-        como *union* da linguagem C.
+        como o *union* da linguagem C.
 
         Quando um `enum` corresponde ao padrão usando `match`, você pode vincular um nome de variável 
         para cada valor de dados.
 
         Detalhes de memória do `enum`:
-        * Um valor de dados enum terá um tamanho de memória igual ao seu maior elemento. Isso permite
+        * Um valor de dados *enum* terá um tamanho de memória igual ao seu maior elemento. Isso permite
           que todos os valores possíveis caibam no mesmo espaço de memória.
         * Além dos tipos de dados do elemento (se houver), cada elemento também possui um valor numérico 
-          que representa qual etiqueta (tag) é.
+          que representa qual etiqueta (tag) ele é.
 
         Outros detalhes:
         * O `enum` do Rust também é conhecido como *tagged-union*
