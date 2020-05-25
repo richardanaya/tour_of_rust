@@ -15,6 +15,7 @@ common_words:
     toc: Inhaltsverzeichnis
     lessons: Kapitel
     chapter: Kapitel
+    untranslated: Untranslated
   ie:
     tor: Tur de Rust
     next: Sequent
@@ -22,6 +23,7 @@ common_words:
     toc: Tabelle de contenete
     lessons: Lectiones
     chapter: Capitul
+    untranslated: Untranslated
   ru:
     chapter: Глава
     tor: Тур по Rust
@@ -29,6 +31,7 @@ common_words:
     previous: Назад
     toc: Содержание
     lessons: Занятия
+    untranslated: Untranslated
   es:
     chapter: Capítulo
     tor: Tour de Rust
@@ -36,6 +39,7 @@ common_words:
     previous: Anterior
     toc: Tabla de Contenidos
     lessons: Unidades
+    untranslated: Untranslated
   pt-br:
     chapter: Capítulo
     tor: Um tour por Rust
@@ -43,6 +47,7 @@ common_words:
     previous: Anterior
     toc: Índice
     lessons: Unidades
+    untranslated: Untranslated
 pages:
   - en:
       title: "Hello, <span class=\"emoji\">\U0001F980</span>"
