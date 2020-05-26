@@ -487,7 +487,6 @@ pages:
         Los valores mutables siempre se denotan con la palabra reservada **mut**.
 
         Hay mucho más que explicar aún sobre este concepto, pero de momento presta atención solamente a la palabra reservada.
-        We will have more to say on this concept later, but for now just keep an eye out for this keyword.
     pt-br:
       title: Modificando valores
       content_markdown: |
