@@ -1030,12 +1030,10 @@ pages:
       title: Chapter 1 Conclusion
       content_markdown: |
         Nice job so far! The basics of Rust aren't so bad, right?  We're
-        getting a peek into how the Rust compiler thinks.  It cares a lot about the size
-        of values in memory, whether things can be modified or not, and making sure your
-        math is what you want it to be. These are small previews of a principle of **safety**
-        that is prevalent through Rust. The compiler just wants to make sure your code
-        does what it expects! Next up we'll be looking at some old friends `if`
-        and `for` loops.
+        getting a peek into how the Rust compiler thinks.  As a system programming language 
+        it cares a lot about the size  of values in memory, whether things can be modified or not, 
+        and making sure your math is what you want it to be. Next up we'll be looking at some old friends 
+        `if` and `for` loops.
     fr:
       title: Chapter 1 Conclusion
       content_markdown: |
