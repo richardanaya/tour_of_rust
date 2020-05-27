@@ -1448,8 +1448,8 @@ pages:
     de:
       title: Rückgabewerte aus loop
       content_markdown: |
-        `loop`	        Funktionen etc. zu finden sind, können Werte zurückgeben (return).</p><p>Noch etwas
-        kann mittels <code>break</code> den Wert returnen.
+        `loop`	können Werte zurückgeben (return).
+        Noch etwas kann mittels `break` den Wert returnen.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%2213%20gefunden!%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
     ie:
       title: Retornar valores de loop
