@@ -8,6 +8,14 @@ common_words:
     toc: Table of Contents
     lessons: Lessons
     untranslated: Untranslated
+  en_c:
+    chapter: Chapter
+    tor: Tour of Web Assembly
+    next: Next
+    previous: Previous
+    toc: Table of Contents
+    lessons: Lessons
+    untranslated: Untranslated
   de:
     tor: Tour zu Web Assembly
     next: Weiter
@@ -57,7 +65,21 @@ pages:
         appreciate the [Tour of Rust](https://tourofrust.com/)! Most of our examples will be easy
         enough to follow along by anyone though.
 
-        * [English](index.html)
+        * [Rust](index.html)
+        * [C](index_c.html)
+
+        If you have suggestions on content or would like to contribute to translations, 
+        checkout out Tour of Web Assembly's [github repository](https://github.com/richardanaya/tour_of_rust).
+
+        You can navigate through the tour with <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
+    en_c:
+      title: Hello, Web Assembly
+      content_markdown: |
+        Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
+        and how C can be used to power the web.
+
+        * [Rust](index.html)
+        * [C](index_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
         checkout out Tour of Web Assembly's [github repository](https://github.com/richardanaya/tour_of_rust).
@@ -125,3 +147,10 @@ pages:
         results in HTML.
 
         `#[no_mangle]` tells our compiler to keep our function name human readable.
+    en_c:
+      title: 1+1
+      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      content_markdown: |
+        Let's put our knowledge all together and make a web assembly
+        module with a single **export** function `add` for adding two numbers, and put the
+        results in HTML.
