@@ -53,13 +53,14 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
                 <span class="title"><a href="${getFileName(lang,0,is_beta,lessons[0].chapter)}">${getWord(words,lang,"tor")}</a></span>
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
-                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}">${getWord(words,lang,"previous")}</a></span>`:""}
-                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}">${getWord(words,lang,"next")}</a></span>`}
-                </span>
             </div>
             <div class="page">
             <h1>${title}</h1>
             ${content}
+            <div class="bottomnav">
+                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}">❮ ${getWord(words,lang,"previous")}</a></span>`:""}
+                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}">${getWord(words,lang,"next")} ❯</a></span>`}
+            </div>
             </div>
             ${code?`<div class="code">
             <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
