@@ -120,7 +120,7 @@ pages:
       title: 1+1
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
-        Let's now put our knowledge all together and make a web assembly
+        Let's put our knowledge all together and make a web assembly
         module with a single **export** function `add` for adding two numbers, and put the
         results in HTML.
 
