@@ -65,7 +65,8 @@ pages:
         appreciate the [Tour of Rust](https://tourofrust.com/)! Most of our examples will be easy
         enough to follow along by anyone though. This tour is also available in C.
 
-        * [Rust](index.html)
+        * [Rust (English)](index.html)
+        * [Rust (Português Brasileiro)](index_pt-br.html)
         * [C](index_en_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
@@ -78,7 +79,8 @@ pages:
         Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
         and how C can be used to power the web. This tour is also available in Rust.
 
-        * [Rust](index.html)
+        * [Rust (English)](index.html)
+        * [Rust (Português Brasileiro)](index_pt-br.html)
         * [C](index_en_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
