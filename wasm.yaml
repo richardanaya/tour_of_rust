@@ -89,7 +89,7 @@ pages:
       title: Olá, Web Assembly
       content_markdown: |
         Bem-vindo ao *Tour por Web Assembly*. Pretendemos ser uma introdução a esta tecnologia e de
-        como o Rust pode ser usado para dar força à web. Se você é completamente novo no Rust pode
+        como o Rust pode ser usado para dar mais força à web. Se você é completamente novo no Rust pode
         apreciar o [Tour por Rust](https://tourofrust.com/)! A maioria dos nossos exemplos será fácil
         o suficiente para qualquer pessoa acompanhar. Este tour também está disponível para a
         linguagem C.
@@ -120,13 +120,13 @@ pages:
       title: Capítulo 1 - O Que É Web Assembly?
       content_markdown: |
         O Web Assembly é um formato binário para representar um código executável isolado. Foi
-        projetado para ser executada nos navegadores de internet como uma alternativa ao 
+        projetado para ser executado nos navegadores de internet como uma alternativa ao 
         JavaScript com algumas vantagens nítidas:
 
         * Por ser um bytecode de baixo nível, é capaz de executar cálculos rapidamente e gerenciar
           a memória de forma mais concisa.
-        * O Web Assembly foi projetado com os compiladores existentes em mente, permitindo que seja 
-          compilada a partir de linguagens nativas como C/C++ e Rust.
+        * O Web Assembly foi projetado tendo os compiladores existentes em mente, permitindo que seja 
+          compilado a partir de linguagens nativas como C/C++ e Rust.
         * Projetado com o isolamento em mente, permitindo um controle de acesso detalhado.
         * O Web Assembly foi projetado para ser bem agnóstico, permitindo que as pessoas usem o web 
           assembly [fora dos navegadores](https://wasmer.io/) também!
@@ -151,8 +151,8 @@ pages:
         `.wasm` chamado de **módulo**.
 
         O módulo é um [formato binário](https://webassembly.github.io/spec/core/index.html) com 
-        todas as informações para que um programa wasm e a sua memória devem ser configuradas 
-        para interagir com:
+        todas as informações para que um programa wasm e a sua memória sejam configurados 
+        e interajam com:
         * uma lista de funções.
         * quais funções devem ser exportadas/importadas.
         * quais dados devem inicialmente estar na memória dos módulos wasm.
@@ -193,15 +193,14 @@ pages:
     pt-br:
       title: Criando um Módulo
       content_markdown: |
-        Módules são criados a partir de bytes.
+        Módulos são criados a partir de bytes.
 
         ```
         let module = await WebAssembly.instantiate(bytes);
         ```
 
-        Durante esta fase podemos **importar** funções javascript que queremos que nosso módulo
-        tenha acesso.
-        Mostraremos um exemplo no próximo capítulo.
+        Durante esta fase podemos **importar** funções javascript que desejamos que nosso módulo
+        tenha acesso. Mostraremos um exemplo no próximo capítulo.
   - en:
       title: Using a Module
       content_markdown: |
@@ -216,7 +215,7 @@ pages:
     pt-br:
       title: Usando um Módulo
       content_markdown: |
-        Um módulo tem uma ou mais funções **exportadas** que serão acessíveis ao JavaScript.
+        Um módulo tem uma ou mais funções **exportadas** que estarão acessíveis ao JavaScript.
         Tipicamente há uma função exportada que será chamada para iniciar um programa wasm
         (por exemplo: `main`, `start`).
 
@@ -245,6 +244,6 @@ pages:
       title: 1+1
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
-        Vamos juntar nossos conhecimentos e criar um módulo web assembly com uma única função `soma` **exportada** para somar dois números e colocar o resultado em HTML.
+        Vamos juntar nossos conhecimentos e criar um módulo web assembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
 
         `#[no_mangle]` diz ao nosso compilador para manter o nome da nossa função legível para seres humanos.
