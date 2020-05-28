@@ -56,6 +56,14 @@ common_words:
     toc: Índice
     lessons: Unidades
     untranslated: Untranslated
+  zh-cn:
+    chapter: 章
+    tor: Rust 语言之旅
+    next: 下一页
+    previous: 上一页
+    toc: 目录
+    lessons: 课程
+    untranslated: 未翻译
 pages:
   - en:
       title: "Hello, <span class=\"emoji\">\U0001F980</span>"
@@ -74,6 +82,7 @@ pages:
         * [Interlingue](index_ie.html)
         * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
+        * [简体中文](index_zh-cn.html)
 
         if you have suggestions on content
         or would like to contribute to translations, checkout out Tour of Rust's 
@@ -101,6 +110,7 @@ pages:
         * [Interlingue](index_ie.html)
         * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
+        * [简体中文](index_zh-cn.html)
 
         si tu as des suggestions sur le contenu
         ou si tu souhaites contribuer aux traductions, rends-toi sur le
@@ -134,6 +144,7 @@ pages:
         * [Interlingue](index_ie.html)
         * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
+        * [简体中文](index_zh-cn.html)
     ie:
       title: "Salute, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Salute%2C%20%F0%9F%A6%80%22)%3B%0A%7D
@@ -145,8 +156,8 @@ pages:
         <p>In ti-ci exemple on vide li exemple classic de programmation quel monstra li
         subtention de strings (catenes) unicode in Rust.</p><p>Translations:<ul><li><a
         href="index_de.html">Deutsch</a></li><li><a href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a
-        href="index_ie.html">Interlingue</a></li><li><a href="index_ru.html">Русский</a></li></ul></p><p>Si
-        tu have suggestiones pri contenete o vole contribuer un traduction, ples visitar
+        href="index_ie.html">Interlingue</a></li><li><a href="index_ru.html">Русский</a></li><li><a href="index_zh-cn.html">简体中文</a></li></ul></p>
+        <p>Si tu have suggestiones pri contenete o vole contribuer un traduction, ples visitar
         li <a href="https://github.com/richardanaya/tour_of_rust">repositoria github</a>
         del Tur de Rust.</p>
     ru:
@@ -165,6 +176,7 @@ pages:
         * [Interlingue](index_ie.html)
         * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
+        * [简体中文](index_zh-cn.html)
 
         Если у вас есть предложения по содержимому или вы бы хотели помочь с переводом, проверьте
         Тур по Rust [github репозиторий](https://github.com/richardanaya/tour_of_rust).
@@ -187,6 +199,7 @@ pages:
         * [Interlingue](index_ie.html)
         * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
+        * [简体中文](index_zh-cn.html)
 
         Si tienes alguna sugerencia sobre el contenido
         o quieres contribuir a las traducciones, puedes encontrar el repositorio del 
@@ -213,6 +226,7 @@ pages:
         * [Interlingue](index_ie.html)
         * [Português Brasileiro](index_pt-br.html)
         * [Русский](index_ru.html)
+        * [简体中文](index_zh-cn.html)
 
         Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
         traduções, veja o repositório do Tour por Rust no 
@@ -221,6 +235,29 @@ pages:
         Você pode navegar pelo curso usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
 
         Neste exemplo clássico mostramos o suporte de strings Unicode em Rust.
+    zh-cn:
+      title: "你好，<span class=\"emoji\">\U0001F980</span>"
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%E4%BD%A0%E5%A5%BD%EF%BC%8C%F0%9F%A6%80%22)%3B%0A%7D%0A
+      content_markdown: |
+        欢迎来到 *Rust 语言之旅*。本教程旨在逐步介绍 Rust 编程语言的特性。Rust 通常被认为是一门学习曲线陡峭的语言，
+        我希望能说服你，在我们开始学习复杂的部分之前，还有很多东西需要探索。
+
+        你可以通过以下这些语言来阅读本教程：
+
+        * [Deutsch](index_de.html)
+        * [English](index.html)
+        * [Español](index_es.html)
+        * [Français](index_fr.html)
+        * [Interlingue](index_ie.html)
+        * [Português Brasileiro](index_pt-br.html)
+        * [Русский](index_ru.html)
+        * [简体中文](index_zh-cn.html)
+
+        如果你对内容有任何建议，或者想参与翻译做出贡献，请查看 Rust 语言之旅的 [github 代码库](https://github.com/richardanaya/tour_of_rust)。
+
+        你可以使用 <span class="emoji">⬅️</span> 和 <span class="emoji">➡️</span> 浏览整个教程。
+
+        在这个经典的例子中，我们展示了 Rust 对 Unicode 字符串的支持。
   - chapter: 1
     en:
       title: Chapter 1 - The Basics
@@ -278,6 +315,13 @@ pages:
         E se por acaso você está se perguntando quem é este adorável caranguejo falante, eu me 
         chamo **Ferris** e sou o mascote não oficial da linguagem de programação Rust.
         Prazer em conhecê-lo.
+    zh-cn:
+      title: 第一章 - 基础知识
+      content_markdown: |
+        在第一章中，我们将探讨函数、变量和最基本的类型等基本知识。欢迎入坑！
+
+        并且~ 以防你好奇这个跟你说话的螃蟹是谁，我是 **Ferris**，一个非官方的 Rust 语言的吉祥物。
+        很高兴认识你！
   - en:
       title: The Rust Playground
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
@@ -326,6 +370,13 @@ pages:
         Este tour usa a ferramenta de codificação interativa [Rust Playground](https://play.rust-lang.org)
 
         É uma boa maneira de brincar com Rust e mostrar aos outros a sua criatividade e desafios!
+    zh-cn:
+      title: Rust 练习场
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%BB%83%E4%B9%A0%E5%9C%BA%EF%BC%81%E4%BD%A0%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9%E8%BF%99%E5%84%BF%E7%9A%84%E4%BB%A3%E7%A0%81%E3%80%82%22)%3B%0A%7D%0A
+      content_markdown: |
+        本教程使用一个来自 [Rust 练习场](https://play.rust-lang.org) 的交互代码工具。
+
+        这是一个玩转 Rust 并且向别人展示你的创造力和挑战性的好方法。
   - en:
       title: Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -415,6 +466,17 @@ pages:
         futuras a esse nome.
 
         Os nomes das variáveis são sempre em `snake_case`.
+    zh-cn:
+      title: 变量
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20%E6%8E%A8%E6%96%AD%E5%87%BAx%E7%9A%84%E7%B1%BB%E5%9E%8B%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%E4%B9%9F%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E5%A3%B0%E6%98%8E%E7%B1%BB%E5%9E%8B%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20%E4%B9%9F%E6%94%AF%E6%8C%81%E5%85%88%E5%A3%B0%E6%98%8E%E5%90%8E%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E4%BD%86%E5%BE%88%E5%B0%91%E8%BF%99%E6%A0%B7%E5%81%9A%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        变量使用 **let** 关键字来声明。
+
+        在赋值时，Rust 能够在 99% 的情况下推断变量的类型。如果不能，你可以将类型添加到变量声明中。
+
+        注意，我们如何多次分配相同的变量名。这被称为变量隐藏，可以更改变量类型以实现对该变量名的后续使用。
+
+        变量名总是遵循 `蛇形命名法` (snake_case)。
   - en:
       title: Changing Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -501,6 +563,18 @@ pages:
 
         Temos muito a explicar ainda sobre este conceito, mas por enquanto apenas preste atenção 
         nesta palavra-chave.
+    zh-cn:
+      title: 修改变量
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        Rust 非常关心哪些变量是可修改的。值分为两种类型：
+
+        * **可变的** - 编译器允许对变量进行写入和读取。
+        * **不可变的** - 编译器只允许对变量进行读取。
+
+        可变值用 **mut** 关键字表示。
+
+        关于这个概念，我们以后还会有更多的内容，但是目前请注意这个关键字即可。
   - en:
       title: Basic Types
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
@@ -655,6 +729,26 @@ pages:
 
         Tipos numéricos podem ser especificados explicitamente adicionando o tipo ao final do 
         número (por exemplo: `13u32`, `2u8`)
+    zh-cn:
+      title: 基本类型
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20%E9%BB%98%E8%AE%A4%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E8%BF%99%E6%98%AFi32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20%E9%BB%98%E8%AE%A4%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E8%BF%99%E6%98%AFf64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        Rust 有多种常见的类型：
+
+        * 布尔型 - `bool` 表示 true 或 false
+        * 无符号整型- `u8` `u32` `u64` `u128` 表示正整数
+        * 有符号整型 - `i8` `i32` `i64` `i128` 表示正负整数
+        * 指针大小的整数 - `usize` `isize` 表示内存中内容的索引和大小
+        * 浮点数 - `f32` `f64`
+        * 元组（tuple） - `(value, value, ...)` 用于在栈上传递固定序列的值
+        * 数组 - 在编译时已知的具有固定长度的相同元素的集合
+        * 切片（slice） - 在运行时已知长度的相同元素的集合
+        * `str`(string slice) - 在运行时已知长度的文本
+
+        文本可能比你在其他语言中学到的更复杂，因为 Rust 是一种系统编程语言，它关心的是你可能不太习惯的内存问题。
+        我们稍后将详细讨论这个问题。
+
+        可以通过将类型附加到数字的末尾来明确指定数字类型（如 `13u32`, `2u8`）
   - en:
       title: Basic Type Conversion
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -711,6 +805,13 @@ pages:
 
         Por sorte o Rust faz com que as conversões de tipos numéricos sejam muito siples usando 
         a plavra-chave **as**.
+    zh-cn:
+      title: 基本类型转换
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+      content_markdown: |
+        当涉及到数字类型时，Rust 要求明确。一个人不能把“u8”用在“u32”上而不出错。
+
+        幸运的是，使用 **as** 关键字，rust 使数字类型转换非常容易。
   - en:
       title: Constants
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -786,6 +887,16 @@ pages:
         Diferentemente das variáveis, o tipo das constantes devem ter sempre declarados.
 
         Os nomes das constantes são sempre em `SCREAMING_SNAKE_CASE`.
+    zh-cn:
+      title: 常量
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        常量允许我们指定一个在代码中多次有效使用的公共值。常量在编译时直接用它们的值替换文本标识符，
+        而不是复制变量之类的值。
+
+        不同于变量，常量必须始终具有显式类型。
+
+        常量名总是遵循 `全大写蛇形命名法`（SCREAMING_SNAKE_CASE）。
   - en:
       title: Arrays
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
@@ -835,6 +946,15 @@ pages:
 
         Os elementos podem ser recuperados individualmente com o operador `[x]`, onde *x* 
         é o índice do tipo *usize* (começando de 0) do elemento que deseja recuperar.
+    zh-cn:
+      title: 数组
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+      content_markdown: |
+        *数组* 是所有相同类型数据元素的固定长度集合。
+
+        一个 *数组* 的数据类型是 `[T;N]`，其中T是元素的类型，N是编译时已知的固定长度。
+
+        可以使用 `[x]` 运算符检索单个元素，其中 *x* 是所需元素的 *usize* 索引(从0开始)。
   - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
@@ -895,6 +1015,15 @@ pages:
         Neste exemplo, *add* recebe dois parâmetros do tipo `i32` (número inteiro de 32 bits).
 
         Os nomes das funções são sempre em `snake_case`.
+    zh-cn:
+      title: 函数
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+      content_markdown: |
+        函数有0个或者多个参数。
+
+        在这个例子中，add 接受类型为 `i32` (32位长度的整数)的两个参数。
+
+        函数名总是遵循 `蛇形命名法` (snake_case)。
   - en:
       title: Multiple Return Values
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
@@ -962,6 +1091,15 @@ pages:
 
         O Rust suporta vários modos de desestruturação que veremos em diferentes formas, 
         permintindo extrair subconjuntos de dados de maneira prática.
+    zh-cn:
+      title: 多个返回值
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA%E5%85%83%E7%BB%84%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20%E5%B0%86%E5%85%83%E7%BB%84%E8%A7%A3%E6%9E%84%E4%B8%BA%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+      content_markdown: |
+        函数可以通过 **元组** 来返回多个值。
+
+        元组元素可以通过他们的索引来获取。
+
+        Rust 支持我们后续将看到的各种形式的解构，允许我们以符合人类工程学的方式提取数据结构的子片段。注意！
   - en:
       title: Returning Nothing
       content_markdown: |
@@ -1026,6 +1164,15 @@ pages:
         Uma tupla vazia é representada por `()`.
 
         O uso de `()` é incomum, mas é necessário saber o seu significado uma vez que aparecerá de vez em quando.
+    zh-cn:
+      title: 返回空
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E9%9A%90%E5%90%AB%E4%B8%BA%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E6%8C%87%E5%AE%9A%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%8C%E8%BF%99%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B0%86%E4%BC%9A%E8%BF%94%E5%9B%9E%20()%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20%E6%89%93%E5%8D%B0a%E5%92%8Cb%E7%9A%84debug%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%BE%88%E9%9A%BE%E5%8E%BB%E6%89%93%E5%8D%B0%E7%A9%BA%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+      content_markdown: |
+        如果没有为函数指定返回类型，它将返回一个空的元组，也称为 *单元*。
+
+        一个空的元组用 `()` 表示。
+
+        明确的使用 `()` 是不常见的，但作为函数返回值会经常出现。
   - en:
       title: Chapter 1 Conclusion
       content_markdown: |
@@ -1098,6 +1245,12 @@ pages:
         na memória, se as coisas podem ser modificadas ou não, e garantir que sua
         matemática seja o que você quer que seja. A seguir veremos alguns velhos
         amigos: `if` e `for`.
+    zh-cn:
+      title: 第一章总结
+      content_markdown: |
+        到目前为止做得很好！ Rust 的基础知识还不错，对吧？ 我们将看到 Rust 编译器是如何思考的。
+        作为一种系统编程语言，它非常关心内存中值的大小，是否可以修改内容，并确保数值符合你的预期。
+        接下来，我们将看一些老朋友 `if` 和 `for` 循环。
   - chapter: 2
     en:
       title: Chapter 2 - Basic Control Flow
@@ -1136,6 +1289,10 @@ pages:
         Neste capítulo falaremos das estruturas de controle de fluxo básicas em Rust.
         Se você está familiarizado com linguagens baseadas em C, se sentirá em casa
         e, quem sabe, algumas agradáveis surpresas.
+    zh-cn:
+      title: 第二章 - 基本控制流
+      content_markdown: |
+        在本章中，我们将讨论 Rust 中的基本控制流方法。 如果你熟悉类 C 的语言，你会感到宾至如归，可能会感到惊讶。
   - en:
       title: if/else if/else
       content_markdown: |
@@ -1188,6 +1345,15 @@ pages:
         Todos os nossos operadores lógicos habituais continuam funcionando: 
         `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22menor%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22igual%20a%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22maior%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+    zh-cn:
+      title: if/else if/else
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+      content_markdown: |
+        Rust 中的代码分支不足为奇。
+
+        条件判断没有括号！我们真的需要它们吗？我们的逻辑现在看起来很清晰。
+
+        你所有常用的逻辑运算符仍然适用：`!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
   - en:
       title: loop
       content_markdown: |
@@ -1236,6 +1402,15 @@ pages:
         O `break` nos permite sair de um loop quando precisar.
 
         O `loop` tem um segredo do qual falaremos em breve.
+    zh-cn:
+      title: 循环
+      content_markdown: |
+        需要一个无限循环？
+
+        使用 Rust 很容易实现。
+
+        `break` 会退出当前循环。</p><p>`loop` 有个秘密，我们很快讲到。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   - en:
       title: while
       content_markdown: |
@@ -1270,6 +1445,13 @@ pages:
         O `while` permite que você estabeleça facilmente uma condição no loop.
 
         Se a condição avaliar `falso`, o loop terminará.
+    zh-cn:
+      title: while
+      content_markdown: |
+        `while` 允许你轻松地向循环添加条件。
+
+        如果条件变为 `false`，循环退出。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: for
       content_markdown: |
@@ -1361,6 +1543,18 @@ pages:
 
         O operador `..=` cria um iterador que gera uma seqüência a partir de um 
         número inicial até um número final, inclusive.
+    zh-cn:
+      title: for
+      content_markdown: |
+        Rust的 `for` 循环是一个强大的升级。它遍历来自计算结果为迭代器的任何表达式的值。
+        迭代器是什么？迭代器是一个你可以询问“下一项是什么？”直到没有其他项的对象。
+
+        我们将在以后的章节中进一步探讨这一点，与此同时，我们知道 Rust 使创建生成整数序列的迭代器变得容易。
+
+        `..` 运算符创建一个可以生成包含起始数字、但不包含末尾数字的数字序列的迭代器。
+
+        `..=` 运算符创建一个可以生成包含起始数字、且包含末尾数字的数字序列的迭代器。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: match
       content_markdown: |
@@ -1439,6 +1633,17 @@ pages:
         Correspondências (matching) combinado com desestruturação é um dos padrões mais comuns
         que você verá no Rust.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20o%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20comparar%20com%20m%C3%BAltiplos%20valores%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%201%20ou%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20comparar%20com%20iteradores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20um%20n%C3%BAmero%20entre%203%20e%209%2C%20inclusive%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20vincular%20a%20uma%20vari%C3%A1vel%20o%20n%C3%BAmero%20a%20ser%20comparado%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20o%20n%C3%BAmero%20%7B%7D%20entre%2010%20e%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20esta%20%C3%A9%20a%20correspond%C3%AAncia%20padr%C3%A3o%20que%20deve%20existir%20se%20nenhum%20caso%20for%20correspondido%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20outra%20coisa!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+    zh-cn:
+      title: match
+      content_markdown: |
+        想念你的 switch 语句吗？Rust有一个非常有用的关键字，用于匹配值的所有可能条件，
+        并在匹配为真时执行相应代码。我们来看看对数字的使用。在未来章节中，我们将有更多
+        更复杂的数据模式匹配的说明，我向你保证，它将值得等待。
+
+        `match` 是穷尽性的，所以必须处理所有情况。
+
+        匹配与解构相结合是迄今为止你在 Rust 中看到的最常见的模式之一。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%8C%B9%E9%85%8D%E5%A4%9A%E4%B8%AA%E5%80%BC%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%8C%B9%E9%85%8D%E8%BF%AD%E4%BB%A3%E5%99%A8%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%B0%86%E5%8C%B9%E9%85%8D%E6%95%B0%E5%80%BC%E7%BB%91%E5%AE%9A%E5%88%B0%E5%8F%98%E9%87%8F%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E8%BF%99%E6%98%AF%E9%BB%98%E8%AE%A4%E5%8C%B9%E9%85%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%A4%84%E7%90%86%E6%89%80%E6%9C%89%E6%83%85%E5%86%B5%EF%BC%8C%E5%88%99%E5%BF%85%E9%A1%BB%E5%AD%98%E5%9C%A8%E8%AF%A5%E5%8C%B9%E9%85%8D%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: Returning Values From loop
       content_markdown: |
@@ -1469,6 +1674,11 @@ pages:
       content_markdown: |
         `loop` podem ser interrompidos para retornar um valor.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontrei%20o%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+    zh-cn:
+      title: 从循环中返回值
+      content_markdown: |
+        `loop` 可以中断以返回一个值。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
   - en:
       title: Returning Values From Block Expressions
       content_markdown: |
@@ -1547,6 +1757,17 @@ pages:
 
         Note isso também permite que o operador `if` funcione como uma expressão ternária concisa.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20express%C3%A3o%20tern%C3%A1ria%20em%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22do%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamb%C3%BArger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22cachorro-quente%22%20%3D%3E%20%22%C3%A9%20cachorro-quente%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20repare%20que%20as%20chaves%20s%C3%A3o%20opcionais%20quando%20o%20retorno%20%C3%A9%20s%C3%B3%20uma%20express%C3%A3o%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22n%C3%A3o%20%C3%A9%20cachorro-quente%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identificando%20o%20lanche%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloco%20de%20c%C3%B3digo%20nos%20permite%20obter%20um%20resultado%20sem%20poluir%20o%20escopo%20da%20fun%C3%A7%C3%A3o%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20bloco%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Assim%20retornamos%20um%20valor%20en%20Rust%20no%20final%20de%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22da%20fun%C3%A7%C3%A3o%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+    zh-cn:
+      title: 从块表达式返回值
+      content_markdown: |
+        `if`，`match`，函数，以及作用域块都有一种返回值的独特方式。
+
+        如果 `if`、`match`、函数或作用域块中的最后一条语句是不带 `;` 的表达式，
+        Rust将把它作为一个值从块中返回。这是一种创建简洁逻辑的好方法，它返回一个
+        可以放入新变量的值。
+
+        注意，它还允许 `if` 语句像简洁的三元表达式一样操作。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust%E7%9A%84%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%BD%93%E5%AE%83%E5%8F%AA%E6%98%AF%E4%B8%80%E4%B8%AA%E8%BF%94%E5%9B%9E%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%97%B6%EF%BC%8C%E5%A4%A7%E6%8B%AC%E5%8F%B7%E6%98%AF%E5%8F%AF%E9%80%89%E7%9A%84%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%E8%BF%99%E4%B8%AA%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%9D%97%E8%AE%A9%E6%88%91%E4%BB%AC%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%BB%93%E6%9E%9C%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20%E5%9C%A8%E6%9C%80%E5%90%8E%E4%BB%8E%E5%87%BD%E6%95%B0%E4%B8%AD%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E6%83%AF%E7%94%A8%E6%96%B9%E6%B3%95%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
   - en:
       title: Chapter 2 Conclusion
       content_markdown: |
@@ -1594,6 +1815,12 @@ pages:
         `match` com mais profundidade à medida que formos adquirindo mais 
         conhecimento para aproveitar os seus recursos. A seguir entraremos nos 
         fundamentos das estruturas de dados do Rust.
+    zh-cn:
+      title: 第二章总结
+      content_markdown: |
+        希望我已经展示了 Rust 的强大功能，即使是在最基本的语言特性中。
+        我们将更深入地讨论 `for` 和 `match`，因为我们将获得更多可以
+        利用它们能力的知识。下次我们将讨论 Rust 的基础数据结构。
   - chapter: 3
     en:
       title: Chapter 3 - Basic Data Structure Types
@@ -1631,6 +1858,11 @@ pages:
         de dados mais primitivas do Rust, prestando muita atenção nas suas representações em
         memória. Acredito que você gostará do quão pouco o Rust esconde de você como as coisas 
         funcionam.
+    zh-cn:
+      title: 第三章 - 基本数据结构类型
+      content_markdown: |
+        现在是我们探索基本类型之外内容的时候了！在本章中，我们将查看 Rust 中最原始的数据结构，
+        密切关注它们在内存中的表示。我想你们会喜欢上 Rust 是很少隐藏事情运作原理的。
   - en:
       title: Structures
       content_markdown: |
@@ -1687,6 +1919,16 @@ pages:
 
         Sua definição é como um modelo para o compilador sobre como organizar os campos na memória 
         próximos uns dos outros.
+    zh-cn:
+      title: 结构体
+      content_markdown: |
+        一个 `struct` 就是一些字段的集合。
+
+        *字段* 是一个与数据结构相关联的数据值。它的值可以是基本类型或结构体类型。
+
+        它的定义就像一个编译器的蓝图，告诉编译器如何在内存中布局彼此相邻的字段。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20%E6%98%AF%E4%B8%AA%E7%BB%93%E6%9E%84%E4%BD%93%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
   - en:
       title: Calling Methods
       content_markdown: |
@@ -1744,6 +1986,18 @@ pages:
         **Métodos de instância** — os métodos que pertencem a uma instância de um tipo são chamados usando o operador `.`.
 
         Falaremos mais sobre como criar seus próprios métodos nos próximos capítulos.
+    zh-cn:
+      title: 方法调用
+      content_markdown: |
+        与函数（function）不同，方法（method）是与特定数据类型关联的函数。
+
+        **静态方法** — 属于某个类型，调用时使用 `::` 运算符。
+
+        **实例方法** — 属于某个类型的实例，调用时使用 `.` 运算符。
+
+        我们将在后续章节中更多地讨论如何创建自己的方法。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E6%9D%A5%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAString%E5%AE%9E%E4%BE%8B%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B%E6%9D%A5%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
   - en:
       title: Memory
       content_markdown: |
@@ -1848,6 +2102,19 @@ pages:
           sua natureza dinâmica geralmente é considerado mais lenta, mas permite usos de memória muito 
           mais criativas. Quando dados são adicionados a essa região, chamamos de **alocação**. Quando 
           os dados são removidos desta seção, chamamos de **desalocação**.
+    zh-cn:
+      title: 内存
+      content_markdown: |
+        Rust 程序有3个存放数据的内存区域：
+        * **数据内存** - 对于固定大小和 **静态** （就是在整个程序声明周期中都存在的）的数据。
+          考虑一下程序中的文本（例如 “Hello World”），该文本的字节只能读取，因此它们位于该区域中。
+          编译器对这类数据做了很多优化，由于位置已知且固定，因此通常认为编译器使用起来非常快。
+        * **栈内存** - 对于在函数中声明为变量的数据。
+          在函数调用期间，内存的位置不会改变，因为编译器可以优化代码，所以栈数据使用起来非常快。
+        * **堆内存** - 对于在程序运行时创建的数据。
+          此区域中的数据可以添加、移动、删除、调整大小等。由于它的动态特性，通常认为它使用起来比较慢，
+          但是它允许更多创造性的内存使用。当数据添加到该区域时，我们称其为 **分配**。 从本区域中删除
+          数据后，我们将其称为 **释放**。
   - en:
       title: Creating Data In Memory
       content_markdown: |
@@ -1982,6 +2249,25 @@ pages:
         * Finalmente, nossos dois amigos *Ferris* e *Sara* têm estruturas de dados que sempre terão
           locais fixos em nosso programa, portanto, eles são colocados na *pilha*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Os%20dados%20de%20SeaCreature%20est%C3%A3o%20na%20pilha%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20A%20struct%20da%20String%20tamb%C3%A9m%20est%C3%A1%20na%20pilha%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20mas%20mant%C3%A9m%20uma%20refer%C3%AAncia%20dos%20dados%20na%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22caranguejo%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22garra%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22polvo%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22nenhum%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%A9%20um%20%7B%7D.%20Eles%20t%C3%AAm%20%7B%7D%20bra%C3%A7os%2C%20%7B%7D%20patas%2C%20e%20uma%20arma%20de%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%A9%20um%20%7B%7D.%20Eles%20t%C3%AAm%20%7B%7D%20bra%C3%A7os%20e%20%7B%7D%20patas.%20Eles%20n%C3%A3o%20t%C3%AAm%20armas..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
+    zh-cn:
+      title: 在内存中创建数据
+      content_markdown: |
+        当我们在代码中 **实例化** 一个 **结构体** 时，我们的程序会在内存中并排创建关联的字段数据。
+
+        当我们通过制定所有字段值的方式来实例化时：
+
+        `结构体名 { ... }`.
+
+        结构体字段可以通过 `.` 运算符来获取。
+
+        我们例子的内存详情：
+        * 引号内的文本是只读数据（例如“ferris”），因此它位于 *数据内存区*。
+        * 函数调用 `String::from` 创建一个结构体 `String`，该结构体与 SeaCreature 的字段并排放置在 *栈* 中。
+          字符串表示可以更改的文本通过：
+          1. 在 *堆* 上创建可修改文本的内存。
+          2. 将 *堆* 中存储对象的内存位置的引用存储在 `String` 结构体中(在以后的课程中会详细介绍)。
+        * 最后，我们的两个朋友 *ferris* 和 *sara* 有在程序中总是固定的位置的数据结构，所以它们被放在 *栈* 上。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature%E7%9A%84%E6%95%B0%E6%8D%AE%E5%9C%A8%E6%A0%88%E4%B8%8A%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20%E7%BB%93%E6%9E%84%E4%BD%93%E4%B9%9F%E5%9C%A8%E6%A0%88%E4%B8%8A%EF%BC%8C%0A%20%20%20%20%20%20%20%20%2F%2F%20%E4%BD%86%E4%B9%9F%E5%AD%98%E6%94%BE%E4%BA%86%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%A0%86%E4%B8%8A%E7%9A%84%E5%BC%95%E7%94%A8%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
   - en:
       title: Tuple-like Structs
       content_markdown: |
@@ -2011,6 +2297,12 @@ pages:
         Para sermos concisos, você pode criar estruturas que são usadas em tupla.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Isto%20ainda%20%C3%A9%20uma%20estrutura%20em%20uma%20pilha%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+    zh-cn:
+      title: 类元组结构体
+      content_markdown: |
+        简洁起见，你可以创建像元组一样使用的结构体。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E8%BF%99%E4%BB%8D%E7%84%B6%E6%98%AF%E4%B8%80%E4%B8%AA%E5%9C%A8%E6%A0%88%E4%B8%8A%E7%9A%84%E7%BB%93%E6%9E%84%E4%BD%93%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
   - en:
       title: Unit-like Structs
       content_markdown: |
@@ -2064,6 +2356,16 @@ pages:
         É por isso que esse tipo de estrutura é chamado de *Unit-like*.
 
         Este tipo de estrutura raramente é usado.
+    zh-cn:
+      title: 类单元结构体
+      content_markdown: |
+        结构体也可以没有任何字段。
+
+        就像第一章提到的，一个 *unit* 是空元组 `()` 的别称。这就是为什么，此类结构体被称为 `类单元`。
+
+        这种类型的结构体很少用到。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Marker%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_m%20%3D%20Marker%3B%0A%7D%0A
   - en:
       title: Enumerations
       content_markdown: |
@@ -2115,6 +2417,13 @@ pages:
 
         O `match` ajuda a garantir o tratamento exaustivo de todos os valores possíveis de *enum*, tornando-o uma ferramenta poderosa para garantir um código de qualidade.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20esta%20linha%20evita%20avisos%20do%20compilador%0A%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20caranguejo%22%2C%20ferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20polvo%22%2C%20ferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20peixe%22%2C%20ferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20%C3%A9%20um%20molusco%22%2C%20ferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
+    zh-cn:
+      title: 枚举
+      content_markdown: |
+        枚举允许你使用 `enum` 关键字创建一个新类型，该类型的值可以包含几个带标记的元素。
+
+        `match` 有助于确保对所有可能的枚举值进行彻底的处理，使其成为确保高质量代码的强大工具。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20is%20a%20crab%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20is%20a%20octopus%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20is%20a%20fish%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20is%20a%20clam%22%2Cferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: Enumerations With Data
       content_markdown: |
@@ -2220,6 +2529,21 @@ pages:
         * A combinação de tipos para criar um novo tipo é a o que nos referimos quando dizemos que Rust 
           tem *tipos algébricos*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20esta%20linha%20evita%20avisos%20do%20compilador%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20os%20dados%20de%20SeaCreature%20est%C3%A3o%20na%20pilha%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20A%20struct%20da%20String%20tamb%C3%A9m%20est%C3%A1%20na%20pilha%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20mas%20mant%C3%A9m%20uma%20refer%C3%AAncia%20dos%20dados%20na%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22grandes%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22pequenas%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22Ferris%20%C3%A9%20um%20caranguejo%20com%20%7B%7D%20garras%20%7B%7D%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22Ferris%20%C3%A9%20um%20caranguejo%20com%20outro%20tipo%20de%20arma%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22Ferris%20%C3%A9%20outro%20tipo%20de%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D
+    zh-cn:
+      title: 带数据的枚举
+      content_markdown: |
+        `enum` 的元素可以有一个或多个数据类型，从而使其表现得像C语言中的 *联合*。
+
+        当使用 `match` 对 一个 `枚举` 进行模式匹配时，可以将变量名称绑定到每个数据值。
+
+        `枚举` 的内存细节：
+        * 枚举数据的内存大小等于它最大元素的大小。这允许所有可能的值都适合于相同的内存空间。
+        * 除了元素数据类型(如果有的话)之外，每个元素还有一个数字值，表示它是哪个标签。
+
+        其他细节：
+        * Rust的 `枚举` 也被称为 *标签联合* (tagged-union)
+        * 把类型组合成一种新的类型，这就是人们所说的 Rust 具有 *algebraic 类型* 的含义。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22big%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22small%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20is%20a%20crab%20with%20%7B%7D%20%7B%7D%20claws%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20a%20crab%20with%20some%20other%20weapon%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20some%20other%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D
   - en:
       title: Chapter 3 - Conclusion
       content_markdown: |
@@ -2260,6 +2584,12 @@ pages:
         Esperamos que agora possamos ver como as operações fundamentais do Rust funcionam em harmonia
         e concisão com seus tipos. A seguir, falaremos sobre um conceito que oferece aos nossos tipos 
         de dados ainda mais flexibilidade de representação: *genéricos*.
+    zh-cn:
+      title: 第三章 - 总结
+      content_markdown: |
+        多么令人兴奋啊！现在我们有了一个最基本的工具，可以用代码来展示我们的想法。
+        希望现在我们能看到 Rust 的基本操作是如何与它的类型和谐一致地工作的。
+        接下来我们将讨论一个概念，它为我们的数据类型提供了更大的灵活性: *泛型*。
   - chapter: 4
     en:
       title: Chapter 4 - Generic Types
