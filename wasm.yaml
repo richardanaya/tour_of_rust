@@ -79,7 +79,7 @@ pages:
         and how C can be used to power the web.
 
         * [Rust](index.html)
-        * [C](index_c.html)
+        * [C](index_en_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
         checkout out Tour of Web Assembly's [github repository](https://github.com/richardanaya/tour_of_rust).
