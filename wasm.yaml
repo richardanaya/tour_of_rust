@@ -63,7 +63,7 @@ pages:
         Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
         and how Rust can be used to power the web.  If you are completely new to Rust, you might 
         appreciate the [Tour of Rust](https://tourofrust.com/)! Most of our examples will be easy
-        enough to follow along by anyone though.
+        enough to follow along by anyone though. This tour is also availabe in C.
 
         * [Rust](index.html)
         * [C](index_c.html)
@@ -76,7 +76,7 @@ pages:
       title: Hello, Web Assembly
       content_markdown: |
         Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
-        and how C can be used to power the web.
+        and how C can be used to power the web. This tour is also availabe in Rust.
 
         * [Rust](index.html)
         * [C](index_en_c.html)
