@@ -66,7 +66,7 @@ pages:
         enough to follow along by anyone though. This tour is also availabe in C.
 
         * [Rust](index.html)
-        * [C](index_c.html)
+        * [C](index_en_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
         checkout out Tour of Web Assembly's [github repository](https://github.com/richardanaya/tour_of_rust).
