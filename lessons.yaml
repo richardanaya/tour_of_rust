@@ -494,8 +494,8 @@ pages:
         Em Rust é importante levar em consideração quais valores serão alterados. Os valores
         se dividem em dois tipos:
 
-        * **mutáveis** - a localidade na mamória pode ser lida e gravada
-        * **imutáveis** - a localidade na mamória pode ser somente lida
+        * **mutáveis** - o compilador permitirá que a variável seja lida e gravada.
+        * **imutáveis** - o compilador permitirá apenas a leitura da variável.
 
         Valores mutáveis são marcados com a palavra-chave **mut**.
 
@@ -1093,12 +1093,11 @@ pages:
       title: Capítulo 1 - Conclusão
       content_markdown: |
         Bom trabalho! O básico do Rust não foi tão ruim, não é? Este foi só o
-        comecinho de como o compilador Rust trabalha. Ele se preocupa muito a respeito
-        dos tamanhos dos valores em memória, quais coisas podem ser modificadas ou não,
-        e garantir que as coisas funcionem do jeito que você quer que funcionem. Estes são
-        pequenos previews de um princípio de **segurança** que prevalece através do Rust.
-        O compilador apenas quer ter certeza que o seu código faça o que se espera dele!
-        A seguir veremos alguns velhos conhecidos: `if` e `for`.
+        comecinho de como o compilador Rust trabalha. Por ser uma linguagem de
+        programação de sistemas, ele se importa muito com o tamanho dos valores
+        na memória, se as coisas podem ser modificadas ou não, e garantir que sua
+        matemática seja o que você quer que seja. A seguir veremos alguns velhos
+        amigos: `if` e `for`.
   - chapter: 2
     en:
       title: Chapter 2 - Basic Control Flow
