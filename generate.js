@@ -192,9 +192,13 @@ for(var l in languages){
             <p>
             <ul>
         ${langLessons.map((x,i)=> {
-            let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:"["+getWord(words,lang,"untranslated")+"] "+x["en"].title}</a></li>`;
+            let target_lang = lang;
+            if(x[lang] && x[lang].clone){
+                target_lang = x[lang].clone;
+            }
+            let s = `<li><a href="${getFileName(lang,i,false,x.chapter)}">${x[target_lang]?x[target_lang]["title"]:"["+getWord(words,target_lang,"untranslated")+"] "+x["en"].title}</a></li>`;
             if(x.chapter != undefined){
-                s = `</ul><h3><a href="${getFileName(lang,i,false,x.chapter)}">${x[lang]?x[lang]["title"]:"["+getWord(words,lang,"untranslated")+"] "+x["en"].title}</a></h3><ul>`;
+                s = `</ul><h3><a href="${getFileName(lang,i,false,x.chapter)}">${x[target_lang]?x[target_lang]["title"]:"["+getWord(words,target_lang,"untranslated")+"] "+x["en"].title}</a></h3><ul>`;
             }
             return s;
         }).join("\n")}
