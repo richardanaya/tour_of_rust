@@ -250,3 +250,12 @@ pages:
         Vamos juntar nossos conhecimentos e criar um módulo web assembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
 
         `#[no_mangle]` diz ao nosso compilador para manter o nome da nossa função legível para seres humanos.
+  - chapter: 2
+    en:
+      title: The End
+      content_markdown: |
+        That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!
+    es:
+      title: Fin
+      content_markdown: |
+        Esto es todo por ahora, pero aún quedan más capítulos, así que ¡muy atento! Esperamos que disfrutes del viaje.
