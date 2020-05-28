@@ -1290,6 +1290,10 @@ pages:
         Neste capítulo falaremos das estruturas de controle de fluxo básicas em Rust.
         Se você está familiarizado com linguagens baseadas em C, se sentirá em casa
         e, quem sabe, algumas agradáveis surpresas.
+    zh-cn:
+      title: 第二章 - 基本控制流
+      content_markdown: |
+        在本章中，我们将讨论 Rust 中的基本控制流方法。 如果你熟悉类 C 的语言，你会感到宾至如归，可能会感到惊讶。
   - en:
       title: if/else if/else
       content_markdown: |
@@ -1342,6 +1346,15 @@ pages:
         Todos os nossos operadores lógicos habituais continuam funcionando: 
         `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22menor%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22igual%20a%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22maior%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+    zh-cn:
+      title: if/else if/else
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+      content_markdown: |
+        Rust 中的代码分支不足为奇。
+
+        条件判断没有括号！我们真的需要它们吗？我们的逻辑现在看起来很清晰。
+
+        你所有常用的逻辑运算符仍然适用：`!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
   - en:
       title: loop
       content_markdown: |
@@ -1390,6 +1403,15 @@ pages:
         O `break` nos permite sair de um loop quando precisar.
 
         O `loop` tem um segredo do qual falaremos em breve.
+    zh-cn:
+      title: 循环
+      content_markdown: |
+        需要一个无限循环？
+
+        使用 Rust 很容易实现。
+
+        `break` 会退出当前循环。</p><p>`loop` 有个秘密，我们很快讲到。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   - en:
       title: while
       content_markdown: |
@@ -1424,6 +1446,13 @@ pages:
         O `while` permite que você estabeleça facilmente uma condição no loop.
 
         Se a condição avaliar `falso`, o loop terminará.
+    zh-cn:
+      title: while
+      content_markdown: |
+        `while` 允许你轻松地向循环添加条件。
+
+        如果条件变为 `false`，循环退出。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: for
       content_markdown: |
@@ -1515,6 +1544,18 @@ pages:
 
         O operador `..=` cria um iterador que gera uma seqüência a partir de um 
         número inicial até um número final, inclusive.
+    zh-cn:
+      title: for
+      content_markdown: |
+        Rust的 `for` 循环是一个强大的升级。它遍历来自计算结果为迭代器的任何表达式的值。
+        迭代器是什么？迭代器是一个你可以询问“下一项是什么？”直到没有其他项的对象。
+
+        我们将在以后的章节中进一步探讨这一点，与此同时，我们知道 Rust 使创建生成整数序列的迭代器变得容易。
+
+        `..` 运算符创建一个可以生成包含起始数字、但不包含末尾数字的数字序列的迭代器。
+
+        `..=` 运算符创建一个可以生成包含起始数字、且包含末尾数字的数字序列的迭代器。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: match
       content_markdown: |
@@ -1593,6 +1634,17 @@ pages:
         Correspondências (matching) combinado com desestruturação é um dos padrões mais comuns
         que você verá no Rust.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20o%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20comparar%20com%20m%C3%BAltiplos%20valores%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%201%20ou%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20comparar%20com%20iteradores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20um%20n%C3%BAmero%20entre%203%20e%209%2C%20inclusive%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20vincular%20a%20uma%20vari%C3%A1vel%20o%20n%C3%BAmero%20a%20ser%20comparado%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20o%20n%C3%BAmero%20%7B%7D%20entre%2010%20e%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20esta%20%C3%A9%20a%20correspond%C3%AAncia%20padr%C3%A3o%20que%20deve%20existir%20se%20nenhum%20caso%20for%20correspondido%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20outra%20coisa!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+    zh-cn:
+      title: match
+      content_markdown: |
+        想念你的 switch 语句吗？Rust有一个非常有用的关键字，用于匹配值的所有可能条件，
+        并在匹配为真时执行相应代码。我们来看看对数字的使用。在未来章节中，我们将有更多
+        更复杂的数据模式匹配的说明，我向你保证，它将值得等待。
+
+        `match` 是穷尽性的，所以必须处理所有情况。
+
+        匹配与解构相结合是迄今为止你在 Rust 中看到的最常见的模式之一。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%8C%B9%E9%85%8D%E5%A4%9A%E4%B8%AA%E5%80%BC%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%8C%B9%E9%85%8D%E8%BF%AD%E4%BB%A3%E5%99%A8%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%B0%86%E5%8C%B9%E9%85%8D%E6%95%B0%E5%80%BC%E7%BB%91%E5%AE%9A%E5%88%B0%E5%8F%98%E9%87%8F%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%E8%BF%99%E6%98%AF%E9%BB%98%E8%AE%A4%E5%8C%B9%E9%85%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%A4%84%E7%90%86%E6%89%80%E6%9C%89%E6%83%85%E5%86%B5%EF%BC%8C%E5%88%99%E5%BF%85%E9%A1%BB%E5%AD%98%E5%9C%A8%E8%AF%A5%E5%8C%B9%E9%85%8D%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: Returning Values From loop
       content_markdown: |
@@ -1623,6 +1675,11 @@ pages:
       content_markdown: |
         `loop` podem ser interrompidos para retornar um valor.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontrei%20o%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+    zh-cn:
+      title: 从循环中返回值
+      content_markdown: |
+        `loop` 可以中断以返回一个值。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
   - en:
       title: Returning Values From Block Expressions
       content_markdown: |
@@ -1701,6 +1758,17 @@ pages:
 
         Note isso também permite que o operador `if` funcione como uma expressão ternária concisa.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20express%C3%A3o%20tern%C3%A1ria%20em%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22do%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamb%C3%BArger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22cachorro-quente%22%20%3D%3E%20%22%C3%A9%20cachorro-quente%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20repare%20que%20as%20chaves%20s%C3%A3o%20opcionais%20quando%20o%20retorno%20%C3%A9%20s%C3%B3%20uma%20express%C3%A3o%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22n%C3%A3o%20%C3%A9%20cachorro-quente%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identificando%20o%20lanche%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloco%20de%20c%C3%B3digo%20nos%20permite%20obter%20um%20resultado%20sem%20poluir%20o%20escopo%20da%20fun%C3%A7%C3%A3o%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20bloco%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Assim%20retornamos%20um%20valor%20en%20Rust%20no%20final%20de%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22da%20fun%C3%A7%C3%A3o%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+    zh-cn:
+      title: 从块表达式返回值
+      content_markdown: |
+        `if`，`match`，函数，以及作用域块都有一种返回值的独特方式。
+
+        如果 `if`、`match`、函数或作用域块中的最后一条语句是不带 `;` 的表达式，
+        Rust将把它作为一个值从块中返回。这是一种创建简洁逻辑的好方法，它返回一个
+        可以放入新变量的值。
+
+        注意，它还允许 `if` 语句像简洁的三元表达式一样操作。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust%E7%9A%84%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%BD%93%E5%AE%83%E5%8F%AA%E6%98%AF%E4%B8%80%E4%B8%AA%E8%BF%94%E5%9B%9E%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%97%B6%EF%BC%8C%E5%A4%A7%E6%8B%AC%E5%8F%B7%E6%98%AF%E5%8F%AF%E9%80%89%E7%9A%84%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%E8%BF%99%E4%B8%AA%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%9D%97%E8%AE%A9%E6%88%91%E4%BB%AC%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%BB%93%E6%9E%9C%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20%E5%9C%A8%E6%9C%80%E5%90%8E%E4%BB%8E%E5%87%BD%E6%95%B0%E4%B8%AD%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E6%83%AF%E7%94%A8%E6%96%B9%E6%B3%95%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
   - en:
       title: Chapter 2 Conclusion
       content_markdown: |
@@ -1748,6 +1816,12 @@ pages:
         `match` com mais profundidade à medida que formos adquirindo mais 
         conhecimento para aproveitar os seus recursos. A seguir entraremos nos 
         fundamentos das estruturas de dados do Rust.
+    zh-cn:
+      title: 第二章总结
+      content_markdown: |
+        希望我已经展示了 Rust 的强大功能，即使是在最基本的语言特性中。
+        我们将更深入地讨论 `for` 和 `match`，因为我们将获得更多可以
+        利用它们能力的知识。下次我们将讨论 Rust 的基础数据结构。
   - chapter: 3
     en:
       title: Chapter 3 - Basic Data Structure Types
