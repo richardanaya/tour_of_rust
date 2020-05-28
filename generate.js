@@ -113,13 +113,18 @@ for(var l in languages){
         let lesson_content = converter.makeHtml(lesson["en"].content_markdown)
         let lesson_code = lesson["en"].code 
         if(lesson[lang]){
-            lesson_title = lesson[lang].title;
-            let content = lesson[lang]["content_html"];
+            let target_lang = lang;
+            if(lesson[lang].clone){
+                target_lang = lesson[lang].clone;
+            }
+            lesson_title = lesson[target_lang].title;
+
+            let content = lesson[target_lang]["content_html"];
             if(!content){
-                content = converter.makeHtml(lesson[lang]["content_markdown"]);
+                content = converter.makeHtml(lesson[target_lang]["content_markdown"]);
             }
             lesson_content = content;
-            lesson_code = lesson[lang].code || lesson["en"].code;
+            lesson_code = lesson[target_lang].code || lesson["en"].code;
         }
         
         fs.writeFileSync(target_dir+"/"+fileName, template(langLessons, lang,lesson_title,lesson_code,lesson_content,c,i==langLessons.length-1,words,false))
@@ -129,19 +134,23 @@ for(var l in languages){
     for(var i in betaLessons){
         let lesson = betaLessons[i];
         if(lesson[lang]){
+            let target_lang = lang;
+            if(lesson[lang].clone){
+                target_lang = lesson[lang].clone;
+            }
             let fileName = getFileName(lang,i,true,lesson.chapter);
        
-            let lesson_title = "["+getWord(words,lang,"untranslated")+"] "+lesson["en"].title;
+            let lesson_title = "["+getWord(words,target_lang,"untranslated")+"] "+lesson["en"].title;
             let lesson_content = lesson["en"].content_markdown
             let lesson_code = lesson["en"].code 
-            if(lesson[lang]){
-                lesson_title = lesson[lang].title;
-                let content = lesson[lang]["content_html"];
+            if(lesson[target_lang]){
+                lesson_title = lesson[target_lang].title;
+                let content = lesson[target_lang]["content_html"];
                 if(!content){
-                    content = converter.makeHtml(lesson[lang]["content_markdown"]);
+                    content = converter.makeHtml(lesson[target_lang]["content_markdown"]);
                 }
                 lesson_content = content;
-                lesson_code = lesson[lang].code || lesson["en"].code;
+                lesson_code = lesson[target_lang].code || lesson["en"].code;
             }
             fs.writeFileSync(target_dir+"/beta_"+fileName, template(betaLessons, lang, lesson_title,lesson_code,lesson_content,c,i==betaLessons.length-1,words,true))
             c++;
