@@ -51,7 +51,6 @@ common_words:
 pages:
   - en:
       title: Hello, Web Assembly
-      code: https://webassembly.studio/?embed&f=hvoajwx0cve
       content_markdown: |
         Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
         and how Rust can be used to power the web.
@@ -62,27 +61,65 @@ pages:
         checkout out Tour of Web Assembly's [github repository](https://github.com/richardanaya/tour_of_rust).
 
         You can navigate through the tour with <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
-
-        In this classic example we add 1 + 1, we'll go through how it's done step by step.
   - chapter: 1
     en:
       title: Chapter 1 - What Is Web Assembly?
       content_markdown: |
         Web assembly is a binary format for representating isolated executable code.  It was developed for web
-        browsers as an alternative to javascript with some distinct advantages:
+        browsers as an alternative to JavaScript with some distinct advantages:
 
         * Because its a low level bytecode, it's able to perform math quickly and manage memory more concisely.
         * Web Assembly was built with existing compilers in mind, allowing native languages like C/C++ and Rust to compile to it as a target.
-        * Built with isolation in mind, allowing finer grain access control.
+        * Built with isolation in mind, allowing fine grain access control.
         * Web Assembly was built rather host agnostic, allowing some people to use web assembly [outside of browsers](https://wasmer.io/) too!
 
         Web Assembly is often called **WASM**
   - en:
       title: Inside A Module
       content_markdown: |
-        When you compile to web assembly you get a file ending in `.wasm` called a web assembly **module**.
+        When you compile to a web assembly target your compiler should create a file ending in `.wasm` called a **module**.
 
-        The module is a [binary format](https://webassembly.github.io/spec/core/index.html) full of information on how it should be setup and interacted with:
+        The module is a [binary format](https://webassembly.github.io/spec/core/index.html) full of information on how a 
+        wasm program and it's memory should be setup and interacted with:
         * a list of functions
         * what functions should be exported/imported
         * what data should initially be in the wasm modules memory
+  
+  - en:
+      title: Loading A Module
+      content_markdown: |
+        Since a web assembly module is just a file of bytes. We first need to load it in our browser.
+
+        ```
+        let file = await fetch('my_file.wasm');
+        let bytes = await file.arrayBuffer();
+        ```
+  - en:
+      title: Creating a Module
+      content_markdown: |
+        Modules are created from bytes.
+
+        ```
+        let module = await WebAssembly.instantiate(bytes);
+        ```
+
+        During this phase we can **import** javascript functions we want to give our module access to. 
+        We'll show an example of this next chapter.
+  - en:
+      title: Using a Module
+      content_markdown: |
+        A module will have one more more **export** functions that are accessible from JavaScript to call. Typically
+        there is some export function to call in order to start a wasm program.
+
+        ```
+        module.instance.main();
+        ```
+  - en:
+      title: 1+1
+      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      content_markdown: |
+        Let's now put our knowledge all together and make a web assembly
+        module with a single **export** function `add` for adding two numbers, and put the
+        results in HTML.
+
+        `#[no_mangle]` tells our compiler to keep our function name human readable.
