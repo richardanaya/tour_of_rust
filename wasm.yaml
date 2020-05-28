@@ -255,6 +255,8 @@ pages:
       title: The End
       content_markdown: |
         That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!
+    en_c:
+      clone: en
     es:
       title: Fin
       content_markdown: |
