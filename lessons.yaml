@@ -91,7 +91,7 @@ pages:
         pas au travers des fonctionnalités du language de programmation Rust. Rust est souvant
         considéré comme difficile et il y a beaucoup à explorer avant d'aborder
         les choses complexes.
-        
+
         tu peux trouver ce guide dans les languages suivants:
 
         * [Deutsch](index_de.html)
@@ -422,8 +422,8 @@ pages:
         Rust cares a great deal about what variables are modifiable. Values
         fall into two types:
 
-        * **mutable** - the location in memory can be written to and read from
-        * **immutable** - the location in memory can only be read
+        * **mutable** - the compiler will allow the variable to be written to and read from.
+        * **immutable** - the compiler will only allow the variable to be read from.
 
         Mutable values are denoted with a **mut** keyword.
 
@@ -788,7 +788,7 @@ pages:
         Os nomes das constantes são sempre em `SCREAMING_SNAKE_CASE`.
   - en:
       title: Arrays
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%20%3D%20%5B1%2C%202%2C%203%5D%3B%20%2F%2F%20type%20is%20%5Bi32%2C3%5D%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
       content_markdown: |
         An *array* is a fixed length collection of data elements all of the same type.
 
@@ -797,7 +797,6 @@ pages:
         Individual elements can be retrieved with `[x]` operator where *x* is a *usize* index (starting at 0) of the element you want.
     fr:
       title: Tableaux
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%20%3D%20%5B1%2C%202%2C%203%5D%3B%20%2F%2F%20le%20type%20est%20%5Bi32%2C3%5D%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
       content_markdown: |
         Un *tableau* est une collection de taille fixe (celle-ci doit être
         connue à la compilation) contenant des éléments du même type.
@@ -1031,12 +1030,10 @@ pages:
       title: Chapter 1 Conclusion
       content_markdown: |
         Nice job so far! The basics of Rust aren't so bad, right?  We're
-        getting a peek into how the Rust compiler thinks.  It cares a lot about the size
-        of values in memory, whether things can be modified or not, and making sure your
-        math is what you want it to be. These are small previews of a principle of **safety**
-        that is prevalent through Rust. The compiler just wants to make sure your code
-        does what it expects! Next up we'll be looking at some old friends `if`
-        and `for` loops.
+        getting a peek into how the Rust compiler thinks.  As a system programming language 
+        it cares a lot about the size  of values in memory, whether things can be modified or not, 
+        and making sure your math is what you want it to be. Next up we'll be looking at some old friends 
+        `if` and `for` loops.
     fr:
       title: Chapter 1 Conclusion
       content_markdown: |
@@ -1444,11 +1441,39 @@ pages:
         que você verá no Rust.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20o%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20comparar%20com%20m%C3%BAltiplos%20valores%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%201%20ou%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20comparar%20com%20iteradores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20um%20n%C3%BAmero%20entre%203%20e%209%2C%20inclusive%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20vincular%20a%20uma%20vari%C3%A1vel%20o%20n%C3%BAmero%20a%20ser%20comparado%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20o%20n%C3%BAmero%20%7B%7D%20entre%2010%20e%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20esta%20%C3%A9%20a%20correspond%C3%AAncia%20padr%C3%A3o%20que%20deve%20existir%20se%20nenhum%20caso%20for%20correspondido%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontrei%20outra%20coisa!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
   - en:
+      title: Returning Values From loop
+      content_markdown: |
+        `loop` can break to return a value.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+    de:
+      title: Rückgabewerte aus loop
+      content_markdown: |
+        `loop`	können Werte zurückgeben (return).
+        Noch etwas kann mittels `break` den Wert returnen.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%2213%20gefunden!%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+    ie:
+      title: Retornar valores de loop
+      content_markdown: |
+        `loop` posse exear (break) por retornar un valore.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22trovat%20li%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22del%20loop%20(cicle)%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+    ru:
+      title: Возвращение значений из loop
+      content_markdown: |
+        Прерывая `loop`, вы можете возвратить значение.
+    es:
+      title: Devolviendo valores en loop
+      content_markdown: |
+        Podemos devolver un valor en un `loop` cuando usamos `break`
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontr%C3%A9%20el%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Del%20bucle%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+    pt-br:
+      title: Retornando Valores de um loop
+      content_markdown: |
+        `loop` podem ser interrompidos para retornar um valor.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontrei%20o%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+  - en:
       title: Returning Values From Block Expressions
       content_markdown: |
-        `if`,`loop`,`match`,functions, and scope blocks all have a unique way of returning values in Rust.
-
-        `loop` can break to return a value.
+        `if`,`match`,functions, and scope blocks all have a unique way of returning values in Rust.
 
         If the last statement in an `if`, `match`, function, or scope block is an expression without
         a `;`, Rust will return it as a value from the block. This
@@ -1456,42 +1481,39 @@ pages:
         a new variable.
 
         Notice that it also allows an `if` statement to operate like a concise ternary expression.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22is%20hotdog%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
     de:
       title: Rückgabewerte aus Blockausdrücken
       content_html:
         "<p>Als <b>Block</b> wird in Rust ein Codestück zwischen zwei geschweiften
         Klammern bezeichnet (<code>{ /* code block */ }</code>).</p><p>Hier
-        ist eine Besonderheit in Rust: Blockausdrücke, die in <code>if</code>,<code>loop</code>,
-        Funktionen etc. zu finden sind, können Werte zurückgeben (return).</p><p><code>loop</code>
-        kann mittels <code>break</code> den Wert returnen.</p><p>Noch etwas
+        ist eine Besonderheit in Rust: Blockausdrücke, die in <code>if</code>,
+        Funktionen etc. zu finden sind, können Werte zurückgeben (return).</p><p>Noch etwas
         idiomatisches in Rust: wenn die letzte Zeile in einem solchen Codeblock ein Ausdruck
         (expression) ohne <code>;</code> am Ende ist, interpretiert Rust dies
         als den Rückgabewert.</p><p>Für Leute, die ein Fan von ternary Operatoren sind
         und das Fragezeichensymbol in Rust vermissen, <code>if</code> Statements
         bilden dazu die Alternative.</p>"
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%2213%20gefunden!%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22aus%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20food%20%3D%20%22nutella%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22nutella%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22ist%20nutella%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22nein%2C%20das%20ist%20keine%20nutella%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Essen%20identifizieren%3A%20%7B%7D%22%2C%20%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22aus%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22aus%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22nutella%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22nutella%22%20%3D%3E%20%22ist%20nutella%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22nein%2C%20das%20ist%20keine%20nutella%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Essen%20identifizieren%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22aus%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
     ie:
       title: Retornar valores de bloc-expressiones
-      content_html: "<p><code>if</code>,<code>loop</code>,<code>match</code>,
+      content_html: "<p><code>if</code>,<code>match</code>,
         functiones, e cadre-blocs omni possede un maniere unic por retornar valores in
-        Rust.</p><p><code>loop</code> posse exear (break) por retornar un valore.</p><p>Si
-        li ultim declaration in un bloc <code>if</code>,<code>loop</code>,
+        Rust.</p><p>Si
+        li ultim declaration in un bloc <code>if</code>,
         functiones, o cadre-bloc es un expression sin un <code>;</code>, Rust
         va retornar it quam un valore ex li bloc. To-ci es un bonissim maniere de crear
         logic concis quel retorna un valore quem on posse plazzar in un nov variabile.</p><p>Ples
         notar que to possibilisa que un declaration <code>if</code> opera quam
         un expression ternari concis.</a>"
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20exemple()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22trovat%20li%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22del%20loop%20(cicle)%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Li%20expression%20ternari%20de%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22de%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20manjage%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20resultate%20%3D%20match%20manjage%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22es%20un%20hotdog%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20nota%20que%20li%20inbrassamentes%20es%20optional%20quande%20hay%20solmen%20un%0A%20%20%20%20%20%20%20%20%2F%2F%20expression%20de%20retorna%20simplic%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22ne%20es%20un%20hotdog%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifcante%20li%20manjage%3A%20%7B%7D%22%2C%20%20resultate)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Ti-ci%20cadre-bloc%20fa%20it%20possibil%20por%20nos%20a%20trovar%20un%20resultate%20sin%0A%20%20%20%20%20%20%20%20%2F%2F%20polluer%20li%20cadre%20del%20function%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22del%20bloc%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Vi%20li%20metode%20idiomatic%20in%20Rust%20por%20retornar%20li%20valore%20de%20un%20function%0A%20%20%20%20%2F%2F%20al%20fine%20de%20it%20(quam%20monstrat%20un%20vez%20in%20Capitul%201)%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22del%20function%3A%20%7B%7D%22%2C%20exemple())%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20exemple()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Li%20expression%20ternari%20de%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22de%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20manjage%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20resultate%20%3D%20match%20manjage%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22es%20un%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20nota%20que%20li%20inbrassamentes%20es%20optional%20quande%20hay%20solmen%20un%0A%20%20%20%20%20%20%20%20%2F%2F%20expression%20de%20retorna%20simplic%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22ne%20es%20un%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifcante%20li%20manjage%3A%20%7B%7D%22%2C%20resultate)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Ti-ci%20cadre-bloc%20fa%20it%20possibil%20por%20nos%20a%20trovar%20un%20resultate%20sin%0A%20%20%20%20%20%20%20%20%2F%2F%20polluer%20li%20cadre%20del%20function%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22del%20bloc%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Vi%20li%20metode%20idiomatic%20in%20Rust%20por%20retornar%20li%20valore%20de%20un%20function%0A%20%20%20%20%2F%2F%20al%20fine%20de%20it%20(quam%20monstrat%20un%20vez%20in%20Capitul%201)%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22del%20function%3A%20%7B%7D%22%2C%20exemple())%3B%0A%7D%0A
     ru:
       title: Возвращение значений из выражений-блоков
       content_markdown: |
-        `if`, `loop`, `match`, функции и блоки(scope blocks) - все имеют уникальный
+        `if`, `match`, функции и блоки(scope blocks) - все имеют уникальный
         способ возвращать значение.
 
-        Прерывая `loop`, вы можете возвратить значение.
-
-        Если последняя инструкция в `if`, `loop`, `match`, функции или 
+        Если последняя инструкция в `if`, `match`, функции или 
         блоке(scope block) не завершается `;`, Rust вернёт это значение 
         из данного блока. Это отличный способ создать краткую логику, которая
         возвращает какое-то значение, не создавая новую функцию, и сразу же присваивая
@@ -1502,23 +1524,21 @@ pages:
     es:
       title: Devolviendo valores en bloques de expresiones
       content_html:
-        "<p>Las sentencias <code>if</code>,<code>loop</code>,<code>match</code>, funciones
+        "<p>Las sentencias <code>if</code>,<code>match</code>, funciones
         y bloques de código presentan maneras únicas de devolver valores en Rust.</p>
-        <p>Podemos devolver un valor en un <code>loop</code> cuando usamos <code>break</code></p>
         <p>Si la última sentencia de un <code>if</code>,
         <code>match</code>, función o bloque de código es una expresión sin
         <code>;</code>, Rust la devolverá como valor de retorno del bloque. Esta
         es una gran manera de crear una lógica concisa que devuelva un valor que pueda ser
         asignado a un nueva variable.</p><p>Ten en cuenta que también permite a una sentencia <code>if</code>
         operar como una expresión ternaria concisa.</a>"
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontr%C3%A9%20el%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Del%20bucle%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Expresi%C3%B3n%20ternaria%20en%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22Del%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20food%20%3D%20%22hamburguesa%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22perrito%20caliente%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22es%20un%20perrito%20caliente%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20los%20par%C3%A9ntesis%20son%20opcionales%20cuando%20hay%20una%20sola%20expresi%C3%B3n%20de%20retorno%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22no%20es%20un%20perrito%20caliente%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Identificando%20comida%3A%20%7B%7D%22%2C%20%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloque%20de%20c%C3%B3digo%20nos%20permite%20obtener%20un%20resultado%20%0A%20%20%20%20%20%20%20%20%2F%2F%20sin%20tener%20que%20definir%20una%20funci%C3%B3n%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Del%20bloque%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Esta%20es%20la%20forma%20de%20devolver%20un%20valor%20en%20Rust%20al%20final%20de%20una%20funci%C3%B3n%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22De%20la%20funci%C3%B3n%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Expresi%C3%B3n%20ternaria%20en%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22Del%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburguesa%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22perrito%20caliente%22%20%3D%3E%20%22es%20un%20perrito%20caliente%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20los%20par%C3%A9ntesis%20son%20opcionales%20cuando%20hay%20una%20sola%20expresi%C3%B3n%20de%20retorno%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22no%20es%20un%20perrito%20caliente%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Identificando%20comida%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloque%20de%20c%C3%B3digo%20nos%20permite%20obtener%20un%20resultado%0A%20%20%20%20%20%20%20%20%2F%2F%20sin%20tener%20que%20definir%20una%20funci%C3%B3n%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Del%20bloque%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Esta%20es%20la%20forma%20de%20devolver%20un%20valor%20en%20Rust%20al%20final%20de%20una%20funci%C3%B3n%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22De%20la%20funci%C3%B3n%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
     pt-br:
       title: Retornando Valores de um Bloco de Códígo
       content_markdown: |
-        `if`, `loop`, `match`, funções e blocos de código têm maneiras únicas de retornar
+        `if`, `match`, funções e blocos de código têm maneiras únicas de retornar
         valores em Rust.
 
-        `loop` podem ser interrompidos para retornar um valor.
 
         Se a última instrução de um `if`, `match`, função ou bloco de código 
         for uma expressão sem `;`, o Rust vai retorná-la como um valor do bloco.
@@ -1527,7 +1547,7 @@ pages:
         pode ser atribuída a uma nova variável.
 
         Note isso também permite que o operador `if` funcione como uma expressão ternária concisa.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontrei%20o%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20express%C3%A3o%20tern%C3%A1ria%20em%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22do%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20let%20food%20%3D%20%22hamb%C3%BArger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22cachorro-quente%22%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22%C3%A9%20cachorro-quente%22%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20repare%20que%20as%20chaves%20s%C3%A3o%20opcionais%20quando%20o%20retorno%20%C3%A9%20s%C3%B3%20uma%20express%C3%A3o%20%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22n%C3%A3o%20%C3%A9%20cachorro-quente%22%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identificando%20o%20lanche%3A%20%7B%7D%22%2C%20%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloco%20de%20c%C3%B3digo%20nos%20permite%20obter%20um%20resultado%20sem%20poluir%20o%20escopo%20da%20fun%C3%A7%C3%A3o%20%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20bloco%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Assim%20retornamos%20um%20valor%20en%20Rust%20no%20final%20de%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22da%20fun%C3%A7%C3%A3o%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20express%C3%A3o%20tern%C3%A1ria%20em%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22do%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamb%C3%BArger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22cachorro-quente%22%20%3D%3E%20%22%C3%A9%20cachorro-quente%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20repare%20que%20as%20chaves%20s%C3%A3o%20opcionais%20quando%20o%20retorno%20%C3%A9%20s%C3%B3%20uma%20express%C3%A3o%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22n%C3%A3o%20%C3%A9%20cachorro-quente%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identificando%20o%20lanche%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloco%20de%20c%C3%B3digo%20nos%20permite%20obter%20um%20resultado%20sem%20poluir%20o%20escopo%20da%20fun%C3%A7%C3%A3o%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22do%20bloco%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Assim%20retornamos%20um%20valor%20en%20Rust%20no%20final%20de%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22da%20fun%C3%A7%C3%A3o%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
   - en:
       title: Chapter 2 Conclusion
       content_markdown: |
