@@ -110,8 +110,8 @@ pages:
   - en:
       title: Using a Module
       content_markdown: |
-        A module will have one more more **export** functions that are accessible from JavaScript to call. Typically
-        there is some export function to call in order to start a wasm program.
+        A module will have one more **export** functions that are accessible to JavaScript. Typically
+        there is some export function to call in order to start a wasm program (e.g. `main`, `start`).
 
         ```
         module.instance.main();
