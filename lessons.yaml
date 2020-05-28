@@ -1259,6 +1259,12 @@ pages:
         In this chapter let's talk about basic control flow methods in Rust.
         If you are familiar with C based languages you'll feel right at home and maybe
         enjoy a surprise or two.
+    fr:
+      title: Chapter 2 - Structures de contrôle basiques
+      content_markdown: |
+        Dans ce chapitre, nous allons aborder les structures de contrôle basiques de Rust.
+        Si tu es déjà familer avec les languages de programmation inspirés du C alors
+        tu ne sera pas perdu et tu y découvrira même quelques bonnes surprises.
     de:
       title: Kapitel 2 - Ein bisschen Kontrollfluss
       content_html:
@@ -1303,6 +1309,16 @@ pages:
 
         All your usual logical operators still work: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+    fr:
+      title: if/else if/else
+      content_markdown: |
+        L'embranchement de code en Rust n'est pas une surprise.
+
+        Les conditions n'ont pas de parenthèses! En a-t-on réellement besoin?
+        Sans elles notre code est plus jolie et plus lisible.
+
+        Les opérateurs logiques usuels sont disponibles: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20petit%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20tout%20rond%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20grand%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     de:
       title: if/else if/else
       content_html:
@@ -1364,6 +1380,16 @@ pages:
 
         `break` will escape a loop when you are ready.</p><p>`loop` has a secret we'll talk about soon.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+    fr:
+      title: boucle
+      content_markdown: |
+        Besoin d'une boucle infinie?
+
+        Avec Rust, c'est facile!
+
+        `break` permet de sortir de la boucle à tout moment.</p><p>Quand à
+        l'instruction `loop`, celle-ci possède un secret dont nous parlerons plus tard.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
     de:
       title: loop
       content_html: "<p>Unendliche Schleifen gefällig? <code>loop</code> macht
@@ -1419,6 +1445,13 @@ pages:
 
         If the condition evaluates to `false`, the loop will exit.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+    fr:
+      title: while
+      content_markdown: |
+        `while` permet d'ajouter facilement une condition à une boucle.
+
+        Si la condition est évaluée à `faux`, alors la boucle s'arrête.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: while
       content_html: "<p><code>while</code> Schleifen werden so lange ausgeführt,
@@ -1469,6 +1502,22 @@ pages:
 
         The `..=` operator creates an iterator that generates numbers from a start number up to 
         and including an end number.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+    fr:
+      title: for
+      content_markdown: |
+        La boucle `for` de Rust est une mise à niveau puissante qui permet
+        d'itérer sur les valeurs d'une expression en créant un itérateur.
+        Qu'est-ce qu'un itérateur? Un itérateur est un objet auquel tu peux demander
+        "quel est l'élément suivant?" jusqu'à ce qu'il n'y en ait plus.
+
+        Nous donnerons plus d'explication sur les itérateurs dans un future chapitre. Quoi qu'il en soit,
+        retient qu'avec Rust il est facile de créer des itérateurs qui génère une séquence de nombres entiers.
+
+        L'opérateur `..` créer un itérateur qui génère une suite de nombres depuis la première valeur incluse
+        jusqu'à la dernière valeur excluse.
+        L'opérateur `..=` créer un itérateur qui génère une suite de nombres depuis la première valeur incluse
+        jusqu'à la dernière valeur incluse.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: for
@@ -1571,6 +1620,20 @@ pages:
         Matching combined with destructuring is by far one of the
         most common patterns you will see in all of Rust.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20iterators%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+    fr:
+      title: match
+      content_markdown: |
+        La structure de contrôle `switch` te manque? Rust possède un mot clé similaire
+        extrêmement puissant pour comparer une valeur à un motif et permet de déclancher soit
+        une exécution conditionelle soit la récupération d'une valeur (le terme anglais est
+        pattern matching). Regardons un exemple pour les nombres. Nous aurons plus à dire
+        dans les chapitres à venir lorsque nous l'appliquerons à des données plus comlexes,
+        je te promets que cela vaut la peine d'attendre.
+
+        `match` est exhaustif donc tous les cas doivent être pris en compte.
+
+        La destructuration combiné avec `match` fournit un des patterns le plus utilisé de Rust. Tu pourra le constater.  
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20certainement%20zero!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20comparer%20%C3%A0%20plusieurs%20valeurs%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20soit%201%20soit%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20comparer%20%C3%A0%20un%20it%C3%A9rateur%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20un%20nombre%20compris%20entre%203%20et%209%20inclus!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20r%C3%A9cup%C3%A9rer%20la%20valeur%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22L%27entier%20%7B%7D%20est%20compris%20entre%2010%20et%20100%20inclus!%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20C%27est%20le%20cas%20par%20d%C3%A9faut.%0A%20%20%20%20%20%20%20%20%2F%2F%20Celui-ci%20doit%20%C3%AAtre%20pr%C3%A9sent%20si%20tous%20les%20cas%0A%20%20%20%20%20%20%20%20%2F%2F%20ne%20sont%20pas%20pr%C3%A9sent.%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: match
       content_html:
@@ -1650,6 +1713,11 @@ pages:
       content_markdown: |
         `loop` can break to return a value.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+    fr:
+      title: Retourner des valeurs avec loop
+      content_markdown: |
+        L'instruction `loop` peut s'arrêter pour retourner une valeur.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22J%27ai%20trouv%C3%A9%20le%2013!%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22La%20boucle%20dit%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
     de:
       title: Rückgabewerte aus loop
       content_markdown: |
@@ -1692,6 +1760,19 @@ pages:
 
         Notice that it also allows an `if` statement to operate like a concise ternary expression.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+    fr:
+      title: Retourner des valeurs avec des blocs d'instructions
+      content_markdown: |
+        `if`,`match`, les fonctions et les blocs d'instructions ont tous
+        une manière unique de retourner des valeurs avec Rust.
+
+        Si la dernière instruction d'un `if`, d'un `match`, d'une fonction ou d'un bloc d'instructions
+        se termine sans `;` alors Rust retournera le résultat de l'exécution de cette dernière ligne
+        en tant que valeur. C'est un moyen élégant de créer une logique conçise qui retourne
+        une valeur qu'on pourra ensuite stocker dans une variable.
+
+        Notes que cela permet également l'instruction `if` de se comporter comme une expression ternaire.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20expression%20ternaire%20avec%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22depuis%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22est%20un%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notes%20que%20les%20accolades%20sont%20optionnels%20lorsqu%27il%20n%27y%20a%0A%20%20%20%20%20%20%20%20%2F%2F%20qu%27un%20seul%20cas%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22n%27est%20pas%20un%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22un%20%7B%7D%20%7B%7D%22%2C%20food%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20ce%20bloc%20de%20code%20nous%20permet%20d%27obtenir%20un%20r%C3%A9sultat%0A%20%20%20%20%20%20%20%20%2F%2F%20sans%20d%C3%A9finir%20de%20fonction%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22depuis%20le%20bloc%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20c%27est%20la%20mani%C3%A8re%20typique%20de%20Rust%20pour%20retourner%0A%20%20%20%20%2F%2F%20une%20valeur%20depuis%20une%20fonction%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22depuis%20la%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
     de:
       title: Rückgabewerte aus Blockausdrücken
       content_html:
@@ -1777,6 +1858,13 @@ pages:
         `match` even more in depth as we gain more knowledge that
         can utilize their capabilities. Next time we'll get into Rust's foundational data
         structures.
+    fr:
+      title: Chapter 2 Conclusion
+      content_markdown: |
+        J'espère avoir montré un aperçu des fonctionnalités basiques de Rust dont certaines
+        se montrent très pratiques. Nous verrons plus en détails les instructions `for` et
+        `match` à mesure que nos connaîssances de Rust augmente. Par la suite, nous verrons
+        les structures de données fondamentales de Rust.
     de:
       title: Kapitel 2 Fazit
       content_html:
