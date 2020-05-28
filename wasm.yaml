@@ -90,7 +90,7 @@ pages:
   - en:
       title: Loading A Module
       content_markdown: |
-        Since a web assembly module is just a file of bytes. We first need to load it in our browser.
+        Since a web assembly module is just a file of bytes. We first need to load those bytes in our browser.
 
         ```
         let file = await fetch('my_file.wasm');
@@ -105,7 +105,7 @@ pages:
         let module = await WebAssembly.instantiate(bytes);
         ```
 
-        During this phase we can **import** javascript functions we want to give our module access to. 
+        During this phase we can **import** javascript functions we want our module to have access to. 
         We'll show an example of this next chapter.
   - en:
       title: Using a Module
