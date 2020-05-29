@@ -23,7 +23,7 @@ common_words:
     toc: Inhaltsverzeichnis
     lessons: Kapitel
     chapter: Kapitel
-    untranslated: Untranslated
+    untranslated: Noch nicht übersetzt
   ie:
     tor: Tur de Rust
     next: Sequent
