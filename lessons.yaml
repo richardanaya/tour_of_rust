@@ -2736,7 +2736,7 @@ pages:
         ajuda você sempre pode ser explícito usando o operador `::<T>`, também conhecido pelo nome `turbofish`
         (ele é um bom amigo meu!).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Um%20tipo%20struct%20definido%20parcialmente%0Astruct%20Sacola%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Nota%3A%20usando%20tipos%20gen%C3%A9ricos%20aqui%20n%C3%B3s%20criamos%20tipos%20em%20tempo%20de%20compila%C3%A7%C3%A3o%0A%20%20%20%20%2F%2F%20fazendo%20o%20nosso%20c%C3%B3digo%20ficar%20maior.%20O%20turbofish%20nos%20permite%20ser%20expl%C3%ADcitos.%0A%20%20%20%20let%20i32_sacola%20%3D%20Sacola%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_sacola%20%3D%20Sacola%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20O%20Rust%20pode%20inferir%20os%20tipos%20para%20gen%C3%A9ricos%20tamb%C3%A9m!%0A%20%20%20%20let%20float_sacola%20%3D%20Sacola%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Nota%3A%20nunca%20coloque%20uma%20sacola%20dentro%20da%20outra%20na%20vida%20real%0A%20%20%20%20let%20sacola_na_sacola%20%3D%20Sacola%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20Sacola%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_sacola.item%2C%20bool_sacola.item%2C%20float_sacola.item%2C%20sacola_na_sacola.item.item%0A%20%20%20%20)%3B%0A%7D%0A
-    en:
+    zh-cn:
       title: 泛型是什么？
       content_markdown: |
         泛型允许我们部分定义一个 `结构体` 或 `枚举`，使编译器能够根据我们的代码使用情况，在编译时创建一个完全定义的版本。
