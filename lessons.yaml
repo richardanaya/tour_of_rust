@@ -1919,6 +1919,13 @@ pages:
         It's time we explore beyond basic types! In this chapter we will look the most primitive 
         data structures in Rust, paying close attention to their representations in memory. I think 
         you will enjoy how little Rust hides from you how things work.
+    fr:
+      title: Chapter 3 - Types basiques de structure de données
+      content_markdown: |
+        Il est temps d'explorer autre choses que les types basiques! Dans ce chapitre nous allons
+        nous intéresser aux structures de données les plus primitives de Rust, en étudiant particulièrement
+        de quelle manière celles-ci sont représentées en mémoire. Je pense que vous apprécirez le fait que
+        Rust ne nous cache pas comment les choses fonctionnent.
     de:
       title: Kapitel 3 - Datenstrukturen
       content_markdown: |
@@ -1964,6 +1971,17 @@ pages:
         Its definition is like a blueprint for a compiler on how to layout the fields in memory nearby each other.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+    fr:
+      title: Structures
+      content_markdown: |
+        Une structure est une collection de champs. On créer une structure avec le mot clé `struct`.
+
+        Un *champs* est simplement un élément contenant une valeur et associé à une structure de données.
+        Sa valeur peut être un type primitif ou une autre structure de données.
+
+        Sa définition est comme un plan pour le compilateur sur l'agencement des données en mémoire.
+        Celles-ci seront placées à proximité les uns des autres.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20est%20%C3%A9galement%20une%20structure%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
     de:
       title: Strukturen
       content_markdown: |
@@ -2032,6 +2050,19 @@ pages:
         We will talk more on making your own methods in future chapters.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Using%20a%20static%20method%20to%20create%20an%20instance%20of%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20Using%20a%20method%20on%20the%20instance%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
+    fr:
+      title: Appel de Méthodes
+      content_markdown: |
+        A la différence des fonctions que nous avons vu précédemment, les méthodes sont
+        des fonctions associés à un type de donnée spécifique.
+
+        **méthodes statiques** — méthodes qui appartiennent au type même et sont appelées avec l'opérateur `::`
+
+        **méthodes d'instance** — méthodes qui appartiennent à l'instance d'un type et sont appelées avec l'opérateur `.`
+
+        Nous verrons comment créer tes propres méthodes dans de futures chapitres.
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20On%20utilise%20une%20m%C3%A9thode%20statique%20pour%20cr%C3%A9er%20une%20instance%20de%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20On%20utilise%20ici%20une%20m%C3%A9thode%20directement%20sur%20l%27instance%0A%20%20%20%20println!(%22%7B%7D%20contient%20%7B%7D%20caract%C3%A8res.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
     de:
       title: Methoden aufrufen
       content_markdown: |
@@ -2107,6 +2138,27 @@ pages:
           for much more creative usages of memory.  When data is added to this region we 
           call it an **allocation**. When data is removed from this section we call it a 
           **deallocation**.
+    fr:
+      title: Mémoire
+      content_markdown: |
+        Un programme Rust possède 3 régions de mémoire où les données sont stockées:
+        * **data memory (le segment de données)** - Pour les données de taille fixe et **statiques** (i.e toujours
+          disponible pendant la vie du programme). Par exemple, considère le texte "Hello World!"
+          de ton tout premier programme Rust, les bytes représentant ce texte sont uniquement
+          lu et par conséquant ils sont placés dans cette région. Le compilateur utilise de
+          nombreuses optimisations pour ce type de données, elles sont généralement
+          considérées très rapide d'utilisation car leur position en mémoire est connue
+          et fixe.
+        * **stack memory (la pile)** - Pour les données qui sont déclarées comme variables dans une fonction.
+          La position de cette mémoire ne change jamais pendant la durée d'appel de cette fonction,
+          par conséquant les compilateurs peuvent optimiser le code pour rendre l'utilisation des données
+          sur la pile très rapide.
+        * **heap memory (le tas)** - Pour les données qui sont créées lorsque l'application est en train de s'exécuter. 
+          Les données dans cette région peuvent être ajoutées, déplacées, supprimées, redimenssionnées, etc.
+          A cause de sa nature dynamique c'est généralement considéré plus lent d'utilisation que la pile, mais
+          donne plus de contrôle sur l'utilisation de la mémoire.
+          On appele **allocation** le fait d'ajouter des données à cette région et
+          **désallocation** le fait de les supprimer.
     de:
       title: Speicher
       content_markdown: |
@@ -2229,6 +2281,31 @@ pages:
         * Finally our two friends *ferris* and *sara* have data structures that will always have 
           fixed locations in our program, so they are placed on the *stack*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
+    fr:
+      title: Création de données en mémoire
+      content_markdown: |
+        Lorsqu'on **instancie** une **structure** dans notre code, le programme
+        créer les champs de données associés côte à côte en mémoire.
+
+        On instancie une structure en spécifiant les champs dans des accolades.
+
+        `StructName { ... }`.
+
+        On accède aux champs de la structure avec l'opérateur`.`.
+
+        Détail de la mémoire pour notre exemple:
+        * Le texte à l'intérieur des guillemets est une donnée de lecture uniquement (e.g. "ferris"),
+        celui-ci est donc placé dans la région *data memory*.
+        * L'appel à la fonction `String::from` créer une structure `String` qui est placée en mémoire à côté
+          des champs de la structure SeaCreature sur la pile. Un élément `String` représente un texte
+          qui peut changer et cela est rendue possible en:
+          1. Créant un emplacement sur le *tas* pour le texte où il pourra être modifié
+          2. Stockant une référence vers cette emplacement de mémoire (sur le *tas*) et
+          en stockant cette référence dans une structure `String` (sur la *pile*). Nous en reparlerons
+          de cela dans de futures lessons.
+        * Finalement nos deux amis *ferris* et *sara* ont des structures de données qui auront
+          toujours une position fixe en mémoire et sont donc placés sur la pile.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20La%20structure%20SeaCreature%20est%20plac%C3%A9e%20sur%20la%20pile%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20La%20structure%20String%20est%20%C3%A9galement%20sur%20la%20pile%20mais%0A%20%20%20%20%20%20%20%20%2F%2F%20maintient%20une%20r%C3%A9f%C3%A9rence%20vers%20des%20donn%C3%A9es%20sur%20le%20tas%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crabe%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22pinces%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22poulpe%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20est%20un%20%7B%7D.%20Ces%20derniers%20poss%C3%A8dent%20%7B%7D%20bras%2C%20%7B%7D%20jambes%2C%0A%20%20%20%20%20%20%20%20et%20utilisent%20leurs%20%7B%7D%20comme%20arme.%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%0A%20%20%20%20%20%20%20%20ferris.animal_type%2C%0A%20%20%20%20%20%20%20%20ferris.arms%2C%0A%20%20%20%20%20%20%20%20ferris.legs%2C%0A%20%20%20%20%20%20%20%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20est%20un%20%7B%7D.%20Ces%20derniers%20poss%C3%A8dent%20%7B%7D%20bras%2C%20et%20%7B%7D%20jambes.%0A%20%20%20%20%20%20%20%20Ils%20ne%20sont%20pas%20%C3%A9quip%C3%A9s%20d%27armes...%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%0A%20%20%20%20%20%20%20%20sarah.animal_type%2C%0A%20%20%20%20%20%20%20%20sarah.arms%2C%0A%20%20%20%20%20%20%20%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
     de:
       title: Structs initialisieren
       content_markdown: |
