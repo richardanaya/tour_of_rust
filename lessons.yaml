@@ -3309,7 +3309,7 @@ pages:
   - en:
       title: Dropping is Heirarchal
       content_markdown: |
-        When a struct is dropped its child elements are dropped first.
+        When a struct is dropped, the struct itself is dropped first then it's children are dropped individually and so on.
 
         Memory Details:
         * By automically freeing memory Rust helps ensure that there are less memory leaks 
