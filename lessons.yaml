@@ -3291,7 +3291,7 @@ pages:
         Con referenties, on posse etablisser li valore del proprietario con li operator `*`.
         
         On posse anc obtener un copie del propri valore con li operator `*`
-	      (si li valore es copiabil. Noi va parlar pri tipes copiabil in li capitules a sequer.)
+        (si li valore es copiabil. Noi va parlar pri tipes copiabil in li capitules a sequer.)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20obtenir%20un%20copie%20del%20valore%20del%20proprietario%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20etablisser%20li%20valore%20del%20proprietario%20del%20referentie%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
   
     en:
