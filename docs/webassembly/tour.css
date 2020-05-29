@@ -105,6 +105,29 @@ ul, ol, h3 {
     margin-right: 40px;
 }
 
+.bottomnav {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 42px;
+}
+
+.bottomnav a {
+    text-decoration: none;
+    color: #999;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.bottomnav .back {
+    float:left;
+    padding-left: 40px;
+}
+
+.bottomnav .next {
+    float:right;
+    padding-right: 40px;
+}
+
 @media screen and (max-width: 600px) {
     .code, .page {
         width: 100%;
@@ -156,6 +179,18 @@ ul, ol, h3 {
     .nav {
         padding-right: 0px;
         letter-spacing: -.6px;
+    }
+
+    .bottomnav a {
+        font-size: 14px;
+    }
+    
+    .bottomnav .back {
+        padding-left: 20px;
+    }
+    
+    .bottomnav .next {
+        padding-right: 20px;
     }
 }
 
