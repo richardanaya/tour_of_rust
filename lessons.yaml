@@ -506,15 +506,18 @@ pages:
         Nous aurons plus à dire à ce sujet par la suite.
     de:
       title: Variablenwerte ändern
-      content_html:
-        ' <p>Rust sorgt sich sehr darum, welche Variablen verändert werden können
-        und welche nicht. Daher gibt es die folgende Unterscheidung:</p><ul><li><b>mutable</b>
-        - der Speicherort der Variable kann beschrieben und gelesen werden</li><li><b>immutable</b>
-        - der Speicherort der Variable kann nur gelesen werden</li></ul><p>Variablen,
-        die verändert werden können, werden mit einem extra <code>mut</code>
-        Schlüsselwort gekennzeichnet.</p><p>Auf dieses Konzept wird im späteren Verlauf
-        noch mehr eingegangen, für jetzt ist es wichtig zu wissen, dass "mutable" Variablen
-        beschrieben werden können.</p>'
+      content_markdown: |
+        Rust sorgt sich sehr darum, welche Variablen verändert werden können
+        und welche nicht. Daher gibt es die folgende Unterscheidung:
+        
+        * **mutable** - der Speicherort der Variable kann beschrieben und gelesen werden
+        * **immutable** - der Compiler lässt nur das Lesen des Speicherortes zu
+        
+        Variablen, die verändert werden können, werden mit einem extra `mut`
+        Schlüsselwort gekennzeichnet.
+        
+        Auf dieses Konzept wird im späteren Verlauf noch mehr eingegangen, für jetzt ist es wichtig
+        zu wissen, dass "mutable" die Veränderbarkeit einer Variablen bestimmt.
     ie:
       title: Changear valores
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%20%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
@@ -3495,7 +3498,7 @@ pages:
 
         * Modifying static variables is inherently dangerous because they are globally accessable to be read from by anyone
           introducing the possibility of a data race. We'll talk about the challenges of global data later.
-        * Rust allows the use of `unsafe { ... }` block to perform some operations that the compiler cannot make memory gaurantees about. The [<span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) should not be talked about casually.
+        * Rust allows the use of `unsafe { ... }` block to perform some operations that the compiler cannot make memory gaurantees about. The [<span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) should not be talked about casually.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
   
@@ -3518,7 +3521,7 @@ pages:
         Detallies pri memorie:
         * Modificar variabiles static es dangerosi pro que ili es globalmen accessibil por letion de quicunc, quel introducte li
           possibilitá de data-concurrentie. Noi va parlar pri li desfacilitás de data global plu tard.
-        * Rust possibilisa li usation de un bloc `unsafe { ... }` por far quelc operationes queles li compilator ne posse garantir. Li [<span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) existe por to ma esse prudent!
+        * Rust possibilisa li usation de un bloc `unsafe { ... }` por far quelc operationes queles li compilator ne posse garantir. Li [<span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) existe por to ma esse prudent!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20variabiles%20static%20posse%20anc%20esser%20cadrat%20a%20un%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26%27static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20l%C3%ADtterales%20string%20have%20li%20vive-t%C3%A9mpor%20%27static%0A%20%20%20%20let%20msg%3A%20%26%27static%20str%20%3D%20%22Salute%20munde!%22%3B%0A%20%20%20%20let%20p%3A%20%26%27static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20On%20posse%20rupter%20li%20regules%2C%20ma%20deve%20esser%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20noi%20posse%20far%20SECRET%20un%20l%C3%ADtterale%20string%20nam%20anc%20it%20es%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: Lifetimes In Data Types
