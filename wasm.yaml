@@ -2,7 +2,7 @@
 common_words:
   en:
     chapter: Chapter
-    tor: Tour of Web Assembly
+    tor: Tour of WebAssembly
     next: Next
     previous: Previous
     toc: Table of Contents
@@ -10,14 +10,14 @@ common_words:
     untranslated: Untranslated
   en_c:
     chapter: Chapter
-    tor: Tour of Web Assembly
+    tor: Tour of WebAssembly
     next: Next
     previous: Previous
     toc: Table of Contents
     lessons: Lessons
     untranslated: Untranslated
   de:
-    tor: Tour zu Web Assembly
+    tor: Tour zu WebAssembly
     next: Weiter
     previous: Zurück
     toc: Inhaltsverzeichnis
@@ -34,7 +34,7 @@ common_words:
     untranslated: Untranslated
   ru:
     chapter: Глава
-    tor: Тур по Web Assembly
+    tor: Тур по WebAssembly
     next: Далее
     previous: Назад
     toc: Содержание
@@ -42,7 +42,7 @@ common_words:
     untranslated: Untranslated
   es:
     chapter: Capítulo
-    tor: Tour de Web Assembly
+    tor: Tour de WebAssembly
     next: Siguiente
     previous: Anterior
     toc: Tabla de Contenidos
@@ -50,7 +50,7 @@ common_words:
     untranslated: Untranslated
   pt-br:
     chapter: Capítulo
-    tor: Um tour por Web Assembly
+    tor: Um tour por WebAssembly
     next: Próximo
     previous: Anterior
     toc: Índice
@@ -58,99 +58,144 @@ common_words:
     untranslated: Untranslated
 pages:
   - en:
-      title: Hello, Web Assembly
+      title: Hello, WebAssembly
       content_markdown: |
-        Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
+        Welcome to the *Tour of WebAssembly*. This is meant to be a introduction to the technology 
         and how Rust can be used to power the web.  If you are completely new to Rust, you might 
         appreciate the [Tour of Rust](https://tourofrust.com/)! Most of our examples will be easy
         enough to follow along by anyone though. This tour is also available in C.
 
         * [Rust (English)](index.html)
+        * [Rust (Interlingue)](index_ie.html)
         * [Rust (Português Brasileiro)](index_pt-br.html)
         * [C (English)](index_en_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
-        checkout out Tour of Web Assembly's [github repository](https://github.com/richardanaya/tour_of_rust).
+        checkout out Tour of WebAssembly's [github repository](https://github.com/richardanaya/tour_of_rust).
 
         You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
     en_c:
-      title: Hello, Web Assembly
+      title: Hello, WebAssembly
       content_markdown: |
-        Welcome to the *Tour of Web Assembly*. This is meant to be a introduction to the technology 
+        Welcome to the *Tour of WebAssembly*. This is meant to be a introduction to the technology 
         and how C can be used to power the web. This tour is also available in Rust.
 
         * [Rust (English)](index.html)
+        * [Rust (Interlingue)](index_ie.html)
         * [Rust (Português Brasileiro)](index_pt-br.html)
         * [C (English)](index_en_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
-        checkout out Tour of Web Assembly's [github repository](https://github.com/richardanaya/tour_of_rust).
+        checkout out Tour of WebAssembly's [github repository](https://github.com/richardanaya/tour_of_rust).
 
         You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
-    pt-br:
-      title: Olá, Web Assembly
+
+    ie:
+      title: Salute, WebAssembly
       content_markdown: |
-        Bem-vindo ao *Tour por Web Assembly*. Pretendemos ser uma introdução a esta tecnologia e de
+        Benevenit al *Tur de WebAssembly*, un tur quel intente esser un introduction al tecnologie
+        e qualmen on posse usar Rust por dar plu fortie al web. Si tu es un novon a Rust, noi recomanda li
+        [Tour of Rust](https://tourofrust.com/)! Malgré to, li pluparte de nor exemples va esser facil
+        a sequer por quicunc. Li tur es anc disponibil in C.
+
+        * [Rust (English)](index.html)
+        * [Rust (Interlingue)](index_ie.html)
+        * [Rust (Português Brasileiro)](index_pt-br.html)
+        * [C (English)](index_en_c.html)
+
+        Si tu have suggestiones pri contenete o vole contribuer al traductiones,
+        ples vider li [repositoria github](https://github.com/richardanaya/tour_of_rust) del Tur.
+
+        Tu posse navigar tra li tur con li claves <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
+
+    pt-br:
+      title: Olá, WebAssembly
+      content_markdown: |
+        Bem-vindo ao *Tour por WebAssembly*. Pretendemos ser uma introdução a esta tecnologia e de
         como o Rust pode ser usado para dar mais força à web. Se você é completamente novo no Rust pode
         apreciar o [Tour por Rust](https://tourofrust.com/)! A maioria dos nossos exemplos será fácil
         o suficiente para qualquer pessoa acompanhar. Este tour também está disponível para a
         linguagem C.
 
         * [Rust (English)](index.html)
+        * [Rust (Interlingue)](index_ie.html)
         * [Rust (Português Brasileiro)](index_pt-br.html)
         * [C (English)](index_en_c.html)
 
         Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
-        traduções, veja o repositório do Tour do Web Assembly [github repository](https://github.com/richardanaya/tour_of_rust).
+        traduções, veja o repositório do Tour do WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
         Você pode navegar pelo tour usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
   - chapter: 1
     en:
-      title: Chapter 1 - What Is Web Assembly?
+      title: Chapter 1 - What Is WebAssembly?
       content_markdown: |
-        Web assembly is a binary format for representating isolated executable code.  It was developed for web
+        WebAssembly is a binary format for representating isolated executable code.  It was developed for web
         browsers as an alternative to JavaScript with some distinct advantages:
 
         * Because its a low level bytecode, it's able to perform math quickly and manage memory more concisely.
-        * Web Assembly was built with existing compilers in mind, allowing native languages like C/C++ and Rust to compile to it as a target.
+        * WebAssembly was built with existing compilers in mind, allowing native languages like C/C++ and Rust to compile to it as a target.
         * Built with isolation in mind, allowing fine grain access control.
-        * Web Assembly was built rather host agnostic, allowing some people to use web assembly [outside of browsers](https://wasmer.io/) too!
+        * WebAssembly was built rather host agnostic, allowing some people to use WebAssembly [outside of browsers](https://wasmer.io/) too!
 
-        Web Assembly is often called **WASM**
+        WebAssembly is often called **WASM**
     en_c:
       clone: en
-    pt-br:
-      title: Capítulo 1 - O Que É Web Assembly?
+      
+    ie:
+      title: Chapter 1 - Quo es WebAssembly?
       content_markdown: |
-        O Web Assembly é um formato binário para representar um código executável isolado. Foi
+        WebAssembly es un formate binari por representar code executabil isolat. On developat it por navigatores web
+        quam un alternative a JavaScript con quelc avantages distint:
+
+        * Essente bytecode de bass nivelle, it posse far matematica rapidmen e gerer memorie con plu concisitá.
+        * On constructet WebAssembly pensante pri compilatores existent, por que lingues nativ quam C/C++ e Rust mey compilar con it quam cible.
+        * It esset constructet sur li principie de isolation, possibilisante control de accesse rafinat.
+        * On constructet WebAssembly sin egard al hósped, con quel alcunes posse usar it anc [éxter navigatores web](https://wasmer.io/)!
+
+        On nomina WebAssembly sovente **WASM**
+    pt-br:
+      title: Capítulo 1 - O Que É WebAssembly?
+      content_markdown: |
+        O WebAssembly é um formato binário para representar um código executável isolado. Foi
         projetado para ser executado nos navegadores de internet como uma alternativa ao 
         JavaScript com algumas vantagens nítidas:
 
         * Por ser um bytecode de baixo nível, é capaz de executar cálculos rapidamente e gerenciar
           a memória de forma mais concisa.
-        * O Web Assembly foi projetado tendo os compiladores existentes em mente, permitindo que seja 
+        * O WebAssembly foi projetado tendo os compiladores existentes em mente, permitindo que seja 
           compilado a partir de linguagens nativas como C/C++ e Rust.
         * Projetado com o isolamento em mente, permitindo um controle de acesso detalhado.
-        * O Web Assembly foi projetado para ser bem agnóstico, permitindo que as pessoas usem o web 
+        * O WebAssembly foi projetado para ser bem agnóstico, permitindo que as pessoas usem o web 
           assembly [fora dos navegadores](https://wasmer.io/) também!
 
-        O Web Assembly é frequentemente chamado de **WASM**.
+        O WebAssembly é frequentemente chamado de **WASM**.
   - en:
       title: Inside A Module
       content_markdown: |
-        When you compile to a web assembly target your compiler should create a file ending in `.wasm` called a **module**.
+        When you compile to a WebAssembly target your compiler should create a file ending in `.wasm` called a **module**.
 
         The module is a [binary format](https://webassembly.github.io/spec/core/index.html) full of information on how a 
-        wasm program and it's memory should be setup and interacted with:
+        wasm program and its memory should be setup and interacted with:
         * a list of functions
         * what functions should be exported/imported
         * what data should initially be in the wasm modules memory
     en_c:
       clone: en
+    ie:
+      title: Quo Sta in un Modul
+      content_markdown: |
+        Quande on compila a un cible de WebAssembly, li compilator deve crear un archive quel fini se con `.wasm` nominat un **modul**.
+
+        Li modul es in [formate binari](https://webassembly.github.io/spec/core/index.html) e plen de information pri qualmen
+        on mey crear e interacter con un programma wasm program e su memorie:
+        * un liste de functiones
+        * quel functiones mey esser exportat/importat
+        * quel data mey esser in prim in li memorie del modules wasm
     pt-br:
       title: Por Dentro de um Módulo
       content_markdown: |
-        Quando você compila para web assembly, seu compilador deve criar um arquivo terminado em 
+        Quando você compila para WebAssembly, seu compilador deve criar um arquivo terminado em 
         `.wasm` chamado de **módulo**.
 
         O módulo é um [formato binário](https://webassembly.github.io/spec/core/index.html) com 
@@ -162,7 +207,7 @@ pages:
   - en:
       title: Loading A Module
       content_markdown: |
-        Since a web assembly module is just a file of bytes. We first need to load those bytes in our browser.
+        Since a WebAssembly module is just a file of bytes. We first need to load those bytes in our browser.
 
         ```
         let file = await fetch('my_file.wasm');
@@ -170,10 +215,19 @@ pages:
         ```
     en_c:
       clone: en
+    ie:
+      title: Cargar un Modul
+      content_markdown: |
+        Nam un modul WebAssembly es solmen un archive de bytes, noi va in prim cargar ti-ci bytes in nor navigator
+
+        ```
+        let file = await fetch('my_file.wasm');
+        let bytes = await file.arrayBuffer();
+        ```
     pt-br:
       title: Carregando um Módulo
       content_markdown: |
-        Como um módulo de web assembly é apenas um arquivo de bytes, precisamos primeiro carregar esses
+        Como um módulo de WebAssembly é apenas um arquivo de bytes, precisamos primeiro carregar esses
         bytes em nosso navegador.
 
         ```
@@ -193,6 +247,17 @@ pages:
         We'll show an example of this next chapter.
     en_c:
       clone: en
+    ie:
+      title: Crear un Modul
+      content_markdown: |
+        Modules es creat de bytes.
+
+        ```
+        let module = await WebAssembly.instantiate(bytes);
+        ```
+
+        Durant ti-ci fase noi posse **importar** li functiones de javascript a quel noi vole que nor modul mey posser accesser. 
+        Noi va dar un exemple de to in li capitul a sequer.
     pt-br:
       title: Criando um Módulo
       content_markdown: |
@@ -207,7 +272,7 @@ pages:
   - en:
       title: Using a Module
       content_markdown: |
-        A module will have one more **export** functions that are accessible to JavaScript. Typically
+        A module will have one or more **export** functions that are accessible to JavaScript. Typically
         there is some export function to call in order to start a wasm program (e.g. `main`, `start`).
 
         ```
@@ -215,6 +280,15 @@ pages:
         ```
     en_c:
       clone: en
+    ie:
+      title: Usar un Modul
+      content_markdown: |
+        Un modul va haver un o pluri functiones **export** queles es accessibil a JavaScript. Tipicmen
+        hay alquel function de export a vocar por comensar un programma de wasm (p.ex. `main`, `start`).
+
+        ```
+        module.instance.main();
+        ```
     pt-br:
       title: Usando um Módulo
       content_markdown: |
@@ -229,7 +303,7 @@ pages:
       title: 1+1
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
-        Let's put our knowledge all together and make a web assembly
+        Let's put our knowledge all together and make a WebAssembly
         module with a single **export** function `add` for adding two numbers, and put the
         results in HTML.
 
@@ -238,16 +312,25 @@ pages:
       title: 1+1
       code: https://webassembly.studio/?embed&f=glwzquv2gh8
       content_markdown: |
-        Let's put our knowledge all together and make a web assembly
+        Let's put our knowledge all together and make a WebAssembly
         module with a single **export** function `add` for adding two numbers, and put the
         results in HTML.
         
         `__attribute__((visibility("default")))` tells our compiler to keep our function name human readable to JavaScript.
+    ie:
+      title: 1+1
+      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      content_markdown: |
+        Lass nos combinar nor conossenties por crear un module de WebAssembly
+        con un sol **export**-function nominat `add` por addir du ciffres, e plazzar li 
+        resultates in HTML.
+
+        Con `#[no_mangle]` noi instructe li compilator mantener li nómine de nor function leibil por entes homan.
     pt-br:
       title: 1+1
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
-        Vamos juntar nossos conhecimentos e criar um módulo web assembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
+        Vamos juntar nossos conhecimentos e criar um módulo WebAssembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
 
         `#[no_mangle]` diz ao nosso compilador para manter o nome da nossa função legível para seres humanos.
   - chapter: 2
@@ -255,6 +338,12 @@ pages:
       title: The End
       content_markdown: |
         That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!
+    en_c:
+      clone: en
+    ie:
+      title: Fine
+      content_markdown: |
+        To es omnicos por nu. Plu tard va venir nov contenete. Yo espera que tu va juir li viage a sequer!
     es:
       title: Fin
       content_markdown: |
