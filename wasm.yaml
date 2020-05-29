@@ -88,7 +88,7 @@ pages:
 
         You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
 
-  - ie:
+    ie:
       title: Salute, Web Assembly
       content_markdown: |
         Benevenit al *Tur de Web Assembly*, un tur quel intente esser un introduction al tecnologie
@@ -178,7 +178,7 @@ pages:
         * what data should initially be in the wasm modules memory
     en_c:
       clone: en
-  - en:
+    ie:
       title: Quo Sta in un Modul
       content_markdown: |
         Quande on compila a un cible de web assembly, li compilator deve crear un archive quel fini se con `.wasm` nominat un **modul**.
@@ -211,7 +211,7 @@ pages:
         ```
     en_c:
       clone: en
-  - ie:
+    ie:
       title: Cargar un Modul
       content_markdown: |
         Nam un modul web assembly es solmen un archive de bytes, noi va in prim cargar ti-ci bytes in nor navigator
@@ -243,7 +243,7 @@ pages:
         We'll show an example of this next chapter.
     en_c:
       clone: en
-  - ie:
+    ie:
       title: Crear un Modul
       content_markdown: |
         Modules es creat de bytes.
@@ -276,7 +276,7 @@ pages:
         ```
     en_c:
       clone: en
-  - ie:
+    ie:
       title: Usar un Modul
       content_markdown: |
         Un modul va haver un o pluri functiones **export** queles es accessibil a JavaScript. Tipicmen
@@ -313,7 +313,7 @@ pages:
         results in HTML.
         
         `__attribute__((visibility("default")))` tells our compiler to keep our function name human readable to JavaScript.
-  - ie:
+    ie:
       title: 1+1
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
