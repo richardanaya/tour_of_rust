@@ -2826,7 +2826,7 @@ pages:
         Les types génériques sont incroyablement important avec Rust. Ils sont utilisés pour la représentation
         de valeurs potentiellement nulles (i.e. variables qui n'a peu-être pas encore de valeurs), gestion d'erreurs, 
         collections, et plus! Dans cette section, nous allons découvrir les types génériques fondamentaux
-        dont vous ne pourrez plus vous passer.
+        dont vous ne pourrez plus vous passer.
     ie:
       title: Capitul 4 - Tipes Géneric
       content_markdown: |
@@ -3054,9 +3054,9 @@ pages:
       title: Result
       content_markdown: |
         Le langage Rust met à disposition une énumération générique `Result` qui permet de renvoyer une valeur qui a la possibilité d'échouer.
-        C'est la façon idiomatique avec laquelle le langage gère les erreurs.
+        C'est la façon idiomatique avec laquelle le langage gère les erreurs.
 
-         ```
+        ```
         enum Result<T,Q>{
           Ok(T),
           Err(Q)
