@@ -3091,7 +3091,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
 
@@ -3108,7 +3108,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
     pt-br:
@@ -3124,7 +3124,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
 
@@ -3142,7 +3142,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
 
