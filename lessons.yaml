@@ -509,13 +509,13 @@ pages:
       content_markdown: |
         Rust sorgt sich sehr darum, welche Variablen verändert werden können
         und welche nicht. Daher gibt es die folgende Unterscheidung:
-        
+
         * **mutable** - der Speicherort der Variable kann beschrieben und gelesen werden
         * **immutable** - der Compiler lässt nur das Lesen des Speicherortes zu
-        
+
         Variablen, die verändert werden können, werden mit einem extra `mut`
         Schlüsselwort gekennzeichnet.
-        
+
         Auf dieses Konzept wird im späteren Verlauf noch mehr eingegangen, für jetzt ist es wichtig
         zu wissen, dass "mutable" die Veränderbarkeit einer Variablen bestimmt.
     ie:
@@ -1635,7 +1635,7 @@ pages:
 
         `match` est exhaustif donc tous les cas doivent être pris en compte.
 
-        La destructuration combiné avec `match` fournit un des patterns le plus utilisé de Rust. Tu pourra le constater.  
+        La destructuration combiné avec `match` fournit un des patterns le plus utilisé de Rust. Tu pourra le constater.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20certainement%20zero!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20comparer%20%C3%A0%20plusieurs%20valeurs%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20soit%201%20soit%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20comparer%20%C3%A0%20un%20it%C3%A9rateur%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20un%20nombre%20compris%20entre%203%20et%209%20inclus!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20r%C3%A9cup%C3%A9rer%20la%20valeur%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22L%27entier%20%7B%7D%20est%20compris%20entre%2010%20et%20100%20inclus!%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20C%27est%20le%20cas%20par%20d%C3%A9faut.%0A%20%20%20%20%20%20%20%20%2F%2F%20Celui-ci%20doit%20%C3%AAtre%20pr%C3%A9sent%20si%20tous%20les%20cas%0A%20%20%20%20%20%20%20%20%2F%2F%20ne%20sont%20pas%20pr%C3%A9sent.%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: match
@@ -3273,42 +3273,42 @@ pages:
     fr:
       title: Gestion peu élégante de Option/Result
       content_markdown: |
-       Utiliser `Option` et `Result` peut être tédieux lorsqu'on souhaite rapidement écrire du code.
-       `Option` et `Result` ont tout les deux une fonction appelé `unwrap` qui permet d'obtenir une
-       valeur de manière rapide mais peu élégante.
-       `unwrap` va:
-         
-        1. Renvoyer la valeur de notre Option ou Result
-        2. Faire 'paniquer' le code si la valeur de l'énumération est de type None ou Err. Lorsqu'un
-        programme Rust panique, il envoie un message d'erreur et s'arrête.
+        Utiliser `Option` et `Result` peut être tédieux lorsqu'on souhaite rapidement écrire du code.
+        `Option` et `Result` ont tout les deux une fonction appelé `unwrap` qui permet d'obtenir une
+        valeur de manière rapide mais peu élégante.
+        `unwrap` va:
+          
+         1. Renvoyer la valeur de notre Option ou Result
+         2. Faire 'paniquer' le code si la valeur de l'énumération est de type None ou Err. Lorsqu'un
+         programme Rust panique, il envoie un message d'erreur et s'arrête.
 
-        Ces deux bout de code sont équivalent
+         Ces deux bout de code sont équivalent
 
-        ```
-        my_option.unwrap()
-        ```
+         ```
+         my_option.unwrap()
+         ```
 
-        ```
-        match my_option {
-          Some(v) => v,
-          None => panic!("un message d'erreur généré par Rust!")
-        }
-        ```
+         ```
+         match my_option {
+           Some(v) => v,
+           None => panic!("un message d'erreur généré par Rust!")
+         }
+         ```
 
-        De même:
+         De même:
 
-        ```
-        my_result.unwrap()
-        ```
+         ```
+         my_result.unwrap()
+         ```
 
-        ```
-        match my_result {
-          Ok(v) => v,
-          Err(e) => panic!("un message d'erreur généré par Rust!")
-        }
-        ```
+         ```
+         match my_result {
+           Ok(v) => v,
+           Err(e) => panic!("un message d'erreur généré par Rust!")
+         }
+         ```
 
-        Tu doit être un bon rustacien et utiliser `match` comme il faut et quand tu peux.
+         Tu doit être un bon rustacien et utiliser `match` comme il faut et quand tu peux.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22ce%20n%27est%20pas%20le%20bon%20nombre%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Concis%20mais%20suppose%20qu%27une%20valeur%20est%20pr%C3%A9sente%20et%20le%20code%20%0A%20%20%20%20%2F%2F%20peut%20vite%20devenir%20illisible.%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Le%20programme%20affichera%20le%20mesage%20d%27erreur%20et%20s%27arr%C3%AAtera%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
 
     ie:
@@ -3446,7 +3446,7 @@ pages:
       content_markdown: |
         Les types génériques les plus utiles sont les collections. Un vecteur est une liste de taille variable
         et est représenté par la structure `Vec`.
-        
+
         La macro `vec!` permet facilement de créer un vector au lieu d'avoir à le construire manuellement.
 
         `Vec` possède la méthode `iter()` qui créer un itérateur à partir d'un vecteur, permettant de parcourir les éléments d'un vecteur dans une boucle `for`.
@@ -3554,7 +3554,7 @@ pages:
       content_markdown: |
         Rust possede un dessine unic por gerer memorie quel es diferent quam altri lingues de programmation. Noi va regardar
         chascun conduida e validation del compilator poc a poc por que on ne mey esser aplastat per it. It es important a
-        memorar que in fine ti regules ne existe por far li vive plu dur, ma in contrari por far tui code minu erraci!  
+        memorar que in fine ti regules ne existe por far li vive plu dur, ma in contrari por far tui code minu erraci!
     pt-br:
       title: Capítulo 5 - Propriedade & Empréstimo de Dados
       content_markdown: |
@@ -3596,7 +3596,7 @@ pages:
       content_markdown: |
         Rust usa li final loc de usation o li fine del cadre de un function quam li loc por deconstructer e dealocar 
         un ressurse. On nomina ti deconstruction e dealocation un "cade" (**drop**).
-        
+
         Detallies pri memorie:
         * Rust ne possede jettallia-colection (garbage collection).
         * Tis qui save C++ va conosser ti concepte quam Resource Aquisition Is Initialization ( RAII ).
@@ -3621,7 +3621,7 @@ pages:
         Memory Details:
         * By automically freeing memory Rust helps ensure that there are less memory leaks 
         * Memory resources can only be dropped once.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A  
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
     ie:
       title: On Cade Secun Hierarchie
       content_markdown: |
@@ -3669,13 +3669,13 @@ pages:
 
         Detalhes da memória:
         * Durante uma **movimentação**, a memória da pilha do proprietário do valor é copiada para a memória da pilha dos parâmetros da função chamada.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20faz_alguma_coisa(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%C3%A9%20descartado%20aqui%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20movido%20para%20faz_alguma_coisa%0A%20%20%20%20faz_alguma_coisa(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20n%C3%A3o%20pode%20mais%20ser%20usado%0A%7D%0A  
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20faz_alguma_coisa(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%C3%A9%20descartado%20aqui%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20movido%20para%20faz_alguma_coisa%0A%20%20%20%20faz_alguma_coisa(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20n%C3%A3o%20pode%20mais%20ser%20usado%0A%7D%0A
   - en:
       title: Returning Ownership
       content_markdown: |
         Ownership can also be returned from a function.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
-  
+
     ie:
       title: Retornar Proprietá
       content_markdown: |
@@ -3697,7 +3697,7 @@ pages:
       title: Pruntar Proprietá con Referenties
       content_markdown: |
         Con referenties noi posse prunta accesse a un ressurse con li operator `&`.
-        
+
         Referenties cade in Rust just quam omni altri ressurses.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20cade%20ci%0A%20%20%20%20%2F%2F%20foo%20cade%20ci%0A%7D%0A
     pt-br:
@@ -3722,9 +3722,9 @@ pages:
       title: Pruntation de Mutabil Proprietá con Referenties
       content_markdown: |
         Noi posse anc pruntar accesse mutabil a un ressurse con li operator `&mut`.
-        
+
         Un proprietario de un ressurse ne posse mover o modificar se durant que it es pruntat mutabilmen.
-        
+
         Detallies pri memorie:
         * Rust preveni li duplic mutabil pruntation de un valore pro que con to on have li possibilitá de data-concurrentie.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20far_alquo(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20cade%20ci%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FALLIMENT%3A%20far_alquo%20vell%20fallir%20pro%20quo%0A%20%20%20%20%2F%2F%20foo%20ne%20posse%20mover%20durant%20que%20it%20es%20pruntat%20mutabilmen%0A%0A%20%20%20%20%2F%2F%20FALLIMENT%3A%20foo.x%20%3D%2013%3B%20vell%20fallir%20ci%20pro%20que%0A%20%20%20%20%2F%2F%20on%20ne%20posse%20modificar%20foo%20durant%20que%20it%20es%20pruntat%20mutabilmen%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20cade%20ci%20pro%20que%20on%20ne%20usa%20it%20plu%20pos%20ciloc%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20nu%20it%20functiona%20pro%20quo%20omni%20referenties%20mutabil%20ha%20cadet%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20transferer%20li%20propriet%C3%A1%20de%20foo%20a%20un%20function%0A%20%20%20%20far_alquo(foo)%3B%0A%7D%0A
@@ -3751,7 +3751,7 @@ pages:
       title: Dereferentiar
       content_markdown: |
         Con referenties, on posse etablisser li valore del proprietario con li operator `*`.
-        
+
         On posse anc obtener un copie del propri valore con li operator `*`
         (si li valore es copiabil. Noi va parlar pri tipes copiabil in li capitules a sequer.)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20obtenir%20un%20copie%20del%20valore%20del%20proprietario%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20etablisser%20li%20valore%20del%20proprietario%20del%20referentie%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
@@ -3838,10 +3838,10 @@ pages:
       content_markdown: |
         Benque Rust ne sempre monstra it nos in li code, li compilator save li vive-témpor de chascun variabil e va provar validar
         que referenties ne vive plu long quam lor proprietarios.
-        
+
         Un function posse esser explicit per parametrisar li function-signatura con simboles queles auxilia identificar
         quel parametres e quel retorn-valores partiprende li sam vive-témpor.
-        
+
         Specificatores de vive-témpores sempre comensa con un `'` (e.g. `'a`, `'b`, `'c`)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20li%20parametre%20foo%20e%20retorn-valore%20partiprende%20li%20sam%20vive-t%C3%A9mpor%0A%0A%2F%2F%20(Benque%20por%20li%20pluparte%20on%20scri%20simplicmen%20%27a%2C%20%27b%2C%20%27c%2C%20etc.%2C%20on%0A%2F%2F%20posse%20scrir%20quocunc%20pos%20li%20%27%20%3A%20%27vive_tempor%2C%20%27long%2C%20%27curt%2C%20%0A%2F%2F%20%27unesim%2C%20%27duesim%20etc.%20es%20omnes%20possibil%20n%C3%B3mines%20por%20ili)%0Afn%20far_alquo%3C%27a%3E(foo%3A%20%26%27a%20Foo)%20-%3E%20%26%27a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20cade%20ci%20por%20possibilisar%20li%20creation%20de%20un%20%C3%ADnmutabil%20referentie%0A%20%20%20%20let%20y%20%3D%20far_alquo(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20cade%20ci%0A%20%20%20%20%2F%2F%20foo%20cade%20ci%0A%7D%0A
     pt-br:
@@ -3893,23 +3893,23 @@ pages:
         * Rust allows the use of `unsafe { ... }` block to perform some operations that the compiler cannot make memory gaurantees about. The [<span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) should not be talked about casually.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
-  
+
     ie:
       title: Vive-témpores Static
       content_markdown: |
         Un variabil **static** es un ressurse de memorie creat al moment de compilation quel existe durant li programma
         desde de comense til li fine. Ili besona un tip explicitmen specificat.
-        
+
         Un **vive-témpor static** es un ressurse de memorie quel continua til li fine del programma. A notar que secun ti definition
         quelc ressurses con vive-témpor static posse esser creat ye li execution del programma.
-        
+
         Ressurses con vive-témpores static possede un special specificator `'static`.
-        
+
         `'static` ressurses nequande **cade**
-        
+
         Si un ressurse con un vive-témpor static possede referenties, ili deve omnis esser `'static` (quelcunc altri vive-témpor
         ne vell viver sat long).
-        
+
         Detallies pri memorie:
         * Modificar variabiles static es dangerosi pro que ili es globalmen accessibil por letion de quicunc, quel introducte li
           possibilitá de data-concurrentie. Noi va parlar pri li desfacilitás de data global plu tard.
@@ -3941,7 +3941,7 @@ pages:
 
         We can't have structs running around with references pointing to nothingness!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
-  
+
     ie:
       title: Vive-témpores in tipes de data
       content_markdown: |
@@ -4004,7 +4004,134 @@ pages:
     en:
       title: Chapter 6 - Text
       content_markdown: |
-        TODO
+        Let's talk about text! Now that we understand a bit how Rust thinks of memory, 
+        we're we are prepared to talk about text in more detail.
+  - beta: true
+    en:
+      title: String Literals
+      content_markdown: |
+        String literals are always unicode (**utf-8**)
+
+        String literals type are `&'static str`
+
+        * & meaning that its referring to a place in memory, it lacks a `&mut` meaning that the compiler will not allow modification
+        * `'static` meaning the string data will be available till the end of our program ( it never drops )
+        * `str` means that it points to a sequence of bytes that are always valid **utf-8**
+
+        Length can be acquired with `len` function. This is a common convention throughout Rust. Notice that length returns length
+        in bytes, not length of unicode characters.
+
+        Memory details:
+        * likely the LLVM compiler will put your string in the data segment of your program memory
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: What is utf-8
+      content_markdown: |
+        As more languages were used on computers, the world needed to represent more text characters
+        than ASCII allowed (1 byte only allowed 256 characters). 
+
+        **utf-8** was introduced with a variable byte length of 1-4 bytes greatly increasing the range of possible characters.
+
+        An advantage of variable sized characters is text did not have unecessary bytes for very common ASCII ( only requiring 1 byte still in **utf-8**).
+
+        A downside of variable sized characters is that character lookup can no longer be done in quickly 
+        ( **O(1)** constant time ) with a simple `my_text[3]` to get the 4th character.  It's possible that the proceeding characters
+        could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
+
+        Instead we must iterate through a **utf-8** byte sequence to understand where the unicode characters actually begin ( **O(n)** linear time ).
+
+        Ferris: "I'm mostly just happy to have **utf-8** for representing emojis of my underwater friends."
+
+        <span class="emoji">🐠🐙🐟🐬🐋</span>
+  - beta: true
+    en:
+      title: Escaping Characters
+      content_markdown: |
+        It's impossible to visually represent certain characters, **escape codes** allow us to put a symbol in their place.
+        
+        Rust supports the common escape codes from C-based languages:
+        * \n - newline
+        * \r - carriage return
+        * \t - tab
+        * \\ - backslash
+        * \0 - null
+        * \' - single-quote
+
+        The complete list exists [here](https://doc.rust-lang.org/reference/tokens.html) 
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Multi-line String Literals
+      content_markdown: |
+        Rust strings are multiline by default.
+
+        Use a `\` at the end of a line if you don't want a line break.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Raw String Literals
+      content_markdown: |
+        Raw strings allow us to write a sequence of characters verbatim by starting with `r#"` and ending with `"#`. It lets us insert
+        characters that might otherwise confuse a normal string literals (like double quotes and backslashes).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: String Literals from Files
+      content_markdown: |
+        If you have some very large text, consider using the macro `include_str!` to include very long string literals in your program:
+
+        ```rust
+        let index_html = include_str!("index.html");
+        ```
+  - beta: true
+    en:
+      title: String Slice
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slaices%20of%20invalid%20unicode%20haracters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Chars
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: String
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Passing Around Text
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Building Strings
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Formatting Strings
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Converting Strings
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Chapter 6 Conclusion
+      content_markdown: |
+        hey
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
   - beta: true
     chapter: 7
     en:
@@ -4191,7 +4318,7 @@ pages:
     en:
       title: The End
       content_markdown: |
-        That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!        
+        That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!
     es:
       title: Fin
       content_markdown: |
