@@ -65,10 +65,10 @@ Lastly, there is a section for common words you should fill out your localized t
 
 # Releases
 
-## Release 4 - Unreleased
+## Release 4 - May 30, 2020
 * Chapter 5 released on ownership and sharing
 * Chinese transalations chapter 1-3
-* French translations for chapter 1
+* French translations for chapter 1-3
 * Brazillian portuguese translations for chapter 2-4
 * Spanish translations for chapter 3
 * Starting new section for web assembly

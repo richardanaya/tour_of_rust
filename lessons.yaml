@@ -1919,6 +1919,13 @@ pages:
         It's time we explore beyond basic types! In this chapter we will look the most primitive 
         data structures in Rust, paying close attention to their representations in memory. I think 
         you will enjoy how little Rust hides from you how things work.
+    fr:
+      title: Chapter 3 - Types basiques de structure de données
+      content_markdown: |
+        Il est temps d'explorer autre choses que les types basiques! Dans ce chapitre nous allons
+        nous intéresser aux structures de données les plus primitives de Rust, en étudiant particulièrement
+        de quelle manière celles-ci sont représentées en mémoire. Je pense que vous apprécirez le fait que
+        Rust ne nous cache pas comment les choses fonctionnent.
     de:
       title: Kapitel 3 - Datenstrukturen
       content_markdown: |
@@ -1964,6 +1971,17 @@ pages:
         Its definition is like a blueprint for a compiler on how to layout the fields in memory nearby each other.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+    fr:
+      title: Structures
+      content_markdown: |
+        Une structure est une collection de champs. On créer une structure avec le mot clé `struct`.
+
+        Un *champs* est simplement un élément contenant une valeur et associé à une structure de données.
+        Sa valeur peut être un type primitif ou une autre structure de données.
+
+        Sa définition est comme un plan pour le compilateur sur l'agencement des données en mémoire.
+        Celles-ci seront placées à proximité les uns des autres.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20est%20%C3%A9galement%20une%20structure%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
     de:
       title: Strukturen
       content_markdown: |
@@ -2032,6 +2050,19 @@ pages:
         We will talk more on making your own methods in future chapters.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Using%20a%20static%20method%20to%20create%20an%20instance%20of%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20Using%20a%20method%20on%20the%20instance%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
+    fr:
+      title: Appel de Méthodes
+      content_markdown: |
+        A la différence des fonctions que nous avons vu précédemment, les méthodes sont
+        des fonctions associés à un type de donnée spécifique.
+
+        **méthodes statiques** — méthodes qui appartiennent au type même et sont appelées avec l'opérateur `::`
+
+        **méthodes d'instance** — méthodes qui appartiennent à l'instance d'un type et sont appelées avec l'opérateur `.`
+
+        Nous verrons comment créer tes propres méthodes dans de futures chapitres.
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20On%20utilise%20une%20m%C3%A9thode%20statique%20pour%20cr%C3%A9er%20une%20instance%20de%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20On%20utilise%20ici%20une%20m%C3%A9thode%20directement%20sur%20l%27instance%0A%20%20%20%20println!(%22%7B%7D%20contient%20%7B%7D%20caract%C3%A8res.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
     de:
       title: Methoden aufrufen
       content_markdown: |
@@ -2092,21 +2123,42 @@ pages:
   - en:
       title: Memory
       content_markdown: |
-        Rust programs have 3 memory regions where data is placed:
-        * **data memory** - For data that fixed size and **static** (i.e always available through life of program ). 
-          consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from 
-          therefore they are placed in this region. Compilers make lots of optimizations 
+        Rust programs have 3 memory regions where data is stored:
+        * **data memory** - For data that is fixed in size and **static** (i.e always available through life of program). 
+          Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from one place 
+          and therefore can be stored in this region. Compilers make lots of optimizations 
           with this kind of data, they are generally considered very fast to use since
           locations are known and fixed.
         * **stack memory** - For data that is declared as variables within a function. 
           The location of this memory never changes for the duration of a function call, because of this compilers 
-          can optimize code so stack data is very fast to use. 
+          can optimize code so stack data is very fast to access. 
         * **heap memory** - For data that is created while the application is running. 
           Data in this region may be added, moved, removed, resized, etc. Because of 
-          it's dynamic nature it's generally considered slower to use, but it allows 
+          its dynamic nature it's generally considered slower to use, but it allows 
           for much more creative usages of memory.  When data is added to this region we 
           call it an **allocation**. When data is removed from this section we call it a 
           **deallocation**.
+    fr:
+      title: Mémoire
+      content_markdown: |
+        Un programme Rust possède 3 régions de mémoire où les données sont stockées:
+        * **data memory (le segment de données)** - Pour les données de taille fixe et **statiques** (i.e toujours
+          disponible pendant la vie du programme). Par exemple, considère le texte "Hello World!"
+          de ton tout premier programme Rust, les bytes représentant ce texte sont uniquement
+          lu et par conséquant ils sont placés dans cette région. Le compilateur utilise de
+          nombreuses optimisations pour ce type de données, elles sont généralement
+          considérées très rapide d'utilisation car leur position en mémoire est connue
+          et fixe.
+        * **stack memory (la pile)** - Pour les données qui sont déclarées comme variables dans une fonction.
+          La position de cette mémoire ne change jamais pendant la durée d'appel de cette fonction,
+          par conséquant les compilateurs peuvent optimiser le code pour rendre l'utilisation des données
+          sur la pile très rapide.
+        * **heap memory (le tas)** - Pour les données qui sont créées lorsque l'application est en train de s'exécuter. 
+          Les données dans cette région peuvent être ajoutées, déplacées, supprimées, redimenssionnées, etc.
+          A cause de sa nature dynamique c'est généralement considéré plus lent d'utilisation que la pile, mais
+          donne plus de contrôle sur l'utilisation de la mémoire.
+          On appele **allocation** le fait d'ajouter des données à cette région et
+          **désallocation** le fait de les supprimer.
     de:
       title: Speicher
       content_markdown: |
@@ -2229,6 +2281,31 @@ pages:
         * Finally our two friends *ferris* and *sara* have data structures that will always have 
           fixed locations in our program, so they are placed on the *stack*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
+    fr:
+      title: Création de données en mémoire
+      content_markdown: |
+        Lorsqu'on **instancie** une **structure** dans notre code, le programme
+        créer les champs de données associés côte à côte en mémoire.
+
+        On instancie une structure en spécifiant les champs dans des accolades.
+
+        `StructName { ... }`.
+
+        On accède aux champs de la structure avec l'opérateur`.`.
+
+        Détail de la mémoire pour notre exemple:
+        * Le texte à l'intérieur des guillemets est une donnée de lecture uniquement (e.g. "ferris"),
+        celui-ci est donc placé dans la région *data memory*.
+        * L'appel à la fonction `String::from` créer une structure `String` qui est placée en mémoire à côté
+          des champs de la structure SeaCreature sur la pile. Un élément `String` représente un texte
+          qui peut changer et cela est rendue possible en:
+          1. Créant un emplacement sur le *tas* pour le texte où il pourra être modifié
+          2. Stockant une référence vers cette emplacement de mémoire (sur le *tas*) et
+          en stockant cette référence dans une structure `String` (sur la *pile*). Nous en reparlerons
+          de cela dans de futures lessons.
+        * Finalement nos deux amis *ferris* et *sara* ont des structures de données qui auront
+          toujours une position fixe en mémoire et sont donc placés sur la pile.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20La%20structure%20SeaCreature%20est%20plac%C3%A9e%20sur%20la%20pile%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20La%20structure%20String%20est%20%C3%A9galement%20sur%20la%20pile%20mais%0A%20%20%20%20%20%20%20%20%2F%2F%20maintient%20une%20r%C3%A9f%C3%A9rence%20vers%20des%20donn%C3%A9es%20sur%20le%20tas%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crabe%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22pinces%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22poulpe%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20est%20un%20%7B%7D.%20Ces%20derniers%20poss%C3%A8dent%20%7B%7D%20bras%2C%20%7B%7D%20jambes%2C%0A%20%20%20%20%20%20%20%20et%20utilisent%20leurs%20%7B%7D%20comme%20arme.%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%0A%20%20%20%20%20%20%20%20ferris.animal_type%2C%0A%20%20%20%20%20%20%20%20ferris.arms%2C%0A%20%20%20%20%20%20%20%20ferris.legs%2C%0A%20%20%20%20%20%20%20%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20est%20un%20%7B%7D.%20Ces%20derniers%20poss%C3%A8dent%20%7B%7D%20bras%2C%20et%20%7B%7D%20jambes.%0A%20%20%20%20%20%20%20%20Ils%20ne%20sont%20pas%20%C3%A9quip%C3%A9s%20d%27armes...%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%0A%20%20%20%20%20%20%20%20sarah.animal_type%2C%0A%20%20%20%20%20%20%20%20sarah.arms%2C%0A%20%20%20%20%20%20%20%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
     de:
       title: Structs initialisieren
       content_markdown: |
@@ -2365,6 +2442,12 @@ pages:
         For conciseness, you can create structs that are used like a tuple.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20This%20is%20still%20a%20struct%20on%20a%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+    fr:
+      title: Structures sous forme de n-uplet
+      content_markdown: |
+        Pour être concis, tu peux créer des structures qui s'utilisent comme des n-uplets (tuples en anglais).
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20On%20cr%C3%A9e%20une%20structure%20sur%20la%20pile%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
     de:
       title: Tuple-Structs
       content_markdown: |
@@ -2404,6 +2487,17 @@ pages:
         This type of struct is rarely used.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Marker%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_m%20%3D%20Marker%3B%0A%7D%0A
+    fr:
+      title: Structures de type unitaire
+      content_markdown: |
+        Il n'est pas nécessaire que les structures possèdent des champs.
+
+        Comme mentionné au Chapitre 1, une *unité* est une autre appelation pour un n-uplet vide `()`. 
+        C'est pourquoi ce type de structure est dit *de type unitaire* (unit-like en anglais).
+
+        Ce type de structure est rarement utilisé.
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20On%20cr%C3%A9e%20une%20structure%20sur%20la%20pile%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
     de:
       title: Unit-Structs
       content_markdown: |
@@ -2460,10 +2554,20 @@ pages:
   - en:
       title: Enumerations
       content_markdown: |
-        Enumerations allow you allow you to create a new type that can have a value of several tagged elements using the `enum` keyword.
+        Enumerations allow you to create a new type that can have a value of several tagged elements using the `enum` keyword.
 
         `match` helps ensure exhaustive handling of all possible enum values making it a powerful tool in ensuring quality code.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20is%20a%20crab%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20is%20a%20octopus%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20is%20a%20fish%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20is%20a%20clam%22%2Cferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
+    fr:
+      title: Enumerations
+      content_markdown: |
+        Les énumerations permettent de créer un nouveau type dont la valeur
+        ne peut prendre uniquement celle d'un ensemble de valeurs constantes.
+        On créer une énumération avec le mot clé `enum`.
+
+        `match` aide à s'assurer que l'on a traiter tous les cas d'une énumération,
+        ce qui en fait un outils puissant pour assurer le maintient de la qualité de code.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20cette%20ligne%20supprime%20les%20warnings%20du%20compilateur%0A%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20est%20un%20crabe%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20est%20un%20poulpe%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20est%20un%20poisson%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20est%20une%20palourde%22%2Cferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: Enumerations
       content_markdown: |
@@ -2530,6 +2634,26 @@ pages:
         * Rust's `enum` is something also known as a *tagged-union*
         * The combining of types to make a new type is what people mean when they say Rust has *algebraic types*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22big%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22small%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20is%20a%20crab%20with%20%7B%7D%20%7B%7D%20claws%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20a%20crab%20with%20some%20other%20weapon%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20some%20other%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D
+    fr:
+      title: Enumerations avec des données
+      content_markdown: |
+        Les éléments `enum` peuvent également avoir un ou plusieurs type de données
+        ce qui les rend similaire au type *union* du language C.
+
+        Lorsqu'une énumération est utilisée avec `match`, on peut lier un nom de variable à chaque valeur.
+
+        Représentation des énumérations en mémoire:
+        * La place mémoire qu'occupe un élément d'une énumération est égale à la taille de l'élément
+        de l'énumération qui occupe le plus de place mémoire. Ce qui permet de remplacer un élément
+        en mémoire par un autre sans avoir à redimensionner l'espace mémoire.
+        * En plus du type de donnée de l'élément (s'il en a un), chaque élément possède une valeur
+        numérique permettant d'identifier celui-ci.
+
+        Autres détails:
+        * Les énumérations de Rust sont également appelées *unions étiquetés* (tagged-unions en anglais).
+        * La combinaison de types pour en créer un nouveau est ce à quoi quelqu'un fait référence
+        lorsqu'il dit: Rust possède des types algébriques.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20cette%20ligne%20supprime%20les%20warnings%20du%20compilateur%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Les%20donn%C3%A9es%20de%20SeaCreature%20sont%20sur%20la%20pile%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20La%20structure%20String%20est%20%C3%A9galement%20sur%20la%20pile%0A%20%20%20%20%20%20%20%20%2F%2F%20mais%20maintient%20une%20r%C3%A9f%C3%A9rence%20vers%20une%20donn%C3%A9e%20sur%20le%20tas%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22grandes%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22petites%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20est%20un%20crabe%20avec%20%7B%7D%20%7B%7D%20pinces%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20est%20un%20crabe%20avec%20d%27autres%20armes%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20n%27est%20pas%20un%20crabe%22)%2C%0A%20%20%20%20%7D%0A%7D
     de:
       title: Enumerations mit Daten
       content_markdown: |
@@ -2641,6 +2765,13 @@ pages:
         How exciting! We now have a the most basic tools for representing the form of our ideas in code. Hopefully now we 
         can see a glimmer of how Rust's fundamental operations work in harmony and conciseness with its types.  Next up we will talk about 
         a concept that gives our data types even more flexibility of representation: *generics*.
+    fr:
+      title: Chapter 3 - Conclusion
+      content_markdown: |
+        Super! Nous possédons désormais les outils qu'il nous faut pour représenter nos idées avec du code. 
+        Espérons que maintenant nous pouvons voir plus clairement comment les opérations fondamentales de Rust fonctionnent 
+        en harmonie et de manière conçise avec les types. Dans le prochain chapitre, nous parlerons d'un concept qui 
+        donne à nos données encore plus de flexibilité dans leur représentation: la généricité.
     de:
       title: Kapitel 3 - Fazit
       content_markdown: |
@@ -2689,6 +2820,13 @@ pages:
         of nullable values (i.e. variables which might not have a value yet), error handling, 
         collections, and more! In this section we will be learning about the foundational generic types 
         you will likely be using all the time.
+    fr:
+      title: Chapter 4 - Types Génériques
+      content_markdown: |
+        Les types génériques sont incroyablement important avec Rust. Ils sont utilisés pour la représentation
+        de valeurs potentiellement nulles (i.e. variables qui n'a peu-être pas encore de valeurs), gestion d'erreurs, 
+        collections, et plus! Dans cette section, nous allons découvrir les types génériques fondamentaux
+        dont vous ne pourrez plus vous passer.
     ie:
       title: Capitul 4 - Tipes Géneric
       content_markdown: |
@@ -2716,7 +2854,17 @@ pages:
 
         Rust generally can infer the final type by looking at our instantiation, but if it needs help you 
         can always be explicit using the `::<T>` operator, also known by the name `turbofish` (he's a good friend of mine!).
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20by%20using%20generic%20types%20here%2C%20we%20create%20compile-time%20created%20types%0A%20%20%20%20%2F%2F%20making%20our%20code-size%20bigger.%20Turbofish%20let's%20us%20be%20explicit.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20can%20infer%20types%20for%20generics%20too!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20never%20put%20a%20bag%20of%20holding%20in%20a%20bag%20of%20holding%20in%20real%20life%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20by%20using%20generic%20types%20here%2C%20we%20create%20compile-time%20created%20types.%20%0A%20%20%20%20%2F%2F%20Turbofish%20let's%20us%20be%20explicit.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20can%20infer%20types%20for%20generics%20too!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20never%20put%20a%20bag%20of%20holding%20in%20a%20bag%20of%20holding%20in%20real%20life%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
+    fr:
+      title: Qu'est-ce que des Types Génériques?
+      content_markdown: |
+        Les types génériques permettent de définir partiellement une structure ou une énumération, laissant le compilateur
+        créer un version parfaitement définie lors de la compilation du programme.
+
+        Rust peut générallement inférer le type final en observant de quel manière est faite l'instantiation. Si besoin,
+        on peut explicitement utiliser l'opérateur `::<T>` pour spécifier le type,
+        egalement appelé `turbofish` (c'est un bon amis à moi!).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Une%20structure%20partiellement%20d%C3%A9finie%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20en%20utilisant%20les%20types%20g%C3%A9n%C3%A9riques%2C%20nous%20cr%C3%A9ons%20des%20types%20qui%20%0A%20%20%20%20%2F%2F%20seront%20cr%C3%A9%C3%A9s%20lors%20de%20la%20compilation.%0A%20%20%20%20%2F%2F%20L%27op%C3%A9rateur%20turbofish%20de%20pr%C3%A9ciser%20explicitement%20le%20type.%0A%20%20%20%20%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20peut%20toutefois%20inf%C3%A9rer%20le%20type!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20si%20vous%20%C3%AAtes%20un%20joueur%20de%20Donjons%20et%20Dragons%2C%20vous%20devriez%20savoir%0A%20%20%20%20%2F%2F%20que%20mettre%20un%20sac%20de%20ce%20type%20dans%20un%20autre%20du%20m%C3%AAme%20type%20est%20une%0A%20%20%20%20%2F%2F%20op%C3%A9ration%20risqu%C3%A9e.%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
     ie:
       title: Quo es Tipes Géneric?
       content_markdown: |
@@ -2759,6 +2907,20 @@ pages:
         This pattern of providing a `None` alternative representation for one or many alternate values is so 
         common Rust because of its lack of a `null` value. Generic types help solve this challenge.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20represents%20the%20absence%20of%20an%20item%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
+    fr:
+      title: Representation de valeurs nulles
+      content_markdown: |
+        Dans les autres langages, le mot-clé `null` est utilisé pour représenter l'abscence de valeur.
+        Cela créer des difficultés dans les langages de programmation car il est possible que le programme
+        s'arrête lorsque celui-ci essaie d'utiliser une valeur qui n'est pas présente.
+
+        Rust ne possède pas le mot-clé `null`, mais n'ignore pas la nécessité de représenter l'abscence de valeur!
+        Nous pouvons cependant créer une représentation naive en utilisant un outils que nous connaissons déjà.
+
+        Ce pattern fournissant une représentation alternative `None` pour une ou plusieurs valeurs est très souvant utilisé.
+        En effet Rust ne possède pas le mot-clé `null` comme dans les autres langages. Les types génériques peuvent également
+        aider à résoudre ce problème.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20repr%C3%A9sente%20l%27abscence%20d%27%C3%A9l%C3%A9ment%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
     ie:
       title: Representar Nullcos
       content_markdown: |
@@ -2811,6 +2973,21 @@ pages:
 
         This enum is so common, instances of the enum can be created anywhere with the keyword `Some` and `None`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20A%20bag%20for%20i32%2C%20holding%20nothing!%20We%20have%20to%20specify%20the%20type%0A%20%20%20%20%2F%2F%20because%20otherwise%20Rust%20would%20not%20know%20what%20type%20of%20bag%20it%20is.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22found%20%7B%7D%20in%20bag!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22found%20nothing%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+    fr:
+      title: Option
+      content_markdown: |
+        Le langage Rust met à disposition une énumération générique `Option` qui permet de
+        représenter des valeurs pouvant être nulles sans utiliser `null`.
+
+         ```
+        enum Option<T>{
+          Some(T),
+          None
+        }
+        ```
+
+        Ce type d'énumération est tellement commun qu'on peut créer une instance de ce énumération directement avec `Some` et `None`.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Une%20structure%20partiellement%20d%C3%A9finie.%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Le%20param%C3%A8tre%20T%20sera%20d%C3%A9finie%20lors%20de%20l%27instanciation%20de%20la%20structure.%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20La%20structure%20BagOfHolding%20contiendra%20%C3%A9ventuellement%20un%20%C3%A9l%C3%A9ment%0A%20%20%20%20%2F%2F%20de%20type%20i32%2C%20mais%20ne%20contient%20rien%20pour%20le%20moment!%0A%20%20%20%20%2F%2F%20Nous%20devons%20sp%C3%A9cifier%20le%20type%20car%20autrement%20Rust%20ne%20le%20conna%C3%AEtrais%20pas.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20n%27y%20a%20rien%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20y%20a%20quelque%20chose%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20y%20a%20quelque%20chose%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20n%27y%20a%20rien%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Avec%20%27match%27%2C%20nous%20pouvons%20d%C3%A9construire%20notre%20%27Option%27%20%C3%A9l%C3%A9gamment%20et%0A%20%20%20%20%2F%2F%20s%27assurer%20que%20nous%20prenions%20en%20compte%20tous%20les%20cas.%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22il%20y%20%7B%7D%20dans%20le%20sac!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22le%20sac%20est%20vide%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
     ie:
       title: Option
       content_markdown: |
@@ -2873,6 +3050,23 @@ pages:
 
         This enum is so common, instances of the enum can be created anywhere with the keyword `Ok` and `Err`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Result%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Error%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
+    fr:
+      title: Result
+      content_markdown: |
+        Le langage Rust met à disposition une énumération générique `Result` qui permet de renvoyer une valeur qui a la possibilité d'échouer.
+        C'est la façon idiomatique avec laquelle le langage gère les erreurs.
+
+        ```
+        enum Result<T,Q>{
+          Ok(T),
+          Err(Q)
+        }
+        ```
+
+        Note que ce type générique a plusieurs *types paramétrés* séparés par une virgule.
+
+        Cette énumération est très utilisée et on peut créer une instance avec les mots-clés `Ok` et `Err`.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22ce%20n%27est%20pas%20le%20bon%20nombre%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20Avec%20%27match%27%2C%20nous%20pouvons%20d%C3%A9construire%20notre%20%27Result%27%20%C3%A9l%C3%A9gamment%20et%0A%20%20%20%20%2F%2F%20s%27assurer%20que%20nous%20prenions%20en%20compte%20tous%20les%20cas.%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Erreur%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
     ie:
       title: Result
       content_markdown: |
@@ -2933,6 +3127,11 @@ pages:
       content_markdown: |
         `main` has the capability of returning a `Result`!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20returns%20no%20value%2C%20but%20could%20return%20an%20error!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20handle%20this%20error%20gracefully%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20a%20new%20error%20from%20main%20that%20said%20what%20happened!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22something%20went%20wrong%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Notice%20we%20use%20a%20unit%20value%20inside%20a%20Result%20Ok%0A%20%20%20%20%2F%2F%20to%20represent%20everything%20is%20fine%0A%20%20%20%20Ok(())%0A%7D%0A
+    fr:
+      title: Renvoie d'erreurs dans le main
+      content_markdown: |
+        `main` a la capacité de retourner une structure `Result`!
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22ce%20n%27est%20pas%20le%20bon%20nombre%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20main%20ne%20retourne%20pas%20de%20valeur%20mais%20peut%20retourner%20une%20erreur!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20On%20traite%20cette%20erreur%20gracieusement.%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Retourne%20une%20nouvelle%20erreur%20depuis%20%27main%27%20avec%20un%20message%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20d%27explication!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22quelque%20chose%20s%27est%20mal%20pass%C3%A9%20%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dans%20le%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Notes%20qu%27on%20utilise%20une%20valeur%20unitaire%20avec%20%27Ok%27%0A%20%20%20%20%2F%2F%20pour%20siginifier%20que%20tout%20va%20bien.%0A%20%20%20%20Ok(())%0A%7D%0A
     ie:
       title: Un Main Fallibil
       content_markdown: |
@@ -2960,11 +3159,28 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Look%20at%20how%20much%20code%20we%20saved!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+    fr:
+      title: Gestion élégante des erreurs
+      content_markdown: |
+        `Result` est tellement commun que Rust possède l'opérateur `?` qui lui est associé. C'est deux bout de code sont équivalent:
+
+        ```
+        do_something_that_might_fail()?
+        ```
+
+        ```
+        match do_something_that_might_fail() {
+          Ok(v) => v,
+          Err(e) => { return e; },
+        }
+        ```
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22ce%20n%27est%20pas%20le%20bon%20nombre%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Regarde%20comme%20le%20code%20est%20plus%20concis%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
     ie:
       title: Gracil Tractation de Errores
       content_markdown: |
@@ -2977,7 +3193,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
     pt-br:
@@ -2993,7 +3209,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
 
@@ -3011,7 +3227,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => { return e; },
+          Err(e) => e,
         }
         ```
 
@@ -3053,6 +3269,47 @@ pages:
 
         Be a good rustacean and properly use `match` when you can!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concise%20but%20assumptive%20and%20gets%20ugly%20fast%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20will%20panic!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
+
+    fr:
+      title: Gestion peu élégante de Option/Result
+      content_markdown: |
+       Utiliser `Option` et `Result` peut être tédieux lorsqu'on souhaite rapidement écrire du code.
+       `Option` et `Result` ont tout les deux une fonction appelé `unwrap` qui permet d'obtenir une
+       valeur de manière rapide mais peu élégante.
+       `unwrap` va:
+         
+        1. Renvoyer la valeur de notre Option ou Result
+        2. Faire 'paniquer' le code si la valeur de l'énumération est de type None ou Err. Lorsqu'un
+        programme Rust panique, il envoie un message d'erreur et s'arrête.
+
+        Ces deux bout de code sont équivalent
+
+        ```
+        my_option.unwrap()
+        ```
+
+        ```
+        match my_option {
+          Some(v) => v,
+          None => panic!("un message d'erreur généré par Rust!")
+        }
+        ```
+
+        De même:
+
+        ```
+        my_result.unwrap()
+        ```
+
+        ```
+        match my_result {
+          Ok(v) => v,
+          Err(e) => panic!("un message d'erreur généré par Rust!")
+        }
+        ```
+
+        Tu doit être un bon rustacien et utiliser `match` comme il faut et quand tu peux.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22ce%20n%27est%20pas%20le%20bon%20nombre%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Concis%20mais%20suppose%20qu%27une%20valeur%20est%20pr%C3%A9sente%20et%20le%20code%20%0A%20%20%20%20%2F%2F%20peut%20vite%20devenir%20illisible.%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Le%20programme%20affichera%20le%20mesage%20d%27erreur%20et%20s%27arr%C3%AAtera%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
 
     ie:
       title: Desbell Tractation de Errores
@@ -3184,6 +3441,23 @@ pages:
           reallocates its data on the heap to have a new fixed list with large capacity.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20can%20be%20explicit%20with%20type%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20But%20look%20how%20clever%20Rust%20is%20about%20determining%20the%20type%20automatically%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20That's%20a%20beautiful%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
 
+    fr:
+      title: Vecteurs
+      content_markdown: |
+        Les types génériques les plus utiles sont les collections. Un vecteur est une liste de taille variable
+        et est représenté par la structure `Vec`.
+        
+        La macro `vec!` permet facilement de créer un vector au lieu d'avoir à le construire manuellement.
+
+        `Vec` possède la méthode `iter()` qui créer un itérateur à partir d'un vecteur, permettant de parcourir les éléments d'un vecteur dans une boucle `for`.
+
+        Détails de la mémoire:
+        * `Vec` est une structure qui contient une référence vers une liste fixe de ses éléments sur le tas.
+        * Un vecteur est crée avec une capacité par défaut. Lorsque qu'on souhaite ajouter de nouveaux éléments et
+        qu'il n'y a pas la capacité suffisante, Rust réaffecte les données sur le tas de tel sorte à avoir une nouvelle
+        taille fixe et une capacité supérieure.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20On%20peut%20%C3%AAtre%20explicite%20avec%20le%20type.%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20Mais%20regarde%20%C3%A0%20quel%20point%20Rust%20est%20intelligent%20et%20peut%0A%20%20%20%20%2F%2F%20automatiquement%20d%C3%A9terminer%20le%20type.%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20C%27est%20une%20jolie%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
+
     ie:
       title: Vectors
       content_markdown: |
@@ -3237,6 +3511,15 @@ pages:
         know fully how to use everything, right now it's just good to be aware of the major ideas you will
         see again and again in code. Our functions are getting quite lengthy! In our next chapter we will 
         spend talk about an important concept in Rust: data ownership.
+
+    fr:
+      title: Chapter 4 - Conclusion
+      content_markdown: |
+        Dans un seul chapitre, nous avons découvert la puissance des types génériques! Ne t'inquiète pas si tu ne
+        sais pas parfaitement comment utiliser tout ce que nous venons de voir. Pour le moment il suffit de retenir les
+        principales idées, nous n'avons pas finie de les revoir encore et encore. Nos fonctions deviennent assez longues!
+        Dans notre prochain chapitre, nous allons parler d'un concept important dans
+        Rust: la possession des données (ownership).
 
     ie:
       title: Capitul 4 - Conclusion
