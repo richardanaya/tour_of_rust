@@ -3313,7 +3313,7 @@ pages:
         }
         ```
   - en:
-      title: Ugly Option/Error Handling
+      title: Ugly Option/Result Handling
       content_markdown: |
         Working with `Option`/`Result` can be tedious when you are just trying to write some quick code.  Both `Option` and `Result` have a 
         function called `unwrap` that can be useful for getting a value in a quick and dirty manner.  `unwrap` will:
