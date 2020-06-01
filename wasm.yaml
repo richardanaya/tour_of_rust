@@ -344,6 +344,11 @@ pages:
       title: Fine
       content_markdown: |
         To es omnicos por nu. Plu tard va venir nov contenete. Yo espera que tu va juir li viage a sequer!
+    pt-br:
+      title: Fim
+      content_markdown: |
+        Isso é tudo por enquanto. Fique ligado para novos conteúdos. Espero que
+        se divirta nesta jornada!
     es:
       title: Fin
       content_markdown: |
