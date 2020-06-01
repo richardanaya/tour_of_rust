@@ -4144,8 +4144,9 @@ pages:
     en:
       title: Chapter 6 - Text
       content_markdown: |
-        Let's talk about text! Now that we understand a bit how Rust thinks of memory, 
-        we're we are prepared to talk about text in more detail.
+        Now that we understand a bit how Rust thinks of memory, we're we are prepared to talk about text in more detail.
+        Rust cares a great deal about international text and byte level concerns of text you might not be familiar with
+        from other languages. That said, Rust has a great many tools for making it all easy.
   - beta: true
     en:
       title: String Literals
