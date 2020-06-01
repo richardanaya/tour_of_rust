@@ -3559,8 +3559,8 @@ pages:
       title: Capítulo 5 - Propriedade & Empréstimo de Dados
       content_markdown: |
         O Rust possui um paradigma singular para gerenciar a memória em comparação a outras linguagens
-        de programação. Vamos analisar os comportamentos e validações do compilador, um por um, para 
-        os conceitos que não sejam muito pesados. É importante lembrar que, no fim das contas, as regras
+        de programação. Vamos analisar os comportamentos e validações do compilador, um por um, para que
+        os conceitos não sejam muito pesados. É importante lembrar que, no fim das contas, as regras
         que mostramos não existem para dificultar sua vida, mas para ajudá-lo a tornar seu código menos
         propenso a erros!
   - en:
@@ -3604,9 +3604,9 @@ pages:
     pt-br:
       title: Gerenciamento de Recursos Baseado em Escopo
       content_markdown: |
-        O Rust usa o último local de utlização ou o escopo do final da função para desconstruir e desalocar um recurso.
+        O Rust usa o último local de utilização ou o final do escopo da função para desconstruir e desalocar um recurso.
 
-        O termo para esta descontrução e desalocação é chamado **descarte** (ou drop).
+        O termo para esta descontrução e desalocação é chamado **descarte** (ou *drop*).
 
         Detalhes da memória:
         * O Rust não tem garbage collection.
@@ -3631,13 +3631,13 @@ pages:
         * Ressurses de memorie posse cader solmen un vez.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo.bar%20cade%20in%20prim%0A%20%20%20%20%2F%2F%20pos%20quel%20anc%20foo%20cade%0A%7D%0A
     pt-br:
-      title: O Descarte é Heirárquico
+      title: O Descarte é Hierárquico
       content_markdown: |
         Quando uma estrutura é descartada, a estrutura em si é descartada primeiro,
         depois os filhos são descartados individualmente e assim por diante.
 
         Detalhes da Memória:
-        * Ao liberar automaticamente a memória, a Rust ajuda a garantir que haja menos
+        * Ao liberar automaticamente a memória, o Rust ajuda a garantir que haja menos
           vazamentos de memória.
         * Os recursos de memória só podem ser descartados uma vez.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20descartado%20primeiro%0A%20%20%20%20%2F%2F%20e%20s%C3%B3%20ent%C3%A3o%20foo.bar%20%C3%A9%20descartado%0A%7D%0A
@@ -3795,7 +3795,7 @@ pages:
     pt-br:
       title: Passando Dados Emprestados
       content_markdown: |
-        As regras do Rust para referências podem ser melhor resumidas em:
+        As regras do Rust para referências podem ser melhor resumidas assim:
 
         * O Rust permite que haja apenas uma referência mutável **ou** múltiplas
           referências não-mutáveis, **mas não ambas**.
@@ -4200,3 +4200,8 @@ pages:
       title: Fine
       content_markdown: |
         To es omnicos por nu. Plu tard va venir nov contenete. Yo espera que tu va juir li viage a sequer!
+    pt-br:
+      title: Fim
+      content_markdown: |
+        Isso é tudo por enquanto. Fique ligado para novos conteúdos. Espero que
+        se divirta nesta jornada!
