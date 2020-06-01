@@ -2849,9 +2849,9 @@ pages:
     es:
       title: Capítulo 4 - Tipos Genéricos
       content_markdown: |
-       Los tipos genéricos son muy importantes en Rust. Se utilizan en la representación de valores nulos,
-       (es decir, variables que podrían no tener ningún valor todavía) en la gestión de errores, en las colecciones, etc.
-       En este capítulo hablaremos sobre los tipos genéricos fundamentales que probablemente ya estés usando todo el tiempo.
+        Los tipos genéricos son muy importantes en Rust. Se utilizan en la representación de valores nulos,
+        (es decir, variables que podrían no tener ningún valor todavía) en la gestión de errores, en las colecciones, etc.
+        En este capítulo hablaremos sobre los tipos genéricos fundamentales que probablemente ya estés usando todo el tiempo.
   - en:
       title: What Are Generic Types?
       content_markdown: |
@@ -2979,10 +2979,10 @@ pages:
         En otros lenguajes de programación, la palabra reservada `null` se utiliza para representar la ausencia de valor.
         Esto crea ciertas dificultades en dichos lenguajes, ya que aparece la posibilidad de que nuestro programa falle al
         interactuar con una variable o campo.
-        
+
         En Rust no hay `null`, pero eso no quiere decir que ignore la importancia de representar la ausencia de valor.
         Se puede representar usando herramientas que ya conocemos.
-        
+
         Este patrón de proporcionar una alternativa nula `None` para uno o muchos valores alternativos es muy común en
         Rust debido a su falta de un valor `null`. Los tipos genéricos ayudan a resolver este desafío.
   - en:
@@ -4189,7 +4189,7 @@ pages:
       title: Escaping Characters
       content_markdown: |
         It's impossible to visually represent certain characters, **escape codes** allow us to put a symbol in their place.
-        
+
         Rust supports the common escape codes from C-based languages:
         * \n - newline
         * \r - carriage return
@@ -4198,7 +4198,7 @@ pages:
         * \0 - null
         * \' - single-quote
 
-        The complete list exists [here](https://doc.rust-lang.org/reference/tokens.html) 
+        The complete list exists [here](https://doc.rust-lang.org/reference/tokens.html)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
   - beta: true
     en:
