@@ -4004,13 +4004,86 @@ pages:
     en:
       title: Chapter 6 - Text
       content_markdown: |
-        TODO
+        Let's talk about text! Now that we understand a bit how Rust thinks of memory, 
+        we're we are prepared to talk about text in more detail.
   - beta: true
     en:
       title: String Literals
       content_markdown: |
-        hey
+        String literals are always unicode (**utf-8**)
+
+        String literals type are `&'static str`
+
+        * & meaning that its referring to a place in memory, it lacks a `&mut` meaning that the compiler will not allow modification
+        * `'static` meaning the string data will be available till the end of our program ( it never drops )
+        * `str` means that it points to a sequence of bytes that are always valid **utf-8**
+
+        Length can be acquired with `len` function. This is a common convention throughout Rust. Notice that length returns length
+        in bytes, not length of unicode characters.
+
+        Memory details:
+        * likely the LLVM compiler will put your string in the data segment of your program memory
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: What is utf-8
+      content_markdown: |
+        As more languages were used on computers, the world needed to represent more text characters
+        than ASCII allowed (1 byte only allowed 256 characters). 
+
+        **utf-8** was introduced with a variable byte length of 1-4 bytes greatly increasing the range of possible characters.
+
+        An advantage of variable sized characters is text did not have unecessary bytes for very common ASCII ( only requiring 1 byte still in **utf-8**).
+
+        A downside of variable sized characters is that character lookup can no longer be done in quickly 
+        ( **O(1)** constant time ) with a simple `my_text[3]` to get the 4th character.  It's possible that the proceeding characters
+        could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
+
+        Instead we must iterate through a **utf-8** byte sequence to understand where the unicode characters actually begin ( **O(n)** linear time ).
+
+        Ferris: "I'm mostly just happy to have **utf-8** for representing emojis of my underwater friends."
+
+        <span class="emoji">🐠🐙🐟🐬🐋</span>
+  - beta: true
+    en:
+      title: Escaping Characters
+      content_markdown: |
+        It's impossible to visually represent certain characters, **escape codes** allow us to put a symbol in their place.
+        
+        Rust supports the common escape codes from C-based languages:
+        * \n - newline
+        * \r - carriage return
+        * \t - tab
+        * \\ - backslash
+        * \0 - null
+        * \' - single-quote
+
+        The complete list exists [here](https://doc.rust-lang.org/reference/tokens.html) 
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Multi-line String Literals
+      content_markdown: |
+        Rust strings are multiline by default.
+
+        Use a `\` at the end of a line if you don't want a line break.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: Raw String Literals
+      content_markdown: |
+        Raw strings allow us to write a sequence of characters verbatim by starting with `r#"` and ending with `"#`. It lets us insert
+        characters that might otherwise confuse a normal string literals (like double quotes and backslashes).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+  - beta: true
+    en:
+      title: String Literals from Files
+      content_markdown: |
+        If you have some very large text, consider using the macro `include_str!` to include very long string literals in your program:
+
+        ```rust
+        let index_html = include_str!("index.html");
+        ```
   - beta: true
     en:
       title: String Slice
