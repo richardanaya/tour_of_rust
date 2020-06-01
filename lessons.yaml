@@ -2239,7 +2239,7 @@ pages:
         * **stack memory (memória de pilha)** - Para dados declarados como variáveis dentro de uma
           função. O local dessa memória nunca muda durante a duração de uma chamada de função, assim
           os compiladores podem otimizar o código e por isso a pilha de dados é muito rápida de 
-          usar.
+          acessar.
         * **heap memory** - Para dados criados enquanto o aplicativo está em execução. Os dados 
           nessa região podem ser adicionados, movidos, removidos, redimensionados etc. Por causa da 
           sua natureza dinâmica geralmente é considerado mais lenta, mas permite usos de memória muito 
