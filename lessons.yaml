@@ -2144,14 +2144,14 @@ pages:
         Un programme Rust possède 3 régions de mémoire où les données sont stockées:
         * **data memory (le segment de données)** - Pour les données de taille fixe et **statiques** (i.e toujours
           disponible pendant la vie du programme). Par exemple, considère le texte "Hello World!"
-          de ton tout premier programme Rust, les bytes représentant ce texte sont uniquement
-          lu et par conséquant ils sont placés dans cette région. Le compilateur utilise de
+          de ton tout premier programme Rust, les bytes représentant ce texte sont lu à un seul endroit
+          et par conséquant ils sont placés dans cette région. Le compilateur utilise de
           nombreuses optimisations pour ce type de données, elles sont généralement
           considérées très rapide d'utilisation car leur position en mémoire est connue
           et fixe.
         * **stack memory (la pile)** - Pour les données qui sont déclarées comme variables dans une fonction.
           La position de cette mémoire ne change jamais pendant la durée d'appel de cette fonction,
-          par conséquant les compilateurs peuvent optimiser le code pour rendre l'utilisation des données
+          par conséquant les compilateurs peuvent optimiser le code pour rendre l'accès des données
           sur la pile très rapide.
         * **heap memory (le tas)** - Pour les données qui sont créées lorsque l'application est en train de s'exécuter. 
           Les données dans cette région peuvent être ajoutées, déplacées, supprimées, redimenssionnées, etc.
