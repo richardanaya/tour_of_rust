@@ -4174,8 +4174,8 @@ pages:
         An advantage of variable sized characters is text did not have unecessary bytes for very common ASCII ( only requiring 1 byte still in **utf-8**).
 
         A downside of variable sized characters is that character lookup can no longer be done in quickly 
-        ( **O(1)** constant time ) with a simple `my_text[3]` to get the 4th character.  It's possible that the proceeding characters
-        could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
+        ( **O(1)** constant time ) with a simple indexing (e.g. `my_text[3]` to get the 4th character).  It's possible that the 
+        proceeding characters could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
 
         Instead we must iterate through a **utf-8** byte sequence to understand where the unicode characters actually begin ( **O(n)** linear time ).
 
