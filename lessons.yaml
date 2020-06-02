@@ -4280,7 +4280,7 @@ pages:
     en:
       title: Formatting Strings
       content_markdown: |
-        The `format!` macro allows us to create a string by defininging a templated string with placeholders markers for where and how values should be placed.
+        The `format!` macro allows us to create a string by defining a parameterized string with placeholders for where and how values should be placed (e.g. `{}`).
 
         `format!` uses the exact same templating system as `println!`
 
