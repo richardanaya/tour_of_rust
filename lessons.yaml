@@ -4151,7 +4151,7 @@ pages:
     en:
       title: String Literals
       content_markdown: |
-        String literals are always unicode (**utf-8**)
+        String literals are always Unicode
 
         String literals type are `&'static str`
 
@@ -4215,9 +4215,9 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
   - beta: true
     en:
-      title: String Literals from Files
+      title: String Literals From Files
       content_markdown: |
-        If you have some very large text, consider using the macro `include_str!` to include very long string literals in your program:
+        If you have some very large text, consider using the macro `include_str!` to include text from local files in your program:
 
         ```rust
         let index_html = include_str!("index.html");
@@ -4240,22 +4240,22 @@ pages:
     en:
       title: Chars
       content_markdown: |
-        With so much difficulty in working with unicode, Rust offers a way to retrieve a sequence of unicode bytes as a vector of characters of type `char`.
+        With so much difficulty in working with unicode, Rust offers a way to retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
 
         A `char` is always 4 bytes long (allowing for efficient lookup of individual characters).
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
   - beta: true
     en:
       title: String
       content_markdown: |
-        A **String** is a struct that owns a sequence of unicode bytes in heap memory.
+        A **String** is a struct that owns a sequence of utf-8 bytes in heap memory.
 
         Because its memory is on the heap, it can be extended, modified, etc. in ways string literals cannot.
 
         Common methods:
 
-        * `push_str` to add more unicode bytes to the end of a string.
-        * `replace` to replace sequences of unicode bytes with others.
+        * `push_str` to add more utf-8 bytes to the end of a string.
+        * `replace` to replace sequences of utf-8 bytes with others.
         * `to_lowercase`/`to_uppercase` for case changes.
         * `trim` for trimming space
 
