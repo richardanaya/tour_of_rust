@@ -4266,9 +4266,10 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
   - beta: true
     en:
-      title: Passing Around Text
+      title: Text As Function Parameters
       content_markdown: |
-        String literals and strings are most easily passed around as a string slice to functions.
+        String literals and strings are generally passed around as a string slice to functions. This offers a lot of flexibility for
+        most scenarios where you don't actually have to pass ownership.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26'static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
   - beta: true
     en:
