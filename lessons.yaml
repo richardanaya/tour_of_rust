@@ -928,7 +928,12 @@ pages:
     ie:
       title: Arrays
       content_markdown: |
-        Need translation
+        Un *array* (un arangeament o un tabló) es un colection de longore fixat con data-elementes con li sam tip.
+        
+        Li tip de data por un *array* es `[T;N]` ú T es li tip del elementes, e N es li longore fixat quel on save quande on compila.
+        
+        Singul elementes posse esser retrovat con li operator `[x]` ú *x* es un index de *usize* (comensant con 0) del element quel
+        on desira accesser.
     ru:
       title: Arrays
       content_markdown: Need translation
@@ -3916,7 +3921,7 @@ pages:
 
         Memory detail:
         * Rust prevents having two ways to mutate an owned value because it introduces the possibility of a data race.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20would%20fail%20because%0A%20%20%20%20%2F%2F%20foo%20cannot%20be%20moved%20while%20mutably%20borrowed%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20fail%20here%20because%20because%0A%20%20%20%20%2F%2F%20foo%20is%20not%20modifiable%20while%20mutably%20borrowed%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%20because%20its%20no%20longer%20used%20after%20this%20point%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20works%20now%20because%20there%20all%20mutable%20references%20were%20dropped%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20foo's%20ownership%20to%20a%20function%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20would%20fail%20because%0A%20%20%20%20%2F%2F%20foo%20cannot%20be%20moved%20while%20mutably%20borrowed%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20fail%20here%20because%0A%20%20%20%20%2F%2F%20foo%20is%20not%20modifiable%20while%20mutably%20borrowed%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%20because%20its%20no%20longer%20used%20after%20this%20point%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20works%20now%20because%20there%20all%20mutable%20references%20were%20dropped%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20foo%27s%20ownership%20to%20a%20function%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
 
     fr:
       title: S'approprier une ressource mutable avec des références
@@ -4264,9 +4269,9 @@ pages:
     en:
       title: Chapter 6 - Text
       content_markdown: |
-        Now that we understand a bit how Rust thinks of memory, we're we are prepared to talk about text in more detail.
-        Rust cares a great deal about international text and byte level concerns of text you might not be familiar with
-        from other languages. That said, Rust has a great many tools for making it all easy.
+        Now that we understand a bit how Rust thinks of memory, we are prepared to talk about text in more detail.
+        Rust cares a great deal about international text and byte level concerns you might not be familiar with
+        from other languages. That said, Rust has many great tools for managing those concerns.
   - beta: true
     en:
       title: String Literals
@@ -4275,8 +4280,8 @@ pages:
 
         String literals type are `&'static str`
 
-        * & meaning that its referring to a place in memory, it lacks a `&mut` meaning that the compiler will not allow modification
-        * `'static` meaning the string data will be available till the end of our program ( it never drops )
+        * `&` meaning that its referring to a place in memory, and it lacks a `&mut` meaning that the compiler will not allow modification
+        * `'static` meaning the string data will be available till the end of our program (it never drops)
         * `str` means that it points to a sequence of bytes that are always valid **utf-8**
 
         Memory details:
@@ -4291,13 +4296,13 @@ pages:
 
         **utf-8** was introduced with a variable byte length of 1-4 bytes greatly increasing the range of possible characters.
 
-        An advantage of variable sized characters is text did not have unecessary bytes for very common ASCII ( only requiring 1 byte still in **utf-8**).
+        An advantage of variable sized characters is text did not have unnecessary bytes for very common ASCII (only requiring 1 byte still in **utf-8**).
 
         A downside of variable sized characters is that character lookup can no longer be done in quickly 
-        ( **O(1)** constant time ) with a simple `my_text[3]` to get the 4th character.  It's possible that the proceeding characters
-        could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
+        (**O(1)** constant time) with a simple indexing (e.g. `my_text[3]` to get the 4th character). It's possible that the 
+        proceeding characters could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
 
-        Instead we must iterate through a **utf-8** byte sequence to understand where the unicode characters actually begin ( **O(n)** linear time ).
+        Instead we must iterate through a **utf-8** byte sequence to understand where the unicode characters actually begin (**O(n)** linear time).
 
         Ferris: "I'm mostly just happy to have **utf-8** for representing emojis of my underwater friends."
 
@@ -4317,7 +4322,7 @@ pages:
         * `\'` - single-quote
 
         The complete list exists [here](https://doc.rust-lang.org/reference/tokens.html)
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
   - beta: true
     en:
       title: Multi-line String Literals
@@ -4348,7 +4353,7 @@ pages:
       content_markdown: |
         A string slice is a reference to a sequence of bytes in memory that must always be valid utf-8
 
-        A string slice ( a sub-slice ) of a str slice, must also be valid utf-8.
+        A string slice (a sub-slice) of a `str` slice, must also be valid utf-8.
 
         Common methods of `&str`:
         * `len` gets the length of the string literal in bytes (not number of characters).
@@ -4386,10 +4391,11 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
   - beta: true
     en:
-      title: Passing Around Text
+      title: Text As Function Parameters
       content_markdown: |
-        String literals and strings are most easily passed around as a string slice to functions.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26'static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+        String literals and strings are generally passed around as a string slice to functions. This offers a lot of flexibility for
+        most scenarios where you don't actually have to pass ownership.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
   - beta: true
     en:
       title: Building Strings
@@ -4424,9 +4430,7 @@ pages:
         has plenty of functionality to make it easy to manage.  
 
         Up to now, we've mostly looked at Rust from the lens of a procedural paradigm (i.e. just functions and data),
-        it's time we now talk about traits and the capabilties unlocked by Rust's object oriented paradigm.
-
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B0%5D%20as%20u32)%3B%0A%7D%0A
+        it's time we now talk about traits and the capabilties unlocked by Rust's object oriented paradigm. 
   - beta: true
     chapter: 7
     en:
