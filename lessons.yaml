@@ -928,7 +928,12 @@ pages:
     ie:
       title: Arrays
       content_markdown: |
-        Need translation
+        Un *array* (un arangeament o un tabló) es un colection de longore fixat con data-elementes con li sam tip.
+        
+        Li tip de data por un *array* es `[T;N]` ú T es li tip del elementes, e N es li longore fixat quel on save quande on compila.
+        
+        Singul elementes posse esser retrovat con li operator `[x]` ú *x* es un index de *usize* (comensant con 0) del element quel
+        on desira accesser.
     ru:
       title: Arrays
       content_markdown: Need translation
