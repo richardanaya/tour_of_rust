@@ -366,7 +366,7 @@ pages:
       content_markdown: |
         WebAssembly modules can only call functions that have been explicitly imported.
 
-        C uses `extern` functions to list the function signatures of those imported functions.
+        C uses the `extern` keyword to define signatures of the imported functions.
   - en:
       title: Limitations of Functions
       content_markdown: |
