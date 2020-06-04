@@ -368,6 +368,8 @@ pages:
         * f32/f64
 
         So in order to communicate between JavaScript and WebAssembly we will have to get clever with the meaning of numbers!
+
+        Rust is fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
   - beta: true
     en:
       title: Exporting Memory
@@ -406,7 +408,6 @@ pages:
   - beta: true
     en:
       title: UTF-8 Encoding/Decoding
-      code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
         JavaScript provides some utility functions for writing/reading UTF-8 strings to/from
         bytes inside of `ArrayBuffer` objects.
