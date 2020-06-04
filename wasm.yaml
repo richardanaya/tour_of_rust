@@ -349,20 +349,25 @@ pages:
         In this chapter we will explore the strategies used to move data back and forth.
   - beta: true
     en:
-      title: Limitations of Imports
+      title: Importing Functions
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
         WebAssembly modules can only call functions that have been explicitly imported.
-        
-        Parameter and return types of those functions are limited to:
+
+        Rust uses `extern "C" { ... }` to list the function signatures of those imported functions.
+  - beta: true
+    en:
+      title: Limitations of Functions
+      content_markdown: |
+        Parameter and return types of functions are limited to:
 
         * i32/i64
         * f32/f64
 
-        So in order to talk with the outside world we will have to get clever with the meaning of numbers!
+        So in order to communicate between JavaScript and WebAssembly we will have to get clever with the meaning of numbers!
   - beta: true
     en:
-      title: Exporting memory
+      title: Exporting Memory
       content_markdown: |
         WebAssembly programs export their memory as a long array of bytes (up to 4GB!). 
         
