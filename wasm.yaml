@@ -333,12 +333,20 @@ pages:
         Vamos juntar nossos conhecimentos e criar um módulo WebAssembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
 
         `#[no_mangle]` diz ao nosso compilador para manter o nome da nossa função legível para seres humanos.
+
+  - en:
+      title: Chapter 1 Conclusion
+      content_markdown: |
+        I hope it's clear that WebAssembly is not that complex fundamentally! In our next chapter we will 
+        start looking into the details of how JavaScript and WebAssembly can talk about the same data.
   - beta: true
     chapter: 2
     en:
-      title: Chapter 2 - Interacting with Javascript
+      title: Chapter 2 - Sharing Data Structures
       content_markdown: |
-        Interacting with the host environment from WebAssembly is very limited. 
+        JavaScript and your WebAssembly program have very different representations of data.
+        To make matters more complex, interacting with the host environment from WebAssembly is very limited.
+        In this chapter we will explore the strategies used to move data back and forth.
   - beta: true
     en:
       title: Limitations of Imports
@@ -351,27 +359,44 @@ pages:
         * i32/i64
         * f32/f64
 
-        So in order to talk with the outside world we will have to get clever with numbers!
+        So in order to talk with the outside world we will have to get clever with the meaning of numbers!
   - beta: true
     en:
       title: Exporting memory
       content_markdown: |
-        WebAssembly programs export their memory so that the host make use of data
-        structures created by the program's code.
+        WebAssembly programs export their memory as a long array of bytes (up to 4GB!). 
+        
+        The host can interpret from these bytes the data structures created by the program's code.
 
-        Data can also be written directly into a program's memory from the host.
+        Arrays of bytes can also be written directly into a program's memory from the host.
 
         Writing bytes and ready bytes to/from a WebAssembly programs memory is
         the primary means of input and output of non-primitive types.
   - beta: true
     en:
+      title: ArrayBuffer
+      content_markdown: |
+        JavaScript represents a long array of bytes as an `ArrayBuffer`
+
+        You can get a typed view of this buffer that is very efficient to
+        interact with.
+  - beta: true
+    en:
       title: Logging Text
-      code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
         Let's explore a simple example of logging some text from a WebAssembly program.
 
-        We must create some unicode compliant text in our memory, and somehow
-        get the start of that text to the host browser so it can call `console.log`.
+        We must:
+        1. Create some unicode compliant text in our program's memory
+        2. Determine the length of our text's bytes
+        3. Somehow send the starting byte index and length in bytes of that text data to the host browser so it can call `console.log`.
+  - beta: true
+    en:
+      title: UTF-8 Encoding/Decoding
+      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      content_markdown: |
+        JavaScript provides some utility functions for writing/reading UTF-8 strings to/from
+        bytes inside of `ArrayBuffer` objects.
   - beta: true
     en:
       title: Reading Text
@@ -379,8 +404,11 @@ pages:
       content_markdown: |
         Let's explore the opposite idea. Imagine we want to give some text to a WebAssembly program.
 
-        We must allocate some space in our memory for the text we want to take in and then
-        copy bytes into our program's memory at the start of the space we allocated.
+        We must:
+        1. Determine the length in bytes of the text we want to pass in.
+        1. Allocate some space in our memory of that byte length.
+        2. Copy bytes into our program's memory at the start of the space we allocated.
+        3. Let the WebAssembly program know we have put some data in it's memory at a specific index and lenth in bytes.
   - beta: true
     en:
       title: Chapter 2 Conclusion
