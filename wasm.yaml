@@ -356,7 +356,7 @@ pages:
 
         Rust uses `extern "C" { ... }` to list the function signatures of those imported functions.
 
-        Notice that calling an external function is considered `unsafe` in Rust because the compiler
+        Notice that calling an imported function is considered `unsafe` in Rust because the compiler
         can make no gaurantees about what happens within it's implementation.
   - beta: true
     en:
@@ -409,7 +409,7 @@ pages:
     en:
       title: UTF-8 Encoding/Decoding
       content_markdown: |
-        JavaScript provides some utility functions for writing/reading UTF-8 strings to/from
+        JavaScript provides utility functions for writing/reading UTF-8 strings to/from
         bytes inside of `ArrayBuffer` objects.
 
         ```javascript
@@ -439,7 +439,9 @@ pages:
         We must:
         1. Create some utf-8 compliant text in our program's memory
         2. Determine the length of our text's bytes
-        3. Somehow send the starting byte index and length in bytes of that text data to the host browser so it can call `console.log`.
+        3. Somehow send the starting byte start index and length in bytes of that text data to the host browser so it can call `console.log`.
+        
+        Here's an example of what that receiving JavaScript function would look like:
 
         ```javascript
         wasm_log(start,len) {
@@ -448,7 +450,7 @@ pages:
           let buffer = module.instance.exports.memory.buffer;
           let memory = new Uint8Array(buffer);
           let text = utf8dec.decode(memory.subarray(start,start+len));
-          ...
+          console.log(text);
         }
         ```
 
@@ -463,7 +465,9 @@ pages:
         1. Determine the length in bytes of the text we want to pass in.
         1. Allocate some space in our memory of that byte length.
         2. Copy bytes into our program's memory at the start of the space we allocated.
-        3. Let the WebAssembly program know we have put some data in it's memory at a specific index and lenth in bytes.
+        3. Let the WebAssembly program know we have put some data in it's memory at a specific index and lenth in bytes. 
+        
+        Here's an example of what that initialization looks like:
 
         ```javascript
         // Turn "Ferris" into bytes
