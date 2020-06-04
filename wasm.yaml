@@ -354,26 +354,43 @@ pages:
         So in order to talk with the outside world we will have to get clever with numbers!
   - beta: true
     en:
-      title: Exporting Memory
+      title: Exporting memory
+      content_markdown: |
+        WebAssembly programs export their memory so that the host make use of data
+        structures created by the program's code.
+
+        Data can also be written directly into a program's memory from the host.
+
+        Writing bytes and ready bytes to/from a WebAssembly programs memory is
+        the primary means of input and output of non-primitive types.
+  - beta: true
+    en:
+      title: Logging Text
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
-        WebAssembly modules can only call functions that have been explicitly imported.
-        
-        Parameter and return types of those functions are limited to:
+        Let's explore a simple example of logging some text from a WebAssembly program.
 
-        * i32/i64
-        * f32/f64
+        We must create some unicode compliant text in our memory, and somehow
+        get the start of that text to the host browser so it can call `console.log`.
+  - beta: true
+    en:
+      title: Reading Text
+      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      content_markdown: |
+        Let's explore the opposite idea. Imagine we want to give some text to a WebAssembly program.
 
-        So in order to talk with the outside world we will have to get clever with numbers!
+        We must allocate some space in our memory for the text we want to take in and then
+        copy bytes into our program's memory at the start of the space we allocated.
   - beta: true
     en:
       title: Chapter 2 Conclusion
       content_markdown: |
-        Let's put our knowledge all together and make a WebAssembly
-        module with a single **export** function `add` for adding two numbers, and put the
-        results in HTML.
+        Crossing the boundry between host and WebAssembly program is cumbersome. It's important
+        to remind ourselves that WebAssembly is a low level byte code with concerns about memory
+        structures much fine-grained than javascript. Check out your programming languages
+        libraries for tools that help make this an easier task! For Rust, `wasm-bindgen` is a popular option.
 
-        `#[no_mangle]` tells our compiler to keep our function name human readable.
+        In our next chapter we will talk about a technique for dynamically calling javascript!
   - chapter: 3
     en:
       title: The End
