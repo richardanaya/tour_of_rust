@@ -48,3 +48,4 @@ publish:
 	git checkout master
 lint:
 	prettier --write lessons.yaml
+	prettier --write wasm.yaml

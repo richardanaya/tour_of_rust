@@ -141,7 +141,7 @@ pages:
         WebAssembly is often called **WASM**
     en_c:
       clone: en
-      
+
     ie:
       title: Chapter 1 - Quo es WebAssembly?
       content_markdown: |
@@ -315,7 +315,7 @@ pages:
         Let's put our knowledge all together and make a WebAssembly
         module with a single **export** function `add` for adding two numbers, and put the
         results in HTML.
-        
+
         `__attribute__((visibility("default")))` tells our compiler to keep our function name human readable to JavaScript.
     ie:
       title: 1+1
@@ -355,7 +355,7 @@ pages:
         WebAssembly modules can only call functions that have been explicitly imported.
 
         Rust uses `extern "C" { ... }` to list the function signatures of those imported functions.
-  
+
         Notice that calling an external function is considered `unsafe` in Rust because the compiler
         can make no gaurantees about what happens within it's implementation.
   - beta: true
@@ -373,7 +373,7 @@ pages:
       title: Exporting Memory
       content_markdown: |
         WebAssembly programs export their memory as a long array of bytes (up to 4GB!). 
-        
+
         The host can interpret from these bytes the data structures created by the program's code.
 
         Arrays of bytes can also be written directly into a program's memory from the host.
@@ -439,10 +439,22 @@ pages:
         1. Create some utf-8 compliant text in our program's memory
         2. Determine the length of our text's bytes
         3. Somehow send the starting byte index and length in bytes of that text data to the host browser so it can call `console.log`.
+
+        ```javascript
+        wasm_log(start,len) {
+          // extract text from memory location and length
+          const utf8dec = new TextDecoder("utf-8");
+          let buffer = module.instance.exports.memory.buffer;
+          let memory = new Uint8Array(buffer);
+          let text = utf8dec.decode(memory.subarray(start,start+len));
+          ...
+        }
+        ```
+
   - beta: true
     en:
       title: Reading Text
-      code: https://webassembly.studio/?embed&f=1gxcr004p3x
+      code: https://webassembly.studio/?embed&f=ubmxmavgf2
       content_markdown: |
         Let's explore the opposite idea. Imagine we want to give some text to a WebAssembly program.
 
@@ -451,10 +463,29 @@ pages:
         1. Allocate some space in our memory of that byte length.
         2. Copy bytes into our program's memory at the start of the space we allocated.
         3. Let the WebAssembly program know we have put some data in it's memory at a specific index and lenth in bytes.
+
+        ```javascript
+        // Turn "Ferris" into bytes
+        const utf8enc = new TextEncoder("utf-8");
+        let text = "Ferris";
+        let text_bytes = utf8enc.encode(text);
+
+        // Allocate enough space for the text
+        let len = text_bytes.length;
+        let start = module.instance.exports.wasm_malloc(len);
+
+        // Put the text in WebAssembly program's memory
+        let buffer = module.instance.exports.memory.buffer;
+        let memory = new Uint8Array(buffer);
+        memory.set(text_bytes, start);
+
+        // Run the program
+        module.instance.exports.main(start,len);
+        ```
+
   - beta: true
     en:
       title: Discovering Representations
-      code: https://webassembly.studio/?embed&f=jg96xg1ovj
       content_markdown: |
         You might find it annoying to pass around the length along with the start index of text.
 
@@ -464,7 +495,7 @@ pages:
         Don't want to pass around a byte packed data structure? Consider passing around json.
 
         You are in control of your representations in memory and what they mean and if they
-        are appropriate for your use cases! 
+        are appropriate for your use cases!
   - beta: true
     en:
       title: Chapter 2 Conclusion
