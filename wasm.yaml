@@ -339,14 +339,18 @@ pages:
       content_markdown: |
         I hope it's clear that WebAssembly is not that complex fundamentally! In our next chapter we will 
         start looking into the details of how JavaScript and WebAssembly can talk about the same data.
+    en_c:
+      clone: en
   - beta: true
     chapter: 2
     en:
       title: Chapter 2 - Sharing Data Structures
       content_markdown: |
-        JavaScript and your WebAssembly program have very different representations of data.
+        JavaScript and your WebAssembly program have very different representations of data at the memory level.
         To make matters more complex, interacting with the host environment from WebAssembly is very limited.
         In this chapter we will explore the strategies used to move data back and forth.
+    en_c:
+      clone: en
   - beta: true
     en:
       title: Importing Functions
@@ -358,6 +362,13 @@ pages:
 
         Notice that calling an imported function is considered `unsafe` in Rust because the compiler
         can make no gaurantees about what happens within it's implementation.
+    en_c:
+      title: Importing Functions
+      code: https://webassembly.studio/?embed&f=bah3p4wjere
+      content_markdown: |
+        WebAssembly modules can only call functions that have been explicitly imported.
+
+        C uses `extern` functions to list the function signatures of those imported functions.
   - beta: true
     en:
       title: Limitations of Functions
@@ -369,7 +380,9 @@ pages:
 
         So in order to communicate between JavaScript and WebAssembly we will have to get clever with the meaning of numbers!
 
-        Rust is fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
+        Rust and C are fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
+    en_c:
+      clone: en
   - beta: true
     en:
       title: Exporting Memory
@@ -382,6 +395,8 @@ pages:
 
         Writing/reading bytes to/from a WebAssembly programs memory is
         the primary means of input and output of non-primitive types.
+    en_c:
+      clone: en
   - beta: true
     en:
       title: ArrayBuffer
@@ -405,6 +420,8 @@ pages:
         console.log(i32_bytes[0]); 
         ///272 or 00010000000000010000000000000000
         ```
+    en_c:
+      clone: en
   - beta: true
     en:
       title: UTF-8 Encoding/Decoding
@@ -429,6 +446,8 @@ pages:
         console.log(text_bytes) 
         // Uint8Array(3) [72, 105, 33]
         ```
+    en_c:
+      clone: en
   - beta: true
     en:
       title: Logging Text
@@ -453,7 +472,9 @@ pages:
           console.log(text);
         }
         ```
-
+    en_c:
+      clone: en
+      code: https://webassembly.studio/?embed&f=vh15t7nok4p
   - beta: true
     en:
       title: Reading Text
@@ -487,7 +508,9 @@ pages:
         // Run the program
         module.instance.exports.main(start,len);
         ```
-
+    en_c:
+      clone: en
+      code: https://webassembly.studio/?embed&f=0wwbpbvt4kwk
   - beta: true
     en:
       title: Discovering Representations
@@ -501,6 +524,8 @@ pages:
 
         You are in control of your representations in memory and what they mean and if they
         are appropriate for your use cases!
+    en_c:
+      clone: en
   - beta: true
     en:
       title: Chapter 2 Conclusion
@@ -509,6 +534,15 @@ pages:
         It's important to remind ourselves that WebAssembly is a low -level executable byte code with concerns about memory
         structures that are much fine-grained than JavaScript. Check out your programming language's
         library support for tools that help make this an easier task! For Rust, [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) is a popular option.
+
+        In our next chapter we will talk about a technique for dynamically calling JavaScript functions and garbage collection!
+    en_c:
+      title: Chapter 2 Conclusion
+      content_markdown: |
+        Crossing the boundry between host and WebAssembly program is cumbersome, but with it can come great performance. 
+        It's important to remind ourselves that WebAssembly is a low -level executable byte code with concerns about memory
+        structures that are much fine-grained than JavaScript. Check out your programming language's
+        library support for tools that help make this an easier task!
 
         In our next chapter we will talk about a technique for dynamically calling JavaScript functions and garbage collection!
   - chapter: 3

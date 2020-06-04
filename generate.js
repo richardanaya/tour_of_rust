@@ -126,6 +126,12 @@ for(var l in languages){
             }
             lesson_content = content;
             lesson_code = lesson[target_lang].code || lesson["en"].code;
+
+            if(lesson[lang].clone){ 
+                if(lesson[lang].code){
+                    lesson_code = lesson[lang].code;
+                }
+            }
         }
         
         fs.writeFileSync(target_dir+"/"+fileName, template(langLessons, lang,lesson_title,lesson_code,lesson_content,c,i==langLessons.length-1,words,false))
