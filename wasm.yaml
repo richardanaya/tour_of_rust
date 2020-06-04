@@ -341,8 +341,7 @@ pages:
         start looking into the details of how JavaScript and WebAssembly can talk about the same data.
     en_c:
       clone: en
-  - beta: true
-    chapter: 2
+  - chapter: 2
     en:
       title: Chapter 2 - Sharing Data Structures
       content_markdown: |
@@ -351,8 +350,7 @@ pages:
         In this chapter we will explore the strategies used to move data back and forth.
     en_c:
       clone: en
-  - beta: true
-    en:
+  - en:
       title: Importing Functions
       code: https://webassembly.studio/?embed&f=pp20eedhka
       content_markdown: |
@@ -369,8 +367,7 @@ pages:
         WebAssembly modules can only call functions that have been explicitly imported.
 
         C uses `extern` functions to list the function signatures of those imported functions.
-  - beta: true
-    en:
+  - en:
       title: Limitations of Functions
       content_markdown: |
         Parameter and return types of functions are limited to:
@@ -383,8 +380,7 @@ pages:
         Rust and C are fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
     en_c:
       clone: en
-  - beta: true
-    en:
+  - en:
       title: Exporting Memory
       content_markdown: |
         WebAssembly programs export their memory as a long array of bytes (up to 4GB!). 
@@ -397,8 +393,7 @@ pages:
         the primary means of input and output of non-primitive types.
     en_c:
       clone: en
-  - beta: true
-    en:
+  - en:
       title: ArrayBuffer
       content_markdown: |
         JavaScript represents a long array of bytes as an `ArrayBuffer`
@@ -422,8 +417,7 @@ pages:
         ```
     en_c:
       clone: en
-  - beta: true
-    en:
+  - en:
       title: UTF-8 Encoding/Decoding
       content_markdown: |
         JavaScript provides utility functions for writing/reading UTF-8 strings to/from
@@ -448,8 +442,7 @@ pages:
         ```
     en_c:
       clone: en
-  - beta: true
-    en:
+  - en:
       title: Logging Text
       code: https://webassembly.studio/?embed&f=1gxcr004p3x
       content_markdown: |
@@ -459,7 +452,7 @@ pages:
         1. Create some utf-8 compliant text in our program's memory
         2. Determine the length of our text's bytes
         3. Somehow send the starting byte start index and length in bytes of that text data to the host browser so it can call `console.log`.
-        
+
         Here's an example of what that receiving JavaScript function would look like:
 
         ```javascript
@@ -475,8 +468,7 @@ pages:
     en_c:
       clone: en
       code: https://webassembly.studio/?embed&f=vh15t7nok4p
-  - beta: true
-    en:
+  - en:
       title: Reading Text
       code: https://webassembly.studio/?embed&f=ubmxmavgf2
       content_markdown: |
@@ -487,7 +479,7 @@ pages:
         1. Allocate some space in our memory of that byte length.
         2. Copy bytes into our program's memory at the start of the space we allocated.
         3. Let the WebAssembly program know we have put some data in it's memory at a specific index and lenth in bytes. 
-        
+
         Here's an example of what that initialization looks like:
 
         ```javascript
@@ -511,8 +503,7 @@ pages:
     en_c:
       clone: en
       code: https://webassembly.studio/?embed&f=0wwbpbvt4kwk
-  - beta: true
-    en:
+  - en:
       title: Discovering Representations
       content_markdown: |
         You might find it annoying to pass around the length along with the start index of text.
@@ -526,8 +517,7 @@ pages:
         are appropriate for your use cases!
     en_c:
       clone: en
-  - beta: true
-    en:
+  - en:
       title: Chapter 2 Conclusion
       content_markdown: |
         Crossing the boundry between host and WebAssembly program is cumbersome, but with it can come great performance. 
