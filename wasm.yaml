@@ -380,7 +380,7 @@ pages:
 
         Arrays of bytes can also be written directly into a program's memory from the host.
 
-        Writing bytes and ready bytes to/from a WebAssembly programs memory is
+        Writing/reading bytes to/from a WebAssembly programs memory is
         the primary means of input and output of non-primitive types.
   - beta: true
     en:
@@ -418,10 +418,10 @@ pages:
         data[0] = 72;  // H
         data[1] = 105; // i
         data[2] = 33;  // !
-        let str_leng = 3;
+        let str_len = 3;
         const utf8dec = new TextDecoder("utf-8");
         // sub array takes start and end index
-        let text = utf8dec.decode(data.subarray(0,str_leng));
+        let text = utf8dec.decode(data.subarray(0,str_len));
         console.log(text) // Hi!
 
         const utf8enc = new TextEncoder("utf-8");
