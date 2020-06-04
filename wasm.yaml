@@ -350,11 +350,14 @@ pages:
   - beta: true
     en:
       title: Importing Functions
-      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      code: https://webassembly.studio/?embed&f=pp20eedhka
       content_markdown: |
         WebAssembly modules can only call functions that have been explicitly imported.
 
         Rust uses `extern "C" { ... }` to list the function signatures of those imported functions.
+  
+        Notice that calling an external function is considered `unsafe` in Rust because the compiler
+        can make no gaurantees about what happens within it's implementation.
   - beta: true
     en:
       title: Limitations of Functions
@@ -385,6 +388,21 @@ pages:
 
         You can get a typed view of this buffer that is very efficient to
         interact with.
+
+        ```javascript
+        // create an array of 8 bytes
+        let bytes = new ArrayBuffer(8);
+        // view those 8 bytes as 8-bit unsigned integers
+        let u8_bytes = new Uint8Array(bytes);
+        // modify the array buffer
+        u8_bytes[0] = 16; // 00010000
+        u8_bytes[1] = 1;  // 00000001
+        // re-interpret the array buffer's bytes as 
+        // little endian 32-bit signed integers
+        let i32_bytes = new Int32Array(bytes);
+        console.log(i32_bytes[0]); 
+        ///272 or 00010000000000010000000000000000
+        ```
   - beta: true
     en:
       title: Logging Text
@@ -392,7 +410,7 @@ pages:
         Let's explore a simple example of logging some text from a WebAssembly program.
 
         We must:
-        1. Create some unicode compliant text in our program's memory
+        1. Create some utf-8 compliant text in our program's memory
         2. Determine the length of our text's bytes
         3. Somehow send the starting byte index and length in bytes of that text data to the host browser so it can call `console.log`.
   - beta: true
