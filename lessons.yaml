@@ -4264,8 +4264,7 @@ pages:
         * Vendo claramente áreas do código em que o compilador não pode dar garantias
 
         No próximo capítulo aplicaremos um pouco desse conhecimento ao ver como o Rust manipula textos.
-  - beta: true
-    chapter: 6
+  - chapter: 6
     en:
       title: Chapter 6 - Text
       content_markdown: |
@@ -4278,8 +4277,7 @@ pages:
         Nam noi ja comprende un poc pri qualmen Rust concepte memorie, noi es preparat parlar plu detalliatmen pri textu.
         Rust sucia sempre pri textu international e li concernes sur li nivelle de bytes queles fórsan es nov por tis
         qui ha venit de altri lingues. Támen, Rust possede mult utensiles por gerer ti-ci problemas.
-  - beta: true
-    en:
+  - en:
       title: String Literals
       content_markdown: |
         String literals are always Unicode
@@ -4307,8 +4305,7 @@ pages:
         Detallies pri memorie:
         * max probabilmen li compilator LLVM va plazzar tui string in li segment de data del memorie de tui programma
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22salute%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: What is utf-8
       content_markdown: |
         As more languages were used on computers, the world needed to represent more text characters
@@ -4346,8 +4343,7 @@ pages:
         Ferris: "Por mi parte yo es felici posser usar **utf-8** por usar li emojis de mi amics submarin."
 
         <span class="emoji">🐠🐙🐟🐬🐋</span>
-  - beta: true
-    en:
+  - en:
       title: Escaping Characters
       content_markdown: |
         It's challenging to visually represent certain characters, **escape codes** allow us to put a symbol in their place.
@@ -4377,8 +4373,7 @@ pages:
 
         Li liste complet trova se [ci](http://doc.rust-lang.org/reference/tokens.html)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20di%3A%5Ct%5C%22salute%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Multi-line String Literals
       content_markdown: |
         Rust strings are multiline by default.
@@ -4392,8 +4387,7 @@ pages:
 
         On usa un `\` al fine de un linea si on ne vole que li linea mey rupter se.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku_angl%C3%A9s%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22salute%20%5C%0A%20%20%20%20munde%22)%20%2F%2F%20n.b.%20li%20spacie%20avan%20m%20es%20ignorat%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Raw String Literals
       content_markdown: |
         Raw strings allow us to write a sequence of characters verbatim by starting with `r#"` and ending with `"#`. It lets us insert
@@ -4405,8 +4399,7 @@ pages:
         Con raw strings (crud catenes de caracteres) noi posse scrir un sequentie de caracteres quel comensa con `r#"` e fini se con `"#` Talmen
         noi posse inserter caracteres tales quam "" o \ queles normalmen es confusent in normal string literals.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Crud%20catenes%20es%20util%20de%20t%C3%A9mpor%20a%20t%C3%A9mpor.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%20%20%20%20%2F%2F%20Quo%20far%20si%20un%20%23%20trova%20se%20in%20un%20catene%3F%20On%20simplicmen%20adjunte%20un%20%23%20in%20plu%3A%0A%20%20%20%20%2F%2F%20r%23%23%22%20catene%20de%20caracteres%20%22%23%23%0A%20%20%20%20%2F%2F%20Quo%20far%20si%20trova%20se%20du%20%23%23%3F%20On%20adjunte%20un%20%23%20in%20plu!%20On%20posse%20usar%20quantcunc%0A%20%20%20%20%2F%2F%20si%20necessi%3A%20mem%20r%23%23%23%23%23%22catene%20de%20caracteres%22%23%23%23%23%23%20es%20possibil.%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: String Literals From Files
       content_markdown: |
         If you have some very large text, consider using the macro `include_str!` to include text from local files in your program:
@@ -4424,8 +4417,7 @@ pages:
         let index_html = include_str!("index.html");
         ```
 
-  - beta: true
-    en:
+  - en:
       title: String Slice
       content_markdown: |
         A string slice is a reference to a sequence of bytes in memory that must always be valid utf-8
@@ -4453,8 +4445,7 @@ pages:
         * `is_empty` retorna true si li longore es zero
         * `find` retorna un `Option<usize>` del unesim position de alquel textu
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22salute%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20unesim_parol%20%3D%20%26a%5B0..6%5D%3B%0A%20%20%20%20let%20duesim_parol%20%3D%20%26a%5B7..11%5D%3B%0A%20%20%20%20%2F%2F%20let%20demi_crabe%20%3D%20%26a%5B9..11%5D%3B%20FALLIMENT%0A%20%20%20%20%2F%2F%20Rust%20ne%20accepta%20tranches%20de%20caracteres%20unicode%20queles%20es%20%C3%ADnvalid%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20unesim_parol%2C%20duesim_parol)%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Chars
       content_markdown: |
         With so much difficulty in working with unicode, Rust offers a way to retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
@@ -4469,8 +4460,7 @@ pages:
 
         Un `char` possede sempre un grandore de 4 bytes, con quel on posse facilmen trovar caracteres individual.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20colecter%20li%20caracteres%20quam%20un%20vector%20de%20char%0A%20%20%20%20let%20chars%20%3D%20%22salute%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20deve%20esser%204%0A%20%20%20%20%2F%2F%20nam%20chars%20es%204%20bytes%20noi%20posse%20converter%20les%20a%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: String
       content_markdown: |
         A **String** is a struct that owns a sequence of utf-8 bytes in heap memory.
@@ -4508,8 +4498,7 @@ pages:
         `String` have un operator `+` con quel on extende it con un `&str` e retorna se self, ma it ne es tam ergonomic quam on vell esperar.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20salute_munde%20%3D%20String%3A%3Afrom(%22salute%22)%3B%0A%20%20%20%20salute_munde.push_str(%22%20munde%22)%3B%0A%20%20%20%20salute_munde%20%3D%20salute_munde%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20salute_munde)%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Text As Function Parameters
       content_markdown: |
         String literals and strings are generally passed around as a string slice to functions. This offers a lot of flexibility for
@@ -4522,8 +4511,7 @@ pages:
         In general on transfere string literals e strings quam un string slice (tranche de caracteres) a functiones. Con to on have 
         flexibilitá in li pluparte de situationes quande on ne besona transferer proprietá.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20di_it_vocosimen(msg%3A%20%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2C%20msg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20di_it_vocosimen%20posse%20pruntar%20%26%27static%20str%20quam%20un%20%26str%0A%20%20%20%20di_it_vocosimen(%22salute%22)%3B%0A%20%20%20%20%2F%2F%20di_it_vocosimen%20posse%20anc%20pruntar%20String%20quam%20un%20%26str%0A%20%20%20%20di_it_vocosimen(%26String%3A%3Afrom(%22a%20revidentie%22))%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Building Strings
       content_markdown: |
         `concat` and `join` are two simple but powerful ways for building strings.
@@ -4534,8 +4522,7 @@ pages:
       content_markdown: |
         Li simplic ma potent `concat` e `join` possibilisa li creation de catenes.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20salute_munde%20%3D%20%5B%22salute%22%2C%20%22%20%22%2C%20%22munde%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20salute_munde)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20abc)%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Formatting Strings
       content_markdown: |
         The `format!` macro allows us to create a string by defining a parameterized string with placeholders for where and how values should be placed (e.g. `{}`).
@@ -4554,8 +4541,7 @@ pages:
 
         Li capabilitás de ti-ci function es tro grand por nor litt *Tour of Rust*; plu detallies trova se [in li documentation](https://doc.rust-lang.org/std/fmt/)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secrete%20del%20vive%3A%20%7B%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f)%3B%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Converting Strings
       content_markdown: |
         Many types can be converted to a string using `to_string`.
@@ -4574,8 +4560,7 @@ pages:
         ad-in un altri tip. Ti-ci function retorna un `Result` pro li possibilitá
         de falliment.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20std%3A%3Aerror%3A%3AError%3E%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
-  - beta: true
-    en:
+  - en:
       title: Chapter 6 Conclusion
       content_markdown: |
         Now you know the basics of text!  As you have seen, unicode makes working with text a bit tricky, but the standard library 
