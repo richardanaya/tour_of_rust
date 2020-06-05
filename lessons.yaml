@@ -3262,7 +3262,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => e,
+          Err(e) =>  return e,
         }
         ```
     pt-br:
@@ -3278,7 +3278,7 @@ pages:
         ```
         match do_something_that_might_fail() {
           Ok(v) => v,
-          Err(e) => e,
+          Err(e) => return e,
         }
         ```
 
