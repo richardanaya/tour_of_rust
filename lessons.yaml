@@ -1197,7 +1197,7 @@ pages:
         commençé à voir comment le compilateur de Rust fonctionne. Celui-ci prend soin de la taille
         des éléments en mémoires, s'assure si les choses peuvent êtres modifiées ou non, et fait en sorte
         qu'on ne se mélange pas les pinceaux dans les types de variables. Tu peux donc avoir un aperçu de
-        ce qu'on appele la **sécurité** de Rust qui est l'un des aspects le plus mis en avant du language.
+        ce qu'on appelle la **sécurité** de Rust qui est l'un des aspects le plus mis en avant du language.
         Le compilateur fait en sorte que le résultat du programme exécuté est celui espéré.
         Par la suite, nous allons voir de vieux amis : les structures de contrôles `if`
         et les boucles `for`.
@@ -2497,7 +2497,7 @@ pages:
       content_markdown: |
         Il n'est pas nécessaire que les structures possèdent des champs.
 
-        Comme mentionné au Chapitre 1, une *unité* est une autre appelation pour un n-uplet vide `()`. 
+        Comme mentionné au Chapitre 1, une *unité* est une autre appellation pour un n-uplet vide `()`. 
         C'est pourquoi ce type de structure est dit *de type unitaire* (unit-like en anglais).
 
         Ce type de structure est rarement utilisé.
