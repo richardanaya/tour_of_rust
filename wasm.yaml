@@ -396,9 +396,19 @@ pages:
 
         So in order to communicate between JavaScript and WebAssembly we will have to get clever with the meaning of numbers!
 
-        Rust and C are fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
+        Rust is fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
     en_c:
-      clone: en
+      title: Limitations of Functions
+      content_markdown: |
+        Parameter and return types of functions are limited to:
+
+        * int/long
+        * float/double
+
+        So in order to communicate between JavaScript and WebAssembly we will have to get clever with the meaning of numbers!
+
+        C is fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
+
     pt-br:
       title: Limitações das Funções
       content_markdown: |
