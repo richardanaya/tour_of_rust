@@ -1190,6 +1190,10 @@ pages:
         it cares a lot about the size  of values in memory, whether things can be modified or not, 
         and making sure your math is what you want it to be. Next up we'll be looking at some old friends 
         `if` and `for` loops.
+
+        More Resources:
+        [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
+        [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
     fr:
       title: Chapitre 1 - Conclusion
       content_markdown: |
