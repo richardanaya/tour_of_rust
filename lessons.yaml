@@ -1194,6 +1194,7 @@ pages:
         More Resources:
         [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
         [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+        [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
     fr:
       title: Chapitre 1 - Conclusion
       content_markdown: |
