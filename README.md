@@ -65,6 +65,10 @@ Lastly, there is a section for common words you should fill out your localized t
 
 # Releases
 
+## Release 5 - May 30, 2020
+* Chapter 6 released on text in English, Occidental
+* Chapter 5 released in French and Brazillian Portuguese
+
 ## Release 4 - May 30, 2020
 * Chapter 5 released on ownership and sharing
 * Chinese transalations chapter 1-3
