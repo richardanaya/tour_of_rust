@@ -68,6 +68,10 @@ Lastly, there is a section for common words you should fill out your localized t
 ## Release 5 - May 30, 2020
 * Chapter 6 released on text in English, Occidental
 * Chapter 5 released in French and Brazillian Portuguese
+* Chapter 4 released in Chinese and Spanish
+* Chapter 3 released in French
+* Minor fixes
+* Chapter 2 of Tour of Web Assemblhy released
 
 ## Release 4 - May 30, 2020
 * Chapter 5 released on ownership and sharing
