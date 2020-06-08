@@ -4588,6 +4588,66 @@ pages:
       content_markdown: |
         TODO
   - beta: true
+    en:
+      title: What is OOP?
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Rust is not OOP
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Methods
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Traits
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Trait Inheritence
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Implemented Methods On Traits
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Trait Objects
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Dynamic vs Static Dispatch
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Unsized Data
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Generics & Traits
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Box
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Chapter 7 - Conclusion
+      content_markdown: |
+        TODO
+  - beta: true
     chapter: 7
     en:
       title: Chapter 8 - Smart Pointers
