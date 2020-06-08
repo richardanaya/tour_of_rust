@@ -4651,22 +4651,27 @@ pages:
         TODO
   - beta: true
     en:
-      title: What is OOP?
+      title: What Is OOP?
       content_markdown: |
         TODO
   - beta: true
     en:
-      title: Rust is not OOP
+      title: Rust Is Not OOP
       content_markdown: |
         TODO
   - beta: true
     en:
-      title: Methods
+      title: Object Methods
       content_markdown: |
         TODO
   - beta: true
     en:
-      title: Traits
+      title: Polymorphism With Traits
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Encapsulation In Traits
       content_markdown: |
         TODO
   - beta: true
@@ -4691,17 +4696,27 @@ pages:
         TODO
   - beta: true
     en:
-      title: Unsized Data
+      title: Handling Unsized Data
       content_markdown: |
         TODO
   - beta: true
     en:
-      title: Generics & Traits
+      title: Generic Functions
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Generic Function Shorthand
       content_markdown: |
         TODO
   - beta: true
     en:
       title: Box
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Traits for Generic Structs
       content_markdown: |
         TODO
   - beta: true
