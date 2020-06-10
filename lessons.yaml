@@ -4293,18 +4293,18 @@ pages:
     fr:
       title: Chapitre 5 - Conclusion
       content_markdown: |
-         Ouf, félicitations pour être arrivé jusque là! Je sais que c'est beaucoup à apprendre mais tu es en bonne
-         voie pour devenir un Rustacean. J'espère que tu arrive à voir comment Rust en tant que langage vise à
-         résoudre bon nombre des défis communs à la programmation système:
+        Ouf, félicitations pour être arrivé jusque là! Je sais que c'est beaucoup à apprendre mais tu es en bonne
+        voie pour devenir un Rustacean. J'espère que tu arrive à voir comment Rust en tant que langage vise à
+        résoudre bon nombre des défis communs à la programmation système:
 
-         * Modification involontaire de ressources.
-         * Oubli de déconstruire les ressources.
-         * Ressources accidentellement déconstruites deux fois.
-         * Utilisation des ressources après leur déconstruction.
-         * Accès concurrentiels causés par l'écriture d'une ressource tandis que quelqu'un est en train de la lire.
-         * Voir clairement les zones du code dont le compilateur ne garantit pas les effets.
+        * Modification involontaire de ressources.
+        * Oubli de déconstruire les ressources.
+        * Ressources accidentellement déconstruites deux fois.
+        * Utilisation des ressources après leur déconstruction.
+        * Accès concurrentiels causés par l'écriture d'une ressource tandis que quelqu'un est en train de la lire.
+        * Voir clairement les zones du code dont le compilateur ne garantit pas les effets.
 
-         Dans le chapitre suivant, nous appliquerons une partie de nos connaissances en examinant comment Rust gère le texte.
+        Dans le chapitre suivant, nous appliquerons une partie de nos connaissances en examinant comment Rust gère le texte.
     ie:
       title: Conclusion de Capitul 5
       content_markdown: |
@@ -4648,7 +4648,10 @@ pages:
     en:
       title: Chapter 7 - Object Oriented Programming
       content_markdown: |
-        TODO
+        Working with functions is a powerful tool. Conceptually there can be benefits
+        to aggrogations and abstractions. Many of you may be familiar with OOP as one
+        such way to view your data and behavior in an elegant manner. In this chapter
+        we'll explore how Rust can help us write our ideas more expressive.
   - beta: true
     en:
       title: What Is OOP?
@@ -4723,9 +4726,14 @@ pages:
     en:
       title: Chapter 7 - Conclusion
       content_markdown: |
-        TODO
+        We now have a collection of tools to help us represent our ideas more clearly! 
+        Rust abstractions might be simple but they are powerful enough to make
+        working with code a joy. In this chapter, we caught a preview with `Box` of how
+        smart pointers can help us work with memory outide of the stack, in
+        the next chapter we'll learn about how smart pointers can help us without
+        even more specialized memory situations.
   - beta: true
-    chapter: 7
+    chapter: 8
     en:
       title: Chapter 8 - Smart Pointers
       content_markdown: |
