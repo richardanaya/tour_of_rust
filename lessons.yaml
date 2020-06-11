@@ -4805,67 +4805,150 @@ pages:
     en:
       title: Rust Is Not OOP
       content_markdown: |
-        TODO
+        Rust lacks inheritence of data and behavior in any meaningful way.
+        * structs cannot inherit properties from a parent struct
+        * methods cannot be inherited
+        That said, Rust has many powerful paradigms that you might not mind.
   - beta: true
     en:
       title: Object Methods
       content_markdown: |
-        TODO
+        Rust supports the concept of an object that is a struct associated with functions for that struct (also know as methods). Wenn
+
+        The first parameter of any method must be a reference to the object instance associated with it. Rust uses:
+        * `&self` - to immutably reference the instance
+        * `&mut self` - to mutably reference an instance
+
+        Methods belong within `impl MyStruct { ... }`
+  - beta: true
+    en:
+      title: Encapsulation In Objects
+      content_markdown: |
+        Rust can help us hide the inner workers of our objects.
+
+        We have the capability of exposing fields of a struct to be public with `pub` keyword.
+
+        Similarly struct methods can also be made publice with `pub`.
   - beta: true
     en:
       title: Polymorphism With Traits
       content_markdown: |
-        TODO
-  - beta: true
-    en:
-      title: Encapsulation In Traits
-      content_markdown: |
-        TODO
-  - beta: true
-    en:
-      title: Trait Inheritence
-      content_markdown: |
-        TODO
+        Rust supports polymorphism with traits. Traits allow us to associate a set of methods with a struct type. 
+
+        When a struct implements a trait, it establishes a contract that allows us to indirectly interact with the struct 
+        without knowing the real type.
+
+        Traits are implemented by implementing a struct's trait methods within  `impl MyTrait for MyStruct { ... }`
   - beta: true
     en:
       title: Implemented Methods On Traits
       content_markdown: |
-        TODO
+        Traits can have implemented methods.
+
+        The functions have no direct access to the inner fields of a struct, but it can 
+        be useful for sharing behavior between many trait implementors.
   - beta: true
     en:
-      title: Trait Objects
+      title: Trait Inheritence
       content_markdown: |
-        TODO
+        Traits can inhert from other traits.
   - beta: true
     en:
       title: Dynamic vs Static Dispatch
       content_markdown: |
-        TODO
+        In Rust  methods on objects are executed in two ways:
+        * static dispatch - when the object type is known, we have directly knowledge of what function to call
+        * dynamic dispatch - when an object type is not known, we must find out some way of calling the correct function
+        
+        Traits are what give use the ability to work with instances of objects indirectly using dynamic dispatch.
+  - beta: true
+    en:
+      title: Trait Objects
+      content_markdown: |
+        When was pass an instance of an object to a paramter of type `&MyTrait` we pass what is called *trait object*. 
+        
+        A trait object is what allows us to indirectly call the correct methods of an instance. A trait object is a struct that holds the pointer of 
+        our instance with  a list of function pointers to our instance's methods.
+
+        Memore detail:
+        * this list of functions is known in C++ as a *vtable*
   - beta: true
     en:
       title: Handling Unsized Data
       content_markdown: |
-        TODO
+        Traits introduce an interesting challenge when we want to store them within another struct. Traits obsfucate the original
+        struct thus it also obsfucates the original size. Unsized values being stored in structs are handled in two ways in Rust:
+
+        * `generics` - which effectively create functions with known types and sizes
+        * `smart pointers` - which give us a level of interactio that allow us to not have to care about the size
   - beta: true
     en:
       title: Generic Functions
       content_markdown: |
-        TODO
+        Generics in Rust work hand in hand with traits. When we describe a parameterized type `T` we can constraint what types 
+        can be used as an argument by listing what required traits the argument must have.
+
+        ```rust
+        fn myFunction<T>(foo:T) where T:Foo {
+          ...
+        }
+        ```
+
+        By using generics we we create static typed functions at compiletime that will have known types and sizes, allowing us to
+        perform static dispatch and store as as sized value.
   - beta: true
     en:
       title: Generic Function Shorthand
       content_markdown: |
-        TODO
+        Rust has a shorthand for expressing generics constrained by a trait:
+        The simplest way us with a parameter expression `impl MyTrait`:
+
+        ```rust
+        fn my_function(foo: impl Foo){
+          ...
+        }
+        ```
+
+        This is equivalist to writing:
+
+        ```rust
+        fn myFunction<T>(foo:T) where T:Foo {
+          ...
+        }
+        ```
   - beta: true
     en:
       title: Box
       content_markdown: |
-        TODO
+        `Box` is a data structure that allows us to move our data from the stack to the heap.
+
+        `Box` is struct known a *smart pointer* that holds the pointer to our data on the heap.
+
+        Because `Box` is struct with a known size ( because it just holds a pointer ), it is 
+        often used as a way store a reference to something in a struct that must must know the size 
+        of it's fields.
+
+        `Box` is so common it can be used from anywhere.
   - beta: true
     en:
       title: Traits for Generic Structs
       content_markdown: |
-        TODO
+        In addition to generic functions, Rust supports generic structs that 
+        can also contain types constrained by traits. Just as functions, the type
+        must be specified.
+
+        ```rust
+        struct MyStruct<T> where T:MYTrait {
+          foo:T
+        }
+
+        impl<T> MyStruct<T>{
+          ...
+        }
+        ```
+
+        This allows struct types to be created at compile time according to our usage. Because the types
+        are created at compile time, the generic struct will have known and sized types of it's members.
   - beta: true
     en:
       title: Chapter 7 - Conclusion
