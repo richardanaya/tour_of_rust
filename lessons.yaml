@@ -4898,23 +4898,28 @@ pages:
     en:
       title: Chapter 7 - Object Oriented Programming
       content_markdown: |
-        Working with functions is a powerful tool. Conceptually there can be benefits
-        to aggrogations and abstractions. Many of you may be familiar with OOP as one
-        such way to view your data and behavior in an elegant manner. In this chapter
-        we'll explore how Rust can help us write our ideas more expressive.
+        Representing our ideas with functions is a proven way of representing behavior and data (C 
+        has been doing it for decades!). Historically, computer science has found other
+        useful aggregations and abstractions for data. You may be familiar with object oriented programming (OOP) as one
+        such way to view your data and behavior in a more expressive manner. In this chapter
+        we'll explore Rust programming language beyond functions.
   - beta: true
     en:
       title: What Is OOP?
       content_markdown: |
-        TODO
+        Object oriented programmingly roughly refers to programming languages that have a number of iconic features:
+        * Objects - Associating data and methods into the conceptual unit of a single type called an object.
+        * Encapsulation - Hiding data and function members to obsfucate implementation details of an object.
+        * Polymorphism - The ability to interacting with an object from different functional perspectives.
+        * Inheritence - The ability to inherit data and behavior from other objects.
   - beta: true
     en:
       title: Rust Is Not OOP
       content_markdown: |
         Rust lacks inheritence of data and behavior in any meaningful way.
         * structs cannot inherit properties from a parent struct
-        * methods cannot be inherited
-        That said, Rust has many powerful paradigms that you might not mind.
+        * methods cannot be inherited from a parent struct
+        That said, Rust implement many programming language paradigms that you might not mind this.
   - beta: true
     en:
       title: Object Methods
