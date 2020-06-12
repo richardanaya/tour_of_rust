@@ -4631,16 +4631,16 @@ pages:
   - en:
       title: String Slice
       content_markdown: |
-        A string slice is a reference to a sequence of bytes in memory that must always be valid utf-8
+        A string slice is a reference to a sequence of bytes in memory that must always be valid utf-8.
 
         A string slice (a sub-slice) of a `str` slice, must also be valid utf-8.
 
         Common methods of `&str`:
         * `len` gets the length of the string literal in bytes (not number of characters).
-        *  `starts_with`/`ends_with` for basic testing
-        * `is_empty` returns true if zero length
-        * `find` returns an `Option<usize>` of the first position of some text
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slaices%20of%20invalid%20unicode%20haracters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+        *  `starts_with`/`ends_with` for basic testing.
+        * `is_empty` returns true if zero length.
+        * `find` returns an `Option<usize>` of the first position of some text.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
 
     ie:
       title: String Slice
