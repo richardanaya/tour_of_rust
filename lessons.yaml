@@ -4898,7 +4898,7 @@ pages:
     en:
       title: Chapter 7 - Object Oriented Programming
       content_markdown: |
-        Expressing our ideas with functions is a proven way of representing behavior and data (C 
+        Expressing ideas with functions is a proven way of representing behavior and data (C 
         has been doing it for decades!). Historically, computer science has found other
         useful expressive aggregations and abstractions for data. You may be familiar with object oriented programming (OOP) as one
         such way. In this chapter we'll explore the Rust programming language beyond functions.
@@ -4907,7 +4907,7 @@ pages:
       title: What Is OOP?
       content_markdown: |
         Object oriented programming roughly refers to programming languages that have a number of iconic features:
-        * Objects - Associating data and methods into the conceptual unit of a single type called an *object*.
+        * Objects - Associating data and functions into the conceptual unit of a single type called an *object*.
         * Encapsulation - Hiding data and function members to obsfucate implementation details of an object.
         * Polymorphism - The ability to interacting with an object from different functional perspectives.
         * Inheritence - The ability to inherit data and behavior from other objects.
@@ -4918,16 +4918,16 @@ pages:
         Rust lacks inheritence of data and behavior in any meaningful way.
         
         * Structs cannot inherit fields from a parent struct.
-        * Methods cannot be inherited from a parent struct.
+        * Structs cannot inherit functions from a parent struct.
 
         That said, Rust implements many programming language features that you might not mind this lacking.
   - beta: true
     en:
       title: Object Methods
       content_markdown: |
-        Rust supports the concept of an object that is a struct associated with some functions (also know as methods).
+        Rust supports the concept of an *object* that is a struct associated with some functions (also known as *methods*).
 
-        The first parameter of any method must be a reference to the instance associated with the call. Rust uses:
+        The first parameter of any method must be a reference to the instance associated with the method call (e.g. `instanceOfObj.foo()`). Rust uses:
         * `&self` - Immutable reference to the instance.
         * `&mut self` - Mutable reference to the instance.
 
@@ -4935,6 +4935,9 @@ pages:
         ```rust
         impl MyStruct { 
           ... 
+          fn foo(&self){
+            ...
+          }
         }
         ```
   - beta: true
@@ -4952,10 +4955,28 @@ pages:
       content_markdown: |
         Rust supports polymorphism with traits. Traits allow us to associate a set of methods with a struct type. 
 
-        When a struct implements a trait, it establishes a contract that allows us to indirectly interact with the struct 
-        without knowing the real type.
+        We first define the signatures of methods of a trait within:
 
-        Traits are implemented by implementing a struct's trait methods within  `impl MyTrait for MyStruct { ... }`
+        ```
+        trait MyTrait {
+          fn foo(&self);
+          ...
+        }
+        ```
+
+        When a struct implements a trait, it establishes a contract that allows us to indirectly interact with the struct 
+        through the trait type (e.g. `&MyTrait`) without having to know the real type.
+
+        A structs implemented traits methods are defined within:
+
+        ```rust
+        impl MyTrait for MyStruct { 
+          fn foo(&self){
+            ...
+          }
+          ... 
+        }
+        ```
   - beta: true
     en:
       title: Implemented Methods On Traits
@@ -4968,13 +4989,13 @@ pages:
     en:
       title: Trait Inheritence
       content_markdown: |
-        Traits can inhert from other traits.
+        Traits can inherit methods from other traits.
   - beta: true
     en:
       title: Dynamic vs Static Dispatch
       content_markdown: |
         In Rust  methods on objects are executed in two ways:
-        * static dispatch - when the object type is known, we have directly knowledge of what function to call
+        * static dispatch - when the object type is known, we have direct knowledge of what function to call
         * dynamic dispatch - when an object type is not known, we must find out some way of calling the correct function
         
         Traits are what give use the ability to work with instances of objects indirectly using dynamic dispatch.
