@@ -5026,7 +5026,7 @@ pages:
         When a struct implements a trait, it establishes a contract that allows us to indirectly interact with the struct 
         through the trait type (e.g. `&MyTrait`) without having to know the real type.
 
-        A structs implemented traits methods are defined within:
+        A struct's implemented traits methods are defined within:
 
         ```rust
         impl MyTrait for MyStruct { 
@@ -5115,7 +5115,7 @@ pages:
     en:
       title: Trait Objects
       content_markdown: |
-        When was pass an instance of an object to a parameter of type `&MyTrait` we pass what is called *trait object*. 
+        When we pass an instance of an object to a parameter of type `&MyTrait` we pass what is called *trait object*. 
         
         A trait object is what allows us to indirectly call the correct methods of an instance. A trait object is a struct that holds the pointer of 
         our instance with a list of function pointers to our instance's methods.
