@@ -4898,11 +4898,10 @@ pages:
     en:
       title: Chapter 7 - Object Oriented Programming
       content_markdown: |
-        Representing our ideas with functions is a proven way of representing behavior and data (C 
+        Expressing our ideas with functions is a proven way of representing behavior and data (C 
         has been doing it for decades!). Historically, computer science has found other
-        useful aggregations and abstractions for data. You may be familiar with object oriented programming (OOP) as one
-        such way to view your data and behavior in a more expressive manner. In this chapter
-        we'll explore the Rust programming language beyond functions.
+        useful expressive aggregations and abstractions for data. You may be familiar with object oriented programming (OOP) as one
+        such way. In this chapter we'll explore the Rust programming language beyond functions.
   - beta: true
     en:
       title: What Is OOP?
@@ -4917,29 +4916,36 @@ pages:
       title: Rust Is Not OOP
       content_markdown: |
         Rust lacks inheritence of data and behavior in any meaningful way.
-        * structs cannot inherit fields from a parent struct
-        * methods cannot be inherited from a parent struct
-        That said, Rust implement many programming language features that you might not mind this.
+        
+        * Structs cannot inherit fields from a parent struct.
+        * Methods cannot be inherited from a parent struct.
+
+        That said, Rust implements many programming language features that you might not mind this lacking.
   - beta: true
     en:
       title: Object Methods
       content_markdown: |
-        Rust supports the concept of an object that is a struct associated with functions for that struct (also know as methods). Wenn
+        Rust supports the concept of an object that is a struct associated with some functions (also know as methods).
 
-        The first parameter of any method must be a reference to the object instance associated with it. Rust uses:
-        * `&self` - to immutably reference the instance
-        * `&mut self` - to mutably reference an instance
+        The first parameter of any method must be a reference to the instance associated with the call. Rust uses:
+        * `&self` - Immutable reference to the instance.
+        * `&mut self` - Mutable reference to the instance.
 
-        Methods belong within `impl MyStruct { ... }`
+        Methods are defined within:
+        ```rust
+        impl MyStruct { 
+          ... 
+        }
+        ```
   - beta: true
     en:
       title: Encapsulation In Objects
       content_markdown: |
-        Rust can help us hide the inner workers of our objects.
+        Rust can hide the inner workings of objects.
 
-        We have the capability of exposing fields of a struct to be public with `pub` keyword.
+        By default fields and methods are accessible only to the module they belong to.
 
-        Similarly struct methods can also be made publice with `pub`.
+        The `pub` keyword exposes struct fields and methods outside of the module.
   - beta: true
     en:
       title: Polymorphism With Traits
