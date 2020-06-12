@@ -5003,7 +5003,7 @@ pages:
     en:
       title: Trait Objects
       content_markdown: |
-        When was pass an instance of an object to a paramter of type `&MyTrait` we pass what is called *trait object*. 
+        When was pass an instance of an object to a parameter of type `&MyTrait` we pass what is called *trait object*. 
         
         A trait object is what allows us to indirectly call the correct methods of an instance. A trait object is a struct that holds the pointer of 
         our instance with  a list of function pointers to our instance's methods.
@@ -5017,22 +5017,23 @@ pages:
         Traits introduce an interesting challenge when we want to store them within another struct. Traits obsfucate the original
         struct thus it also obsfucates the original size. Unsized values being stored in structs are handled in two ways in Rust:
 
-        * `generics` - which effectively create functions with known types and sizes
-        * `smart pointers` - which give us a level of interactio that allow us to not have to care about the size
+        * `generics` - which effectively create struct/functions with known types and thus known sizes.
+        * `smart pointers` - which give us a level of indirection that allow us to not have to worry about the size of the actual type.
   - beta: true
     en:
       title: Generic Functions
       content_markdown: |
-        Generics in Rust work hand in hand with traits. When we describe a parameterized type `T` we can constraint what types 
-        can be used as an argument by listing what required traits the argument must have.
+        Generics in Rust work hand in hand with traits. When we describe a parameterized type `T` we can constrain what types 
+        can be used as an argument by listing what required traits the argument must implement.
 
+        In this example type `T` must implement trait `Foo`:
         ```rust
         fn myFunction<T>(foo:T) where T:Foo {
           ...
         }
         ```
 
-        By using generics we we create static typed functions at compiletime that will have known types and sizes, allowing us to
+        By using generics we we create static typed functions at compile time that will have known types and sizes, allowing us to
         perform static dispatch and store as as sized value.
   - beta: true
     en:
@@ -5093,7 +5094,7 @@ pages:
       content_markdown: |
         We now have more language features at hand to represent our ideas clearly! 
         Rust abstractions might be simple but they are powerful enough to make
-        working with code a joy. In this chapter, we caught a preview of smart pointers
+        working with code a joy. In this chapter, we caught a glimpse at smart pointers
         with `Box`. In the next chapter we'll learn about how smart pointers can help us with other
         specialized memory situations.
   - beta: true
