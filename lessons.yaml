@@ -5091,12 +5091,11 @@ pages:
     en:
       title: Chapter 7 - Conclusion
       content_markdown: |
-        We now have a collection of tools to help us represent our ideas more clearly! 
+        We now have more language features at hand to represent our ideas clearly! 
         Rust abstractions might be simple but they are powerful enough to make
-        working with code a joy. In this chapter, we caught a preview with `Box` of how
-        smart pointers can help us work with memory outide of the stack, in
-        the next chapter we'll learn about how smart pointers can help us without
-        even more specialized memory situations.
+        working with code a joy. In this chapter, we caught a preview of smart pointers
+        with `Box`. In the next chapter we'll learn about how smart pointers can help us with other
+        specialized memory situations.
   - beta: true
     chapter: 8
     en:
