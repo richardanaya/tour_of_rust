@@ -4770,6 +4770,17 @@ pages:
         A `char` is always 4 bytes long (allowing for efficient lookup of individual characters).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
 
+    fr:
+      title: Chars
+      content_markdown: |
+        Du fait de la difficulté de travailler avec des caractères unicodes,
+        Rust offre un moyen de récupérer une séquence d'octets utf-8 sous forme
+        de vecteur de caractères de type `char`.
+
+        Un `char` possède toujours une taille de 4 bytes (rendant la recherche
+        d'un caractère particulier d'une chaîne de caractères plus rapide).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Collecte%20les%20caract%C3%A8res%20sous%20forme%20de%20vector%20de%20%27char%27.%0A%20%20%20%20let%20chars%20%3D%20%22salut%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20Devrait%20afficher%207.%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Etant%20donn%C3%A9%20que%20un%20%27char%27%20est%20stock%C3%A9%20sur%204%20bytes%2C%20%0A%20%20%20%20%2F%2F%20celui-ci%20peut%20donc%20%C3%AAtre%20convertir%20en%20u32.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+
     ie:
       title: Chars
       content_markdown: |
@@ -4794,6 +4805,29 @@ pages:
         When a String is dropped, it's heap memory is also dropped.
 
         `String` has a `+` operator that extends the string with a `&str` and returns itself, but it might not be as ergonomic as you hope for.
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+    fr:
+      title: String
+      content_markdown: |
+        Une structure **String** possède une séquence de bytes utf-8 située sur le tas (en anglais heap).
+
+        Du fait que la donnée se trouve sur le tas, celle-ci peut être étendu, modifié, etc., contrairement
+        aux chaînes de caractères (en anglais string literals).
+
+        Méthodes utiles:
+
+        * `push_str` pour ajouter d'autres bytes utf-8 à la fin.
+        * `replace` pour remplacer la séquence de bytes utf-8 par une autre.
+        * `to_lowercase`/`to_uppercase` pour tout mettre en minuscule ou en majuscule.
+        * `trim` pour supprimer les espaces.
+
+        Lorsqu'une structure String est désallouée, ses données
+        se trouvant sur la pile le sont également.
+
+        Une structure `String` possède l'opérateur `+` qui permet d'étendre la structure
+        avec une autre chaîne de caractères de type `&str` et retourne la structure,
+        mais ce n'est peut-être pas aussi ergonomique que vous l'espérez.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
     ie:
@@ -4822,6 +4856,13 @@ pages:
         most scenarios where you don't actually have to pass ownership.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
 
+    fr:
+      title: Texte en tant que paramètre de fonction
+      content_markdown: |
+        Les chaînes de caractères et les structures String sont généralement passées aux fonctions sous forme de 'string slice'.
+        Cela offre beaucoup de flexibilité pour la plupart des scénarios où vous n'avez pas besoin de transmettre la propriété (ownership).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20peut%20emprunter%20%26%27static%20str%20en%20tant%20que%20%26str%0A%20%20%20%20say_it_loud(%22bonjour%22)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20say_it_loud%20peut%20%C3%A9galement%20emprunter%20String%20en%20tant%20que%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22au%20revoir%22))%3B%0A%7D%0A
+
     ie:
       title: Textu quam Parametres de Functiones
       content_markdown: |
@@ -4832,6 +4873,12 @@ pages:
       title: Building Strings
       content_markdown: |
         `concat` and `join` are two simple but powerful ways for building strings.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
+
+    fr:
+      title: Construction de String
+      content_markdown: |
+        `concat` et` join` sont deux façons simples mais puissantes de construire les structures String.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
 
     ie:
@@ -4848,6 +4895,20 @@ pages:
 
         The capabilities of this function are too large of scope for *Tour of Rust*, check out the documentation [here](https://doc.rust-lang.org/std/fmt/)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+
+    fr:
+      title: Formatage de Strings
+      content_markdown: |
+        La macro `format!` nous permet de créer une chaîne de caractères en définissant
+        une chaîne paramétrée avec des espaces réservés (e.g. `{}`) qui seront remplacés
+        par certaines valeurs.
+
+        `format!` utilise les mêmes chaînes de caractères paramétrées que `println!`.
+
+        Les possibilités offertes par cette fonction sont trop larges pour être toutes
+        vues dans note modeste * Tour de Rust *. Si vous souhaitez cependant en savoir plus,
+        vous pouvez consultez la documentation [ici](https://doc.rust-lang.org/std/fmt/).
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20de%20la%20vie%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
 
     ie:
       title: Formate de Strings
@@ -4868,6 +4929,17 @@ pages:
         a `Result` because it could fail.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20std%3A%3Aerror%3A%3AError%3E%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
 
+    fr:
+      title: Conversion en String
+      content_markdown: |
+        Plusieurs types peuvent être convertis en String en utilisant `to_string`.
+
+        La fonction générique `parse` peut être utilisée pour convertir une structure String
+        ou une chaîne de caratères en un autre type.
+
+        La fonction de l'example ci-contre retourne une structure `Result` car elle pourrait échouer.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20std%3A%3Aerror%3A%3AError%3E%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+
     ie:
       title: Conversion de Strings
       content_markdown: |
@@ -4885,6 +4957,18 @@ pages:
 
         Up to now, we've mostly looked at Rust from the lens of a procedural paradigm (i.e. just functions and data),
         it's time we now talk about traits and the capabilties unlocked by Rust's object oriented paradigm.
+    fr:
+      title: Chapter 6 Conclusion
+      content_markdown: |
+        Maintenant, tu sais tout ce que tu as à connaître sur la gestion des textes avec Rust!
+        Comme tu l'as vu, l'encodage unicode rend le travail avec le texte un peu délicat,
+        mais la bibliothèque standard de Rust possède beaucoup de fonctionnalités pour nous
+        éviter ce travail.
+
+        Jusqu'à présent, nous avons principalement utilisé Rust avec le paradigme de programmation
+        procédural (e.g. uniquement des fonctions avec des données).
+        Il est temps que nous parlions maintenant des traits (c'est la même terme en anglais)
+        et des capacités débloquées par le paradigme de programmation orienté objet de Rust.
     ie:
       title: Conclusion de Capitul 6
       content_markdown: |
