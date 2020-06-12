@@ -4994,11 +4994,11 @@ pages:
     en:
       title: Dynamic vs Static Dispatch
       content_markdown: |
-        In Rust  methods on objects are executed in two ways:
-        * static dispatch - when the object type is known, we have direct knowledge of what function to call
-        * dynamic dispatch - when an object type is not known, we must find out some way of calling the correct function
+        Methods are executed in two ways:
+        * static dispatch - When the instance type is known, we have direct knowledge of what function to call.
+        * dynamic dispatch - When an instance type is not known, we must find out some way of calling the correct function.
         
-        Traits are what give use the ability to work with instances of objects indirectly using dynamic dispatch.
+        Traits types `&MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
   - beta: true
     en:
       title: Trait Objects
@@ -5006,10 +5006,10 @@ pages:
         When was pass an instance of an object to a parameter of type `&MyTrait` we pass what is called *trait object*. 
         
         A trait object is what allows us to indirectly call the correct methods of an instance. A trait object is a struct that holds the pointer of 
-        our instance with  a list of function pointers to our instance's methods.
+        our instance with a list of function pointers to our instance's methods.
 
-        Memore detail:
-        * this list of functions is known in C++ as a *vtable*
+        Memory details:
+        * This list of functions is known in C++ as a *vtable*.
   - beta: true
     en:
       title: Handling Unsized Data
@@ -5017,8 +5017,8 @@ pages:
         Traits introduce an interesting challenge when we want to store them within another struct. Traits obsfucate the original
         struct thus it also obsfucates the original size. Unsized values being stored in structs are handled in two ways in Rust:
 
-        * `generics` - which effectively create struct/functions with known types and thus known sizes.
-        * `smart pointers` - which give us a level of indirection that allow us to not have to worry about the size of the actual type.
+        * `generics` - Using parameterized types effectively create struct/functions known types and thus known sizes.
+        * `heap data` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it.
   - beta: true
     en:
       title: Generic Functions
@@ -5067,27 +5067,31 @@ pages:
         often used as a way store a reference to something in a struct that must must know the size 
         of it's fields.
 
-        `Box` is so common it can be used from anywhere.
-  - beta: true
-    en:
-      title: Traits for Generic Structs
-      content_markdown: |
-        In addition to generic functions, Rust supports generic structs that 
-        can also contain types constrained by traits. Just as functions, the type
-        must be specified.
+        `Box` is so common it can be used from anywhere:
 
         ```rust
-        struct MyStruct<T> where T:MYTrait {
-          foo:T
-        }
+        Box::new(Foo{ ... })
+        ```
+  - beta: true
+    en:
+      title: Generic Structs Revisited
+      content_markdown: |
+        Generic structs can also have their parameterized types constrained by traits.
 
-        impl<T> MyStruct<T>{
+        ```rust
+        struct MyStruct<T> where T:MyTrait {
+          foo: T
           ...
         }
         ```
 
-        This allows struct types to be created at compile time according to our usage. Because the types
-        are created at compile time, the generic struct will have known and sized types of it's members.
+        Struct methods and implemented trait methods for a generic structs have the struct's parameterized type on the `impl` keyword:
+
+        ```rust
+        impl<T> MyStruct<T>{
+          ...
+        }
+        ```
   - beta: true
     en:
       title: Chapter 7 - Conclusion
