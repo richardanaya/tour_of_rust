@@ -4902,7 +4902,7 @@ pages:
         has been doing it for decades!). Historically, computer science has found other
         useful expressive aggregations and abstractions for data. You may be familiar with object oriented programming (OOP) as one
         such way. In this chapter we'll explore the Rust programming language beyond functions.
-  - beta: true
+
     ie:
       title: Capitul 7 - Object-orientat Programmation 
       content_markdown: |
@@ -4910,7 +4910,7 @@ pages:
         fat talmen durant decennies!). Historicmen, scientie computoral ha trovat altri expressiv e
         util agregationes e abstractiones por data. Tu es cert familiari con object-orientat programmation (OOP)
         quam un tal metode. In ti-ci capitul noi va explorar li lingue de programmation Rust ultra functiones.
-
+  - beta: true
     en:
       title: What Is OOP?
       content_markdown: |
@@ -4919,7 +4919,7 @@ pages:
         * Encapsulation - Hiding data and function members to obsfucate implementation details of an object.
         * Polymorphism - The ability to interacting with an object from different functional perspectives.
         * Inheritence - The ability to inherit data and behavior from other objects.
-  - beta: true
+  
 
     ie:
       title: Quo es OOP?
@@ -4929,7 +4929,7 @@ pages:
         * Incapsulation - On cela data e membres de functiones por obfuscacr detallies de implementation de un objecte.
         * Polimorfisme - Li habilitá de interacter con un objecte ex diferent perspectives functional.
         * Heredantie (inheritance) - Li habilitá de heredar data e conduida de altri objectes.
-
+  - beta: true
     en:
       title: Rust Is Not OOP
       content_markdown: |
@@ -4939,7 +4939,6 @@ pages:
         * Structs cannot inherit functions from a parent struct.
 
         That said, Rust implements many programming language features that you might not mind this lacking.
-  - beta: true
 
     ie:
       title: Rust ne es OOP
@@ -4950,7 +4949,7 @@ pages:
         * Structs ne posse heredar functiones de un struct genitoral.
 
         Malgré to, Rust implementa mult trates programmistic con queles tu certmen ne va suciar te pri lor absentie.
-
+  - beta: true
     en:
       title: Object Methods
       content_markdown: |
@@ -4969,7 +4968,6 @@ pages:
           }
         }
         ```
-  - beta: true
 
     ie:
       title: Metodes por Objectes
@@ -4989,7 +4987,7 @@ pages:
           }
         }
         ```
-
+  - beta: true
     en:
       title: Encapsulation In Objects
       content_markdown: |
@@ -4998,8 +4996,6 @@ pages:
         By default fields and methods are accessible only to the module they belong to.
 
         The `pub` keyword exposes struct fields and methods outside of the module.
-  - beta: true
-
     ie:
       title: Incapsulation in Objectes
       content_markdown: |
@@ -5008,7 +5004,7 @@ pages:
         Predefinitmen, campes e metodes es accessibil solmen al modul a quel ili apartene.
 
         Li clave-parol `pub` exposi campes e metodes del structes éxter li modul.
-
+  - beta: true
     en:
       title: Polymorphism With Traits
       content_markdown: |
@@ -5036,7 +5032,6 @@ pages:
           ... 
         }
         ```
-  - beta: true
 
     ie:
       title: Polimorfisme con Trates
@@ -5065,7 +5060,7 @@ pages:
         }
         ```
 
-
+  - beta: true
     en:
       title: Implemented Methods On Traits
       content_markdown: |
@@ -5073,7 +5068,6 @@ pages:
 
         The functions have no direct access to the inner fields of a struct, but it can 
         be useful for sharing behavior between many trait implementors.
-  - beta: true
 
     ie:
       title: Implementat Metodes sur Trates
@@ -5082,18 +5076,17 @@ pages:
 
         Li functiones have null direct accesse al inter campes de un struct, ma it posse esser
         util por partiprender conduida inter mani implementatores de trates.
-
+  - beta: true
     en:
       title: Trait Inheritence
       content_markdown: |
         Traits can inherit methods from other traits.
-  - beta: true
-
+ 
     ie:
       title: Heredantie de Trates
       content_markdown: |
         Trates posse heredar metodes ex altri trates.
-
+  - beta: true
     en:
       title: Dynamic vs Static Dispatch
       content_markdown: |
@@ -5102,8 +5095,6 @@ pages:
         * dynamic dispatch - When an instance type is not known, we must find out some way of calling the correct function.
         
         Traits types `&MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
-  - beta: true
-
     ie:
       title: Dinamic contra Static Dispatch (Depeche)
       content: |
@@ -5112,7 +5103,7 @@ pages:
         * dispatch dinamic - Quande on ne save li tip del instantie, noi deve trovar un maniere por vocar li function corect.
 
         Li tip de un trate `&MyTrait` possibilisa li manipulation de objectes índirectmen con dispatch dinamic.
-
+  - beta: true
     en:
       title: Trait Objects
       content_markdown: |
@@ -5123,7 +5114,6 @@ pages:
 
         Memory details:
         * This list of functions is known in C++ as a *vtable*.
-  - beta: true
 
     ie:
       title: Trate-Objectes
@@ -5135,7 +5125,7 @@ pages:
 
         Detallies pri memorie:
         * On conosse ti-ci liste de functiones in C++ quam un *vtable*.
-
+  - beta: true
     en:
       title: Handling Unsized Data
       content_markdown: |
@@ -5144,7 +5134,6 @@ pages:
 
         * `generics` - Using parameterized types effectively create struct/functions known types and thus known sizes.
         * `heap data` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it.
-  - beta: true
 
     ie:
       title: Gerer Data sin Grandore
@@ -5154,7 +5143,7 @@ pages:
 
         * `génerics` - Usante tipes parametrisat on crea conosset tipes de structs/functiones (e pro to con un grandore conosset) con efectivitá.
         * `data sur li heap` - Plazzante instanties sur li heap da nos un nivelle de índirection con quel noi ne deve suciar pri li grandore del ver tip - on plazza un puntator e li afere es liquidat.
-
+  - beta: true
     en:
       title: Generic Functions
       content_markdown: |
@@ -5170,7 +5159,6 @@ pages:
 
         By using generics we we create static typed functions at compile time that will have known types and sizes, allowing us to
         perform static dispatch and store as as sized value.
-  - beta: true
 
     ie:
       title: Functiones Géneric
@@ -5187,7 +5175,7 @@ pages:
 
         Usante génerics noi posse crear functiones static tipat durant li compilation con conosset tipes e grandores, con quel noi posse
         usar dispatch static e plazzar les quam valores con grandores conosset.
-
+  - beta: true
     en:
       title: Generic Function Shorthand
       content_markdown: |
@@ -5207,7 +5195,6 @@ pages:
           ...
         }
         ```
-  - beta: true
 
     ie:
       title: Abreviation de Functiones Géneric
@@ -5228,7 +5215,7 @@ pages:
           ...
         }
         ```
-    
+  - beta: true
     en:
       title: Box
       content_markdown: |
@@ -5245,7 +5232,6 @@ pages:
         ```rust
         Box::new(Foo{ ... })
         ```
-  - beta: true
 
     ie:
       title: Buxe
@@ -5262,7 +5248,7 @@ pages:
         ```rust
         Box::new(Foo{ ...})
         ```
-
+  - beta: true
     en:
       title: Generic Structs Revisited
       content_markdown: |
@@ -5282,8 +5268,6 @@ pages:
           ...
         }
         ```
-  - beta: true
-
     ie:
       title: Un Revisitation al Structs Géneric
       content_markdown: |
@@ -5304,7 +5288,7 @@ pages:
         }
         ```
 
-
+  - beta: true
     en:
       title: Chapter 7 - Conclusion
       content_markdown: |
@@ -5313,8 +5297,6 @@ pages:
         working with code a joy. In this chapter, we caught a glimpse at smart pointers
         with `Box`. In the next chapter we'll learn about how smart pointers can help us with other
         specialized memory situations.
-  - beta: true
-
     ie:
       title: Capitul 7 - Conclusion
       content_markdown: |
@@ -5323,7 +5305,7 @@ pages:
         scri nor code. In ti-ci capitul noi brevmen videt puntatores inteligent con `Box`.
         In li capitul a sequer noi va aprender pri qualmen puntatores inteligent posse auxiliar nos
         in altri situationes specialisat in li gerentie de memorie.    
-    
+  - beta: true
     chapter: 8
     en:
       title: Chapter 8 - Smart Pointers
