@@ -4903,6 +4903,14 @@ pages:
         useful expressive aggregations and abstractions for data. You may be familiar with object oriented programming (OOP) as one
         such way. In this chapter we'll explore the Rust programming language beyond functions.
   - beta: true
+    ie:
+      title: Capitul 7 - Object-orientat Programmation 
+      content_markdown: |
+        Li expression de idés tra functiones es un metode pruvat por representar conduida e data (C ha
+        fat talmen durant decennies!). Historicmen, scientie computoral ha trovat altri expressiv e
+        util agregationes e abstractiones por data. Tu es cert familiari con object-orientat programmation (OOP)
+        quam un tal metode. In ti-ci capitul noi va explorar li lingue de programmation Rust ultra functiones.
+
     en:
       title: What Is OOP?
       content_markdown: |
@@ -4912,6 +4920,16 @@ pages:
         * Polymorphism - The ability to interacting with an object from different functional perspectives.
         * Inheritence - The ability to inherit data and behavior from other objects.
   - beta: true
+
+    ie:
+      title: Quo es OOP?
+      content_markdown: |
+        Object-orientat programmation, curtmen dit, parla pri lingues de programmation con quelc trates iconic:
+        * Objectes - Ili converge data e functiones ad-in li unitá conceptional de un singul tip nominat un *objecte*.
+        * Incapsulation - On cela data e membres de functiones por obfuscacr detallies de implementation de un objecte.
+        * Polimorfisme - Li habilitá de interacter con un objecte ex diferent perspectives functional.
+        * Heredantie (inheritance) - Li habilitá de heredar data e conduida de altri objectes.
+
     en:
       title: Rust Is Not OOP
       content_markdown: |
@@ -4922,6 +4940,17 @@ pages:
 
         That said, Rust implements many programming language features that you might not mind this lacking.
   - beta: true
+
+    ie:
+      title: Rust ne es OOP
+      content_markdown: |
+        A Rust manca li grand trates de heredantie de data e conduida.
+
+        * Structs ne posse heredar campes de un struct genitoral.
+        * Structs ne posse heredar functiones de un struct genitoral.
+
+        Malgré to, Rust implementa mult trates programmistic con queles tu certmen ne va suciar te pri lor absentie.
+
     en:
       title: Object Methods
       content_markdown: |
@@ -4941,6 +4970,26 @@ pages:
         }
         ```
   - beta: true
+
+    ie:
+      title: Metodes por Objectes
+      content_markdown: |
+        Rust subtene li concepte de un *object* quam un struct con functiones associat (anc conosset quam *metodes*).
+
+        Li unesim parametre de quelcunc metode deve esser un referentie al instantie associat con li voca del metode (p.ex. `instantieDeObj.foo()`) Rust usa:
+        * `&self` - Ínmutabil referentie al instantie.
+        * `&mut self` - Mutabil referentie al instantie.
+
+        Metodes es definat inter:
+        ```rust
+        impl MyStruct {
+          ...
+          fn foo(&self){
+            ...
+          }
+        }
+        ```
+
     en:
       title: Encapsulation In Objects
       content_markdown: |
@@ -4950,6 +4999,16 @@ pages:
 
         The `pub` keyword exposes struct fields and methods outside of the module.
   - beta: true
+
+    ie:
+      title: Incapsulation in Objectes
+      content_markdown: |
+        Rust posse celar li activitá intern de objectes.
+
+        Predefinitmen, campes e metodes es accessibil solmen al modul a quel ili apartene.
+
+        Li clave-parol `pub` exposi campes e metodes del structes éxter li modul.
+
     en:
       title: Polymorphism With Traits
       content_markdown: |
@@ -4978,6 +5037,35 @@ pages:
         }
         ```
   - beta: true
+
+    ie:
+      title: Polimorfisme con Trates
+      content_markdown: |
+        Rust subtene polimorfisme con trates (traits). Con trates noi posse associar un gruppe de metodes con un tip de struct.
+
+        Ante omno, noi defina li signaturas de metodes de un trate intra:
+        ```
+        trait MiTrate {
+          fn foo(&self)
+          ...
+        }
+        ```
+
+        Quande un struct implementa un trate, it etablisse un contracte secun quel noi posse índirectmen interacter con li struct
+        tra li tip del trate (p.ex. `&MiTrate`) sin dever conossen li ver tip.
+
+        Li implementat trate-metodes de un struct es definat intra:
+
+        ```rust
+        impl MiTrate for MyStruct {
+          fn foo(&self){
+            ...
+          }
+          ...
+        }
+        ```
+
+
     en:
       title: Implemented Methods On Traits
       content_markdown: |
@@ -4986,11 +5074,26 @@ pages:
         The functions have no direct access to the inner fields of a struct, but it can 
         be useful for sharing behavior between many trait implementors.
   - beta: true
+
+    ie:
+      title: Implementat Metodes sur Trates
+      content_markdown: |
+        Trates posse haver metodes implementat.
+
+        Li functiones have null direct accesse al inter campes de un struct, ma it posse esser
+        util por partiprender conduida inter mani implementatores de trates.
+
     en:
       title: Trait Inheritence
       content_markdown: |
         Traits can inherit methods from other traits.
   - beta: true
+
+    ie:
+      title: Heredantie de Trates
+      content_markdown: |
+        Trates posse heredar metodes ex altri trates.
+
     en:
       title: Dynamic vs Static Dispatch
       content_markdown: |
@@ -5000,6 +5103,15 @@ pages:
         
         Traits types `&MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
   - beta: true
+
+    ie:
+      title: Dinamic contra Static Dispatch (Depeche)
+        On execute metodes secun du manieres quam seque:
+        * dispatch static - Quande on save li tip del instantie, noi save directmen pri quel function a vocar.
+        * dispatch dinamic - Quande on ne save li tip del instantie, noi deve trovar un maniere por vocar li function corect.
+
+        Li tip de un trate `&MyTrait` possibilisa li manipulation de objectes índirectmen con dispatch dinamic.
+
     en:
       title: Trait Objects
       content_markdown: |
@@ -5011,6 +5123,18 @@ pages:
         Memory details:
         * This list of functions is known in C++ as a *vtable*.
   - beta: true
+
+    ie:
+      title: Trate-Objectes
+      content_markdown: |
+        Quande noi transfere un instantie de un objecte a un parametre del tip `&MyTrait` noi transfere un cose nominat un *trait object*.
+
+        Un trait object es to quel auxilia nos índirectmen vocar li corect metodes de un instantie. Un trait object es un struct quel tene li puntator de
+        nor instantie con un liste de puntatores del functiones al metodes de nor instantie.
+
+        Detallies pri memorie:
+        * On conosse ti-ci liste de functiones in C++ quam un *vtable*.
+
     en:
       title: Handling Unsized Data
       content_markdown: |
@@ -5020,6 +5144,16 @@ pages:
         * `generics` - Using parameterized types effectively create struct/functions known types and thus known sizes.
         * `heap data` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it.
   - beta: true
+
+    ie:
+      title: Gerer Data sin Grandore
+      content_markdown: |
+        Trates introducte un defí interessant quande noi intente plazzar les in un altri struct. Trates obfusca li original struct
+        e pro to obfusta anc li grandore original. In Rust on plazza valores sin grandore in structs secun li metodes a sequer:
+
+        * `génerics` - Usante tipes parametrisat on crea conosset tipes de structs/functiones (e pro to con un grandore conosset) con efectivitá.
+        * `data sur li heap` - Plazzante instanties sur li heap da nos un nivelle de índirection con quel noi ne deve suciar pri li grandore del ver tip - on plazza un puntator e li afere es liquidat.
+
     en:
       title: Generic Functions
       content_markdown: |
@@ -5036,6 +5170,23 @@ pages:
         By using generics we we create static typed functions at compile time that will have known types and sizes, allowing us to
         perform static dispatch and store as as sized value.
   - beta: true
+
+    ie:
+      title: Functiones Géneric
+      content_markdown: |
+        Génerics in Rust labora manu a manu con trates. Quande noi descri un parametrisat tip `T` noi posse limitar li tipes queles
+        posse esser usat quam argument per un inlistation del trates queles li argument deve implementar.
+
+        In ti-ci exemple, li tip `T` deve implementar li trate `Foo`:
+        ```rust
+        fn miFunction<T>(foo:T) where T:Foo {
+          ...
+        }
+        ```
+
+        Usante génerics noi posse crear functiones static tipat durant li compilation con conosset tipes e grandores, con quel noi posse
+        usar dispatch static e plazzar les quam valores con grandores conosset.
+
     en:
       title: Generic Function Shorthand
       content_markdown: |
@@ -5056,6 +5207,27 @@ pages:
         }
         ```
   - beta: true
+
+    ie:
+      title: Abreviation de Functiones Géneric
+      content_markdown: |
+        In Rust on posse abreviar li expression de génerics limitat per un trate:
+        Li max simplic metode es que noi esa un expression de parametre `impl MyTrait`:
+
+        ```rust
+        fn mi_function(foo: impl Foo){
+          ...
+        }
+        ```
+
+        equivale scrir:
+
+        ```rust
+        fn miFunction<T>(foo:T) where T:Foo {
+          ...
+        }
+        ```
+    
     en:
       title: Box
       content_markdown: |
@@ -5073,6 +5245,23 @@ pages:
         Box::new(Foo{ ... })
         ```
   - beta: true
+
+    ie:
+      title: Buxe
+      content_markdown: |
+        Un buxe (`Box`) es un structura de data quel auxilia nos transferer nor data del stack al heap.
+
+        `Box` es un struct conosset quam un *smart pointer* (puntator inteligent) quel tene li puntator a nor data sur li heap.
+
+        Nam `Box` es un struct con grandore conosset (nam it tene solmen un puntator), on usa it sovente
+        por plazzar un referentie a alquo in un struct quel deve conosser li grandore de su campes.
+
+        `Box` es tam frequentmen usat que on posse usar it omniloc:
+
+        ```rust
+        Box::new(Foo{ ...})
+        ```
+
     en:
       title: Generic Structs Revisited
       content_markdown: |
@@ -5093,6 +5282,28 @@ pages:
         }
         ```
   - beta: true
+
+    ie:
+      title: Un Revisitation al Structs Géneric
+      content_markdown: |
+        Anc structs géneric posse usar trates por limitar lor tipes parametrisat.
+
+        ```rust
+        struct MiStruct<T> where T:MiTrate {
+          foo: T
+          ...
+        }
+        ```
+
+        Struct-metodes e implementat trate-metodes por géneric structs have li parametrisat tip del struct sur li clave-parol `impl`:
+
+        ```rust
+        impl<T> MiStruct<T>{
+          ...
+        }
+        ```
+
+
     en:
       title: Chapter 7 - Conclusion
       content_markdown: |
@@ -5102,6 +5313,16 @@ pages:
         with `Box`. In the next chapter we'll learn about how smart pointers can help us with other
         specialized memory situations.
   - beta: true
+
+    ie:
+      title: Capitul 7 - Conclusion
+      content_markdown: |
+        Noi ja conosse plu caractersticas del lingue por auxilia nos clarmen representar nor idés!
+        Benque abstractiones in Rust es simplic, ili es tam potent que ili da nos joya quande noi
+        scri nor code. In ti-ci capitul noi brevmen videt puntatores inteligent con `Box`.
+        In li capitul a sequer noi va aprender pri qualmen puntatores inteligent posse auxiliar nos
+        in altri situationes specialisat in li gerentie de memorie.    
+    
     chapter: 8
     en:
       title: Chapter 8 - Smart Pointers
