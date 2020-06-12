@@ -4902,13 +4902,13 @@ pages:
         has been doing it for decades!). Historically, computer science has found other
         useful aggregations and abstractions for data. You may be familiar with object oriented programming (OOP) as one
         such way to view your data and behavior in a more expressive manner. In this chapter
-        we'll explore Rust programming language beyond functions.
+        we'll explore the Rust programming language beyond functions.
   - beta: true
     en:
       title: What Is OOP?
       content_markdown: |
-        Object oriented programmingly roughly refers to programming languages that have a number of iconic features:
-        * Objects - Associating data and methods into the conceptual unit of a single type called an object.
+        Object oriented programming roughly refers to programming languages that have a number of iconic features:
+        * Objects - Associating data and methods into the conceptual unit of a single type called an *object*.
         * Encapsulation - Hiding data and function members to obsfucate implementation details of an object.
         * Polymorphism - The ability to interacting with an object from different functional perspectives.
         * Inheritence - The ability to inherit data and behavior from other objects.
