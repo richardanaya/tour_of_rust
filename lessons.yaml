@@ -4917,9 +4917,9 @@ pages:
       title: Rust Is Not OOP
       content_markdown: |
         Rust lacks inheritence of data and behavior in any meaningful way.
-        * structs cannot inherit properties from a parent struct
+        * structs cannot inherit fields from a parent struct
         * methods cannot be inherited from a parent struct
-        That said, Rust implement many programming language paradigms that you might not mind this.
+        That said, Rust implement many programming language features that you might not mind this.
   - beta: true
     en:
       title: Object Methods
