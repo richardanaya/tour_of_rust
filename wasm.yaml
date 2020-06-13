@@ -202,7 +202,7 @@ pages:
         WebAssembly is often called **WASM**
     en_c:
       clone: en
-      
+
     ie:
       title: Chapter 1 - Quo es WebAssembly?
       content_markdown: |

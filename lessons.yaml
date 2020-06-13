@@ -938,7 +938,7 @@ pages:
       title: Массивы
       content_markdown: |
         *Массив* это коллекция с фиксированным количеством элементов и все одного типа.  
-        
+
         Что бы создать *массив* нужно написать `[T; N]` где T - тип элементов и N - количество элементов в массиве,
         заранее известное перед компиляцией. 
 
@@ -3605,7 +3605,7 @@ pages:
         когда Вам нужно по-быстрому достать значение.
 
         `unwrap` работает так:
-        
+
         1. Получить значение из `Option`/`Result`
         2. Если оно было `None`/`Err`, 'panic!' 
 
@@ -4988,7 +4988,7 @@ pages:
         such way. In this chapter we'll explore the Rust programming language beyond functions.
 
     ie:
-      title: Capitul 7 - Object-orientat Programmation 
+      title: Capitul 7 - Object-orientat Programmation
       content_markdown: |
         Li expression de idés tra functiones es un metode pruvat por representar conduida e data (C ha
         fat talmen durant decennies!). Historicmen, scientie computoral ha trovat altri expressiv e
@@ -5003,7 +5003,6 @@ pages:
         * Encapsulation - Hiding data and function members to obsfucate implementation details of an object.
         * Polymorphism - The ability to interacting with an object from different functional perspectives.
         * Inheritence - The ability to inherit data and behavior from other objects.
-  
 
     ie:
       title: Quo es OOP?
@@ -5018,7 +5017,7 @@ pages:
       title: Rust Is Not OOP
       content_markdown: |
         Rust lacks inheritence of data and behavior in any meaningful way.
-        
+
         * Structs cannot inherit fields from a parent struct.
         * Structs cannot inherit functions from a parent struct.
 
@@ -5165,7 +5164,7 @@ pages:
       title: Trait Inheritence
       content_markdown: |
         Traits can inherit methods from other traits.
- 
+
     ie:
       title: Heredantie de Trates
       content_markdown: |
@@ -5177,7 +5176,7 @@ pages:
         Methods are executed in two ways:
         * static dispatch - When the instance type is known, we have direct knowledge of what function to call.
         * dynamic dispatch - When an instance type is not known, we must find out some way of calling the correct function.
-        
+
         Traits types `&MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
     ie:
       title: Dinamic contra Static Dispatch (Depeche)
@@ -5192,7 +5191,7 @@ pages:
       title: Trait Objects
       content_markdown: |
         When we pass an instance of an object to a parameter of type `&MyTrait` we pass what is called *trait object*. 
-        
+
         A trait object is what allows us to indirectly call the correct methods of an instance. A trait object is a struct that holds the pointer of 
         our instance with a list of function pointers to our instance's methods.
 
@@ -5388,7 +5387,7 @@ pages:
         Benque abstractiones in Rust es simplic, ili es tam potent que ili da nos joya quande noi
         scri nor code. In ti-ci capitul noi brevmen videt puntatores inteligent con `Box`.
         In li capitul a sequer noi va aprender pri qualmen puntatores inteligent posse auxiliar nos
-        in altri situationes specialisat in li gerentie de memorie.    
+        in altri situationes specialisat in li gerentie de memorie.
   - beta: true
     chapter: 8
     en:
