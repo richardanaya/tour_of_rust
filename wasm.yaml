@@ -16,6 +16,22 @@ common_words:
     toc: Table of Contents
     lessons: Lessons
     untranslated: Untranslated
+  fr:
+    chapter: Chapitre
+    tor: Tour de WebAssembly
+    next: Suivant
+    previous: Précédant
+    toc: Table des Matières
+    lessons: Lessons
+    untranslated: Untranslated
+  fr_c:
+    chapter: Chapitre
+    tor: Tour de WebAssembly
+    next: Suivant
+    previous: Précédant
+    toc: Table des Matières
+    lessons: Lessons
+    untranslated: Untranslated
   de:
     tor: Tour zu WebAssembly
     next: Weiter
@@ -65,10 +81,12 @@ pages:
         appreciate the [Tour of Rust](https://tourofrust.com/)! Most of our examples will be easy
         enough to follow along by anyone though. This tour is also available in C.
 
-        * [Rust (English)](index.html)
-        * [Rust (Interlingue)](index_ie.html)
-        * [Rust (Português Brasileiro)](index_pt-br.html)
-        * [C (English)](index_en_c.html)
+        * [Rust (anglais)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [C (anglais)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
         checkout out Tour of WebAssembly's [github repository](https://github.com/richardanaya/tour_of_rust).
@@ -80,16 +98,55 @@ pages:
         Welcome to the *Tour of WebAssembly*. This is meant to be a introduction to the technology 
         and how C can be used to power the web. This tour is also available in Rust.
 
-        * [Rust (English)](index.html)
-        * [Rust (Interlingue)](index_ie.html)
-        * [Rust (Português Brasileiro)](index_pt-br.html)
-        * [C (English)](index_en_c.html)
+        * [Rust (anglais)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [C (anglais)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
 
         If you have suggestions on content or would like to contribute to translations, 
         checkout out Tour of WebAssembly's [github repository](https://github.com/richardanaya/tour_of_rust).
 
         You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
 
+    fr:
+      title: Salut, WebAssembly
+      content_markdown: |
+        Bienvenue au * Tour de WebAssembly *. Celui-ci a pour but d'être une introduction à la technologie
+        et comment Rust peut être utilisé pour alimenter le Web. Si tu n'es pas à l'aise avec Rust,
+        je te conseille le [Tour de Rust] (https://tourofrust.com/)! La plupart de nos exemples seront
+        suffisamment simple pour pouvoir être suivie par n'importe qui, même les débutants.
+        Cette visite est également disponible en C.
+
+        * [Rust (anglais)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [C (anglais)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
+
+        Si tu as des suggestions sur le contenu ou souhaite contribuer aux traductions,
+        consultez le [dépôt github] du Tour de WebAssembly (https://github.com/richardanaya/tour_of_rust).
+
+        Tu peux parcourir la visite avec le clavier <span class="emoji">⬅️</span> et <span class="emoji">➡️</span>
+    fr_c:
+      title: Salut, WebAssembly
+      content_markdown: |
+        Bienvenue au * Tour de WebAssembly *. Celui-ci a pour but d'être une introduction à la technologie
+        et comment Rust peut être utilisé pour alimenter le Web. Cette visite est également disponible en Rust.
+
+        * [Rust (anglais)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [C (anglais)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
+
+        Si tu as des suggestions sur le contenu ou souhaite contribuer aux traductions,
+        consultez le [dépôt github] du Tour de WebAssembly (https://github.com/richardanaya/tour_of_rust).
+
+        Tu peux parcourir la visite avec le clavier <span class="emoji">⬅️</span> et <span class="emoji">➡️</span>
     ie:
       title: Salute, WebAssembly
       content_markdown: |
@@ -98,10 +155,12 @@ pages:
         [Tour of Rust](https://tourofrust.com/)! Malgré to, li pluparte de nor exemples va esser facil
         a sequer por quicunc. Li tur es anc disponibil in C.
 
-        * [Rust (English)](index.html)
-        * [Rust (Interlingue)](index_ie.html)
-        * [Rust (Português Brasileiro)](index_pt-br.html)
-        * [C (English)](index_en_c.html)
+        * [Rust (anglais)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [C (anglais)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
 
         Si tu have suggestiones pri contenete o vole contribuer al traductiones,
         ples vider li [repositoria github](https://github.com/richardanaya/tour_of_rust) del Tur.
@@ -117,10 +176,12 @@ pages:
         o suficiente para qualquer pessoa acompanhar. Este tour também está disponível para a
         linguagem C.
 
-        * [Rust (English)](index.html)
-        * [Rust (Interlingue)](index_ie.html)
-        * [Rust (Português Brasileiro)](index_pt-br.html)
-        * [C (English)](index_en_c.html)
+        * [Rust (anglais)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [C (anglais)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
 
         Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
         traduções, veja o repositório do Tour do WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
@@ -141,7 +202,7 @@ pages:
         WebAssembly is often called **WASM**
     en_c:
       clone: en
-
+      
     ie:
       title: Chapter 1 - Quo es WebAssembly?
       content_markdown: |
