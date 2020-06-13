@@ -5304,9 +5304,9 @@ pages:
       content_markdown: |
         `Box` is a data structure that allows us to move our data from the stack to the heap.
 
-        `Box` is struct known a *smart pointer* that holds the pointer to our data on the heap.
+        `Box` is a struct known as a *smart pointer* that holds the pointer to our data on the heap.
 
-        Because `Box` is struct with a known size ( because it just holds a pointer ), it is 
+        Because `Box` is a struct with a known size ( because it just holds a pointer ), it is 
         often used as a way store a reference to something in a struct that must must know the size 
         of it's fields.
 
