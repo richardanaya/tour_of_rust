@@ -5216,7 +5216,7 @@ pages:
         struct thus it also obsfucates the original size. Unsized values being stored in structs are handled in two ways in Rust:
 
         * `generics` - Using parameterized types effectively create struct/functions known types and thus known sizes.
-        * `heap data` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it.
+        * `indirection` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it. There are other ways as well!
 
     ie:
       title: Gerer Data sin Grandore
