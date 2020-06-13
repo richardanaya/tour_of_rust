@@ -3935,7 +3935,7 @@ pages:
           em inglês) em C++.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20%2F%2F%20foo_a%20%C3%A9%20descartado%20aqui%20porque%20n%C3%A3o%20%C3%A9%20mais%0A%20%20%20%20%2F%2F%20usado%20depois%20deste%20lugar%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20%C3%A9%20descartado%20aqui%20porque%20%C3%A9%20o%20fim%0A%20%20%20%20%2F%2F%20do%20escopo%20da%20fun%C3%A7%C3%A3o%0A%7D%0A
   - en:
-      title: Dropping is Heirarchal
+      title: Dropping is Hierarchical
       content_markdown: |
         When a struct is dropped, the struct itself is dropped first then it's children are dropped individually and so on.
 
@@ -5240,8 +5240,8 @@ pages:
         }
         ```
 
-        By using generics we we create static typed functions at compile time that will have known types and sizes, allowing us to
-        perform static dispatch and store as as sized value.
+        By using generics we create static typed functions at compile time that will have known types and sizes, allowing us to
+        perform static dispatch and store as a sized value.
 
     ie:
       title: Functiones Géneric
@@ -5263,7 +5263,7 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
       content_markdown: |
         Rust has a shorthand for expressing generics constrained by a trait:
-        The simplest way us with a parameter expression `impl MyTrait`:
+        The simplest way is with a parameter expression `impl MyTrait`:
 
         ```rust
         fn my_function(foo: impl Foo){
@@ -5271,7 +5271,7 @@ pages:
         }
         ```
 
-        This is equivalist to writing:
+        This is equivalent to writing:
 
         ```rust
         fn myFunction<T>(foo:T) where T:Foo {
@@ -5306,9 +5306,9 @@ pages:
 
         `Box` is a struct known as a *smart pointer* that holds the pointer to our data on the heap.
 
-        Because `Box` is a struct with a known size ( because it just holds a pointer ), it is 
-        often used as a way store a reference to something in a struct that must must know the size 
-        of it's fields.
+        Because `Box` is a struct with a known size (because it just holds a pointer), it is 
+        often used as a way to store a reference to something in a struct that must know the size 
+        of its fields.
 
         `Box` is so common it can be used from anywhere:
 
@@ -5343,7 +5343,7 @@ pages:
         }
         ```
 
-        Generic structs have their parameterized type their implementation blocks:
+        Generic structs have their parameterized type in their implementation blocks:
 
         ```rust
         impl<T> MyStruct<T>{
@@ -5376,7 +5376,7 @@ pages:
       content_markdown: |
         We now have more language features at hand to represent our ideas clearly! 
         Rust abstractions might be simple but they are powerful enough to make
-        working with code a joy. In this chapter, we caught a glimpse at smart pointers
+        working with code a joy. In this chapter, we caught a glimpse of smart pointers
         with `Box`. In the next chapter we'll learn about how smart pointers can help us with other
         specialized memory situations.
 
@@ -5410,7 +5410,7 @@ pages:
       content_markdown: |
         Every Rust program or library is a **crate**.
 
-        Every crate is made of a heirarchy of **modules**.
+        Every crate is made of a hierarchy of **modules**.
 
         Programs start running in the root module of a crate at the `main()` function in a file
         called `main.rs`.
