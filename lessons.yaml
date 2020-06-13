@@ -5039,7 +5039,7 @@ pages:
         * `&self` - Immutable reference to the instance.
         * `&mut self` - Mutable reference to the instance.
 
-        Methods are defined within:
+        Methods are defined within an implementation block with keyword `impl`:
         ```rust
         impl MyStruct { 
           ... 
@@ -5102,7 +5102,7 @@ pages:
         When a struct implements a trait, it establishes a contract that allows us to indirectly interact with the struct 
         through the trait type (e.g. `&MyTrait`) without having to know the real type.
 
-        A struct's implemented traits methods are defined within:
+        A struct's implemented traits methods are defined within an implementation block:
 
         ```rust
         impl MyTrait for MyStruct { 
@@ -5343,7 +5343,7 @@ pages:
         }
         ```
 
-        Struct methods and implemented trait methods for a generic structs have the struct's parameterized type on the `impl` keyword:
+        Generic structs have their parameterized type their implementation blocks:
 
         ```rust
         impl<T> MyStruct<T>{
