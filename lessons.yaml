@@ -5100,7 +5100,7 @@ pages:
         ```
 
         When a struct implements a trait, it establishes a contract that allows us to indirectly interact with the struct 
-        through the trait type (e.g. `&MyTrait`) without having to know the real type.
+        through the trait type (e.g. `&dyn MyTrait`) without having to know the real type.
 
         A struct's implemented traits methods are defined within an implementation block:
 
@@ -5127,7 +5127,7 @@ pages:
         ```
 
         Quande un struct implementa un trate, it etablisse un contracte secun quel noi posse índirectmen interacter con li struct
-        tra li tip del trate (p.ex. `&MiTrate`) sin dever conossen li ver tip.
+        tra li tip del trate (p.ex. `&dyn MiTrate`) sin dever conossen li ver tip.
 
         Li implementat trate-metodes de un struct es definat intra:
 
@@ -5174,7 +5174,7 @@ pages:
         * static dispatch - When the instance type is known, we have direct knowledge of what function to call.
         * dynamic dispatch - When an instance type is not known, we must find out some way of calling the correct function.
 
-        Traits types `&MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
+        Traits types `&dyn MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
 
         When dynamic dispatch is used, Rust will encourage you to put `dyn` before your trait type so people are aware.
 
@@ -5187,7 +5187,7 @@ pages:
         * dispatch static - Quande on save li tip del instantie, noi save directmen pri quel function a vocar.
         * dispatch dinamic - Quande on ne save li tip del instantie, noi deve trovar un maniere por vocar li function corect.
 
-        Li tip de un trate `&MyTrait` possibilisa li manipulation de objectes índirectmen con dispatch dinamic.
+        Li tip de un trate `&dyn MyTrait` possibilisa li manipulation de objectes índirectmen con dispatch dinamic.
   - en:
       title: Trait Objects
       content_markdown: |
