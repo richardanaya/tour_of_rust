@@ -29,7 +29,7 @@ This project also aims to provide this book in as many languages as possible.
 * Deutsch - [Felix](https://github.com/jassler)
 * English - [Richard Anaya](https://github.com/richardanaya)
 * Español - [Alba Martínez Martínez](https://github.com/albatraduce)
-* Français - [Mathieu Gemard](https://github.com/mgemard)
+* Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
 * Português Brasileiro - [Denstone](https://github.com/denstone)
 * Русский - [Danil Kondratiev](https://github.com/knightpp)
