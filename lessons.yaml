@@ -4977,8 +4977,7 @@ pages:
 
         Til nu noi ha videt Rust del vispunctu procedural (a saver solmen functiones e data), ma li témpor ha venit
         por parlar pri traits (trates) e li capabilitás liberat del paradigma "object oriented" (object-orientat) de Rust.
-  - beta: true
-    chapter: 7
+  - chapter: 7
     en:
       title: Chapter 7 - Object Oriented Programming
       content_markdown: |
@@ -4994,8 +4993,7 @@ pages:
         fat talmen durant decennies!). Historicmen, scientie computoral ha trovat altri expressiv e
         util agregationes e abstractiones por data. Tu es cert familiari con object-orientat programmation (OOP)
         quam un tal metode. In ti-ci capitul noi va explorar li lingue de programmation Rust ultra functiones.
-  - beta: true
-    en:
+  - en:
       title: What Is OOP?
       content_markdown: |
         Object oriented programming roughly refers to programming languages that have a number of iconic features:
@@ -5012,8 +5010,7 @@ pages:
         * Incapsulation - On cela data e membres de functiones por obfuscacr detallies de implementation de un objecte.
         * Polimorfisme - Li habilitá de interacter con un objecte ex diferent perspectives functional.
         * Heredantie (inheritance) - Li habilitá de heredar data e conduida de altri objectes.
-  - beta: true
-    en:
+  - en:
       title: Rust Is Not OOP
       content_markdown: |
         Rust lacks inheritence of data and behavior in any meaningful way.
@@ -5032,8 +5029,7 @@ pages:
         * Structs ne posse heredar functiones de un struct genitoral.
 
         Malgré to, Rust implementa mult trates programmistic con queles tu certmen ne va suciar te pri lor absentie.
-  - beta: true
-    en:
+  - en:
       title: Object Methods
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
       content_markdown: |
@@ -5071,8 +5067,7 @@ pages:
           }
         }
         ```
-  - beta: true
-    en:
+  - en:
       title: Encapsulation In Objects
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20%26creature.get_sound())%3B%0A%7D%0A
       content_markdown: |
@@ -5089,8 +5084,7 @@ pages:
         Predefinitmen, campes e metodes es accessibil solmen al modul a quel ili apartene.
 
         Li clave-parol `pub` exposi campes e metodes del structes éxter li modul.
-  - beta: true
-    en:
+  - en:
       title: Polymorphism With Traits
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
       content_markdown: |
@@ -5146,8 +5140,7 @@ pages:
         }
         ```
 
-  - beta: true
-    en:
+  - en:
       title: Implemented Methods On Traits
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
       content_markdown: |
@@ -5163,8 +5156,7 @@ pages:
 
         Li functiones have null direct accesse al inter campes de un struct, ma it posse esser
         util por partiprender conduida inter mani implementatores de trates.
-  - beta: true
-    en:
+  - en:
       title: Trait Inheritence
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
       content_markdown: |
@@ -5174,8 +5166,7 @@ pages:
       title: Heredantie de Trates
       content_markdown: |
         Trates posse heredar metodes ex altri trates.
-  - beta: true
-    en:
+  - en:
       title: Dynamic vs Static Dispatch
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
       content_markdown: |
@@ -5197,8 +5188,7 @@ pages:
         * dispatch dinamic - Quande on ne save li tip del instantie, noi deve trovar un maniere por vocar li function corect.
 
         Li tip de un trate `&MyTrait` possibilisa li manipulation de objectes índirectmen con dispatch dinamic.
-  - beta: true
-    en:
+  - en:
       title: Trait Objects
       content_markdown: |
         When we pass an instance of an object to a parameter of type `&MyTrait` we pass what is called *trait object*. 
@@ -5219,8 +5209,7 @@ pages:
 
         Detallies pri memorie:
         * On conosse ti-ci liste de functiones in C++ quam un *vtable*.
-  - beta: true
-    en:
+  - en:
       title: Handling Unsized Data
       content_markdown: |
         Traits introduce an interesting challenge when we want to store them within another struct. Traits obsfucate the original
@@ -5237,8 +5226,7 @@ pages:
 
         * `génerics` - Usante tipes parametrisat on crea conosset tipes de structs/functiones (e pro to con un grandore conosset) con efectivitá.
         * `data sur li heap` - Plazzante instanties sur li heap da nos un nivelle de índirection con quel noi ne deve suciar pri li grandore del ver tip - on plazza un puntator e li afere es liquidat.
-  - beta: true
-    en:
+  - en:
       title: Generic Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
       content_markdown: |
@@ -5270,8 +5258,7 @@ pages:
 
         Usante génerics noi posse crear functiones static tipat durant li compilation con conosset tipes e grandores, con quel noi posse
         usar dispatch static e plazzar les quam valores con grandores conosset.
-  - beta: true
-    en:
+  - en:
       title: Generic Function Shorthand
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
       content_markdown: |
@@ -5311,8 +5298,7 @@ pages:
           ...
         }
         ```
-  - beta: true
-    en:
+  - en:
       title: Box
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sara%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sara)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
       content_markdown: |
@@ -5345,8 +5331,7 @@ pages:
         ```rust
         Box::new(Foo{ ...})
         ```
-  - beta: true
-    en:
+  - en:
       title: Generic Structs Revisited
       content_markdown: |
         Generic structs can also have their parameterized types constrained by traits.
@@ -5386,8 +5371,7 @@ pages:
         }
         ```
 
-  - beta: true
-    en:
+  - en:
       title: Chapter 7 - Conclusion
       content_markdown: |
         We now have more language features at hand to represent our ideas clearly! 
