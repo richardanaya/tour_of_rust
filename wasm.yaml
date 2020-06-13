@@ -302,14 +302,14 @@ pages:
         * quais funções devem ser exportadas/importadas.
         * quais dados devem inicialmente estar na memória dos módulos wasm.
   - en:
-    title: Loading A Module
-    content_markdown: |
-      Since a WebAssembly module is just a file of bytes. We first need to load those bytes in our browser.
+      title: Loading A Module
+      content_markdown: |
+        Since a WebAssembly module is just a file of bytes. We first need to load those bytes in our browser.
 
-      ```
-      let file = await fetch('my_file.wasm');
-      let bytes = await file.arrayBuffer();
-      ```
+        ```
+        let file = await fetch('my_file.wasm');
+        let bytes = await file.arrayBuffer();
+        ```
     en_c:
       clone: en
     fr:
