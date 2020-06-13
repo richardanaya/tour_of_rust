@@ -1,16 +1,17 @@
 function setupKeys(){
     document.body.addEventListener("keyup",function(e){
+        if(e.ctrlKey || e.altKey || e.metaKey || e.shiftKey){
+            return;
+        }
+        let link;
         if(e.keyCode == 39){
-            let next = document.querySelector(".next a");
-            if(next){
-                next.click();
-            }
+            link = document.querySelector(".next a");
         }
         if(e.keyCode == 37){
-            let prev = document.querySelector(".back a");
-            if(prev){
-                prev.click();
-            }
+            link = document.querySelector(".back a");
+        }
+        if(link){
+            link.click();
         }
     })
 }
