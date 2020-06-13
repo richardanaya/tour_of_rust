@@ -3952,7 +3952,7 @@ pages:
         Détails de la mémoire:
         * En libérant automatiquement la mémoire, Rust aide à s'assurer qu'il y a moins de fuites de mémoire.
         * Les ressources mémoire ne peuvent être déconstruites et désallouées qu'une seule fois.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20en%20premier%2C%0A%20%20%20%20%2F%2F%20viens%20ensuite%20le%20tour%20de%20foo.bar%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20en%20premier%2C%0A%20%20%20%20%2F%2F%20vient%20ensuite%20le%20tour%20de%20foo.bar%0A%7D%0A
     ie:
       title: On Cade Secun Hierarchie
       content_markdown: |
@@ -4483,10 +4483,10 @@ pages:
         Rust cares a great deal about international text and byte level concerns you might not be familiar with
         from other languages. That said, Rust has many great tools for managing those concerns.
     fr:
-      title: Chapter 6 - Texte
+      title: Chapitre 6 - Texte
       content_markdown: |
         Maintenant que nous en savons un peu plus sur la manière dont Rust gère la mémoire,
-        nous sommes prêt à parler des chaînes de caractères en détails.
+        nous sommes prêts à parler des chaînes de caractères en détail.
         Rust se soucie beaucoup du support des textes internationaux et des problèmes associés au niveau des bits 
         (dont vous n'êtes peut-être pas familier). Cela dit, Rust dispose d'excellents
         outils pour gérer ces préoccupations.
@@ -4519,8 +4519,8 @@ pages:
 
         * `&` signifie que c'est une référence. Remarque l'abscence du mot-clé `&mut`,
         cela nous dit également que le compilateur n'autorisera pas la modification.
-        * `'static` signifie que la donnée sera disponible jusqu'à la fin du programme (celle-ci n'est jamais désalloué).
-        * `str` signifie que la référence pointe vers une séquence de bytes que sera toujours interprétable en tant **utf-8**.
+        * `'static` signifie que la donnée sera disponible jusqu'à la fin du programme (celle-ci n'est jamais désallouée).
+        * `str` signifie que la référence pointe vers une séquence de bytes qui sera toujours interprétable en tant qu'**utf-8**.
 
         Détails de la mémoire:
         * Le compilateur Rust va dans la plupart des cas placer les données de la chaîne de caractères
@@ -4575,10 +4575,10 @@ pages:
         Un désavantage d'avoir des caractères à taille variable est que l'accès ne peut plus être fait
         rapidemment (temps constant **O(1)**) avec un simple accès par index (e.g.
         `my_text[3]` pour récupérer le 4ème caractère). 
-        En effet, il est possible que les caractères précédents le caractère qu'on souhaite lire aient une taille variable, altérant
+        En effet, il est possible que les caractères précédants le caractère que l'on souhaite lire aient une taille variable, altérant
         la position où le 4ème caractère se situe dans la séquence d'octets.
 
-        Au lieur de cela, nous devons itérer sur la séquence de byte **utf-8** pour trouver où se situe
+        Au lieu de cela, nous devons itérer sur la séquence de byte **utf-8** pour trouver où se situe
         le caractère unicode (temps linéaire **O(n)**).
 
         Ferris: "Je suis surtout content d'avoir l'encodage ** utf-8 ** pour représenter les emojis de mes amis sous-marins!"
@@ -4681,7 +4681,7 @@ pages:
       content_markdown: |
         Les chaînes de caractères bruts (en anglais raw string literals) permettent d'écrice textuellement
         une séquence de caractères en commençant par `r#"` et finissant par `"#`.
-        Cela nous permet d'insérer des caractères qui seraient autrement prit
+        Cela nous permet d'insérer des caractères qui seraient autrement pris
         pour un autre (notamment les caractères **"** et **\**).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Les%20cha%C3%AEnes%20de%20caract%C3%A8res%20bruts%20sont%20parfois%20utiles.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
     ie:
@@ -4743,10 +4743,10 @@ pages:
 
         Méthodes utiles de `&str`:
         * `len` retourne la taille de la chaîne de caractères en bytes (pas le nombre de caractères!).
-        * `starts_with`/`ends_with` pour tester si la chaîne de caractères commence ou finie par un certain motif.
-        * `is_empty` retourne vrai si la taille est zero.
+        * `starts_with`/`ends_with` pour tester si la chaîne de caractères commence ou finit par un certain motif.
+        * `is_empty` retourne vrai si la taille est zéro.
         * `find` retourne une structure de type `Option<usize>` donnant la première position du modif à trouver.
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22salut%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..5%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B6..10%5D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20L%27instruction%20suivante%20%C3%A9chouerait%3A%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B6..8%5D%3B%20%0A%20%20%20%20%2F%2F%20En%20effet%2C%20Rust%20n%27acc%C3%A8pte%20pas%20de%20%27slice%27%20de%20caract%C3%A8re%20unicode%20invalide.%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22salut%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..5%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B6..10%5D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20L'instruction%20suivante%20%C3%A9chouerait%3A%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B6..8%5D%3B%20%0A%20%20%20%20%2F%2F%20En%20effet%2C%20Rust%20n'accepte%20pas%20de%20'slice'%20de%20caract%C3%A8re%20unicode%20invalide.%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
 
     ie:
       title: String Slice
@@ -4779,7 +4779,7 @@ pages:
 
         Un `char` possède toujours une taille de 4 bytes (rendant la recherche
         d'un caractère particulier d'une chaîne de caractères plus rapide).
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Collecte%20les%20caract%C3%A8res%20sous%20forme%20de%20vector%20de%20%27char%27.%0A%20%20%20%20let%20chars%20%3D%20%22salut%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20Devrait%20afficher%207.%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Etant%20donn%C3%A9%20que%20un%20%27char%27%20est%20stock%C3%A9%20sur%204%20bytes%2C%20%0A%20%20%20%20%2F%2F%20celui-ci%20peut%20donc%20%C3%AAtre%20convertir%20en%20u32.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Collecte%20les%20caract%C3%A8res%20sous%20forme%20de%20vecteur%20de%20'char'.%0A%20%20%20%20let%20chars%20%3D%20%22salut%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20Devrait%20afficher%207.%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Etant%20donn%C3%A9%20que%20un%20'char'%20est%20stock%C3%A9%20sur%204%20bytes%2C%20%0A%20%20%20%20%2F%2F%20celui-ci%20peut%20donc%20%C3%AAtre%20converti%20en%20u32.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
 
     ie:
       title: Chars
@@ -4812,13 +4812,13 @@ pages:
       content_markdown: |
         Une structure **String** possède une séquence de bytes utf-8 située sur le tas (en anglais heap).
 
-        Du fait que la donnée se trouve sur le tas, celle-ci peut être étendu, modifié, etc., contrairement
+        Du fait que la donnée se trouve sur le tas, celle-ci peut être étendue, modifiée, etc., contrairement
         aux chaînes de caractères (en anglais string literals).
 
         Méthodes utiles:
 
         * `push_str` pour ajouter d'autres bytes utf-8 à la fin.
-        * `replace` pour remplacer la séquence de bytes utf-8 par une autre.
+        * `replace` pour remplacer une séquence de bytes utf-8 par une autre.
         * `to_lowercase`/`to_uppercase` pour tout mettre en minuscule ou en majuscule.
         * `trim` pour supprimer les espaces.
 
@@ -4907,7 +4907,7 @@ pages:
 
         Les possibilités offertes par cette fonction sont trop larges pour être toutes
         vues dans note modeste * Tour de Rust *. Si vous souhaitez cependant en savoir plus,
-        vous pouvez consultez la documentation [ici](https://doc.rust-lang.org/std/fmt/).
+        vous pouvez consulter la documentation [ici](https://doc.rust-lang.org/std/fmt/).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20de%20la%20vie%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
 
     ie:
@@ -4937,7 +4937,7 @@ pages:
         La fonction générique `parse` peut être utilisée pour convertir une structure String
         ou une chaîne de caratères en un autre type.
 
-        La fonction de l'example ci-contre retourne une structure `Result` car elle pourrait échouer.
+        La fonction de l'exemple ci-contre retourne une structure `Result` car elle pourrait échouer.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20std%3A%3Aerror%3A%3AError%3E%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
 
     ie:
@@ -4958,7 +4958,7 @@ pages:
         Up to now, we've mostly looked at Rust from the lens of a procedural paradigm (i.e. just functions and data),
         it's time we now talk about traits and the capabilties unlocked by Rust's object oriented paradigm.
     fr:
-      title: Chapter 6 Conclusion
+      title: Chapitre 6 - Conclusion
       content_markdown: |
         Maintenant, tu sais tout ce que tu as à connaître sur la gestion des textes avec Rust!
         Comme tu l'as vu, l'encodage unicode rend le travail avec le texte un peu délicat,
@@ -4967,7 +4967,7 @@ pages:
 
         Jusqu'à présent, nous avons principalement utilisé Rust avec le paradigme de programmation
         procédural (e.g. uniquement des fonctions avec des données).
-        Il est temps que nous parlions maintenant des traits (c'est la même terme en anglais)
+        Il est temps que nous parlions maintenant des traits (c'est le même terme en anglais)
         et des capacités débloquées par le paradigme de programmation orienté objet de Rust.
     ie:
       title: Conclusion de Capitul 6
