@@ -874,16 +874,17 @@ pages:
     en:
       title: Why Dynamic Invocation?
       content_markdown: |
-        We saw in the first chapters that we could easily write our own javascript functions by hand in our `*.js` files, so why
+        We saw in the first chapters that we could easily write our own javascript functions by hand in our `.js` files, so why
         dynamically create functions?
 
         * Most people come to WebAssembly to escape JavaScript. Dynamic creation of javascript functions allow us to use
-          libraries in our native language that do the hard part of dynamically creating their bindings.
+          libraries in our native language that do the hard part of dynamically creating their bindings without everyone having
+          to recreate the wheel.
 
         * Simplifies our setup and bootstrapping of our WebAssembly module to a bare minimum. We only need the ability to register 
-          new functions and call those new functions.
+          new functions and call those new functions instead of specifying a litany of hand written JavaScript functions.
 
-        * It's difficult for javascript to know what dependencies your module needs, by allowing the wasm program to create its own functions
+        * It's difficult for JavaScript to know what dependencies your module needs, by allowing the WebAssembly program to create its own functions
           it creates only exactly what it needs.
 
   - beta: true
