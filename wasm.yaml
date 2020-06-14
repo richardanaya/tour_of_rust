@@ -908,7 +908,7 @@ pages:
         register_function(js:&str) -> usize
         ``` 
 
-        Since WebAssembly can only pass back and forth numbers, and since all numbers in JavasSript are 64-bit floats, 
+        Since WebAssembly can only pass back and forth numbers, and since all numbers in JavaScript are 64-bit floats, 
         what this will look like ultimately is an imported function:
 
         ```
@@ -919,9 +919,9 @@ pages:
     en:
       title: Calling Functions
       content_markdown: |
-        When we later want to call our dynamic function by handle, we'll need some sort of invokation function.
+        When we later want to call our dynamic function by handle, we'll need some sort of invocation function.
 
-        Again, since WebAssembly can only pass back and forth numbers, and since all numbers in JavasSript are 64-bit floats, 
+        Again, since WebAssembly can only pass back and forth numbers, and since all numbers in JavaScript are 64-bit floats, 
         what this will look like ultimately is an imported function:
 
         ```
@@ -936,8 +936,7 @@ pages:
             // somehow call console_log  
           }");
         let msg = "hello world";
-        js_invoke_with_2_params(
-            log_handle,msg.as_ptr() as f64, 
+        js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
             msg.len() as f64 );
         ```
 
@@ -957,7 +956,8 @@ pages:
             console.log(msg); 
           }")
         let msg = "hello world";
-        js_invoke_with_2_params(log_handle,msg.as_ptr() as f64, msg.len() as f64);
+        js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
+          msg.len() as f64);
         ```
   - beta: true
     en:
