@@ -937,7 +937,9 @@ pages:
           (param_a, param_b) => {
             // somehow call console_log  
           }");
+          
         let msg = "hello world";
+
         js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
             msg.len() as f64 );
         ```
@@ -957,7 +959,9 @@ pages:
             let msg = context.getUtf8FromMemory(msgStart,msgEnd);
             console.log(msg); 
           }");
+
         let msg = "hello world";
+
         js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
           msg.len() as f64);
         ```
@@ -978,7 +982,9 @@ pages:
             let objHandle = context.storeObject(domEl);
             return objHandle;
           }");
+
         let selector = "#fancy-button";
+
         js_invoke_with_2_params(
             log_handle,selector.as_ptr() as f64, 
             selector.len() as f64 );
@@ -1034,6 +1040,7 @@ pages:
             let objHandle = context.storeObject(ctx);
             return objHandle;
           }");
+
         let set_context_color = register_function("
           (context, ctxHandle, colorStart, colorEnd) => {
             let color = context.getUtf8FromMemory(
@@ -1041,6 +1048,7 @@ pages:
             let ctx = context.getObject(ctxHandle);
             ctx.fillColor(color);
           }");
+
         let draw_rect = register_function("
           (context, ctxHandle, x, y, width, height) => {
             let ctx = context.getObject(ctxHandle);
