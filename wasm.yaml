@@ -915,6 +915,8 @@ pages:
         register_function(js_start:f64,js_len:f64) -> f64
         ```
 
+        Underneath the covers we take advantage of JavaScript's `eval` function to make these functions real.
+
   - beta: true
     en:
       title: Calling Functions
