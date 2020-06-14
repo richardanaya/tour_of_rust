@@ -889,7 +889,7 @@ pages:
     en:
       title: Logging Revisited
       content_markdown: |
-        In our first chapter we manually wrote our log functions to do logging to `console.log`.  Let's consider how we would do this dynamically.
+        In our first chapter we manually wrote our log functions to do logging with `console.log`.  Let's consider how we would do this dynamically.
 
         * We need some way to register a function at runtime.
         * We need some way to call that function.
@@ -901,8 +901,8 @@ pages:
       content_markdown: |
         In order to register a function we need two things:
 
-        * we need to pass in the function we want to create in JavaScript
-        * we need to get back a handle so we can call that function later
+        * we need to pass body of function we want to create in JavaScript as a string
+        * we need to get back a handle so we can call that function later with parameters
 
         ```rust
         register_function(js:&str) -> usize
