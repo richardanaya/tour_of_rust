@@ -925,7 +925,7 @@ pages:
         what this will look like ultimately is an imported function:
 
         ```
-        js_invoke_with_2_params(fn_handle:f64, a:f64,b:f64) -> f64
+        js_invoke_with_2_params(fn_handle:f64, a:f64, b:f64) -> f64
         ``` 
 
         Putting it all together we
@@ -973,13 +973,16 @@ pages:
         ```rust
         let query_selector_handle = register_function("
           (context, selectorStart, selectorEnd) => {
-            let selector = context.getUtf8FromMemory(selectorStart,selectorEnd);
+            let selector = context.getUtf8FromMemory(
+              selectorStart,selectorEnd);
             let domEl = document.querySelector(selector);
             let objHandle = context.storeObject(domEl);
             return objHandle;
           }")
         let selector = "#fancy-button";
-        js_invoke_with_2_params(log_handle,selector.as_ptr() as f64, selector.len() as f64);
+        js_invoke_with_2_params(
+            log_handle,selector.as_ptr() as f64, 
+            selector.len() as f64 );
         ```
   - beta: true
     en:
@@ -1025,7 +1028,8 @@ pages:
         ```rust
         let get_2d_context = register_function("
           (context, selectorStart, selectorEnd) => {
-            let selector = context.getUtf8FromMemory(selectorStart,selectorEnd);
+            let selector = context.getUtf8FromMemory(
+              selectorStart,selectorEnd);
             let domEl = document.querySelector(selector);
             let ctx = domEl.getContext("2d");
             let objHandle = context.storeObject(ctx);
@@ -1033,7 +1037,8 @@ pages:
           }");
         let set_context_color = register_function("
           (context, ctxHandle, colorStart, colorEnd) => {
-            let color = context.getUtf8FromMemory(colorStart,colorEnd);
+            let color = context.getUtf8FromMemory(
+              colorStart,colorEnd);
             let ctx = context.getObject(ctxHandle);
             ctx.fillColor(color)
           }");
