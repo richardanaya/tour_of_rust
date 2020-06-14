@@ -916,7 +916,8 @@ pages:
   - en:
       title: Calling Functions
       content_markdown: |
-        When we later want to call our dynamic function by handle, we'll need some sort of invocation function.
+        When we later want to call our dynamic function, we'll need some sort of invocation function that can take 
+        in our function handle and arguments.
 
         Again, since WebAssembly can only pass back and forth numbers, and since all numbers in JavaScript are 64-bit floats, 
         what this will look like ultimately is an imported function:
@@ -981,7 +982,7 @@ pages:
 
         let selector = "#fancy-button";
 
-        js_invoke_with_2_params(
+        let dom_element_handle = js_invoke_with_2_params(
             log_handle,selector.as_ptr() as f64, 
             selector.len() as f64 );
         ```
