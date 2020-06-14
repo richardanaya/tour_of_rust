@@ -936,7 +936,9 @@ pages:
             // somehow call console_log  
           }")
         let msg = "hello world";
-        js_invoke_with_2_params(log_handle,msg.as_ptr() as f64, msg.len() as f64)
+        js_invoke_with_2_params(
+            log_handle,msg.as_ptr() as f64, 
+            msg.len() as f64 )
         ```
 
         You'll notice there is a problem with our JavaScript function though. It has the start and end of our utf-8 but not memory!
