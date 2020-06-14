@@ -891,9 +891,9 @@ pages:
       content_markdown: |
         In our first chapter we manually wrote our log functions to do logging to `console.log`.  Let's consider how we would do this dynamically.
 
-        * We need some way to register a function at runtime
-        * We need some way to call that function at runtime
-        * We'll need some way for that dynamic function to have access to memory for extracting utf-8 bytes
+        * We need some way to register a function at runtime.
+        * We need some way to call that function.
+        * We'll need some way for that dynamic function to have access to memory (e.g. for extracting utf-8 bytes.)
   
   - beta: true
     en:
