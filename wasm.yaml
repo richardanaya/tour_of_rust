@@ -967,9 +967,6 @@ pages:
         around numbers! To break past this challenge, we must establish a convention of using a numerical handle to represent
         a reference to our object in JavaScript.
 
-        When our dynamically invoked functions are called, the functions need to have access to the module's memory. We can place
-        important resources on a context object so our function has all the available tools to do it's job.
-
         ```rust
         let query_selector_handle = register_function("
           (context, selectorStart, selectorEnd) => {
