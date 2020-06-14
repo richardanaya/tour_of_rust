@@ -1024,7 +1024,7 @@ pages:
       title: Drawing To The Screen
       code: https://webassembly.studio/?embed&f=bdhga9zwlem
       content_markdown: |
-        Let's put it all together with a an example by drawing a red square to the screen. Let's think about the function's we'll need
+        Let's put it all together with a an example by drawing a red square to the screen. Let's think about the functions we'll need
         to register:
 
         ```rust
