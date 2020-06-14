@@ -212,7 +212,7 @@ pages:
         distincts:
 
         * Etant du bytecode de bas niveau, cela permet d'effectuer des calculs
-        plus rapidement que le javascript et d'avoir plus de contrôle sur la gestion
+        plus rapidement que le JavaScript et d'avoir plus de contrôle sur la gestion
         de la mémoire.
         * WebAssembly a été créé en s'inspirant des compilateurs existants, permettant
         ainsi aux langages natifs comme C / C ++ et Rust de produire ce bytecode.
@@ -352,7 +352,7 @@ pages:
         let module = await WebAssembly.instantiate(bytes);
         ```
 
-        During this phase we can **import** javascript functions we want our module to have access to. 
+        During this phase we can **import** JavaScript functions we want our module to have access to. 
         We'll show an example of this next chapter.
     en_c:
       clone: en
@@ -380,7 +380,7 @@ pages:
         let module = await WebAssembly.instantiate(bytes);
         ```
 
-        Durant ti-ci fase noi posse **importar** li functiones de javascript a quel noi vole que nor modul mey posser accesser. 
+        Durant ti-ci fase noi posse **importar** li functiones de JavaScript a quel noi vole que nor modul mey posser accesser. 
         Noi va dar un exemple de to in li capitul a sequer.
     pt-br:
       title: Criando um Módulo
@@ -391,7 +391,7 @@ pages:
         let module = await WebAssembly.instantiate(bytes);
         ```
 
-        Durante esta fase podemos **importar** funções javascript que desejamos que nosso módulo
+        Durante esta fase podemos **importar** funções JavaScript que desejamos que nosso módulo
         tenha acesso. Mostraremos um exemplo no próximo capítulo.
   - en:
       title: Using a Module
@@ -615,7 +615,7 @@ pages:
         You can get a typed view of this buffer that is very efficient to
         interact with.
 
-        ```javascript
+        ```JavaScript
         // create an array of 8 bytes
         let bytes = new ArrayBuffer(8);
         // view those 8 bytes as 8-bit unsigned integers
@@ -638,7 +638,7 @@ pages:
 
         Você pode obter uma visualização tipada desse buffer de uma maneira muito eficiente para interagir.
 
-        ```javascript
+        ```JavaScript
         // cria uma matriz de 8 bytes
         let bytes = new ArrayBuffer(8);
         // exibe estes 8 bytes como inteiros sem sinal de 8-bit
@@ -658,7 +658,7 @@ pages:
         JavaScript provides utility functions for writing/reading UTF-8 strings to/from
         bytes inside of `ArrayBuffer` objects.
 
-        ```javascript
+        ```JavaScript
         let bytes = new ArrayBuffer(8);
         const data = new Uint8Array(bytes);
         data[0] = 72;  // H
@@ -682,7 +682,7 @@ pages:
       content_markdown: |
         O JavaScript fornece funções utilitárias para ler e escrever strings UTF-8 para bytes dentro de objetos `ArrayBuffer` e vice-versa.
 
-        ```javascript
+        ```JavaScript
         let bytes = new ArrayBuffer(8);
         const data = new Uint8Array(bytes);
         data[0] = 79;  // O
@@ -712,7 +712,7 @@ pages:
 
         Here's an example of what that receiving JavaScript function would look like:
 
-        ```javascript
+        ```JavaScript
         wasm_log(start,len) {
           // extract text from memory location and length
           const utf8dec = new TextDecoder("utf-8");
@@ -738,7 +738,7 @@ pages:
 
         Aqui está um exemplo de como seria essa função de recebimento em JavaScript:
 
-        ```javascript
+        ```JavaScript
         wasm_log(start,len) {
           // extrai o texto de um lugar da memória e seu comprimento
           const utf8dec = new TextDecoder("utf-8");
@@ -762,7 +762,7 @@ pages:
 
         Here's an example of what that initialization looks like:
 
-        ```javascript
+        ```JavaScript
         // Turn "Ferris" into bytes
         const utf8enc = new TextEncoder("utf-8");
         let text = "Ferris";
@@ -797,7 +797,7 @@ pages:
 
         Aqui está um exemplo de como é essa inicialização:
 
-        ```javascript
+        ```JavaScript
         // Transforma "Ferris" em bytes
         const utf8enc = new TextEncoder("utf-8");
         let text = "Ferris";
@@ -874,10 +874,10 @@ pages:
     en:
       title: Why Dynamic Invocation?
       content_markdown: |
-        We saw in the first chapters that we could easily write our own javascript functions by hand in our `.js` files, so why
+        We saw in the first chapters that we could easily write our own JavaScript functions by hand in our `.js` files, so why
         dynamically create functions?
 
-        * Most people come to WebAssembly to escape JavaScript. Dynamic creation of javascript functions allow us to use
+        * Most people come to WebAssembly to escape JavaScript. Dynamic creation of JavaScript functions allow us to use
           libraries in our native language that do the hard part of dynamically creating their bindings without everyone having
           to recreate the wheel.
 
@@ -903,7 +903,7 @@ pages:
       content_markdown: |
         In order to register a function we need two things:
 
-        * we need to pass in the function we want to create in javascript
+        * we need to pass in the function we want to create in JavaScript
         * we need to get back a handle so we can call that function later
 
         ```rust
@@ -941,7 +941,7 @@ pages:
         js_invoke_with_2_params(log_handle,msg.as_ptr() as f64, msg.len() as f64)
         ```
 
-        You'll notice there is a problem with our javascript function though. It has the start and end of our utf-8 but not memory!
+        You'll notice there is a problem with our JavaScript function though. It has the start and end of our utf-8 but not memory!
 
   - beta: true
     en:
@@ -965,7 +965,7 @@ pages:
       content_markdown: |
         We run into an issue with dynamic functions when we want to return a reference to an object. WebAssembly can only pass
         around numbers! To break past this challenge, we must establish a convention of using a numerical handle to represent
-        a reference to our object in javascript.
+        a reference to our object in JavaScript.
 
         When our dynamically invoked functions are called, the functions need to have access to the module's memory. We can place
         important resources on a context object so our function has all the available tools to do it's job.
@@ -1047,7 +1047,7 @@ pages:
     en:
       title: Chapter 3 - Dynamic Invocation
       content_markdown: |
-        We now have the ability to invoke any kind of javascript! How cool is that? Using eval obviously is not that idea,
+        We now have the ability to invoke any kind of JavaScript! How cool is that? Using eval obviously is not that idea,
         WebAssembly is an evolving technology that will one day have better ways to access any aspect of the 
         browser. Until then we do our best! The next chapter is on asynchronous programming!
 
