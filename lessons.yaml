@@ -5191,7 +5191,7 @@ pages:
   - en:
       title: Trait Objects
       content_markdown: |
-        When we pass an instance of an object to a parameter of type `&MyTrait` we pass what is called *trait object*. 
+        When we pass an instance of an object to a parameter of type `&dyn MyTrait` we pass what is called *trait object*. 
 
         A trait object is what allows us to indirectly call the correct methods of an instance. A trait object is a struct that holds the pointer of 
         our instance with a list of function pointers to our instance's methods.
@@ -5202,7 +5202,7 @@ pages:
     ie:
       title: Trate-Objectes
       content_markdown: |
-        Quande noi transfere un instantie de un objecte a un parametre del tip `&MyTrait` noi transfere un cose nominat un *trait object*.
+        Quande noi transfere un instantie de un objecte a un parametre del tip `&dyn MyTrait` noi transfere un cose nominat un *trait object*.
 
         Un trait object es to quel auxilia nos índirectmen vocar li corect metodes de un instantie. Un trait object es un struct quel tene li puntator de
         nor instantie con un liste de puntatores del functiones al metodes de nor instantie.
