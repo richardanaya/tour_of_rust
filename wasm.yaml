@@ -518,6 +518,14 @@ pages:
         In this chapter we will explore the strategies used to move data back and forth.
     en_c:
       clone: en
+    fr:
+      title: Chapter 2 - Partage de structures de données
+      content_markdown: |
+        JavaScript et ton programme WebAssembly ont des représentations très différentes des données au niveau de la mémoire.
+        Pour rendre les choses plus complexes, l'interaction avec l'environnement hôte de WebAssembly est très limité.
+        Dans ce chapitre, nous explorerons les stratégies utilisées pour échanger les données entre JavaScript et WebAssembly.
+    fr_c:
+      clone: fr
     pt-br:
       title: Capítulo 2 - Compartilhando Estruturas de dados
       content_markdown: |
@@ -541,6 +549,23 @@ pages:
         WebAssembly modules can only call functions that have been explicitly imported.
 
         C uses the `extern` keyword to define signatures of the imported functions.
+    fr:
+      title: Import de Fonctions
+      code: https://webassembly.studio/?embed&f=pp20eedhka
+      content_markdown: |
+        Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui ont été explicitement importées.
+
+        Rust utilise `extern" C "{...}` pour répertorier les signatures de fonction de ces fonctions importées.
+
+        Note que l'appel d'une fonction importée est considéré comme `unsafe` (dangereux) par Rust car le compilateur
+        ne peut faire aucune garantie sur ce qui se passe dans son implémentation.
+    fr_c:
+      title: Import de Fonctions
+      code: https://webassembly.studio/?embed&f=bah3p4wjere
+      content_markdown: |
+        Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui ont été explicitement importées.
+
+        C utilise le mot-clé `extern` pour définir les signatures des fonctions importées.
     pt-br:
       title: Importando Funções
       code: https://webassembly.studio/?embed&f=pp20eedhka
@@ -572,6 +597,29 @@ pages:
         So in order to communicate between JavaScript and WebAssembly we will have to get clever with the meaning of numbers!
 
         C is fairly good at converting it's primitive types to WebAssembly's numerical equivalents.
+
+    fr:
+      title: Limitations des Fonctions
+      content_markdown: |
+        Les types des paramètres et retours d'une fonction sont limités à:
+
+        * i32/i64
+        * f32/f64
+
+        Donc, pour communiquer entre JavaScript et WebAssembly, nous devrons ruser sur les types à utiliser!
+
+        Rust permet facilement de convertir ses types primitifs en équivalents numériques de WebAssembly.
+    fr_c:
+      title: Limitations des Fonctions
+      content_markdown: |
+        Les types de paramètres et de fonctions de retour sont limités à:
+
+        * int/long
+        * float/double
+
+        Donc, pour communiquer entre JavaScript et WebAssembly, nous devrons ruser sur les types à utiliser!
+
+        C permet facilement de convertir ses types primitifs en équivalents numériques de WebAssembly.
 
     pt-br:
       title: Limitações das Funções
