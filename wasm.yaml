@@ -864,14 +864,12 @@ pages:
         É importante lembrar que o WebAssembly é um byte-code executável de baixo nível com preocupações a respeito de estruturas de memória que são muito mais refinadas que o JavaScript. Confira o suporte da biblioteca da sua linguagem de programação para ferramentas que ajudam a tornar essa tarefa mais fácil! Para o Rust, o [wasm-bindgen] (https://github.com/rustwasm/wasm-bindgen) é uma opção popular.
 
         No próximo capítulo falaremos sobre uma técnica para chamar dinamicamente funções JavaScript e garbage collection!
-  - beta: true
-    chapter: 3
+  - chapter: 3
     en:
       title: Chapter 3 - Dynamic Invocation
       content_markdown: |
         In this chapter we will talk about how we can create our own dynamic functions at runtime to call from WebAssembly.
-  - beta: true
-    en:
+  - en:
       title: Why Dynamic Invocation?
       content_markdown: |
         We saw in the first chapters that we could easily write our own JavaScript functions by hand in our `.js` files, so why
@@ -885,8 +883,7 @@ pages:
         * It's difficult for JavaScript to know what dependencies your module needs, by allowing the WebAssembly program to create its own functions
           it creates only exactly what it needs.
 
-  - beta: true
-    en:
+  - en:
       title: Logging Revisited
       content_markdown: |
         In our first chapter we manually wrote our log functions to do logging with `console.log`.  Let's consider how we would do this dynamically.
@@ -895,8 +892,7 @@ pages:
         * We need some way to call that function.
         * We'll need some way for that dynamic function to have access to memory (e.g. for extracting utf-8 bytes.)
   
-  - beta: true
-    en:
+  - en:
       title: Registering Functions
       content_markdown: |
         In order to register a function we need two things:
@@ -917,8 +913,7 @@ pages:
 
         Underneath the covers we take advantage of JavaScript's `eval` function to make these functions real.
 
-  - beta: true
-    en:
+  - en:
       title: Calling Functions
       content_markdown: |
         When we later want to call our dynamic function by handle, we'll need some sort of invocation function.
@@ -946,8 +941,7 @@ pages:
 
         You'll notice there is a problem with our JavaScript function though. It has the start and end of our utf-8 but not memory!
 
-  - beta: true
-    en:
+  - en:
       title: Context Of Dynamic Invocation
       code: https://webassembly.studio/?embed&f=70lhg7nwda9
       content_markdown: |
@@ -968,8 +962,7 @@ pages:
         ```
 
         Look at the example for the complete implementation.
-  - beta: true
-    en:
+  - en:
       title: Returning References
       content_markdown: |
         We run into an issue with dynamic functions when we want to return a reference to an object. WebAssembly can only pass
@@ -992,8 +985,7 @@ pages:
             log_handle,selector.as_ptr() as f64, 
             selector.len() as f64 );
         ```
-  - beta: true
-    en:
+  - en:
       title: Allocators
       code: https://webassembly.studio/?embed&f=mz2gu9y29tn
       content_markdown: |
@@ -1027,8 +1019,7 @@ pages:
 
         There are many issues for you to consider with your implementation.
 
-  - beta: true
-    en:
+  - en:
       title: Drawing To The Screen
       code: https://webassembly.studio/?embed&f=bdhga9zwlem
       content_markdown: |
@@ -1051,7 +1042,7 @@ pages:
             let color = context.getUtf8FromMemory(
               colorStart,colorEnd);
             let ctx = context.getObject(ctxHandle);
-            ctx.fillColor(color);
+            ctx.fillStyle = color;
           }");
 
         let draw_rect = register_function("
@@ -1060,8 +1051,7 @@ pages:
             ctx.fillRect(x,y,width,height);
           }");
         ```
-  - beta: true
-    en:
+  - en:
       title: Chapter 3 Conclusion
       content_markdown: |
         We now have the ability to invoke any kind of JavaScript! How cool is that? Using eval obviously is not that idea,
