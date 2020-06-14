@@ -880,10 +880,8 @@ pages:
         * Most people come to WebAssembly to escape JavaScript. Dynamic creation of JavaScript functions allow us to use
           libraries in our native language that do the hard part of dynamically creating their bindings without everyone having
           to recreate the wheel.
-
         * Simplifies our setup and bootstrapping of our WebAssembly module to a bare minimum. We only need the ability to register 
           new functions and call those new functions instead of specifying a litany of hand written JavaScript functions.
-
         * It's difficult for JavaScript to know what dependencies your module needs, by allowing the WebAssembly program to create its own functions
           it creates only exactly what it needs.
 
