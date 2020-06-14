@@ -934,11 +934,11 @@ pages:
         let log_handle = register_function("
           (param_a, param_b) => {
             // somehow call console_log  
-          }")
+          }");
         let msg = "hello world";
         js_invoke_with_2_params(
             log_handle,msg.as_ptr() as f64, 
-            msg.len() as f64 )
+            msg.len() as f64 );
         ```
 
         You'll notice there is a problem with our JavaScript function though. It has the start and end of our utf-8 but not memory!
@@ -1040,7 +1040,7 @@ pages:
             let color = context.getUtf8FromMemory(
               colorStart,colorEnd);
             let ctx = context.getObject(ctxHandle);
-            ctx.fillColor(color)
+            ctx.fillColor(color);
           }");
         let draw_rect = register_function("
           (context, ctxHandle, x, y, width, height) => {
