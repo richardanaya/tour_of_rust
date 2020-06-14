@@ -956,7 +956,7 @@ pages:
           (context, msgStart, msgEnd) => {
             let msg = context.getUtf8FromMemory(msgStart,msgEnd);
             console.log(msg); 
-          }")
+          }");
         let msg = "hello world";
         js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
           msg.len() as f64);
@@ -977,7 +977,7 @@ pages:
             let domEl = document.querySelector(selector);
             let objHandle = context.storeObject(domEl);
             return objHandle;
-          }")
+          }");
         let selector = "#fancy-button";
         js_invoke_with_2_params(
             log_handle,selector.as_ptr() as f64, 
