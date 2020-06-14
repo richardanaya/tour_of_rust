@@ -937,7 +937,7 @@ pages:
           (param_a, param_b) => {
             // somehow call console_log  
           }");
-          
+
         let msg = "hello world";
 
         js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
@@ -949,6 +949,7 @@ pages:
   - beta: true
     en:
       title: Context Of Dynamic Invocation
+      code: https://webassembly.studio/?embed&f=rsr22xbqroe
       content_markdown: |
         When our dynamically invoked functions are called, the functions need to have access to the module's memory. We can place
         important resources on a context object so our function has all the available tools to do it's job.
@@ -965,6 +966,8 @@ pages:
         js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
           msg.len() as f64);
         ```
+
+        Look at the example for the complete implementation.
   - beta: true
     en:
       title: Returning References
