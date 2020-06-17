@@ -926,18 +926,18 @@ pages:
       clone: en
       code: https://webassembly.studio/?embed&f=0wwbpbvt4kwk
     fr:
-      title: Envoie de Texte vers un Programme WebAssembly
+      title: Envoi de Texte vers un Programme WebAssembly
       code: https://webassembly.studio/?embed&f=rasfcwobpv
       content_markdown: |
         Explorons l'idée opposée. Imagine que nous voulons envoyer du texte vers notre
         programme WebAssembly.
 
         Nous devons:
-        1. Déterminez la longueur en octets du texte que nous souhaitons transmettre.
-        1. Allouez suffisamment d'espace dans notre mémoire pour ces octets.
-        2. Copiez les octets dans la mémoire de notre programme à la position que nous
+        1. Déterminer la longueur en octets du texte que nous souhaitons transmettre.
+        2. Allouer suffisamment d'espace dans notre mémoire pour ces octets.
+        3. Copier les octets dans la mémoire de notre programme à la position que nous
         venons d'allouer.
-        3. Informez au programme WebAssembly que nous avons mis ces octets dans sa mémoire
+        4. Informer au programme WebAssembly que nous avons mis ces octets dans sa mémoire
         en lui indiquant l'index et la taille.
 
         Voici un exemple de ce à quoi ressemble cette initialisation:
@@ -1015,15 +1015,15 @@ pages:
         Il est possible que tu trouves cela pénible de devoir passer la taille des données
         en mémoire ainsi que l'index de début de celles-ci.
       
-        Ne pourrions-nous pas ruser pour échanger une sructure données d'une manière simple
-        sans avoir à passer chaque champs un à un? Pense au chaînes de caratères du C
-        (en anglais * C strings *) qui déclare la fin du texte avec le caractère `\ 0`.
+        Ne pourrions-nous pas ruser pour échanger une structure donnée de manière simple
+        sans devoir passer chaque champs un à un? Pense au chaînes de caractères du C
+        (en anglais * C strings *) qui déclare la fin du texte avec le caractère `\0`.
 
-        Tu l'as peut-être déjà à l'esprit, mais nous pouvons utiliser le json! Ce ni plus ni
-        moins qu'une chaîne de caratères et tu sais déjà comment échanger ce type de donnée! 
+        Tu l'as peut-être déjà à l'esprit, mais nous pouvons utiliser le json! Ce n'est ni plus ni
+        moins qu'une chaîne de caractères et tu sais déjà comment échanger ce type de donnée! 
 
         N'oublie pas que tu as le contrôle sur la représentation mémoire des données et
-        c'est donc à toi de choisir celle que te simplifie le travail.
+        c'est donc à toi de choisir celle qui te simplifie le travail.
     fr_c:
       clone: fr
     pt-br:
@@ -1055,7 +1055,7 @@ pages:
 
         In our next chapter we will talk about a technique for dynamically calling JavaScript functions and garbage collection!
     fr:
-      title: Chapter 2 Conclusion
+      title: Chapitre 2 - Conclusion
       content_markdown: |
         Echanger des données entre l'hôte et un programme WebAssembly est fastidieux,
         mais cela peut entraîner de grands gains en performances.
@@ -1070,7 +1070,7 @@ pages:
         dynamiquement les fonctions JavaScript et nous aborderons
         le ramasse-miettes (garbage collector)!
     fr_c:
-      title: Chapter 2 Conclusion
+      title: Chapitre 2 - Conclusion
       content_markdown: |
         Echanger des données entre l'hôte et un programme WebAssembly est fastidieux,
         mais cela peut entraîner de grands gains en performances.
@@ -1095,10 +1095,10 @@ pages:
       content_markdown: |
         In this chapter we will talk about how we can create our own dynamic functions at runtime to call from WebAssembly.
     fr:
-      title: Chapter 3 - Invocation dynamique
+      title: Chapitre 3 - Invocation dynamique
       content_markdown: |
         Dans ce chapitre, nous expliquerons comment créer nos propres fonctions
-        dynamiques (créées lors de l'exécution) et être appelées depuis WebAssembly.
+        dynamiques (créées lors de l'exécution) et les appeler depuis WebAssembly.
   - en:
       title: Why Dynamic Invocation?
       content_markdown: |
