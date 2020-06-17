@@ -456,7 +456,7 @@ pages:
         `__attribute__((visibility("default")))` tells our compiler to keep our function name human readable to JavaScript.
     fr:
       title: 1+1
-      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      code: https://webassembly.studio/?embed&f=ays6dkowzyk
       content_markdown: |
         Nous en savons suffisamment pour écrire notre premier module WebAssembly:
         l'addition de deux nombre! Le résultat sera affiché dans l'html.
@@ -465,7 +465,7 @@ pages:
         le nom de la fonction pour qu'on puisse l'appeler depuis le JavaScript.
     fr_c:
       title: 1+1
-      code: https://webassembly.studio/?embed&f=glwzquv2gh8
+      code: https://webassembly.studio/?embed&f=sxf9utkxgbo
       content_markdown: |
         Nous en savons suffisamment pour écrire notre premier module WebAssembly:
         l'addition de deux nombre! Le résultat sera affiché dans l'html.
@@ -551,7 +551,7 @@ pages:
         C uses the `extern` keyword to define signatures of the imported functions.
     fr:
       title: Import de Fonctions
-      code: https://webassembly.studio/?embed&f=pp20eedhka
+      code: https://webassembly.studio/?embed&f=wy84hvb1mec
       content_markdown: |
         Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui ont été explicitement importées.
 
@@ -561,7 +561,7 @@ pages:
         ne peut faire aucune garantie sur ce qui se passe dans son implémentation.
     fr_c:
       title: Import de Fonctions
-      code: https://webassembly.studio/?embed&f=bah3p4wjere
+      code: https://webassembly.studio/?embed&f=24dhd9oyxo4
       content_markdown: |
         Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui ont été explicitement importées.
 
@@ -840,8 +840,8 @@ pages:
       clone: en
       code: https://webassembly.studio/?embed&f=vh15t7nok4p
     fr:
-      title: Logger du texte
-      code: https://webassembly.studio/?embed&f=1gxcr004p3x
+      title: Affichage de texte depuis WebAssembly
+      code: https://webassembly.studio/?embed&f=o2u0e8p0lpi
       content_markdown: |
         Explorons un exemple simple d'affichage de texte à partir d'un programme WebAssembly.
 
@@ -866,7 +866,7 @@ pages:
         ```
     fr_c:
       clone: fr
-      code: https://webassembly.studio/?embed&f=vh15t7nok4p
+      code: https://webassembly.studio/?embed&f=1k8ag8em8q9
     pt-br:
       title: Logando Texto
       code: https://webassembly.studio/?embed&f=1gxcr004p3x
@@ -925,6 +925,44 @@ pages:
     en_c:
       clone: en
       code: https://webassembly.studio/?embed&f=0wwbpbvt4kwk
+    fr:
+      title: Envoi de Texte vers un Programme WebAssembly
+      code: https://webassembly.studio/?embed&f=rasfcwobpv
+      content_markdown: |
+        Explorons l'idée opposée. Imagine que nous voulons envoyer du texte vers notre
+        programme WebAssembly.
+
+        Nous devons:
+        1. Déterminer la longueur en octets du texte que nous souhaitons transmettre.
+        2. Allouer suffisamment d'espace dans notre mémoire pour ces octets.
+        3. Copier les octets dans la mémoire de notre programme à la position que nous
+        venons d'allouer.
+        4. Informer au programme WebAssembly que nous avons mis ces octets dans sa mémoire
+        en lui indiquant l'index et la taille.
+
+        Voici un exemple de ce à quoi ressemble cette initialisation:
+
+        ```JavaScript
+        // Transforme "Ferris" en octets.
+        const utf8enc = new TextEncoder("utf-8");
+        let text = "Ferris";
+        let text_bytes = utf8enc.encode(text);
+
+        // Alloue de l'espace mémoire pour le texte.
+        let len = text_bytes.length;
+        let start = module.instance.exports.wasm_malloc(len);
+
+        // Met le texte dans la mémoire du programme WebAssembly.
+        let buffer = module.instance.exports.memory.buffer;
+        let memory = new Uint8Array(buffer);
+        memory.set(text_bytes, start);
+
+        // Exécute le programme.
+        module.instance.exports.main(start,len);
+        ```
+    fr_c:
+      clone: fr
+      code: https://webassembly.studio/?embed&f=etabmws7uru
     pt-br:
       title: Lendo Texto
       code: https://webassembly.studio/?embed&f=ubmxmavgf2
@@ -971,6 +1009,23 @@ pages:
         are appropriate for your use cases!
     en_c:
       clone: en
+    fr:
+      title: Découverte des représentations
+      content_markdown: |
+        Il est possible que tu trouves cela pénible de devoir passer la taille des données
+        en mémoire ainsi que l'index de début de celles-ci.
+      
+        Ne pourrions-nous pas ruser pour échanger une structure donnée de manière simple
+        sans devoir passer chaque champs un à un? Pense au chaînes de caractères du C
+        (en anglais * C strings *) qui déclare la fin du texte avec le caractère `\0`.
+
+        Tu l'as peut-être déjà à l'esprit, mais nous pouvons utiliser le json! Ce n'est ni plus ni
+        moins qu'une chaîne de caractères et tu sais déjà comment échanger ce type de donnée! 
+
+        N'oublie pas que tu as le contrôle sur la représentation mémoire des données et
+        c'est donc à toi de choisir celle qui te simplifie le travail.
+    fr_c:
+      clone: fr
     pt-br:
       title: Descobrindo Representações
       content_markdown: |
@@ -999,6 +1054,34 @@ pages:
         library support for tools that help make this an easier task!
 
         In our next chapter we will talk about a technique for dynamically calling JavaScript functions and garbage collection!
+    fr:
+      title: Chapitre 2 - Conclusion
+      content_markdown: |
+        Echanger des données entre l'hôte et un programme WebAssembly est fastidieux,
+        mais cela peut entraîner de grands gains en performances.
+        Il est important de se rappeler que WebAssembly exécute du bytecode bas-niveau et
+        nous donne un contrôle sur la mémoire beaucoup plus fin que JavaScript.
+        N'hésite pas non plus à regarder s'il n'existe pas de librairies Rust pour te
+        simplifier la tâche.
+        Par exemple, [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) est une
+        option populaire.
+
+        Dans le prochain chapitre, nous parlerons d'une technique pour appeler
+        dynamiquement les fonctions JavaScript et nous aborderons
+        le ramasse-miettes (garbage collector)!
+    fr_c:
+      title: Chapitre 2 - Conclusion
+      content_markdown: |
+        Echanger des données entre l'hôte et un programme WebAssembly est fastidieux,
+        mais cela peut entraîner de grands gains en performances.
+        Il est important de se rappeler que WebAssembly exécute du bytecode bas-niveau et
+        nous donne un contrôle sur la mémoire beaucoup plus fin que JavaScript.
+        N'hésite pas non plus à regarder s'il n'existe pas de librairies C pour te
+        simplifier la tâche.
+
+        Dans le prochain chapitre, nous parlerons d'une technique pour appeler
+        dynamiquement les fonctions JavaScript et nous aborderons le
+        ramasse-miettes (garbage collector)!
     pt-br:
       title: Capítulo 2 - Conclusão
       content_markdown: |
@@ -1011,6 +1094,11 @@ pages:
       title: Chapter 3 - Dynamic Invocation
       content_markdown: |
         In this chapter we will talk about how we can create our own dynamic functions at runtime to call from WebAssembly.
+    fr:
+      title: Chapitre 3 - Invocation dynamique
+      content_markdown: |
+        Dans ce chapitre, nous expliquerons comment créer nos propres fonctions
+        dynamiques (créées lors de l'exécution) et les appeler depuis WebAssembly.
   - en:
       title: Why Dynamic Invocation?
       content_markdown: |
