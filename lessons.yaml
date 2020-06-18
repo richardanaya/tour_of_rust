@@ -5405,16 +5405,16 @@ pages:
         by a reference. A reference is fundamentally just a number representing the start
         of some bytes of data, it's only purpose is to represent the concept of where data exists.
 
-        The *value* of data pointed at by references is used in two ways:
-        * The assignment of the value at a reference
-        * The accessing of fields or methods of a value
+        The *value* of the data pointed at by references is used in two ways:
+        * The assignment of the value at a reference to someplace else
+        * The accessing of fields or methods of a value pointed by a reference
 
-        Rust has some powerful operators that allow us to do this explicitly and somewhat subtly.
+        Rust has some powerful operators that allow us to dereference both explicitly and subtly.
   - beta: true
     en:
       title: The * Operator
       content_markdown: |
-        The `*` operaator is an explicit way to dereference a reference. 
+        The `*` operator is an explicit way to dereference a reference. 
 
         ```rust
         let a:i32 = 42;
@@ -5425,7 +5425,7 @@ pages:
 
         Memory detail:
         - Because i32 is a primitive type that implements the Copy trait, 
-        the bytes of `a` are copied into the bytes of `b`
+        the bytes of variable `a` on stack are copied into the bytes of varaible `b`.
   - beta: true
     en:
       title: The . Operator
@@ -5446,23 +5446,26 @@ pages:
   - beta: true
     en:
       title: Smart Pointers
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
       content_markdown: |
         In addition to the ability to create references to existing types using the `&` operator. Rust gives us the ability
-        to create *reference-like` structs often times called smart pointers. 
+        to create *reference-like* structs often times called **smart pointers**. 
         
-        We can think of references at a high level as a type that give us another type.  Their behavior is driven by internal 
-        logic that a programmer writes.
+        We can think of references at a high level as a type that give us another type.  Smart pointers are different in their 
+        behavior from normal references in that they operate based on internal logic that a programmer writes. You the programmer
+        are the *smart* part.
 
-        Typically a smart pointer implements traits `Deref`,`DerefMut`,`Drop` to specify the logic of what should happen when
+        Typically a smart pointers implements traits `Deref`,`DerefMut`,`Drop` to specify the logic of what should happen when
         the structure is dereferenced with `*` and `.` operators.
   - beta: true
     en:
       title: Smart Unsafe Code
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%5Bu8%3B4%5D%20%3D%20%5B86%2C14%2C73%2C64%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Getting%20the%20memory%20address%20of%20something%20is%20totally%20safe%3A%20%7B%7D%22%2Cpointer_a)%3B%0A%20%20%20%20%2F%2F%20turn%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20()%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%20%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%20to%20assume%20this%20is%20a%20valid%20f32%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D
       content_markdown: |
         A fair warning in advance, smart pointers tend to use *unsafe* code fairly heavily. As mentioned at the beginning, 
         they tend to be our interface to the lowest levels of memory.
 
-        What does it mean to write unsafe code? Unsafe code behaves exactly like with the exception of a few abilities that
+        What does it mean to write unsafe code? Unsafe code behaves exactly like normal Rust with the exception of a few abilities that
         the Rust compiler is unable to make memory safety gaurantees about.
 
         The heart of unsafe code is the ability to *dereference a raw pointer*. What does that mean? It means taking some 
@@ -5470,7 +5473,7 @@ pages:
         track of the meaning of every byte that gets written to memory. Because Rust cannot make any gaurantees about what 
         exists at an arbtrary number it's given, it must be put in `unsafe { ... }`. 
 
-        Smart pointers tend to use *dereferences of raw pointers* extensively.
+        Smart pointers tend to  *dereference raw pointers* extensively, but they are well proven in what they do.
   - beta: true
     en:
       title: Familiar Friends
