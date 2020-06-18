@@ -1119,11 +1119,11 @@ pages:
         écrire nos propres fonctions JavaScript à la main dans nos fichiers `.js`,
         alors pourquoi vouloir créer dynamiquement ces fonctions?
 
-        * Un certain nombre de développeurs sont attiré par WebAssembly pour échapper
+        * Un certain nombre de développeurs sont attirés par WebAssembly pour échapper
           à JavaScript. On pourrait imaginer des librairies natives Rust qui facilitent
           la liaison avec JavaScript et nous évite tout simplement d'écrire du code
           JavaScript.
-        * Simplifie la configuration et l'amorçage d'un module WebAssembly.
+        * Cela simplifie la configuration et l'amorçage d'un module WebAssembly.
           Nous avons seulement besoin de donner à WebAssembly un moyen de pouvoir
           déclarer et exécuter nos fonctions JavaScript. Nous n'avons dès lors plus
           besoin de spécifier une pléthore de fonctions dans notre code JavaScript.
@@ -1176,7 +1176,7 @@ pages:
     fr:
       title: Déclaration de Fonctions
       content_markdown: |
-      Pour déclarer une fonction, nous avons besoin de deux choses:
+          Pour déclarer une fonction, nous avons besoin de deux choses:
 
         * Nous devons passer le corps de la fonction JavaScript que nous voulons créer
         sous la forme d'une chaîne de caractères.
