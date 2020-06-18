@@ -5399,8 +5399,8 @@ pages:
         memory with Rust's expectations of safety. 
         
         Ferris says: "Don't feel overwhelmed by this chapter if you don't feel confident 
-        you could write your own low level management code. This chapter is mostly to
-        introduce you to some useful tools and give a glimpse at how they work!"
+        you could write your own low level memory management code in one short read. This chapter 
+        is mostly to introduce you to some useful tools and give a glimpse at how they work!"
 
   - beta: true
     en:
