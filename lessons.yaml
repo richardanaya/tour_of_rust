@@ -5508,7 +5508,7 @@ pages:
         the Rust compiler is unable to make gaurantees about.
 
         The heart of unsafe code is the ability to *dereference a raw pointer*. What does that mean? It means taking  *raw pointer* 
-        to a position in memory and declaring "a data structure exists here!" and turning it into a representation of data. 
+        to a position in memory and declaring "a data structure exists here!" and turning it into a representation of data (i.e. `*const u8` into `u8`). 
         Rust has no way to keep track of the meaning of every byte that gets written to memory. Because Rust cannot make 
         any gaurantees about what exists at an arbtrary number used as a *raw pointer*, so it must be put in an `unsafe { ... }` block. 
 
