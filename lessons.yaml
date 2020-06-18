@@ -5510,7 +5510,7 @@ pages:
         `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
         exists in these bytes.  The `Vec<T>` data structure interprets what it means to grab items from these region of bytes,
         keep track of the index numbers of where data structures begin and end, and then finally dereference those raw pointer
-        numbers into datastructure values.
+        numbers into data structures.
 
         Similarly, `String` keeps track of a memory region of bytes, and programatically restricts that the content's be `utf-8` 
         and helps dereference that memory region into a type `&str`.
