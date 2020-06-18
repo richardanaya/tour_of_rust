@@ -5396,6 +5396,61 @@ pages:
       content_markdown: |
         TODO
   - beta: true
+    en:
+      title: Dereferencing
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: The * Operator
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: The . Operator
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Smart Pointers
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Familiar Friends
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Heap Allocated Memory
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Failable Main Revisited
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Referencing Counting
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Sharing Access
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Sharing Across Threads
+      content_markdown: |
+        TODO
+  - beta: true
+    en:
+      title: Chapter 8 Conclusion
+      content_markdown: |
+        TODO
+  - beta: true
     chapter: 9
     en:
       title: Chapter 9 - Project Organization and Structure
