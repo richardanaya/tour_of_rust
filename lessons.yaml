@@ -5497,23 +5497,23 @@ pages:
       title: Smart Unsafe Code
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20in%20memory%3A%20%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
       content_markdown: |
-        A fair warning in advance, smart pointers tend to use *unsafe* code fairly heavily. As mentioned at the beginning, 
-        they tend to be our interface to the lowest levels of memory.
+        Smart pointers tend to use *unsafe* code fairly often. As mentioned at the beginning, 
+        they tend to be our tools for interacting with the lowest levels of memory.
 
         What does it mean to write unsafe code? Unsafe code behaves exactly like normal Rust with the exception of a few abilities that
-        the Rust compiler is unable to make memory safety gaurantees about.
+        the Rust compiler is unable to make gaurantees about.
 
-        The heart of unsafe code is the ability to *dereference a raw pointer*. What does that mean? It means taking some 
-        number that pointers to a position in memory and declaring "a data structure exists here!". Rust has no way to keep
-        track of the meaning of every byte that gets written to memory. Because Rust cannot make any gaurantees about what 
-        exists at an arbtrary number it's given, it must be put in `unsafe { ... }`. 
+        The heart of unsafe code is the ability to *dereference a raw pointer*. What does that mean? It means taking  *raw pointer* 
+        to a position in memory and declaring "a data structure exists here!" and it into a reference to data. 
+        Rust has no way to keep track of the meaning of every byte that gets written to memory. Because Rust cannot make 
+        any gaurantees about what exists at an arbtrary number used as a *raw pointer*, so it must be put in an `unsafe { ... }` block. 
 
         Smart pointers tend to  *dereference raw pointers* extensively, but they are well proven in what they do.
   - beta: true
     en:
       title: Familiar Friends
       content_markdown: |
-        Consider some already familiar friends like `Vec<T>` and `String`.
+        Consider some already smart pointers we've seen like `Vec<T>` and `String`.
 
         `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
         exists in these bytes.  The `Vec<T>` data structure interprets what it means to grab items from these region of bytes,
@@ -5524,6 +5524,9 @@ pages:
         and helps dereference that memory region into a type `&str`.
 
         Both `Vec<T>` and `String` use unsafe dereferencing of raw pointers to do their job.
+
+        Memory details:
+        * Rust has an equivalent of C's `malloc` called [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
   - beta: true
     en:
       title: Heap Allocated Memory
