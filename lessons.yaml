@@ -5516,9 +5516,9 @@ pages:
         Consider some already smart pointers we've seen like `Vec<T>` and `String`.
 
         `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
-        exists in these bytes. It interprets what it means to grab items from these region of bytes,
-        keeps of where data structures begin and end, and then finally dereference those raw pointer
-        numbers into data structures through a nice clean ergonomic interface.
+        exists in these bytes. The vector smart pointer interprets what it means to grab items from these region of bytes,
+        keeps track of where data structures within those bytes begin and end, and then finally dereference those raw pointer
+        into data structures into a nice clean ergonomic interface for us to use.
 
         Similarly, `String` keeps track of a memory region of bytes, and programatically restricts that the content's to always be `utf-8` 
         and helps dereference that memory region into a type `&str`.
