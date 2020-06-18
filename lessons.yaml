@@ -5397,22 +5397,16 @@ pages:
         In this chapter we will demystify smart pointers. We will explore into
         these data structures that let us interface with the lowest level of 
         memory with Rust's expectations of safety.
+        
   - beta: true
     en:
-      title: Dereferencing
+      title: References Revisited
       content_markdown: |
-        Dereferencing is the process of accessing/manipulating data that is being referred to
-        by a *reference* (i.e. `&i32`). A reference is fundamentally just a number representing the start
+        A reference is fundamentally just a number representing the start
         of some bytes of data in memory, it's only purpose is to represent the concept of 
         where data exists. What makes a reference different from a just a number is that Rust
         will validate the lifetime of references that they don't exist longer than what
         they refer to.
-
-        The data referred to by references is used in two methods:
-        * Access to the referred data during assignment of variables.
-        * Access to fields or methods of the referred data.
-
-        Rust has some powerful operators that allow us to dereference both explicitly and subtly.
 
   - beta: true
     en:
@@ -5437,6 +5431,20 @@ pages:
           how it can be stored and moved around to other functions.
         * A raw pointer in rust is similar to a pointer in C that it represents a number that can be copied 
           passed around, and even turned into numerical types where it can be modifed as a number to do pointer math.
+  
+  - beta: true
+    en:
+      title: Dereferencing
+      content_markdown: |
+        Dereferencing is the process of accessing/manipulating data that is being referred to
+        by a *reference* (i.e. `&i32`). 
+        
+        References is used in two methods:
+        * Access to the referred data during assignment of variables.
+        * Access to fields or methods of the referred data.
+
+        Rust has some powerful operators that allow us to dereference both explicitly and subtly.
+  
   - beta: true
     en:
       title: The * Operator
