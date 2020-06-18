@@ -5397,7 +5397,7 @@ pages:
         In this chapter we will demystify smart pointers. We will explore into
         these data structures that let us interface with the lowest level of 
         memory with Rust's expectations of safety.
-        
+
   - beta: true
     en:
       title: References Revisited
@@ -5422,7 +5422,7 @@ pages:
         * `*const T` - pointer to data that should never change
         * `*mut T` - pointer to data that can change
 
-        *raw pointers* can be converted to numbers using `as usize`.
+        *raw pointers* can be converted **to** and **from** numbers.
 
         One cannot use raw pointers to access/modify data without *unsafe* code (more on this later).
 
