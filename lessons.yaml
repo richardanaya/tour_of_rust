@@ -5401,15 +5401,42 @@ pages:
     en:
       title: Dereferencing
       content_markdown: |
-        Dereferencing is the process of using the *value* of data that is being pointed to
-        by a reference. A reference is fundamentally just a number representing the start
-        of some bytes of data, it's only purpose is to represent the concept of where data exists.
+        Dereferencing is the process of accessing/manipulating data that is being referred to
+        by a *reference* (i.e. `&i32`). A reference is fundamentally just a number representing the start
+        of some bytes of data in memory, it's only purpose is to represent the concept of 
+        where data exists. What makes a reference different from a just a number is that Rust
+        will validate the lifetime of references that they don't exist longer than what
+        they refer to.
 
-        The *value* of the data pointed at by references is used in two ways:
-        * The assignment of the value at a reference to someplace else
-        * The accessing of fields or methods of a value pointed by a reference
+        The data referred to by references is used in two methods:
+        * Access to the referred data during assignment of variables.
+        * Access to fields or methods of the referred data.
 
         Rust has some powerful operators that allow us to dereference both explicitly and subtly.
+
+  - beta: true
+    en:
+      title: Raw Pointers
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+      content_markdown: |
+        References can be converted into a more primitive type called a *raw pointer*. Much like a number, it
+        can be copied and moved around much easily than a reference that must satisfy lifetime checking. Rust
+        makes no assurances of the validity of the memory location it points to.
+
+        Two kinds of raw pointers exist:
+
+        * `*const T` - pointer to data that should never change
+        * `*mut T` - pointer to data that can change
+
+        *raw pointers* can be converted to numbers using `as usize`.
+
+        One cannot use raw pointers to access/modify data without *unsafe* code (more on this later).
+
+        Memory Details:
+        * A reference in rust is very similar to a pointer in C in terms of usage, but with much more compile time restrictions on
+          how it can be stored and moved around to other functions.
+        * A raw pointer in rust is similar to a pointer in C that it represents a number that can be copied 
+          passed around, and even turned into numerical types where it can be modifed as a number to do pointer math.
   - beta: true
     en:
       title: The * Operator
