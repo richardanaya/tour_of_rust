@@ -5396,7 +5396,11 @@ pages:
       content_markdown: |
         In this chapter we will demystify smart pointers. We will explore into
         these data structures that let us interface with the lowest level of 
-        memory with Rust's expectations of safety.
+        memory with Rust's expectations of safety. 
+        
+        Ferris says: "Don't feel overwhelmed by this chapter if you don't feel confident 
+        you could write your own low level management code. This chapter is mostly to
+        introduce you to some useful tools and give a glimpse at how they work!"
 
   - beta: true
     en:
