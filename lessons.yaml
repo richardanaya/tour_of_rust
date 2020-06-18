@@ -5526,7 +5526,7 @@ pages:
         Both these datastructures use unsafe dereferencing of raw pointers to do their job.
 
         Memory details:
-        * Rust has an equivalent of C's `malloc` called [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html )
+        * Rust has an equivalent of C's `malloc` called [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) for getting ahold of your own memory regions to manage.
   - beta: true
     en:
       title: Heap Allocated Memory
