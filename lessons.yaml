@@ -5472,7 +5472,7 @@ pages:
         let ref_ref_ref_f = &&&f;
         println!("{}",ref_ref_ref_f.value);
         ```
-        Whoa, how come we didn't need to add `***` before `ref_ref_ref_f`. This is because the `.` operator automatically dereferences 
+        Whoa, why didn't we need to add `***` before `ref_ref_ref_f`? This is because the `.` operator automatically dereferences 
         a sequence of references. That last line is turned into the following by the compiler automatically.
 
         ```rust
@@ -5484,7 +5484,7 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
       content_markdown: |
         In addition to the ability to create references to existing types using the `&` operator. Rust gives us the ability
-        to create *reference-like* structs often times called **smart pointers**. 
+        to create *reference-like* structs called **smart pointers**. 
         
         We can think of references at a high level as a type that give us another type.  Smart pointers are different in their 
         behavior from normal references in that they operate based on internal logic that a programmer writes. You the programmer
