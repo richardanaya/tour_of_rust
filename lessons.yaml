@@ -5516,17 +5516,17 @@ pages:
         Consider some already smart pointers we've seen like `Vec<T>` and `String`.
 
         `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
-        exists in these bytes.  The `Vec<T>` data structure interprets what it means to grab items from these region of bytes,
-        keep track of the index numbers of where data structures begin and end, and then finally dereference those raw pointer
-        numbers into data structures.
+        exists in these bytes. It interprets what it means to grab items from these region of bytes,
+        keeps of where data structures begin and end, and then finally dereference those raw pointer
+        numbers into data structures through a nice clean ergonomic interface.
 
-        Similarly, `String` keeps track of a memory region of bytes, and programatically restricts that the content's be `utf-8` 
+        Similarly, `String` keeps track of a memory region of bytes, and programatically restricts that the content's to always be `utf-8` 
         and helps dereference that memory region into a type `&str`.
 
-        Both `Vec<T>` and `String` use unsafe dereferencing of raw pointers to do their job.
+        Both these datastructures use unsafe dereferencing of raw pointers to do their job.
 
         Memory details:
-        * Rust has an equivalent of C's `malloc` called [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
+        * Rust has an equivalent of C's `malloc` called [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html )
   - beta: true
     en:
       title: Heap Allocated Memory
