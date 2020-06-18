@@ -5394,32 +5394,98 @@ pages:
     en:
       title: Chapter 8 - Smart Pointers
       content_markdown: |
-        TODO
+        In this chapter we will demystify smart pointers. We will explore into
+        these data structures that let us interface with the lowest level of 
+        memory with Rust's expectations of safety.
   - beta: true
     en:
       title: Dereferencing
       content_markdown: |
-        TODO
+        Dereferencing is the process of using the *value* of data that is being pointed to
+        by a reference. A reference is fundamentally just a number representing the start
+        of some bytes of data, it's only purpose is to represent the concept of where data exists.
+
+        The *value* of data pointed at by references is used in two ways:
+        * The assignment of the value at a reference
+        * The accessing of fields or methods of a value
+
+        Rust has some powerful operators that allow us to do this explicitly and somewhat subtly.
   - beta: true
     en:
       title: The * Operator
       content_markdown: |
-        TODO
+        The `*` operaator is an explicit way to dereference a reference. 
+
+        ```rust
+        let a:i32 = 42;
+        let ref_ref_ref_a:&&&i32 = &&&a;
+        let ref_a:&i32 = **ref_ref_ref_a;
+        let b:i32 = *ref_a;
+        ```
+
+        Memory detail:
+        - Because i32 is a primitive type that implements the Copy trait, 
+        the bytes of `a` are copied into the bytes of `b`
   - beta: true
     en:
       title: The . Operator
       content_markdown: |
-        TODO
+        The `.` operator is used in accessing fields and methods of a reference. It works a bit more subtly.
+
+        ```rust
+        let f = Foo{ value: 42 };
+        let ref_ref_ref_f = &&&f;
+        println!("{}",ref_ref_ref_f.value);
+        ```
+        Whoa, how come we didn't need to add `***` before `ref_ref_ref_f`. This is because the `.` operator automatically dereferences 
+        a sequence of references. That last line is turned into the following by the compiler automatically.
+
+        ```rust
+        println!("{}",(***ref_ref_ref_f).value);
+        ```
   - beta: true
     en:
       title: Smart Pointers
       content_markdown: |
-        TODO
+        In addition to the ability to create references to existing types using the `&` operator. Rust gives us the ability
+        to create *reference-like` structs often times called smart pointers. 
+        
+        We can think of references at a high level as a type that give us another type.  Their behavior is driven by internal 
+        logic that a programmer writes.
+
+        Typically a smart pointer implements traits `Deref`,`DerefMut`,`Drop` to specify the logic of what should happen when
+        the structure is dereferenced with `*` and `.` operators.
+  - beta: true
+    en:
+      title: Smart Unsafe Code
+      content_markdown: |
+        A fair warning in advance, smart pointers tend to use *unsafe* code fairly heavily. As mentioned at the beginning, 
+        they tend to be our interface to the lowest levels of memory.
+
+        What does it mean to write unsafe code? Unsafe code behaves exactly like with the exception of a few abilities that
+        the Rust compiler is unable to make memory safety gaurantees about.
+
+        The heart of unsafe code is the ability to *dereference a raw pointer*. What does that mean? It means taking some 
+        number that pointers to a position in memory and declaring "a data structure exists here!". Rust has no way to keep
+        track of the meaning of every byte that gets written to memory. Because Rust cannot make any gaurantees about what 
+        exists at an arbtrary number it's given, it must be put in `unsafe { ... }`. 
+
+        Smart pointers tend to use *dereferences of raw pointers* extensively.
   - beta: true
     en:
       title: Familiar Friends
       content_markdown: |
-        TODO
+        Consider some already familiar friends like `Vec<T>` and `String`.
+
+        `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
+        exists in these bytes.  The `Vec<T>` data structure interprets what it means to grab items from these region of bytes,
+        keep track of the index numbers of where data structures begin and end, and then finally dereference those raw pointer
+        numbers into datastructure values.
+
+        Similarly, `String` keeps track of a memory region of bytes, and programatically restricts that the content's be `utf-8` 
+        and helps dereference that memory region into a type `&str`.
+
+        Both `Vec<T>` and `String` use unsafe dereferencing of raw pointers to do their job.
   - beta: true
     en:
       title: Heap Allocated Memory
@@ -5449,7 +5515,11 @@ pages:
     en:
       title: Chapter 8 Conclusion
       content_markdown: |
-        TODO
+        Smart pointers are the idioms of Rust programming and let us not have to re-create the 
+        very common patterns of memory usage. With them you are ready to tackle the toughest of
+        challenges! Now that we have the foundations of Rust, let's talk a bit about how we make 
+        larger projects. In chapter 9 we break free of single page
+        lines of code.
   - beta: true
     chapter: 9
     en:
