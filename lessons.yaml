@@ -5521,10 +5521,10 @@ pages:
 
         `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
         exists in these bytes. The smart pointer interprets what it means to grab items from it's region of memory it manages,
-        keeps track of where data structures within those bytes begin and end, and then finally dereference those raw pointer
+        keeps track of where data structures within those bytes begin and end, and then finally dereference a raw pointer
         into data structures into a nice clean ergonomic interface for us to use (e.g. `my_vec[3]`).
 
-        Similarly, `String` keeps track of a memory region of bytes, and programatically restricts that the content's to always
+        Similarly, `String` keeps track of a memory region of bytes, and programatically restricts content written to it to always
         be valid `utf-8` and helps dereference that memory region into a type `&str`.
 
         Both these datastructures use unsafe dereferencing of raw pointers to do their job.
