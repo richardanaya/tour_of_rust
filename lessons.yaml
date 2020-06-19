@@ -5608,8 +5608,10 @@ pages:
 
         `Arc<Mutex<Bar>>` - Allow multiple smart pointers the ability to lock temporary mutable/immutable borrows in a CPU thread exclusive manner.
 
-        Using smart pointers to allow mutable modification of a hidden heap data is know as `interior mutability` in Rust. There's many of powerful 
-        ways to do it worth exploring.
+        Memory detail:
+        * You'll notice a theme with many of these combinations. The use of a immutable data type (possibly owned by multiple smart pointers) to modify internal data. This 
+          is referred to as the "interior mutability" pattern in Rust. It is a pattern that let's is bend the rules of memory usage with they same level of safety as Rust's 
+          compiler-time checks.
   - beta: true
     en:
       title: Chapter 8 Conclusion
