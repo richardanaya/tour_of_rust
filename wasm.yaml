@@ -1176,7 +1176,7 @@ pages:
     fr:
       title: Déclaration de Fonctions
       content_markdown: |
-          Pour déclarer une fonction, nous avons besoin de deux choses:
+        Pour déclarer une fonction, nous avons besoin de deux choses:
 
         * Nous devons passer le corps de la fonction JavaScript que nous voulons créer
         sous la forme d'une chaîne de caractères.
