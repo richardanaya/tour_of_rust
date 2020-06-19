@@ -4991,8 +4991,8 @@ pages:
       content_markdown: |
         L'utilisation de fonctions pour exprimer une idée ou modéliser le comportement
         et les données d'un programme a toujours été une manière éprouvée d'écrire un
-        programme (C le fait depuis des décennies!). Cependant, il existe d'autre paradigme
-        de programmation permetant l'agrégation et l'abstraction de données. Vous connaissez
+        programme (C le fait depuis des décennies!). Cependant, il existe d'autres paradigmes
+        de programmation permettant l'agrégation et l'abstraction de données. Vous connaissez
         peut-être déjà la programmation orientée objet (POO). Dans ce chapitre, nous
         explorerons le langage de programmation Rust au-delà des fonctions.
 
@@ -5017,7 +5017,7 @@ pages:
       content_markdown: |
         La programmation orientée objet se réfère grossièrement aux langages de
         programmation qui possèdent un certain nombre des fonctionnalités suivantes:
-        * Encapsulation - Association de champs et de fonctions dans une seule unité
+        * Encapsulation - Association de champs et de fonctions dans une seule unitée
         appelée *objet*.
         * Abstraction - Dissimulation des champs et des fonctions pour cacher les
         détails de l'implémentation d'un objet.
@@ -5049,8 +5049,8 @@ pages:
       content_markdown: |
         Il n'y a pas d'héritage avec Rust.
 
-        * Les structures ne peuvent pas hériter des champs d'une structure parent.
-        * Les structures ne peuvent pas hériter des fonctions d'une structure parent.
+        * Les structures ne peuvent pas hériter des champs d'une structure parente.
+        * Les structures ne peuvent pas hériter des fonctions d'une structure parente.
 
         Cela dit, Rust implémente de nombreuses fonctionnalités qui nous permettent
         de ne pas regretter l'héritage.        
