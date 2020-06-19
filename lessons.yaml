@@ -5395,7 +5395,7 @@ pages:
       title: Chapter 8 - Smart Pointers
       content_markdown: |
         In this chapter we will demystify smart pointers. Let's explore into
-        these data structures that let us interface with the lowest level of 
+        these data structures that let us interact with the lowest level of 
         memory.
         
         Ferris says: "Don't feel overwhelmed by this chapter if you don't feel 
