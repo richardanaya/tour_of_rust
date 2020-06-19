@@ -5593,7 +5593,7 @@ pages:
         What is unsafe code? Unsafe code behaves exactly like normal Rust with the exception of a few abilities that
         the Rust compiler is unable to make gaurantees about.
 
-        A primary ability of unsafe code is *dereferencing a raw pointer*. That means taking  *raw pointer* 
+        A primary ability of unsafe code is *dereferencing a raw pointer*. That means taking a *raw pointer* 
         to a position in memory and declaring "a data structure exists here!" and turning it into a representation of data you can use (i.e. `*const u8` into `u8`). 
         Rust has no way to keep track of the meaning of every byte that gets written to memory. Because Rust can't make 
         gaurantees about what exists at an arbitrary number used as a *raw pointer*, it puts the dereference in an `unsafe { ... }` block. 
@@ -5665,7 +5665,7 @@ pages:
       title: Failable Main Revisited
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
       content_markdown: |
-        Rust code may have a plethora of representations of errors, but the standard library does have
+        Rust code may have a plethora of representations of errors, but the standard library has
         a universial trait `std::error::Error` for describing errors.
 
         Using a smart pointer `Box` we can use the type `Box<dyn std::error::Error>` as a common type for returning errors because it allows us to
@@ -5715,7 +5715,7 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
       content_markdown: |
         `RefCell` is a container data structure commonly held by smart pointers that takes in data and let's us 
-        borrow mutable and immutable references to what's inside. This smart pointer prevents borrowing from
+        borrow mutable and immutable references to what's inside. It prevents borrowing from
         being abused by enforcing Rust's memory safety rules at runtime when you ask to borrow
         the data within:
 
