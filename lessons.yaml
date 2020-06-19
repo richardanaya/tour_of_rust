@@ -5521,7 +5521,7 @@ pages:
         Consider some smart pointers we've already seen like `Vec<T>` and `String`.
 
         `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
-        exists in these bytes. The smart pointer interprets what it means to grab items from it's region of memory it manages,
+        exists in these bytes. The smart pointer interprets what it means to grab items from the region of memory it manages,
         keeps track of where data structures within those bytes begin and end, and then finally dereference a raw pointer
         into data structures into a nice clean ergonomic interface for us to use (e.g. `my_vec[3]`).
 
@@ -5531,7 +5531,7 @@ pages:
         Both these datastructures use unsafe dereferencing of raw pointers to do their job.
 
         Memory details:
-        * Rust has an equivalent of C's `malloc` using [alloc]() and [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) for getting ahold of your own memory regions to manage.
+        * Rust has an equivalent of C's `malloc` using [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) and [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) for getting ahold of your own memory regions to manage.
   - beta: true
     en:
       title: Heap Allocated Memory
