@@ -5464,7 +5464,7 @@ pages:
 
         Memory detail:
         - Because i32 is a primitive type that implements the Copy trait, 
-        the bytes of variable `a` on stack are copied into the bytes of varaible `b`.
+        the bytes of variable `a` on stack are copied into the bytes of variable `b`.
   - beta: true
     en:
       title: The . Operator
