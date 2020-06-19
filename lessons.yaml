@@ -5610,7 +5610,7 @@ pages:
 
         Memory detail:
         * You'll notice a theme with many of these combinations. The use of a immutable data type (possibly owned by multiple smart pointers) to modify internal data. This 
-          is referred to as the "interior mutability" pattern in Rust. It is a pattern that let's is bend the rules of memory usage with they same level of safety as Rust's 
+          is referred to as the "interior mutability" pattern in Rust. It is a pattern that let's us bend the rules of memory usage at runtime with the same level of safety as Rust's 
           compiler-time checks.
   - beta: true
     en:
