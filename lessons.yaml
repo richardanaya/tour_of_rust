@@ -5815,6 +5815,7 @@ pages:
         
     ie:
       title: Conclusion de Capitul 8
+      content_markdown: |
         Puntatores inteligent es li idiotismes de programmation in Rust con queles noi ne es fortiat recrear
         li defís comun in li mustres de usation de memorie. Con ili on es pret a soluer mem li defís max dur!
         Armat con li fundamentes de Rust, noi nu va parlar plu pri qualmen crear projectes con un grandore
