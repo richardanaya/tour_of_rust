@@ -1112,7 +1112,24 @@ pages:
           new functions and call those new functions instead of specifying a litany of hand written JavaScript functions.
         * It's difficult for JavaScript to know what dependencies your module needs, by allowing the WebAssembly program to create its own functions
           it creates only exactly what it needs.
+    fr:
+      title: Pourquoi l'invocation dynamique?
+      content_markdown: |
+        Nous avons vu dans les premiers chapitres que nous pouvions facilement
+        écrire nos propres fonctions JavaScript à la main dans nos fichiers `.js`,
+        alors pourquoi vouloir créer dynamiquement ces fonctions?
 
+        * Un certain nombre de développeurs sont attirés par WebAssembly pour échapper
+          à JavaScript. On pourrait imaginer des librairies natives Rust qui facilitent
+          la liaison avec JavaScript et nous évite tout simplement d'écrire du code
+          JavaScript.
+        * Cela simplifie la configuration et l'amorçage d'un module WebAssembly.
+          Nous avons seulement besoin de donner à WebAssembly un moyen de pouvoir
+          déclarer et exécuter nos fonctions JavaScript. Nous n'avons dès lors plus
+          besoin de spécifier une pléthore de fonctions dans notre code JavaScript.
+        * Il est difficile pour JavaScript de savoir quelles dépendances le module
+          a besoin et en donnant la possibilité au programme WebAssembly de créer
+          ses propres fonctions, ce dernier crée lui-même ce dont il a besoin.
   - en:
       title: Logging Revisited
       content_markdown: |
@@ -1121,7 +1138,21 @@ pages:
         * We need some way to register a function at runtime.
         * We need some way to call that function.
         * We'll need some way for that dynamic function to have access to memory (e.g. for extracting utf-8 bytes.)
-  
+
+    fr:
+      title: Affichage de texte depuis WebAssembly revisité
+      content_markdown: |
+        Dans le premier chapitre, nous avons écrit nous même une fonction JavaScript
+        qui affichait un texte en appelant `console.log`. Voyons comment procéder de
+        manière dynamique (e.g. l'instruction `console.log` se trouvera dans le code
+        Rust!):
+
+        * Nous avons besoin d'un moyen de déclarer notre fonction dynamique lors de
+        l'exécution.
+        * Nous avons besoin d'un moyen d'appeler cette fonction.
+        * Nous devons faire en sorte que cette fonction ait accès à la mémoire (e.g.
+        pour extraire les octets utf-8.)
+
   - en:
       title: Registering Functions
       content_markdown: |
@@ -1142,6 +1173,31 @@ pages:
         ```
 
         Underneath the covers we take advantage of JavaScript's `eval` function to make these functions real.
+    fr:
+      title: Déclaration de Fonctions
+      content_markdown: |
+          Pour déclarer une fonction, nous avons besoin de deux choses:
+
+        * Nous devons passer le corps de la fonction JavaScript que nous voulons créer
+        sous la forme d'une chaîne de caractères.
+        * Nous devons avoir un moyen d'appeler cette fonction plus tard.
+        
+        La signature Rust de cette fonction est:
+
+        ```rust
+        register_function(js:&str) -> usize
+        ``` 
+
+        Cependant, étant donné que WebAssembly et JavaScript ne peuvent échanger que
+        des nombres et que tous les nombres en JavaScript sont des float 64 bits,
+        la signature de cette fonction côté JavaScript sera:
+
+        ```
+        register_function(js_start:f64,js_len:f64) -> f64
+        ```
+
+        Nous profitons de la fonction `eval` de JavaScript permettant d'évaluer du code
+        JavaScript représenté sous forme d'une chaîne de caractères.
 
   - en:
       title: Calling Functions
