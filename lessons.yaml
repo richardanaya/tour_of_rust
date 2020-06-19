@@ -5394,12 +5394,12 @@ pages:
     en:
       title: Chapter 8 - Smart Pointers
       content_markdown: |
-        In this chapter we will demystify smart pointers. We will explore into
+        In this chapter we will demystify smart pointers. Let's explore into
         these data structures that let us interface with the lowest level of 
-        memory with Rust's expectations of safety. 
+        memory.
         
-        Ferris says: "Don't feel overwhelmed by this chapter if you don't feel confident 
-        you could write your own low level memory management code in one short read. This chapter 
+        Ferris says: "Don't feel overwhelmed by this chapter if you don't feel 
+        you can write your own low level memory management code in one short read. This chapter 
         is mostly to introduce you to some useful tools and give a glimpse at how they work!"
 
   - beta: true
@@ -5418,17 +5418,17 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
       content_markdown: |
         References can be converted into a more primitive type called a *raw pointer*. Much like a number, it
-        can be copied and moved around more easily than a reference that must satisfy lifetime checking. Rust
-        however makes no assurances of the validity of the memory location it points to.
+        can be copied and moved around with little restriction. Rust
+        makes no assurances of the validity of the memory location it points to.
 
         Two kinds of raw pointers exist:
 
-        * `*const T` - pointer to data that should never change
-        * `*mut T` - pointer to data that can change
+        * `*const T` - A raw pointer to data that should never change.
+        * `*mut T` - A raw pointer to data that can change.
 
-        *raw pointers* can be converted **to** and **from** numbers.
+        Raw pointers can be converted to and from numbers.
 
-        One cannot use raw pointers to access/modify data without *unsafe* code (more on this later).
+        Raw pointers can access/modify data with *unsafe* code (more on this later).
 
         Memory Details:
         * A reference in rust is very similar to a pointer in C in terms of usage, but with much more compile time restrictions on
