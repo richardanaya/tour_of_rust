@@ -5406,11 +5406,11 @@ pages:
     en:
       title: References Revisited
       content_markdown: |
-        A reference is fundamentally just a number representing the start
-        of some bytes of data in memory, it's only purpose is to represent the concept of 
-        where data exists. What makes a reference different from a just a number is that Rust
-        will validate the lifetime of references that they don't exist longer than what
-        they refer to.
+        A reference is fundamentally just a number that is the start
+        of some bytes, it's only purpose is to represent the concept of 
+        where data of a specific type exists. What makes a reference different from a just a number is that Rust
+        will validate the lifetime of references doesn't last longer than what
+        it refers to (otherwise we'd get an error when we used it!).
 
   - beta: true
     en:
@@ -5423,10 +5423,10 @@ pages:
 
         Two kinds of raw pointers exist:
 
-        * `*const T` - A raw pointer to data that should never change.
-        * `*mut T` - A raw pointer to data that can change.
+        * `*const T` - A raw pointer to data of type T that should never change.
+        * `*mut T` - A raw pointer to data of type T that can change.
 
-        Raw pointers can be converted to and from numbers.
+        Raw pointers can be converted to and from numbers (e.g. `usize`).
 
         Raw pointers can access data with *unsafe* code (more on this later).
 
@@ -5487,7 +5487,7 @@ pages:
       title: Smart Pointers
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
       content_markdown: |
-        In addition to the ability to create references to existing types using the `&` operator. Rust gives us the ability
+        In addition to the ability to create references to existing typed data using the `&` operator. Rust gives us the ability
         to create *reference-like* structs called **smart pointers**. 
         
         We can think of references at a high level as a type that give us access to another type.  Smart pointers are different in their 
