@@ -5742,7 +5742,7 @@ pages:
         having the operating system restrict only one CPU thread at time to have access to the data, 
         blocking other threads until that original thread is done with it's locked borrow.
 
-        Multithreading is beyond the scope of this book, but `Mutex` is a fundamental part of orchestrating
+        Multithreading is beyond the scope of Tour of Rust, but `Mutex` is a fundamental part of orchestrating
         multiple CPUs threads accessing the same data.
 
         There is a special smart pointer `Arc` which is identical to `Rc` except uses thread-safe incrementing of reference counts. 
@@ -5767,9 +5767,9 @@ pages:
 
         `Rc<Vec<Foo>>` - Allow the cloning of multiple smart pointers that can borrow the same vector of immutable data structures on the heap.
 
-        `Rc<RefCell<Bar>>` - Allow multiple smart pointers the ability to borrow mutably/immutably the same struct `Bar`
+        `Rc<RefCell<Foo>>` - Allow multiple smart pointers the ability to borrow mutably/immutably the same struct `Foo`
 
-        `Arc<Mutex<Bar>>` - Allow multiple smart pointers the ability to lock temporary mutable/immutable borrows in a CPU thread exclusive manner.
+        `Arc<Mutex<Foo>>` - Allow multiple smart pointers the ability to lock temporary mutable/immutable borrows in a CPU thread exclusive manner.
 
         Memory detail:
         * You'll notice a theme with many of these combinations. The use of a immutable data type (possibly owned by multiple smart pointers) to modify internal data. This 
@@ -5781,8 +5781,8 @@ pages:
       content_markdown: |
         Smart pointers sembla liminat, ma junt ili crea combinationes tre potent.
         `Rc<Vec<Foo>>` - Clonada de multiplic smart pointers queles posse pruntar li sam vector de ínmutabil data-structuras sur li heap.
-        `Rc<RefCell<Bar>>` - Multiplic smart pointers possent pruntar mutabilmen/ínmutabilmen li sam struct `Bar`
-        `Arc<Mutex<Bar>>` - Multiplic smart pointers possent cluder temporari mutabil/ínmutabil pruntas in un maniere exclusiv in un fil del CPU.
+        `Rc<RefCell<Foo>>` - Multiplic smart pointers possent pruntar mutabilmen/ínmutabilmen li sam struct `Foo`
+        `Arc<Mutex<Foo>>` - Multiplic smart pointers possent cluder temporari mutabil/ínmutabil pruntas in un maniere exclusiv in un fil del CPU.
         Detallies pri memorie:
         * Tu va har remarcat un tema comun con ti-ci combinationes, a saver li usation de un data-tip ínmutabil (fórsan possedet per multiplic puntatores inteligent) por modificar
         data intern. On nomina it li mustre de "mutabilitá intern" in Rust. Con ti mustre noi posse circumear li regules pri usation de memorie durant li execution del programma
