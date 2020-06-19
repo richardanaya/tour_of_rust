@@ -5573,7 +5573,7 @@ pages:
       title: Sharing Access
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
       content_markdown: |
-        `RefCell` is a container data structure commonly held by smart pointer that takes in data and let's us 
+        `RefCell` is a container data structure commonly held by smart pointers that takes in data and let's us 
         borrow mutable and immutable references to what's inside. This smart pointer prevents borrowing from
         being abused by enforcing Rust's memory safety rules at runtime when you ask to borrow
         the data within:
@@ -5586,7 +5586,7 @@ pages:
       title: Sharing Across Threads
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20let's%20borrow%20a%20locked%20immutable%20reference%20of%20pie%0A%20%20%20%20%2F%2F%20we%20have%20to%20unwrap%20the%20result%20of%20a%20lock%0A%20%20%20%20%2F%2F%20because%20it%20might%20fail%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20locked%20reference%20drops%20here%2C%20and%20mutex%20protected%20value%20can%20be%20used%20by%20someone%20else%0A%7D%0A
       content_markdown: |
-        `Mutex` is a container data structure commonly held by smart pointers that takes in data and let's us to borrow mutable 
+        `Mutex` is a container data structure commonly held by smart pointers that takes in data and let's us borrow mutable 
         and immutable references to the data within. This prevents borrowing from being abused by 
         having the operating system restrict only one CPU thread at time to have access to the data, 
         blocking other threads until that original thread is done with it's locked borrow.
@@ -5612,7 +5612,7 @@ pages:
         Memory detail:
         * You'll notice a theme with many of these combinations. The use of a immutable data type (possibly owned by multiple smart pointers) to modify internal data. This 
           is referred to as the "interior mutability" pattern in Rust. It is a pattern that let's us bend the rules of memory usage at runtime with the same level of safety as Rust's 
-          compiler-time checks.
+          compile-time checks.
   - beta: true
     en:
       title: Chapter 8 Conclusion
