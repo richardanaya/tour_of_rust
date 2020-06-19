@@ -5546,9 +5546,9 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
       content_markdown: |
         Rust has a plethora of representations of errors, but the standard library does have
-        a universial trait `std::err::Error` for describing errors.
+        a universial trait `std::error::Error` for describing errors.
 
-        Using a smart pointer `Box` we can use the type `Box<dyn std::err::Error>` as common type for returning errors because it allows us to
+        Using a smart pointer `Box` we can use the type `Box<dyn std::error::Error>` as common type for returning errors because it allows us to
         propogate up an error on the heap and interact with it at a high level without having to know a specific type.
 
         Early in Tour of Rust we learned that main can return an error. We can now return
@@ -5556,11 +5556,12 @@ pages:
         so long as the error's data structure that implements Rust's common `Error` trait.
 
         ```rust
-        fn main() -> Result<(),Box<dyn std::err:Error>>
+        fn main() -> Result<(),Box<dyn std::error:Error>>
         ```
   - beta: true
     en:
       title: Referencing Counting
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20%2F%2F%20heap_pie3%20drops%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20%2F%2F%20heap_pie2%20drops%0A%20%20%20%20heap_pie1.eat()%3B%0A%0A%20%20%20%20%2F%2F%20all%20reference%20count%20smart%20pointers%20are%20dropped%20now%0A%20%20%20%20%2F%2F%20the%20heap%20data%20Pie%20finally%20deallocates%0A%7D%0A
       content_markdown: |
         `Rc` is a smart pointer that moves data from stack onto a heap, and allows us to 
         clone multiple read-only owner `Rc` data structures of the same data. Effectively 
