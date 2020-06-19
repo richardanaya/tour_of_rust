@@ -5603,7 +5603,7 @@ pages:
       content_markdown: |
         Smart pointers might seem limited, but they can make some very powerful combinations.
 
-        `Rc<Box<dyn Foo>>` - Allow the cloning of multiple smart pointers that can borrow the same immutable data structure on the heap hidden behind a trait interface `Foo`.
+        `Rc<Vec<Foo>>` - Allow the cloning of multiple smart pointers that can borrow the same vector of immutable data structures on the heap.
 
         `Rc<RefCell<Bar>>` - Allow multiple smart pointers the ability to borrow mutably/immutably the same struct `Bar`
 
