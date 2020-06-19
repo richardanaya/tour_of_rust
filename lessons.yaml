@@ -5594,7 +5594,7 @@ pages:
         Multithreading is beyond the scope of this book, but `Mutex` is a fundamental part of orchestrating
         multiple CPUs threads accessing the same data.
 
-        There is a special smart pointer `Arc` which is identity to `Rc` except uses thread save incrementing of reference counts.
+        There is a special smart pointer `Arc` which is identical to `Rc` except uses thread-safe incrementing of reference counts.
   - beta: true
     en:
       title: Combining Smart Pointers
