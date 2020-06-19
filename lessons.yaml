@@ -5516,7 +5516,7 @@ pages:
   - beta: true
     en:
       title: Familiar Friends
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20dealloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20usize%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20dereference%20a%20few%20locations%20as%20bytes%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20using%20pointer%20math%20and%20set%20them%20to%20values%0A%20%20%20%20%20%20%20%20%20%20%20%20*(ptr%20as%20*mut%20u8)%20%3D%2086%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20*((ptr%20%2B%201)%20as%20*mut%20u8)%20%3D%2014%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20*((ptr%20%2B%202)%20as%20*mut%20u8)%20%3D%2073%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20*((ptr%20%2B%203)%20as%20*mut%20u8)%20%3D%2064%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20usize%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20dereference%20a%20few%20locations%20as%20bytes%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20using%20pointer%20math%20and%20set%20them%20to%20values%0A%20%20%20%20%20%20%20%20%20%20%20%20*(ptr%20as%20*mut%20u8)%20%3D%2086%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20*((ptr%20%2B%201)%20as%20*mut%20u8)%20%3D%2014%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20*((ptr%20%2B%202)%20as%20*mut%20u8)%20%3D%2073%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20*((ptr%20%2B%203)%20as%20*mut%20u8)%20%3D%2064%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
       content_markdown: |
         Consider some smart pointers we've already seen like `Vec<T>` and `String`.
 
@@ -5535,28 +5535,61 @@ pages:
   - beta: true
     en:
       title: Heap Allocated Memory
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
       content_markdown: |
-        TODO
+        `Box` is a smart pointer that let's us move data from the stack to the heap.
+
+        Dereferencing it lets us use the heap allocated data ergonomically as if it were the original type.
   - beta: true
     en:
       title: Failable Main Revisited
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
       content_markdown: |
-        TODO
+        Rust has a plethora of representations of errors, but the standard library does have
+        a universial trait `std::err::Error` for describing errors.
+
+        Using a smart pointer `Box` we can use the type `Box<dyn std::err::Error>` as common type for returning errors because it allows us to
+        propogate up an error on the heap and interact with it at a high level without having to know a specific type.
+
+        Early in Tour of Rust we learned that main can return an error. We can now return
+        a type capable of describing almost any kind of error that might occur in our program 
+        so long as the error's data structure that implements Rust's common `Error` trait.
+
+        ```rust
+        fn main() -> Result<(),Box<dyn std::err:Error>>
+        ```
   - beta: true
     en:
       title: Referencing Counting
       content_markdown: |
-        TODO
+        `Rc` is a smart pointer that moves data from stack onto a heap, and allows us to 
+        clone multiple read-only owner `Rc` data structures of the same data. Effectively 
+        this let's multiple places in our code have the ability to read the same data.
+
+        Only when the last smart pointer is dropped does the data on the heap become deallocated.
   - beta: true
     en:
       title: Sharing Access
       content_markdown: |
-        TODO
+        `RefCell` is a smart pointer that moves data from the stack onto the heap and let's us 
+        borrow mutable and immutable references to what's inside. This smart pointer prevents borrowing from
+        being abused by enforcing Rust's memory safety rules at runtime when you ask to borrow
+        the data on the heap:
+
+        **Only one mutable reference OR multiple immutable references, but not both!**
+
+        If you violate these rules `RefCell` will panic.
   - beta: true
     en:
       title: Sharing Across Threads
       content_markdown: |
-        TODO
+        `Mutex` is a smart pointer that moves data from stack to heap and allows us to borrow mutable 
+        and immutable references. This smart pointer prevents borrowing from being abused by 
+        having the operating system restrict only one CPU thread at time have access to the data at 
+        at time, and blocking other threads until that one thread is done with the borrow.
+
+        Multithreading is beyond the scope of this book, but `Mutex` is a fundamental part of orchestrating
+        multiple CPUs accessing the same data.
   - beta: true
     en:
       title: Chapter 8 Conclusion
