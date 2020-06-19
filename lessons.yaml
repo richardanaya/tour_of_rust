@@ -5424,8 +5424,8 @@ pages:
         it refers to (otherwise we'd get an error when we used it!).
         
     ie:
-      ie: Denov pri Referenties
-        content_markdown: |
+      title: Denov pri Referenties
+      content_markdown: |
           Li concepte de un referentie es quam seque: it es solmen un numeró quel 
           monstra li position de comensa de quelc bytes in memorie; it servi solmen por representar 
           li concepte de ú existe li data de un cert tip. To quo fa un referentie diferent de un 
@@ -5548,7 +5548,7 @@ pages:
         println!("{}",(***ref_ref_ref_f).value);
         ```
         
-    ie
+    ie:
       title: Li Operator .
       content_markdown: |
         On usa li operator `.` por accesser li campes e metodes de un referentie. It efectua se con un poc plu subtilitá.
