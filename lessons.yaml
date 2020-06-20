@@ -2638,7 +2638,7 @@ pages:
   - en:
       title: Enumerations With Data
       content_markdown: |
-        `enum` elements can also have have one or more data types allowing them to behave like *union* from C.
+        `enum` elements can also have one or more data types allowing them to behave like *union* from C.
 
         When an `enum` is pattern matched using `match`, you can bind a variable name to each data value.
 
