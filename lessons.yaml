@@ -3034,10 +3034,10 @@ pages:
         Rust has a built in generic enum called `Option` that allows us to represent nullable values 
         without using `null`.
 
-         ```
-        enum Option<T>{
-          Some(T),
-          None
+        ```
+        enum Option<T> {
+            None,
+            Some(T),
         }
         ```
 
@@ -3049,10 +3049,10 @@ pages:
         Le langage Rust met à disposition une énumération générique `Option` qui permet de
         représenter des valeurs pouvant être nulles sans utiliser `null`.
 
-         ```
-        enum Option<T>{
-          Some(T),
-          None
+        ```
+        enum Option<T> {
+            None,
+            Some(T),
         }
         ```
 
@@ -3065,9 +3065,9 @@ pages:
         sin li usation de `null.`
 
         ```
-        enum Option<T>{
-          Some(T),
-          None
+        enum Option<T> {
+            None,
+            Some(T),
         }
         ```
 
@@ -3079,10 +3079,10 @@ pages:
         O Rust possui uma enumeração genérica embutida chamada `Option` que nos permite representar valores 
         nulos sem precisar usar o `null`.
 
-         ```
-        enum Option<T>{
-          Some(T),
-          None
+        ```
+        enum Option<T> {
+            None,
+            Some(T),
         }
         ```
 
@@ -3094,10 +3094,10 @@ pages:
       content_markdown: |
         Rust 有一个内置的泛型枚举叫做 `Option`，它可以让我们不使用 `null` 就可以表示可空值。
 
-         ```
-        enum Option<T>{
-          Some(T),
-          None
+        ```
+        enum Option<T> {
+            None,
+            Some(T),
         }
         ```
 
@@ -3110,9 +3110,9 @@ pages:
         нулевые значения без использования `null`.
 
         ```
-        enum Option<T>{
-          Some(T),
-          None
+        enum Option<T> {
+            None,
+            Some(T),
         }
         ```
 
@@ -3124,10 +3124,10 @@ pages:
         Rust tiene un enumerado genérico integrado llamado `Option` que nos permite representar
         valores nulos sin usar `null`.
 
-         ```
-        enum Option<T>{
-          Some(T),
-          None
+        ```
+        enum Option<T> {
+            None,
+            Some(T),
         }
         ```
 
@@ -3139,10 +3139,10 @@ pages:
         Rust has a built in generic enum called `Result` that allows us to return a value that has the possibility of failing.
         It is the idiomatic way in which the language does error handling.
 
-         ```
-        enum Result<T,Q>{
-          Ok(T),
-          Err(Q)
+        ```
+        enum Result<T, E> {
+            Ok(T),
+            Err(E),
         }
         ```
 
@@ -3157,9 +3157,9 @@ pages:
         C'est la façon idiomatique avec laquelle le language gère les erreurs.
 
         ```
-        enum Result<T,Q>{
-          Ok(T),
-          Err(Q)
+        enum Result<T, E> {
+            Ok(T),
+            Err(E),
         }
         ```
 
@@ -3174,9 +3174,9 @@ pages:
         To es li maniere idiomatic in ti lingue por tractar errores.
 
         ```
-        enum Result<T,Q>{
-          Ok(T),
-          Err(Q)
+        enum Result<T, E> {
+            Ok(T),
+            Err(E),
         }
         ```
 
@@ -3193,9 +3193,9 @@ pages:
         Esta é a maneira idiomática pela qual a linguagem faz a manipulação de erros.
 
         ```
-        enum Result<T,Q>{
-          Ok(T),
-          Err(Q)
+        enum Result<T, E> {
+            Ok(T),
+            Err(E),
         }
         ```
 
@@ -3211,10 +3211,10 @@ pages:
         Rust 有一个内置的泛型枚举叫做 `Result`，它可以让我们返回一个包含失败可能的值。
         这是编程语言进行错误处理的惯用方法。
 
-         ```
-        enum Result<T,Q>{
-          Ok(T),
-          Err(Q)
+        ```
+        enum Result<T, E> {
+            Ok(T),
+            Err(E),
         }
         ```
 
@@ -3228,9 +3228,9 @@ pages:
         Rust имеет встроенное перечисление `Result` - оно позволяет вернуть значение или ошибку. 
         Это идиоматический способ обработки ошибок. 
         ```
-        enum Result<T,Q>{
-          Ok(T),
-          Err(Q)
+        enum Result<T, E> {
+            Ok(T),
+            Err(E),
         }
         ```
 
@@ -3244,10 +3244,10 @@ pages:
         Rust tiene  un enumerado genérico integrado llamado `Result` que nos permite devolver un
         valor que puede dar error. Es la forma que este lenguaje tiene de gestionar los errores.
 
-         ```
-        enum Result<T,Q>{
-          Ok(T),
-          Err(Q)
+        ```
+        enum Result<T, E> {
+            Ok(T),
+            Err(E),
         }
         ```
 
@@ -3300,8 +3300,8 @@ pages:
 
         ```
         match do_something_that_might_fail() {
-          Ok(v) => v,
-          Err(e) => return Err(e),
+            Ok(v) => v,
+            Err(e) => return Err(e),
         }
         ```
 
@@ -3317,8 +3317,8 @@ pages:
 
         ```
         match do_something_that_might_fail() {
-          Ok(v) => v,
-          Err(e) => return Err(e),
+            Ok(v) => v,
+            Err(e) => return Err(e),
         }
         ```
 
@@ -3334,8 +3334,8 @@ pages:
 
         ```
         match do_something_that_might_fail() {
-          Ok(v) => v,
-          Err(e) => return Err(e),
+            Ok(v) => v,
+            Err(e) => return Err(e),
         }
         ```
     pt-br:
@@ -3350,8 +3350,8 @@ pages:
 
         ```
         match do_something_that_might_fail() {
-          Ok(v) => v,
-          Err(e) => return Err(e),
+            Ok(v) => v,
+            Err(e) => return Err(e),
         }
         ```
 
@@ -3368,8 +3368,8 @@ pages:
 
         ```
         match do_something_that_might_fail() {
-          Ok(v) => v,
-          Err(e) => return Err(e),
+            Ok(v) => v,
+            Err(e) => return Err(e),
         }
         ```
 
@@ -3385,8 +3385,8 @@ pages:
 
         ```
         match do_something_that_might_fail() {
-          Ok(v) => v,
-          Err(e) => return Err(e), // возврат из функции
+            Ok(v) => v,
+            Err(e) => return Err(e), // возврат из функции
         }
         ```
     es:
@@ -3401,8 +3401,8 @@ pages:
 
         ```
         match do_something_that_might_fail() {
-          Ok(v) => v,
-          Err(e) => return Err(e),
+            Ok(v) => v,
+            Err(e) => return Err(e),
         }
         ```
   - en:
@@ -3422,8 +3422,8 @@ pages:
 
         ```
         match my_option {
-          Some(v) => v,
-          None => panic!("some error message generated by Rust!")
+            Some(v) => v,
+            None => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -3435,8 +3435,8 @@ pages:
 
         ```
         match my_result {
-          Ok(v) => v,
-          Err(e) => panic!("some error message generated by Rust!")
+            Ok(v) => v,
+            Err(e) => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -3463,8 +3463,8 @@ pages:
 
          ```
          match my_option {
-           Some(v) => v,
-           None => panic!("un message d'erreur généré par Rust!")
+             Some(v) => v,
+             None => panic!("un message d'erreur généré par Rust!"),
          }
          ```
 
@@ -3476,8 +3476,8 @@ pages:
 
          ```
          match my_result {
-           Ok(v) => v,
-           Err(e) => panic!("un message d'erreur généré par Rust!")
+             Ok(v) => v,
+             Err(e) => panic!("un message d'erreur généré par Rust!"),
          }
          ```
 
@@ -3539,8 +3539,8 @@ pages:
 
         ```
         match my_option {
-          Some(v) => v,
-          None => panic!("alguma mensagem de erro gerada pelo Rust!")
+            Some(v) => v,
+            None => panic!("alguma mensagem de erro gerada pelo Rust!"),
         }
         ```
 
@@ -3552,8 +3552,8 @@ pages:
 
         ```
         match my_result {
-          Ok(v) => v,
-          Err(e) => panic!("alguma mensagem de erro gerada pelo Rust!")
+            Ok(v) => v,
+            Err(e) => panic!("alguma mensagem de erro gerada pelo Rust!"),
         }
         ```
 
@@ -3577,8 +3577,8 @@ pages:
 
         ```
         match my_option {
-          Some(v) => v,
-          None => panic!("some error message generated by Rust!")
+            Some(v) => v,
+            None => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -3590,8 +3590,8 @@ pages:
 
         ```
         match my_result {
-          Ok(v) => v,
-          Err(e) => panic!("some error message generated by Rust!")
+            Ok(v) => v,
+            Err(e) => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -3617,8 +3617,8 @@ pages:
 
         ```
         match my_option {
-          Some(v) => v,
-          None => panic!("some error message generated by Rust!")
+            Some(v) => v,
+            None => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -3630,8 +3630,8 @@ pages:
 
         ```
         match my_result {
-          Ok(v) => v,
-          Err(e) => panic!("some error message generated by Rust!")
+            Ok(v) => v,
+            Err(e) => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -3654,8 +3654,8 @@ pages:
 
         ```
         match my_option {
-          Some(v) => v,
-          None => panic!("some error message generated by Rust!")
+            Some(v) => v,
+            None => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -3667,8 +3667,8 @@ pages:
 
         ```
         match my_result {
-          Ok(v) => v,
-          Err(e) => panic!("some error message generated by Rust!")
+            Ok(v) => v,
+            Err(e) => panic!("some error message generated by Rust!"),
         }
         ```
 
@@ -5077,10 +5077,10 @@ pages:
         Methods are defined within an implementation block with keyword `impl`:
         ```rust
         impl MyStruct { 
-          ... 
-          fn foo(&self){
             ...
-          }
+            fn foo(&self) {
+                ...
+            }
         }
         ```
 
@@ -5096,10 +5096,10 @@ pages:
         Metodes es definat inter:
         ```rust
         impl MyStruct {
-          ...
-          fn foo(&self){
             ...
-          }
+            fn foo(&self) {
+                ...
+            }
         }
         ```
   - en:
@@ -5129,8 +5129,8 @@ pages:
 
         ```
         trait MyTrait {
-          fn foo(&self);
-          ...
+            fn foo(&self);
+            ...
         }
         ```
 
@@ -5141,10 +5141,10 @@ pages:
 
         ```rust
         impl MyTrait for MyStruct { 
-          fn foo(&self){
-            ...
-          }
-          ... 
+            fn foo(&self) {
+                ...
+            }
+            ... 
         }
         ```
 
@@ -5156,8 +5156,8 @@ pages:
         Ante omno, noi defina li signaturas de metodes de un trate intra:
         ```
         trait MiTrate {
-          fn foo(&self)
-          ...
+            fn foo(&self);
+            ...
         }
         ```
 
@@ -5168,10 +5168,10 @@ pages:
 
         ```rust
         impl MiTrate for MyStruct {
-          fn foo(&self){
+            fn foo(&self) {
+                ...
+            }
             ...
-          }
-          ...
         }
         ```
 
@@ -5270,8 +5270,11 @@ pages:
 
         In this example type `T` must implement trait `Foo`:
         ```rust
-        fn myFunction<T>(foo:T) where T:Foo {
-          ...
+        fn my_function<T>(foo: T)
+        where
+            T:Foo
+        {
+            ...
         }
         ```
 
@@ -5286,8 +5289,11 @@ pages:
 
         In ti-ci exemple, li tip `T` deve implementar li trate `Foo`:
         ```rust
-        fn miFunction<T>(foo:T) where T:Foo {
-          ...
+        fn mi_function<T>(foo: T)
+        where
+            T:Foo
+        {
+            ...
         }
         ```
 
@@ -5300,16 +5306,19 @@ pages:
         Rust has a shorthand for expressing generics constrained by a trait:
         
         ```rust
-        fn my_function(foo: impl Foo){
-          ...
+        fn my_function(foo: impl Foo) {
+            ...
         }
         ```
 
         This is equivalent to writing:
 
         ```rust
-        fn myFunction<T>(foo:T) where T:Foo {
-          ...
+        fn my_function<T>(foo: T)
+        where
+            T:Foo
+        {
+            ...
         }
         ```
 
@@ -5319,16 +5328,19 @@ pages:
         In Rust on posse abreviar li expression de génerics limitat per un trate:
 
         ```rust
-        fn mi_function(foo: impl Foo){
-          ...
+        fn mi_function(foo: impl Foo) {
+            ...
         }
         ```
 
         equivale scrir:
 
         ```rust
-        fn miFunction<T>(foo:T) where T:Foo {
-          ...
+        fn miFunction<T>(foo: T)
+        where
+            T: Foo
+        {
+            ...
         }
         ```
   - en:
@@ -5346,7 +5358,7 @@ pages:
         `Box` is so common it can be used from anywhere:
 
         ```rust
-        Box::new(Foo{ ... })
+        Box::new(Foo { ... })
         ```
 
     ie:
@@ -5362,7 +5374,7 @@ pages:
         `Box` es tam frequentmen usat que on posse usar it omniloc:
 
         ```rust
-        Box::new(Foo{ ...})
+        Box::new(Foo { ...})
         ```
   - en:
       title: Generic Structs Revisited
@@ -5370,17 +5382,20 @@ pages:
         Generic structs can also have their parameterized types constrained by traits.
 
         ```rust
-        struct MyStruct<T> where T:MyTrait {
-          foo: T
-          ...
+        struct MyStruct<T>
+        where
+            T: MyTrait
+        {
+            foo: T
+            ...
         }
         ```
 
         Generic structs have their parameterized type in their implementation blocks:
 
         ```rust
-        impl<T> MyStruct<T>{
-          ...
+        impl<T> MyStruct<T> {
+            ...
         }
         ```
     ie:
@@ -5390,17 +5405,20 @@ pages:
         Anc structs géneric posse usar trates por limitar lor tipes parametrisat.
 
         ```rust
-        struct MiStruct<T> where T:MiTrate {
-          foo: T
-          ...
+        struct MiStruct<T>
+        where
+            T: MiTrate
+        {
+            foo: T
+            ...
         }
         ```
 
         Struct-metodes e implementat trate-metodes por géneric structs have li parametrisat tip del struct sur li clave-parol `impl`:
 
         ```rust
-        impl<T> MiStruct<T>{
-          ...
+        impl<T> MiStruct<T> {
+            ...
         }
         ```
 
@@ -5536,10 +5554,10 @@ pages:
         The `*` operator is an explicit way to dereference a reference. 
 
         ```rust
-        let a:i32 = 42;
-        let ref_ref_ref_a:&&&i32 = &&&a;
-        let ref_a:&i32 = **ref_ref_ref_a;
-        let b:i32 = *ref_a;
+        let a: i32 = 42;
+        let ref_ref_ref_a: &&&i32 = &&&a;
+        let ref_a: &i32 = **ref_ref_ref_a;
+        let b: i32 = *ref_a;
         ```
 
         Memory detail:
@@ -5552,7 +5570,7 @@ pages:
         Li operator `*` es un metode explicit por dereferentiar un referentie.
         ```rust
         let a: i32 = 42;
-        let ref_ref:ref_a: &&&i32 = &&&a;
+        let ref_ref_ref_a: &&&i32 = &&&a;
         let ref_a: &i32 = **ref_ref_ref_a;
         let b: i32 = *ref_a;
         ```
@@ -5566,15 +5584,15 @@ pages:
         The `.` operator is used in accessing fields and methods of a reference. It works a bit more subtly.
 
         ```rust
-        let f = Foo{ value: 42 };
+        let f = Foo { value: 42 };
         let ref_ref_ref_f = &&&f;
-        println!("{}",ref_ref_ref_f.value);
+        println!("{}", ref_ref_ref_f.value);
         ```
         Whoa, why didn't we need to add `***` before `ref_ref_ref_f`? This is because the `.` operator automatically dereferences 
         a sequence of references. That last line is turned into the following by the compiler automatically.
 
         ```rust
-        println!("{}",(***ref_ref_ref_f).value);
+        println!("{}", (***ref_ref_ref_f).value);
         ```
         
     ie:
@@ -5711,7 +5729,7 @@ pages:
         so long as the error's data structure implements Rust's common `Error` trait.
 
         ```rust
-        fn main() -> Result<(),Box<dyn std::error:Error>>
+        fn main() -> Result<(), Box<dyn std::error:Error>>
         ```
         
     ie:
