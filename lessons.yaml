@@ -5084,6 +5084,30 @@ pages:
         }
         ```
 
+    fr:
+      title: Encapsulation avec des Méthodes
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+      content_markdown: |
+        Avec Rust, un objet est représenté par une structure. On peut associer
+        à celle-ci certaines fonctions (également appelées *méthodes*).
+
+        Le premier paramètre de toute méthode doit être une référence à l'instance
+        associée à l'appel de la méthode (par exemple `instanceOfObj.foo ()`).
+        Rust utilise:
+        * `&self` - Référence immuable à l'instance.
+        * `&mut self` - Référence mutable à l'instance.
+
+        Les méthodes sont définies dans un bloc d'implémentation
+        avec le mot clé `impl`:
+        ```rust
+        impl MyStruct { 
+          ... 
+          fn foo(&self){
+            ...
+          }
+        }
+        ```
+
     ie:
       title: Metodes por Objectes
       content_markdown: |
@@ -5111,6 +5135,17 @@ pages:
         By default fields and methods are accessible only to the module they belong to.
 
         The `pub` keyword exposes struct fields and methods outside of the module.
+    fr:
+      title: Abstraction avec différents niveaux de visibilité
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20%26creature.get_sound())%3B%0A%7D%0A
+      content_markdown: |
+        Rust peut encapsuler le fonctionnement interne des objets.
+
+        Par défaut, les champs et les méthodes ne sont accessibles
+        qu'à l'intérieur du module auquel ils appartiennent.
+
+        Le mot-clé `pub` permet d'exposer un champ ou une méthode
+        pour qu'il ou elle soit visible en dehors d'un module.
     ie:
       title: Incapsulation in Objectes
       content_markdown: |
@@ -5145,6 +5180,39 @@ pages:
                 ...
             }
             ... 
+        }
+        ```
+
+    fr:
+      title: Polymorphisme avec les Traits
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
+      content_markdown: |
+        Rust rend possible le polymorphisme grâce aux 'traits'. Les traits
+        nous permettent d'associer un ensemble de méthodes à une structure.
+
+        Il faut tout d'abord définir la signature des méthodes d'un trait:
+
+        ```
+        trait MyTrait {
+          fn foo(&self);
+          ...
+        }
+        ```
+
+        Quand une structure implémente un trait, le trait établit un contrat entre
+        la structure et les méthodes que la structure doit implémenter. Cela nous
+        permetra d'intéragir avec la structure à travers le type du trait
+        (par exemple `&dyn MyTrait`) sans avoir à connaître le type réel.
+
+        Les méthodes du trait implémentées par la structure sont définies dans un bloc
+        d'implémentation:
+
+        ```rust
+        impl MyTrait for MyStruct { 
+          fn foo(&self){
+            ...
+          }
+          ... 
         }
         ```
 
@@ -5184,6 +5252,16 @@ pages:
         The functions have no direct access to the inner fields of a struct, but it can 
         be useful for sharing behavior between many trait implementors.
 
+    fr:
+      title: Méthodes Implémentées sur les Traits
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+      content_markdown: |
+        Un 'trait' peut lui-même implémenter une ou plusieurs méthodes.
+
+        Les méthodes d'un trait n'ont pas accès aux champs des structures
+        mais elles peuvent être utiles pour partager un comportement
+        entre plusieurs implémentations de traits.
+
     ie:
       title: Implementat Metodes sur Trates
       content_markdown: |
@@ -5196,6 +5274,12 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
       content_markdown: |
         Traits can inherit methods from other traits.
+
+    fr:
+      title: Hériter d'un Trait
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+      content_markdown: |
+        Un trait peut hériter d'un autre trait.
 
     ie:
       title: Heredantie de Trates
@@ -5215,6 +5299,26 @@ pages:
 
         Memory details:
         * Dynamic dispatch is slightly slower because of the pointer chasing to find the real function call.
+    fr:
+      title: Dispatch Dynamique ou Statique
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
+      content_markdown: |
+        Une méthode est exécutée de deux manières:
+        * Dispatch statique - Lorsque le type de l'instance est connu, nous avons
+        une connaissance directe de la méthode à appeler.
+        * Dispatch dynamique - Lorsque le type de l'instance n'est pas connu, Rust
+        doit se débrouiller pour appeler la bonne méthode.
+
+        Les types de traits `&dyn MyTrait` nous permettent de travailler indirectement
+        avec des instances d'objets en utilisant un dispatch dynamique.
+
+        Lorsque qu'un dispach dynamique est utilisé, Rust nous encouragera (il affichera
+        un warning) à placer `dyn` devant le type du trait pour indiquer que c'est un
+        trait.
+
+        Détails de la mémoire:
+        * Le dispach dynamique est légèrement plus lent que le dispatch statique car
+        il faut trouver la méthode à appeler.
     ie:
       title: Dinamic contra Static Dispatch (Depeche)
       content: |
@@ -5233,7 +5337,21 @@ pages:
 
         Memory details:
         * This list of functions is known in C++ as a *vtable*.
+    fr:
+      title: Objets Trait
+      content_markdown: |
+        Lorsque nous transmettons l'instance d'un objet à un paramètre de
+        type `&dyn MyTrait`, nous transmettons ce que l'on appelle un
+        *objet trait* (en anglais trait object).
 
+        Un objet trait est ce qui nous permet d'appeler indirectement les bonnes
+        méthodes d'une instance via un dispach dynamique. Un objet trait est une
+        structure qui contient le pointeur de l'instance ainsi qu'une liste de
+        pointeurs vers les méthodes de cette instance.
+
+        Détails de la mémoire:
+        * Cette liste de fonctions est connue en C++ sous le nom de *vtable*.
+        
     ie:
       title: Trate-Objectes
       content_markdown: |
