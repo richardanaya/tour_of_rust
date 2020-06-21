@@ -5091,11 +5091,11 @@ pages:
         Avec Rust, un objet est représenté par une structure. On peut associer
         à celle-ci certaines fonctions (également appelées *méthodes*).
 
-        Le premier paramètre de toute méthode doit être une référence à l'instance
-        associée à l'appel de la méthode (par exemple `instanceOfObj.foo ()`).
+        Le premier paramètre de toute méthode doit être une référence de l'instance
+        associée à l'appel de la méthode (par exemple `instanceOfObj.foo()`).
         Rust utilise:
-        * `&self` - Référence immuable à l'instance.
-        * `&mut self` - Référence mutable à l'instance.
+        * `&self` - Référence immuable de l'instance.
+        * `&mut self` - Référence mutable de l'instance.
 
         Les méthodes sont définies dans un bloc d'implémentation
         avec le mot clé `impl`:
@@ -5201,7 +5201,7 @@ pages:
 
         Quand une structure implémente un trait, le trait établit un contrat entre
         la structure et les méthodes que la structure doit implémenter. Cela nous
-        permetra d'intéragir avec la structure à travers le type du trait
+        permetra d'interagir avec la structure à travers le type du trait
         (par exemple `&dyn MyTrait`) sans avoir à connaître le type réel.
 
         Les méthodes du trait implémentées par la structure sont définies dans un bloc
