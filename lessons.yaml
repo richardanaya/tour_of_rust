@@ -5371,6 +5371,21 @@ pages:
         * `generics` - Using parameterized types effectively create struct/functions known types and thus known sizes.
         * `indirection` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it. There are other ways as well!
 
+    fr:
+      title: Gestion des données sans Taille
+      content_markdown: |
+        Les traits présentent un défi intéressant lorsque nous voulons les stocker
+        dans une autre structure. Les traits masquent la structure originel et
+        notamment sa taille. Avec Rust, les éléments sans taille connues et qui sont
+        stockées dans une structure sont traitées de deux manières:
+
+        * `génériques` - Le compilateur Rust créer des structures ou des fonctions
+        dont la taille est connue par l'utilisation de types paramétrés (génériques).
+        * `données sur le tas` - En mettant l'instance sur le tas et en stockant
+        uniquement un pointeur vers cette instance. Cela nous donne un niveau
+        d'indirection nous évitant d'avoir à se soucier de la taille du type. Il
+        existe également d'autres moyens!
+
     ie:
       title: Gerer Data sin Grandore
       content_markdown: |
@@ -5398,6 +5413,30 @@ pages:
 
         By using generics we create static typed functions at compile time that will have known types and sizes, allowing us to
         perform static dispatch and store as a sized value.
+
+    fr:
+      title: Fonctions Géneriques
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20Le%20type%20est%20connu%20%C3%A0%20la%20compilation%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+      content_markdown: |
+        Avec Rust les génériques vont de pair avec les traits. Lorsque qu'un paramètre
+        de fonctions est un type paramétré `T`, le compilateur contraint les types qui
+        peuvent être utilisés comme argument de la fonction. Le mot-clé `where` permet
+        de lister les traits que l'argument doit implémenter.
+
+        Dans cet exemple, le type `T` doit implémenter le trait` Foo`:
+        ```rust
+        fn my_function<T>(foo: T)
+        where
+            T:Foo
+        {
+            ...
+        }
+        ```
+
+        En utilisant des génériques, nous créons des fonctions statiquement typées
+        au moment de la compilation dont le type et la taille seront connus. Cela
+        nous permet d'effectuer un dispatch statique et de stocker des valeurs dont
+        la taille est connue.
 
     ie:
       title: Functiones Géneric
@@ -5430,6 +5469,30 @@ pages:
         ```
 
         This is equivalent to writing:
+
+        ```rust
+        fn my_function<T>(foo: T)
+        where
+            T:Foo
+        {
+            ...
+        }
+        ```
+
+    fr:
+      title: Fonctions génériques condensées
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20Le%20type%20est%20connu%20%C3%A0%20la%20compilation.%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+      content_markdown: |
+        Rust possède un raccourci pour exprimer les génériques contraintes par
+        un trait:
+        
+        ```rust
+        fn my_function(foo: impl Foo) {
+            ...
+        }
+        ```
+
+        Cela équivaut à écrire:
 
         ```rust
         fn my_function<T>(foo: T)
@@ -5479,6 +5542,26 @@ pages:
         Box::new(Foo { ... })
         ```
 
+    fr:
+      title: Box
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sara%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22chante%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sara)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
+      content_markdown: |
+        `Box` est une structure de données qui permet de déplacer les données
+        de la pile vers le tas.
+
+        `Box` est également appelé *pointeur intelligent* (en anglais smart
+        pointer) qui contient un pointeur vers des données sur le tas.
+
+        `Box` étant de taille connue (la taille du pointeur), on l'utilise
+        souvant comme un moyen de stocker une référence dans une structure
+        lorsque cette dernière doit connaître la taille de certaints éléments.
+
+        `Box` est très souvent utilisé et on le fait de cette manière:
+
+        ```rust
+        Box::new(Foo { ... })
+        ```
+
     ie:
       title: Buxe
       content_markdown: |
@@ -5510,6 +5593,30 @@ pages:
         ```
 
         Generic structs have their parameterized type in their implementation blocks:
+
+        ```rust
+        impl<T> MyStruct<T> {
+            ...
+        }
+        ```
+    fr:
+      title: Structures Génériques Revisitées
+      content_markdown: |
+        Les types d'une structure générique peuvent également être contraints par des
+        traits.
+
+        ```rust
+        struct MyStruct<T>
+        where
+            T: MyTrait
+        {
+            foo: T
+            ...
+        }
+        ```
+        Quand à la définition des méthodes d'une structure paramétrée, celle-ci
+        est faîte de la manière suivante (le type paramétré peut être utilisé
+        dans le bloc d'implémentation):
 
         ```rust
         impl<T> MyStruct<T> {
@@ -5552,6 +5659,22 @@ pages:
         Resources:
         * [Video - Object-oriented Programming in 7 minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
         * [Article - "The faster you unlearn OOP, the better for you and your software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
+    fr:
+      title: Chapitre 7 - Conclusion
+      content_markdown: |
+        Nous en savons désormais beaucoup pour pouvoir représenter clairement
+        nos idées avec Rust! Les abstractions peuvent sembler simples mais elles
+        sont suffisamment puissantes pour faire en sorte qu'écrirer un programme
+        Rust devienne une partie de plaisir. Dans ce chapitre, nous avons vu très
+        brièvement les pointeurs intelligents avec `Box`. Dans le chapitre suivant,
+        nous découvrirons comment les pointeurs intelligents peuvent nous aider
+        dans d'autre cas où une gestion spéciale de la mémoire est requise.
+
+        Bien que les ressources suivantes soient en anglais, nous vous recommendons
+        celles-ci. Car de toute façon il faudra bien se mettre à l'anglais,
+        pas vrai <span class=\"emoji\">\U0001F604</span>?
+        * [Video - La programmation orientée objet en 7 minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+        * [Article - Le plus rapidement vous oublierez la POO, le mieux cela sera pour vous et votre logiciel](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
     ie:
       title: Capitul 7 - Conclusion
       content_markdown: |
