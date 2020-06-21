@@ -5321,7 +5321,7 @@ pages:
         il faut trouver la méthode à appeler.
     ie:
       title: Dinamic contra Static Dispatch (Depeche)
-      content: |
+      content_markdown: |
         On execute metodes secun du manieres quam seque:
         * dispatch static - Quande on save li tip del instantie, noi save directmen pri quel function a vocar.
         * dispatch dinamic - Quande on ne save li tip del instantie, noi deve trovar un maniere por vocar li function corect.
