@@ -5375,8 +5375,8 @@ pages:
       title: Gestion des données sans Taille
       content_markdown: |
         Les traits présentent un défi intéressant lorsque nous voulons les stocker
-        dans une autre structure. Les traits masquent la structure originel et
-        notamment sa taille. Avec Rust, les éléments sans taille connues et qui sont
+        dans une autre structure. Les traits masquent la structure originelle et
+        notamment sa taille. Avec Rust, les éléments sans taille connue et qui sont
         stockées dans une structure sont traitées de deux manières:
 
         * `génériques` - Le compilateur Rust créer des structures ou des fonctions
@@ -5418,8 +5418,8 @@ pages:
       title: Fonctions Géneriques
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20Le%20type%20est%20connu%20%C3%A0%20la%20compilation%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
       content_markdown: |
-        Avec Rust les génériques vont de pair avec les traits. Lorsque qu'un paramètre
-        de fonctions est un type paramétré `T`, le compilateur contraint les types qui
+        Avec Rust les génériques vont de pair avec les traits. Lorsqu'un paramètre
+        de fonction est un type paramétré `T`, le compilateur contraint les types qui
         peuvent être utilisés comme argument de la fonction. Le mot-clé `where` permet
         de lister les traits que l'argument doit implémenter.
 
@@ -5553,8 +5553,8 @@ pages:
         pointer) qui contient un pointeur vers des données sur le tas.
 
         `Box` étant de taille connue (la taille du pointeur), on l'utilise
-        souvant comme un moyen de stocker une référence dans une structure
-        lorsque cette dernière doit connaître la taille de certaints éléments.
+        souvent comme un moyen de stocker une référence dans une structure
+        lorsque cette dernière doit connaître la taille de certains éléments.
 
         `Box` est très souvent utilisé et on le fait de cette manière:
 
@@ -5614,8 +5614,8 @@ pages:
             ...
         }
         ```
-        Quand à la définition des méthodes d'une structure paramétrée, celle-ci
-        est faîte de la manière suivante (le type paramétré peut être utilisé
+        Quant à la définition des méthodes d'une structure paramétrée, celle-ci
+        est faite de la manière suivante (le type paramétré peut être utilisé
         dans le bloc d'implémentation):
 
         ```rust
@@ -5664,7 +5664,7 @@ pages:
       content_markdown: |
         Nous en savons désormais beaucoup pour pouvoir représenter clairement
         nos idées avec Rust! Les abstractions peuvent sembler simples mais elles
-        sont suffisamment puissantes pour faire en sorte qu'écrirer un programme
+        sont suffisamment puissantes pour faire en sorte qu'écrire un programme
         Rust devienne une partie de plaisir. Dans ce chapitre, nous avons vu très
         brièvement les pointeurs intelligents avec `Box`. Dans le chapitre suivant,
         nous découvrirons comment les pointeurs intelligents peuvent nous aider
