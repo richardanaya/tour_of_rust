@@ -5694,7 +5694,18 @@ pages:
         Ferris says: "Don't feel overwhelmed by this chapter if you don't feel 
         you can write your own low level memory management code in one short read. This chapter 
         is mostly to introduce you to some useful tools and give a glimpse at how they work!"
-        
+    fr:
+      title: Chapitre 8 - Pointeurs Intelligents (Smart Pointers)
+      content_markdown: |
+        Dans ce chapitre, nous allons démystifier les pointeurs intelligents
+        (en anglais Smart Pointers). Explorons ces structures de données qui
+        nous permettent d'interagir au plus bas niveau de la Mémoire.
+      
+        Ferris dit: "Ne te sent pas submergé par ce chapitre, je n'attend pas de
+        toi que tu soit capable d'écrire ton propre code de gestion de la mémoire
+        bas niveau après une première lecture. Ce chapitre est surtout là pour te
+        présenter quelques outils utiles et de te donner un aperçu de leur
+        fonctionnement!"
     ie:
       title: Capitul 8 - Smart Pointers
       content_markdown: |
@@ -5714,6 +5725,16 @@ pages:
         where data of a specific type exists. What makes a reference different from a just a number is that Rust
         will validate the lifetime of references doesn't last longer than what
         it refers to (otherwise we'd get an error when we used it!).
+        
+    fr:
+      title: References Revisitées
+      content_markdown: |
+        Une référence est fondamentalement juste un nombre qui donne la position
+        de départ d'octets en mémoire, son seul but est d'indiquer où des données
+        d'un type spécifique sont situées en mémoire. Une référence n'est pas juste
+        qu'un nombre, Rust va valider la durée de vie de la référence pour qu'elle ne
+        dépasse par celle de l'objet qu'elle réfère (sinon nous obtiendrions une
+        erreur dès que nous essayerions de l'utiliser!).
         
     ie:
       title: Denov pri Referenties
@@ -5746,7 +5767,37 @@ pages:
           how it can be stored and moved around to other functions.
         * A raw pointer in Rust is similar to a pointer in C that it represents a number that can be copied 
           passed around, and even turned into numerical types where it can be modifed as a number to do pointer math.
-          
+    fr:
+      title: Pointeurs Bruts (Raw Pointers)
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22La%20donn%C3%A9e%20se%20trouve%20%C3%A0%20l%27adresse%20m%C3%A9moire%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+      content_markdown: |
+        Les références peuvent être converties en un type plus primitif appelé
+        *pointeurs bruts* (en anglais raw pointers). Ce type de pointeur peut
+        être copié et déplacé avec peu de restrictions. Cependant, Rust ne garantit
+        pas la validité de l'emplacement de mémoire vers lequel il pointe.
+
+        Il existe deux types de pointeurs bruts:
+
+        * `*const T` - Un pointeur brut vers des données de type T qui ne devraient
+        jamais changer.
+        * `*mut T` - Un pointeur brut vers des données de type T qui peuvent
+        changer.
+
+        Les pointeurs bruts peuvent être convertis en et à partir de nombres
+        (par exemple `usize`).
+
+        Les pointeurs bruts peuvent accéder aux données avec un code *unsafe*
+        (plus d'informations à ce sujet plus tard).
+
+        Détails de la mémoire:
+        * En termes d'utilisation, une référence en Rust est très similaire
+        à un pointeur en C mais avec beaucoup plus de restrictions lors de la
+        compilation (notamment sur la manière dont la référence peut être stockée
+        et déplacée vers d'autres fonctions).
+        * Un pointeur brut en Rust est similaire à un pointeur en C du fait qu'ils
+        représentent tout les deux un nombre qui peut être copié, passé en argument
+        de fonction ou même transformé en un type numérique avec lequel on pourra
+        faire cetaines opérations arithmétiques (i.e. arithmétique des pointeurs).
     ie:
       title: Raw (crud) Puntatores
       content_markdown: |
@@ -5778,6 +5829,18 @@ pages:
 
         Rust has some powerful operators that allow us to do this.
         
+    fr:
+      title: Déréférencement
+      content_markdown: |
+        Le fait d'accéder ou de manipuler des données à partir d'une *référence*
+        (i.e. un `&i32`) est appelé *déréférencement* (en anglais dereferencing).
+      
+        Les références sont utilisées pour accéder ou manipuler des données de deux
+        manières:
+        * Accéder à la donnée référencée lors de l'affectation d'une variable.
+        * Accéder aux champs ou méthodes de la donnée référencée.
+
+        Pour cela, Rust met à notre disposition des opérateurs très puissants.
     ie:
       title: Dereferentiation
       content_markdown: |
