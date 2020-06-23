@@ -5871,7 +5871,7 @@ pages:
     fr:
       title: L'opérateur *
       content_markdown: |
-      L'opérateur `*` est un moyen explicite de déréférencer une référence. 
+        L'opérateur `*` est un moyen explicite de déréférencer une référence. 
 
         ```rust
         let a: i32 = 42;
@@ -5919,8 +5919,8 @@ pages:
     fr:
       title: L'opérateur .
       content_markdown: |
-      L'opérateur `.` est utilisé pour accéder aux champs et aux méthodes d'une
-      référence. Cela fonctionne un peu plus subtilement que l'opérateur `*`.
+        L'opérateur `.` est utilisé pour accéder aux champs et aux méthodes d'une
+        référence. Cela fonctionne un peu plus subtilement que l'opérateur `*`.
 
         ```rust
         let f = Foo { value: 42 };
@@ -5970,13 +5970,13 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20Un%20d%C3%A9r%C3%A9f%C3%A9rencement%20est%20fait%20par%20l%27appel%0A%20%20%20%20%2F%2F%20de%20la%20fonction%20%60len%60.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
       content_markdown: |
         En plus de la possibilité de créer des références de données typées à
-        l'aide de l'opérateur `&`. Rust nous donne la possiblité de créer des
+        l'aide de l'opérateur `&`, Rust nous donne la possibilité de créer des
         structures similaires aux références (en anglais reference-like) appelées
         **pointeurs intelligents**.
       
         Les références peuvent être vues comme un type qui nous donne accès à un
         autre type. Les pointeurs intelligents peuvent faire la même chose que les
-        références et plus encore, c'est au programmer de définir la logique interne
+        références et plus encore, c'est au programmeur de définir la logique interne
         d'un pointeur intelligent. La partie *intelligente* est le programmeur.
 
         Les pointeurs intelligents implémentent généralement les traits Deref,
@@ -6027,10 +6027,10 @@ pages:
         La première cause d'un code dangereux est lorsqu'on essaye de
         *déréférencer un pointeur brut*. Cela signifie prendre un *pointeur brut*
         correspondant à une adresse mémoire, déclarer "une structure de données existe ici!"
-        et tranformer les octets de cette emplacement mémoire dans une représentation
-        de données que l'on pourra utiliser (par exemple `*const u8` en` u8`).
-        Puisque Rust ne garantie pas la signification des octets (il n'est garde
-        pas de trace), il place le déréférencement dans un bloc `unsafe {...}`.
+        et transformer les octets de cet emplacement mémoire dans une représentation
+        de données que l'on pourra utiliser (par exemple `*const u8` en `u8`).
+        Puisque Rust ne garantie pas la signification des octets (il ne garde
+        pas de traces), il place le déréférencement dans un bloc `unsafe {...}`.
         
     ie:
       title: Code Inteligent e Ínsecur
