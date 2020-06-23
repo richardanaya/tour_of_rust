@@ -6261,10 +6261,41 @@ pages:
         un repositorio de crates creado por la comunidad Rust: <a href="https://crates.io/">https://crates.io</a></p>
   - beta: true
     en:
+      title: Module Heirarchy
+      content_markdown: |
+        When we think of code, we usually imagine like a heirarchy of folders and files for organization sake. Similarly in Rust, we
+        can have two kinds of modules relative to the root module `main.rs`/`lib.rs`:
+          * modules as files - these are simply files that have the same name as the module (eg. `foo.rs`) and declared `mod foo;` in parent module.
+          * modules as directory - if we want to represent a module as a directory, we creat a director named `foo` and put a file in `mode.rs`.
+            We declare this module similarly as `mod foo` in it's parent directory
+  - beta: true
+    en:
+      title: Inline Module
+      content_markdown: |
+        A sub module can be directoy inlined within another module. You don't have to create a new file/directory at all to give some heirarchy to your code.
+  - beta: true
+    en:
+      title: Testing
+      content_markdown: |
+        One very common use for inline modules is creating tests. We create an inline module that only exists when Rust is used for testing!
+
+        ```
+        // this macro removes this inline module when Rust is not in test mode
+        #[cfg(test)]
+        mod tests {
+            // notice that we don't immediately get access to the parent module
+            // we must be explicit
+            use super::*;
+
+            ... tests go here ...
+        }
+        ```
+  - beta: true
+    en:
       title: Exporting
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=pub%20fn%20everyone_can_use_this_function()%20%7B%0A%20%20%20%20println!(%22do%20something%22)%0A%7D%0A
       content_markdown: |
-        By default members of a module are not accessible from outside of the module. We make members 
+        By default members of a module are not accessible from outside of the module (not even to it's child modules!). We make members 
         of a module accessible using the `pub` keyword.
 
         By default members of a crate are not accessible outside of the crate. We make members of
@@ -6332,11 +6363,62 @@ pages:
       title: Область видимости структур
       content_markdown: |
         Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
+  - beta: true
+    en:
+      title: Internal Module Referencing
+      content_markdown: |
+        Rust has several keywords you can use in your your `use` path to quickly get ahold of the module you want:
+          
+        * `crate` - the root module of your crate
+        * `super` - the parent module of your current module
+        * `self` - the current module
+  - beta: true
+    en:
+      title: Exporting Beyond Rust
+      content_markdown: |
+        Before Rust existed, a standard called the C application binary interface (ABI) existed.
+
+        The C ABI is simply a specification for how to expose C functions to other users within an operating
+        system for using during static/dynamic linking.
+
+        Rust can expose functions using this ABI protocol.
+  - beta: true
+    en:
+      title: Standardizing Structure Layout
+      content_markdown: |
+        Rust has rules for optimizing it's structures that the outside world might not be aware of if you share a struct
+        outside of your rust library. You can optionally have Rust us the C ABI structure layout rules, so that
+        your data structures in memory have an expected layout. This makes your data structures more portable!
+
+        To do so we use a structure macro `#[repr(C)]`
+  - beta: true
+    en:
+      title: C ABI Limitations
+      content_markdown: |
+        The C ABI has some important limitations to be aware of:
+        * data structures or references to data structures cannot be passed over C ABI functions, only raw pointers
+        * primitive types are limiited to basic C types: `i32/int`, `f32/float`, `byte/char`, etc.
+  - beta: true
+    en:
+      title: Prelude
+      content_markdown: |
+        You might by wondering in Rust, how we have access to `Vec`,`Box`, etc. everywhere without a `use`. In the Rust standard 
+        library anything that is exported in `std::prelude::*` is automatically available to every part of Rust.
+  - beta: true
+    en:
+      title: Your Own Prelude
+      content_markdown: |
+        Because of standard library's prelude, it's common for your libary to have it's own prelude module as a starting point for 
+        where users should import all of the most common data structures for using your library (e.g `use my_library::prelude::*`).
+
+        Ferris says, "Be a good rustacean and help a fellow crab out with a good prelude!"
   - chapter: 10
     en:
       title: The End
       content_markdown: |
-        That's all for now. Stay tuned for new content. I hope you enjoy the journey ahead!
+        It's been a joy to have you on the Tour of Rust.  Ferris and the Tour of Rust team sincerely hope you enjoy the journey ahead!  If you 
+        have feel comfortable this far, we strongly recommend diving deeper with these resources:
+        * [The Official Rust Programming Book](https://doc.rust-lang.org/stable/book/)
     es:
       title: Fin
       content_markdown: |
