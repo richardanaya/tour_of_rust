@@ -5701,10 +5701,10 @@ pages:
         (en anglais Smart Pointers). Explorons ces structures de données qui
         nous permettent d'interagir au plus bas niveau de la Mémoire.
       
-        Ferris dit: "Ne te sent pas submergé par ce chapitre, je n'attend pas de
-        toi que tu soit capable d'écrire ton propre code de gestion de la mémoire
+        Ferris dit: "Ne te sens pas submergé par ce chapitre, je n'attends pas de
+        toi que tu sois capable d'écrire ton propre code de gestion de la mémoire
         bas niveau après une première lecture. Ce chapitre est surtout là pour te
-        présenter quelques outils utiles et de te donner un aperçu de leur
+        présenter quelques outils utiles et te donner un aperçu de leur
         fonctionnement!"
     ie:
       title: Capitul 8 - Smart Pointers
@@ -5727,11 +5727,11 @@ pages:
         it refers to (otherwise we'd get an error when we used it!).
         
     fr:
-      title: References Revisitées
+      title: Références Revisitées
       content_markdown: |
         Une référence est fondamentalement juste un nombre qui donne la position
         de départ d'octets en mémoire, son seul but est d'indiquer où des données
-        d'un type spécifique sont situées en mémoire. Une référence n'est pas juste
+        d'un type spécifique sont situés en mémoire. Une référence n'est pas juste
         qu'un nombre, Rust va valider la durée de vie de la référence pour qu'elle ne
         dépasse par celle de l'objet qu'elle réfère (sinon nous obtiendrions une
         erreur dès que nous essayerions de l'utiliser!).
@@ -5795,9 +5795,9 @@ pages:
         compilation (notamment sur la manière dont la référence peut être stockée
         et déplacée vers d'autres fonctions).
         * Un pointeur brut en Rust est similaire à un pointeur en C du fait qu'ils
-        représentent tout les deux un nombre qui peut être copié, passé en argument
+        représentent tous les deux un nombre qui peut être copié, passé en argument
         de fonction ou même transformé en un type numérique avec lequel on pourra
-        faire cetaines opérations arithmétiques (i.e. arithmétique des pointeurs).
+        faire certaines opérations arithmétiques (i.e. arithmétique des pointeurs).
     ie:
       title: Raw (crud) Puntatores
       content_markdown: |
