@@ -75,14 +75,14 @@ pages:
         a lot to explore before we even get to complex parts.</p><p>You can find this
         guide in these languages:
 
-        * [Deutsch](index_de.html)
-        * [English](index.html)
-        * [Español](index_es.html)
-        * [Français](index_fr.html)
-        * [Interlingue](index_ie.html)
-        * [Português Brasileiro](index_pt-br.html)
-        * [Русский](index_ru.html)
-        * [简体中文](index_zh-cn.html)
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
 
         if you have suggestions on content
         or would like to contribute to translations, checkout out Tour of Rust's 
@@ -103,14 +103,14 @@ pages:
 
         tu peux trouver ce guide dans les languages suivants:
 
-        * [Deutsch](index_de.html)
-        * [English](index.html)
-        * [Español](index_es.html)
-        * [Français](index_fr.html)
-        * [Interlingue](index_ie.html)
-        * [Português Brasileiro](index_pt-br.html)
-        * [Русский](index_ru.html)
-        * [简体中文](index_zh-cn.html)
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
 
         si tu as des suggestions sur le contenu
         ou si tu souhaites contribuer aux traductions, rends-toi sur le
@@ -139,13 +139,13 @@ pages:
         [Github Repository](https://github.com/richardanaya/tour_of_rust).
 
         Translations:
-        * [Deutsch](index_de.html)
-        * [English](index.html)
-        * [Español](index_es.html)
-        * [Interlingue](index_ie.html)
-        * [Português Brasileiro](index_pt-br.html)
-        * [Русский](index_ru.html)
-        * [简体中文](index_zh-cn.html)
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Interlingue](00_ie.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
     ie:
       title: "Salute, <span class=\"emoji\">\U0001F980</span>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Salute%2C%20%F0%9F%A6%80%22)%3B%0A%7D
@@ -156,8 +156,8 @@ pages:
         convicter te que hay multcos a explorar e aprender ante que veni li complexitá.</p>
         <p>In ti-ci exemple on vide li exemple classic de programmation quel monstra li
         subtention de strings (catenes) unicode in Rust.</p><p>Translations:<ul><li><a
-        href="index_de.html">Deutsch</a></li><li><a href="index.html">English</a></li><li><a href="index_es.html">Español</a></li><li><a
-        href="index_ie.html">Interlingue</a></li><li><a href="index_ru.html">Русский</a></li><li><a href="index_zh-cn.html">简体中文</a></li></ul></p>
+        href="00_de.html">Deutsch</a></li><li><a href="00_en.html">English</a></li><li><a href="00_es.html">Español</a></li><li><a
+        href="00_ie.html">Interlingue</a></li><li><a href="00_ru.html">Русский</a></li><li><a href="00_zh-cn.html">简体中文</a></li></ul></p>
         <p>Si tu have suggestiones pri contenete o vole contribuer un traduction, ples visitar
         li <a href="https://github.com/richardanaya/tour_of_rust">repositoria github</a>
         del Tur de Rust.</p>
@@ -170,14 +170,14 @@ pages:
         мы перейдём к более сложным частям.
 
         Тур доступен на таких языках:
-        * [Deutsch](index_de.html)
-        * [English](index.html)
-        * [Español](index_es.html)
-        * [Français](index_fr.html)
-        * [Interlingue](index_ie.html)
-        * [Português Brasileiro](index_pt-br.html)
-        * [Русский](index_ru.html)
-        * [简体中文](index_zh-cn.html)
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
 
         Если у вас есть предложения по содержимому или вы бы хотели помочь с переводом, проверьте
         Тур по Rust [github репозиторий](https://github.com/richardanaya/tour_of_rust).
@@ -193,14 +193,14 @@ pages:
         antes de llegar a las partes complejas.</p><p>Puedes encontrar esta
         guía en los siguientes idiomas:
 
-        * [Deutsch](index_de.html)
-        * [English](index.html)
-        * [Español](index_es.html)
-        * [Français](index_fr.html)
-        * [Interlingue](index_ie.html)
-        * [Português Brasileiro](index_pt-br.html)
-        * [Русский](index_ru.html)
-        * [简体中文](index_zh-cn.html)
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
 
         Si tienes alguna sugerencia sobre el contenido
         o quieres contribuir a las traducciones, puedes encontrar el repositorio del 
@@ -220,14 +220,14 @@ pages:
 
         Você pode ver este guia nestes idiomas:
 
-        * [Deutsch](index_de.html)
-        * [English](index.html)
-        * [Español](index_es.html)
-        * [Français](index_fr.html)
-        * [Interlingue](index_ie.html)
-        * [Português Brasileiro](index_pt-br.html)
-        * [Русский](index_ru.html)
-        * [简体中文](index_zh-cn.html)
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
 
         Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
         traduções, veja o repositório do Tour por Rust no 
@@ -245,14 +245,14 @@ pages:
 
         你可以通过以下这些语言来阅读本教程：
 
-        * [Deutsch](index_de.html)
-        * [English](index.html)
-        * [Español](index_es.html)
-        * [Français](index_fr.html)
-        * [Interlingue](index_ie.html)
-        * [Português Brasileiro](index_pt-br.html)
-        * [Русский](index_ru.html)
-        * [简体中文](index_zh-cn.html)
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
 
         如果你对内容有任何建议，或者想参与翻译做出贡献，请查看 Rust 语言之旅的 [github 代码库](https://github.com/richardanaya/tour_of_rust)。
 
@@ -1056,7 +1056,7 @@ pages:
       content_markdown: |
         Une fonction peut retourner plusieurs valeurs en retournant un *tuple* de valeurs.
 
-        Les éléments du tuple peuvent être référencés par leur index.
+        Les éléments du tuple peuvent être référencés par leur 00_en.
 
         Rust nous donne la possibilité d'extraire simplement certaines parties de structures de données,
         c'est la destructuration. Nous en verrons d'autres formes par la suite. Garde l'oeil ouvert!
@@ -4696,7 +4696,7 @@ pages:
         If you have some very large text, consider using the macro `include_str!` to include text from local files in your program:
 
         ```rust
-        let index_html = include_str!("index.html");
+        let 00_html = include_str!("00_en.html");
         ```
 
     fr:
@@ -4706,7 +4706,7 @@ pages:
         tu peux utiliser la macro `include_str!`:
 
         ```rust
-        let index_html = include_str!("index.html");
+        let 00_html = include_str!("00_en.html");
         ```
 
     ie:
@@ -4715,7 +4715,7 @@ pages:
         Si on possede mult textu, on posse usar li macro `include_str!` por includer li textu de archives local in li programma:
 
         ```rust
-        let index_html = include_str!("index.html");
+        let 00_html = include_str!("00_en.html");
         ```
 
   - en:
