@@ -71,7 +71,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
 </html>`
 }
 
-function pad(num, size) {ma
+function pad(num, size) {
     var s = num+"";
     return s.padStart(2, '0')
 }
