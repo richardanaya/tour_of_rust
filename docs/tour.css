@@ -75,11 +75,11 @@ html, body {
 
 .page {
     overflow-y: auto;
-    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 2s; /* Firefox < 16 */
-        -ms-animation: fadein 2s; /* Internet Explorer */
-         -o-animation: fadein 2s; /* Opera < 12.1 */
-            animation: fadein 2s;
+    -webkit-animation: fadein .5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein .5s; /* Firefox < 16 */
+        -ms-animation: fadein .5s; /* Internet Explorer */
+         -o-animation: fadein .5s; /* Opera < 12.1 */
+            animation: fadein .5s;
 }
 
 
@@ -211,6 +211,10 @@ body.welcome-cover {
     text-decoration: underline;
 }
 
+ul {
+    font-size: 20px;
+}
+
 @media screen and (max-width: 600px) {
     .code, .page {
         width: 100%;
@@ -225,6 +229,10 @@ body.welcome-cover {
 
     .code iframe{
         height: 100%;
+    }
+
+    code {
+        font-size: 14px;
     }
 
     .header {
@@ -253,10 +261,10 @@ body.welcome-cover {
     }
 
     ul,ol, h3 {
-        margin-left: 20px;
+        margin-left: 0px;
         margin-right: 20px;
     }
-    
+
     .nav span {
         padding-left: 5px;
     }
