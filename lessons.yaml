@@ -6065,6 +6065,33 @@ pages:
         Memory details:
         * Rust has an equivalent of C's `malloc` using [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) and [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) for getting ahold of your own memory regions to manage.
         
+    fr:
+      title: Amis familiers
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20On%20d%C3%A9finie%20l%27agencement%20que%20doit%20avoir%20la%20m%C3%A9moire%0A%20%20%20%20%20%20%20%20%2F%2F%20pour%20pouvoir%20allouer%204%20octets.%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Alloue%20nos%204%20octets%20en%20m%C3%A9moire%20et%20sauvegarde%20la%20position%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20de%20d%C3%A9but%20en%20tant%20qu%27entier.%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20On%20%C3%A9crit%20quelques%20valeurs%20u8%20en%20m%C3%A9moire%20avec%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20un%20peu%20d%27arithm%C3%A9tique%20des%20pointeurs.%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Interpr%C3%A8te%20le%20pointer%20secret_recipe%20en%20tant%20que%0A%20%20%20%20%20%20%20%20%2F%2F%20pointer%20brut%20f32.%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20D%C3%A9reference%20le%20pointer%20brut%20et%20retourne%20une%0A%20%20%20%20%20%20%20%20%2F%2F%20valeur%20%26f32.%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20On%20d%C3%A9r%C3%A9f%C3%A9rence%20le%20pointeur%20intelligent%20de%20notre%0A%20%20%20%20%2F%2F%20structure%20Pie.%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+      content_markdown: |
+        Revenons sur quelques pointeurs intelligents que tu connais déjà: `Vec<T>` et `String`.
+
+        `Vec <T>` est un pointeur intelligent vers des octets en mémoire. Le
+        compilateur Rust n'a aucune idée de la manière dont interpréter ces octets.
+        Le pointeur intelligent est capable d'interpréter ces octets en gardant
+        une trace de l'endroit dans ces octets où une structures de données commence
+        et se termine. Le pointeur intelligent déréférence un pointeur brut pour
+        exposer la structure de données dans une belle interface ergonomique propre
+        que nous d'utiliser (par exemple `my_vec [3]`).
+
+        De même, `String` garde une trace des octets en mémoire et restreint par
+        programmation le contenu qui y est écrit à toujours être de `utf-8`
+        valide. Il déréférence cette région de mémoire dans un type` &str`.
+
+        Ces deux structures de données doivent procéder à un déréférencement
+        dangereux de pointeurs bruts.
+
+        Détails de la mémoire:
+        * Rust possède l'équivalent de `malloc` du langage C avec
+        [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) et
+        [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
+        pour allouer soi-même un région de la mémoire.
+        
     ie:
       title: Amics Bon Conosset
       content_markdown: |
@@ -6086,6 +6113,16 @@ pages:
         `Box` is a smart pointer that lets us move data from the stack to the heap.
 
         Dereferencing it lets us use the heap allocated data ergonomically as if it were the original type.
+        
+    fr:
+      title: Mémoire Allouée sur le Tas
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+      content_markdown: |
+        `Box` est un pointeur intelligent qui nous permet de déplacer des données
+        de la pile vers le tas.
+
+        Le déréférencement nous permet d'utiliser les données allouées sur le tas
+        de manière ergonomique comme s'il s'agissait du type d'origine.
         
     ie:
       title: Memorie Alocat sur li Heap
@@ -6110,7 +6147,28 @@ pages:
         ```rust
         fn main() -> Result<(), Box<dyn std::error:Error>>
         ```
-        
+    fr:
+      title: Renvoie d'erreurs dans le main revisité
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C%27_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22La%20tarte%20n%27est%20pas%20fra%C3%AEche!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+      content_markdown: |
+        Rust possède une pléthore de représentations d'erreurs, mais la bibliothèque
+        standard met à disposition un trait universel `std::error::Error` pour
+        décrire les erreurs.
+
+        En utilisant le pointeur intelligent `Box`, nous pouvons utiliser le type
+        `Box<dyn std::error::Error>` comme type courant pour renvoyer des erreurs
+        car celui-ci nous permet de propager une erreur sur le tas et d'interagir
+        avec elle sans avoir à connaître le type spécifique.
+
+        Au début du Tour de Rust, nous avons appris que `main` pouvait renvoyer une
+        erreur. Avec `Box`, nous pouvons maintenant retourner un type capable de
+        décrire presque tout type d'erreur qui pourrait se produire dans notre
+        programme à condition que la structure de données de l'erreur implémente
+        le trait `Error` de Rust.
+
+        ```rust
+        fn main() -> Result<(), Box<dyn std::error:Error>>
+        ```
     ie:
       title: Denov pri li Main Fallibil
       content_markdown: |
@@ -6135,6 +6193,17 @@ pages:
 
         Only when the last smart pointer is dropped does the data on the heap become deallocated.
         
+    fr:
+      title: Multi-Propriétaire
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20Les%20donn%C3%A9es%20de%20Pie%20se%20trouvant%20sur%20le%20tas%20sont%0A%20%20%20%20%2F%2F%20d%C3%A9sallou%C3%A9es%20ici.%0A%7D%0A
+      content_markdown: |
+        `Rc` (en anglais Reference Counting) est un pointeur intelligent qui
+        déplace les données de la pile vers le tas. Celui-ci peut être cloner
+        et permet d'emprunter immuablement les données se trouvant sur le tas.
+
+        Ce n'est que lorsque le dernier pointeur intelligent est déalloué que les
+        données du tas sont désallouées.
+        
     ie:
       title: Numerotar Referenties
       content_markdown: |
@@ -6154,6 +6223,20 @@ pages:
         **Only one mutable reference OR multiple immutable references, but not both!**
 
         If you violate these rules `RefCell` will panic.
+        
+    fr:
+      title: Partage d'accès
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20valide%20les%20r%C3%A8gles%20de%20s%C3%A9curit%C3%A9%20li%C3%A9es%0A%20%20%20%20%2F%2F%20%C3%A0%20la%20m%C3%A9moire%20lors%20de%20l%27ex%C3%A9cution.%0A%20%20%20%20%2F%2F%20Note%3A%20pie_cell%20n%27est%20pas%20mutable!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Mais%20rien%20n%27emp%C3%AAche%20d%27emprunter%20une%20r%C3%A9f%C3%A9rence%20mutable!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20est%20d%C3%A9sallou%C3%A9%20ici.%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Nous%20pouvons%20emprunter%20une%20r%C3%A9f%C3%A9rence%20immuable%20car%0A%20%20%20%20%2F%2F%20la%20r%C3%A9f%C3%A9rence%20mutable%20vient%20d%27%C3%AAtre%20d%C3%A9sallou%C3%A9e.%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+      content_markdown: |
+        `RefCell` est une structure de données couramment détenue par des pointeurs
+        intelligents et qui contient des données. `RefCell`nous permet d'emprunter
+        des références mutables et immuables vers ces données. Il empêche d'abuser
+        de la fonctionnalité d'emprunt (en anglais borrowing) de Rust en appliquant
+        des règles de sécurité liées à la mémoire lors de l'exécution:
+
+        **Une seule référence mutable OU plusieurs références immuables, mais pas les deux!**
+
+        Si vous violez ces règles, `RefCell` paniquera.
         
     ie:
       title: Accesse Junt
