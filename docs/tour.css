@@ -16,7 +16,7 @@ a {
 
 .title a {
     text-decoration: none;
-    color: white;
+    color: #120b12;
     font-size: 34px;
     line-height: 34px;
 }
@@ -40,7 +40,7 @@ h1, p, pre{
 }
 
 .header {
-    background-color: #ff6602;
+    background-color: #cecece;
     height: 40px;
     padding: 4px;
     line-height: 40px;
@@ -59,7 +59,7 @@ html, body {
 }
 
 .next a, .back a{
-    color: white;
+    color: #120b12;
 }
 
 .nav {
@@ -98,7 +98,7 @@ li {
 }
 
 .toc a{
-    color: white;
+    color: #120b12;
 } 
 
 
@@ -259,4 +259,9 @@ body.welcome-cover {
 
 b, h1 {
     color: black;
+}
+
+
+.header:fullscreen, .header:-webkit-full-screen, .header:moz-full-screen {
+    display:none;
 }
