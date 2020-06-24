@@ -37,7 +37,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
         <title>${getWord(words,lang,"tor")} - ${titleClean(title)}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -71,7 +71,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
 </html>`
 }
 
-function pad(num, size) {
+function pad(num, size) {ma
     var s = num+"";
     return s.padStart(2, '0')
 }
@@ -171,7 +171,7 @@ for(var l in languages){
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
         <title>${getWord(words,lang,"tor")} - ${getWord(words,lang,"toc")}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
