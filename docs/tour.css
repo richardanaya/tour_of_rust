@@ -1,5 +1,5 @@
 body {
-    background: #f4f4f4;
+    background: #dfdfdf;
 }
 
 .page {
@@ -40,7 +40,7 @@ h1, p, pre{
 }
 
 .header {
-    background-color: #f74c00;
+    background-color: #ff6602;
     height: 40px;
     padding: 4px;
     line-height: 40px;
@@ -130,6 +130,46 @@ ul, ol, h3 {
     padding-right: 40px;
 }
 
+
+body.welcome-cover { 
+    background: url(cover.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+}
+
+.welcome {
+    font-size: 40;
+    top: 50%;
+    width: 100%;
+    position: absolute;
+    text-shadow: 2px 2px black;
+    font-weight: bold;
+    color: #dfdfdf;
+}
+
+.welcome a{
+    font-size: 40px;
+    color: #dfdfdf;
+    text-shadow: 4px 2px black;
+    line-height: 80px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.welcome a {
+    font-size: 120;
+}
+
+.welcome-instruction {
+    text-shadow: 2px 1px black;
+    padding-top: 10px;
+    font-size: 30px;
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 600px) {
     .code, .page {
         width: 100%;
@@ -196,47 +236,27 @@ ul, ol, h3 {
     .bottomnav .next {
         padding-right: 20px;
     }
+
+    .welcome {
+        font-size: 24px;
+    }
+
+    .welcome a{
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .welcome a {
+        font-size: 50;
+        text-shadow: 2px 2px black;
+    }
+
+    .welcome-instruction {
+        padding-top: 10px;
+        font-size: 30px;
+    }
 }
 
 b, h1 {
     color: black;
-}
-
-body.welcome-cover { 
-    background: url(cover.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    text-align: center;
-}
-
-.welcome {
-    font-size: 40;
-    top: 50%;
-    width: 100%;
-    position: absolute;
-    text-shadow: 2px 2px black;
-    font-weight: bold;
-    color: white;
-}
-
-.welcome a{
-    font-size: 40px;
-    color: white;
-    text-shadow: 4px 2px black;
-    line-height: 80px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.welcome a {
-    font-size: 120;
-}
-
-.welcome-instruction {
-    text-shadow: 2px 1px black;
-    padding-top: 10px;
-    font-size: 30px;
-    text-decoration: underline;
 }
