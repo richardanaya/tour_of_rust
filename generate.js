@@ -37,7 +37,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@400;700&display=swap" rel="stylesheet">
         <title>${getWord(words,lang,"tor")} - ${titleClean(title)}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -78,13 +78,6 @@ function pad(num, size) {
 
 function getFileName(lang,i,is_beta,chapter){
     let fileName = pad(i,2)+`_${lang}.html`;
-    if(i==0 && !is_beta){
-        if(lang == "en"){
-            fileName = "index.html";
-        } else {
-            fileName = `index_${lang}.html`
-        }
-    }
     if(chapter !== undefined){
         fileName = `chapter_${chapter}_${lang}.html`
     }
@@ -178,7 +171,7 @@ for(var l in languages){
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@400;700&display=swap" rel="stylesheet">
         <title>${getWord(words,lang,"tor")} - ${getWord(words,lang,"toc")}</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -216,3 +209,38 @@ for(var l in languages){
     <script src="/tour.js"></script>
     </html>`)
 }
+
+let fileName = `index.html`;
+fs.writeFileSync(target_dir+"/"+fileName,`<html lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-155199982-1');
+        </script>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&display=swap" rel="stylesheet">
+        <title>Tour of Rust</title>
+        <link rel="stylesheet" href="tour.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    </head>
+    <body class="welcome-cover">
+        <div class="welcome">
+        Welcome to the<br>
+        <a href="00_en.html">Tour of Rust
+        <div class="welcome-instruction">Press to Continue</div>
+        </a></div>
+    </body>
+    <script src="/tour.js"></script>
+</html>`);

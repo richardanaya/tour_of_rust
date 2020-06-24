@@ -1,3 +1,7 @@
+body {
+    background: #f4f4f4;
+}
+
 .page {
     width: 50%;
     display: inline-block;
@@ -13,6 +17,8 @@ a {
 .title a {
     text-decoration: none;
     color: white;
+    font-size: 34px;
+    line-height: 34px;
 }
 
 .emoji {
@@ -39,15 +45,16 @@ h1, p, pre{
     padding: 4px;
     line-height: 40px;
     font-size: 28px;
+    line-height: 28px;
     font-weight: bold;
     color: white;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 html, body {
     padding:0px;
     margin: 0px;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Neuton', serif;
     color: #333;
 }
 
@@ -140,13 +147,15 @@ ul, ol, h3 {
     }
 
     .header {
-        font-size: 12px;
+        font-size: 20px;
         padding-left: 7PX;
-        padding-right: 7px;    
+        padding-right: 7px;   
+        line-height: 40px; 
     }
 
-    .title {
-        font-size: 18px;
+    .title a {
+        font-size: 28px;
+        line-height: 40px;
     }
 
     .page p, h1, pre {
@@ -191,4 +200,43 @@ ul, ol, h3 {
 
 b, h1 {
     color: black;
+}
+
+body.welcome-cover { 
+    background: url(cover.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+}
+
+.welcome {
+    font-size: 40;
+    top: 50%;
+    width: 100%;
+    position: absolute;
+    text-shadow: 2px 2px black;
+    font-weight: bold;
+    color: white;
+}
+
+.welcome a{
+    font-size: 40px;
+    color: white;
+    text-shadow: 4px 2px black;
+    line-height: 80px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.welcome a {
+    font-size: 120;
+}
+
+.welcome-instruction {
+    text-shadow: 2px 1px black;
+    padding-top: 10px;
+    font-size: 30px;
+    text-decoration: underline;
 }
