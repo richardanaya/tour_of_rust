@@ -5868,6 +5868,23 @@ pages:
         - Because i32 is a primitive type that implements the Copy trait, 
         the bytes of variable `a` on stack are copied into the bytes of variable `b`.
         
+    fr:
+      title: L'opérateur *
+      content_markdown: |
+        L'opérateur `*` est un moyen explicite de déréférencer une référence. 
+
+        ```rust
+        let a: i32 = 42;
+        let ref_ref_ref_a: &&&i32 = &&&a;
+        let ref_a: &i32 = **ref_ref_ref_a;
+        let b: i32 = *ref_a;
+        ```
+
+        Détail de la mémoire:
+        - Parce que i32 est un type primitif qui implémente le trait Copy,
+        les octets de la variable `a` sur la pile sont copiés dans les octets
+        de la variable `b`.
+        
     ie:
       title: Li Operator *
       content_markdown: |
@@ -5894,6 +5911,26 @@ pages:
         ```
         Whoa, why didn't we need to add `***` before `ref_ref_ref_f`? This is because the `.` operator automatically dereferences 
         a sequence of references. That last line is turned into the following by the compiler automatically.
+
+        ```rust
+        println!("{}", (***ref_ref_ref_f).value);
+        ```
+        
+    fr:
+      title: L'opérateur .
+      content_markdown: |
+        L'opérateur `.` est utilisé pour accéder aux champs et aux méthodes d'une
+        référence. Cela fonctionne un peu plus subtilement que l'opérateur `*`.
+
+        ```rust
+        let f = Foo { value: 42 };
+        let ref_ref_ref_f = &&&f;
+        println!("{}", ref_ref_ref_f.value);
+        ```
+        Whoa, pourquoi n'avons-nous pas dû ajouter `***` avant `ref_ref_ref_f`?
+        La raison est que l'opérateur `.` déréférence automatiquement une
+        séquence de références. La dernière instruction du bloc ci-dessus est
+        automatiquement transformée par le compilateur en:
 
         ```rust
         println!("{}", (***ref_ref_ref_f).value);
@@ -5928,6 +5965,24 @@ pages:
         Typically smart pointers implement `Deref`,`DerefMut`,`Drop` traits to specify the logic of what should happen when
         the structure is dereferenced with `*` and `.` operators.
         
+    fr:
+      title: Pointeurs Intelligents
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20Un%20d%C3%A9r%C3%A9f%C3%A9rencement%20est%20fait%20par%20l%27appel%0A%20%20%20%20%2F%2F%20de%20la%20fonction%20%60len%60.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+      content_markdown: |
+        En plus de la possibilité de créer des références de données typées à
+        l'aide de l'opérateur `&`, Rust nous donne la possibilité de créer des
+        structures similaires aux références (en anglais reference-like) appelées
+        **pointeurs intelligents**.
+      
+        Les références peuvent être vues comme un type qui nous donne accès à un
+        autre type. Les pointeurs intelligents peuvent faire la même chose que les
+        références et plus encore, c'est au programmeur de définir la logique interne
+        d'un pointeur intelligent. La partie *intelligente* est le programmeur.
+
+        Les pointeurs intelligents implémentent généralement les traits Deref,
+        DerefMut et Drop pour spécifier le comportement du pointeur lorsque la
+        structure est déréférencée avec les opérateurs `*` et `.`.
+        
     ie:
       title: Puntatores Inteligent
       content_markdown: |
@@ -5956,6 +6011,26 @@ pages:
         gaurantees about what exists at an arbitrary number used as a *raw pointer*, it puts the dereference in an `unsafe { ... }` block. 
 
         Smart pointers *dereference raw pointers* extensively, but they are well proven in what they do.
+        
+    fr:
+      title: Code Intelligents mais Dangereux
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20C%27est%20un%20pointeur%20brut.%20Obtenir%20l%27adresse%20m%C3%A9moire%0A%20%20%20%20%2F%2F%20d%27un%20nombre%20est%20totalement%20s%C3%BBr.%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20%20%20%20%20println!(%22Adresse%20m%C3%A9moire%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Transformer%20notre%20nombre%20en%20un%20pointeur%20brut%20vers%20un%0A%20%20%20%20%2F%2F%20f32%20est%20%C3%A9galement%20s%C3%BBr.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20C%27est%20dangereux%20car%20nous%20demandons%20au%20compilateur%0A%20%20%20%20%20%20%20%20%2F%2F%20de%20supposer%20que%20notre%20pointeur%20est%20un%20f32%20valide%0A%20%20%20%20%20%20%20%20%2F%2F%20et%20de%20d%C3%A9r%C3%A9f%C3%A9rencer%20sa%20valeur%20dans%20la%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20n%27a%20aucun%20moyen%20de%20v%C3%A9rifier%20que%20cette%20hypoth%C3%A8se%0A%20%20%20%20%20%20%20%20%2F%2F%20soit%20vraie.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Je%20jure%20que%20c%27est%20une%20tarte!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+      content_markdown: |
+        Les pointeurs intelligents ont tendance à utiliser assez souvent du code
+        *dangereux* (en anglais unsafe). Comme mentionné précédemment, ce sont des
+        outils courants pour interagir au plus bas niveau de la mémoire.
+
+        Qu'est-ce qu'un code dangereux? Un code dangereux se comporte exactement
+        comme un code normal à l'exception que le compilateur Rust ne garantie pas
+        la validité du programme.
+
+        La première cause d'un code dangereux est lorsqu'on essaye de
+        *déréférencer un pointeur brut*. Cela signifie prendre un *pointeur brut*
+        correspondant à une adresse mémoire, déclarer "une structure de données existe ici!"
+        et transformer les octets de cet emplacement mémoire dans une représentation
+        de données que l'on pourra utiliser (par exemple `*const u8` en `u8`).
+        Puisque Rust ne garantie pas la signification des octets (il ne garde
+        pas de traces), il place le déréférencement dans un bloc `unsafe {...}`.
         
     ie:
       title: Code Inteligent e Ínsecur
