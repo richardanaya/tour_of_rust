@@ -147,12 +147,12 @@ body.welcome-cover {
     position: absolute;
     text-shadow: 2px 2px black;
     font-weight: bold;
-    color: #dfdfdf;
+    color: white;
 }
 
 .welcome a{
     font-size: 40px;
-    color: #dfdfdf;
+    color: white;
     text-shadow: 4px 2px black;
     line-height: 80px;
     font-weight: bold;
