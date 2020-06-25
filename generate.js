@@ -242,6 +242,7 @@ fs.writeFileSync(target_dir+"/"+fileName,`<html lang="en">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
     </head>
     <body class="welcome-cover">
+        <img class="mobile-ferris" src="/ferris_lofi.png">
         <div class="welcome">
         Welcome to the<br>
         <a href="00_en.html">Tour of Rust

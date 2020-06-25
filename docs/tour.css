@@ -215,6 +215,10 @@ ul {
     font-size: 20px;
 }
 
+.mobile-ferris {
+    display: none;
+}
+
 @media screen and (max-width: 600px) {
     .code, .page {
         width: 100%;
@@ -303,6 +307,20 @@ ul {
     .welcome-instruction {
         padding-top: 10px;
         font-size: 30px;
+    }
+
+    .mobile-ferris {
+        display: block;
+        top: 20%;
+        left: 50%;
+        margin-left: -75px;
+        position: absolute;
+        width: 150px;
+        -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
     }
 }
 
