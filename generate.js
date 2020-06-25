@@ -40,7 +40,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
         <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2"/>
         <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2"/>
         <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-        <title>${getWord(words,lang,"tor")} - Let's go on and adventure!</title>
+        <title>${getWord(words,lang,"tor")} - Let's go on an adventure!</title>
         <link rel="stylesheet" href="tour.css">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
