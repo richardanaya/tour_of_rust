@@ -3865,6 +3865,14 @@ pages:
         os conceitos não sejam muito pesados. É importante lembrar que, no fim das contas, as regras
         que mostramos não existem para dificultar sua vida, mas para ajudá-lo a tornar seu código menos
         propenso a erros!
+    ru:
+      title: Глава 5 - Владение и Заимствование данными
+      content_markdown: |
+        Rust использует уникальную парадигму для управления памятью по сравнению с другими языками 
+        программирования. Мы посмотрим на поведение компилятора и то, как он проверяет код 
+        постепенно, иначе Вы рискуете быть ошеломлены. Важно понимать, что все эти правила существуют
+        не для того, чтобы сделать Вашу жизнь сложнее, а для того, чтобы предотвратить широкий спектр 
+        ошибок.
   - en:
       title: Ownership
       content_markdown: |
@@ -3889,6 +3897,12 @@ pages:
       content_markdown: |
         Instanciar um tipo e **vinculá-lo** a um nome de variável cria um recurso de memória que o compilador Rust validará por toda sua a **vida útil**. A variável vinculada é chamada de **proprietária** do recurso.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Instanciamos%20structs%20e%20vinculamos%20a%20vari%C3%A1veis%0A%20%20%20%20%2F%2F%20para%20criar%20recursos%20de%20mem%C3%B3ria%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20o%20propriet%C3%A1rio%0A%7D%0A
+    ru:
+      title: Владение
+      content_markdown: |
+        Создание объекта типа и **связывание** (binding) его с именем переменной создаёт ресурс в памяти, который будет
+        валидироваться на протяжении всего своего **времени жизни** (lifetime). Такую переменную называют **владельцем**
+        ресурса (в данном случае объекта типа).
   - en:
       title: Scope-Based Resource Management
       content_markdown: |
@@ -3934,6 +3948,17 @@ pages:
         * Também conhecido por Aquisição de Recursos é Inicialização (sigla RAII,
           em inglês) em C++.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20%2F%2F%20foo_a%20%C3%A9%20descartado%20aqui%20porque%20n%C3%A3o%20%C3%A9%20mais%0A%20%20%20%20%2F%2F%20usado%20depois%20deste%20lugar%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20%C3%A9%20descartado%20aqui%20porque%20%C3%A9%20o%20fim%0A%20%20%20%20%2F%2F%20do%20escopo%20da%20fun%C3%A7%C3%A3o%0A%7D%0A
+    ru:
+      title: Управление ресурсами на основе области видимости
+      content_markdown: |
+        Rust использует последнее место использования или конец области видимости функции в качестве места, где делает
+        свою работу деконструктор и деалоцируется ресурс.
+
+        Термин для обозначения деконструктора и деалокации — **drop**. 
+
+        Тонкости памяти:
+        * В Rust нет сборщика мусора
+        * Это может быть знакома Вам как идиома RAII (Resource Aquisition Is Initialization) из С++
   - en:
       title: Dropping is Hierarchical
       content_markdown: |
@@ -3972,6 +3997,14 @@ pages:
           vazamentos de memória.
         * Os recursos de memória só podem ser descartados uma vez.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20descartado%20primeiro%0A%20%20%20%20%2F%2F%20e%20s%C3%B3%20ent%C3%A3o%20foo.bar%20%C3%A9%20descartado%0A%7D%0A
+    ru:
+      title: Drop по иерархии
+      content_markdown: |
+        Когда структура drop'ается, в начале происходит drop этой структуры, а потом её детей по очереди и так далее.  
+
+        Тонкости памяти:
+        * Автоматически очищая память, Rust помогает уменьшить количество утечек памяти
+        * Ресурсы должны быть drop'нуты только один раз!
   - en:
       title: Moving Ownership
       content_markdown: |
@@ -4011,6 +4044,17 @@ pages:
         Detalhes da memória:
         * Durante uma **movimentação**, a memória da pilha do proprietário do valor é copiada para a memória da pilha dos parâmetros da função chamada.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20faz_alguma_coisa(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%C3%A9%20descartado%20aqui%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20movido%20para%20faz_alguma_coisa%0A%20%20%20%20faz_alguma_coisa(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20n%C3%A3o%20pode%20mais%20ser%20usado%0A%7D%0A
+    ru:
+      title: Передача владения
+      content_markdown: |
+        Когда владелец ресурса используется в качестве аргумента функции, владение передаётся параметру
+        этой функции. 
+
+        После **передачи** (move) переменной, начиная с того места, где мы её передали, переменную больше нельзя
+        использовать.
+
+        Тонкости памяти:
+        * **Передача** или **move** копирует память со стека владельца в стек параметров функции.
   - en:
       title: Returning Ownership
       content_markdown: |
@@ -4033,6 +4077,10 @@ pages:
       content_markdown: |
         A propriedade também pode ser retornada de uma função.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20a%20propriedade%20%C3%A9%20retornada%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20se%20torna%20o%20propriet%C3%A1rio%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20descartado%20por%20causa%20do%20fim%20do%20escopo%20da%20fun%C3%A7%C3%A3o%0A%7D%0A
+    ru:
+      title: Возвращение владения
+      content_markdown: |
+        Владение также может быть возвращено с функции.
   - en:
       title: Borrowing Ownership with References
       content_markdown: |
@@ -4061,6 +4109,12 @@ pages:
 
         As referências também são descartadas do mesmo jeito que os outros recursos.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%C3%A9%20descartado%20aqui%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20descartado%20aqui%0A%7D%0A
+    ru:
+      title: Заимствование у владельца с помощью ссылок
+      content_markdown: |
+        Ссылки позволяют нам заимствовать доступ к ресурсу с помощью оператора `&`.
+
+        Ссылки drop'аются так же как и остальные ресурсы.
   - en:
       title: Borrowing Mutable Ownership with References
       content_markdown: |
@@ -4107,6 +4161,18 @@ pages:
         * O Rust evita ter duas maneiras de alterar um valor que tenha um dono, pois
         introduz a possibilidade de uma corrida de dados.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20faz_alguma_coisa(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%C3%A9%20descartado%20aqui%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20faz_alguma_coisa(foo)%20ir%C3%A1%20falhar%20porque%0A%20%20%20%20%2F%2F%20foo%20n%C3%A3o%20pode%20ser%20movida%20durante%20um%20empr%C3%A9stimo%20mut%C3%A1vel%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20ir%C3%A1%20falhar%20porque%0A%20%20%20%20%2F%2F%20foo%20n%C3%A3o%20%C3%A9%20modific%C3%A1vel%20durante%20um%20empr%C3%A9stimo%20mut%C3%A1vel%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20%C3%A9%20descartado%20aqui%20por%20n%C3%A3o%20ser%20mais%20usado%20depois%20deste%20ponto%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20isto%20aqui%20funciona%20agora%20porque%20todas%20as%20refer%C3%AAncias%20%0A%20%20%20%20%2F%2F%20mut%C3%A1veis%20foram%20descartadas%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20a%20propriedade%20de%20foo%20para%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20faz_alguma_coisa(foo)%3B%0A%7D%0A
+    ru:
+      title: Заимствование у владельца с правами на изменние
+      content_markdown: |
+        Мы также можем позаимствовать доступ к ресурсу с правами на его изменение с помощью 
+        оператора `&mut`.
+
+        Владелец ресурса не может быть передан (move'нут) или изменён (права на изменения у `&mut` ссылки), пока
+        он **mut**'абельно заимствован.
+
+        Тонкости памяти:
+        * Rust предотвращает изменение ресурса более чем с одного места, так как это может привести
+        к гонкам данных (data race).
   - en:
       title: Dereferencing
       content_markdown: |
@@ -4142,6 +4208,13 @@ pages:
         (Se o valor puder ser copiado. Discutiremos tipos copiáveis nos próximos 
         capítulos).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20pega%20uma%20c%C3%B3pia%20do%20propriet%C3%A1rio%20do%20valor%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20atribue%20%C3%A0%20refer%C3%AAncia%20do%20propriet%C3%A1rio%20do%20valor%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+    ru:
+      title: Разыменование
+      content_markdown: |
+        Используя `&mut` ссылки, Вы можете установить значение переменной, используя `*` оператор.
+
+        Вы также можете получить копию значения, используя `*` (только если значение может быть скопировано. Мы поговорим о 
+        копируемых типах в следующих главах).
   - en:
       title: Passing Around Borrowed Data
       content_markdown: |
