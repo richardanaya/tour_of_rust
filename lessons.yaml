@@ -5133,8 +5133,8 @@ pages:
       content_markdown: |
         A Rust manca li grand trates de heredantie de data e conduida.
 
-        * Structs ne posse heredar campes de un struct genitoral.
-        * Structs ne posse heredar functiones de un struct genitoral.
+        * Structs ne posse heredar campes de un struct genitori.
+        * Structs ne posse heredar functiones de un struct genitori.
 
         Malgré to, Rust implementa mult trates programmistic con queles tu certmen ne va suciar te pri lor absentie.
   - en:
@@ -6455,6 +6455,12 @@ pages:
       title: Chapter 9 - Project Organization and Structure
       content_markdown: |
         So far all of our code examples have been a single file. Let's discuss how our code be better organized and shared by others!
+        
+    ie:
+      title: Capitul 9 - Organisation e Structura de un Projecte
+      content_markdown: |
+        Til nu nor exemples de code ha esset scrit in singul archives. Lass nos discusser pri qualmen plu bon organisar e partiprender it!
+        
   - beta: true
     en:
       title: Modules
@@ -6466,17 +6472,36 @@ pages:
         Every crate has a root module.
 
         A module holds global variables, functions, structs, traits, and other modules!
+        
+    ie:
+      title: Modules
+      content_markdown: |
+        Chascun programma o biblioteca in Rust es un *crate*.
+        Chascun crate es creat ex un hierarchie de *modules*.
+        Chascun crate possede un root (radical) modul.
+        Un model possede variabiles global, functiones, structs, traits, e altri modules!
+        
   - beta: true
     en:
       title: Writing a Program
       content_markdown: |
         A program has a root module in a file called `main.rs`.
+        
+    ie:
+      title: Scrir un Programma
+      content_markdown: |
+        Un programma have un modul root in un archive nominat `main.rs`.
 
   - beta: true
     en:
       title: Writing a Library
       content_markdown: |
         A library has a root module in a file called `lib.rs`.
+        
+    ie:
+      title: Scrir un Biblioteca
+      content_markdown: |
+        Un biblioteca have un modul root in un archive nominat `lib.rs`.
 
   - beta: true
     en:
@@ -6504,6 +6529,16 @@ pages:
         ```
 
         Ferris doesn't eat TAU, he only eats PI.
+        
+    ie:
+      title: Referentiar Coses Multiplic
+      content_markdown: |
+        On posse referentiar coses multiplic in un sol modul quam seque:
+        ```rust
+        use std::f64::consts::{PI, TAU}
+        ```
+        Ferris ne manja TAU, solmen PI.
+        
   - beta: true
     en:
       title: Module Heirarchy
@@ -6519,6 +6554,19 @@ pages:
         ```rust
         mod foo;
         ```
+        
+    ie:
+      title: Hierarchie de un Modul
+        Quande on pensa pri code, on imagina por li pluparte un hierarchie de archives organisat in archivieres.
+        
+        Rust posse posseder un modul `foo` representat quam
+          * un archive nominat `foo.rs`
+          * un archiviere nominat `foo` in quel sta un archive `mod.rs`
+        Por etablisser un relation inter un model e su sub-modul, on deve scrir quam seque in li modul genitori.
+        ```rust
+        mod foo;
+        ```
+        
   - beta: true
     en:
       title: Inline Module
@@ -6539,6 +6587,24 @@ pages:
             ... tests go here ...
         }
         ```
+        
+      ie:
+        title: Modul Inlineari
+        content_markdown: |
+          On posse 'inlinear' un sub-modul directmen in li code de un model.
+          On fa talmen tre frequentmen por crear provas unitic (unit tests).
+          ```
+          // Ti-ci macro remove li modul inlineari quande Rust
+          // ne sta in prova-mode.
+          #[cfg(test)]
+          mod tests {
+            // A notar que a nos ne es ínmediatmen dat accesse al
+            // modul genitori. Noi deve esser explicit.
+            use super::*;
+            ... li provas sta ci ...
+          }
+          ```
+        
   - beta: true
     en:
       title: Internal Module Referencing
@@ -6548,6 +6614,16 @@ pages:
         * `crate` - the root module of your crate
         * `super` - the parent module of your current module
         * `self` - the current module
+        
+    ie:
+      title: Referenties Intern a Modules
+      content_markdown: |
+        Rust possede mult clave-paroles queles tu posse usar in tui `use`-path por rapidmen trovar li modul desirat:
+
+        * `crate` - li root modul de tui crate
+        * `super` - li modul genitori del modul quel tu usa actualmen
+        * `self` - li modul in quel on nu sta
+        
   - beta: true
     en:
       title: Exporting
