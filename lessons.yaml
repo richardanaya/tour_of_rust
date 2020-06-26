@@ -4581,7 +4581,7 @@ pages:
         * `str` means that it points to a sequence of bytes that are always valid **utf-8**
 
         Memory details:
-        * likely the LLVM compiler will put your string in the data segment of your program memory
+        * likely the Rust compiler will put your string in the data segment of your program memory
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
     fr:
       title: Chaînes de caractères
@@ -4611,7 +4611,7 @@ pages:
         * `str` significa que it indica un sequentie de bytes queles sempre es valid **utf-8**
 
         Detallies pri memorie:
-        * max probabilmen li compilator LLVM va plazzar tui string in li segment de data del memorie de tui programma
+        * max probabilmen li compilator Rust va plazzar tui string in li segment de data del memorie de tui programma
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22salute%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
   - en:
       title: What is utf-8
