@@ -245,7 +245,7 @@ fs.writeFileSync(target_dir+"/"+fileName,`<html lang="en">
         <img class="mobile-ferris" src="/ferris_lofi.png">
         <div class="welcome">
         Welcome to the<br>
-        <a href="00_en.html">Tour of Rust
+        <a href="00_en.html">${lessons.common_words.en.tor}
         <div class="welcome-instruction">Press to Continue</div>
         </a></div>
     </body>
