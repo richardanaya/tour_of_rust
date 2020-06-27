@@ -84,7 +84,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
 
-        if you have suggestions on content
+        If you have suggestions on content
         or would like to contribute to translations, checkout out Tour of Rust's 
         [github repository](https://github.com/richardanaya/tour_of_rust).
 
@@ -101,7 +101,7 @@ pages:
         considéré comme difficile et il y a beaucoup à explorer avant d'aborder
         les choses complexes.
 
-        tu peux trouver ce guide dans les languages suivants:
+        Tu peux trouver ce guide dans les languages suivants:
 
         * [Deutsch](00_de.html)
         * [English](00_en.html)
@@ -112,7 +112,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
 
-        si tu as des suggestions sur le contenu
+        Si tu as des suggestions sur le contenu
         ou si tu souhaites contribuer aux traductions, rends-toi sur le
         [dépôt github](https://github.com/richardanaya/tour_of_rust).
 
@@ -274,7 +274,7 @@ pages:
         Dans ce premier chapitre, nous allons explorer les fondamentaux
         avec les fonctions, les variables et les types primitifs. Bienvenue à bord!
 
-        Aussi! Si tu te demandes qui est cet adorable crabe qui te parle, sache que je m'appelle **Ferris**,
+        Et si tu te demandes qui est cet adorable crabe qui te parle, sache que je m'appelle **Ferris**,
         la mascotte non officielle du language de programmation Rust. Heureux de te renconter!
     de:
       title: Kapitel 1 - Die Basics
@@ -1056,7 +1056,7 @@ pages:
       content_markdown: |
         Une fonction peut retourner plusieurs valeurs en retournant un *tuple* de valeurs.
 
-        Les éléments du tuple peuvent être référencés par leur 00_en.
+        Les éléments du tuple peuvent être référencés par leur index.
 
         Rust nous donne la possibilité d'extraire simplement certaines parties de structures de données,
         c'est la destructuration. Nous en verrons d'autres formes par la suite. Garde l'oeil ouvert!
@@ -1128,9 +1128,9 @@ pages:
       title: Ne rien retourner
       content_markdown: |
         Si une fonction ne spécifie aucun type de retour, celle-ci retourne un tuple vide,
-        également appelé *unité*
+        également appelé *unité*.
 
-        Un tuple vide est représenté par `()`
+        Un tuple vide est représenté par `()`.
 
         Il est rare d'utiliser `()`, mais cela arrive et il est bon de le savoir.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20le%20type%20de%20retour%20est%20implicitement%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20cette%20fonction%20retournera%20()%0A%20%20%20%20%2F%2F%20si%20rien%20n'est%20sp%C3%A9cifi%C3%A9%20en%20retour%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20le%20symbole%20%3A%3F%20signifie%20qu'on%20souhaite%20utiliser%0A%20%20%20%20%2F%2F%20un%20formatage%20sp%C3%A9cial%20de%20debug%20qui%20affichera%0A%20%20%20%20%2F%2F%20notamment%20le%20type%20des%20variables%20a%20et%20b%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
@@ -1189,7 +1189,7 @@ pages:
 
         明确的使用 `()` 是不常见的，但作为函数返回值会经常出现。
   - en:
-      title: Chapter 1 Conclusion
+      title: Chapter 1 - Conclusion
       content_markdown: |
         Nice job so far! The basics of Rust aren't so bad, right?  We're
         getting a peek into how the Rust compiler thinks.  As a system programming language 
@@ -1205,13 +1205,16 @@ pages:
       title: Chapitre 1 - Conclusion
       content_markdown: |
         Bon travail! Les fondamentaux de rust ne sont pas si dûr que ça, n'est-ce pas? Nous avons
-        commençé à voir comment le compilateur de Rust fonctionne. Celui-ci prend soin de la taille
+        commençé à voir comment le compilateur de Rust fonctionne. Celui-ci fait attention à la taille
         des éléments en mémoires, s'assure si les choses peuvent êtres modifiées ou non, et fait en sorte
-        qu'on ne se mélange pas les pinceaux dans les types de variables. Tu peux donc avoir un aperçu de
-        ce qu'on appelle la **sécurité** de Rust qui est l'un des aspects le plus mis en avant du language.
-        Le compilateur fait en sorte que le résultat du programme exécuté est celui espéré.
-        Par la suite, nous allons voir de vieux amis : les structures de contrôles `if`
-        et les boucles `for`.
+        qu'on ne se mélange pas les pinceaux dans les types de variables. Par la suite, nous allons voir
+        de vieux amis : les structures de contrôles `if` et les boucles `for`.
+
+        
+        Plus de ressources (en anglais):
+          [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
+          [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+          [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
     de:
       title: Kapitel 1 Fazit
       content_html:
@@ -1326,7 +1329,7 @@ pages:
 
         Conditions don't have parentheses! Did we ever really need them? Our logic now looks nice and clean.
 
-        All your usual logical operators still work: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
+        All your usual logical operators still work: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     fr:
       title: if/else if/else
@@ -1336,7 +1339,7 @@ pages:
         Les conditions n'ont pas de parenthèses! En a-t-on réellement besoin?
         Sans elles notre code est plus joli et plus lisible.
 
-        Les opérateurs logiques usuels sont disponibles: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
+        Les opérateurs logiques usuels sont disponibles: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20petit%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20tout%20rond%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20grand%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     de:
       title: if/else if/else
@@ -1400,7 +1403,7 @@ pages:
         `break` will escape a loop when you are ready.</p><p>`loop` has a secret we'll talk about soon.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
     fr:
-      title: boucle
+      title: loop
       content_markdown: |
         Besoin d'une boucle infinie?
 
@@ -1869,7 +1872,7 @@ pages:
         注意，它还允许 `if` 语句像简洁的三元表达式一样操作。
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust%E7%9A%84%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%BD%93%E5%AE%83%E5%8F%AA%E6%98%AF%E4%B8%80%E4%B8%AA%E8%BF%94%E5%9B%9E%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%97%B6%EF%BC%8C%E5%A4%A7%E6%8B%AC%E5%8F%B7%E6%98%AF%E5%8F%AF%E9%80%89%E7%9A%84%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%E8%BF%99%E4%B8%AA%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%9D%97%E8%AE%A9%E6%88%91%E4%BB%AC%E5%BE%97%E5%88%B0%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%BB%93%E6%9E%9C%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20%E5%9C%A8%E6%9C%80%E5%90%8E%E4%BB%8E%E5%87%BD%E6%95%B0%E4%B8%AD%E8%BF%94%E5%9B%9E%E5%80%BC%E7%9A%84%E6%83%AF%E7%94%A8%E6%96%B9%E6%B3%95%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
   - en:
-      title: Chapter 2 Conclusion
+      title: Chapter 2 - Conclusion
       content_markdown: |
         Hopefully I've shown a glimpse of Rust's power even in the most
         basic language features. We'll be talking about `for` and
@@ -1892,7 +1895,7 @@ pages:
         erfordert.</p><p>Im nächsten Kapitel werden wir uns dafür ein bisschen in die
         Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?</p>"
     ie:
-      title: Conclusion de Capitul 2
+      title: Capitul 2 - Conclusion
       content_html:
         "<p>Vi li tot contenete til nu in li capitul! Yo espera har monstrat
         te un poc pri li potentie de Rust quel trova se mem in li declarationes max basic.
@@ -1940,7 +1943,7 @@ pages:
       content_markdown: |
         Il est temps d'explorer autre chose que les types basiques! Dans ce chapitre nous allons
         nous intéresser aux structures de données les plus primitives de Rust, en étudiant particulièrement
-        de quelle manière celles-ci sont représentées en mémoire. Je pense que vous apprécirez le fait que
+        de quelle manière celles-ci sont représentées en mémoire. Je pense que tu apprécieras le fait que
         Rust ne nous cache pas comment les choses fonctionnent.
     de:
       title: Kapitel 3 - Datenstrukturen
@@ -2067,7 +2070,7 @@ pages:
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Using%20a%20static%20method%20to%20create%20an%20instance%20of%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20Using%20a%20method%20on%20the%20instance%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
     fr:
-      title: Appel de Méthodes
+      title: Appel de méthodes
       content_markdown: |
         A la différence des fonctions que nous avons vu précédemment, les méthodes sont
         des fonctions associées à un type de donnée spécifique.
@@ -2461,7 +2464,7 @@ pages:
     fr:
       title: Structures sous forme de n-uplet
       content_markdown: |
-        Pour être concis, tu peux créer des structures qui s'utilisent comme des n-uplets (tuples en anglais).
+        Pour être concis, tu peux créer des structures qui s'utilisent comme des n-uplets (en anglais tuples).
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20On%20cr%C3%A9e%20une%20structure%20sur%20la%20pile%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
     de:
@@ -2509,7 +2512,7 @@ pages:
         Il n'est pas nécessaire que les structures possèdent des champs.
 
         Comme mentionné au Chapitre 1, une *unité* est une autre appellation pour un n-uplet vide `()`. 
-        C'est pourquoi ce type de structure est dit *de type unitaire* (unit-like en anglais).
+        C'est pourquoi ce type de structure est dit *de type unitaire* (en anglais unit-like).
 
         Ce type de structure est rarement utilisé.
 
@@ -2666,7 +2669,7 @@ pages:
         numérique permettant d'identifier celui-ci.
 
         Autres détails:
-        * Les énumérations de Rust sont également appelées *unions étiquetés* (tagged-unions en anglais).
+        * Les énumérations de Rust sont également appelées *unions étiquetés* (en anglais tagged-unions).
         * La combinaison de types pour en créer un nouveau est ce à quoi quelqu'un fait référence
         lorsqu'il dit: Rust possède des types algébriques.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20cette%20ligne%20supprime%20les%20warnings%20du%20compilateur%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Les%20donn%C3%A9es%20de%20SeaCreature%20sont%20sur%20la%20pile%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20La%20structure%20String%20est%20%C3%A9galement%20sur%20la%20pile%0A%20%20%20%20%20%20%20%20%2F%2F%20mais%20maintient%20une%20r%C3%A9f%C3%A9rence%20vers%20une%20donn%C3%A9e%20sur%20le%20tas%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22grandes%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22petites%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20est%20un%20crabe%20avec%20%7B%7D%20%7B%7D%20pinces%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20est%20un%20crabe%20avec%20d%27autres%20armes%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20n%27est%20pas%20un%20crabe%22)%2C%0A%20%20%20%20%7D%0A%7D
@@ -2885,7 +2888,7 @@ pages:
         can always be explicit using the `::<T>` operator, also known by the name `turbofish` (he's a good friend of mine!).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20by%20using%20generic%20types%20here%2C%20we%20create%20compile-time%20created%20types.%20%0A%20%20%20%20%2F%2F%20Turbofish%20lets%20us%20be%20explicit.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20can%20infer%20types%20for%20generics%20too!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20never%20put%20a%20bag%20of%20holding%20in%20a%20bag%20of%20holding%20in%20real%20life%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
     fr:
-      title: Qu'est-ce que les Types Génériques?
+      title: Qu'est-ce que les types génériques?
       content_markdown: |
         Les types génériques permettent de définir partiellement une structure ou une énumération, laissant le compilateur
         créer une version parfaitement définie lors de la compilation du programme.
@@ -3262,7 +3265,7 @@ pages:
         `main` has the capability of returning a `Result`!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20returns%20no%20value%2C%20but%20could%20return%20an%20error!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20handle%20this%20error%20gracefully%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20a%20new%20error%20from%20main%20that%20said%20what%20happened!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22something%20went%20wrong%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Notice%20we%20use%20a%20unit%20value%20inside%20a%20Result%20Ok%0A%20%20%20%20%2F%2F%20to%20represent%20everything%20is%20fine%0A%20%20%20%20Ok(())%0A%7D%0A
     fr:
-      title: Renvoie d'erreurs dans le main
+      title: main retourne une erreur
       content_markdown: |
         `main` a la capacité de retourner une structure `Result`!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22ce%20n%27est%20pas%20le%20bon%20nombre%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20main%20ne%20retourne%20pas%20de%20valeur%20mais%20peut%20retourner%20une%20erreur!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20On%20traite%20cette%20erreur%20gracieusement.%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Retourne%20une%20nouvelle%20erreur%20depuis%20%27main%27%20avec%20un%20message%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20d%27explication!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22quelque%20chose%20s%27est%20mal%20pass%C3%A9%20%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dans%20le%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Notes%20qu%27on%20utilise%20une%20valeur%20unitaire%20avec%20%27Ok%27%0A%20%20%20%20%2F%2F%20pour%20siginifier%20que%20tout%20va%20bien.%0A%20%20%20%20Ok(())%0A%7D%0A
@@ -3880,7 +3883,7 @@ pages:
         through its whole **lifetime**.  The bound variable is called the resource's **owner**.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20instantiate%20structs%20and%20bind%20to%20variables%0A%20%20%20%20%2F%2F%20to%20create%20memory%20resources%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20the%20owner%0A%7D%0A
     fr:
-      title: Propriété (en anglais Ownership)
+      title: Propriété (en anglais ownership)
       content_markdown: |
         L'instanciation d'un type et le fait de lier (en anglais **binding**) la ressource à une variable crée
         une ressource mémoire que le compilateur Rust validera pendant toute sa durée de vie (en anglais **lifetime**).
@@ -3923,7 +3926,7 @@ pages:
         On dira pour cette déconstruction et désallocation que la variable est "jetée" (en anglais **dropped**).
 
         Détails de la mémoire:
-        * Rust ne possède pas de ramasse-miettes (en anglais garbage collector)
+        * Rust ne possède pas de ramasse-miettes (en anglais garbage collector).
         * Cela est également connu sous le nom de RAII (l'acquisition d'une ressource est une initialisation) en C ++.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20%2F%2F%20la%20variable%20foo_a%20est%20jet%C3%A9e%20ici%20car%20elle%20n'est%20%0A%20%20%20%20%2F%2F%20plus%20utilis%C3%A9e%20apr%C3%A8s%20cet%20endroit%20du%20code%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20la%20variable%20foo_b%20est%20jet%C3%A9e%20ici%20car%20la%20port%C3%A9e%0A%20%20%20%20%2F%2F%20de%20la%20fonction%20prend%20fin%0A%7D%0A
     ie:
@@ -4062,9 +4065,9 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
 
     fr:
-      title: Retourner l'accès à une ressource
+      title: Retourner la propriété d'une ressource
       content_markdown: |
-        Une fonction peut retourner l'accès à une ressource.
+        Une fonction peut retourner la propriété d'une ressource.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20Le%20propri%C3%A9taire%20de%20la%20structure%20Foo%20d%C3%A9m%C3%A9nage%0A%20%20%20%20%2F%2F%20%C3%A0%20l'ext%C3%A9rieur%20de%20la%20fonction.%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20devient%20le%20nouveau%20propri%C3%A9taire.%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20(d%C3%A9construit%20et%20d%C3%A9sallou%C3%A9)%20ici%20car%20la%20port%C3%A9e%20de%20la%20%0A%20%20%20%20%2F%2F%20fonction%20main%20se%20termine.%0A%7D%0A
 
     ie:
@@ -4464,13 +4467,15 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
 
     fr:
-      title: Durée de vie dans les types de données
+      title: Durée de vie dans les structures
       content_markdown: |
-        De la même manière que les fonctions, les types de données peuvent être paramétrés avec
-        des spécifieurs de durée de vie pour un ou plusieurs de ses membres.
+        De la même manière que les fonctions, les champs d'une structure peuvent
+        être paramétrés avec des spécifieurs de durée de vie pour un ou plusieurs
+        de ses membres.
 
-        Si une structure contient une référence, alors le compilateur Rust s'assure que la durée de vie
-        de la structure n'exède pas celle du 'propriétaire' de la référence.
+        Si une structure contient une référence, alors le compilateur Rust s'assure
+        que la durée de vie de la structure n'excède pas celle du 'propriétaire' de
+        la référence.
 
         Le compilateur Rust ne permet pas d'avoir une structure possédant
         des références pointant vers rien du tout.
@@ -4493,7 +4498,7 @@ pages:
         Não podemos ter estruturas rodando por aí com referências apontando para o nada!
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
   - en:
-      title: Chapter 5 Conclusion
+      title: Chapter 5 - Conclusion
       content_markdown: |
         Whew, congrats for making it through! I know it's alot to take in but you are well
         under way to becoming a Rustacean. Hopefully it's clear how Rust as a language aims to 
@@ -4523,7 +4528,7 @@ pages:
 
         Dans le chapitre suivant, nous appliquerons une partie de nos connaissances en examinant comment Rust gère le texte.
     ie:
-      title: Conclusion de Capitul 5
+      title: Capitul 5 - Conclusion
       content_markdown: |
         Gratulationes pro har leet omnicos til nu! Yo save que it es mult a aprender ma tu es ja sur li via de devenir
         un rustaceane. Noi espera que li explication ha esset clar pri qualmen Rust vole soluer li defís comun in li 
@@ -4633,7 +4638,7 @@ pages:
 
         <span class="emoji">🐠🐙🐟🐬🐋</span>
     fr:
-      title: Introduction à utf-8
+      title: Introduction à l'utf-8
       content_markdown: |
         De plus en plus de langues doivent être supportées par les ordinateurs d'aujourd'hui.
         Malheureusement, le système d'encodage ASCII initialement utilisé sur les premiers ordinateurs ne suffit plus
@@ -4933,7 +4938,7 @@ pages:
       title: Texte en tant que paramètre de fonction
       content_markdown: |
         Les chaînes de caractères et les structures String sont généralement passées aux fonctions sous forme de 'string slice'.
-        Cela offre beaucoup de flexibilité pour la plupart des scénarios où vous n'avez pas besoin de transmettre la propriété (ownership).
+        Cela offre beaucoup de flexibilité pour la plupart des scénarios où vous n'avez pas besoin de transmettre la propriété (en anglais ownership).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20peut%20emprunter%20%26%27static%20str%20en%20tant%20que%20%26str%0A%20%20%20%20say_it_loud(%22bonjour%22)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20say_it_loud%20peut%20%C3%A9galement%20emprunter%20String%20en%20tant%20que%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22au%20revoir%22))%3B%0A%7D%0A
 
     ie:
@@ -5023,7 +5028,7 @@ pages:
         de falliment.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
   - en:
-      title: Chapter 6 Conclusion
+      title: Chapter 6 - Conclusion
       content_markdown: |
         Now you know the basics of text!  As you have seen, unicode makes working with text a bit tricky, but the standard library 
         has plenty of functionality to make it easy to manage.  
@@ -5043,7 +5048,7 @@ pages:
         Il est temps que nous parlions maintenant des traits (c'est le même terme en anglais)
         et des capacités débloquées par le paradigme de programmation orienté objet de Rust.
     ie:
-      title: Conclusion de Capitul 6
+      title: Capitul 6 - Conclusion
       content_markdown: |
         Nu tu comprende li basic coses a saver pri textu! Quam ja videt, unicode fa li manipulation de textu un poc desfacil, ma in li
         standard library trova se mult functionalitá con quel it deveni plu facil.
@@ -5060,7 +5065,7 @@ pages:
         such way. In this chapter we'll explore the Rust programming language beyond functions.
 
     fr:
-      title: Chapitre 7 - Programmation Orientée Object
+      title: Chapitre 7 - Programmation orientée object
       content_markdown: |
         L'utilisation de fonctions pour exprimer une idée ou modéliser le comportement
         et les données d'un programme a toujours été une manière éprouvée d'écrire un
@@ -5158,7 +5163,7 @@ pages:
         ```
 
     fr:
-      title: Encapsulation avec des Méthodes
+      title: Encapsulation avec des méthodes
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
       content_markdown: |
         Avec Rust, un objet est représenté par une structure. On peut associer
@@ -5257,7 +5262,7 @@ pages:
         ```
 
     fr:
-      title: Polymorphisme avec les Traits
+      title: Polymorphisme avec les traits
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
       content_markdown: |
         Rust rend possible le polymorphisme grâce aux 'traits'. Les traits
@@ -5326,7 +5331,7 @@ pages:
         be useful for sharing behavior between many trait implementors.
 
     fr:
-      title: Méthodes Implémentées sur les Traits
+      title: Méthodes implémentées sur les traits
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
       content_markdown: |
         Un 'trait' peut lui-même implémenter une ou plusieurs méthodes.
@@ -5349,7 +5354,7 @@ pages:
         Traits can inherit methods from other traits.
 
     fr:
-      title: Hériter d'un Trait
+      title: Hériter d'un trait
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
       content_markdown: |
         Un trait peut hériter d'un autre trait.
@@ -5373,7 +5378,7 @@ pages:
         Memory details:
         * Dynamic dispatch is slightly slower because of the pointer chasing to find the real function call.
     fr:
-      title: Dispatch Dynamique ou Statique
+      title: Dispatch dynamique ou statique
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
       content_markdown: |
         Une méthode est exécutée de deux manières:
@@ -5411,7 +5416,7 @@ pages:
         Memory details:
         * This list of functions is known in C++ as a *vtable*.
     fr:
-      title: Objets Trait
+      title: Objets trait
       content_markdown: |
         Lorsque nous transmettons l'instance d'un objet à un paramètre de
         type `&dyn MyTrait`, nous transmettons ce que l'on appelle un
@@ -5445,7 +5450,7 @@ pages:
         * `indirection` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it. There are other ways as well!
 
     fr:
-      title: Gestion des données sans Taille
+      title: Gestion de données sans taille
       content_markdown: |
         Les traits présentent un défi intéressant lorsque nous voulons les stocker
         dans une autre structure. Les traits masquent la structure originelle et
@@ -5488,7 +5493,7 @@ pages:
         perform static dispatch and store as a sized value.
 
     fr:
-      title: Fonctions Géneriques
+      title: Fonctions géneriques
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20Le%20type%20est%20connu%20%C3%A0%20la%20compilation%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
       content_markdown: |
         Avec Rust les génériques vont de pair avec les traits. Lorsqu'un paramètre
@@ -5673,7 +5678,7 @@ pages:
         }
         ```
     fr:
-      title: Structures Génériques Revisitées
+      title: Structures génériques revisitées
       content_markdown: |
         Les types d'une structure générique peuvent également être contraints par des
         traits.
@@ -5768,7 +5773,7 @@ pages:
         you can write your own low level memory management code in one short read. This chapter 
         is mostly to introduce you to some useful tools and give a glimpse at how they work!"
     fr:
-      title: Chapitre 8 - Pointeurs Intelligents (Smart Pointers)
+      title: Chapitre 8 - Pointeurs intelligents (smart pointers)
       content_markdown: |
         Dans ce chapitre, nous allons démystifier les pointeurs intelligents
         (en anglais Smart Pointers). Explorons ces structures de données qui
@@ -5800,7 +5805,7 @@ pages:
         it refers to (otherwise we'd get an error when we used it!).
         
     fr:
-      title: Références Revisitées
+      title: Références revisitées
       content_markdown: |
         Une référence est fondamentalement juste un nombre qui donne la position
         de départ d'octets en mémoire, son seul but est d'indiquer où des données
@@ -5841,7 +5846,7 @@ pages:
         * A raw pointer in Rust is similar to a pointer in C that it represents a number that can be copied 
           passed around, and even turned into numerical types where it can be modifed as a number to do pointer math.
     fr:
-      title: Pointeurs Bruts (Raw Pointers)
+      title: Pointeurs bruts (en anglais raw pointers)
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22La%20donn%C3%A9e%20se%20trouve%20%C3%A0%20l%27adresse%20m%C3%A9moire%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
       content_markdown: |
         Les références peuvent être converties en un type plus primitif appelé
@@ -6039,7 +6044,7 @@ pages:
         the structure is dereferenced with `*` and `.` operators.
         
     fr:
-      title: Pointeurs Intelligents
+      title: Pointeurs intelligents
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20Un%20d%C3%A9r%C3%A9f%C3%A9rencement%20est%20fait%20par%20l%27appel%0A%20%20%20%20%2F%2F%20de%20la%20fonction%20%60len%60.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
       content_markdown: |
         En plus de la possibilité de créer des références de données typées à
@@ -6086,7 +6091,7 @@ pages:
         Smart pointers *dereference raw pointers* extensively, but they are well proven in what they do.
         
     fr:
-      title: Code Intelligents mais Dangereux
+      title: Code intelligents mais dangereux
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20C%27est%20un%20pointeur%20brut.%20Obtenir%20l%27adresse%20m%C3%A9moire%0A%20%20%20%20%2F%2F%20d%27un%20nombre%20est%20totalement%20s%C3%BBr.%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20%20%20%20%20println!(%22Adresse%20m%C3%A9moire%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Transformer%20notre%20nombre%20en%20un%20pointeur%20brut%20vers%20un%0A%20%20%20%20%2F%2F%20f32%20est%20%C3%A9galement%20s%C3%BBr.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20C%27est%20dangereux%20car%20nous%20demandons%20au%20compilateur%0A%20%20%20%20%20%20%20%20%2F%2F%20de%20supposer%20que%20notre%20pointeur%20est%20un%20f32%20valide%0A%20%20%20%20%20%20%20%20%2F%2F%20et%20de%20d%C3%A9r%C3%A9f%C3%A9rencer%20sa%20valeur%20dans%20la%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20n%27a%20aucun%20moyen%20de%20v%C3%A9rifier%20que%20cette%20hypoth%C3%A8se%0A%20%20%20%20%20%20%20%20%2F%2F%20soit%20vraie.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Je%20jure%20que%20c%27est%20une%20tarte!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
       content_markdown: |
         Les pointeurs intelligents ont tendance à utiliser assez souvent du code
@@ -6188,7 +6193,7 @@ pages:
         Dereferencing it lets us use the heap allocated data ergonomically as if it were the original type.
         
     fr:
-      title: Mémoire Allouée sur le Tas
+      title: Mémoire allouée sur le tas
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
       content_markdown: |
         `Box` est un pointeur intelligent qui nous permet de déplacer des données
@@ -6267,7 +6272,7 @@ pages:
         Only when the last smart pointer is dropped does the data on the heap become deallocated.
         
     fr:
-      title: Multi-Propriétaire
+      title: Multi-propriétaire
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20Les%20donn%C3%A9es%20de%20Pie%20se%20trouvant%20sur%20le%20tas%20sont%0A%20%20%20%20%2F%2F%20d%C3%A9sallou%C3%A9es%20ici.%0A%7D%0A
       content_markdown: |
         `Rc` (en anglais Reference Counting) est un pointeur intelligent qui
@@ -6337,8 +6342,8 @@ pages:
         It's often used to have many references to the same `Mutex`.
         
     fr:
-      title: Partage entre Fil d'Exécution (Thread)
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Je%20suis%20le%20seul%20%C3%A0%20pouvoir%20manger%20la%20tarte!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20On%20emprunte%20une%20r%C3%A9f%C3%A9rence%20immuable.%20Celle-ci%20doit%20%C3%AAtre%0A%20%20%20%20%2F%2F%20v%C3%A9rouill%C3%A9e%20(en%20anglais%20locked).%20On%20doit%20%C3%A9galement%20faire%0A%20%20%20%20%2F%2F%20appel%20%C3%A0%20%27unwrap%27%20car%20l%27appel%20%C3%A0%20%27lock%27%20peut%20%C3%A9chouer.%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20La%20r%C3%A9f%C3%A9rence%20ref_pie%20est%20d%C3%A9sallou%C3%A9e%20ici.%20mutex_pie%0A%20%20%20%20%2F%2F%20pourrait%20de%20nouveau%20%C3%AAtre%20utilis%C3%A9%20ici.%0A%20%20%20%20%0A%7D%0A
+      title: Partage entre threads
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Je%20suis%20le%20seul%20%C3%A0%20pouvoir%20manger%20la%20tarte!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20On%20emprunte%20une%20r%C3%A9f%C3%A9rence%20immuable.%20Celle-ci%20doit%20%C3%AAtre%0A%20%20%20%20%2F%2F%20verrouill%C3%A9e%20(en%20anglais%20locked).%20On%20doit%20%C3%A9galement%20faire%0A%20%20%20%20%2F%2F%20appel%20%C3%A0%20'unwrap'%20car%20l'appel%20%C3%A0%20'lock'%20peut%20%C3%A9chouer.%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20La%20r%C3%A9f%C3%A9rence%20ref_pie%20est%20d%C3%A9sallou%C3%A9e%20ici.%20mutex_pie%0A%20%20%20%20%2F%2F%20pourrait%20de%20nouveau%20%C3%AAtre%20utilis%C3%A9%20ici.%0A%20%20%20%20%0A%7D%0A
       content_markdown: |
         `Mutex` est une structure de données (couramment détenue par des pointeurs
         intelligents) pouvant contenir des données et nous permet d'emprunter des
@@ -6348,7 +6353,7 @@ pages:
         données.
 
         Le multithreading dépasse le cadre de Tour of Rust, mais `Mutex` est un
-        élément fondamental de la programmation concurrentiels avec Rust.
+        élément fondamental de la programmation concurrentielle avec Rust.
 
         Il existe un pointeur intelligent spécial `Arc` qui est identique à `Rc`
         mais pour les threads. La particularité de `Arc` est qu'il est thread-safe,
@@ -6385,12 +6390,12 @@ pages:
           compile-time checks.
           
     fr:
-      title: Utilisation Avancée des Pointeurs Intelligents
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20a%20pris%20une%20part!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Utilise%20un%20pointeur%20intelligent%20vers%20Pie%20pour%0A%20%20%20%20%20%20%20%20%2F%2F%20effectuer%20un%20emprunt%20mutable.%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20On%20modifie%20la%20donn%C3%A9e.%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Ferris%20et%20Sara%20sont%20cr%C3%A9es%20avec%20des%20clones%20de%0A%20%20%20%20%2F%2F%20pointeurs%20intelligents%20vers%20Pie.%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sara%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sara.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20parts%20restantes.%22%2C%20p.slices)%3B%0A%7D%0A
+      title: Utilisation avancée des pointeurs intelligents
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20a%20pris%20une%20part!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Utilise%20un%20pointeur%20intelligent%20vers%20Pie%20pour%0A%20%20%20%20%20%20%20%20%2F%2F%20effectuer%20un%20emprunt%20mutable.%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20On%20modifie%20la%20donn%C3%A9e.%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Ferris%20et%20Sara%20sont%20cr%C3%A9%C3%A9s%20avec%20des%20clones%20de%0A%20%20%20%20%2F%2F%20pointeurs%20intelligents%20vers%20Pie.%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sara%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sara.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20parts%20restantes.%22%2C%20p.slices)%3B%0A%7D%0A
       content_markdown: |
         Les pointeurs intelligents peuvent sembler limités, mais ils peuvent
-        utilisé de manière très puissantes avec les structures que nous venons
-        de voir.
+        être utilisés de manière très puissante avec les structures que nous
+        venons de voir.
 
         `Rc<Vec<Foo>>` - Permet de cloner plusieurs pointeurs intelligents pouvant
         emprunter le même vecteur de données immuables. Pour rappel `Rc` place les
@@ -6400,15 +6405,15 @@ pages:
         mutuellement ou immuablement la même structure `Foo`.
 
         `Arc<Mutex<Foo>>` - Permet à un pointeur intelligent de verrouiller
-        temporairement une données (celle-ci ne pourra plus être emprunté mutablement
+        temporairement une donnée (celle-ci ne pourra plus être emprunté mutablement
         ou immuablement) de manière exclusive à un thread du CPU (les autres threads
-        n'y aurons pas accès).
+        n'y auront pas accès).
 
         Détail de la mémoire:
         * Vous remarquerez un thème commun avec plusieurs de ces utilisations:
           l'utilisation d'un type de données immuable (possiblement emprunté par
           plusieurs pointeurs intelligents) pour modifier les données internes.
-          C'est ce qu'on appel la "mutabilité intérieure" (en anglais interior
+          C'est ce qu'on appelle la "mutabilité intérieure" (en anglais interior
           mutability) de Rust. C'est un modèle qui nous permet de contourner les
           règles d'utilisation de la mémoire à l'exécution mais en gardant le même
           niveau de sécurité que Rust nous offre lors de la compilation.
@@ -6425,7 +6430,7 @@ pages:
         con un nivelle de securitá tam secur quam ti durant li compilation.
           
   - en:
-      title: Chapter 8 Conclusion
+      title: Chapter 8 - Conclusion
       content_markdown: |
         Smart pointers are the idioms of Rust programming and let us not have to re-create the 
         very common patterns of memory usage. With them you are ready to tackle the toughest of
@@ -6434,7 +6439,7 @@ pages:
         lines of code.
         
     fr:
-      title: Chapitre 8 Conclusion
+      title: Chapitre 8 - Conclusion
       content_markdown: |
         Les pointeurs intelligents sont très utilisés avec Rust car cela nous
         évite de recréer nous-même ces schémas très courants d'utilisation de
@@ -6443,7 +6448,7 @@ pages:
         chapitre comment se structure un projet Rust au-delà d'un simple fichier.
         
     ie:
-      title: Conclusion de Capitul 8
+      title: Capitul 8 - Conclusion
       content_markdown: |
         Puntatores inteligent es li idiotismes de programmation in Rust con queles noi ne es fortiat recrear
         li defís comun in li mustres de usation de memorie. Con ili on es pret a soluer mem li defís max dur!
@@ -6711,7 +6716,7 @@ pages:
         Ferris says, "Be a good rustacean and help a fellow crab out with a good prelude!"
   - beta: true
     en:
-      title: Chapter 9 Conclusion
+      title: Chapter 9 - Conclusion
       content_markdown: |
         You now have a few tricks up your sleeve when it comes to creating Rust applications and libraries ready for the world. Don't
         worry about remembering it all. As your library grows and is used by other people, you'll find what works best at each milestone.
@@ -6722,13 +6727,22 @@ pages:
     en:
       title: The End
       content_markdown: |
-        It's been a joy to have you on the Tour of Rust.  Ferris and the Tour of Rust team sincerely hope you enjoy the journey ahead!  If you 
+        It's been a joy to have you on the Tour of Rust. Ferris and the Tour of Rust team sincerely hope you enjoy the journey ahead! If you 
         have feel comfortable this far, we strongly recommend diving deeper with these resources:
         * [The Official Rust Programming Book](https://doc.rust-lang.org/stable/book/)
     es:
       title: Fin
       content_markdown: |
         Esto es todo por ahora, pero aún quedan más capítulos, así que ¡muy atento! Esperamos que disfrutes del viaje.
+    fr:
+      title: Fin
+      content_markdown: |
+        Ce fut une joie de t'avoir sur le Tour de Rust. Ferris et l'équipe du
+        Tour de Rust espèrent sincèrement que tu apprécieras le voyage à venir!
+        Si tu te sens à l'aise avec Rust, nous te conseillons fortement de
+        continuer à approfondir tes connaissances avec ces ressources (attention
+        celles-ci sont en anglais):
+        * [Le livre officiel du langage de programmation Rust](https://doc.rust-lang.org/stable/book/)
     ie:
       title: Fine
       content_markdown: |
