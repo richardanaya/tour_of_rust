@@ -18,10 +18,16 @@ function setupKeys(){
 
 let iframe = document.querySelector("iframe");
 if(iframe){
+    setupKeys();
     iframe.addEventListener( "load", function(e) {
         setTimeout(()=>{
             document.querySelector('a').focus();
+            setupKeys();
         },100)
+        setTimeout(()=>{
+            document.querySelector('a').focus();
+            setupKeys();
+        },1000)
         setupKeys();
     });
 } else {
