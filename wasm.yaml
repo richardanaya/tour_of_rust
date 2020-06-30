@@ -62,7 +62,7 @@ common_words:
     next: Siguiente
     previous: Anterior
     toc: Tabla de Contenidos
-    lessons: Unidades
+    lessons: Lecciones
     untranslated: Untranslated
   pt-br:
     chapter: Capítulo
@@ -85,6 +85,7 @@ pages:
         * [Rust (français)] (index_fr.html)
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -102,6 +103,7 @@ pages:
         * [Rust (français)] (index_fr.html)
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -123,6 +125,7 @@ pages:
         * [Rust (français)] (index_fr.html)
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -133,13 +136,14 @@ pages:
     fr_c:
       title: Salut, WebAssembly
       content_markdown: |
-        Bienvenue au * Tour de WebAssembly *. Celui-ci a pour but d'être une introduction à la technologie
+        Bienvenue au *Tour de WebAssembly*. Celui-ci a pour but d'être une introduction à la technologie
         et comment Rust peut être utilisé pour alimenter le Web. Cette visite est également disponible en Rust.
 
         * [Rust (english)] (index.html)
         * [Rust (français)] (index_fr.html)
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -159,6 +163,7 @@ pages:
         * [Rust (français)] (index_fr.html)
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -180,6 +185,7 @@ pages:
         * [Rust (français)] (index_fr.html)
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -187,6 +193,26 @@ pages:
         traduções, veja o repositório do Tour do WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
         Você pode navegar pelo tour usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
+  - en:
+      title: Hola, WebAssembly
+      content_markdown: |
+        Bienvenido al *Tour de WebAssembly*. Este tutorial pretende introducirte a la tecnología y
+        a cómo Rust puede ser usado para mejorar la web.  Si eres completamente nuevo en Rust, quizá te 
+        interese el [Tour de Rust](https://tourofrust.com/)! La mayoría de nuestros ejemplos serán lo
+        suficientemente fácilles para cualquier persona que quiera seguirlos.
+
+        * [Rust (english)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
+        * [C (english)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
+
+        En el caso de que tengas sugerencias respecto al contenido o quieras contribuir con traducciones,
+        vaya al repositorio del Tour de WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
+
+        Puedes navegar por el tour usando el teclado <span class="emoji">⬅️</span> y <span class="emoji">➡️</span>
   - chapter: 1
     en:
       title: Chapter 1 - What Is WebAssembly?
@@ -253,6 +279,22 @@ pages:
           assembly [fora dos navegadores](https://wasmer.io/) também!
 
         O WebAssembly é frequentemente chamado de **WASM**.
+    pt-br:
+      title: Capítulo 1 - Qué es WebAssembly?
+      content_markdown: |
+        WebAssembly es un formato binario para representar un código ejecutable de forma aislada. Foi
+        Fue creado para para ser executado en los navegadores como una alternativa a 
+        JavaScript con las siguientes ventajas:
+
+        * Por ser un bytecode de bajo nivel, capaz de ejecutar cálculos rápidamente y acceder a la memoria
+          de una forma más directa.
+        * WebAssembly fue creado teniendo a los compiladores existentes en mente, haciendo posible que fuera
+          compilado a partir de lenguajes nativos como C/C++ y Rust.
+        * Creado con seguridad e isolación en mente, permitiendo un control de acesso detallado.
+        * WebAssembly fue creado para ser agnóstico, permitiendo que los usuarios usaran WebAssembly 
+          [fuera de los navegadores](https://wasmer.io/) también!
+
+        WebAssembly es frecuentemente mencionado como **WASM**.
   - en:
       title: Inside A Module
       content_markdown: |
@@ -301,6 +343,18 @@ pages:
         * uma lista de funções.
         * quais funções devem ser exportadas/importadas.
         * quais dados devem inicialmente estar na memória dos módulos wasm.
+    pt-br:
+      title: Dentro de un Módulo
+      content_markdown: |
+        Cuando compilas a WebAssembly, su compilador debe crear un archivo acabado en 
+        `.wasm` llamado **módulo**.
+
+        El módulo es un [formato binario](https://webassembly.github.io/spec/core/index.html) con 
+        toda la información necesaria para que un programa wasm y su memoria sean configurados e interaccionen
+        con:
+        * una lista de funciones.
+        * qué funciones deben de ser exportadas/importadas.
+        * qué datos tienen que estar inicialmente en la memoria de los módulos wasm.
   - en:
       title: Loading A Module
       content_markdown: |
@@ -341,6 +395,16 @@ pages:
 
         ```
         let file = await fetch('meu_arquivo.wasm');
+        let bytes = await file.arrayBuffer();
+        ```
+    es:
+      title: Cargando un Módulo
+      content_markdown: |
+        Como un módulo de WebAssembly es apenas un conjunto de bytes, necesitamos primero cargar esos bytes
+        en nuestro navegador.
+
+        ```
+        let file = await fetch('mi_modulo.wasm');
         let bytes = await file.arrayBuffer();
         ```
   - en:
