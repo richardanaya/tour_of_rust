@@ -193,13 +193,13 @@ pages:
         traduções, veja o repositório do Tour do WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
         Você pode navegar pelo tour usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
-  - en:
+  - es:
       title: Hola, WebAssembly
       content_markdown: |
         Bienvenido al *Tour de WebAssembly*. Este tutorial pretende introducirte a la tecnología y
         a cómo Rust puede ser usado para mejorar la web.  Si eres completamente nuevo en Rust, quizá te 
         interese el [Tour de Rust](https://tourofrust.com/)! La mayoría de nuestros ejemplos serán lo
-        suficientemente fácilles para cualquier persona que quiera seguirlos.
+        suficientemente fáciles para cualquier persona que quiera seguirlos.
 
         * [Rust (english)] (index.html)
         * [Rust (français)] (index_fr.html)
@@ -279,7 +279,7 @@ pages:
           assembly [fora dos navegadores](https://wasmer.io/) também!
 
         O WebAssembly é frequentemente chamado de **WASM**.
-    pt-br:
+    es:
       title: Capítulo 1 - Qué es WebAssembly?
       content_markdown: |
         WebAssembly es un formato binario para representar un código ejecutable de forma aislada. Foi
@@ -343,7 +343,7 @@ pages:
         * uma lista de funções.
         * quais funções devem ser exportadas/importadas.
         * quais dados devem inicialmente estar na memória dos módulos wasm.
-    pt-br:
+    es:
       title: Dentro de un Módulo
       content_markdown: |
         Cuando compilas a WebAssembly, su compilador debe crear un archivo acabado en 
