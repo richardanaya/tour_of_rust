@@ -1321,10 +1321,10 @@ pages:
             msg.len() as f64 );
         ```
 
-        Il y a cependant un problème. En effet notre fonction JavaScript à appeler
+        Il y a cependant un problème. En effet, notre fonction JavaScript à appeler
         (celle affichant le console log) doit récupérer le message à afficher depuis
         la mémoire. Elle connait la postition du message dans la mémoire ainsi que sa
-        taile mais comment récupérer le message? Nous utiliserons pour cela un
+        taille, mais comment récupérer le message? Nous utiliserons pour cela un
         contexte!
   - en:
       title: Context Of Dynamic Invocation
@@ -1351,7 +1351,7 @@ pages:
       title: Contexte d'invocation dynamique
       code: https://webassembly.studio/?f=8z21oi4ptfd
       content_markdown: |
-        Lorsque nos fonctions invoquées dynamiquement sont appelées, les fonctions
+        Lorsque nos fonctions invoquées dynamiquement sont appelées, celles-ci
         doivent avoir accès à la mémoire du module. Pour cela, nous pouvons créer
         une fonction ayant pour but de décoder les octets de cette mémoire et
         passer cette fonction de décodage à chacune des fonctions dynamiques à
