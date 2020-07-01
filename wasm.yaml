@@ -1400,7 +1400,7 @@ pages:
         Nous rencontrons cependant un problème avec les fonctions dynamiques
         lorsque nous voulons retourner une référence à un objet. En effet,
         WebAssembly et JavaScript ne peuvent échanger entre eux uniquement
-        des nombres! Afin surmonter ce problème, il nous suffit d'établir
+        des nombres! Afin de surmonter ce problème, il nous suffit d'établir
         une convention pour pouvoir référencer nos objets JavaScript en
         stockant ces objets dans le contexte.
 
@@ -1465,9 +1465,9 @@ pages:
         retourne cette référence.
         * `getObject(f64) -> object` - Récupère la référence d'un objet.
         * `releaseObject(f64) -> object` - Supprime la référence d'un objet
-        présente dans le stockage, permettant ainsi de libérer l'espace mémomire.
+        présent dans le stockage, permettant ainsi de libérer l'espace mémoire.
 
-        Ce mécanisme de stockage est ce qu'on appele un *allocateur*. Cela dépasse
+        Ce mécanisme de stockage est ce qu'on appelle un *allocateur*. Cela dépasse
         la portée de ce tutoriel mais on pourrait imaginer une mise en œuvre très
         naïve en utilisant un tableau dans lequel sont stockés les objects.
 
