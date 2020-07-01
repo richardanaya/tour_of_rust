@@ -1394,6 +1394,32 @@ pages:
             log_handle,selector.as_ptr() as f64, 
             selector.len() as f64 );
         ```
+    fr:
+      title: Retourner une référence
+      content_markdown: |
+        Nous rencontrons cependant un problème avec les fonctions dynamiques
+        lorsque nous voulons retourner une référence à un objet. En effet,
+        WebAssembly et JavaScript ne peuvent échanger entre eux uniquement
+        des nombres! Afin surmonter ce problème, il nous suffit d'établir
+        une convention pour pouvoir référencer nos objets JavaScript en
+        stockant ces objets dans le contexte.
+
+        ```rust
+        let query_selector_handle = register_function("
+          (context, selectorStart, selectorEnd) => {
+            let selector = context.getUtf8FromMemory(
+              selectorStart,selectorEnd);
+            let domEl = document.querySelector(selector);
+            let objHandle = context.storeObject(domEl);
+            return objHandle;
+          }");
+
+        let selector = "#fancy-button";
+
+        let dom_element_handle = js_invoke_with_2_params(
+            log_handle,selector.as_ptr() as f64, 
+            selector.len() as f64 );
+        ```
   - en:
       title: Allocators
       code: https://webassembly.studio/?embed&f=mz2gu9y29tn
@@ -1427,7 +1453,45 @@ pages:
         ```
 
         There are many issues for you to consider with your implementation.
+    fr:
+      title: Allocateurs
+      code: https://webassembly.studio/?f=kub72dua5e
+      content_markdown: |
+        Comme nous venons de le voir, pour retourner la référence d'un objet
+        JavaScript, nous devons mettre en place un mécanisme de stockage pour
+        les objets à référencer:
 
+        * `storeObject(object) -> f64` - Stocke la référence d'un objet et
+        retourne cette référence.
+        * `getObject(f64) -> object` - Récupère la référence d'un objet.
+        * `releaseObject(f64) -> object` - Supprime la référence d'un objet
+        présente dans le stockage, permettant ainsi de libérer l'espace mémomire.
+
+        Ce mécanisme de stockage est ce qu'on appele un *allocateur*. Cela dépasse
+        la portée de ce tutoriel mais on pourrait imaginer une mise en œuvre très
+        naïve en utilisant un tableau dans lequel sont stockés les objects.
+
+        ```
+        let storage = [];
+
+        function storeObject(obj){
+          let index = storage.length;
+          storage.push(obj);
+          return index;
+        }
+
+        function getObject(handle){
+          return storage[handle];
+        }
+
+        function releaseObject(handle){
+          return storage[handle] = null;
+        }
+        ```
+
+        Cela dit, cette implémentation simpliste présente de nombreux
+        problèmes que nous n'arborderons pas ici.
+    
   - en:
       title: Drawing To The Screen
       code: https://webassembly.studio/?embed&f=bdhga9zwlem
@@ -1460,13 +1524,55 @@ pages:
             ctx.fillRect(x,y,width,height);
           }");
         ```
+    fr:
+      title: Dessiner à l'écran
+      code: https://webassembly.studio/?f=e212pnspafj
+      content_markdown: |
+        Mettons en pratique tout ce que nous venons de voir avec un exemple où
+        nous allons dessiner un carré rouge à l'écran. Voici les fonctions dont
+        nous aurons besoin:
+
+        ```rust
+        let get_2d_context = register_function("
+          (context, selectorStart, selectorEnd) => {
+            let selector = context.getUtf8FromMemory(
+              selectorStart,selectorEnd);
+            let domEl = document.querySelector(selector);
+            let ctx = domEl.getContext("2d");
+            let objHandle = context.storeObject(ctx);
+            return objHandle;
+          }");
+
+        let set_context_color = register_function("
+          (context, ctxHandle, colorStart, colorEnd) => {
+            let color = context.getUtf8FromMemory(
+              colorStart,colorEnd);
+            let ctx = context.getObject(ctxHandle);
+            ctx.fillStyle = color;
+          }");
+
+        let draw_rect = register_function("
+          (context, ctxHandle, x, y, width, height) => {
+            let ctx = context.getObject(ctxHandle);
+            ctx.fillRect(x,y,width,height);
+          }");
+        ```
   - en:
       title: Chapter 3 Conclusion
       content_markdown: |
         We now have the ability to invoke any kind of JavaScript! How cool is that? Using eval obviously is not that idea,
         WebAssembly is an evolving technology that will one day have better ways to access any aspect of the 
         browser. Until then we do our best! The next chapter is on asynchronous programming!
-
+    fr:
+      title: Chapitre 3 - Conclusion
+      content_markdown: |
+        Nous avons maintenant la possibilité d'invoquer tout type de JavaScript
+        avec WebAssembly! N'est-ce pas génial? Utiliser eval n'est évidemment
+        pas idéal, mais WebAssembly est une technologie en évolution qui aura
+        un jour de meilleurs moyens d'accéder à n'importe quel aspect du navigateur.
+        D'ici là, nous faisons de notre mieux! Le chapitre suivant est consacré
+        à la programmation asynchrone!
+    
   - beta: true
     chapter: 4
     en:
