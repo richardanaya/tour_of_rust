@@ -248,7 +248,7 @@ for(var l in languages){
             <img class="mobile-ferris" src="/ferris_lofi.png">
             <div class="welcome">
             ${getWord(words,lang,"welcometothe")}<br>
-            <a href="00_en.html">${getWord(words,lang,"tor")}
+            <a href="00_${lang}.html">${getWord(words,lang,"tor")}
             <div class="welcome-instruction">${getWord(words,lang,"presstocontinue")}</div>
             </a></div>
         </body>
