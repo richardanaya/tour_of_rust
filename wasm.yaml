@@ -193,7 +193,7 @@ pages:
         traduções, veja o repositório do Tour do WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
         Você pode navegar pelo tour usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
-  - es:
+    es:
       title: Hola, WebAssembly
       content_markdown: |
         Bienvenido al *Tour de WebAssembly*. Este tutorial pretende introducirte a la tecnología y
