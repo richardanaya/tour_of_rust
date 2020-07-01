@@ -193,7 +193,7 @@ pages:
         traduções, veja o repositório do Tour do WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
         Você pode navegar pelo tour usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
-    es:
+  es:
       title: Hola, WebAssembly
       content_markdown: |
         Bienvenido al *Tour de WebAssembly*. Este tutorial pretende introducirte a la tecnología y
@@ -1400,7 +1400,7 @@ pages:
       content_markdown: |
         As we can see to properly communicate objects, we need to have some kind of storage mechanism for objects:
 
-        * `storeObject(object) -> f64` - Stores an object and returns a numerical handle.
+          * `storeObject(object) -> f64` - Stores an object and returns a numerical handle.
         * `getObject(f64) -> object` - Get a reference to an object by it's numerical handle.
         * `releaseObject(f64) -> object` - Release a reference to an object from storage, allowing it's memory to be freed.
 
@@ -1463,8 +1463,8 @@ pages:
   - en:
       title: Chapter 3 Conclusion
       content_markdown: |
-        We now have the ability to invoke any kind of JavaScript! How cool is that? Using eval obviously is not that idea,
-        WebAssembly is an evolving technology that will one day have better ways to access any aspect of the 
+        We now have the ability to invoke any kind of JavaScript! How cool is that? Using eval obviously is not that ideal,
+        but WebAssembly is an evolving technology that will one day have better ways to access any aspect of the 
         browser. Until then we do our best! The next chapter is on asynchronous programming!
 
   - beta: true
