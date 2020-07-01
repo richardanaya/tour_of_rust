@@ -1294,7 +1294,7 @@ pages:
         You'll notice there is a problem with our JavaScript function though. It has the start and end of our utf-8 but not memory!
     fr:
       title: Appel de fonctions
-      content_markdown: |`
+      content_markdown: |
         Lorsque nous voulons appeler une fonction dynamique, nous avons besoin
         de connaître sa position (fn_handle dans le code) dans le tableau contenant
         les fonctions dynamiques ainsi que ses arguments.
