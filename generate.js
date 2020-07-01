@@ -212,42 +212,46 @@ for(var l in languages){
     </body>
     <script src="/tour.js"></script>
     </html>`)
+
+    
+    fileName = `index.html`;
+    if(lang != "en"){
+        fileName = `index_${lang}.html`
+    }
+    fs.writeFileSync(target_dir+"/"+fileName,`<html lang="${lang}">
+        <head>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-155199982-1');
+            </script>
+            <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+            <meta content="utf-8" http-equiv="encoding">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2"/>
+            <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2"/>
+            <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+            <title>Tour of Rust</title>
+            <link rel="stylesheet" href="tour.css">
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+            <link rel="manifest" href="/site.webmanifest">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
+            <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        </head>
+        <body class="welcome-cover">
+            <img class="mobile-ferris" src="/ferris_lofi.png">
+            <div class="welcome">
+            ${getWord(words,lang,"welcometothe")}<br>
+            <a href="00_en.html">${getWord(words,lang,"tor")}
+            <div class="welcome-instruction">${getWord(words,lang,"presstocontinue")}</div>
+            </a></div>
+        </body>
+        <script src="/tour.js"></script>
+    </html>`);
 }
-
-let fileName = `index.html`;
-fs.writeFileSync(target_dir+"/"+fileName,`<html lang="en">
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-155199982-1');
-        </script>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <meta content="utf-8" http-equiv="encoding">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2"/>
-        <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2"/>
-        <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-        <title>Tour of Rust</title>
-        <link rel="stylesheet" href="tour.css">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
-    </head>
-    <body class="welcome-cover">
-        <img class="mobile-ferris" src="/ferris_lofi.png">
-        <div class="welcome">
-        Welcome to the<br>
-        <a href="00_en.html">${lessons.common_words.en.tor}
-        <div class="welcome-instruction">Press to Continue</div>
-        </a></div>
-    </body>
-    <script src="/tour.js"></script>
-</html>`);

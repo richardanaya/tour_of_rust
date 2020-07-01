@@ -8,6 +8,8 @@ common_words:
     toc: Table of Contents
     lessons: Lessons
     untranslated: Untranslated
+    welcometothe: "Welcome to the"
+    presstocontinue: "Press to Continue"
   fr:
     chapter: Chapitre
     tor: Tour de Rust
