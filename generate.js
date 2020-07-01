@@ -216,7 +216,7 @@ for(var l in languages){
     
     fileName = `index.html`;
     if(lang != "en"){
-        fileName = `index_${lang}.html`
+        fileName = `index.${lang}.html`
     }
     fs.writeFileSync(target_dir+"/"+fileName,`<html lang="${lang}">
         <head>
