@@ -1400,7 +1400,7 @@ pages:
       content_markdown: |
         As we can see to properly communicate objects, we need to have some kind of storage mechanism for objects:
 
-        * `storeObject(object) -> f64` - Stores and object and returns a numerical handle.
+        * `storeObject(object) -> f64` - Stores an object and returns a numerical handle.
         * `getObject(f64) -> object` - Get a reference to an object by it's numerical handle.
         * `releaseObject(f64) -> object` - Release a reference to an object from storage, allowing it's memory to be freed.
 
