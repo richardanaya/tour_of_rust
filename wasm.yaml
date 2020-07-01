@@ -1560,7 +1560,7 @@ pages:
   - en:
       title: Chapter 3 Conclusion
       content_markdown: |
-        We now have the ability to invoke any kind of JavaScript! How cool is that? Using eval obviously is not that idea,
+        We now have the ability to invoke any kind of JavaScript! How cool is that? Using eval obviously is not that ideal,
         WebAssembly is an evolving technology that will one day have better ways to access any aspect of the 
         browser. Until then we do our best! The next chapter is on asynchronous programming!
     fr:
