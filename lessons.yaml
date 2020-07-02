@@ -18,6 +18,8 @@ common_words:
     toc: Table des matières
     lessons: Leçons
     untranslated: Non traduit
+    welcometothe: "Bienvenue au"
+    presstocontinue: "Clique pour continuer"
   de:
     tor: Tour zu Rust
     next: Weiter
@@ -50,6 +52,8 @@ common_words:
     toc: Tabla de Contenidos
     lessons: Unidades
     untranslated: Untranslated
+    welcometothe: "Bienvenido al"
+    presstocontinue: "Haz clic para continuar"
   pt-br:
     chapter: Capítulo
     tor: Um tour por Rust
