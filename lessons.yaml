@@ -4024,7 +4024,7 @@ pages:
         Comparé aux autres langages de programmation, Rust possède un paradigme unique en ce qui concerne
         la gestion de la mémoire. Nous allons nous intéresser aux comportements et aux validations du compilateur
         un par un pour être sûr de bien comprendre. Il est important de garder à l'esprit qu'au bout du compte,
-        les règles que nous allons voir se sont pas là pour te compliquer la vie, mais pour éviter que ton code
+        les règles que nous allons voir ne sont pas là pour te compliquer la vie, mais pour éviter que ton code
         ne soit truffé d'erreurs!
     ie:
       title: Capitul 5 - Proprietá e Pruntation de Data
