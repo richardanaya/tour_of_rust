@@ -6626,8 +6626,7 @@ pages:
         li defís comun in li mustres de usation de memorie. Con ili on es pret a soluer mem li defís max dur!
         Armat con li fundamentes de Rust, noi nu va parlar plu pri qualmen crear projectes con un grandore
         plu ampli. In Capitul 9 noi va liberar nos de lineas de code scrit sur un singul págine.
-  - beta: true
-    chapter: 9
+  - chapter: 9
     en:
       title: Chapter 9 - Project Organization and Structure
       content_markdown: |
@@ -6638,8 +6637,7 @@ pages:
       content_markdown: |
         Til nu nor exemples de code ha esset scrit in singul archives. Lass nos discusser pri qualmen plu bon organisar e partiprender it!
         
-  - beta: true
-    en:
+  - en:
       title: Modules
       content_markdown: |
         Every Rust program or library is a *crate*.
@@ -6658,8 +6656,7 @@ pages:
         Chascun crate possede un root (radical) modul.
         Un model possede variabiles global, functiones, structs, traits, e altri modules!
         
-  - beta: true
-    en:
+  - en:
       title: Writing a Program
       content_markdown: |
         A program has a root module in a file called `main.rs`.
@@ -6669,8 +6666,7 @@ pages:
       content_markdown: |
         Un programma have un modul root in un archive nominat `main.rs`.
 
-  - beta: true
-    en:
+  - en:
       title: Writing a Library
       content_markdown: |
         A library has a root module in a file called `lib.rs`.
@@ -6680,8 +6676,7 @@ pages:
       content_markdown: |
         Un biblioteca have un modul root in un archive nominat `lib.rs`.
 
-  - beta: true
-    en:
+  - en:
       title: Referencing Other Modules and Crates
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
       content_markdown: |
@@ -6695,8 +6690,7 @@ pages:
         structures and functions for interacting with your operating system.
 
         A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/)
-  - beta: true
-    en:
+  - en:
       title: Referencing Multiple Items
       content_markdown: |
         Multiple items can be referenced in a single module path as so:
@@ -6716,8 +6710,7 @@ pages:
         ```
         Ferris ne manja TAU, solmen PI.
         
-  - beta: true
-    en:
+  - en:
       title: Module Heirarchy
       content_markdown: |
         When we think of code, we usually imagine a heirarchy of files organized in directories. 
@@ -6744,8 +6737,7 @@ pages:
         mod foo;
         ```
         
-  - beta: true
-    en:
+  - en:
       title: Inline Module
       content_markdown: |
         A sub-module can be directly inlined within a module's code.
@@ -6782,8 +6774,7 @@ pages:
           }
           ```
         
-  - beta: true
-    en:
+  - en:
       title: Internal Module Referencing
       content_markdown: |
         Rust has several keywords you can use in your `use` path to quickly get ahold of the module you want:
@@ -6801,8 +6792,7 @@ pages:
         * `super` - li modul genitori del modul quel tu usa actualmen
         * `self` - li modul in quel on nu sta
         
-  - beta: true
-    en:
+  - en:
       title: Exporting
       content_markdown: |
         By default members of a *module* are not accessible from outside of the module (not even to it's child modules!). We make members 
@@ -6849,8 +6839,7 @@ pages:
         se utiliza un módulo dentro de su propio código o en un crate externo, sólo se
         permiten referencias a aquellos elementos que hayan sido marcados como públicos.</p><p>El código en este ejemplo
         da error, añade la palabra reservada <b>pub</b> en el lugar apropiado para arreglarlo.</p>"
-  - beta: true
-    en:
+  - en:
       title: Structure Visibility
       content_markdown: |
         Just like functions, structures can declare what they want exposed outside of their module using `pub`.
@@ -6870,14 +6859,12 @@ pages:
       title: Область видимости структур
       content_markdown: |
         Структуры могут объявлять поля ключевым словом `pub`, открывая к ним доступ для внешних модулей.
-  - beta: true
-    en:
+  - en:
       title: Prelude
       content_markdown: |
         You might by wondering in Rust, how we have access to `Vec`,`Box`, etc. everywhere without a `use`. In the Rust standard 
         library anything that is exported in `std::prelude::*` is automatically available to every part of Rust.
-  - beta: true
-    en:
+  - en:
       title: Your Own Prelude
       content_markdown: |
         Because of standard library's prelude, it's common for your libary to have it's own prelude module as a starting point for 
@@ -6886,8 +6873,7 @@ pages:
         know where to start.
 
         Ferris says, "Be a good rustacean and help a fellow crab out with a good prelude!"
-  - beta: true
-    en:
+  - en:
       title: Chapter 9 - Conclusion
       content_markdown: |
         You now have a few tricks up your sleeve when it comes to creating Rust applications and libraries ready for the world. Don't
