@@ -6327,7 +6327,7 @@ pages:
         une trace de l'endroit dans ces octets où une structures de données commence
         et se termine. Le pointeur intelligent déréférence un pointeur brut pour
         exposer la structure de données dans une belle interface ergonomique propre
-        que nous d'utiliser (par exemple `my_vec [3]`).
+        que nous utilisons (par exemple `my_vec [3]`).
 
         De même, `String` garde une trace des octets en mémoire et restreint par
         programmation le contenu qui y est écrit à toujours être de l'`utf-8`
