@@ -6631,7 +6631,13 @@ pages:
       title: Chapter 9 - Project Organization and Structure
       content_markdown: |
         So far all of our code examples have been a single file. Let's discuss how our code be better organized and shared by others!
-        
+    fr:
+      title: Chapitre 9 - Organisation et structure d'un projet
+      content_markdown: |
+      Jusqu'à présent, tous nos exemples de code n'on guère dépassé le simple
+      fichier. Voyons comment un projet plus complexe s'organise et quels outils
+      l'écosystème Rust met à notre disposition pour pouvoir travailler à
+      plusieurs sur un même projet!
     ie:
       title: Capitul 9 - Organisation e Structura de un Projecte
       content_markdown: |
@@ -6648,6 +6654,18 @@ pages:
 
         A module can holds global variables, functions, structs, traits or even other modules!
         
+    fr:
+      title: Modules
+      content_markdown: |
+        Chaque programme ou bibliothèque Rust est appelé une *crate*
+        (littéralement une caisse).
+
+        Chaque crate est constituée d'une hiérarchie de *modules*.
+
+        Chaque crate possède un module racine.
+
+        Un module peut contenir des variables globales, des fonctions, des
+        structures, des traits ou même d'autres modules!
     ie:
       title: Modules
       content_markdown: |
@@ -6660,7 +6678,10 @@ pages:
       title: Writing a Program
       content_markdown: |
         A program has a root module in a file called `main.rs`.
-        
+    fr:
+      title: Ecrire un programme
+      content_markdown: |
+        Un programme possède un module racine dans un fichier appelé `main.rs`.
     ie:
       title: Scrir un Programma
       content_markdown: |
@@ -6670,7 +6691,10 @@ pages:
       title: Writing a Library
       content_markdown: |
         A library has a root module in a file called `lib.rs`.
-        
+    fr:
+      title: Ecrire une bibliothèque
+      content_markdown: |
+        Un bibliothèque possède un module racine dans un fichier appelé `lib.rs`.
     ie:
       title: Scrir un Biblioteca
       content_markdown: |
@@ -6690,6 +6714,25 @@ pages:
         structures and functions for interacting with your operating system.
 
         A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/)
+    fr:
+      title: Référencement de modules et de crates
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Bienvenue%20au%20terrain%20de%20jeu%20Rust!%22)%3B%0A%20%20%20%20println!(%22Chuck%20Norris%20connait%20la%20derni%C3%A8re%20%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20d%C3%A9cimale%20de%20%7B%7D...!%22%2C%20PI)%3B%0A%7D%0A
+      content_markdown: |
+        Les composants d'un module peuvent être référencés avec leur chemin
+        complet `std::f64::consts::PI`.
+          
+        Un moyen plus simple est d'utiliser le mot-clé **use**. Il nous permet
+        de spécifier des éléments particuliers des modules que nous souhaitons
+        utiliser sans avoir à spécifier le chemin complet à chaque fois. Par
+        exemple `use std::f64::consts::PI` permettra d'utiliser simplement
+        l'identifiant `PI` là où on en a besoin.
+
+        **std** est la **bibliothèque standard** de Rust. Celle-ci met à
+        disposition de nombreuses structures de données et fonction pour
+        intéragir plus facilement avec le système d'exploitation.
+
+        Un répertoire des crates créées par la communauté peut être consulté à
+        l'adresse [https://crates.io](https://crates.io/)
   - en:
       title: Referencing Multiple Items
       content_markdown: |
@@ -6700,7 +6743,14 @@ pages:
         ```
 
         Ferris doesn't eat TAU, he only eats PI.
-        
+    fr:
+      title: Référencement de plusieurs composants d'un modules
+      content_markdown: |
+        Plusieurs composants peuvent être référencés dans un seul chemin de module:
+
+        ```rust
+        use std::f64::consts::{PI,TAU}
+        ```
     ie:
       title: Referentiar Coses Multiplic
       content_markdown: |
@@ -6721,7 +6771,18 @@ pages:
         `foo` can be represented as:
           * a file named `foo.rs`
           * a directory named `foo` with a file `mod.rs` inside
-        
+    fr:
+      title: Création d'un module
+      content_markdown: |
+        Lorsqu'un développeur écrit un programme, il se retrouve généralement
+        avec une hiéarchie de fichiers organisés en répertoire. Rust permet
+        d'organiser son code sous forme de modules tout en préservant la structure
+        des fichiers.
+
+        Avec Rust, il y a deux manière de créer un module. Par exemple, si nous
+        souhaitons créer le module `foo`, nous pouvons créer au choix:
+          * un fichier nommé `foo.rs`
+          * un répertoire nommé `foo` avec un fichier `mod.rs` à l'intérieur
     ie:
       title:  Creation de un Modul
         Quande on pensa pri code, on imagina por li pluparte un hierarchie de archives organisat in archivieres.
@@ -6743,7 +6804,18 @@ pages:
         // will insert its contents inside a module named `foo` under this scope
         mod foo;
         ```
-        
+    fr:
+      title: Hiérarchie de modules
+      content_markdown: |
+        Un module peut dépendre d'un autre. Afin d'établir une relation entre
+        un module et son sous-module, vous devez écrire dans le module parent:
+
+        ```rust
+        // Cette déclaration recherchera un fichier nommé `foo.rs` ou `foo/mod.rs`
+        // et insérera son contenu dans un module nommé `foo` qu'on pourra ensuite
+        // utiliser.
+        mod foo;
+        ```
     ie:
       title: Hierarchie de un Modul
       A module can depends on another one. Por etablisser un relation inter un model e su sub-modul, on deve scrir quam seque in li modul genitori.
