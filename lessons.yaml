@@ -6634,7 +6634,7 @@ pages:
     fr:
       title: Chapitre 9 - Organisation et structure d'un projet
       content_markdown: |
-      Jusqu'à présent, tous nos exemples de code n'on guère dépassé le simple
+      Jusqu'à présent, tous nos exemples de code n'ont guère dépassé le simple
       fichier. Voyons comment un projet plus complexe s'organise et quels outils
       l'écosystème Rust met à notre disposition pour pouvoir travailler à
       plusieurs sur un même projet!
@@ -6728,10 +6728,10 @@ pages:
         l'identifiant `PI` là où on en a besoin.
 
         **std** est la **bibliothèque standard** de Rust. Celle-ci met à
-        disposition de nombreuses structures de données et fonction pour
+        disposition de nombreuses structures de données et fonctions pour
         intéragir plus facilement avec le système d'exploitation.
 
-        Un répertoire des crates créées par la communauté peut être consulté à
+        Un répertoire des crates créés par la communauté peut être consulté à
         l'adresse [https://crates.io](https://crates.io/)
   - en:
       title: Referencing Multiple Items
@@ -6744,7 +6744,7 @@ pages:
 
         Ferris doesn't eat TAU, he only eats PI.
     fr:
-      title: Référencement de plusieurs composants d'un modules
+      title: Référencement de plusieurs composants d'un module
       content_markdown: |
         Plusieurs composants peuvent être référencés dans un seul chemin de module:
 
