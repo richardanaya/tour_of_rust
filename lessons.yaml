@@ -6844,7 +6844,27 @@ pages:
             ... tests go here ...
         }
         ```
-        
+    fr:
+      title: Module Inline
+      content_markdown: |
+        Un sous-module peut être directement intégré dans le code d'un module. 
+
+        Une utilisation très courante de ces modules 'inline' consiste à créer
+        des tests unitaires. Nous créons un module inline qui n'existe que
+        lorsque Rust est utilisé pour les tests!
+
+        ```
+        // Cette macro supprime ce module inline lorsque Rust
+        // n'est pas en mode test.
+        #[cfg(test)]
+        mod tests {
+            // Notez que nous n'avons pas immédiatement accès au
+            // module parent. Nous devons être explicite.
+            use super::*;
+
+            ... les tests vont ici ...
+        }
+        ```
       ie:
         title: Modul Inlineari
         content_markdown: |
@@ -6870,7 +6890,15 @@ pages:
         * `crate` - the root module of your crate
         * `super` - the parent module of your current module
         * `self` - the current module
-        
+    fr:
+      title: Référencement de module interne
+      content_markdown: |
+        Lors du référencement d'un module avec le mot-clé use, tu peux également
+        utiliser les mots-clés suivants dans le chemin:
+
+        * `crate` - le module racine de la crate
+        * `super` - le module parent du module actuel
+        * `self` - le module actuel
     ie:
       title: Referenties Intern a Modules
       content_markdown: |
@@ -6888,6 +6916,17 @@ pages:
 
         By default members of a *crate* are not accessible outside of the crate. We make members of
         a crate accessible by marking them as `pub` in the *root module* of your crate (`lib.rs` or `main.rs`).
+    fr:
+      title: Export
+      content_markdown: |
+        Par défaut, les membres d'un *module* ne sont pas accessibles de
+        l'extérieur du module (pas même à ses modules enfants!). Pour que
+        ceux-ci soient accessible, il faut utiliser le mot-clé `pub`.
+
+        Par défaut, les membres d'une *crate* ne sont pas accessibles en dehors
+        de la crate. De même, il faut utiliser le mot-clé `pub` dans le
+        *module racine* de la crate (` lib.rs` ou `main.rs`) si l'on souhaite
+        rendre accesssible les membres d'une crate depuis l'extérieur. 
     de:
       title: Export
       content_markdown: |
@@ -6933,7 +6972,13 @@ pages:
         Just like functions, structures can declare what they want exposed outside of their module using `pub`.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
-    de:
+    fr:
+      title: Visibilité des structures
+      content_markdown: |
+        Tout comme les fonctions, les structures peuvent déclarer quels champs
+        seront visibles à l'extérieur du module en utilisant le mot-clé`pub`.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20La%20structure%20SeaCreature%20sera%20visible%0A%2F%2F%20en%20dehors%20du%20module.%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20Le%20champ%20weapons%20ne%20sera%20pas%20visible.%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+      de:
       title: Struktursichtbarkeit
       content_markdown: |
         Genau wie bei Funktionen kann in Strukturen angegeben werden, welche Felder nach außen hin sichtbar sein sollen.
