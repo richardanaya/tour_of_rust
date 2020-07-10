@@ -6785,6 +6785,7 @@ pages:
           * un répertoire nommé `foo` avec un fichier `mod.rs` à l'intérieur
     ie:
       title:  Creation de un Modul
+      content_markdown: |
         Quande on pensa pri code, on imagina por li pluparte un hierarchie de archives organisat in archivieres.
         Rust let you create modules closely related to your file
         structure.
@@ -6866,23 +6867,22 @@ pages:
             ... les tests vont ici ...
         }
         ```
-      ie:
-        title: Modul Inlineari
-        content_markdown: |
-          On posse 'inlinear' un sub-modul directmen in li code de un model.
-          On fa talmen tre frequentmen por crear provas unitic (unit tests).
-          ```
-          // Ti-ci macro remove li modul inlineari quande Rust
-          // ne sta in prova-mode.
-          #[cfg(test)]
-          mod tests {
-            // A notar que a nos ne es ínmediatmen dat accesse al
-            // modul genitori. Noi deve esser explicit.
-            use super::*;
-            ... li provas sta ci ...
-          }
-          ```
-        
+    ie:
+      title: Modul Inlineari
+      content_markdown: |
+        On posse 'inlinear' un sub-modul directmen in li code de un model.
+        On fa talmen tre frequentmen por crear provas unitic (unit tests).
+        ```
+        // Ti-ci macro remove li modul inlineari quande Rust
+        // ne sta in prova-mode.
+        #[cfg(test)]
+        mod tests {
+          // A notar que a nos ne es ínmediatmen dat accesse al
+          // modul genitori. Noi deve esser explicit.
+          use super::*;
+          ... li provas sta ci ...
+        }
+        ```
   - en:
       title: Internal Module Referencing
       content_markdown: |
