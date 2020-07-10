@@ -7025,7 +7025,7 @@ pages:
         permet d'importer toutes les structures de données nécessaires à
         l'utilisation de la bibliothèque. Ces structures de données ne seront
         pas automatiquement disponible (il faudra utiliser
-        `use my_library::prelude::*`) mais c'est une bonne convention à respecté.
+        `use my_library::prelude::*`) mais c'est une bonne convention à respecter.
 
         Ferris dit: "Sois un bon rustacean et aide les autres crabes avec un bon prélude!"
   - en:
@@ -7042,8 +7042,8 @@ pages:
         Tu dois maintenant en connaître beaucoup sur la création de bibliothèques
         et d'applications Rust. Je ne te demande pas de tout retenir car je suis
         sûr que, à mesure que ta bibliothèque ou ton application s'agrandira et sera
-        utilisé par d'autres développeurs, tu sera capable de trouver une
-        solution à chaque problême que tu rencontrera.
+        utilisé par d'autres développeurs, tu seras capable de trouver une
+        solution à chaque problème que tu rencontrera.
 
         Ressources (en anglais):
         - [Conseils pour l'écriture d'API Rust](https://rust-lang.github.io/api-guidelines/)
