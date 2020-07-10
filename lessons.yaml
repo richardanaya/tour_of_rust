@@ -6818,6 +6818,7 @@ pages:
         ```
     ie:
       title: Hierarchie de un Modul
+      content_markdown: |
         A module can depends on another one. Por etablisser un relation inter un model e su sub-modul, on deve scrir quam seque in li modul genitori.
           ```rust
           // This declaration will look for a file named `foo.rs` or `foo/mod.rs` and
