@@ -6997,6 +6997,18 @@ pages:
       content_markdown: |
         You might by wondering in Rust, how we have access to `Vec`,`Box`, etc. everywhere without a `use`. In the Rust standard 
         library anything that is exported in `std::prelude::*` is automatically available to every part of Rust.
+    fr:
+      title: prelude
+      content_markdown: |
+        Tu pourrais te demander comment, avec Rust, nous avons pu avoir accès à
+        `Vec` ou `Box` sans utiliser le mot-clé `use` pour les importer. C'est
+        grâce au module prelude de la bibliothèque standard de Rust.
+        
+        Il faut savoir que, dans la bibliothèque standard de Rust, tout ce qui
+        est exporté dans `std::prelude::*` sera automatiquement disponible
+        n'importe où dans le code. C'est le cas pour `Vec` et `Box` mais bien
+        d'autres encore (Option, Copy, etc.).
+
   - en:
       title: Your Own Prelude
       content_markdown: |
@@ -7006,6 +7018,16 @@ pages:
         know where to start.
 
         Ferris says, "Be a good rustacean and help a fellow crab out with a good prelude!"
+    fr:
+      title:  Crée tes propres modules prelude
+      content_markdown: |
+        Il est courant qu'une bibliothèque ait son propre module prelude. Cela
+        permet d'importer toutes les structures de données nécessaires à
+        l'utilisation de la bibliothèque. Ces structures de données ne seront
+        pas automatiquement disponible (il faudra utiliser
+        `use my_library::prelude::*`) mais c'est une bonne convention à respecter.
+
+        Ferris dit: "Sois un bon rustacean et aide les autres crabes avec un bon prélude!"
   - en:
       title: Chapter 9 - Conclusion
       content_markdown: |
@@ -7014,6 +7036,17 @@ pages:
 
         Resources:
         - [Guidelines For Writing Rust APIs](https://rust-lang.github.io/api-guidelines/)
+    fr:
+      title: Chapter 9 - Conclusion
+      content_markdown: |
+        Tu dois maintenant en connaître beaucoup sur la création de bibliothèques
+        et d'applications Rust. Je ne te demande pas de tout retenir car je suis
+        sûr que, à mesure que ta bibliothèque ou ton application s'agrandira et sera
+        utilisé par d'autres développeurs, tu seras capable de trouver une
+        solution à chaque problème que tu rencontrera.
+
+        Ressources (en anglais):
+        - [Conseils pour l'écriture d'API Rust](https://rust-lang.github.io/api-guidelines/)
   - chapter: 10
     en:
       title: The End
