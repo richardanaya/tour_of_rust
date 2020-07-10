@@ -6634,10 +6634,10 @@ pages:
     fr:
       title: Chapitre 9 - Organisation et structure d'un projet
       content_markdown: |
-      Jusqu'à présent, tous nos exemples de code n'ont guère dépassé le simple
-      fichier. Voyons comment un projet plus complexe s'organise et quels outils
-      l'écosystème Rust met à notre disposition pour pouvoir travailler à
-      plusieurs sur un même projet!
+        Jusqu'à présent, tous nos exemples de code n'ont guère dépassé le simple
+        fichier. Voyons comment un projet plus complexe s'organise et quels outils
+        l'écosystème Rust met à notre disposition pour pouvoir travailler à
+        plusieurs sur un même projet!
     ie:
       title: Capitul 9 - Organisation e Structura de un Projecte
       content_markdown: |
@@ -6818,12 +6818,12 @@ pages:
         ```
     ie:
       title: Hierarchie de un Modul
-      A module can depends on another one. Por etablisser un relation inter un model e su sub-modul, on deve scrir quam seque in li modul genitori.
-        ```rust
-        // This declaration will look for a file named `foo.rs` or `foo/mod.rs` and
-        // will insert its contents inside a module named `foo` under this scope
-        mod foo;
-      ```
+        A module can depends on another one. Por etablisser un relation inter un model e su sub-modul, on deve scrir quam seque in li modul genitori.
+          ```rust
+          // This declaration will look for a file named `foo.rs` or `foo/mod.rs` and
+          // will insert its contents inside a module named `foo` under this scope
+          mod foo;
+        ```
 
   - en:
       title: Inline Module
@@ -6978,7 +6978,7 @@ pages:
         Tout comme les fonctions, les structures peuvent déclarer quels champs
         seront visibles à l'extérieur du module en utilisant le mot-clé`pub`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20La%20structure%20SeaCreature%20sera%20visible%0A%2F%2F%20en%20dehors%20du%20module.%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20Le%20champ%20weapons%20ne%20sera%20pas%20visible.%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
-      de:
+    de:
       title: Struktursichtbarkeit
       content_markdown: |
         Genau wie bei Funktionen kann in Strukturen angegeben werden, welche Felder nach außen hin sichtbar sein sollen.
