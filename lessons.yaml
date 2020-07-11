@@ -6801,10 +6801,11 @@ pages:
         between a module and it's sub-module, you must write in the parent module:
 
         ```rust
-        // This declaration will look for a file named `foo.rs` or `foo/mod.rs` and
-        // will insert its contents inside a module named `foo` under this scope
         mod foo;
         ```
+
+        The declaration above  will look for a file named `foo.rs` or `foo/mod.rs` and
+        will insert its contents inside a module named `foo` under this scope
     fr:
       title: Hiérarchie de modules
       content_markdown: |
@@ -6812,11 +6813,12 @@ pages:
         un module et son sous-module, vous devez écrire dans le module parent:
 
         ```rust
-        // Cette déclaration recherchera un fichier nommé `foo.rs` ou `foo/mod.rs`
-        // et insérera son contenu dans un module nommé `foo` qu'on pourra ensuite
-        // utiliser.
         mod foo;
         ```
+
+        La déclaration ci-dessus recherchera un fichier nommé `foo.rs` ou
+        `foo/mod.rs` et insérera son contenu dans un module nommé `foo` qu'on
+        pourra ensuite utiliser.
     ie:
       title: Hierarchie de un Modul
       content_markdown: |
@@ -6860,7 +6862,7 @@ pages:
         // n'est pas en mode test.
         #[cfg(test)]
         mod tests {
-            // Notez que nous n'avons pas immédiatement accès au
+            // Note que nous n'avons pas immédiatement accès au
             // module parent. Nous devons être explicite.
             use super::*;
 
@@ -6996,8 +6998,14 @@ pages:
   - en:
       title: Prelude
       content_markdown: |
-        You might by wondering in Rust, how we have access to `Vec`,`Box`, etc. everywhere without a `use`. In the Rust standard 
-        library anything that is exported in `std::prelude::*` is automatically available to every part of Rust.
+        You might by wondering in Rust, how we have access to `Vec` or `Box`
+        everywhere without a `use` to import them. It is because of the module
+        `prelude` in the standard library.
+        
+        Know that in the Rust standard library anything that is exported in
+        `std::prelude::*` is automatically available to every part of Rust.
+        That is the case for `Vec` and `Box` but others as well (Option, Copy,
+        etc.).
     fr:
       title: prelude
       content_markdown: |
