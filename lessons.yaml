@@ -1501,7 +1501,7 @@ pages:
 
         Conditions don't have parentheses! Did we ever really need them? Our logic now looks nice and clean.
 
-        All your usual logical operators still work: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`.
+        All your usual relational and logical operators still work: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     fr:
       title: if/else if/else
@@ -1511,14 +1511,14 @@ pages:
         Les conditions n'ont pas de parenthèses! En a-t-on réellement besoin?
         Sans elles notre code est plus joli et plus lisible.
 
-        Les opérateurs logiques usuels sont disponibles: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`.
+        Les opérateurs relationnels et logiques usuels sont disponibles: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20petit%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20tout%20rond%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20grand%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     de:
       title: if/else if/else
       content_html:
         "<p>Codeverzweigungen (branching) bieten viel bekanntes.</p><p>Außer
         den fehlenden Klammern! Wer braucht die schon? Logik war noch nie so sauber.</p><p>Die
-        üblichen logischen Operatoren funktionieren noch: <code>!</code><code>!=</code><code>||</code><code>&&</code><code>&lt;</code><code>&gt;</code><code>&lt;=</code><code>&gt;=</code></p><p>Versuch
+        üblichen Vergleichsoperatoren und logischen Operatoren funktionieren noch: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!</code>, <code>||</code>, <code>&&</code>.</p><p>Versuch
         ein paar von den Operatoren in dem Code einzubauen.</p>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20age%20%3D%2017%3B%0A%20%20%20%20%0A%20%20%20%20if%20age%20%3C%2016%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Keine%20alkoholischen%20Getr%C3%A4nke%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%7D%20else%20if%20age%20%3E%3D%2016%20%26%26%20age%20%3C%2018%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20checking%20(age%20%3E%3D%2016)%20could%20have%20been%20omitted%20here%0A%20%20%20%20%20%20%20%20println!(%22Darf%20Bier%2C%20Wein%20und%20Sekt%20kaufen.%20Keine%20Spirituosen%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Darf%20alles%20kaufen%22)%3B%0A%20%20%20%20%7D%0A%7D%0A
     ie:
@@ -1526,7 +1526,7 @@ pages:
       content_html:
         "<p>Code-ramification in Rust ne es surprisant.</p><p>Conditiones ne
         prende parentheses! Esque noi vermen alquande besonat les? Nu nor logica sembla
-        nett e clar.</p><p>Omni tui usual operatores logical functiona quam sempre: <code>!</code><code>!=</code><code>||</code><code>&&</code><code>&lt;</code><code>&gt;</code><code>&lt;=</code><code>&gt;=</code></p>"
+        nett e clar.</p><p>Omni tui usual operatores logical functiona quam sempre: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!</code>, <code>||</code>, <code>&&</code></p>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20exemple()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20return%20-1%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20return%200%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20return%201%3B%0A%20%20%20%20%7D%0A%7D%0A
     ru:
       title: if/else if/else
@@ -1537,13 +1537,13 @@ pages:
         конструкции выглядят красиво и чисто.
 
         Все логические операторы, к которым вы так привыкли, всё еще работают: 
-        `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`.
+        `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
     es:
       title: if/else if/else
       content_html:
         "<p>La ramificación de código en Rust te resultará familiar.</p><p>Las condiciones no
         van entre paréntesis, ¿acaso son necesarios? De esta manera nuestra lógica se ve más limpia y sencilla.</p>
-        <p>Los demás operadores lógicos conocidos siguen funcionando: <code>!</code><code>!=</code><code>||</code><code>&&</code><code>&lt;</code><code>&gt;</code><code>&lt;=</code><code>&gt;=</code></p>"
+        <p>Los demás operadores relacionales y lógicos conocidos siguen funcionando: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!</code>, <code>||</code>, <code>&&</code></p>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%20menor%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%20mayor%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     pt-br:
       title: if/else if/else
@@ -1553,8 +1553,8 @@ pages:
         Não há parêntesis nas condições! Realmente precisamos deles? Assim a nossa
         lógica fica mais simples e limpa.
 
-        Todos os nossos operadores lógicos habituais continuam funcionando: 
-        `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
+        Todos os nossos operadores relacionais e lógicos habituais continuam funcionando: 
+        `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22menor%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22igual%20a%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22maior%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     zh-cn:
       title: if/else if/else
@@ -1564,7 +1564,7 @@ pages:
 
         条件判断没有括号！我们真的需要它们吗？我们的逻辑现在看起来很清晰。
 
-        你所有常用的逻辑运算符仍然适用：`!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=`
+        你所有常用的逻辑运算符仍然适用：`==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`
   - en:
       title: loop
       content_markdown: |
