@@ -5293,7 +5293,7 @@ pages:
       content_markdown: |
         Object oriented programming roughly refers to programming languages that have a number of iconic features:
         * Encapsulation - Associating data and functions into the conceptual unit of a single type called an *object*.
-        * Abstraction - Hiding data and function members to obsfucate implementation details of an object.
+        * Abstraction - Hiding data and function members to obfuscate implementation details of an object.
         * Polymorphism - The ability to interacting with an object from different functional perspectives.
         * Inheritance - The ability to inherit data and behavior from other objects.
 
@@ -5650,8 +5650,8 @@ pages:
   - en:
       title: Handling Unsized Data
       content_markdown: |
-        Traits introduce an interesting challenge when we want to store them within another struct. Traits obsfucate the original
-        struct thus it also obsfucates the original size. Unsized values being stored in structs are handled in two ways in Rust:
+        Traits introduce an interesting challenge when we want to store them within another struct. Traits obfuscate the original
+        struct thus it also obfuscates the original size. Unsized values being stored in structs are handled in two ways in Rust:
 
         * `generics` - Using parameterized types effectively create struct/functions known types and thus known sizes.
         * `indirection` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it. There are other ways as well!
