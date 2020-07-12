@@ -327,11 +327,12 @@ pages:
         la mascotte non officielle du language de programmation Rust. Heureux de te renconter!
     de:
       title: Kapitel 1 - Die Basics
-      content_html:
-        "<p>Im ersten Kapitel werden grundlegende Eigenschaften von Funktionen,
-        Variablen und (fast) allen primitiven Datentypen präsentiert. Willkommen an Board!</p><p>Ach
-        ja! Falls du dich fragst, wer diese süße sprechende Krabbe ist, das ist <b>Ferris</b>,
-        das inoffizielle Maskottchen der Programmiersprache Rust. Sag hallo!</p>"
+      content_markdown: |
+        Im ersten Kapitel werden grundlegende Eigenschaften von Funktionen,
+        Variablen und (fast) allen primitiven Datentypen präsentiert. Willkommen an Board!
+        
+        Ach ja! Falls du dich fragst, wer diese süße sprechende Krabbe ist, das ist **Ferris**,
+        das inoffizielle Maskottchen der Programmiersprache Rust. Sag hallo!
     ie:
       title: Capitul 1 - Coses Simplic
       content_html:
@@ -393,12 +394,14 @@ pages:
 
         C'est un excellent moyen d'expérimenter avec Rust et de montrer aux autres ta créativité et tes challenges!
     de:
-      title: The Rust Playground
-      content_html:
-        <p>Diese Tour macht sich das interaktive Coding Tool von <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
-        zu Nutze.</p><p>Beispiele in Rust lassen sich so spielend leicht testen. Hierbei
-        sind deiner Kreativität auch keine Grenzen gesetzt. Ändere Codeschnipsel, teste
-        Funktionen, lass deiner Fantasie freien Lauf!</p>
+      title: Der Rust Playground
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Willkommen%20im%20Playground!%20Du%20kannst%20den%20Code%20hier%20drin%20modifizieren.%22)%3B%0A%7D
+      content_markdown: |
+        Diese Tour macht sich das interaktive Coding Tool vom [Rust Playground](https://play.rust-lang.org)
+        zu Nutze.
+
+        Beispiele in Rust lassen sich so spielend leicht testen. Hierbei sind deiner Kreativität auch keine Grenzen 
+        gesetzt. Ändere Codeschnipsel, teste Funktionen, lass deiner Fantasie freien Lauf!
     ie:
       title: Li Lud-terren Rust
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Benevenit%20al%20lude-terren!%20Tu%20posse%20modificar%20li%20code%20ci.%22)%3B%0A%7D
@@ -678,7 +681,7 @@ pages:
         and sizes of things in memory
         * floating point - `f32` `f64`
         * tuple - `(value, value, ...)` for passing fixed sequences of values on the stack
-        * arrays - a collection of similar elements with fixed length known at compile time
+        * arrays - `[value, value, ...]` a collection of similar elements with fixed length known at compile time
         * slices - a collection of similar elements with length known at runtime
         * `str`(string slice) - text with a length known at runtime
 
@@ -713,24 +716,28 @@ pages:
         le nombre (ex. `13u32`, `2u8`)
     de:
       title: Basistypen
-      content_html:
-        "<p>Rust besitzt eine vielzahl an bekannten Datentypen <ul><li>booleans
-        - <code>bool</code> für true/false bzw. wahr/falsch Werte</li><li>unsigned
-        integers - <code>u8</code><code>u32</code><code>u64</code>
-        für positive Ganzzahlen (inkl. 0 für die Mathematiker)</li><li>signed integers
-        - <code>i8</code><code>i32</code><code>i64</code>
-        für vorzeichenbehaftete Ganzzahlen</li><li>pointer sized integers - <code>uint</code><code>isize</code>
-        für Indizes und Größen im Speicher</li><li>floating point - <code>f32</code><code>f64</code>
-        für Dezimalzahlen</li><li>text zeug - <code>str</code><code>char</code></li><li>tuple
-        - <code>(value,value,...)</code> zum Übergeben von Wertsequenzen auf
-        dem Stack<li>slices - <code>&[T]</code> um Views in Sequenzen zu referenzieren
-        (hier evt bessere Übersetzung finden)</ul></p><p>Wir sehen schon, dass es einiges
-        zum Anpacken geben wird!</p><p>Eine Warnung vorweg: text-Zeug wird etwas komplexer
-        sein als du es vielleicht von anderen Programmiersprachen gewohnt bist, da Rust
-        eine Systemprogrammiersprache ist und daher mehr auf effektives Speichermanagement
-        fokussiert. Keine Panik auf der Titanic aber, wir werden unser Bestes geben, dich
-        darauf vorzubereiten!</p><p>Noch ein Hinweis: Numerische Datentypen können auch
-        nach dem Zahlenliteral spezifiziert werden (z.B. <code>13u32</code>)</p>"
+      content_markdown: |
+        Rust besitzt eine vielzahl an bekannten Datentypen
+
+        * booleans - `bool` für true/false bzw. wahr/falsch Werte
+        * unsigned integers - `u8` `u32` `u64` für positive Ganzzahlen (inkl. 0 für die Mathematiker)
+        * signed integers - `i8` `i32` `i64` für vorzeichenbehaftete Ganzzahlen
+        * pointer sized integers - `uint` `isize` für Indizes und Größen im Speicher
+        * floating point - `f32` `f64` für Dezimalzahlen
+        * tuple - `(Wert, Wert, ...)` um festgelegte Sequenzen von Werten auf dem Stack zu speichern
+        * arrays - `[Wert, Wert, ...]`eine Kollektion von ähnlichen Elementen mit zur Compile-Zeit festgelegter Länge
+        * slices - eien Kollektion von ähnlichen Elementen mit Länge bekannt zur Laufzeit
+        * `str` (string slice) - Text mit zur Laufzeit bekannter Länge
+
+        Wir sehen schon, dass es einiges zum Anpacken geben wird!
+
+        Eine Warnung vorweg: Text wird etwas komplexer sein als du es vielleicht von anderen
+        Programmiersprachen gewohnt bist, da Rust eine Systemprogrammiersprache ist und daher mehr
+        auf effektives Speichermanagement fokussiert. Keine Panik auf der Titanic aber, wir werden unser
+        Bestes geben, dich darauf vorzubereiten!
+
+        Noch ein Hinweis: Numerische Datentypen können auch nach dem Zahlenliteral spezifiziert werden
+        (z.B. `13u32`)
     ie:
       title: Basic tipes
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%0A%20%20%20%20let%20c%20%3D%204.3f64%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20frase%20%3D%20%22salute%20munde!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20frase%0A%20%20%20%20)%3B%0A%7D%0A
@@ -877,12 +884,12 @@ pages:
         Heureusement, Rust rend la conversion de type très facile grâce au mot clé **as**.
     de:
       title: Basistypen konvertieren
-      content_html:
-        "<p>Rust vordert explizite Konvertierungen, wenn es um Zahlentypen geht.
-        Ein <code>u8</code> (8-bit unsigned integer) kann nicht mit einem <code>u32</code>
-        locker aus dem Handgelenk zusammengerechnet werden ohne das Programm zum Absturz
-        zu bringen.</p><p>Glücklicherweise ist auf die Konvertierung mit dem <code>as</code>
-        Schlüsselwort Verlass.</p>"
+      content_markdown: |
+        Rust fordert explizite Konvertierungen, wenn es um Zahlentypen geht.
+        Ein `u8` (8-bit unsigned integer) kann nicht mit einem `u32` locker aus dem Handgelenk
+        zusammengerechnet werden ohne das Programm zum Absturz zu bringen.
+
+        Glücklicherweise ist auf die Konvertierung mit dem `as` Schlüsselwort Verlass.
     ie:
       title: Conversion de basic tipes
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20a%20%3D%2013u8%3B%0A%20%20let%20b%20%3D%207u32%3B%0A%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20let%20t%20%3D%20true%3B%0A%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D
@@ -954,12 +961,14 @@ pages:
         Les noms de constantes sont toujours de la forme `SCREAMING_SNAKE_CASE`.
     de:
       title: Konstanten
-      content_html: "<p>Konstanten (<code>const</code>) erlauben uns einen Wert
-        in der Kompilierzeit zu setzen, die in unserem Code eingesetzt werden. Kompilierzeit
-        ist hier das Stichwort: anstelle von Variablen sitzen dann an Orten, an denen
-        Konstanten eingestetzt werden, die Werte selbst.</p><p>Anders als bei Variablen
-        muss bei Konstanten der Datentyp explizit angeben werden.</p><p>Die Namensgebung
-        erfolgt generell in <code>SCREAMING_SNAKE_CASE</code>.</p>"
+      content_markdown: |
+        Konstanten (`const`) erlauben uns einen Wert in der Kompilierzeit zu setzen, die in unserem Code eingesetzt 
+        werden. Kompilierzeit ist hier das Stichwort: anstelle von Variablen sitzen dann an Orten, an denen
+        Konstanten eingestetzt werden, die Werte selbst.
+
+        Anders als bei Variablen muss bei Konstanten der Datentyp explizit angeben werden.
+
+        Die Namensgebung erfolgt generell in `SCREAMING_SNAKE_CASE`.
     ie:
       title: Constantes
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Por%20crear%20un%20%7B%7D%20de%20pom%20desde%20li%20comense%2C%20on%20deve%20in%20prim%20crear%20un%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -1046,7 +1055,11 @@ pages:
     de:
       title: Arrays
       content_markdown: |
-        Need translation
+        Ein *Array* ist eine Kollektion von Datenelementen vom selben Datentyp mit festgelegter Länge.
+
+        Der Datentyp eines *Arrays* wird `[T;N]` geschrieben. `T` ist der Datentyp der Arrayelemente und `N` ist die festgelegte Länge dieser zur Compile-Zeit.
+
+        Einzelne Elemente können mit dem `[x]` Operator abgerufen werden, in welchem *x* den *usize* Index (beginnend bei 0) des gesuchten Elementes darstellt.
     ie:
       title: Arrays
       content_markdown: |
@@ -1123,11 +1136,12 @@ pages:
         Les noms de fonctions sont toujours de la forme `snake_case`.
     de:
       title: Funktionen
-      content_html:
-        "<p>Eine Funktion kann eine beliebige (nicht-negative) Anzahl an Argumenten
-        bzw. Parametern aufnehmen.</p><p>In diesem Beispiel verlangt die Funktion <code>add</code>
-        zwei Parameter vom Typ <code>i32</code> (32 Bit Ganzzahl).</p><p>Funktionsnamen
-        sollten im <code>snake_case</code> Format vergeben werden.</p>"
+      content_markdown: |
+        Eine Funktion kann eine beliebige (nicht-negative) Anzahl an Argumenten bzw. Parametern aufnehmen.
+
+        In diesem Beispiel verlangt die Funktion `add` zwei Parameter vom Typ `i32` (32 Bit Ganzzahl).
+
+        Funktionsnamen sollten im `snake_case` Format vergeben werden.
     ie:
       title: Functiones
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20adddir(x%3Ai32%2C%20y%3Ai32)%20-%3E%20i32%20%7B%0A%09return%20x%20%2B%20y%20%2F%2F%20Ci%20on%20utilisa%20return%20por%20monstrar%20que%20anc%20Rust%20possede%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20ti%20clave-parol%20comun%20in%20altri%20lingues%20de%20programmation%2C%20%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20ma%20li%20plu%20idiomatic%20metode%20por%20retornar%20un%20valore%20in%20Rust%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20es%20simplicmen%20scrir%20x%20%2B%20y%20sin%20un%20punctu-comma%20(%3B)%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Dunc%3A%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20x%20%2B%20y%20%3C--%20retorna%20un%20valore%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%20%2B%20y%20%3C--%20retorna%20un%20valore%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%20%2B%20y%3B%20%3C--%20retorna%20null%20valore%20(nota%20li%20%3B%20pos%20x%20%2B%20y)%0A%7D%0A%0Afn%20main()%20%7B%0A%09println!(%22%7B%7D%22%2Cadddir(42%2C%2013))%3B%0A%7D
@@ -1202,11 +1216,13 @@ pages:
         c'est la destructuration. Nous en verrons d'autres formes par la suite. Garde l'oeil ouvert!
     de:
       title: Mehrere return-Variablen
-      content_html:
-        <p>Funktionen können mehrere Variablen auf einmal zurückgeben mittels
-        eines <b>tuples</b>.</p><p>Die Werte können danach über einen Index gelesen werden.</p><p>Rust
-        unterstützt verschiedene Formen von "destructuring", wodurch sich Wertepaare auf
-        einzelne Variablen aufteilen lassen. Halte Ausschau danach!</p>
+      content_markdown: |
+        Funktionen können mehrere Variablen auf einmal zurückgeben mittels eines **tuples**.
+
+        Die Werte können danach über einen Index gelesen werden.
+
+        Rust unterstützt verschiedene Formen von "destructuring", wodurch sich Wertepaare auf
+        einzelne Variablen aufteilen lassen. Halte Ausschau danach!
     ie:
       title: Multiplic retorn-valores
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20interchangear(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20retorna%20un%20tuple%20de%20retorn-valores%0A%20%20%20%20let%20resulta%20%3D%20interchangear(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20resulta.0%2C%20resulta.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructura%20li%20tuple%20in%20du%20n%C3%B3mines%20de%20variabiles%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20interchangear(resulta.0%2C%20resulta.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
@@ -1377,16 +1393,17 @@ pages:
         * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
     de:
       title: Kapitel 1 Fazit
-      content_html:
-        <p>Puh! Das wäre schon mal geschafft! War nicht so übel, oder? Wir wissen
+      content_markdown: |
+        Puh! Das wäre schon mal geschafft! War nicht so übel, oder? Wir wissen
         schon ein wenig, wie der Compiler denkt. Er setzt viel Wert auf Speichermanagement,
         wie groß Variablen sind, ob diese "mutable" sind oder nicht, und ob du garantiert
         weißt, welche Datentypen zusammenaddiert werden. Das sind erste kleine Einblicke
-        in die <b>Sicherheit</b>, die sich durch die gesamte Rustsprache hindurchzieht
+        in die **Sicherheit**, die sich durch die gesamte Rustsprache hindurchzieht
         - nicht unbedingt die Sicherheit des Systems, aber die Sicherheit, dass du weißt,
-        was du tust.</p><p>Im nächsten Kapitel werden wir uns mit den altbekannten Datenkontrollstrukturen
-        <code>if</code> und <code>for</code> Schleifen beschäftigen!
-        Worauf wartest du noch!</p>
+        was du tust.
+
+        Im nächsten Kapitel werden wir uns mit den altbekannten Datenkontrollstrukturen
+        `if` und `for` Schleifen beschäftigen! Worauf wartest du noch!
     ie:
       title: Capitul 1 - Conclusion
       content_html:
@@ -1462,11 +1479,11 @@ pages:
         tu ne sera pas perdu et tu y découvrira même quelques bonnes surprises.
     de:
       title: Kapitel 2 - Ein bisschen Kontrollfluss
-      content_html:
-        "<p>In diesem Kapitel werden wir Kontrollflussmethoden in Rust angehen
+      content_markdown: |
+        In diesem Kapitel werden wir Kontrollflussmethoden in Rust angehen
         (engl. control flow methods). Wenn du ein bisschen Erfahrung in C-verwandten Sprachen
         hast, dürftest du dich hier wie zu Hause fühlen - die ein oder andere Überraschung
-        sei dennoch zu erwarten.</p>"
+        sei dennoch zu erwarten.
     ie:
       title: Chapter 2 - Basic Control-flution
       content_html:
@@ -1516,11 +1533,14 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20petit%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20tout%20rond%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22plus%20grand%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
     de:
       title: if/else if/else
-      content_html:
-        "<p>Codeverzweigungen (branching) bieten viel bekanntes.</p><p>Außer
-        den fehlenden Klammern! Wer braucht die schon? Logik war noch nie so sauber.</p><p>Die
-        üblichen Vergleichsoperatoren und logischen Operatoren funktionieren noch: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>!</code>, <code>||</code>, <code>&&</code>.</p><p>Versuch
-        ein paar von den Operatoren in dem Code einzubauen.</p>"
+      content_markdown: |
+        Codeverzweigungen (branching) bieten viel bekanntes.
+
+        Außer den fehlenden Klammern! Wer braucht die schon? Logik war noch nie so sauber.
+
+        Die üblichen Vergleichsoperatoren und logischen Operatoren funktionieren noch: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
+
+        Versuch ein paar von den Operatoren in den Code einzubauen.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20age%20%3D%2017%3B%0A%20%20%20%20%0A%20%20%20%20if%20age%20%3C%2016%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Keine%20alkoholischen%20Getr%C3%A4nke%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%7D%20else%20if%20age%20%3E%3D%2016%20%26%26%20age%20%3C%2018%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20checking%20(age%20%3E%3D%2016)%20could%20have%20been%20omitted%20here%0A%20%20%20%20%20%20%20%20println!(%22Darf%20Bier%2C%20Wein%20und%20Sekt%20kaufen.%20Keine%20Spirituosen%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Darf%20alles%20kaufen%22)%3B%0A%20%20%20%20%7D%0A%7D%0A
     ie:
       title: if/else if/else
@@ -1573,7 +1593,9 @@ pages:
 
         Rust makes it easy.
 
-        `break` will escape a loop when you are ready.</p><p>`loop` has a secret we'll talk about soon.
+        `break` will escape a loop when you are ready.
+
+        `loop` has a secret we'll talk about soon.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
     fr:
       title: loop
@@ -1582,14 +1604,16 @@ pages:
 
         Avec Rust, c'est facile!
 
-        `break` permet de sortir de la boucle à tout moment.</p><p>Quand à
-        l'instruction `loop`, celle-ci possède un secret dont nous parlerons plus tard.
+        `break` permet de sortir de la boucle à tout moment.
+
+        Quand à l'instruction `loop`, celle-ci possède un secret dont nous parlerons plus tard.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
     de:
       title: loop
-      content_html: "<p>Unendliche Schleifen gefällig? <code>loop</code> macht
-        es möglich!</p><p>Mit <code>break</code> kann diese Schleife unterbrochen
-        werden.</p>"
+      content_markdown: |
+        Unendliche Schleifen gefällig? `loop` macht es möglich!
+
+        Mit `break` kann die Schleife unterbrochen werden.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20print!(%22%7B%7D%20%22%2C%20x)%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
     ie:
       title: loop (cicle)
@@ -1649,8 +1673,8 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: while
-      content_html: "<p><code>while</code> Schleifen werden so lange ausgeführt,
-        bis aus der angegeben Kondition <code>false</code> evaluiert wird.</p>"
+      content_markdown: |
+        `while` Schleifen werden so lange ausgeführt, bis aus der angegeben Kondition `false` evaluiert wird.
     ie:
       title: while (durant)
       content_html: "<p><code>while</code> possibilisa te adjunter un condition
@@ -1716,18 +1740,19 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: for
-      content_html:
-        <p><code>for</code>-Schleifen in Rust sind ein großes Upgrade.
-        Wird ein Ausdruck (expression) in einen Iterator evaluiert, kann dieser in eine
-        for-Schleife eingebaut werden.</p><p>Was ist ein Iterator? Ein Iterator ist ein
-        Objekt, dem die Frage "Was kommt als nächstes?" gestellt werden kann. Sind keine
-        Elemente mehr vorhanden, wird die Schleife abgebrochen.</p><p>In diesem Beispiel
-        sehen wir, wie in Rust eine Zahlensequenz erstellt wird, über die wir iterieren
-        können. Hierbei gibt es zwei unterschiedliche Notationen:</p><p><ul><li><code>x..y</code>
-        erstellt einen Iterator, der bei <code>x</code> anfängt und <b>vor</b>
-        <code>y</code> aufhört (exklusives <code>y</code> also)</li><li><code>x..=y</code>
-        erstellt einen Iterator, der bei <code>x</code> anfängt und <b>mit</b>
-        <code>y</code> aufhört (inklusives <code>y</code>)</li></ul></p>
+      content_markdown: |
+        `for`-Schleifen in Rust sind ein großes Upgrade.
+        Wird ein Ausdruck (expression) in einem Iterator evaluiert, kann dieser in eine
+        `for`-Schleife eingebaut werden.
+
+        Was ist ein Iterator? Ein Iterator ist ein Objekt, dem die Frage "Was kommt als nächstes?"
+        gestellt werden kann. Sind keine Elemente mehr vorhanden, wird die Schleife abgebrochen.
+
+        In diesem Beispiel sehen wir, wie in Rust eine Zahlensequenz erstellt wird, über die wir iterieren
+        können. Hierbei gibt es zwei unterschiedliche Notationen:
+
+        * `x..y` erstellt einen Iterator, der bei `x` anfängt und **vor** `y` aufhört
+        * `x..=y` erstellt einen Iterator, der bei `x` anfängt und `y` mit einschließt
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20print!(%220..5%20%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20print!(%22%5Cn0..5%3D%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
     ie:
       title: for (por)
@@ -1831,18 +1856,21 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20certainement%20zero!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20comparer%20%C3%A0%20plusieurs%20valeurs%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20soit%201%20soit%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20comparer%20%C3%A0%20un%20it%C3%A9rateur%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22C%27est%20un%20nombre%20compris%20entre%203%20et%209%20inclus!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20peut%20r%C3%A9cup%C3%A9rer%20la%20valeur%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22L%27entier%20%7B%7D%20est%20compris%20entre%2010%20et%20100%20inclus!%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20C%27est%20le%20cas%20par%20d%C3%A9faut.%0A%20%20%20%20%20%20%20%20%2F%2F%20Celui-ci%20doit%20%C3%AAtre%20pr%C3%A9sent%20si%20tous%20les%20cas%0A%20%20%20%20%20%20%20%20%2F%2F%20ne%20sont%20pas%20pr%C3%A9sent.%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
     de:
       title: match
-      content_html:
-        <p>Du vermisst dein Switch Statement? Rust lässt dich nicht im Stich!</p><p>Mittels
-        <code>match</code> können Werte mit allen möglichen Konditionen und
-        Werten verglichen werden. Konditionen ist hier vielleicht das interessanteste.
-        Kein stupides Vergleichen, ob zwei Werte eins zu eins übereinstimmen.</p><p>Hier
-        sehen wir das "matching" auf die Zahl <code>x</code> angewandt.</p><p><code>match</code>
-        in Rust ist <b>exhaustive</b> (erschöpfend). Das bedeuted, dass jeder mögliche
-        Wert getested werden muss, den die Variable annehmen kann. Was in manchen Programmiersprachen
-        als <b>default</b> bekannt ist, ist hier durch ein einfaches Unterstrich gegeben.</p><p>Hier
-        sei schon mal erwähnt, dass ein destructuring in Kombination mit match unglaublich
+      content_markdown: |
+        Du vermisst dein Switch Statement? Rust lässt dich nicht im Stich!
+
+        Mittels `match` können Werte mit allen möglichen Konditionen und Werten verglichen werden.
+        Konditionen ist hier vielleicht das interessanteste. Kein stupides Vergleichen, ob zwei Werte
+        eins zu eins übereinstimmen.
+
+        Hier sehen wir das "matching" auf die Zahl `x` angewandt.
+
+        `match` in Rust ist **exhaustive** (erschöpfend). Das bedeuted, dass jeder mögliche
+        Wert getested werden muss, den die Variable annehmen kann.
+
+        Hier sei schon mal erwähnt, dass ein destructuring in Kombination mit match unglaublich
         viel Anwendung in der Sprache findet. Zu viel für ein Einführungskapitel leider,
-        weshalb wir uns dafür etwas gedulden müssen.</p>
+        weshalb wir uns dafür etwas gedulden müssen.
     ie:
       title: match
       content_html:
@@ -1969,16 +1997,19 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20expression%20ternaire%20avec%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22depuis%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22est%20un%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20note%20que%20les%20accolades%20sont%20optionnelles%20lorsqu'il%20n'y%20a%0A%20%20%20%20%20%20%20%20%2F%2F%20qu'un%20seul%20cas%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22n'est%20pas%20un%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22un%20%7B%7D%20%7B%7D%22%2C%20food%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20ce%20bloc%20de%20code%20nous%20permet%20d'obtenir%20un%20r%C3%A9sultat%0A%20%20%20%20%20%20%20%20%2F%2F%20sans%20d%C3%A9finir%20de%20fonction%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22depuis%20le%20bloc%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20c'est%20la%20mani%C3%A8re%20typique%20de%20Rust%20pour%20retourner%0A%20%20%20%20%2F%2F%20une%20valeur%20depuis%20une%20fonction%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22depuis%20la%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
     de:
       title: Rückgabewerte aus Blockausdrücken
-      content_html:
-        "<p>Als <b>Block</b> wird in Rust ein Codestück zwischen zwei geschweiften
-        Klammern bezeichnet (<code>{ /* code block */ }</code>).</p><p>Hier
-        ist eine Besonderheit in Rust: Blockausdrücke, die in <code>if</code>,
-        Funktionen etc. zu finden sind, können Werte zurückgeben (return).</p><p>Noch etwas
-        idiomatisches in Rust: wenn die letzte Zeile in einem solchen Codeblock ein Ausdruck
-        (expression) ohne <code>;</code> am Ende ist, interpretiert Rust dies
-        als den Rückgabewert.</p><p>Für Leute, die ein Fan von ternary Operatoren sind
-        und das Fragezeichensymbol in Rust vermissen, <code>if</code> Statements
-        bilden dazu die Alternative.</p>"
+      content_markdown: |
+        Als **Block** wird in Rust ein Codestück zwischen zwei geschweiften
+        Klammern bezeichnet (`{ /* code block */ }`).
+
+        Hier ist eine Besonderheit in Rust: Blockausdrücke, die in `if`,
+        Funktionen etc. zu finden sind, können Werte zurückgeben (return).
+
+        Noch etwas idiomatisches in Rust: wenn es sich bei der letzten Zeile in einem solchen Codeblock
+        um einen Ausdruck (expression) ohne `;` am Ende handelt, interpretiert Rust dies
+        als den Rückgabewert.
+
+        Für Leute, die ein Fan von ternary Operatoren sind und das Fragezeichensymbol in Rust vermissen,
+        `if` Statements bieten dazu die Alternative.</p>"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22aus%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22nutella%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22nutella%22%20%3D%3E%20%22ist%20nutella%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22nein%2C%20das%20ist%20keine%20nutella%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Essen%20identifizieren%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22aus%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
     ie:
       title: Retornar valores de bloc-expressiones
@@ -2061,12 +2092,15 @@ pages:
         les structures de données fondamentales de Rust.
     de:
       title: Kapitel 2 Fazit
-      content_html:
-        "<p>Was? Das war's schon?</p><p>Keine Bange, es gibt noch viel zu erforschen!
-        Insbesondere <code>match</code> wurde hier außer Acht gelassen, das
-        viele mächtige Features beinhaltet, dementsprechend aber auch etwas mehr Hintergrundwissen
-        erfordert.</p><p>Im nächsten Kapitel werden wir uns dafür ein bisschen in die
-        Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?</p>"
+      content_markdown: |
+        Was? Das war's schon?
+
+        Keine Bange, es gibt noch viel zu erforschen!
+        Insbesondere `match` wurde hier außer Acht gelassen, was viele mächtige Features beinhaltet,
+        dementsprechend aber auch etwas mehr Hintergrundwissen erfordert.
+
+        Im nächsten Kapitel werden wir uns dafür ein bisschen in die
+        Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir noch?
     ie:
       title: Capitul 2 - Conclusion
       content_html:
