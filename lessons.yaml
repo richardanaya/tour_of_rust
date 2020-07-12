@@ -675,8 +675,8 @@ pages:
         Rust has a variety of familiar types:
 
         * booleans - `bool` for representing true/false
-        * unsigned integers - `u8` `u32` `u64` `u128` for representing positive whole numbers
-        * signed integers - `i8` `i32` `i64` `i128` for representing positive/negative whole numbers
+        * unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing positive whole numbers
+        * signed integers - `i8` `i16` `i32` `i64` `i128` for representing positive/negative whole numbers
         * pointer sized integers - `usize` `isize` for representing indexes
         and sizes of things in memory
         * floating point - `f32` `f64`
@@ -1120,7 +1120,7 @@ pages:
       content_markdown: |
         A function has zero or more parameters.
 
-        In this example, add takes two arguments of type `i32` (integer of 32-bit
+        In this example, add takes two arguments of type `i32` (signed integer of 32-bit
         length).
 
         Function names are always in `snake_case`.
