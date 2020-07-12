@@ -105,7 +105,7 @@ pages:
 
         You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
 
-        In this classic example we show Rust's support for unicode
+        In this classic example we show Rust's support for Unicode
         strings.
     fr:
       title: "Bonjour, <img src=\"/favicon-32x32.png\" style=\"display:inline; vertical-align:bottom\">"
@@ -873,7 +873,7 @@ pages:
         use a `u8` for a `u32` casually without
         error.
 
-        Luckily rust makes numeric type conversions very easy with the **as** keyword.
+        Luckily Rust makes numeric type conversions very easy with the **as** keyword.
     fr:
       title: Conversion des types primitifs
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -4784,7 +4784,7 @@ pages:
   - en:
       title: String Literals
       content_markdown: |
-        String literals are always Unicode
+        String literals are always Unicode.
 
         String literals type are `&'static str`
 
@@ -4839,7 +4839,7 @@ pages:
         (**O(1)** constant time) with a simple indexing (e.g. `my_text[3]` to get the 4th character). It's possible that the 
         proceeding characters could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
 
-        Instead we must iterate through a **utf-8** byte sequence to understand where the unicode characters actually begin (**O(n)** linear time).
+        Instead we must iterate through a **utf-8** byte sequence to understand where the Unicode characters actually begin (**O(n)** linear time).
 
         Ferris: "I'm mostly just happy to have **utf-8** for representing emojis of my underwater friends."
 
@@ -5050,7 +5050,7 @@ pages:
   - en:
       title: Chars
       content_markdown: |
-        With so much difficulty in working with unicode, Rust offers a way to retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
+        With so much difficulty in working with Unicode, Rust offers a way to retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
 
         A `char` is always 4 bytes long (allowing for efficient lookup of individual characters).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
@@ -5237,7 +5237,7 @@ pages:
   - en:
       title: Chapter 6 - Conclusion
       content_markdown: |
-        Now you know the basics of text!  As you have seen, unicode makes working with text a bit tricky, but the standard library 
+        Now you know the basics of text!  As you have seen, Unicode makes working with text a bit tricky, but the standard library 
         has plenty of functionality to make it easy to manage.  
 
         Up to now, we've mostly looked at Rust from the lens of a procedural paradigm (i.e. just functions and data),
