@@ -85,7 +85,7 @@ pages:
       content_markdown: |
         Welcome to the *Tour of Rust*. This is meant to be a step by
         step guide through the features of the Rust programming language.  Rust is often
-        considered a language with a steep learning curve, I hope I can convince you there's
+        considered a language with a steep learning curve, but I hope I can convince you there's
         a lot to explore before we even get to complex parts.</p><p>You can find this
         guide in these languages:
 
@@ -100,7 +100,7 @@ pages:
         * [日本語](00_ja.html)
 
         If you have suggestions on content
-        or would like to contribute to translations, checkout out Tour of Rust's 
+        or would like to contribute to translations, check out Tour of Rust's 
         [github repository](https://github.com/richardanaya/tour_of_rust).
 
         You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
@@ -315,7 +315,7 @@ pages:
         In this first chapter we're going to be exploring the very basics
         with functions, variables, and the most primitive types. Glad to have you on board!
 
-        Also! In case you are wondering who this adorable crab is speaking to you, I am **Ferris**,
+        Also! In case you are wondering who this adorable crab who is speaking to you is, I am **Ferris**,
         the unofficial mascot for the Rust programming language. Nice to meet you.
     fr:
       title: Chapitre 1 - Les fondamentaux
@@ -685,7 +685,7 @@ pages:
         * slices - a collection of similar elements with length known at runtime
         * `str`(string slice) - text with a length known at runtime
 
-        Text might be more complex than you are used to in other languages,
+        Text might be more complex than you are used to in other languages;
         since Rust is a system programming language, it cares about memory 
         issues you might not be used to. We will be going into this in detail later.
 
@@ -939,8 +939,8 @@ pages:
       title: Constants
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
       content_markdown: |
-        Constants allow us to specify a common value that's used through
-        out our code many times efficiently.  Instead of copying values like variables
+        Constants allow us to specify a common value that's used throughout
+        our code many times efficiently.  Instead of copying values like variables
         where they are used, constants directly replace the text identifier where they
         are used with their value at compile time.
 
@@ -1040,7 +1040,7 @@ pages:
 
         The data type for an *array* is `[T;N]` where T is the elements' type, and N is the fixed length known at compile-time.
 
-        Individual elements can be retrieved with `[x]` operator where *x* is a *usize* index (starting at 0) of the element you want.
+        Individual elements can be retrieved with the `[x]` operator where *x* is a *usize* index (starting at 0) of the element you want.
     fr:
       title: Tableaux
       content_markdown: |
@@ -1368,8 +1368,8 @@ pages:
         Nice job so far! The basics of Rust aren't so bad, right?  We're
         getting a peek into how the Rust compiler thinks.  As a system programming language 
         it cares a lot about the size  of values in memory, whether things can be modified or not, 
-        and making sure your math is what you want it to be. Next up we'll be looking at some old friends 
-        `if` and `for` loops.
+        and making sure your math is what you want it to be. Next up we'll be looking at some old friends:
+        `if` tests and `for` loops.
 
         More Resources:
         
@@ -1713,7 +1713,7 @@ pages:
         an iterator? An iterator is an object that you can ask the question "What's the
         next item you have?" until there are no more items.
 
-        We'll explore this more in a future chapter, in the meantime just know Rust makes 
+        We'll explore this more in a future chapter. In the meantime, just know Rust makes 
         it easy to create iterators that generate a sequence of integer numbers.
 
         The `..` operator creates an iterator that generates numbers from a start number up to
@@ -1831,7 +1831,7 @@ pages:
         Miss your switch statement? Rust has an incredibly useful keyword
         for matching all possible conditions of a value and executing a code path if the
         match is true. Let's see how this works for numbers. We will have more to say
-        in future chapters on pattern matching more complex data, I promise you it will
+        in future chapters on pattern matching more complex data. I promise you it will
         be worth the wait.
 
         `match` is exhaustive so all cases
@@ -2142,7 +2142,7 @@ pages:
     en:
       title: Chapter 3 - Basic Data Structure Types
       content_markdown: |
-        It's time we explore beyond basic types! In this chapter we will look the most primitive 
+        It's time we explore beyond basic types! In this chapter we will look at the most primitive 
         data structures in Rust, paying close attention to their representations in memory. I think 
         you will enjoy how little Rust hides from you how things work.
     fr:
@@ -2190,7 +2190,7 @@ pages:
   - en:
       title: Structures
       content_markdown: |
-        A `struct` a collection of fields.
+        A `struct` is a collection of fields.
 
         A *field* is simply a data value associated with a data structure. Its value can be of a primitive type or a data structure.
 
@@ -2267,7 +2267,7 @@ pages:
   - en:
       title: Calling Methods
       content_markdown: |
-        Unlike functions, methods are a function associated with a specific data type.
+        Unlike functions, methods are functions associated with a specific data type.
 
         **static methods** — methods that belong to a type itself are called using the `::` operator.
 
@@ -2350,13 +2350,13 @@ pages:
       title: Memory
       content_markdown: |
         Rust programs have 3 memory regions where data is stored:
-        * **data memory** - For data that is fixed in size and **static** (i.e always available through life of program). 
-          Consider the text in your program (e.g. "Hello World!"), this text's bytes are only ever read from one place 
+        * **data memory** - For data that is fixed in size and **static** (i.e. always available through life of program). 
+          Consider the text in your program (e.g. "Hello World!"): This text's bytes are only ever read from one place 
           and therefore can be stored in this region. Compilers make lots of optimizations 
-          with this kind of data, they are generally considered very fast to use since
+          with this kind of data, and they are generally considered very fast to use since
           locations are known and fixed.
         * **stack memory** - For data that is declared as variables within a function. 
-          The location of this memory never changes for the duration of a function call, because of this compilers 
+          The location of this memory never changes for the duration of a function call; because of this compilers 
           can optimize code so stack data is very fast to access. 
         * **heap memory** - For data that is created while the application is running. 
           Data in this region may be added, moved, removed, resized, etc. Because of 
@@ -2493,11 +2493,11 @@ pages:
 
         `StructName { ... }`.
 
-        struct fields are accessed using a dot operator `.`.
+        Struct fields are accessed using a dot operator `.`.
 
         Memory details of our example:
         * The text inside the quotes is read only data (e.g. "ferris"), therefore it is 
-          placed in *data memory region*
+          placed in the *data memory region*.
         * The function call `String::from` creates a struct `String` that is placed side 
           by side with the fields of SeaCreature in the *stack*. A String represents text that can be changed 
           and does this by:
@@ -2988,7 +2988,7 @@ pages:
   - en:
       title: Chapter 3 - Conclusion
       content_markdown: |
-        How exciting! We now have a the most basic tools for representing the form of our ideas in code. Hopefully now we 
+        How exciting! We now have the most basic tools for representing the form of our ideas in code. Hopefully now we 
         can see a glimmer of how Rust's fundamental operations work in harmony and conciseness with its types.  Next up we will talk about 
         a concept that gives our data types even more flexibility of representation: *generics*.
     fr:
@@ -3153,7 +3153,7 @@ pages:
   - en:
       title: Representing Nothing
       content_markdown: |
-        In other languages, the keyword `null` is used to represent an absense of a value. It creates
+        In other languages, the keyword `null` is used to represent an absence of a value. It creates
         difficulty in programming languages because it creates the possibility that our program might fail 
         when interacting with a variable/field.
 
@@ -3161,7 +3161,7 @@ pages:
         Consider a naive representation using a tool we already know.
 
         This pattern of providing a `None` alternative representation for one or many alternate values is so 
-        common Rust because of its lack of a `null` value. Generic types help solve this challenge.
+        common in Rust because of its lack of a `null` value. Generic types help solve this challenge.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20represents%20the%20absence%20of%20an%20item%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
     fr:
       title: Representation de valeurs nulles
@@ -3251,7 +3251,7 @@ pages:
         }
         ```
 
-        This enum is so common, instances of the enum can be created anywhere with the keyword `Some` and `None`.
+        This enum is so common, instances of the enum can be created anywhere with the keywords `Some` and `None`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20A%20bag%20for%20i32%2C%20holding%20nothing!%20We%20have%20to%20specify%20the%20type%0A%20%20%20%20%2F%2F%20because%20otherwise%20Rust%20would%20not%20know%20what%20type%20of%20bag%20it%20is.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22found%20%7B%7D%20in%20bag!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22found%20nothing%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
     fr:
       title: Option
@@ -3358,7 +3358,7 @@ pages:
 
         Note that our generics type has multiple *parameterized types* separated by a comma.
 
-        This enum is so common, instances of the enum can be created anywhere with the keyword `Ok` and `Err`.
+        This enum is so common, instances of the enum can be created anywhere with the keywords `Ok` and `Err`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Result%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Error%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
     fr:
       title: Result
@@ -3896,7 +3896,7 @@ pages:
 
         Memory Details:
         * `Vec` is a struct, but internally it contains a reference to a fixed list of its items on the heap.
-        * A vector starts with a default capacity, when more items are added than it has capacity for, it 
+        * A vector starts with a default capacity; when more items are added than it has capacity for, it 
           reallocates its data on the heap to have a new fixed list with large capacity.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20can%20be%20explicit%20with%20type%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20But%20look%20how%20clever%20Rust%20is%20about%20determining%20the%20type%20automatically%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20That's%20a%20beautiful%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
 
@@ -4172,10 +4172,10 @@ pages:
   - en:
       title: Dropping is Hierarchical
       content_markdown: |
-        When a struct is dropped, the struct itself is dropped first then it's children are dropped individually and so on.
+        When a struct is dropped, the struct itself is dropped first, then its children are dropped individually, and so on.
 
         Memory Details:
-        * By automatically freeing memory Rust helps ensure that there are less memory leaks 
+        * By automatically freeing memory Rust helps ensure that there are fewer memory leaks.
         * Memory resources can only be dropped once.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
     fr:
@@ -4218,7 +4218,7 @@ pages:
   - en:
       title: Moving Ownership
       content_markdown: |
-        When a owner is passed as an argument to a function, ownership is moved to the function parameter.
+        When an owner is passed as an argument to a function, ownership is moved to the function parameter.
 
         After a **move** the variable in the original function can no longer be used.
 
@@ -4388,7 +4388,7 @@ pages:
       content_markdown: |
         Using `&mut` references, you can set the owner's value using the `*` operator.
 
-        You can also get a copy of owned value using the `*` operator (If the value can be copied. We will discuss copyable types in later chapters).
+        You can also get a copy of owned value using the `*` operator (if the value can be copied - we will discuss copyable types in later chapters).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20get%20a%20copy%20of%20the%20owner's%20value%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%20the%20reference's%20owner's%20value%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
 
     fr:
@@ -4436,8 +4436,8 @@ pages:
         This doesn't tend to be a problem when passing around references to functions.
 
         Memory details:
-        * The first rule of references prevents data races. What's a data race? A data race when reading from data has the possibility of being out of sync due to the existance of a writer to the data at the same time. This happens often in multi-threaded programming.
-        * The second rule of references prevents the misuse of references that refer to non-existant data ( called dangling pointers in C ).
+        * The first rule of references prevents data races. What's a data race? A data race when reading from data has the possibility of being out of sync due to the existence of a writer to the data at the same time. This happens often in multi-threaded programming.
+        * The second rule of references prevents the misuse of references that refer to non-existent data (called dangling pointers in C).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20because%20all%20mutable%20references%20are%20dropped%20within%0A%20%20%20%20%2F%2F%20the%20function%20do_something.%20We%20can%20create%20another.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
     fr:
       title: Transfert de données empruntées
@@ -4594,7 +4594,7 @@ pages:
 
         * Modifying static variables is inherently dangerous because they are globally accessable to be read from by anyone
           introducing the possibility of a data race. We'll talk about the challenges of global data later.
-        * Rust allows the use of `unsafe { ... }` block to perform some operations that the compiler cannot make memory gaurantees about. The [<span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) should not be talked about casually.
+        * Rust allows the use of `unsafe { ... }` blocks to perform some operations that the compiler cannot make memory gaurantees about. The [<span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) should not be talked about casually.
 
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
 
@@ -4707,18 +4707,18 @@ pages:
   - en:
       title: Chapter 5 - Conclusion
       content_markdown: |
-        Whew, congrats for making it through! I know it's alot to take in but you are well
+        Whew, congrats for making it through! I know it's a lot to take in, but you are well
         under way to becoming a Rustacean. Hopefully it's clear how Rust as a language aims to 
         solve many of these common challenges in systems programming:
 
         * Unintentional modification of resources
         * Forgetting to deconstruct resources 
-        * Resources accidently being deconstructed twice
+        * Resources accidentally being deconstructed twice
         * Using resources after they have been deconstructed 
         * Data races caused by writing to resources while others are reading from resources 
-        * Seeing clearly areas of the code where compiler can’t make guarantees
+        * Seeing clearly areas of the code where the compiler can’t make guarantees
 
-        In the next chapter we'll apply some of this knowledge as we look how Rust handles text.
+        In the next chapter we'll apply some of this knowledge as we look at how Rust handles text.
     fr:
       title: Chapitre 5 - Conclusion
       content_markdown: |
@@ -4788,12 +4788,12 @@ pages:
 
         String literals type are `&'static str`
 
-        * `&` meaning that its referring to a place in memory, and it lacks a `&mut` meaning that the compiler will not allow modification
+        * `&` meaning that it's referring to a place in memory, and it lacks a `&mut` meaning that the compiler will not allow modification
         * `'static` meaning the string data will be available till the end of our program (it never drops)
         * `str` means that it points to a sequence of bytes that are always valid **utf-8**
 
         Memory details:
-        * likely the Rust compiler will put your string in the data segment of your program memory
+        * The Rust compiler will likely put your string in the data segment of your program memory
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
     fr:
       title: Chaînes de caractères
@@ -4837,7 +4837,7 @@ pages:
 
         A downside of variable sized characters is that character lookup can no longer be done quickly 
         (**O(1)** constant time) with a simple indexing (e.g. `my_text[3]` to get the 4th character). It's possible that the 
-        proceeding characters could have variable widths that, altering where the 4th character actually begins in the sequence of bytes.
+        preceding characters could have variable widths, altering where the 4th character actually begins in the sequence of bytes.
 
         Instead we must iterate through a **utf-8** byte sequence to understand where the Unicode characters actually begin (**O(n)** linear time).
 
@@ -4891,7 +4891,7 @@ pages:
   - en:
       title: Escaping Characters
       content_markdown: |
-        It's challenging to visually represent certain characters, **escape codes** allow us to put a symbol in their place.
+        It's challenging to visually represent certain characters, so **escape codes** allow us to put a symbol in their place.
 
         Rust supports the common escape codes from C-based languages:
         * `\n` - newline
@@ -4959,7 +4959,7 @@ pages:
       title: Raw String Literals
       content_markdown: |
         Raw strings allow us to write a sequence of characters verbatim by starting with `r#"` and ending with `"#`. It lets us insert
-        characters that might otherwise confuse a normal string literals (like double quotes and backslashes).
+        characters that might otherwise confuse a normal string as literals (like double quotes and backslashes).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
     fr:
       title: Chaînes de caractères bruts
@@ -5087,7 +5087,7 @@ pages:
         * `to_lowercase`/`to_uppercase` for case changes.
         * `trim` for trimming space
 
-        When a String is dropped, it's heap memory is also dropped.
+        When a String is dropped, its heap memory is also dropped.
 
         `String` has a `+` operator that extends the string with a `&str` and returns itself, but it might not be as ergonomic as you hope for.
 
@@ -5178,7 +5178,7 @@ pages:
 
         `format!` uses the same parameterized strings as `println!`
 
-        The capabilities of this function are too large of scope for *Tour of Rust*, check out the documentation [here](https://doc.rust-lang.org/std/fmt/)
+        The capabilities of this function are too large of scope for *Tour of Rust*; check out the documentation [here](https://doc.rust-lang.org/std/fmt/).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
 
     fr:
@@ -5241,7 +5241,7 @@ pages:
         has plenty of functionality to make it easy to manage.  
 
         Up to now, we've mostly looked at Rust from the lens of a procedural paradigm (i.e. just functions and data),
-        it's time we now talk about traits and the capabilties unlocked by Rust's object oriented paradigm.
+        but it's time we now talk about traits and the capabilties unlocked by Rust's object oriented paradigm.
     fr:
       title: Chapitre 6 - Conclusion
       content_markdown: |
@@ -5327,7 +5327,7 @@ pages:
         * Structs cannot inherit fields from a parent struct.
         * Structs cannot inherit functions from a parent struct.
 
-        That said, Rust implements many programming language features that you might not mind this lacking.
+        That said, Rust implements many programming language features, so that you might not mind this lacking.
 
     fr:
       title: Rust n'est pas POO
@@ -5555,7 +5555,7 @@ pages:
         Li functiones have null direct accesse al inter campes de un struct, ma it posse esser
         util por partiprender conduida inter mani implementatores de trates.
   - en:
-      title: Trait Inheritence
+      title: Trait Inheritance
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
       content_markdown: |
         Traits can inherit methods from other traits.
@@ -5578,7 +5578,7 @@ pages:
         * static dispatch - When the instance type is known, we have direct knowledge of what function to call.
         * dynamic dispatch - When an instance type is not known, we must find out some way of calling the correct function.
 
-        Traits types `&dyn MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
+        Trait types `&dyn MyTrait` give us the ability to work with instances of objects indirectly using dynamic dispatch.
 
         When dynamic dispatch is used, Rust will encourage you to put `dyn` before your trait type so people are aware.
 
@@ -5615,7 +5615,7 @@ pages:
   - en:
       title: Trait Objects
       content_markdown: |
-        When we pass an instance of an object to a parameter of type `&dyn MyTrait` we pass what is called *trait object*. 
+        When we pass an instance of an object to a parameter of type `&dyn MyTrait` we pass what is called a *trait object*. 
 
         A trait object is what allows us to indirectly call the correct methods of an instance. A trait object is a struct that holds the pointer of 
         our instance with a list of function pointers to our instance's methods.
@@ -6006,8 +6006,8 @@ pages:
       title: References Revisited
       content_markdown: |
         A reference is fundamentally just a number that is the start position
-        of some bytes in memory, it's only purpose is to represent the concept of 
-        where data of a specific type exists. What makes a reference different from a just a number is that Rust
+        of some bytes in memory. Its only purpose is to represent the concept of 
+        where data of a specific type exists. What makes a reference different from just a number is that Rust
         will validate the lifetime of references doesn't last longer than what
         it refers to (otherwise we'd get an error when we used it!).
         
@@ -6150,7 +6150,7 @@ pages:
         ```
 
         Memory detail:
-        - Because i32 is a primitive type that implements the Copy trait, 
+        - Because i32 is a primitive type that implements the `Copy` trait, 
         the bytes of variable `a` on stack are copied into the bytes of variable `b`.
         
     fr:
@@ -6240,14 +6240,14 @@ pages:
       title: Smart Pointers
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
       content_markdown: |
-        In addition to the ability to create references to existing typed data using the `&` operator. Rust gives us the ability
+        In addition to the ability to create references to existing typed data using the `&` operator, Rust gives us the ability
         to create *reference-like* structs called **smart pointers**. 
         
         We can think of references at a high level as a type that give us access to another type.  Smart pointers are different in their 
         behavior from normal references in that they operate based on internal logic that a programmer writes. You — the programmer —
         are the *smart* part.
 
-        Typically smart pointers implement `Deref`,`DerefMut`,`Drop` traits to specify the logic of what should happen when
+        Typically smart pointers implement `Deref`, `DerefMut`, and `Drop` traits to specify the logic of what should happen when
         the structure is dereferenced with `*` and `.` operators.
         
     fr:
@@ -6339,10 +6339,10 @@ pages:
 
         `Vec<T>` is a smart pointer that just owns some memory region of bytes. The Rust compiler has no idea what 
         exists in these bytes. The smart pointer interprets what it means to grab items from the region of memory it manages,
-        keeps track of where data structures within those bytes begin and end, and then finally dereference a raw pointer
+        keeps track of where data structures within those bytes begin and end, and then finally dereferences a raw pointer
         into data structures into a nice clean ergonomic interface for us to use (e.g. `my_vec[3]`).
 
-        Similarly, `String` keeps track of a memory region of bytes, and programatically restricts content written to it to always
+        Similarly, `String` keeps track of a memory region of bytes, and programmatically restricts content written to it to always
         be valid `utf-8` and helps dereference that memory region into a type `&str`.
 
         Both these datastructures use unsafe dereferencing of raw pointers to do their job.
@@ -6420,7 +6420,7 @@ pages:
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
       content_markdown: |
         Rust code may have a plethora of representations of errors, but the standard library has
-        a universial trait `std::error::Error` for describing errors.
+        a universal trait `std::error::Error` for describing errors.
 
         Using a smart pointer `Box` we can use the type `Box<dyn std::error::Error>` as a common type for returning errors because it allows us to
         propogate up an error on the heap and interact with it at a high level without having to know a specific type.
@@ -6540,10 +6540,10 @@ pages:
         `Mutex` is a container data structure commonly held by smart pointers that takes in data and lets us borrow mutable
         and immutable references to the data within. This prevents borrowing from being abused by 
         having the operating system restrict only one CPU thread at time to have access to the data, 
-        blocking other threads until that original thread is done with it's locked borrow.
+        blocking other threads until that original thread is done with its locked borrow.
 
         Multithreading is beyond the scope of Tour of Rust, but `Mutex` is a fundamental part of orchestrating
-        multiple CPUs threads accessing the same data.
+        multiple CPU threads accessing the same data.
 
         There is a special smart pointer `Arc` which is identical to `Rc` except uses thread-safe incrementing of reference counts. 
         It's often used to have many references to the same `Mutex`.
@@ -6665,7 +6665,7 @@ pages:
     en:
       title: Chapter 9 - Project Organization and Structure
       content_markdown: |
-        So far all of our code examples have been a single file. Let's discuss how our code be better organized and shared by others!
+        So far all of our code examples have been a single file. Let's discuss how our code can be better organized and shared by others!
     fr:
       title: Chapitre 9 - Organisation et structure d'un projet
       content_markdown: |
@@ -6687,7 +6687,7 @@ pages:
 
         Every crate has a root module.
 
-        A module can holds global variables, functions, structs, traits or even other modules!
+        A module can hold global variables, functions, structs, traits or even other modules!
         
     fr:
       title: Modules
@@ -6799,7 +6799,7 @@ pages:
       title: Creating Modules
       content_markdown: |
         When we think of code, we usually imagine a hierarchy of files organized
-        in directories. Rust let you create modules closely related to your file
+        in directories. Rust lets you create modules closely related to your file
         structure.
         
         There are two ways in Rust to declare a module. For example, a module
@@ -6832,8 +6832,8 @@ pages:
   - en:
       title: Module Hierarchy
       content_markdown: |
-        A module can depends on another one. In order to establish a relationship
-        between a module and it's sub-module, you must write in the parent module:
+        A module can depend on another one. In order to establish a relationship
+        between a module and its sub-module, you must write in the parent module:
 
         ```rust
         mod foo;
@@ -6949,7 +6949,7 @@ pages:
   - en:
       title: Exporting
       content_markdown: |
-        By default members of a *module* are not accessible from outside of the module (not even to it's child modules!). We make members 
+        By default members of a *module* are not accessible from outside of the module (not even to its child modules!). We make members 
         of a module accessible using the `pub` keyword.
 
         By default members of a *crate* are not accessible outside of the crate. We make members of
@@ -7033,7 +7033,7 @@ pages:
   - en:
       title: Prelude
       content_markdown: |
-        You might by wondering in Rust, how we have access to `Vec` or `Box`
+        You might by wondering how we have access to `Vec` or `Box`
         everywhere without a `use` to import them. It is because of the module
         `prelude` in the standard library.
         
@@ -7056,7 +7056,7 @@ pages:
   - en:
       title: Your Own Prelude
       content_markdown: |
-        Because of standard library's prelude, it's common for your libary to have it's own prelude module as a starting point for 
+        Because of standard library's prelude, it's common for your libary to have its own prelude module as a starting point for 
         where users should import all of the most common data structures for using your library (e.g `use my_library::prelude::*`).
         It doesn't automatically get used in programs/libraries that use your crate, but it's a good convention to follow so people
         know where to start.
@@ -7096,7 +7096,7 @@ pages:
       title: The End
       content_markdown: |
         It's been a joy to have you on the Tour of Rust. Ferris and the Tour of Rust team sincerely hope you enjoy the journey ahead! If you 
-        have feel comfortable this far, we strongly recommend diving deeper with these resources:
+        have felt comfortable this far, we strongly recommend diving deeper with these resources:
         * [The Official Rust Programming Book](https://doc.rust-lang.org/stable/book/)
     es:
       title: Fin
