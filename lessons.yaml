@@ -1046,7 +1046,7 @@ pages:
     de:
       title: Arrays
       content_markdown: |
-        Ein *Array* ist eine Kollektion Datenelementen vom selben Datentyp mit festgelegter Länge.
+        Ein *Array* ist eine Kollektion von Datenelementen vom selben Datentyp mit festgelegter Länge.
 
         Der Datentyp eines *Arrays* wird `[T;N]` geschrieben. `T` ist der Datentyp der Arrayelemente und `N` ist die festgelegte Länge dieser zur Compile-Zeit.
 
