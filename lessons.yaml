@@ -5261,7 +5261,7 @@ pages:
         * Encapsulation - Associating data and functions into the conceptual unit of a single type called an *object*.
         * Abstraction - Hiding data and function members to obsfucate implementation details of an object.
         * Polymorphism - The ability to interacting with an object from different functional perspectives.
-        * Inheritence - The ability to inherit data and behavior from other objects.
+        * Inheritance - The ability to inherit data and behavior from other objects.
 
     fr:
       title: Qu'est-ce que la POO?
