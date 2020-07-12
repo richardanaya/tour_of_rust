@@ -21,7 +21,7 @@ common_words:
     welcometothe: "Bienvenue au"
     presstocontinue: "Clique pour continuer"
   de:
-    tor: Tour zu Rust
+    tor: Tour durch Rust
     next: Weiter
     previous: Zurück
     toc: Inhaltsverzeichnis
