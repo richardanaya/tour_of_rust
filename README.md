@@ -61,8 +61,15 @@ Adding new languages should be as simple as adding new properites per page under
 
 ```
 
-
 Lastly, there is a section for common words you should fill out your localized translations of for deeper experience of the site.
+
+## How to run the project locally
+
+To run the site locally you need to install `yq`. There are several projects with the name `yq`, this 
+project uses [this one](https://kislyuk.github.io/yq/).
+
+After installing the dependencies use `make` to launch the site. You will need to restart the server every time
+to see the changes you've made.
 
 # Releases
 
