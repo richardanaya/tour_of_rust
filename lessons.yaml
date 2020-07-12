@@ -1046,7 +1046,11 @@ pages:
     de:
       title: Arrays
       content_markdown: |
-        Need translation
+        Ein *Array* ist eine Kollektion Datenelementen vom selben Datentyp mit festgelegter Länge.
+
+        Der Datentyp eines *Arrays* wird `[T;N]` geschrieben. `T` ist der Datentyp der Arrayelemente und `N` ist die festgelegte Länge dieser zur Compile-Zeit.
+
+        Einzelne Elemente können mit dem `[x]` Operator abgerufen werden, in welchem *x* den *usize* Index (beginnend bei 0) des gesuchten Elementes darstellt.
     ie:
       title: Arrays
       content_markdown: |
