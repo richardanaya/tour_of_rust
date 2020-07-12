@@ -383,7 +383,7 @@ pages:
       title: The Rust Playground
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
       content_markdown: |
-        This tour uses an interactive coding tool from [Rust Playground](https://play.rust-lang.org)
+        This tour uses an interactive coding tool from [Rust Playground](https://play.rust-lang.org).
 
         It's a great way to play around with Rust and show others your creativity and challenges!
     fr:
@@ -455,7 +455,7 @@ pages:
         Notice how we can assign to the same variable name multiple times. This is called variable
         shadowing and the type can be changed for subsequent references to that name.
 
-        Variable names are always in `snake_case`
+        Variable names are always in `snake_case`.
     fr:
       title: Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20inf%C3%A8re%20le%20type%20de%20la%20variable%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20on%20peut%20%C3%A9galement%20sp%C3%A9cifier%20explicitement%20le%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20on%20peut%20aussi%20d%C3%A9clarer%20une%20variable%20et%20l%27initialiser%20plus%20tard%2C%20%0A%20%20%20%20%2F%2F%20bien%20qu%27ici%20il%20n%27y%20ait%20pas%20d%27int%C3%A9r%C3%AAt%20%C3%A0%20utiliser%20deux%20lignes%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -689,7 +689,7 @@ pages:
         since Rust is a system programming language, it cares about memory 
         issues you might not be used to. We will be going into this in detail later.
 
-        Numeric types can be explicitly specified by appending the type to the end of the number (e.g. `13u32`, `2u8`)
+        Numeric types can be explicitly specified by appending the type to the end of the number (e.g. `13u32`, `2u8`).
     fr:
       title: Types primitifs
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20par%20d%C3%A9faut%20c%27est%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20par%20d%C3%A9faut%20c%27est%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
@@ -944,9 +944,9 @@ pages:
         where they are used, constants directly replace the text identifier where they
         are used with their value at compile time.
 
-        Unlike variables, constants must always have explicit types
+        Unlike variables, constants must always have explicit types.
 
-        Constant names are always in `SCREAMING_SNAKE_CASE`
+        Constant names are always in `SCREAMING_SNAKE_CASE`.
     fr:
       title: Constantes
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%CF%80%20est%20le%20rapport%20de%20la%20circonf%C3%A9rence%20d%E2%80%99un%20cercle%20%C3%A0%0A%20%20%20%20%20%20%20%20son%20diam%C3%A8tre%20et%20sa%20valeur%20approximative%20est%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -1283,9 +1283,9 @@ pages:
   - en:
       title: Returning Nothing
       content_markdown: |
-        If no return type is specified for a function, it returns an empty tuple, also known as a *unit*
+        If no return type is specified for a function, it returns an empty tuple, also known as a *unit*.
 
-        An empty tuple is represented by `()`
+        An empty tuple is represented by `()`.
 
         Using `()` is uncommon, but will come up often enough that it's good to know whats happening.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
@@ -1973,7 +1973,7 @@ pages:
   - en:
       title: Returning Values From Block Expressions
       content_markdown: |
-        `if`,`match`,functions, and scope blocks all have a unique way of returning values in Rust.
+        `if`, `match`, functions, and scope blocks all have a unique way of returning values in Rust.
 
         If the last statement in an `if`, `match`, function, or scope block is an expression without
         a `;`, Rust will return it as a value from the block. This
@@ -2857,7 +2857,7 @@ pages:
         * In addition to element data types (if any), each element also has a numeric value that represents which tag it is.
 
         Other details:
-        * Rust's `enum` is something also known as a *tagged-union*
+        * Rust's `enum` is something also known as a *tagged union*.
         * The combining of types to make a new type is what people mean when they say Rust has *algebraic types*.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22big%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22small%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20is%20a%20crab%20with%20%7B%7D%20%7B%7D%20claws%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20a%20crab%20with%20some%20other%20weapon%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20some%20other%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D
     fr:
@@ -4430,7 +4430,7 @@ pages:
       content_markdown: |
         Rust's rules for references might best be summarized by:
 
-        * Rust only allows there to be one mutable reference **or** multiple non-mutable references **but not both**
+        * Rust only allows there to be one mutable reference **or** multiple non-mutable references **but not both**.
         * A reference must never **live longer** than its owner.
 
         This doesn't tend to be a problem when passing around references to functions.
@@ -4586,7 +4586,7 @@ pages:
 
         Resources with static lifetimes have a special lifetime specifier `'static`.
 
-        `'static` resources will never **drop**
+        `'static` resources will never **drop**.
 
         If static lifetime resources contain references they must all be `'static` (anything less would not live long enough).
 
@@ -4786,7 +4786,7 @@ pages:
       content_markdown: |
         String literals are always Unicode.
 
-        String literals type are `&'static str`
+        String literals type are `&'static str`:
 
         * `&` meaning that it's referring to a place in memory, and it lacks a `&mut` meaning that the compiler will not allow modification
         * `'static` meaning the string data will be available till the end of our program (it never drops)
@@ -4901,7 +4901,7 @@ pages:
         * `\0` - null
         * `\'` - single-quote
 
-        The complete list exists [here](https://doc.rust-lang.org/reference/tokens.html)
+        The complete list exists [here](https://doc.rust-lang.org/reference/tokens.html).
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
     fr:
       title: Caractères d'échappement
@@ -6748,7 +6748,7 @@ pages:
         **std** is the crate of the **standard library** of Rust which is full of useful data
         structures and functions for interacting with your operating system.
 
-        A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/)
+        A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/).
     fr:
       title: Référencement de modules et de crates
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Bienvenue%20au%20terrain%20de%20jeu%20Rust!%22)%3B%0A%20%20%20%20println!(%22Chuck%20Norris%20connait%20la%20derni%C3%A8re%20%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20d%C3%A9cimale%20de%20%7B%7D...!%22%2C%20PI)%3B%0A%7D%0A
@@ -6840,7 +6840,7 @@ pages:
         ```
 
         The declaration above  will look for a file named `foo.rs` or `foo/mod.rs` and
-        will insert its contents inside a module named `foo` under this scope
+        will insert its contents inside a module named `foo` under this scope.
     fr:
       title: Hiérarchie de modules
       content_markdown: |
