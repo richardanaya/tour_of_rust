@@ -726,7 +726,7 @@ pages:
         * floating point - `f32` `f64` für Dezimalzahlen
         * tuple - `(Wert, Wert, ...)` um festgelegte Sequenzen von Werten auf dem Stack zu speichern
         * arrays - `[Wert, Wert, ...]`eine Kollektion von ähnlichen Elementen mit zur Compile-Zeit festgelegter Länge
-        * slices - eien Kollektion von ähnlichen Elementen mit Länge bekannt zur Laufzeit
+        * slices - eine Kollektion von ähnlichen Elementen mit Länge bekannt zur Laufzeit
         * `str` (string slice) - Text mit zur Laufzeit bekannter Länge
 
         Wir sehen schon, dass es einiges zum Anpacken geben wird!
