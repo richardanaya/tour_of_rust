@@ -2095,11 +2095,7 @@ pages:
   - en:
       title: Returning Values From Block Expressions
       content_markdown: |
-<<<<<<< HEAD
-        `if`,`match`, functions, and scope blocks all have a unique way of returning values in Rust.
-=======
         `if`, `match`, functions, and scope blocks all have a unique way of returning values in Rust.
->>>>>>> upstream/master
 
         If the last statement in an `if`, `match`, function, or scope block is an expression without
         a `;`, Rust will return it as a value from the block. This
