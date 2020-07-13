@@ -26,7 +26,7 @@ This project also aims to provide this book in as many languages as possible.
 
 # Contributors
 
-* Deutsch - [Felix](https://github.com/jassler)
+* Deutsch - [Felix](https://github.com/jassler), [Ramin Azhdari](https://github.com/raminos)
 * English - [Richard Anaya](https://github.com/richardanaya)
 * Español - [Alba Martínez Martínez](https://github.com/albatraduce)
 * Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
@@ -34,7 +34,8 @@ This project also aims to provide this book in as many languages as possible.
 * Português Brasileiro - [Denstone](https://github.com/denstone)
 * Русский - [Danil Kondratiev](https://github.com/knightpp)
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus)
-* 日本語 - [7shi](https://github.com/7shi)
+* 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213)
+* 한국어 - [fermat39](fermat39) 
 
 # Looking for translators!
 
@@ -61,8 +62,15 @@ Adding new languages should be as simple as adding new properites per page under
 
 ```
 
-
 Lastly, there is a section for common words you should fill out your localized translations of for deeper experience of the site.
+
+## How to run the project locally
+
+To run the site locally you need to install `yq`. There are several projects with the name `yq`, this 
+project uses [this one](https://kislyuk.github.io/yq/).
+
+After installing the dependencies use `make` to launch the site. You will need to restart the server every time
+to see the changes you've made.
 
 # Releases
 
