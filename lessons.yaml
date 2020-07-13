@@ -2191,7 +2191,7 @@ pages:
       title: 第三章 - 基本的なデータ構造体
       contene_markdown: |
         基本的な型をより深く学ぶ時がきました！この章では、 Rust の中で最もプリミティブなデータ構造を見て、
-        それらがメモリ上でどう表現されるかについて詳しく見ていきます。あなたはRust が物事の動作原理をあまり隠していないことを楽しむでしょう。
+        それらがメモリ上でどう表現されるかについて詳しく見ていきます。あなたは Rust が物事の動作原理をあまり隠していないことを楽しむでしょう。
   - en:
       title: Structures
       content_markdown: |
@@ -2267,16 +2267,18 @@ pages:
         *字段* 是一个与数据结构相关联的数据值。它的值可以是基本类型或结构体类型。
 
         它的定义就像一个编译器的蓝图，告诉编译器如何在内存中布局彼此相邻的字段。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20%E6%98%AF%E4%B8%AA%E7%BB%93%E6%9E%84%E4%BD%93%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
     ja:
       title: 構造体
       content_markdown: |
-        一個の `struct` はフィールドの集合です。
+        一つの `struct` はフィールドの集合です。
 
-        *フィールド*とはデータ構造と紐づく値です。その値はプリミティブ型かデータ構造を指定可能です。
+        *フィールド* とはデータ構造とキーワードを紐づくる値です。その値はプリミティブ型かデータ構造を指定可能です。
 
         その定義はメモリ上で隣合うデータの配置をコンパイラに伝える設計図の様なものです。
 
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20%E6%98%AF%E4%B8%AA%E7%BB%93%E6%9E%84%E4%BD%93%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20%E3%81%AF%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%A7%E3%81%82%E3%82%8B%E3%80%82%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
   - en:
       title: Calling Methods
       content_markdown: |
@@ -2357,18 +2359,20 @@ pages:
         **实例方法** — 属于某个类型的实例，调用时使用 `.` 运算符。
 
         我们将在后续章节中更多地讨论如何创建自己的方法。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E6%9D%A5%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAString%E5%AE%9E%E4%BE%8B%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B%E6%9D%A5%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
     ja:
       title: メソッドの定義
       content_markdown: |
         関数(function)と違って、メソッド(method)は特定のデータ型と紐づく関数のことです。
 
-        **スタティックメソッド** - とある型そのものに紐付き、演算子 `::` で呼び出す。
+        **スタティックメソッド** - ある型そのものに紐付き、演算子 `::` で呼び出せます。
 
-        **インスタンスメソッド** - とある型のインスタンスに紐付き、演算子 `.`で呼び出す。
+        **インスタンスメソッド** - ある型のインスタンスに紐付き、演算子 `.` で呼び出せます。
 
         以降の章でまたメソッドの作り方について話します。
 
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E6%9D%A5%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAString%E5%AE%9E%E4%BE%8B%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B%E6%9D%A5%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E3%82%B9%E3%82%BF%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%81%A7String%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E3%80%82%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99%E3%80%82%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
   - en:
       title: Memory
       content_markdown: |
@@ -2510,15 +2514,15 @@ pages:
     ja:
       title: メモリ
       content_markdown: |
-        Rust のプログラムでは、3種類のデータの保存空間があります。
-        * **データメモリ** - 固定サイズと **スタティック(グローバル変数)** (プログラムの周期で常に存在するもの)なデータ。
-          プログラム内の文字列(例: ‘Hello World’), この文字列の文字(バイト)は読み取りにしか使えないため、この領域に入る。
-          コンパイラはこういったデータに対してチューニングをして、メモリ上の位置はすでに知られていてかつ固定であるため、非常に速く使うことができる。
-        * **スタックメモリ** - 関数内で宣言した変数。
-          関数が呼びされる間では、メモリ上の位置は変更されることがないため、コンパイラからするとチューニングができるので、スタックメモリも非常に速い。
+        Rust のプログラムでは、データを保持するために次の3種類のメモリ空間を持っています。
+        * **データメモリ** - 固定長もしくは **スタティック** (例: プログラムのライフサイクルで常に存在するもの)なデータ。
+          プログラム内の文字列(例: ‘Hello World’), この文字列のキャラクタは読み取りにしか使えないため、この領域に入ります。
+          コンパイラはこういったデータに対してチューニングをしており、メモリ上の位置はすでに知られていてかつ固定であるため、非常に速く使うことができます。
+        * **スタックメモリ** - 関数内で宣言された変数。
+          関数が呼びされている間は、メモリ上の位置は変更されることがないため、コンパイラからするとチューニングができるので、スタックメモリも非常に速くデータにアクセスできます。
         * **ヒープメモリ** - プログラムの実行時に作られるデータ。
-          このメモリにあるデータは追加、移動、削除、サイズの調節など操作が許される。ダイナミックな特性を持っているため、よく遅いと思われがちですが、
-          メモリーの使い方に柔軟性を生み出すことができる。データをヒープメモリに入れることをアロケーション(allocation)といい、データをヒープメモリから削除することはディアロケーション(deallocation)と言います。
+          このメモリにあるデータは追加、移動、削除、サイズの調節などの操作が許されています。動的であるため、遅いと思われがちですが、
+          これによりメモリの使い方に柔軟性を生み出すことができます。データをヒープメモリに入れることをアロケーション(allocation)といい、データをヒープメモリから削除することはディアロケーション(deallocation)と言います。
   - en:
       title: Creating Data In Memory
       content_markdown: |
@@ -2700,21 +2704,23 @@ pages:
     ja:
       title: メモリの中でデータを作成する
       content_markdown: |
-        コードの中で **構造体** を **インスタンス化** をする際に、プログラムはメモリの中でフィールドデータを並列で作成してくれます。
+        コードの中で **構造体** を **インスタンス化** する際に、プログラムはフィールドデータをメモリ上で隣り合うように作成します。
 
-        全てのフィールドの値を宣言する方式でインスタンス化をする時：
+        全てのフィールドの値を指定してインスタンス化をする際：
 
         `構造体名 {...}`.
 
-        構造体のフィールドは演算子 `.` で取り出すことができる。
+        構造体のフィールドは演算子 `.` で取り出すことができます。
 
         例に示したコードのメモリ状況について：
-        * ダブルクオートに囲まれたテキストは(例: "ferris")読み取り専用データであるため、 **データメモリ** に入ります。
+        * ダブルクオートに囲まれたテキスト(例: "ferris")は読み取り専用データであるため、 **データメモリ** に入ります。
         * 関数の呼び出し `String::from` では構造体 `String` を作成し、この構造体と SeaCreature のフィールドを隣り合う形で *スタック* に入れられます。
         　フィールドの値は変更可能であり、メモリ上では以下の様に変更されます。
-          1. *ヒープ* に変更可能なメモリを作り、テキストを入れる。
-          2. 1.で作成した参照アドレスを *ヒープ* に保存し、それを `String` に保存する(後の章でまた詳しく紹介します。)。
-        * 最後に、我々の友である *Ferris* と *Sarah* はプログラムの中では固定な位置であるため、*スタック* に入れます。
+          1. *ヒープ* に変更可能なメモリを作り、テキストを入れます。
+          2. 1.で作成した参照アドレスを *ヒープ* に保存し、それを `String` に保存します(後の章でまた詳しく紹介します。)。
+        * 最後に、我々の友である *Ferris* と *Sarah* はプログラムの中では固定な位置であるため、*スタック* に入ります。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AF%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AB%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%82%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AB%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%99%E3%81%8C%E3%80%81%0A%20%20%20%20%20%20%20%20%2F%2F%20%E3%83%92%E3%83%BC%E3%83%97%E3%81%AB%E5%85%A5%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%82%E7%85%A7%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%8C%E4%B8%80%E3%81%A4%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
   - en:
       title: Tuple-like Structs
       content_markdown: |
@@ -2759,7 +2765,9 @@ pages:
     ja:
       tielt: タプルライクな構造体
       content_markdown: |
-        簡潔に、タプルの様な構造体を作って使用することできる。
+        Rust ではタプルの様な構造体を利用できます。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E3%81%93%E3%82%8C%E3%82%82%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AB%E5%85%A5%E3%82%8C%E3%82%89%E3%82%8C%E3%82%8B%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%A7%E3%81%99%E3%80%82%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
   - en:
       title: Unit-like Structs
       content_markdown: |
@@ -2837,11 +2845,13 @@ pages:
     ja:
       title: ユニットライクな構造体
       content_markdown: |
-        構造体はフィールドを持たないこともできます。
+        Rust ではフィールドを持たない構造体を宣言できます。
 
-        第一章で述べた様に、*unit* は空ユニット `()` の別名称です。こういった構造体が `ユニットライク` と言われる理由である。
+        第一章で述べた様に、*unit* は空ユニット `()` の別名称です。こういった構造体が `ユニットライク` と言われる理由でもあります。
 
         この構造体はあまり使われません。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Marker%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_m%20%3D%20Marker%3B%0A%7D%0A
   - en:
       title: Enumerations
       content_markdown: |
@@ -2915,7 +2925,9 @@ pages:
       content_markdown: |
         列挙型はキーワード `enum` で新しい型を生成することができ、この型はいくつかのタグ付された値を持つことができます。
 
-        `match` は保有する全てな列挙値を処理する手助けすることができ、データの品質を高めるためのツールともなりうる。
+        `match` は保有する全ての列挙値を処理する手助けすることができ、コードの品質を維持することもできます。
+
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20%E3%81%93%E3%81%AE%E8%A1%8C%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9%E3%81%AEwarings%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%92%E6%AD%A2%E3%82%81%E3%81%BE%E3%81%99%E3%80%82%0A%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20is%20a%20crab%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20is%20a%20octopus%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20is%20a%20fish%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20is%20a%20clam%22%2Cferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: Enumerations With Data
       content_markdown: |
@@ -3061,15 +3073,16 @@ pages:
       content_markdown: |
         `enum` は一個もしくは複数な型のデータを持つことができ、C言語の `union` の様な表現ができます。
 
-        `match` を用いた、 列挙型に対するパターンマッチングを行う時、各データに変数名を入れることができる。
+        `match` を用いて列挙値に対するパターンマッチングを行う際、各データを変数名に束縛することができます。
 
         `列挙` のメモリ事情:
-        * 列挙データのメモリサイズはそれが持つ最大要素と等しい。これは全て代入可能の値が同じメモリ空間を利用することを可能にします。
-        * 要素の型以外に、各要素には数字値がついており、どのタグであるかについて示している。
+        * 列挙型のメモリサイズはそれが持つ最大要素のサイズと等しい。これにより全ての代入可能な値が同じサイズのメモリ空間を利用することを可能にします。
+        * 要素の型以外に、各要素には数字値がついており、どのタグであるかについて示しています。
 
         その他の事情:
-        * Rustの `列挙` は *tagged-union* とも言われる。
-        * 複数な型を組み合わせて新しい型を作ることができる、 これが Rust には *algebrai types* を持つと言われる理由。
+        * Rust の `列挙` は *tagged-union* とも言われています。
+        * 複数の型を組み合わせて新しい型を作ることができます。 これが Rust には *algebrai types* を持つと言われる理由です。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=90e4fe63a23ebaa82574d1beef55b41e
   - en:
       title: Chapter 3 - Conclusion
       content_markdown: |
@@ -3126,9 +3139,8 @@ pages:
     ja:
       title: 第三章 - まとめ
       content_markdown: |
-        興奮するでしょう！これで我々は元々基本的なツールを手に入れ、コードで我々の思考を表現することができます。
-        Rust はいかに Rust が持つ型で一致性のある基本操作を実現してるかを理解していることを祈ります。
-        次にある概念について話します。これは我々の構造体に可用性を増やします: *Generics*。
+        興奮するでしょう！これで我々は基本的なツールを手に入れ、コードで我々の思考を表現することができます。
+        次の章では Generics について説明します。
   - chapter: 4
     en:
       title: Chapter 4 - Generic Types
