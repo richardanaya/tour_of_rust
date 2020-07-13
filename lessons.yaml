@@ -108,6 +108,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
 
         If you have suggestions on content
         or would like to contribute to translations, check out Tour of Rust's 
@@ -137,6 +138,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
 
         Si tu as des suggestions sur le contenu
         ou si tu souhaites contribuer aux traductions, rends-toi sur le
@@ -173,6 +175,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
     ie:
       title: "Salute, <img src=\"/favicon-32x32.png\" style=\"display:inline; vertical-align:bottom\">"
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Salute%2C%20%F0%9F%A6%80%22)%3B%0A%7D
@@ -185,7 +188,8 @@ pages:
         subtention de strings (catenes) unicode in Rust.</p><p>Translations:<ul><li><a
         href="00_de.html">Deutsch</a></li><li><a href="00_en.html">English</a></li><li><a href="00_es.html">Español</a></li><li><a
         href="00_ie.html">Interlingue</a></li><li><a href="00_ru.html">Русский</a></li><li><a href="00_zh-cn.html">简体中文</a></li><li><a
-        href="00_ja.html">日本語</a></li></ul></p>
+        href="00_ja.html">日本語</a></li><li><a
+        href="00_ko.html">한국어</a></li></ul></p>
         <p>Si tu have suggestiones pri contenete o vole contribuer un traduction, ples visitar
         li <a href="https://github.com/richardanaya/tour_of_rust">repositoria github</a>
         del Tur de Rust.</p>
@@ -207,6 +211,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
 
         Если у вас есть предложения по содержимому или вы бы хотели помочь с переводом, проверьте
         [Github репозиторий](https://github.com/richardanaya/tour_of_rust) Тура по Rust.
@@ -231,6 +236,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
 
         Si tienes alguna sugerencia sobre el contenido
         o quieres contribuir a las traducciones, puedes encontrar el repositorio del 
@@ -259,6 +265,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
 
         Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as
         traduções, veja o repositório do Tour por Rust no 
@@ -285,6 +292,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
 
         如果你对内容有任何建议，或者想参与翻译做出贡献，请查看 Rust 语言之旅的 [github 代码库](https://github.com/richardanaya/tour_of_rust)。
 
@@ -311,6 +319,7 @@ pages:
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
         * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
 
         コンテンツへの提案や翻訳に貢献したい場合、
         Rust ツアーの [github リポジトリ](https://github.com/richardanaya/tour_of_rust)をチェックしてください。
