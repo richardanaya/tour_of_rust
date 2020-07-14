@@ -1009,6 +1009,28 @@ pages:
         これについては後ほど詳しく説明します。
 
         数値型は、数値の最後に型を付加することで明示的に指定できます。（例: `13u32`, `2u8`）
+    hu:
+      title: Alapvető típusok
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        Rust has a variety of familiar types:
+        A Rust sokféle, valószínűleg már ismert típust különböztet meg:
+
+        * boolean - `bool` igaz és hamis értékekhez
+        * előjel nélküli egészek - `u8` `u16` `u32` `u64` `u128` pozitív egész számok kifejezésére
+        * előjeles egészek - `i8` `i16` `i32` `i64` `i128` pozitív és negatív egész számok kifejezésére
+        * mutató méretű egészek - `usize` `isize` tömbök indexeinek és a memóriában tárolt dolgok méretének tárolására
+        * lebegőpontos törtek - `f32` `f64`
+        * rendezett párok - `(érték, érték, ...)` meghatározott hosszú és típusú értékek a veremben való eltárolására szánt gyűjtemény
+        * tömbök - `[érték, érték, ...]` ugyanolyan típusú értékek fordításkor is ismert hosszal rendelkező gyűjteménye
+        * szeletek - ugyanolyan típusú értékek futáskor ismert hosszal rendelkező gyűjteménye
+        * `str` (szöveg szelet) - szöveg, melynek a hosszát csak futáskor ismerjük
+
+        A szövegek kezelése kicsit bonyultabb, mint ahogy azt más nyelvekben megszokhattad. Mivel a
+        Rust egy alacsony-szintű programozási nyelv, így fontosnak tartja az olyan memória-hibák
+        elkerülését is, amikre esetleg eddig nem is gondoltál. De erről majd később.
+
+        A számértékek típusait explicit módon is meg lehet adni azzal, hogy a szám végére illesztjük annak típusát (pl.: `13u32`, `2u8`).
   - en:
       title: Basic Type Conversion
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -1079,6 +1101,14 @@ pages:
         Rust で数値型を扱う際、型を明示する必要があります。`u8` と `u32` を混ぜるとエラーになります。
 
         幸い、Rust は **as** キーワードで数値型を簡単に変換できます。
+    hu:
+      title: Egyszerű típusok közötti átalakítás
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+      content_markdown: |
+        A Rust elvárja, hogy a számtípusok közötti átalakítást explicit módon tedd. Például nem
+        használhatsz `u8`-t olyan helyen, ami `u32`-t vár anélkül, hogy hibát dobna.
+
+        Szerencsére a típusok közötti átalakítás nagyon egyszerű az **as** kulcsszó használatával.
   - en:
       title: Constants
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -1176,6 +1206,17 @@ pages:
         変数とは異なり、定数は明示的な型指定が必要です。
 
         定数名には大文字のスネークケース `SCREAMING_SNAKE_CASE` を使用します。
+    hu:
+      title: Konstansok
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        A konstansok lehetővé teszik nekünk, hogy sebességvesztés nélkül adhassunk nevet gyakori
+        értékeknek. Ahelyett, hogy változók értékeit másolgatnánk oda, ahol azok használva vannak, a
+        konstansok helyére rögtön fordítás közben azok értéke kerül.
+
+        A változókkal ellentétben a konstansoknak mindig explicit módon meg kell adnunk a típusát.
+
+        A konstansok neveit mindig `ORDÍTÓ_KÍGYÓ_MÓDON` adjuk meg.
   - en:
       title: Arrays
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
@@ -1258,6 +1299,17 @@ pages:
         *配列*のデータ型は `[T;N]` であり、T は要素の型、N はコンパイル時に決まる固定長です。
 
         個々の要素は `[x]` 演算子によって取得できます。ここで *x* は取り出そうとする要素の *usize* 型のインデックス（0 始まり）です。
+    hu:
+      title: Tömbök
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+      content_markdown: |
+        Egy *tömb* egy olyan megegyező típusú elemeket tartalmazó csoport, aminek a hossza
+        megváltoztathatatlan.
+
+        A *tömbök* típusa `[T;N]`, ahol T az elemek típusa és N pedig a hossza, amit fordításkor már tudnunk kell.
+
+        Egyes elemek elérhetőek a `[x]` operátorral, ahol **x** egy *usize* indexe (ami 0-nál
+        kezdődik) annak az elemnek, amit szeretnél.
   - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
