@@ -88,6 +88,16 @@ common_words:
     untranslated: 미번역
     welcometothe: "환영합니다"
     presstocontinue: "진행하기 위해 아무 키나 눌러주세요"    
+  hu:
+    chapter: Fejezet
+    tor: Rust-túra
+    next: Következő
+    previous: Előző
+    toc: Tartalomjegyzék
+    lessons: Egységek
+    untranslated: Lefordításra vár
+    welcometothe: "Üdvözöllek a"
+    presstocontinue: "Nyomd meg a folytatáshoz"
 pages:
   - en:
       title: "Hello, <img src=\"/favicon-32x32.png\" style=\"display:inline; vertical-align:bottom\">"
@@ -104,6 +114,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -353,6 +364,35 @@ pages:
         <span class="emoji">⬅️</span>키와 <span class="emoji">➡️</span>키로 여행을 다닐 수 있습니다.
 
         이번 프로그래밍 언어의 고전적인 예제에서, 유니코드 문자열을 지원하는 Rust를 알아봅니다.
+    hu:
+      title: "Helló, <img src=\"/favicon-32x32.png\" style=\"display:inline; vertical-align:bottom\">"
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hell%C3%B3%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+      content_markdown: |
+        Üdvözöllek a *Rust-túrán*. Ez egy olyan lépésekre bontott leírás, aminek segítségével
+        megismerheted a Rust képességeit. Sokan úgy tartják a Rust egy nehezen megtanulható nyelv,
+        de reményeim szerint meg tudlak győzni, hogy épp elég érdekes dolgot lehet felfedezni benne
+        azelőtt, hogy a bonyolult részekhez érnénk.</p><p>Ez a leírás a következő nyelveken érhető
+        el:
+
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
+        * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
+
+
+        Ha bármilyen hozzáfűznivalód van vagy a fordításban szeretnél segíteni, keresd fel a
+        Rust-túra [github oldalát](https://github.com/richardanaya/tour_of_rust).
+
+        A túrán való navigációhoz használhatod a <span class="emoji">⬅️</span> és <span class="emoji">➡️</span> billenytűket is.
+
+        Ebben a klasszikus példában a Rust Unicode támogatását mutatjuk be.
   - chapter: 1
     en:
       title: Chapter 1 - The Basics
@@ -432,6 +472,14 @@ pages:
 
         또한! 여러분에게 이야기하고 있는 사랑스러운 꽃게가 누구인지 궁굼하다면, 
         저는 **페리스(Ferris)**입니다, Rust 프로그래밍 언어의 비공식적인 마스코드입니다. 만나서 반갑습니다.
+    hu:
+      title: 1. Fejezet - Az Alapok
+      content_markdown: |
+        Az első fejezetben a nyelv alapjaival fogunk megismerkedni, többek között a funkciókkal, a
+        változókkal és a legalapabb típusokkal. Üdv a fedélzeten!
+
+        Ja igen! Ha kíváncsi vagy ki ez az aranyos rák, aki épp hozzád beszél, a nevem **Ferris**,
+        én vagyok a Rust nyelv nem-hivatalos kabalája. Örülök a találkozásnak.
   - en:
       title: The Rust Playground
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
@@ -503,6 +551,13 @@ pages:
         [Rust 실습장](https://play.rust-lang.org)과 같은 대화형 코딩 도구를 이용해서 여행을 합니다.
 
         Rust로 실습을 하고, 여러분의 창의성과 도전성을 보여줄 수 있는 아주 훌륭한 방법입니다!
+    hu:
+      title: A Rust Homokozó
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%C3%9Cdv%20a%20homokoz%C3%B3ban!%20Az%20itt%20tal%C3%A1lhat%C3%B3%20k%C3%B3d%20szabadon%20megv%C3%A1ltoztathat%C3%B3!%22)%3B%0A%7D
+      content_markdown: |
+        Ez a bemutató egy interaktív programozó eszközt használ a [Rust Homokozóból](https://play.rust-lang.org).
+
+        Remek arra, hogy kipróbálhass dolgokat, kihívásokat oldj meg és, hogy bemutathasd a kreativitásod.
   - en:
       title: Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
