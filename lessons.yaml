@@ -670,6 +670,20 @@ pages:
         これは変数のシャドウイングと呼ばれるもので、型を変更して後でその名前で参照できます。
 
         変数名にはスネークケース `snake_case` を使用します。
+    hu:
+      title: Változók
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        A változókat a **let** kulcsszóval hozzuk létre.
+
+        Amikor egy változóhoz hozzárendelünk, a Rust az esetek 99%-ban képes lesz kitalálni, mi is a
+        típusa. Ha ez mégse sikerül neki, akkor a változó deklarációjában ezt te magad is
+        megteheted.
+
+        Figyeld meg, hogy ugyanahhoz a változónévhez többször is hozzárendelhetünk értékeket. Ezt
+        változó-árnyékolásnak nevezzük, a változó típusa is megváltozhat ilyenkor.
+
+        A változóneveket mindig 'kígyó_módon' adjuk meg.
   - en:
       title: Changing Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -783,6 +797,21 @@ pages:
         可変値は **mut** キーワードで表します。
 
         この概念については後で詳しく説明しますが、今のところはこのキーワードに注意してください。
+    hu:
+      title: Változók megváltoztatása
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        A Rust nagy figyelmet fordít afelé, hogy mely változókat lehet megváltoztatni. Minden érték
+        kétféle kategóriába esik:
+
+        * **megváltoztatható** - a fordító megengedi, hogy az ilyen változókba való írást és a belőlük való olvasást is.
+        * **megváltoztathatatlan** - a fordító csak a változóból való olvasást engedi.
+
+        A megváltoztatható értékek a **mut** ("mutable", "megváltoztatható") kulcsszóval vannak
+        jelölve.
+
+        A későbbiekben több szó is lesz majd erről a kulcsszóról, de egyelőre csak tartsd észben,
+        hogy létezik.
   - en:
       title: Basic Types
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
