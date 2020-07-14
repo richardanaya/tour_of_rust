@@ -145,6 +145,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -182,6 +183,7 @@ pages:
         * [English](00_en.html)
         * [Español](00_es.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -218,6 +220,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -243,6 +246,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -272,6 +276,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -299,6 +304,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -326,6 +332,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -352,6 +359,7 @@ pages:
         * [스페인어](00_es.html)
         * [프랑스어](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [브라질 포르투갈어](00_pt-br.html)
         * [러시아어](00_ru.html)
         * [중국어](00_zh-cn.html)
@@ -475,7 +483,7 @@ pages:
     hu:
       title: 1. Fejezet - Az Alapok
       content_markdown: |
-        Az első fejezetben a nyelv alapjaival fogunk megismerkedni, többek között a funkciókkal, a
+        Az első fejezetben a nyelv alapjaival fogunk megismerkedni, többek között a függvényekkel, a
         változókkal és a legalapabb típusokkal. Üdv a fedélzeten!
 
         Ja igen! Ha kíváncsi vagy ki ez az aranyos rák, aki épp hozzád beszél, a nevem **Ferris**,
