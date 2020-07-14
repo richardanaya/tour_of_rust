@@ -1389,6 +1389,15 @@ pages:
         この例では、add は `i32` 型（32 ビット長の整数）の引数を 2 つ取ります。
 
         関数名にはスネークケース `snake_case` を使用します。
+    hu:
+      title: Függvények
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+      content_markdown: |
+        A függvényeknek nulla vagy több paraméterük van.
+
+        Ebben a példában az add két `i32`-t (32 bit hosszú előjeles számokat) fogad.
+
+        A függvények nevei mindig `kígyó_módon` vannak megadva.
   - en:
       title: Multiple Return Values
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
@@ -1476,6 +1485,16 @@ pages:
         タプルの要素はインデックス番号で参照できます。
 
         Rust はデータ構造の一部を抽出する機能を提供します。これについては後ほど他の方法も見ていきます。
+    hu:
+      title: Több visszatérési érték
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+      content_markdown: |
+        A függvények több értékkel is visszatérhetnek egy **rendezett pár** képében.
+
+        A rendezett párok elemeit az indexük számával lehet elérni.
+
+        A Rust többféle elérési módot is biztosít, amivel az adatok bizonyos részeit érhetjük el
+        ergonomikus módon. De erről később lesz szó!
   - en:
       title: Returning Nothing
       content_markdown: |
@@ -1558,6 +1577,18 @@ pages:
 
         `()` はあまり使われませんが、時々出てくるので意味は知っておく必要があります。
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%AF%20()%20%E3%81%A8%E6%8E%A8%E8%AB%96%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20%E3%81%93%E3%81%AE%E9%96%A2%E6%95%B0%E3%81%AF%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%8C%E6%8C%87%E5%AE%9A%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%20()%20%E3%82%92%E8%BF%94%E3%81%99%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20%E7%A9%BA%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E3%81%AE%E3%81%AF%E9%9B%A3%E3%81%97%E3%81%84%E3%81%AE%E3%81%A7%E3%80%81%0A%20%20%20%20%2F%2F%20a%20%E3%81%A8%20b%20%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E8%A1%A8%E7%A4%BA%0A%20%20%20%20println!(%22a%20%E3%81%AE%E5%80%A4%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22b%20%E3%81%AE%E5%80%A4%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+    hu:
+      title: Semmivel való visszatérés
+      content_markdown: |
+        Ha nincs visszatérési érték megadva egy függvénynek, akkor egy üres rendezett párral tér
+        vissza, melyet *unit*-nak hívunk.
+
+        Az üres rendezett párokat `()`-al jelöljük.
+
+        Using `()` is uncommon, but will come up often enough that it's good to know whats happening.
+
+        A `()` használata ritkán fordul elő, de mégis elég gyakori ahhoz, hogy érdemes tudni miről is van szó.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
   - en:
       title: Chapter 1 - Conclusion
       content_markdown: |
@@ -1660,6 +1691,21 @@ pages:
         * [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
         * [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
         * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
+    hu:
+      title: 1. Fejezet - Konklúzió
+      content_markdown: |
+        Gratula az első fejezet teljesítéséhez! Ugye nem is olyan rossz eddig? Bepillantást nyertünk
+        abba, hogyan is gondolkodik a fordító. Mivel a Rust egy alacsony-szintű programozási nyelv,
+        így nagy figyelmet fordít a memóriában tárolt értékek méretére, arra, hogy a változók
+        megváltoztathatóak-e vagy sem és, hogy a számításaid valóban úgy történnek, ahogy
+        szeretnéd. A következő oldalon két régi baráttal fogunk megismerkedni: az `if`-el és a `for`
+        ciklussal.
+
+        További források angolul:
+
+        * [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
+        * [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+        * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
   - chapter: 2
     en:
       title: Chapter 2 - Basic Control Flow
@@ -1713,6 +1759,12 @@ pages:
       content_markdown: |
         この章では、Rustの基本的な制御フローについて説明します。
         C 系の言語に慣れていればすぐに馴染めますし、ちょっとした驚きがあるかもしれません。
+    hu:
+      title: 2. Fejezet - Egyszerű ciklusok és elágazások
+      content_markdown: |
+        Ebben a fejezetben a Rust alapvető ciklusairól és elágazásairól lesz szó.
+        Ha használtál már C-re alapuló nyelveket, akkor itt otthon fogod magad érezni, bár lehet egy-két meglepetés
+        fog érni.
   - en:
       title: if/else if/else
       content_markdown: |
@@ -1796,6 +1848,16 @@ pages:
 
         いつもの論理演算子が使えます: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20%E3%82%88%E3%82%8A%E5%B0%8F%E3%81%95%E3%81%84%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20%E3%81%AB%E7%AD%89%E3%81%97%E3%81%84%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20%E3%82%88%E3%82%8A%E5%A4%A7%E3%81%8D%E3%81%84%22)%3B%0A%20%20%20%20%7D%0A%7D
+    hu:
+      title: if/else if/else
+      content_markdown: |
+        A Rust elágazásai nem éppen meglepőek.
+
+        Az elágazások feltételei nincsenek zárójelek között. Valljuk be, volt bármikor is szükség
+        ezekre? A logika így szépen és tisztán néz ki.
+
+        Minden logikai és összehasonlító operátor ugyanúgy működik: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
   - en:
       title: loop
       content_markdown: |
@@ -1876,6 +1938,17 @@ pages:
 
         `break` によってループから脱出できます。</p><p>後で見ますが `loop` には秘密があります。
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+    hu:
+      title: loop
+      content_markdown: |
+        Szükséged volna egy végtelen ciklusra?
+
+        A Rust-tal ez egyszerű.
+
+        A `break` utasítás pedig kitör a ciklusból, ha arra van szükség.
+
+        A `loop` rendelkezik egy titokkal, amiről hamarosan fogunk beszélni.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   - en:
       title: while
       content_markdown: |
@@ -1930,6 +2003,13 @@ pages:
         `while` を使えば、ループに条件を簡単に追加できます。
 
         条件が `false` と評価された場合、ループは終了します。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+    hu:
+      title: while
+      content_markdown: |
+        A `while` segítségével egy feltételt szabhatsz a ciklusodnak.
+
+        Amint a feltétel `false` (hamis) értéket vesz, a ciklus megszakad.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: for
@@ -2064,6 +2144,22 @@ pages:
         `..` 演算子は、開始番号から終了番号の手前までの数値を生成するイテレータを作成します。
 
         `..=` 演算子は、開始番号から終了番号までの数値を生成するイテレータを作成します。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+    hu:
+      title: for
+      content_markdown: |
+        A `for` ciklus a Rust nyelvben sokkal többet tud, mint az más nyelvekben megszokott. Képes
+        minden iterátorrá váló kifejezés elemein átlépkedni. Mit is jelent az, hogy valami iterátor?
+        Olyan objektumok, amiknél megkérdezhető, hogy "Mi a következő elem?" egészen addig, amíg már
+        nem marad elem.
+
+        Ezt egy későbbi fejezetben jobban is át fogjuk nézni. Addig is elég ha azt tudod, hogy a
+        Rust egyszerűvé teszi a számok sorait létrehozó iterárotok készítését.
+
+        A `..` operátor egy olyan iterátort hoz létre, ami egy megadott kezdőszámtól elszámol a
+        megadott végső szám előtti számig.
+
+        A `..=` operátor pedig ugyanezt teszi, viszont ekkor a végső szám is benne van a sorban.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: match
