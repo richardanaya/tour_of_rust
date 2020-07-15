@@ -31,6 +31,7 @@ This project also aims to provide this book in as many languages as possible.
 * Español - [Alba Martínez Martínez](https://github.com/albatraduce)
 * Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
+* Magyar - [Nemin32](https://github.com/Nemin32/)
 * Português Brasileiro - [Denstone](https://github.com/denstone)
 * Русский - [Danil Kondratiev](https://github.com/knightpp)
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus)
