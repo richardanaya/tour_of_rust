@@ -342,7 +342,7 @@ pages:
         * 独立性を保ちつつ、きめ細かいアクセス管理が可能
         * もとより実行される環境を問わない設計のため、[Webブラウザ外](https://wasmer.io/)でも実行可能です！
 
-       WebAssemblyは、しばしば**WASM**と呼ばれます。
+        WebAssemblyは、しばしば**WASM**と呼ばれます。
 
   - en:
       title: Inside A Module
