@@ -3747,7 +3747,7 @@ pages:
         }
         ```
 
-        This enum is so common, instances of the enum can be created anywhere with the keywords `Some` and `None`.
+        This enum is so common, instances of the enum can be created anywhere with the enum variants `Some` and `None`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20A%20bag%20for%20i32%2C%20holding%20nothing!%20We%20have%20to%20specify%20the%20type%0A%20%20%20%20%2F%2F%20because%20otherwise%20Rust%20would%20not%20know%20what%20type%20of%20bag%20it%20is.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22found%20%7B%7D%20in%20bag!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22found%20nothing%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
     fr:
       title: Option
@@ -3762,7 +3762,7 @@ pages:
         }
         ```
 
-        Ce type d'énumération est tellement commun qu'on peut créer une instance de cette énumération directement avec `Some` et `None`.
+        Ce type d'énumération est tellement commun qu'on peut créer une instance de cette énumération directement avec les variantes d'énumération `Some` et `None`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Une%20structure%20partiellement%20d%C3%A9finie.%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Le%20param%C3%A8tre%20T%20sera%20d%C3%A9fini%20lors%20de%20l'instanciation%20de%20la%20structure.%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20La%20structure%20BagOfHolding%20contiendra%20%C3%A9ventuellement%20un%20%C3%A9l%C3%A9ment%0A%20%20%20%20%2F%2F%20de%20type%20i32%2C%20mais%20ne%20contient%20rien%20pour%20le%20moment!%0A%20%20%20%20%2F%2F%20Nous%20devons%20sp%C3%A9cifier%20le%20type%20car%20autrement%20Rust%20ne%20le%20conna%C3%AEtrait%20pas.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20n'y%20a%20rien%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20y%20a%20quelque%20chose%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20y%20a%20quelque%20chose%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22il%20n'y%20a%20rien%20dans%20le%20sac!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Avec%20'match'%2C%20nous%20pouvons%20d%C3%A9construire%20notre%20'Option'%20%C3%A9l%C3%A9gamment%20et%0A%20%20%20%20%2F%2F%20s'assurer%20que%20nous%20prenions%20en%20compte%20tous%20les%20cas.%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22il%20y%20%7B%7D%20dans%20le%20sac!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22le%20sac%20est%20vide%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
     ie:
       title: Option
@@ -3854,7 +3854,7 @@ pages:
 
         Note that our generics type has multiple *parameterized types* separated by a comma.
 
-        This enum is so common, instances of the enum can be created anywhere with the keywords `Ok` and `Err`.
+        This enum is so common, instances of the enum can be created anywhere with the enum variants `Ok` and `Err`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Result%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Error%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
     fr:
       title: Result
@@ -3871,7 +3871,7 @@ pages:
 
         Note que ce type générique a plusieurs *types paramétrés* séparés par une virgule.
 
-        Cette énumération est très utilisée et on peut créer une instance avec les mots-clés `Ok` et `Err`.
+        Cette énumération est très utilisée et on peut créer une instance avec les variantes d'énumération `Ok` et `Err`.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22ce%20n%27est%20pas%20le%20bon%20nombre%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20Avec%20%27match%27%2C%20nous%20pouvons%20d%C3%A9construire%20notre%20%27Result%27%20%C3%A9l%C3%A9gamment%20et%0A%20%20%20%20%2F%2F%20s%27assurer%20que%20nous%20prenions%20en%20compte%20tous%20les%20cas.%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22trouv%C3%A9%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Erreur%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
     ie:
       title: Result
