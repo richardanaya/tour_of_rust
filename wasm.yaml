@@ -331,6 +331,19 @@ pages:
           [fuera de los navegadores](https://wasmer.io/) también!
 
         WebAssembly es frecuentemente mencionado como **WASM**.
+    ja:
+      title: Chapter 1 - WebAssemblyとは?
+      content_markdown: |
+        WebAssemblyは、単体で実行可能なバイナリ形式のコードです。
+        JavaScriptの代わりとしてWebブラウザのために開発されたもので、いくつかの優位性があります。
+
+        * ローレベルのバイトコードのため、メモリ安全に高速な演算が可能
+        * 既存のプログラミング言語でコンパイルできるよう設計されているので、C/C++やRustなどからもターゲットとしてコンパイルできる
+        * 独立性を保ちつつ、きめ細かいアクセス管理が可能
+        * もとより実行される環境を問わない設計のため、[Webブラウザ外](https://wasmer.io/)でも実行可能です！
+
+       WebAssemblyは、しばしば**WASM**と呼ばれます。
+
   - en:
       title: Inside A Module
       content_markdown: |
