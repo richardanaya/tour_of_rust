@@ -40,11 +40,9 @@ This project also aims to provide this book in as many languages as possible.
 
 # Looking for translators!
 
-If you would like to contribute translations in a language that doesn't exist yet.  Feel free to make an issue and I will modify the generator for your language.
+If you would like to contribute translations in a language that doesn't exist yet.  Feel free to make a PR!
 
-The only file you should modify in your pull request is: **lessons.yaml**
-
-Adding new languages should be as simple as adding new properites per page under an appropriate language code object. Let's assume we're doing spanish and your language code is "es":
+Look for your appropriate appropriate language under the `lessons` folder.  Each chapter has its own file. You can modify an existing chapter's content or if there is one you'd like to translate from the english lessons, copy that chapter file over and modify it's content to your own language. Each page has various properties.
 
 * **title** - this would be your localized page's title
 * **content_markdown** - this would be your localized page's content as markdown using [shodown markdown](https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax)
@@ -63,7 +61,7 @@ Adding new languages should be as simple as adding new properites per page under
 
 ```
 
-Lastly, there is a section for common words you should fill out your localized translations of for deeper experience of the site.
+Lastly, there is a file for common words you should fill out your localized translations of for deeper experience of the site.
 
 ## How to run the project locally
 
