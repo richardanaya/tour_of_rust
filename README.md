@@ -35,7 +35,7 @@ This project also aims to provide this book in as many languages as possible.
 * Português Brasileiro - [Denstone](https://github.com/denstone)
 * Русский - [Danil Kondratiev](https://github.com/knightpp)
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus)
-* 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213)
+* 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213), [Yuji Sugiura](https://github.com/leader22)
 * 한국어 - [fermat39](fermat39) 
 
 # Looking for translators!
