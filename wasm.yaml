@@ -644,6 +644,14 @@ pages:
         Vamos juntar nossos conhecimentos e criar um módulo WebAssembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
 
         `#[no_mangle]` diz ao nosso compilador para manter o nome da nossa função legível para seres humanos.
+    ja:
+      title: 1+1
+      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      content_markdown: |
+        今までに覚えたことを使って、WebAssemblyのモジュールを作ってみましょう。
+        2つの数値を足し合わせてHTMLに表示するだけの関数を**export**してみます。
+
+        `#[no_mangle]` を付与することで、コンパイラーに関数名を難読化しないよう伝えます。
 
   - en:
       title: Chapter 1 Conclusion
