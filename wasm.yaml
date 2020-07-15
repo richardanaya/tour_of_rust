@@ -72,6 +72,14 @@ common_words:
     toc: Índice
     lessons: Unidades
     untranslated: Untranslated
+  ja:
+    chapter: 章
+    tor: WebAssembly ツアー
+    next: 次
+    previous: 前
+    toc: 目次
+    lessons: レッスン
+    untranslated: 未翻訳
 pages:
   - en:
       title: Hello, WebAssembly
@@ -86,6 +94,7 @@ pages:
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
         * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -104,6 +113,7 @@ pages:
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
         * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -126,6 +136,7 @@ pages:
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
         * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -144,6 +155,7 @@ pages:
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
         * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -164,6 +176,7 @@ pages:
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
         * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -186,6 +199,7 @@ pages:
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
         * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -206,6 +220,7 @@ pages:
         * [Rust (Interlingue)] (index_ie.html)
         * [Rust (Português Brasileiro)] (index_pt-br.html)
         * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
         * [C (english)] (index_en_c.html)
         * [C (français)] (index_fr_c.html)
 
@@ -213,6 +228,27 @@ pages:
         vaya al repositorio del Tour de WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
         Puedes navegar por el tour usando el teclado <span class="emoji">⬅️</span> y <span class="emoji">➡️</span>
+    ja:
+      title: こんにちは, WebAssembly
+      content_markdown: |
+        *WebAssembly ツアー*へようこそ。 ここでは、Webを発展させるために、Rustを使ってなにができるかを紹介します。
+        ほとんどの例は、誰にでも十分わかるように書かれていますが、もしあなたが完全なRust初心者の場合は、[Rust ツアー](https://tourofrust.com/)がおすすめです。
+        このツアーはCでも利用可能です。
+
+        * [Rust (english)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
+        * [C (english)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
+
+        コンテンツへの提案や翻訳に貢献したい場合、
+        WebAssembly ツアーの [github リポジトリ](https://github.com/richardanaya/tour_of_rust)をチェックしてください。
+
+        キーボードの <span class="emoji">⬅️</span> と <span class="emoji">➡️</span> でツアーをナビゲートできます。
+
   - chapter: 1
     en:
       title: Chapter 1 - What Is WebAssembly?
@@ -295,6 +331,19 @@ pages:
           [fuera de los navegadores](https://wasmer.io/) también!
 
         WebAssembly es frecuentemente mencionado como **WASM**.
+    ja:
+      title: 1章 - WebAssemblyとは?
+      content_markdown: |
+        WebAssemblyは、単体で実行可能なバイナリ形式のコードです。
+        JavaScriptの代わりとしてWebブラウザのために開発されたもので、いくつかの優位性があります。
+
+        * ローレベルのバイトコードのため、メモリ安全に高速な演算が可能
+        * 既存のプログラミング言語でコンパイルできるよう設計されているので、C/C++やRustなどからもターゲットとしてコンパイルできる
+        * 独立性を保ちつつ、きめ細かいアクセス管理が可能
+        * もとより実行される環境を問わない設計のため、[Webブラウザ外](https://wasmer.io/)でも実行可能です！
+
+        WebAssemblyは、しばしば**WASM**と呼ばれます。
+
   - en:
       title: Inside A Module
       content_markdown: |
@@ -355,6 +404,17 @@ pages:
         * una lista de funciones.
         * qué funciones deben de ser exportadas/importadas.
         * qué datos tienen que estar inicialmente en la memoria de los módulos wasm.
+    ja:
+      title: Moduleについて
+      content_markdown: |
+        WebAssemblyをターゲットにしてコードをコンパイルすると、`.wasm`ファイルができます。これを、**モジュール**と呼びます。
+
+        モジュールは、[バイナリ形式](https://webassembly.github.io/spec/core/index.html)で、どのようにプログラムが振る舞うのかのすべての情報が入っています。
+        たとえば、これらです。
+        * 関数のリスト
+        * どの関数がエクスポート、インポートされるか
+        * どんなデータがあらかじめWASMモジュールのメモリに格納されるか
+
   - en:
       title: Loading A Module
       content_markdown: |
@@ -407,6 +467,16 @@ pages:
         let file = await fetch('mi_modulo.wasm');
         let bytes = await file.arrayBuffer();
         ```
+    ja:
+      title: モジュールのロード
+      content_markdown: |
+        WebAssemblyのモジュールはただのバイト列です。まずはそれをブラウザで読み込む必要があります。
+
+        ```
+        let file = await fetch('my_file.wasm');
+        let bytes = await file.arrayBuffer();
+        ```
+
   - en:
       title: Creating a Module
       content_markdown: |
@@ -457,6 +527,18 @@ pages:
 
         Durante esta fase podemos **importar** funções JavaScript que desejamos que nosso módulo
         tenha acesso. Mostraremos um exemplo no próximo capítulo.
+    ja:
+      title: モジュールの作成
+      content_markdown: |
+        モジュールはバイト列から作成されます。
+
+        ```
+        let module = await WebAssembly.instantiate(bytes);
+        ```
+
+        このとき、JavaScriptの関数などをモジュールがアクセスできるように**import**して渡すこともできます。
+        次の章で紹介します。
+
   - en:
       title: Using a Module
       content_markdown: |
@@ -500,6 +582,16 @@ pages:
         ```
         module.instance.main();
         ```
+    ja:
+      title: モジュールを使用する
+      content_markdown: |
+        モジュールには、JavaScriptからアクセスできる1つ以上の**export**された関数があるはずです。
+        多くの場合、WASMプログラムを起動するための関数があると思います。(例えば`main`, `start`など)
+
+        ```
+        module.instance.main();
+        ```
+
   - en:
       title: 1+1
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
@@ -552,6 +644,14 @@ pages:
         Vamos juntar nossos conhecimentos e criar um módulo WebAssembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
 
         `#[no_mangle]` diz ao nosso compilador para manter o nome da nossa função legível para seres humanos.
+    ja:
+      title: 1+1
+      code: https://webassembly.studio/?embed&f=jg96xg1ovj
+      content_markdown: |
+        今までに覚えたことを使って、WebAssemblyのモジュールを作ってみましょう。
+        2つの数値を足し合わせてHTMLに表示するだけの関数を**export**してみます。
+
+        `#[no_mangle]` を付与することで、コンパイラーに関数名を難読化しないよう伝えます。
 
   - en:
       title: Chapter 1 Conclusion
@@ -573,6 +673,12 @@ pages:
       title: Capítulo 1 - Conclusão
       content_markdown: |
         Espero que fique claro que o WebAssembly não é tão complexo fundamentalmente! No próximo capítulo começaremos a examinar os detalhes de como o JavaScript e p WebAssembly podem falar dos mesmos dados.
+    ja:
+      title: 1章のまとめ
+      content_markdown: |
+        WebAssemblyが基本的には複雑なものではないということが伝わったでしょう！
+        次の章では、JavaScriptとWebAssemblyが互いにデータをやり取りする部分を見ていきます。
+
   - chapter: 2
     en:
       title: Chapter 2 - Sharing Data Structures
@@ -596,6 +702,7 @@ pages:
         JavaScript e seu WebAssembly têm representações de dados muito diferentes no nível da memória.
         Para tornar as coisas mais complexas, a interação com o ambiente host do WebAssembly é muito limitada.
         Neste capítulo exploraremos as estratégias usadas para o vai-e-vem dos dados.
+
   - en:
       title: Importing Functions
       code: https://webassembly.studio/?embed&f=pp20eedhka
