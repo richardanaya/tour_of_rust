@@ -49,16 +49,14 @@ Look for your appropriate appropriate language under the `lessons` folder.  Each
 * **code** (optional) - this would be your localized page's code. This is the "embedded link" generated from https://play.rust-lang.org/ when you hit the "Share" button. Be sure your run the "rustfmt" tool! If you don't provide code, a page will fallback onto an english version of code (if it exists).
 
 ```yaml
-  - es:
-      title: Capítulo 3 - Conclusión
-      content_markdown: |
-        ¡Rust tiene algunos increíbles ** punteros **!
+- title: Capítulo 3 - Conclusión
+  content_markdown: |
+    ¡Rust tiene algunos increíbles ** punteros **!
 
-        * A
-        * `let`
-        * C
-      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%7D%0A
-
+    * A
+    * `let`
+    * C
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%7D%0A
 ```
 
 Lastly, there is a file for common words you should fill out your localized translations of for deeper experience of the site.
