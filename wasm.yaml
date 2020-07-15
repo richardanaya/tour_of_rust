@@ -673,6 +673,12 @@ pages:
       title: Capítulo 1 - Conclusão
       content_markdown: |
         Espero que fique claro que o WebAssembly não é tão complexo fundamentalmente! No próximo capítulo começaremos a examinar os detalhes de como o JavaScript e p WebAssembly podem falar dos mesmos dados.
+    ja:
+      title: 1章のまとめ
+      content_markdown: |
+        WebAssemblyが基本的には複雑なものではないということが伝わったでしょう！
+        次の章では、JavaScriptとWebAssemblyが互いにデータをやり取りする部分を見ていきます。
+
   - chapter: 2
     en:
       title: Chapter 2 - Sharing Data Structures
@@ -696,11 +702,6 @@ pages:
         JavaScript e seu WebAssembly têm representações de dados muito diferentes no nível da memória.
         Para tornar as coisas mais complexas, a interação com o ambiente host do WebAssembly é muito limitada.
         Neste capítulo exploraremos as estratégias usadas para o vai-e-vem dos dados.
-    ja:
-      title: 1章のまとめ
-      content_markdown: |
-        WebAssemblyが基本的には複雑なものではないということが伝わったでしょう！
-        次の章では、JavaScriptとWebAssemblyが互いにデータをやり取りする部分を見ていきます。
 
   - en:
       title: Importing Functions
