@@ -1,0 +1,39 @@
+- title: 'Salute, WebAssembly'
+  content_markdown: >
+    Benevenit al *Tur de WebAssembly*, un tur quel intente esser un introduction
+    al tecnologie
+
+    e qualmen on posse usar Rust por dar plu fortie al web. Si tu es un novon a
+    Rust, noi recomanda li
+
+    [Tour of Rust](https://tourofrust.com/)! Malgré to, li pluparte de nor
+    exemples va esser facil
+
+    a sequer por quicunc. Li tur es anc disponibil in C.
+
+
+    * [Rust (english)] (index.html)
+
+    * [Rust (français)] (index_fr.html)
+
+    * [Rust (Interlingue)] (index_ie.html)
+
+    * [Rust (Português Brasileiro)] (index_pt-br.html)
+
+    * [Rust (Español)] (index_es.html)
+
+    * [Rust (日本語)] (index_ja.html)
+
+    * [C (english)] (index_en_c.html)
+
+    * [C (français)] (index_fr_c.html)
+
+
+    Si tu have suggestiones pri contenete o vole contribuer al traductiones,
+
+    ples vider li [repositoria
+    github](https://github.com/richardanaya/tour_of_rust) del Tur.
+
+
+    Tu posse navigar tra li tur con li claves <span class="emoji">⬅️</span> e
+    <span class="emoji">➡️</span>

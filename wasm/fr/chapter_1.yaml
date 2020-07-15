@@ -1,0 +1,105 @@
+- title: Chapitre 1 - Qu'est-ce que WebAssembly?
+  content_markdown: >
+    WebAssembly est un format binaire pour représenter un code exécutable dans
+
+    un environement isolé. Il a été développé pour être exécuté par les
+    navigateurs
+
+    web et propose une alternative au langage Javascript avec plusieurs
+    avantages
+
+    distincts:
+
+
+    * Étant du bytecode de bas niveau, cela permet d'effectuer des calculs
+
+    plus rapidement que le JavaScript et d'avoir plus de contrôle sur la gestion
+
+    de la mémoire.
+
+    * WebAssembly a été créé en s'inspirant des compilateurs existants,
+    permettant
+
+    ainsi aux langages natifs comme C / C ++ et Rust de produire ce bytecode.
+
+    * Le bytecode étant exécuté dans un environement isolé, cela permet de
+
+    contrôler son exécution.
+
+    * WebAssembly a été construit indépendamment de l'hôte, rendant possible
+
+    son utilisation [en dehors des navigateurs](https://wasmer.io/)!
+
+
+    WebAssembly est souvent racourci en ** WASM **.
+- title: À l'Intérieur d'un Module
+  content_markdown: >
+    Lorsque tu compiles vers du bytecode WebAssembly, le compilateur
+
+    crée un fichier `.wasm` qu'on appele un **module**.
+
+
+    Un module est un [format
+    binaire](https://webassembly.github.io/spec/core/index.html)
+
+    contenant des informations sur le programme wasm et sur la mémoire qu'il
+
+    utilise. Un module contient:
+
+    * une liste de fonctions
+
+    * quelles fonctions doivent être exportées/importées
+
+    * quelles données doivent se trouver initialement dans la mémoire des
+    modules wasm
+- title: Charger un Module
+  content_markdown: >
+    Puisqu'un module WebAssembly n'est qu'un fichier d'octets (en anglais
+    bytes),
+
+    nous devons d'abord charger ces octets dans notre navigateur.
+
+
+    ```
+
+    let file = await fetch('my_file.wasm');
+
+    let bytes = await file.arrayBuffer();
+
+    ```
+- title: Créer d'un Module
+  content_markdown: |
+    Les modules sont créés à partir d'octets.
+
+    ```
+    let module = await WebAssembly.instantiate(bytes);
+    ```
+
+    Au cours de cette phase, nous pouvons également définir les fonctions à
+    **importer** et qui seront utilisées par notre module. Ne t'inquiète pas
+    si ce n'est pas clair, nous verrons un exemple d'import de fonction par
+    la suite.
+- title: Utiliser un Module
+  content_markdown: |
+    Un module peut **exporter** une ou plusieurs fonctions qui
+    seront utilisables par le code JavaScript. Typiquement
+    il existe une fonction à appeler pour démarrer
+    un programme wasm (par exemple `main`,` start`).
+
+    ```
+    module.instance.main();
+    ```
+- title: 1+1
+  code: 'https://webassembly.studio/?embed&f=ays6dkowzyk'
+  content_markdown: |
+    Nous en savons suffisamment pour écrire notre premier module WebAssembly:
+    l'addition de deux nombre! Le résultat sera affiché dans l'html.
+
+    `#[no_mangle]` est un attribut disant au compilateur de conserver
+    le nom de la fonction pour qu'on puisse l'appeler depuis le JavaScript.
+- title: Chapitre 1 - Conclusion
+  content_markdown: |
+    J'espère t'avoir convaincu que, fondamentalement, WebAssembly
+    n'est pas si compliqué que ça! Dans notre prochain chapitre, nous allons
+    commencer à examiner en détail comment JavaScript et WebAssembly peuvent
+    échanger des données.

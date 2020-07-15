@@ -1,0 +1,148 @@
+- title: Kapitel 2 - Ein bisschen Kontrollfluss
+  content_markdown: >
+    In diesem Kapitel werden wir Kontrollflussmethoden in Rust angehen
+
+    (engl. control flow methods). Wenn du ein bisschen Erfahrung in C-verwandten
+    Sprachen
+
+    hast, dürftest du dich hier wie zu Hause fühlen - die ein oder andere
+    Überraschung
+
+    sei dennoch zu erwarten.
+- title: if/else if/else
+  content_markdown: >
+    Codeverzweigungen (branching) bieten viel bekanntes.
+
+
+    Außer den fehlenden Klammern! Wer braucht die schon? Logik war noch nie so
+    sauber.
+
+
+    Die üblichen Vergleichsoperatoren und logischen Operatoren funktionieren
+    noch: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
+
+
+    Versuch ein paar von den Operatoren in den Code einzubauen.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20age%20%3D%2017%3B%0A%20%20%20%20%0A%20%20%20%20if%20age%20%3C%2016%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Keine%20alkoholischen%20Getr%C3%A4nke%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%7D%20else%20if%20age%20%3E%3D%2016%20%26%26%20age%20%3C%2018%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20checking%20(age%20%3E%3D%2016)%20could%20have%20been%20omitted%20here%0A%20%20%20%20%20%20%20%20println!(%22Darf%20Bier%2C%20Wein%20und%20Sekt%20kaufen.%20Keine%20Spirituosen%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Darf%20alles%20kaufen%22)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: loop
+  content_markdown: |
+    Unendliche Schleifen gefällig? `loop` macht es möglich!
+
+    Mit `break` kann die Schleife unterbrochen werden.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20print!(%22%7B%7D%20%22%2C%20x)%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while
+  content_markdown: >
+    `while` Schleifen werden so lange ausgeführt, bis aus der angegeben
+    Kondition `false` evaluiert wird.
+- title: for
+  content_markdown: >
+    `for`-Schleifen in Rust sind ein großes Upgrade.
+
+    Wird ein Ausdruck (expression) in einem Iterator evaluiert, kann dieser in
+    eine
+
+    `for`-Schleife eingebaut werden.
+
+
+    Was ist ein Iterator? Ein Iterator ist ein Objekt, dem die Frage "Was kommt
+    als nächstes?"
+
+    gestellt werden kann. Sind keine Elemente mehr vorhanden, wird die Schleife
+    abgebrochen.
+
+
+    In diesem Beispiel sehen wir, wie in Rust eine Zahlensequenz erstellt wird,
+    über die wir iterieren
+
+    können. Hierbei gibt es zwei unterschiedliche Notationen:
+
+
+    * `x..y` erstellt einen Iterator, der bei `x` anfängt und **vor** `y`
+    aufhört
+
+    * `x..=y` erstellt einen Iterator, der bei `x` anfängt und `y` mit
+    einschließt
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20print!(%220..5%20%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20print!(%22%5Cn0..5%3D%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_markdown: >
+    Du vermisst dein Switch Statement? Rust lässt dich nicht im Stich!
+
+
+    Mittels `match` können Werte mit allen möglichen Konditionen und Werten
+    verglichen werden.
+
+    Konditionen ist hier vielleicht das interessanteste. Kein stupides
+    Vergleichen, ob zwei Werte
+
+    eins zu eins übereinstimmen.
+
+
+    Hier sehen wir das "matching" auf die Zahl `x` angewandt.
+
+
+    `match` in Rust ist **exhaustive** (erschöpfend). Das bedeuted, dass jeder
+    mögliche
+
+    Wert getested werden muss, den die Variable annehmen kann.
+
+
+    Hier sei schon mal erwähnt, dass ein destructuring in Kombination mit match
+    unglaublich
+
+    viel Anwendung in der Sprache findet. Zu viel für ein Einführungskapitel
+    leider,
+
+    weshalb wir uns dafür etwas gedulden müssen.
+- title: Rückgabewerte aus loop
+  content_markdown: >
+    In einem `loop` kann durch das Schlüsselwort `break` ein Wert zurückgegeben
+    werden.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%2213%20gefunden!%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Rückgabewerte aus Blockausdrücken
+  content_markdown: >
+    Als **Block** wird in Rust ein Codestück zwischen zwei geschweiften
+
+    Klammern bezeichnet (`{ /* code block */ }`).
+
+
+    Hier ist eine Besonderheit in Rust: Blockausdrücke, die in `if`,
+
+    Funktionen etc. zu finden sind, können Werte zurückgeben (return).
+
+
+    Noch etwas idiomatisches in Rust: wenn es sich bei der letzten Zeile in
+    einem solchen Codeblock
+
+    um einen Ausdruck (expression) ohne `;` am Ende handelt, interpretiert Rust
+    dies
+
+    als den Rückgabewert.
+
+
+    Für Leute, die ein Fan von ternary Operatoren sind und das
+    Fragezeichensymbol in Rust vermissen,
+
+    `if` Statements bieten dazu die Alternative.</p>"
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22aus%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22nutella%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22nutella%22%20%3D%3E%20%22ist%20nutella%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22nein%2C%20das%20ist%20keine%20nutella%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Essen%20identifizieren%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22aus%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22aus%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: Kapitel 2 Fazit
+  content_markdown: >
+    Was? Das war's schon?
+
+
+    Keine Bange, es gibt noch viel zu erforschen!
+
+    Insbesondere `match` wurde hier außer Acht gelassen, was viele mächtige
+    Features beinhaltet,
+
+    dementsprechend aber auch etwas mehr Hintergrundwissen erfordert.
+
+
+    Im nächsten Kapitel werden wir uns dafür ein bisschen in die
+
+    Datenstrukturen (data structures) von Rust einarbeiten. Worauf warten wir
+    noch?

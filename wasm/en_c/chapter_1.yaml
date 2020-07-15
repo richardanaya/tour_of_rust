@@ -1,0 +1,19 @@
+- clone: en
+- clone: en
+- clone: en
+- clone: en
+- clone: en
+- title: 1+1
+  code: 'https://webassembly.studio/?embed&f=glwzquv2gh8'
+  content_markdown: >
+    Let's put our knowledge all together and make a WebAssembly
+
+    module with a single **export** function `add` for adding two numbers, and
+    put the
+
+    results in HTML.
+
+
+    `__attribute__((visibility("default")))` tells our compiler to keep our
+    function name human readable to JavaScript.
+- clone: en

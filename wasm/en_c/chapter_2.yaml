@@ -1,0 +1,49 @@
+- clone: en
+- title: Importing Functions
+  code: 'https://webassembly.studio/?embed&f=bah3p4wjere'
+  content_markdown: >
+    WebAssembly modules can only call functions that have been explicitly
+    imported.
+
+
+    C uses the `extern` keyword to define signatures of the imported functions.
+- title: Limitations of Functions
+  content_markdown: >
+    Parameter and return types of functions are limited to:
+
+
+    * int/long
+
+    * float/double
+
+
+    So in order to communicate between JavaScript and WebAssembly we will have
+    to get clever with the meaning of numbers!
+
+
+    C is fairly good at converting it's primitive types to WebAssembly's
+    numerical equivalents.
+- clone: en
+- clone: en
+- clone: en
+- clone: en
+  code: 'https://webassembly.studio/?embed&f=vh15t7nok4p'
+- clone: en
+  code: 'https://webassembly.studio/?embed&f=0wwbpbvt4kwk'
+- clone: en
+- title: Chapter 2 Conclusion
+  content_markdown: >
+    Crossing the boundry between host and WebAssembly program is cumbersome, but
+    with it can come great performance. 
+
+    It's important to remind ourselves that WebAssembly is a low -level
+    executable byte code with concerns about memory
+
+    structures that are much fine-grained than JavaScript. Check out your
+    programming language's
+
+    library support for tools that help make this an easier task!
+
+
+    In our next chapter we will talk about a technique for dynamically calling
+    JavaScript functions and garbage collection!

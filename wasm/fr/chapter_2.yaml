@@ -1,0 +1,283 @@
+- title: Chapitre 2 - Partage de structures de données
+  content_markdown: >
+    JavaScript et ton programme WebAssembly ont des représentations très
+    différentes des données au niveau de la mémoire.
+
+    Pour rendre les choses plus complexes, l'interaction avec l'environnement
+    hôte de WebAssembly est très limité.
+
+    Dans ce chapitre, nous explorerons les stratégies utilisées pour échanger
+    les données entre JavaScript et WebAssembly.
+- title: Import de Fonctions
+  code: 'https://webassembly.studio/?embed&f=wy84hvb1mec'
+  content_markdown: >
+    Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui
+    ont été explicitement importées.
+
+
+    Rust utilise `extern" C "{...}` pour répertorier les signatures des
+    fonctions importées.
+
+
+    Note que l'appel d'une fonction importée est considéré comme `unsafe`
+    (dangereux) par Rust car le compilateur
+
+    ne peut faire aucune garantie sur ce qui se passe dans son implémentation.
+- title: Limitations des Fonctions
+  content_markdown: >
+    Les types des paramètres et retours d'une fonction sont limités à:
+
+
+    * i32/i64
+
+    * f32/f64
+
+
+    Donc, pour communiquer entre JavaScript et WebAssembly, nous devrons ruser
+    sur les types à utiliser!
+
+
+    Rust permet facilement de convertir ces types primitifs en équivalents
+    numériques de WebAssembly.
+- title: Exportation de la Mémoire
+  content_markdown: >
+    Les programmes WebAssembly exportent leur mémoire sous forme d'un long
+    tableau d'octets (jusqu'à 4 Go!).
+
+
+    L'environnement hôte peut interpréter à partir de ces octets les structures
+    de données créées par le code du programme.
+
+
+    Des tableaux d'octets peuvent également être écrits directement dans la
+    mémoire d'un programme par
+
+    l'environnement hôte.
+
+
+    L' écriture et la lecture d'octets vers (ou depuis) la mémoire d'un
+    programme WebAssembly sont
+
+    les principaux moyens d'entrée et de sortie des types non primitifs.
+- title: ArrayBuffer
+  content_markdown: |
+    JavaScript représente le long tableau d'octets avec un `ArrayBuffer`.
+
+    Vous pouvez obtenir une vue typée de ce buffer avec laquelle on peut
+    intéragir efficacement.
+
+    `` `JavaScript
+    // Crée un tableau de 8 octets.
+    let bytes = new ArrayBuffer(8);
+    // Affiche ces 8 octets comme des entiers non signés 8 bits.
+    let u8_bytes = new Uint8Array(bytes);
+    // Modification du tableau d'octets.
+    u8_bytes[0] = 16; // 00010000
+    u8_bytes[1] = 1; // 00000001
+    // Réinterprète les bytes u8_bytes de l'ArrayBuffer comme
+    // des entiers signés 32 bits petits-boutiste (little endian).
+    let i32_bytes = new Int32Array(u8_bytes.buffer);
+    console.log(i32_bytes[0]);
+    /// 272 ou 00010000000000010000000000000000
+    ```
+- title: Encodage/Décodage UTF-8
+  content_markdown: >
+    JavaScript fournit des fonctions utilitaires pour écrire/lire des chaînes
+    UTF-8 vers/depuis
+
+    les octets à l'intérieur des objets `ArrayBuffer`.
+
+
+    ```JavaScript
+
+    let bytes = new ArrayBuffer(8);
+
+    const data = new Uint8Array(bytes);
+
+    data[0] = 83; // S
+
+    data[1] = 65; // A
+
+    data[2] = 76; // L
+
+    data[3] = 85; // U
+
+    data[4] = 84; // T
+
+    data[5] = 33; // !
+
+    let str_len = 6;
+
+    const utf8dec = new TextDecoder("utf-8");
+
+    // Le 'sous-tableau' (en anglais subarray) prend l'index de début et de fin.
+
+    let text = utf8dec.decode(data.subarray(0,str_len));
+
+    console.log(text) // Salut!
+
+
+    const utf8enc = new TextEncoder("utf-8");
+
+    let text_bytes = utf8enc.encode(text);
+
+    console.log(text_bytes) 
+
+    // Uint8Array(6) [ 83, 65, 76, 85, 84, 33 ]
+
+    ```
+- title: Affichage de texte depuis WebAssembly
+  code: 'https://webassembly.studio/?embed&f=o2u0e8p0lpi'
+  content_markdown: >
+    Explorons un exemple simple d'affichage de texte à partir d'un programme
+    WebAssembly.
+
+
+    Nous devons:
+
+    1. Créer du texte compatible utf-8 dans la mémoire de notre programme.
+
+    2. Déterminer la longueur des octets de notre texte.
+
+    3. Envoyer d'une manière ou d'une autre l'index de début du premier octet
+
+    et la longueur en octets du texte au navigateur hôte afin qu'il
+
+    puisse appeler `console.log`.
+
+
+    Voici un exemple de ce à quoi ressemblerait la réception de la fonction
+    JavaScript:
+
+
+    ```JavaScript
+
+    wasm_log(start,len) {
+      // Extrait le texte de l'emplacement mémoire.
+      const utf8dec = new TextDecoder("utf-8");
+      let buffer = module.instance.exports.memory.buffer;
+      let memory = new Uint8Array(buffer);
+      let text = utf8dec.decode(memory.subarray(start,start+len));
+      console.log(text);
+    }
+
+    ```
+- title: Envoi de Texte vers un Programme WebAssembly
+  code: 'https://webassembly.studio/?embed&f=rasfcwobpv'
+  content_markdown: >
+    Explorons l'idée opposée. Imagine que nous voulons envoyer du texte vers
+    notre
+
+    programme WebAssembly.
+
+
+    Nous devons:
+
+    1. Déterminer la longueur en octets du texte que nous souhaitons
+    transmettre.
+
+    2. Allouer suffisamment d'espace dans notre mémoire pour ces octets.
+
+    3. Copier les octets dans la mémoire de notre programme à la position que
+    nous
+
+    venons d'allouer.
+
+    4. Informer au programme WebAssembly que nous avons mis ces octets dans sa
+    mémoire
+
+    en lui indiquant l'index et la taille.
+
+
+    Voici un exemple de ce à quoi ressemble cette initialisation:
+
+
+    ```JavaScript
+
+    // Transforme "Ferris" en octets.
+
+    const utf8enc = new TextEncoder("utf-8");
+
+    let text = "Ferris";
+
+    let text_bytes = utf8enc.encode(text);
+
+
+    // Alloue de l'espace mémoire pour le texte.
+
+    let len = text_bytes.length;
+
+    let start = module.instance.exports.wasm_malloc(len);
+
+
+    // Met le texte dans la mémoire du programme WebAssembly.
+
+    let buffer = module.instance.exports.memory.buffer;
+
+    let memory = new Uint8Array(buffer);
+
+    memory.set(text_bytes, start);
+
+
+    // Exécute le programme.
+
+    module.instance.exports.main(start,len);
+
+    ```
+- title: Découverte des représentations
+  content_markdown: >
+    Il est possible que tu trouves cela pénible de devoir passer la taille des
+    données
+
+    en mémoire ainsi que l'index de début de celles-ci.
+
+
+    Ne pourrions-nous pas ruser pour échanger une structure donnée de manière
+    simple
+
+    sans devoir passer chaque champs un à un? Pense au chaînes de caractères du
+    C
+
+    (en anglais * C strings *) qui déclare la fin du texte avec le caractère
+    `\0`.
+
+
+    Tu l'as peut-être déjà à l'esprit, mais nous pouvons utiliser le json! Ce
+    n'est ni plus ni
+
+    moins qu'une chaîne de caractères et tu sais déjà comment échanger ce type
+    de donnée! 
+
+
+    N'oublie pas que tu as le contrôle sur la représentation mémoire des données
+    et
+
+    c'est donc à toi de choisir celle qui te simplifie le travail.
+- title: Chapitre 2 - Conclusion
+  content_markdown: >
+    Echanger des données entre l'hôte et un programme WebAssembly est
+    fastidieux,
+
+    mais cela peut entraîner de grands gains en performances.
+
+    Il est important de se rappeler que WebAssembly exécute du bytecode
+    bas-niveau et
+
+    nous donne un contrôle sur la mémoire beaucoup plus fin que JavaScript.
+
+    N'hésite pas non plus à regarder s'il n'existe pas de librairies Rust pour
+    te
+
+    simplifier la tâche.
+
+    Par exemple, [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) est
+    une
+
+    option populaire.
+
+
+    Dans le prochain chapitre, nous parlerons d'une technique pour appeler
+
+    dynamiquement les fonctions JavaScript et nous aborderons
+
+    le ramasse-miettes (garbage collector)!

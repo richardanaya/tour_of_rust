@@ -1,0 +1,363 @@
+- title: Chapitre 7 - Programmation orientée object
+  content_markdown: >
+    L'utilisation de fonctions pour exprimer une idée ou modéliser le
+    comportement
+
+    et les données d'un programme a toujours été une manière éprouvée d'écrire
+    un
+
+    programme (C le fait depuis des décennies!). Cependant, il existe d'autres
+    paradigmes
+
+    de programmation permettant l'agrégation et l'abstraction de données. Vous
+    connaissez
+
+    peut-être déjà la programmation orientée objet (POO). Dans ce chapitre, nous
+
+    explorerons le langage de programmation Rust au-delà des fonctions.
+- title: Qu'est-ce que la POO?
+  content_markdown: >
+    La programmation orientée objet se réfère grossièrement aux langages de
+
+    programmation qui possèdent un certain nombre des fonctionnalités suivantes:
+
+    * Encapsulation - Association de champs et de fonctions dans une seule
+    unitée
+
+    appelée *objet*.
+
+    * Abstraction - Dissimulation des champs et des fonctions pour cacher les
+
+    détails de l'implémentation d'un objet.
+
+    * Polymorphisme - Mettre à disposition une interface unique pour des entités
+
+    pouvant avoir des types différents.
+
+    * Héritage - La capacité d'un objet d'hériter des caractéristiques d'un
+    autre
+
+    objet.
+- title: Rust n'est pas POO
+  content_markdown: >
+    Il n'y a pas d'héritage avec Rust.
+
+
+    * Les structures ne peuvent pas hériter des champs d'une structure parente.
+
+    * Les structures ne peuvent pas hériter des fonctions d'une structure
+    parente.
+
+
+    Cela dit, Rust implémente de nombreuses fonctionnalités qui nous permettent
+
+    de ne pas regretter l'héritage.        
+- title: Encapsulation avec des méthodes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: |
+    Avec Rust, un objet est représenté par une structure. On peut associer
+    à celle-ci certaines fonctions (également appelées *méthodes*).
+
+    Le premier paramètre de toute méthode doit être une référence de l'instance
+    associée à l'appel de la méthode (par exemple `instanceOfObj.foo()`).
+    Rust utilise:
+    * `&self` - Référence immuable de l'instance.
+    * `&mut self` - Référence mutable de l'instance.
+
+    Les méthodes sont définies dans un bloc d'implémentation
+    avec le mot clé `impl`:
+    ```rust
+    impl MyStruct { 
+      ... 
+      fn foo(&self){
+        ...
+      }
+    }
+    ```
+- title: Abstraction avec différents niveaux de visibilité
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: |
+    Rust peut encapsuler le fonctionnement interne des objets.
+
+    Par défaut, les champs et les méthodes ne sont accessibles
+    qu'à l'intérieur du module auquel ils appartiennent.
+
+    Le mot-clé `pub` permet d'exposer un champ ou une méthode
+    pour qu'il ou elle soit visible en dehors d'un module.
+- title: Polymorphisme avec les traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
+  content_markdown: >
+    Rust rend possible le polymorphisme grâce aux 'traits'. Les traits
+
+    nous permettent d'associer un ensemble de méthodes à une structure.
+
+
+    Il faut tout d'abord définir la signature des méthodes d'un trait:
+
+
+    ```
+
+    trait MyTrait {
+      fn foo(&self);
+      ...
+    }
+
+    ```
+
+
+    Quand une structure implémente un trait, le trait établit un contrat entre
+
+    la structure et les méthodes que la structure doit implémenter. Cela nous
+
+    permetra d'interagir avec la structure à travers le type du trait
+
+    (par exemple `&dyn MyTrait`) sans avoir à connaître le type réel.
+
+
+    Les méthodes du trait implémentées par la structure sont définies dans un
+    bloc
+
+    d'implémentation:
+
+
+    ```rust
+
+    impl MyTrait for MyStruct { 
+      fn foo(&self){
+        ...
+      }
+      ... 
+    }
+
+    ```
+- title: Méthodes implémentées sur les traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: |
+    Un 'trait' peut lui-même implémenter une ou plusieurs méthodes.
+
+    Les méthodes d'un trait n'ont pas accès aux champs des structures
+    mais elles peuvent être utiles pour partager un comportement
+    entre plusieurs implémentations de traits.
+- title: Hériter d'un trait
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: |
+    Un trait peut hériter d'un autre trait.
+- title: Dispatch dynamique ou statique
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Une méthode est exécutée de deux manières:
+
+    * Dispatch statique - Lorsque le type de l'instance est connu, nous avons
+
+    une connaissance directe de la méthode à appeler.
+
+    * Dispatch dynamique - Lorsque le type de l'instance n'est pas connu, Rust
+
+    doit se débrouiller pour appeler la bonne méthode.
+
+
+    Les types de traits `&dyn MyTrait` nous permettent de travailler
+    indirectement
+
+    avec des instances d'objets en utilisant un dispatch dynamique.
+
+
+    Lorsque qu'un dispach dynamique est utilisé, Rust nous encouragera (il
+    affichera
+
+    un warning) à placer `dyn` devant le type du trait pour indiquer que c'est
+    un
+
+    trait.
+
+
+    Détails de la mémoire:
+
+    * Le dispach dynamique est légèrement plus lent que le dispatch statique car
+
+    il faut trouver la méthode à appeler.
+- title: Objets trait
+  content_markdown: |
+    Lorsque nous transmettons l'instance d'un objet à un paramètre de
+    type `&dyn MyTrait`, nous transmettons ce que l'on appelle un
+    *objet trait* (en anglais trait object).
+
+    Un objet trait est ce qui nous permet d'appeler indirectement les bonnes
+    méthodes d'une instance via un dispach dynamique. Un objet trait est une
+    structure qui contient le pointeur de l'instance ainsi qu'une liste de
+    pointeurs vers les méthodes de cette instance.
+
+    Détails de la mémoire:
+    * Cette liste de fonctions est connue en C++ sous le nom de *vtable*.
+- title: Gestion de données sans taille
+  content_markdown: >
+    Les traits présentent un défi intéressant lorsque nous voulons les stocker
+
+    dans une autre structure. Les traits masquent la structure originelle et
+
+    notamment sa taille. Avec Rust, les éléments sans taille connue et qui sont
+
+    stockées dans une structure sont traitées de deux manières:
+
+
+    * `génériques` - Le compilateur Rust créer des structures ou des fonctions
+
+    dont la taille est connue par l'utilisation de types paramétrés
+    (génériques).
+
+    * `données sur le tas` - En mettant l'instance sur le tas et en stockant
+
+    uniquement un pointeur vers cette instance. Cela nous donne un niveau
+
+    d'indirection nous évitant d'avoir à se soucier de la taille du type. Il
+
+    existe également d'autres moyens!
+- title: Fonctions géneriques
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20Le%20type%20est%20connu%20%C3%A0%20la%20compilation%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Avec Rust les génériques vont de pair avec les traits. Lorsqu'un paramètre
+
+    de fonction est un type paramétré `T`, le compilateur contraint les types
+    qui
+
+    peuvent être utilisés comme argument de la fonction. Le mot-clé `where`
+    permet
+
+    de lister les traits que l'argument doit implémenter.
+
+
+    Dans cet exemple, le type `T` doit implémenter le trait` Foo`:
+
+    ```rust
+
+    fn my_function<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+
+    En utilisant des génériques, nous créons des fonctions statiquement typées
+
+    au moment de la compilation dont le type et la taille seront connus. Cela
+
+    nous permet d'effectuer un dispatch statique et de stocker des valeurs dont
+
+    la taille est connue.
+- title: Fonctions génériques condensées
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20Le%20type%20est%20connu%20%C3%A0%20la%20compilation.%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: |
+    Rust possède un raccourci pour exprimer les génériques contraintes par
+    un trait:
+
+    ```rust
+    fn my_function(foo: impl Foo) {
+        ...
+    }
+    ```
+
+    Cela équivaut à écrire:
+
+    ```rust
+    fn my_function<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22chante%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
+  content_markdown: |
+    `Box` est une structure de données qui permet de déplacer les données
+    de la pile vers le tas.
+
+    `Box` est également appelé *pointeur intelligent* (en anglais smart
+    pointer) qui contient un pointeur vers des données sur le tas.
+
+    `Box` étant de taille connue (la taille du pointeur), on l'utilise
+    souvent comme un moyen de stocker une référence dans une structure
+    lorsque cette dernière doit connaître la taille de certains éléments.
+
+    `Box` est très souvent utilisé et on le fait de cette manière:
+
+    ```rust
+    Box::new(Foo { ... })
+    ```
+- title: Structures génériques revisitées
+  content_markdown: >
+    Les types d'une structure générique peuvent également être contraints par
+    des
+
+    traits.
+
+
+    ```rust
+
+    struct MyStruct<T>
+
+    where
+        T: MyTrait
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+    Quant à la définition des méthodes d'une structure paramétrée, celle-ci
+
+    est faite de la manière suivante (le type paramétré peut être utilisé
+
+    dans le bloc d'implémentation):
+
+
+    ```rust
+
+    impl<T> MyStruct<T> {
+        ...
+    }
+
+    ```
+- title: Chapitre 7 - Conclusion
+  content_markdown: >
+    Nous en savons désormais beaucoup pour pouvoir représenter clairement
+
+    nos idées avec Rust! Les abstractions peuvent sembler simples mais elles
+
+    sont suffisamment puissantes pour faire en sorte qu'écrire un programme
+
+    Rust devienne une partie de plaisir. Dans ce chapitre, nous avons vu très
+
+    brièvement les pointeurs intelligents avec `Box`. Dans le chapitre suivant,
+
+    nous découvrirons comment les pointeurs intelligents peuvent nous aider
+
+    dans d'autre cas où une gestion spéciale de la mémoire est requise.
+
+
+    Bien que les ressources suivantes soient en anglais, nous vous recommendons
+
+    celles-ci. Car de toute façon il faudra bien se mettre à l'anglais,
+
+    pas vrai <span class=\"emoji\">\U0001F604</span>?
+
+    * [Video - La programmation orientée objet en 7
+    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Article - Le plus rapidement vous oublierez la POO, le mieux cela sera
+    pour vous et votre
+    logiciel](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)

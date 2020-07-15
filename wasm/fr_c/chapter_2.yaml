@@ -1,0 +1,56 @@
+- clone: fr
+- title: Import de Fonctions
+  code: 'https://webassembly.studio/?embed&f=24dhd9oyxo4'
+  content_markdown: >
+    Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui
+    ont été explicitement importées.
+
+
+    C utilise le mot-clé `extern` pour définir les signatures des fonctions
+    importées.
+- title: Limitations des Fonctions
+  content_markdown: >
+    Les types de paramètres et de fonctions de retour sont limités à:
+
+
+    * int/long
+
+    * float/double
+
+
+    Donc, pour communiquer entre JavaScript et WebAssembly, nous devrons ruser
+    sur les types à utiliser!
+
+
+    C permet facilement de convertir ces types primitifs en équivalents
+    numériques de WebAssembly.
+- clone: fr
+- clone: fr
+- clone: fr
+- clone: fr
+  code: 'https://webassembly.studio/?embed&f=1k8ag8em8q9'
+- clone: fr
+  code: 'https://webassembly.studio/?embed&f=etabmws7uru'
+- clone: fr
+- title: Chapitre 2 - Conclusion
+  content_markdown: >
+    Echanger des données entre l'hôte et un programme WebAssembly est
+    fastidieux,
+
+    mais cela peut entraîner de grands gains en performances.
+
+    Il est important de se rappeler que WebAssembly exécute du bytecode
+    bas-niveau et
+
+    nous donne un contrôle sur la mémoire beaucoup plus fin que JavaScript.
+
+    N'hésite pas non plus à regarder s'il n'existe pas de librairies C pour te
+
+    simplifier la tâche.
+
+
+    Dans le prochain chapitre, nous parlerons d'une technique pour appeler
+
+    dynamiquement les fonctions JavaScript et nous aborderons le
+
+    ramasse-miettes (garbage collector)!

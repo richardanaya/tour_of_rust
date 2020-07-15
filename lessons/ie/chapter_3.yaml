@@ -1,0 +1,175 @@
+- title: Capitul 3 - Basic Tipes de Data-Structura
+  content_markdown: >
+    Li témpor ha venit por explorar ultra li tipes basic! In ti-ci capitul noi
+    va vider li max primitiv 
+
+    data-structuras in Rust, atentente pri qualmen ili representa se in li
+    memorie. Yo crede que tu va 
+
+    juir vider quant litt Rust oculta de te pri qualmen functiona li coses.
+- title: Structuras
+  content_markdown: >
+    Un `struct` es un colection de fields (campes).
+
+
+    Un *field* es simplicmen un valore de data asociat a un data-structura. Su
+    valore posse esser un tip primitiv o un data-structura.
+
+
+    Su definition es simil a un plan por li compilator pri qualmen plazzar li
+    campes in memorie proxim unaltru.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMarin%20%7B%0A%20%20%20%20%2F%2F%20String%20es%20un%20struct%0A%20%20%20%20tip_de_animale%3A%20String%2C%0A%20%20%20%20nomine%3A%20String%2C%0A%20%20%20%20brasses%3A%20i32%2C%0A%20%20%20%20jambes%3A%20i32%2C%0A%20%20%20%20arme%3A%20String%2C%0A%7D
+- title: Calling Methods
+  content_markdown: |
+    Need translation.
+- title: Memorie
+  content_markdown: >
+    Programmas in Rust have 3 regiones de memorie ú es plazzat li data:
+
+    * **data-memorie** - Por data con un grandore fix e **static** (a saver,
+    sempre disponibil durant li vive del programma). 
+
+    Ples considerar li textu in tui programma (p.ex. "Salute Munde!"); li bytes
+    de ti-ci textu es solmen leet e pro to 
+
+    on plazza les in ti-ci loc. Li compilatores sovente optimisa ti tip data, on
+    considera les rapidissim a usar pro que 
+
+    lor locs es conosset e fix.
+
+    * **stack memory** (cumul-memorie) - Por data declarat quam variabiles intra
+    un function. Li loc de ti-ci memorie 
+
+    ne changea se durant li duration del vocation de un function, e pro to li
+    compilatores posse optimisar li code 
+
+    por far data in li cumul rapid a utilisar.
+
+    * **heap memory** (amasse-memorie) - Por data creat durant que li aplication
+    execute se. Li data in ti-ci loc posse esser 
+
+    adjuntet, movet, removet, mesurat, etc. Pro su natura dinamic on considera
+    it plu lent a utilisar, ma it possibilisa 
+
+    plu creativ usationes de memorie. Quande on adjunte data a ti-ci region on
+    nomina it un **alocation**. Quande on remove data 
+
+    de it on nomina it un **dealocation**.
+- title: Creation de Data in Memorie
+  content_markdown: >
+    Quande on **instantia** un **struct** in nor code, li programma crea li data
+    por li camp relatet con it ye láteres in li memorie.
+
+
+    Noi instantia per specificar omni camp-valores intra
+
+
+    `StructNómine { ... }` .
+
+
+    Accesse es dat al campes de un struct con li punctu-operator `.`.
+
+
+    Detallies pri memorie in nor exemple:
+
+
+    * Li textu intra li signes de citation es data quel es solmen leet (p.ex.
+    "ferris"), e pro to es plazzat in li
+
+    *region por data-memorie*
+
+    * Li function-vocation `String::from` crea li struct `String` quel es
+    plazzat lateralmen con li campes de CreaturaMarit 
+
+    sur li *stack*. Un String representa textu changeabil, fante it possibil
+    quam seque:
+
+    1. Per crear memorie sur li *heap* por li textu ú it posse esser modificat
+
+    2. Per aprovisionar un referentie a ti loc de memorie sur li *heap* e
+    aprovisionar it in li struct `String` 
+
+    (plu detallies pri to in lectiones a sequer)
+
+    * In fine, nor amics *Ferris* e *Sarah* possede data-structuras queles
+    sempre va haver locs fix in nor programma,
+
+    e pro to es plazzat sur li *stack*.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMarin%20%7B%0A%20%20%20%20tip_de_animale%3A%20String%2C%0A%20%20%20%20nomine%3A%20String%2C%0A%20%20%20%20brasses%3A%20i32%2C%0A%20%20%20%20jambes%3A%20i32%2C%0A%20%20%20%20arme%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Li%20data%20de%20CreaturaMarin%20es%20sur%20li%20stack%0A%20%20%20%20let%20ferris%20%3D%20CreaturaMarin%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Anc%20li%20struct%20String%20es%20sur%20li%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20ma%20possede%20un%20referentie%20al%20data%20sur%20li%20heap%0A%20%20%20%20%20%20%20%20tip_de_animale%3A%20String%3A%3Afrom(%22crabe%22)%2C%0A%20%20%20%20%20%20%20%20nomine%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20brasses%3A%202%2C%0A%20%20%20%20%20%20%20%20jambes%3A%204%2C%0A%20%20%20%20%20%20%20%20arme%3A%20String%3A%3Afrom(%22griffe%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20CreaturaMarin%20%7B%0A%20%20%20%20%20%20%20%20tip_de_animale%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20nomine%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20brasses%3A%208%2C%0A%20%20%20%20%20%20%20%20jambes%3A%200%2C%0A%20%20%20%20%20%20%20%20arme%3A%20String%3A%3Afrom(%22nullcos%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20es%20un%20%7B%7D.%20Ili%20have%20%7B%7D%20brasses%2C%20%7B%7D%20jambes%2C%20e%20es%20armat%20con%20un%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.nomine%2C%20ferris.tip_de_animale%2C%20ferris.brasses%2C%20ferris.jambes%2C%20ferris.arme%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20es%20un%20%7B%7D.%20Ili%20have%20%7B%7D%20brasses%2C%20e%20%7B%7D%20jambes.%20Ili%20have%20null%20armes..%22%2C%0A%20%20%20%20%20%20%20%20sarah.nomine%2C%20sarah.tip_de_animale%2C%20sarah.brasses%2C%20sarah.jambes%0A%20%20%20%20)%3B%0A%7D%0A
+- title: Tuplic Structs
+  content_markdown: |
+    Por esser concis, on posse crear structs queles on usa quam un tuple.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Ti%20es%20ancor%20un%20struct%20sur%20un%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+- title: Unitic Structs
+  content_markdown: >-
+    Structs in fact ne besona quelcunc campes in ili.
+
+    Quam mentionat in Capitul 1 un *unit* es un altri metode por dir vacui tuple
+    `()`. Pro to on nomina un tal struct *Unit-like* (unitic, unitesc).
+
+    Tal structs es rarmen usat.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Ti%20es%20ancor%20un%20struct%20sur%20un%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0Av
+- title: Enumerationes
+  content_markdown: >
+
+    Enumerationes possibilisa li creation de un nov tip quel usa li clave-parol
+    `enum` e quel posse posseder li valore 
+
+    de pluri marcat elementes.
+
+
+    Con `match` on es assecurat tractar se con omni possibil valores del enum,
+    fante it un potent utensile in li creation 
+
+    de code de alt qualitá.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Specie%20%7B%0A%20%20%20%20Crabe%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Pisc%2C%0A%20%20%20%20Mollusco%2C%0A%7D%0A%0Astruct%20CreaturaMarin%20%7B%0A%20%20%20%20specie%3A%20Specie%2C%0A%20%20%20%20nomine%3A%20String%2C%0A%20%20%20%20brasses%3A%20i32%2C%0A%20%20%20%20jambes%3A%20i32%2C%0A%20%20%20%20arme%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Li%20data%20de%20CreaturaMarin%20es%20sur%20li%20stack%0A%20%20%20%20let%20ferris%20%3D%20CreaturaMarin%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Li%20struct%20String%20es%20anc%20sur%20li%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20ma%20possede%20un%20referentie%20de%20data%20sur%20li%20heap%0A%20%20%20%20%20%20%20%20specie%3A%20Specie%3A%3ACrabe%2C%0A%20%20%20%20%20%20%20%20nomine%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20brasses%3A%202%2C%0A%20%20%20%20%20%20%20%20jambes%3A%204%2C%0A%20%20%20%20%20%20%20%20arme%3A%20String%3A%3Afrom(%22griffe%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Ci%20on%20usa%20match%20por%20comparar%20contra%20omni%20possibil%20%27brasse%27%20(arm)%20del%0A%20%20%20%20%2F%2F%20enum.%20Li%20compilator%20va%20incolerar%20se%20si%20on%20ne%20include%20omni%20possibil%0A%20%20%20%20%2F%2F%20brasses%20in%20li%20comparation.%0A%20%20%20%20match%20ferris.specie%20%7B%0A%20%20%20%20%20%20%20%20Specie%3A%3ACrabe%20%3D%3E%20println!(%22ferris%20es%20un%20crabe%22)%2C%0A%20%20%20%20%20%20%20%20Specie%3A%3AOctopus%20%3D%3E%20println!(%22ferris%20es%20un%20octopus%22)%2C%0A%20%20%20%20%20%20%20%20Specie%3A%3APisc%20%3D%3E%20println!(%22ferris%20es%20un%20pisc%22)%2C%0A%20%20%20%20%20%20%20%20Specie%3A%3AMollusco%20%3D%3E%20println!(%22ferris%20es%20un%20mollusco%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Enumerationes con Data
+  content_markdown: >
+    Li elementes de `enum` posse haver un o plu data-tipes, quel es un poc simil
+    a *union* in C.
+
+
+    Quande on fa un pattern match (filtrage de mustres) con `match`, on posse
+    ligar un nómine de variabile a chascun data-valore.
+
+
+    Detallies pri `enum` in memorie:
+
+    * Un data-valore por un enum va posseder un grandore egal a su max grand
+    element. Con to, omni possibil valores 
+
+    va posser intrar li sam loc de memorie.
+
+    * Ultra le data-tipes de elementes (si ili trova se), chascun element have
+    un valore numeric 
+
+    quel representa su tag (marcation).
+
+
+    Altri detallies:
+
+    * `enum` in Rust es anc conosset quam un *tagged-union* (marcat union)
+
+    * Li combination de tipes por crear un nov tip es li cose pri quel li gente
+    parla quande ili di que Rust 
+
+    possede *algebraic types*.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Specie%20%7B%20Crabe%2C%20Octopus%2C%20Pisc%2C%20Mollusco%20%7D%0Aenum%20TipVenen%20%7B%20Acidic%2C%20Dolorosi%2C%20Mortific%20%7D%0Aenum%20Grandore%20%7B%20Grand%2C%20Litt%20%7D%0Aenum%20Arme%20%7B%0A%20%20%20%20Griffe(i32%2C%20Grandore)%2C%0A%20%20%20%20Venen(TipVenen)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20CreaturaMarin%20%7B%0A%20%20%20%20specie%3A%20Specie%2C%0A%20%20%20%20nomine%3A%20String%2C%0A%20%20%20%20brasses%3A%20i32%2C%0A%20%20%20%20jambes%3A%20i32%2C%0A%20%20%20%20arme%3A%20Arme%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Li%20data%20de%20CreaturaMarin%20es%20sur%20li%20stack%0A%20%20%20%20let%20ferris%20%3D%20CreaturaMarin%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Anc%20li%20struct%20String%20es%20sur%20li%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20ma%20possede%20un%20referentie%20al%20data%20sur%20li%20heap%0A%20%20%20%20%20%20%20%20specie%3A%20Specie%3A%3ACrabe%2C%0A%20%20%20%20%20%20%20%20nomine%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20brasses%3A%202%2C%0A%20%20%20%20%20%20%20%20jambes%3A%204%2C%0A%20%20%20%20%20%20%20%20arme%3A%20Arme%3A%3AGriffe(2%2C%20Grandore%3A%3ALitt)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.specie%20%7B%0A%20%20%20%20%20%20%20%20Specie%3A%3ACrabe%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.arme%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Arme%3A%3AGriffe(num_griffes%2C%20grandore)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20descrition_de_grandore%20%3D%20match%20grandore%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Grandore%3A%3AGrand%20%3D%3E%20%22grand%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Grandore%3A%3ALitt%20%3D%3E%20%22litt%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20es%20un%20crabe%20con%20%7B%7D%20%7B%7D%20griffes%22%2C%20num_griffes%2C%20descrition_de_grandore)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20es%20un%20crabe%20con%20alquel%20altri%20arme%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20es%20alquel%20altri%20animale%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Capitul 3 - Conclusion
+  content_markdown: >
+    Quam excitant! Noi ja nu possede un tre basic utensilarium por representar
+    li forme de nor idés in nor code. 
+
+    Esperabilmen desde nu noi va posseder un poc aclaration pri qualmen li
+    operationes fundamental in Rust labora junt 
+
+    in harmonie e con concision con su tipes. A sequer noi va parlar pri un
+    concept quel da nor data-types 
+
+    mem plu flexibilitá e plu representation: *generics*.

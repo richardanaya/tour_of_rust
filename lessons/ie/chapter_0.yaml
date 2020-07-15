@@ -1,0 +1,23 @@
+- title: >-
+    Salute, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Salute%2C%20%F0%9F%A6%80%22)%3B%0A%7D
+  content_html: >-
+    <p>Benevenit al <b>Tur de Rust</b>. Li tur intente esser un guide explicat
+    passu a passu al caracteristicas trovat in li lingue de programmation Rust.
+    On considera Rust un lingue complex con un scarp curve de aprension, ma yo
+    espera convicter te que hay multcos a explorar e aprender ante que veni li
+    complexitá.</p> <p>In ti-ci exemple on vide li exemple classic de
+    programmation quel monstra li subtention de strings (catenes) unicode in
+    Rust.</p><p>Translations:<ul><li><a href="00_de.html">Deutsch</a></li><li><a
+    href="00_en.html">English</a></li><li><a
+    href="00_es.html">Español</a></li><li><a
+    href="00_ie.html">Interlingue</a></li><li><a
+    href="00_ru.html">Русский</a></li><li><a
+    href="00_zh-cn.html">简体中文</a></li><li><a
+    href="00_ja.html">日本語</a></li><li><a href="00_ko.html">한국어</a></li></ul></p>
+    <p>Si tu have suggestiones pri contenete o vole contribuer un traduction,
+    ples visitar li <a
+    href="https://github.com/richardanaya/tour_of_rust">repositoria github</a>
+    del Tur de Rust.</p>

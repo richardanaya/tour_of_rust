@@ -1,0 +1,183 @@
+- title: 3. Fejezet - Alapvető adatstruktúra típusok
+  content_markdown: >
+    Ideje felfedezni mik is következnek az alapvető típusok után! Ebben a
+    fejezetben a Rust
+
+    legprimitívebb adatstruktúráit fogjuk áttekinteni, különös figyelmet
+    szentelve arra, hogy
+
+    hogy helyezkednek el a memóriában.
+- title: Struktúrák
+  content_markdown: >
+    A `struct` egy mezőkból álló gyűjtemény.
+
+
+    Egy *mező* pedig szimplán egy érték, ami az adatstruktúrához van rendelve. 
+    Ez lehet egy
+
+    primitív tipus vagy egy másik adatszerkezet.
+
+
+    Olyasmi módon érdemes felfogni, mint egy "tervrajz" a fordító számára,
+    aminek segítségével
+
+    képes a különböző mezőket elhelyezni a memóriában.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20is%20a%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+- title: Metódusok hívása
+  content_markdown: >
+    A sima függvényekkel ellentétben a metódusok olyan függvények, amik egy
+    bizonyos
+
+    adattípushoz vannak rendelve.
+
+
+    **statikus metódusok** - Olyan metódusok, amik magához a típushoz vannak
+    rendelve és a `::` operátorral érhetőek el.
+
+
+    **elem metódusok** - Olyan metódusok, amik egy típus egy-egy létrehozott
+    eleméhez tartoznak. Ezeket a `.` operátorral lehet elérni.
+
+
+    A metódusok létrehozásáról később lesz szó.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Using%20a%20static%20method%20to%20create%20an%20instance%20of%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20Using%20a%20method%20on%20the%20instance%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
+- title: Memória
+  content_markdown: >
+    A Rust-ban írt programok háromféle memóriarégióban tárolják az adatokat:
+
+    * **adat memória** - A meghatározott hosszal rendelkező **statikus** (vagyis
+    a program
+        teljes futási ideje alatt elérhető) adatai vannak itt tárolva. Ilyen például a
+        programodban használt szövegek ("Helló Világ!"): A szöveg bájtjai csupán egy helyről
+        vannak kiolvasva, emiatt eltárolhatóak ebben a régióban. A fordítók sokféle
+        optimalizációra képesek az itt tárolt adatokkal, melyek emellé nagyon gyorsak is, hisz a
+        helyük és hosszuk már a fordításkor ismert és megváltoztathatatlan.
+    * **veremmemória** - A változókként deklarált adatok vannak itt eltárolva.
+    Az itt tárolt
+        adatok helye nem változik a memóriában, így a fordító optimalizálhatja őket, emiatt
+        nagyon gyors az elérésük.
+    * **kupacmemória** - Az alkalmazás futása közben létrejövő adatok helye. Az
+    itt eltárolt
+        adatokhoz hozzá lehet adni, el lehet venni, mozgatni lehet, törölni, átméretezni,
+        stb. Mivel ennyire dinamikus, a használata lasabb mint az előző kettőé, cserébe sokkal
+        kreatívabb lehetőségeket biztosít a memória felhasználására. A kupachoz való hozzáadást
+        **allokálásnak**, a levételt pedig **deallokálásnak** nevezzük.
+- title: Adatok létrehozása a memóriában
+  content_markdown: >
+    Amikor **példányosítunk** egy **struct**-ot a kódunkban, a program
+    létrehozza a hozzá
+
+    tartozó mezőket a memóriában.
+
+
+    A példányosítás úgy történik, hogy a `StructName { ... }`-ben található
+    összes mezőnek
+
+    értéket adunk.
+
+
+    A struct-ok mezőit a `.` operátorral érjük el.
+
+
+    Hogyan is történnek a dolgok a memóriában ebben a példában:
+
+    * Az idézőjelek közötti szöveg csak olvasható adat ("ferris"), így ez az
+    *adat memóriában*
+      van eltárolva.
+    * A `String::from` funkció meghívása létrehoz egy `String` struct-ot, ami a
+    SeaCreature
+      mezőibe kerül a *veremben*. A String olyan szöveget tartalmaz, ami megváltoztatható. Ezt
+      úgy éri el, hogy:
+      1. A *kupacon* allokál helyet a szövegnek, ami így szabadon változtatható.
+      2. Majd ennek a szövegnek a helyét szintén egy a *kupacon* allokált referenciában tárolja
+      el, ami végül a `String` struct-ban fog megjelenni. (Erről későbbi írásokban lesz még szó.)
+    * Végül pedig ott van *Ferris* és *Sarah*, akik mivel meghatározott helyen
+    lévő adatstruktúrák, így
+      a *veremben* kerülnek eltárolásra.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
+- title: Tuple-szerű Struct-ok
+  content_markdown: >
+    A tömörség kedvéért létrehozhatsz olyan struct-okat, amiket tuple-szerűen
+    lehet használni.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20This%20is%20still%20a%20struct%20on%20a%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+- title: Unit-szerű struct-ok
+  content_markdown: >
+    Az ilyen struct-oknak egyáltalán nincsenek mezőik.
+
+
+    Amint azt az első fejezetben már átbeszéltük, a *unit* ugyanazt jelenti,
+    mint egy üres tuple
+
+    vagyis `()`. Emiatt a mezők nélküli struct-okat *unit-szerűnek* nevezzük.
+
+
+    Az ilyen fajta struct-ok elég ritkán vannak használva.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Marker%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_m%20%3D%20Marker%3B%0A%7D%0A
+- title: Enumerációk
+  content_markdown: >
+    Az enumerációk lehetőséget biztosítanak arra, hogy új típusú elemeket hozz
+    létre, amiknek
+
+    értéke előre meghatározott változatok közül vesz fel egyet. Ehhez az `enum`
+    kulcsszót
+
+    használhatod.
+
+
+    A `match` segítségével biztosra mehetsz, hogy az enum összes lehetséges
+    értéke kezelve van,
+
+    ami nagyon hasznos jó minőségű kód írásakor.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20is%20a%20crab%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20is%20a%20octopus%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20is%20a%20fish%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20is%20a%20clam%22%2Cferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Adatokat tartalmazó Enumerációk
+  content_markdown: >
+    Az `enum`-oknál lehetőség nyílik arra is, hogy egy vagy több változat
+    adatokat is
+
+    tartalmazhasson, így képesek a C nyelv *union*-ját utánozni.
+
+
+    Amikor az ilyen `enum`-on hajtunk vissza minta összehasonlítást a `match`
+    kulcsszóval, ha a
+
+    változat adatot is tartalmaz, akkor ezt változóhoz is köthetjük.
+
+
+    Az `enum` reprezentációja a memóriában:
+
+    * Az enum-ok a legnagyobb lehetséges elemük méretét veszik fel. Így minden
+    változat beléjük fér.
+
+    * Minden elemnek, akár tartozik hozzá adat, akár nem, van egy számszerű
+    értéke is, ami azt mutatja meg melyik változat is.
+
+
+    Egyéb megjegyzések:
+
+    * A Rust-ban található `enum` ismert még *tagged union* néven is.
+
+    * Mivel az `enum`-ok lehetővé teszik egyes típusok összekombinálást új
+    típusokká, ezért azt mondjuk, hogy a Rust *algebrai típusokkal* rendelkezik.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature's%20data%20is%20on%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20is%20also%20on%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20holds%20a%20reference%20to%20data%20on%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22big%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22small%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20is%20a%20crab%20with%20%7B%7D%20%7B%7D%20claws%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20a%20crab%20with%20some%20other%20weapon%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20is%20some%20other%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D
+- title: 3. Fejezet - Konklúzió
+  content_markdown: >
+    Milyen izgalmas! Ezzel elsajátítottuk azokat az alapvető eszközöket, amikkel
+    a
+
+    gondolatainkat kódban is reprezentálhatjuk. Remélhetőleg így már legalább
+    egy kicsit
+
+    átsejlik, hogy is működnek a Rust alapvető műveletei összhangban a
+    típusokkal. Legközelebb
+
+    olyasvalamiről fogunk beszélni, ami még több rugalmasságot ad az adatok
+    reprezentációjára,
+
+    névszerint: a *generikus elemek*-ről.

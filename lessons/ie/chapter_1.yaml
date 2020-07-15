@@ -1,0 +1,124 @@
+- title: Capitul 1 - Coses Simplic
+  content_html: >-
+    <p>Ci in li unesim capitul, noi va explorar li max simplic coses in li
+    lingue, includente functiones, variabiles, e li tipes max primitiv. Felici a
+    haver te con noi!</p><p>Hay alquo in plu! Un brevi introduction por li casu
+    in quel tu questiona te qui es ti-ci amabil crabe quel parla te: yo nomina
+    me <b>Ferris</b>, li mascote ínoficial por li lingue de programmation Rust.
+    Felici a incontrar te.</p>
+- title: Li Lud-terren Rust
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20println!(%22Benevenit%20al%20lude-terren!%20Tu%20posse%20modificar%20li%20code%20ci.%22)%3B%0A%7D
+  content_html: >-
+    <p>Ti-ci tur usa un instrument interactiv por codar quel trova se a <a
+    href="https://play.rust-lang.org/">https://play.rust-lang.org</a></p><p>It
+    es un bonissim metode por luder con Rust e monstrar li altres tui creativitá
+    e defís!</p>
+- title: Variables
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%2F%2F%20rust%20infere%20li%20tip%20de%20x%0A%20%20let%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20specificar%20li%20tip%20explicitmen%0A%20%20let%20x%3Af64%20%3D%203.14159%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%0A%20%20%2F%2F%20rust%20posse%20anc%20declarar%20in%20prim%2C%20poy%20inicialisar%2C%20ma%20ti-ci%20metode%0A%20%20%2F%2F%20es%20rarmen%20usat%0A%20%20let%20x%3B%0A%20%20x%20%3D%200%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
+  content_html: ' <p>On declara variabiles con li clave-parol <b>let</b>.</p><p>Quande on assigna un valore, Rust va posser inferer li tip del variabile con un certitá de 99%. Si it ne posse, tu posse adjunter li tip al declaration por li variabile.</p><p>A notar es qualmen noi posse assignar li sam nómine por un variabile plu quam un vez. Ti-ci metode es nominat variable shadowing ("variabil-ombration") in quel li tip va posser changear se por referenties sequent por ti nómine.</b></p><p>Nómines por variabiles sempre usa <code>snake_case</code> (minuscules con infra-strecs)</p>'
+- title: Changear valores
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%20%20x%20%3D%2013%3B%0A%20%20println!(%22%7B%7D%22%2Cx)%3B%0A%7D
+  content_html: ' <p>Rust sucia se mult pri li valores queles es modificat. Valores possede du tipes:</p><ul><li><b>mutabil</b> - li loc in memorie posse esser inscrit e leet</li><li><b>ínmutabil</b> - li loc in memorie posse esser solmen leet</li></ul><p>On denota sempre li valores mutabil con li clave-parol <b>mut</b></p><p>Pri to noi va parlar plu con detallies, ma por li momente ples solmen atenter pri ti-ci parol-clave quel monstra que un cose es modificabil</p>'
+- title: Basic tipes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%0A%20%20%20%20let%20c%20%3D%204.3f64%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20frase%20%3D%20%22salute%20munde!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20frase%0A%20%20%20%20)%3B%0A%7D%0A
+  content_html: >-
+    <p>Rust possede un varietá de tipes familiari <ul><li>booleanes -
+    <code>bool</code> por representar true/false (ver/fals)</li><li>unsigned
+    integers (integrales ínsignat) -
+    <code>u8</code><code>u32</code><code>u64</code><code>u128</code> por
+    representar integrales positiv</li><li>signed integers (integrales signat) -
+    <code>i8</code><code>i32</code><code>i64</code><code>i128</code> por
+    representar integrales sive positiv sive negativ</li><li>pointer sized
+    integers (integrales con puntator-mesurat grandore) -
+    <code>usize</code><code>isize</code> por representar indexes e grandores de
+    coses in memorie</li><li>floating point (punctu flottant) -
+    <code>f32</code><code>f64</code></li><li>con relation a textu -
+    <code>str</code><code>char</code></li><li>tuple - <code>(value,
+    value,...)</code> por passar fixat sequenties de valore sur li stack (li
+    cumul)<li>slices (tranches) - <code>&[T]</code> por referer visus ad-in
+    sequenties de valores in memorie</ul></p><p>Noi va parlar pri alcunes ex ili
+    plu detalliatmen plu tard.</p><p>Un avise in prim: textu va posser esser plu
+    complicat quam tui experientie con altri lingues, pro que Rust es un lingue
+    de programmation por sistemas quel orienta se pri problemas de memorie con
+    quel fórsan tu ne ha experientie. Noi va parlar plu detalliatmen pri textu
+    plu tard.</p><p>Nota qualmen on posse explicitmen specificar tipes numeric
+    per afixar li tip directmen pos li numeró (p.e. <code>13u32</code>)</p>
+- title: Conversion de basic tipes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20let%20a%20%3D%2013u8%3B%0A%20%20let%20b%20%3D%207u32%3B%0A%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20let%20t%20%3D%20true%3B%0A%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D
+  content_html: >-
+    <p>Rust exige explicitá quande it acte se pri tipes numeric. On ne posse
+    usar un <code>u8</code> hasardalmen por un <code>u32</code> sin un
+    erra.</p><p>Felicimen, conversiones de tipes numeric es facil in Rust con li
+    clave-parol <b>as</b>.</p>
+- title: Constantes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Por%20crear%20un%20%7B%7D%20de%20pom%20desde%20li%20comense%2C%20on%20deve%20in%20prim%20crear%20un%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_html: >-
+    <p>Constantes possibilisa li specification de valores comun quel noi usa tra
+    nor code con un eficientie mult vezes plu grand.  Vice copiar valores quam
+    variabiles chascun vez ú ili es usat, constantes remplazza li
+    textu-identificator directmen con lor valore in li locs ú on usa
+    les.</p><p>In contraste a variabiles, constantes deve sempre posseder un tip
+    explicit</p><p>Nómines de constantes es sempre in
+    <code>SCREAMING_SNAKE_CASE</code> (majuscules con infra-strecs)</p>
+- title: Arrays
+  content_markdown: >
+    Un *array* (un arangeament o un tabló) es un colection de longore fixat con
+    data-elementes con li sam tip.
+
+
+    Li tip de data por un *array* es `[T;N]` ú T es li tip del elementes, e N es
+    li longore fixat quel on save quande on compila.
+
+
+    Singul elementes posse esser retrovat con li operator `[x]` ú *x* es un
+    index de *usize* (comensant con 0) del element quel
+
+    on desira accesser.
+- title: Functiones
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20adddir(x%3Ai32%2C%20y%3Ai32)%20-%3E%20i32%20%7B%0A%09return%20x%20%2B%20y%20%2F%2F%20Ci%20on%20utilisa%20return%20por%20monstrar%20que%20anc%20Rust%20possede%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20ti%20clave-parol%20comun%20in%20altri%20lingues%20de%20programmation%2C%20%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20ma%20li%20plu%20idiomatic%20metode%20por%20retornar%20un%20valore%20in%20Rust%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20es%20simplicmen%20scrir%20x%20%2B%20y%20sin%20un%20punctu-comma%20(%3B)%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Dunc%3A%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20x%20%2B%20y%20%3C--%20retorna%20un%20valore%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%20%2B%20y%20%3C--%20retorna%20un%20valore%0A%09%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%20%2B%20y%3B%20%3C--%20retorna%20null%20valore%20(nota%20li%20%3B%20pos%20x%20%2B%20y)%0A%7D%0A%0Afn%20main()%20%7B%0A%09println!(%22%7B%7D%22%2Cadddir(42%2C%2013))%3B%0A%7D
+  content_html: >-
+    <p>Un function posse prender null o plu argumentes.</p><p>In ti-ci exemple,
+    adddir prende du parametres del tip <code>i32</code> (integer (númere
+    integrale) del longore 32-bit).</p><p>Nómines de functiones es sempre in
+    <code>snake_case</code> (minuscules con infra-strecs)</p>
+- title: Multiplic retorn-valores
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20interchangear(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20retorna%20un%20tuple%20de%20retorn-valores%0A%20%20%20%20let%20resulta%20%3D%20interchangear(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20resulta.0%2C%20resulta.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructura%20li%20tuple%20in%20du%20n%C3%B3mines%20de%20variabiles%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20interchangear(resulta.0%2C%20resulta.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_html: >-
+    <p>Functiones posse retornar multiplic valores per retornar un <b>tuple</b>
+    de valores. (N.B. un tuple es parent con -tuplic in
+    Interlingue-Occidental)</p><p>On posse referer al valores per lor position
+    in li tuple.</p><p>Rust subtene varie tipes de destructuration quel noi va
+    vider in pluri formes. To possibilisa li extraction de sub-pezzes de data
+    ergonomicmen. Esse atentiv por it!</p>
+- title: Retornar necos
+  content_markdown: >
+    Si null tip de retorn es specificat por un function, it retorna un vacui
+    tuple, anc conosset quam un *unit* (li tal-nominat tip unitic)
+
+
+    On representa un vacui tuple per `()`
+
+
+    In Rust it passa presc ínvisibil por que on ne mey esser distractet de it,
+    ma it es bon a saver que un functiona retornant necos retorna un fact un
+    vacui tuple.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20crear_necos()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20li%20tip%20de%20retorn%20es%20implicat%20quam%20()%0Afn%20crear_necos2()%20%7B%0A%20%20%20%20%2F%2F%20ti-ci%20functiona%20va%20retornar%20()%20si%20on%20specifica%20nullcos%20a%20retornar%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20crear_necos()%3B%0A%20%20%20%20let%20b%20%3D%20crear_necos2()%3B%0A%0A%20%20%20%20%2F%2F%20Printant%20un%20string%20(catene)%20debug%20por%20a%20e%20b%0A%20%20%20%20%2F%2F%20Pro%20que%20printar%20%27necosit%C3%A1%27%20es%20desfacil%0A%20%20%20%20println!(%22Li%20valore%20de%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22Li%20valore%20de%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: Capitul 1 - Conclusion
+  content_html: >-
+    <p>Bon labor til nu! Li coses basic in Rust ne es tam mal, ne ver? Vi til nu
+    un curt regarde pri qualmen pensa li compilator Rust. It sucia se mult pri
+    li grandore de valores in memorie, qualmen on posse modificar un cose o ne,
+    e si tui matematica es vermen to quel tu intente scrir o ne. Tis-ci es micri
+    previsiones del principie de <b>safety</b> (securitá) quel prevale tra Rust.
+    Li compilator solmen intente far cert que tui code fa to quo tu intente que
+    it fa! A sequer noi va vider li old amics <code>if</code> (si) e cicles
+    usant <code>for</code> (por).</p>

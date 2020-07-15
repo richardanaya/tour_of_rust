@@ -1,0 +1,10 @@
+- title: Exportar
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_modulo%20%7B%0A%20%20%20%20fn%20haz_algo()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20haz_algo_mas()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%20m%C3%A1s%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo()%3B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo_mas()%3B%0A%7D%0A
+  content_html: >-
+    <p>En Rust, exportamos elementos de un módulo usando la palabra reservada
+    <b>pub</b>.</p><p>Cuando se utiliza un módulo dentro de su propio código o
+    en un crate externo, sólo se permiten referencias a aquellos elementos que
+    hayan sido marcados como públicos.</p><p>El código en este ejemplo da error,
+    añade la palabra reservada <b>pub</b> en el lugar apropiado para
+    arreglarlo.</p>

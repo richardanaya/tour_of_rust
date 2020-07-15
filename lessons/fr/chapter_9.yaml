@@ -1,0 +1,158 @@
+- title: Chapitre 9 - Organisation et structure d'un projet
+  content_markdown: |
+    Jusqu'à présent, tous nos exemples de code n'ont guère dépassé le simple
+    fichier. Voyons comment un projet plus complexe s'organise et quels outils
+    l'écosystème Rust met à notre disposition pour pouvoir travailler à
+    plusieurs sur un même projet!
+- title: Modules
+  content_markdown: |
+    Chaque programme ou bibliothèque Rust est appelé une *crate*
+    (littéralement une caisse).
+
+    Chaque crate est constituée d'une hiérarchie de *modules*.
+
+    Chaque crate possède un module racine.
+
+    Un module peut contenir des variables globales, des fonctions, des
+    structures, des traits ou même d'autres modules!
+- title: Ecrire un programme
+  content_markdown: |
+    Un programme possède un module racine dans un fichier appelé `main.rs`.
+- title: Ecrire une bibliothèque
+  content_markdown: |
+    Un bibliothèque possède un module racine dans un fichier appelé `lib.rs`.
+- title: Référencement de modules et de crates
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Bienvenue%20au%20terrain%20de%20jeu%20Rust!%22)%3B%0A%20%20%20%20println!(%22Chuck%20Norris%20connait%20la%20derni%C3%A8re%20%5C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20d%C3%A9cimale%20de%20%7B%7D...!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: |
+    Les composants d'un module peuvent être référencés avec leur chemin
+    complet `std::f64::consts::PI`.
+      
+    Un moyen plus simple est d'utiliser le mot-clé **use**. Il nous permet
+    de spécifier des éléments particuliers des modules que nous souhaitons
+    utiliser sans avoir à spécifier le chemin complet à chaque fois. Par
+    exemple `use std::f64::consts::PI` permettra d'utiliser simplement
+    l'identifiant `PI` là où on en a besoin.
+
+    **std** est la **bibliothèque standard** de Rust. Celle-ci met à
+    disposition de nombreuses structures de données et fonctions pour
+    intéragir plus facilement avec le système d'exploitation.
+
+    Un répertoire des crates créés par la communauté peut être consulté à
+    l'adresse [https://crates.io](https://crates.io/)
+- title: Référencement de plusieurs composants d'un module
+  content_markdown: |
+    Plusieurs composants peuvent être référencés dans un seul chemin de module:
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+- title: Création d'un module
+  content_markdown: |
+    Lorsqu'un développeur écrit un programme, il se retrouve généralement
+    avec une hiéarchie de fichiers organisés en répertoire. Rust permet
+    d'organiser son code sous forme de modules tout en préservant la structure
+    des fichiers.
+
+    Avec Rust, il y a deux manière de créer un module. Par exemple, si nous
+    souhaitons créer le module `foo`, nous pouvons créer au choix:
+      * un fichier nommé `foo.rs`
+      * un répertoire nommé `foo` avec un fichier `mod.rs` à l'intérieur
+- title: Hiérarchie de modules
+  content_markdown: |
+    Un module peut dépendre d'un autre. Afin d'établir une relation entre
+    un module et son sous-module, vous devez écrire dans le module parent:
+
+    ```rust
+    mod foo;
+    ```
+
+    La déclaration ci-dessus recherchera un fichier nommé `foo.rs` ou
+    `foo/mod.rs` et insérera son contenu dans un module nommé `foo` qu'on
+    pourra ensuite utiliser.
+- title: Module Inline
+  content_markdown: |
+    Un sous-module peut être directement intégré dans le code d'un module. 
+
+    Une utilisation très courante de ces modules 'inline' consiste à créer
+    des tests unitaires. Nous créons un module inline qui n'existe que
+    lorsque Rust est utilisé pour les tests!
+
+    ```
+    // Cette macro supprime ce module inline lorsque Rust
+    // n'est pas en mode test.
+    #[cfg(test)]
+    mod tests {
+        // Note que nous n'avons pas immédiatement accès au
+        // module parent. Nous devons être explicite.
+        use super::*;
+
+        ... les tests vont ici ...
+    }
+    ```
+- title: Référencement de module interne
+  content_markdown: |
+    Lors du référencement d'un module avec le mot-clé use, tu peux également
+    utiliser les mots-clés suivants dans le chemin:
+
+    * `crate` - le module racine de la crate
+    * `super` - le module parent du module actuel
+    * `self` - le module actuel
+- title: Export
+  content_markdown: |
+    Par défaut, les membres d'un *module* ne sont pas accessibles de
+    l'extérieur du module (pas même à ses modules enfants!). Pour que
+    ceux-ci soient accessible, il faut utiliser le mot-clé `pub`.
+
+    Par défaut, les membres d'une *crate* ne sont pas accessibles en dehors
+    de la crate. De même, il faut utiliser le mot-clé `pub` dans le
+    *module racine* de la crate (` lib.rs` ou `main.rs`) si l'on souhaite
+    rendre accesssible les membres d'une crate depuis l'extérieur. 
+- title: Visibilité des structures
+  content_markdown: |
+    Tout comme les fonctions, les structures peuvent déclarer quels champs
+    seront visibles à l'extérieur du module en utilisant le mot-clé`pub`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20La%20structure%20SeaCreature%20sera%20visible%0A%2F%2F%20en%20dehors%20du%20module.%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20Le%20champ%20weapons%20ne%20sera%20pas%20visible.%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: prelude
+  content_markdown: |
+    Tu pourrais te demander comment, avec Rust, nous avons pu avoir accès à
+    `Vec` ou `Box` sans utiliser le mot-clé `use` pour les importer. C'est
+    grâce au module prelude de la bibliothèque standard de Rust.
+
+    Il faut savoir que, dans la bibliothèque standard de Rust, tout ce qui
+    est exporté dans `std::prelude::*` sera automatiquement disponible
+    n'importe où dans le code. C'est le cas pour `Vec` et `Box` mais bien
+    d'autres encore (Option, Copy, etc.).
+- title: Crée tes propres modules prelude
+  content_markdown: >
+    Il est courant qu'une bibliothèque ait son propre module prelude. Cela
+
+    permet d'importer toutes les structures de données nécessaires à
+
+    l'utilisation de la bibliothèque. Ces structures de données ne seront
+
+    pas automatiquement disponible (il faudra utiliser
+
+    `use my_library::prelude::*`) mais c'est une bonne convention à respecter.
+
+
+    Ferris dit: "Sois un bon rustacean et aide les autres crabes avec un bon
+    prélude!"
+- title: Chapter 9 - Conclusion
+  content_markdown: >
+    Tu dois maintenant en connaître beaucoup sur la création de bibliothèques
+
+    et d'applications Rust. Je ne te demande pas de tout retenir car je suis
+
+    sûr que, à mesure que ta bibliothèque ou ton application s'agrandira et sera
+
+    utilisé par d'autres développeurs, tu seras capable de trouver une
+
+    solution à chaque problème que tu rencontrera.
+
+
+    Ressources (en anglais):
+
+    - [Conseils pour l'écriture d'API
+    Rust](https://rust-lang.github.io/api-guidelines/)

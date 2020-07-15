@@ -1,0 +1,19 @@
+- clone: fr
+- clone: fr
+- clone: fr
+- clone: fr
+- clone: fr
+- title: 1+1
+  code: 'https://webassembly.studio/?embed&f=sxf9utkxgbo'
+  content_markdown: >
+    Nous en savons suffisamment pour écrire notre premier module WebAssembly:
+
+    l'addition de deux nombre! Le résultat sera affiché dans l'html.
+
+
+    `__attribute __ ((visibility ("default")))` est une directive disant au
+    compilateur
+
+    de conserver le nom de la fonction pour qu'on puisse l'appeler depuis le
+    JavaScript.
+- clone: fr

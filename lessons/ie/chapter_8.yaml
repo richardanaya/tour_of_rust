@@ -1,0 +1,331 @@
+- title: Capitul 8 - Smart Pointers
+  content_markdown: >
+    In ti-ci capitul noi va remover li misterie de smart pointers (puntatores
+    inteligent).
+
+    On va explorar pri qualmen ti data-structuras possibilisa li interaction con
+    memorie
+
+    sur li nivelles max bass.
+
+
+    Ferris di: "Ne esse aplastat per li desfacilitás in ti-ci capitul si tu ne
+    es strax pret
+
+    a scrir tui propri code por gerer memorie ye bass nivelles. It mey servir
+    solmen por
+
+    conossentar te con quelc util utensiles e qualmen ili functiona!" 
+- title: Denov pri Referenties
+  content_markdown: >
+    Li concepte de un referentie es quam seque: it es solmen un numeró quel 
+
+    monstra li position de comensa de quelc bytes in memorie; it servi solmen
+    por representar 
+
+    li concepte de ú existe li data de un cert tip. To quo fa un referentie
+    diferent de un 
+
+    simplic numeró es que Rust va far cert que li viv-témpore de un referentie
+    ne dura plu 
+
+    long quam li cose a quel it refere (altrimen noi vell incontrar un errore in
+    su usation!).
+- title: Raw (crud) Puntatores
+  content_markdown: >
+    On posse converter referenties a un tip plu primitiv nominat un *raw
+    pointer*. Just quam un numeró, on
+
+    posse copiar e mover it sin grand restrictiones. Rust da nos null certitá
+    pri li validitá del loc 
+
+    de memorie a quel it punta.
+
+
+    Hay du tipes de crud puntatores:
+
+    * `*const T` - Un crud puntator a data del tip T quel deve ne changear se.
+
+    * `*mut T` - Un crud puntator a data del tip T quel posse changear se.
+
+    On posse converter crud puntatores ad-in e ex ciffres (p.ex. `usize`).
+
+    Crud puntatores posse accesser data usante code *unsafe* (on parla pri to
+    plu tard).
+
+
+    Detallies de memorie:
+
+    * Un referentie in Rust es tre simil a un puntator in C in su usada, ma con
+    mult plu restrictiones ye
+
+    témpor de compilation pri qualmen on posse plazzar e mover it ad altri
+    functiones.
+
+    * Un crud puntator in Rust es simil a un puntator in C nam it representa un
+    numeró quel on posse copiar
+
+    e mover, e mem converter a tipes numeric quel on posse modificar it por far
+    matematica puntatori.
+- title: Dereferentiation
+  content_markdown: >
+    Li processe de accesser/manipular data a quel on referer se con un
+    *referentie*
+
+    (p.ex. `&i32`) es nominat *dereferentiation* (dereferencing).
+
+
+    Con du metodes on accesse/manipular data con un referentie:
+
+    * Accesse al data referet durant li assignation de variabiles.
+
+    * Accesse a campes o metodes del data referet.
+
+    Rust possede quelc potent operatores queles fa to possibil por nos.
+- title: Li Operator *
+  content_markdown: >
+    Li operator `*` es un metode explicit por dereferentiar un referentie.
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+    Detallies pri memorie:
+
+    - Nam i32 es un tip primitiv quel implementa li trate Copy, li bytes del
+    variabil `a`
+
+    sur li stack es copiat ad-in li bytes de variabil `b`.
+- title: Li Operator .
+  content_markdown: >
+    On usa li operator `.` por accesser li campes e metodes de un referentie. It
+    efectua se con un poc plu subtilitá.
+
+    ```rust
+
+    let f = Foo { valore: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.valore);
+
+    ````
+
+    Ma atende, pro quo noi ne besonat adjunter `***` avan `ref_ref_ref_f`? To es
+    pro que li operator `.` dereferentia
+
+    automaticmen un sequentie de referenties. Ti ultim linea changea se
+    automaticmen per li compilator quam seque:
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: Puntatores Inteligent
+  content_markdown: >
+    In plu al possibilitá de crear referenties a existent tipat data con li
+    operator `&`, Rust da nos li habilitá de crear
+
+    *referentiesc* structs nominat **smart pointers** (puntatores inteligent).
+
+
+    Noi posse conceptualisar referenties simplicmen quam un tip quel da accesse
+    a un altri tip. Smart pointers es diferent de normal
+
+    puntatores in quant que ili functiona basat sur li logic intern scrit del
+    programmator. Tu - li programmator - es li parte
+
+    quel es *inteligent*.
+
+    Por li pluparte smart puntatores implementa li trates `Deref`, `DerefMut` e
+    `Drop` por specificar li logica pri quo mey evenir
+
+    quande on dereferentia li structura con li operatores `*` e `.`.
+- title: Code Inteligent e Ínsecur
+  content_markdown: >
+    Smart pointers frequentmen usa code *unsafe* (ínsecur). Quam mentionat in
+    supra, ili es utensiles frequentmen
+
+    usat por interacter con li nivelles de memorie max bass in Rust.
+
+    Quo es code unsafe? Unsafe code es just quam Rust normal except que it have
+    quelc habilitás pri queles li
+
+    compilator ne posse confirmar ca ili es secur o ne.
+
+    Li habilitá primari de code unsafe es li *dereferentiation de un puntator
+    crud*. To vole dir mover un *raw pointer*
+
+    a un loc in memorie e declerar "ti-ci hay un data structura!" e changear it
+    ad-in un representation de usabil data (p.ex.
+
+    ex un `*const u8` ad-in un `u8`). Rust nullmen posse memorar li
+    significantie de omni byte inscrit in memorie, e pro to,
+
+    ne posse garantir quo existe in un loc arbitrari usat quam un *raw pointer*,
+    e pro to on plazza li dereferentie in un bloc
+
+    `unsafe { ... }`.
+
+    Smart pointers *dereferentia puntatores crud* extensivmen, ma fa it tre
+    habilmen.  
+- title: Amics Bon Conosset
+  content_markdown: >
+    Ples considerar quelc inteligent puntatores ja videt quam `Vec<T>` e
+    `String`.
+
+    `Vec<T>` es un puntator intilegent quel simplicmen possede un region de
+    memorie de bytes. Li compilator Rust have null idé
+
+    pri quo existe in li bytes. Li puntator inteligent interpreta li
+    significantie de prender bytes del region de memorie quel
+
+    it gere, it nota ex u comensa e fini se li data-structuras ta, e in fine
+    dereferentia un raw pointer ad-in data-structuras
+
+    con un interfacie clar e ergonomic quel noi posse utilisar (p.ex.
+    `my_vec[3]`).
+
+    Similmen, `String` nota u trova se un region de memorie de bytes, e
+    programmaticmen da restrictiones al contenete inscrit ta
+
+    por que it mey esser valid `utf-8`, poy auxilia dereferentiar ti region de
+    memorie ad-in un tip `&str`.
+
+    Ti ambi data-structuras usa ínsecur dereferentiation de puntatores crud por
+    acompleer li tache.
+
+    Detallies pri memorie:
+
+    * Por alquo equivoc a `malloc` usat in C, rust usa
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) e
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) por gerer
+    tui propri regiones de memorie.
+- title: Memorie Alocat sur li Heap
+  content_markdown: >
+    `Box` es un puntator inteligent con quel noi posse transferer data del stack
+    til li heap.
+
+    Con un dereferentiation de it noi posse ergonomicmen usar li data sur li
+    heap just quam si it esset li tip original.
+- title: Denov pri li Main Fallibil
+  content_markdown: >
+    In li code de Rust trova se multissim metodes por representar errores, ma li
+    biblioteca standard possede ya
+
+    un trate universal `std::error::Error` por descrir les.
+
+    Con li puntator inteligent `Box` noi posse usar li tip `Box<dyn
+    std::error::Error>` quam un tip comun por retornar 
+
+    errores pro que con it noi posse propagar un errore sur li heap e interacter
+    con it sur un alt nivelle sin dever
+
+    conosser un tip specific. Tost in li Tur de Rust noi aprendet que `main`
+    posse retornar un errore. Nu noi posse 
+
+    retornar un tip quel es capabil descrir presc qualcunc errore quel posse
+    evenir in nor programma, si solmen li
+
+    data-structura del errore implementa li trate comun de Rust `Error`.
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error::Error>>
+
+    ```
+- title: Numerotar Referenties
+  content_markdown: >
+    `Rc` es un puntator inteligent quel move data del stack til li heap. Con it
+    noi posse clonar altri
+
+    puntatores `Rc` queles possede li habilitá de ínmutabilmen pruntar li data
+    plazzar sur li heap.
+
+    Li dealocation del data sur li heap eveni solmen pos que li ultim puntator
+    inteligent cade.
+- title: Accesse Junt
+  content_markdown: >
+    `RefCell` es un data-structura scatullesc quel es tenet per puntatores
+    inteligent e prende data por que noi mey
+
+    pruntar referenties mutabil e ínmutabil al contenete intern. Ti-ci puntator
+    inteligent preveni pruntation abuset
+
+    per li validation del regules de Rust pri securitá de memorie durant li
+    functionament del programma quande tu
+
+    peti pruntar li data intern.
+
+    **Sive un mutabil referentie sive multiplic ínmutabil referenties, ma ne
+    ambi!**
+
+    Con un violation de ti regules `RefCell` va far un panic.
+- title: Partiprender trans Files (Threads)
+  content_markdown: >
+    `Mutex` es un data-structura scatullesc quel es frequentmen tenet per
+    puntatores inteligent e prende data por que noi
+
+    mey pruntar mutabil e ínmutabil al contenete intern. Con to li pruntation ne
+    es abuset per restrictiones del OS quande
+
+    solmen un fil posse accesser li data, bloccante li altri files til quande li
+    fil original ha finit con li pruntation
+
+    original. Multifilation es plu complex por nor libre, ma `Mutex` es un parte
+    fundamental del gerentie de multiplic
+
+    CPU-files por accesse al sam data.
+
+    Hay un puntator inteligent special nominat `Arc` quel es identic a `Rc`
+    except in qualmen it usa fil-secur incrementation
+
+    del númere de referenties. Con it on posse haver mult referenties al sam
+    `Mutex`.
+- title: Combinar Puntatores Inteligent
+  content_markdown: >
+    Smart pointers sembla liminat, ma junt ili crea combinationes tre potent.
+
+    `Rc<Vec<Foo>>` - Clonada de multiplic smart pointers queles posse pruntar li
+    sam vector de ínmutabil data-structuras sur li heap.
+
+    `Rc<RefCell<Foo>>` - Multiplic smart pointers possent pruntar
+    mutabilmen/ínmutabilmen li sam struct `Foo`
+
+    `Arc<Mutex<Foo>>` - Multiplic smart pointers possent cluder temporari
+    mutabil/ínmutabil pruntas in un maniere exclusiv in un fil del CPU.
+
+    Detallies pri memorie:
+
+    * Tu va har remarcat un tema comun con ti-ci combinationes, a saver li
+    usation de un data-tip ínmutabil (fórsan possedet per multiplic puntatores
+    inteligent) por modificar
+
+    data intern. On nomina it li mustre de "mutabilitá intern" in Rust. Con ti
+    mustre noi posse circumear li regules pri usation de memorie durant li
+    execution del programma
+
+    con un nivelle de securitá tam secur quam ti durant li compilation.
+      
+- title: Capitul 8 - Conclusion
+  content_markdown: >
+    Puntatores inteligent es li idiotismes de programmation in Rust con queles
+    noi ne es fortiat recrear
+
+    li defís comun in li mustres de usation de memorie. Con ili on es pret a
+    soluer mem li defís max dur!
+
+    Armat con li fundamentes de Rust, noi nu va parlar plu pri qualmen crear
+    projectes con un grandore
+
+    plu ampli. In Capitul 9 noi va liberar nos de lineas de code scrit sur un
+    singul págine.

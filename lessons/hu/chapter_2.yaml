@@ -1,0 +1,138 @@
+- title: 2. Fejezet - Egyszerű ciklusok és elágazások
+  content_markdown: >
+    Ebben a fejezetben a Rust alapvető ciklusairól és elágazásairól lesz szó.
+
+    Ha használtál már C-re alapuló nyelveket, akkor itt otthon fogod magad
+    érezni, bár lehet egy-két meglepetés
+
+    fog érni.
+- title: if/else if/else
+  content_markdown: >
+    A Rust elágazásai nem éppen meglepőek.
+
+
+    Az elágazások feltételei nincsenek zárójelek között. Valljuk be, volt
+    bármikor is szükség
+
+    ezekre? A logika így szépen és tisztán néz ki.
+
+
+    Minden logikai és összehasonlító operátor ugyanúgy működik: `==`, `!=`, `<`,
+    `>`, `<=`, `>=`, `!`, `||`, `&&`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+- title: loop
+  content_markdown: |
+    Szükséged volna egy végtelen ciklusra?
+
+    A Rust-tal ez egyszerű.
+
+    A `break` utasítás pedig kitör a ciklusból, ha arra van szükség.
+
+    A `loop` rendelkezik egy titokkal, amiről hamarosan fogunk beszélni.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while
+  content_markdown: |
+    A `while` segítségével egy feltételt szabhatsz a ciklusodnak.
+
+    Amint a feltétel `false` (hamis) értéket vesz, a ciklus megszakad.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: for
+  content_markdown: >
+    A `for` ciklus a Rust nyelvben sokkal többet tud, mint az más nyelvekben
+    megszokott. Képes
+
+    minden iterátorrá váló kifejezés elemein átlépkedni. Mit is jelent az, hogy
+    valami iterátor?
+
+    Olyan objektumok, amiknél megkérdezhető, hogy "Mi a következő elem?" egészen
+    addig, amíg már
+
+    nem marad elem.
+
+
+    Ezt egy későbbi fejezetben jobban is át fogjuk nézni. Addig is elég ha azt
+    tudod, hogy a
+
+    Rust egyszerűvé teszi a számok sorait létrehozó iterárotok készítését.
+
+
+    A `..` operátor egy olyan iterátort hoz létre, ami egy megadott kezdőszámtól
+    elszámol a
+
+    megadott végső szám előtti számig.
+
+
+    A `..=` operátor pedig ugyanezt teszi, viszont ekkor a végső szám is benne
+    van a sorban.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_markdown: >
+    Hiányolod a switch utasítást? A Rust egy nagyon hasznos kulcsszóval
+    rendelkezik, ami
+
+    lehetővé teszi, hogy minden lehetséges esetet lekezelj úgy, hogy ezek közül
+    az első igazzal
+
+    visszatérő fog lefutni. Egyelőre azt fogjuk megnézni, hogy ez hogy működik
+    számok esetén. A
+
+    későbbi fejezetek során még több szó is lesz az ennél komplexebb adatok
+    mintái között való
+
+    összehasonlításról. Ígérem, megéri a várakozást.
+
+
+    A `match` utasítás elvárja, hogy az összes eset le legyen kezelve.
+
+
+    Az adatok szétbontásával kombinált összehasonlítás a Rust egyik
+    leggyakrabban előforduló
+
+    mintája.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: Visszatérés a ciklusokból értékkel
+  content_markdown: >
+    Lehetséges úgy kitörni egy `loop`-ból, hogy közben egy értékkel is
+    visszatérünk.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Értékkel való visszatérés blokk kifejezésekből
+  content_markdown: >
+    Az `if`, a `match`, a függvények és a változók hatásköreit kifejező blokkok
+    mind egyedi
+
+    módon képesek értékkel visszatérni a Rust nyelvben.
+
+
+    Ha az utolsó utasítás egy nem `;`-al lezárt kifejezés ezek közül
+    valamelyikben, akkor a Rust
+
+    automatikusan visszatér ennek az értékével. Ez remek arra, hogy tömör
+    logikai kifejezéseket
+
+    írhassunk, melyek ezután változókba kerülnek.
+
+
+    Figyeljük meg, hogy ennek segítségével az `if` utasítást használhatjuk úgy,
+    mint más nyelvekben
+
+    a `feltétel ? ha_igaz : ha_hamis` operátort.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: 2. Fejezet - Konklúzió
+  content_markdown: >
+    Remélhetőleg ezzel sikerült egy kis betekintést nyújtanom a Rust alapvető
+    képességeibe és az
+
+    ezekben megbúvó erőbe. A későbbiekben még több szó is lesz a `for`-ról és a
+    `match`-ről,
+
+    amint eleget tanultunk ahhoz, hogy az előzőleg átvetteknél bonyolultabb
+    képességeiket is
+
+    hasznosítani tudjuk.

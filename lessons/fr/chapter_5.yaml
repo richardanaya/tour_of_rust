@@ -1,0 +1,288 @@
+- title: Chapitre 5 - Propriété et emprunt de données
+  content_markdown: >
+    Comparé aux autres langages de programmation, Rust possède un paradigme
+    unique en ce qui concerne
+
+    la gestion de la mémoire. Nous allons nous intéresser aux comportements et
+    aux validations du compilateur
+
+    un par un pour être sûr de bien comprendre. Il est important de garder à
+    l'esprit qu'au bout du compte,
+
+    les règles que nous allons voir ne sont pas là pour te compliquer la vie,
+    mais pour éviter que ton code
+
+    ne soit truffé d'erreurs!
+- title: Propriété (en anglais ownership)
+  content_markdown: "L'instanciation d'un type et le fait de lier (en anglais **binding**) la ressource à une variable crée\nune ressource mémoire que le compilateur Rust validera\_pendant toute sa durée de vie (en anglais **lifetime**).\nLa variable liée devient le propriétaire (en anglais **owner**) de la ressource.\n"
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Nous%20instancions%20une%20structure%20et%20l%27attachons%20%C3%A0%20une%20variable%0A%20%20%20%20%2F%2F%20pour%20cr%C3%A9er%20les%20ressources%20n%C3%A9cessaires%20en%20m%C3%A9moire%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20devient%20le%20propri%C3%A9taire%20(owner)%20de%20la%20ressource%0A%7D%0A
+- title: Management des ressources basé sur la portée (en anglais scope)
+  content_markdown: >
+    Rust prend en compte le dernier endroit où une variable a été utilisée ainsi
+
+    que la fin de la portée de la fonction pour déconstruire et désallouer une
+    ressource.
+
+
+    On dira pour cette déconstruction et désallocation que la variable est
+    "jetée" (en anglais **dropped**).
+
+
+    Détails de la mémoire:
+
+    * Rust ne possède pas de ramasse-miettes (en anglais garbage collector).
+
+    * Cela est également connu sous le nom de RAII (l'acquisition d'une
+    ressource est une initialisation) en C ++.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20%2F%2F%20la%20variable%20foo_a%20est%20jet%C3%A9e%20ici%20car%20elle%20n'est%20%0A%20%20%20%20%2F%2F%20plus%20utilis%C3%A9e%20apr%C3%A8s%20cet%20endroit%20du%20code%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20la%20variable%20foo_b%20est%20jet%C3%A9e%20ici%20car%20la%20port%C3%A9e%0A%20%20%20%20%2F%2F%20de%20la%20fonction%20prend%20fin%0A%7D%0A
+- title: La déconstruction et désallocation est hiérarchique
+  content_markdown: >
+    Lorsqu'une structure est jetée (déconstruite et désallouée), la structure
+    elle-même est jetée en première puis
+
+    on jete ses enfants un par un et ainsi de suite.
+
+
+    Détails de la mémoire:
+
+    * En libérant automatiquement la mémoire, Rust aide à s'assurer qu'il y a
+    moins de fuites de mémoire.
+
+    * Les ressources mémoire ne peuvent être déconstruites et désallouées qu'une
+    seule fois.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20en%20premier%2C%0A%20%20%20%20%2F%2F%20vient%20ensuite%20le%20tour%20de%20foo.bar%0A%7D%0A
+- title: Transfert de propriétaire
+  content_markdown: >
+    Lorsqu'une ressource est passée en argument d'une fonction, le propriétaire
+    de cette ressource devient le paramètre de la fonction.
+
+
+    Après cela, la variable passée en argument ne peut plus être utilisée, car
+    la variable a été déplacée.
+
+
+    Détails de la mémoire:
+
+    * Lors du transfert de propriétaire, les éléments de la pile concernant la
+    variable à déplacer sont copié sur la pile du paramètre de la fonction
+    appelée.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20est%20jet%C3%A9%20(d%C3%A9construit%20et%20d%C3%A9sallou%C3%A9)%20ici%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20foo%20est%20d%C3%A9plac%C3%A9%20vers%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20ne%20peut%20plus%20%C3%AAtre%20utilis%C3%A9%0A%7D%0A
+- title: Retourner la propriété d'une ressource
+  content_markdown: |
+    Une fonction peut retourner la propriété d'une ressource.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20Le%20propri%C3%A9taire%20de%20la%20structure%20Foo%20d%C3%A9m%C3%A9nage%0A%20%20%20%20%2F%2F%20%C3%A0%20l'ext%C3%A9rieur%20de%20la%20fonction.%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20devient%20le%20nouveau%20propri%C3%A9taire.%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20(d%C3%A9construit%20et%20d%C3%A9sallou%C3%A9)%20ici%20car%20la%20port%C3%A9e%20de%20la%20%0A%20%20%20%20%2F%2F%20fonction%20main%20se%20termine.%0A%7D%0A
+- title: S'approprier une ressource avec des références.
+  content_markdown: >
+    Les références nous permettent d'emprunter l'accès à une ressource grâce à
+    l'opérateur `&`.
+
+
+    Les références sont également jetées (déconstruites et désallouées) comme
+    les autres ressources.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20et%20foo%20sont%20jet%C3%A9s%20ici%0A%7D%0A
+- title: S'approprier une ressource mutable avec des références
+  content_markdown: >
+    On peut créer une référence mutable qui permet d'emprunter l'accès à une
+    ressource mutable (celles-ci sont
+
+    créées avec le mot-clé **let**) en utilisant l'opérateur `&mut`.
+
+
+    Le propriétaire d'une ressource ne peut pas changer lorsque la ressource
+
+    est empruntée avec une référence mutable.
+
+
+    Détails de la mémoire:
+
+    * Rust empêche d'avoir deux moyens de modifier une valeur car cela
+    introduirait 
+
+    des problèmes concurrentiels d'accès aux données.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20est%20jet%C3%A9%20(d%C3%A9construit%20et%20d%C3%A9sallou%C3%A9)%20ici.%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20ECHEC%3A%20l'appel%20%C3%A0%20la%20fonction%20do_something(foo)%20%C3%A9chouerait.%0A%20%20%20%20%2F%2F%20En%20effet%2C%20le%20propri%C3%A9taire%20de%20foo%20ne%20peut%20pas%20%C3%AAtre%20d%C3%A9plac%C3%A9%20vers%0A%20%20%20%20%2F%2F%20le%20param%C3%A8tre%20de%20la%20fonction%20car%20f%20l'a%20emprunt%C3%A9%20avec%20l'op%C3%A9rateur%20%26mut.%0A%0A%20%20%20%20%2F%2F%20ECHEC%3A%20l'instruction%20%60foo.x%20%3D%2013%3B%60%20%C3%A9chouerait.%20En%20effet%20foo%20ne%20peut%20pas%20%0A%20%20%20%20%2F%2F%20%C3%AAtre%20modifi%C3%A9%20car%20f%20l'a%20emprunt%C3%A9%20avec%20une%20r%C3%A9f%C3%A9rence%20mutable.%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20est%20jet%C3%A9%20ici%20car%20il%20n'est%20plus%20utilis%C3%A9%20par%20la%20suite.%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20On%20a%20le%20droit%20car%20l'unique%20r%C3%A9f%C3%A9rence%20mutable%20f%20a%20%C3%A9t%C3%A9%20jet%C3%A9e.%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20foo%20change%20une%20fois%20de%20plus%20de%20propri%C3%A9taire!%0A%20%20%20%20%2F%2F%20Le%20nouveau%20propri%C3%A9taire%20de%20foo%20est%20le%20param%C3%A8tre%0A%20%20%20%20%2F%2F%20de%20la%20fonction%20do_something.%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: Déréférencement
+  content_markdown: >
+    Avec une référence, on peut modifier la valeur avec l'opérateur de
+    déréférencement `*`.
+
+
+    Tu peux également obtenir une copie de la valeur en utilisant également
+    l'opérateur de déférencement `*`
+
+    (à condition que la valeur puisse être copiée, nous discuterons des types
+    qui peuvent l'être
+
+    dans un prochain chapitre).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20obtient%20une%20copie%20de%20la%20valeur%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20change%20la%20valeur%20originelle%20mais%20pas%20celle%20de%20la%20copie!%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: Transfert de données empruntées
+  content_markdown: >
+    Les règles de Rust en ce qui concerne les références peuvent être résumées
+    en:
+
+
+    * Rust n'autorise qu'une seule référence mutable (mot-clé `&mut`) ou
+    plusieurs références immuables **mais pas les deux**.
+
+    * Une référence ne doit pas **vivre plus longtemps** que son propriétaire. 
+
+
+    Cela n'est pas un problème lorsque que la référence est passée en paramètre
+
+    d'une fonction puisque la référence n'exite que dans la portée de la
+    fonction.
+
+
+    Détails de la mémoire:
+
+    * La première règle empêche les accès concurrentiels. On parle d'accès
+    concurrentiels lorsque plusieurs acteurs
+
+    essayent d'accéder à une ressource en même temps. Par exemple j'essaie de
+    lire une valeur mais quelqu'un d'autre
+
+    la modifie en même temps, résultat je ne sais pas si je lis la valeur avant
+    ou après modification. Cela arrive
+
+    fréquemment dans les programme utilisant plusieurs fils d'exécution (en
+    anglais threads).
+
+    * La deuxième règle nous évite la mauvaise utilisation de références qui
+    pourrait faire référence à une donnée
+
+    inexistante (les fameux **dandling pointers** du language C).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20La%20r%C3%A9f%C3%A9rence%20mutable%20f%20est%20jet%C3%A9e%20(d%C3%A9construite%20et%20d%C3%A9sallou%C3%A9e)%20ici.%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Etant%20donn%C3%A9%20que%20la%20r%C3%A9f%C3%A9rence%20modifiable%20foo%20n%27existe%20uniquement%20dans%0A%20%20%20%20%2F%2F%20la%20fonction%20do_something%2C%20on%20peut%20en%20cr%C3%A9er%20une%20autre.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20ici.%0A%7D%0A
+- title: Réferences de réferences
+  content_markdown: |
+    Une référence peut faire référence à une autre.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20est%20jet%C3%A9%20(d%C3%A9construit%20et%20d%C3%A9allou%C3%A9)%20ici%2C%20ce%20qui%20nous%20autorise%0A%20%20%20%20%2F%2F%20%C3%A0%20cr%C3%A9er%20une%20r%C3%A9f%C3%A9rence%20immuable.%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20est%20jet%C3%A9%20ici.%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20ici.%0A%7D%0A
+- title: Durée de vie explicite
+  content_markdown: >
+    Même si cela ne se voit pas, le compilateur porte une attention particulière
+    à la durée de vie
+
+    de chaque variable et veillera à ce qu'une référence n'existe pas au delà de
+
+    l'existance de son propriétaire.
+
+
+    Avec Rust, on peut explicitement spécifier la durée de vie des paramètres
+    d'une fonction.
+
+    Ceci permet à un ou plusieurs paramètres d'une fonction de partager la durée
+    de vie de valeurs de retour.
+
+
+    Les spécifieurs de durée de vie commencent toujours par le symbole `'` (e.g.
+    `'a`, `'b`, `'c`).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20Le%20param%C3%A8tre%20foo%20et%20la%20valeur%20de%20retour%20partage%0A%2F%2F%20la%20m%C3%AAme%20dur%C3%A9e%20de%20vie.%0Afn%20do_something%3C%27a%3E(foo%3A%20%26%27a%20Foo)%20-%3E%20%26%27a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20x%20est%20jet%C3%A9%20(d%C3%A9construit%20et%20d%C3%A9allou%C3%A9)%20ici%2C%20ce%20qui%20permet%20de%0A%20%20%20%20%2F%2F%20cr%C3%A9er%20une%20r%C3%A9f%C3%A9rence%20immuable.%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20est%20jet%C3%A9%20ici.%0A%20%20%20%20%2F%2F%20foo%20est%20jet%C3%A9%20ici.%0A%7D%0A
+- title: Durée de vie multiple
+  content_markdown: >
+    Les spécifieurs de durée de vie permettent d'être explicite dans certains
+    cas où le compilateur
+
+    ne puisse pas résoudre lui-même les durées de vie des éléments de la
+    signature d'une fonction.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20et%20la%20valeur%20de%20retour%20partagent%20la%20m%C3%AAme%20dur%C3%A9e%20de%20vie.%0A%2F%2F%20foo_a%20a%20sa%20propre%20dur%C3%A9e%20de%20vie.%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20est%20jet%C3%A9%20(d%C3%A9construit%20et%20d%C3%A9sallou%C3%A9)%20ici.%0A%20%20%20%20%2F%2F%20Seule%20la%20dur%C3%A9e%20de%20vie%20de%20foo_b%20continue.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20x%20est%20jet%C3%A9%20ici.%0A%20%20%20%20%2F%2F%20foo_b%20est%20jet%C3%A9%20ici.%0A%7D%0A
+- title: Durées de vie statiques
+  content_markdown: >
+    Une variable statique (en anglais **static**) est une ressource mémoire
+    créée lors de la compilation
+
+    et qui existe du début jusqu'à la fin du programme. le type doit être défini
+    explicitement.
+
+
+    Une **durée de vie statique** est une ressource mémoire qui existe
+    indéfiniment jusqu'à la fin du programme.
+
+    Une ressource statique peut être créée lors de l'exécution du programme.
+
+
+    Elle est créée avec le mot-clé `'static`.
+
+
+    Elle ne sera jamais déconstruite et désallouée avant la fin du programme.
+
+
+    Si une ressouce statique contient une référence, celle-ci doit également
+    être statique
+
+    (sinon la durée de vie de la référence pourrait s'arrêter avant la fin du
+    programme).
+
+
+    Détails de la mémoire:
+
+
+    * Modifier une variable statique est dangereux car ce sont des variables
+    globales
+
+    pouvant être lues par n'importe qui et pourrait créer des problèmes
+    concurrentiels).
+
+    Nous parlerons des défis des données globales dans de futurs chapitres.
+
+    * Rust nous donne accès au bloc `unsafe { ... }` pour effectuer des
+    opérations en mémoire
+
+    risquées (le résultat n'est pas garanti). Le [<span style="color:red;
+    font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+
+    ne doit pas être pris à la légère.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Les%20variables%20statisques%20peuvent%20%C3%A9galement%0A%20%20%20%20%2F%2F%20%C3%AAtre%20limit%C3%A9es%20%C3%A0%20la%20port%C3%A9e%20de%20la%20fonction.%0A%20%20%20%20static%20mut%20SECRET%3A%20%26%27static%20str%20%3D%20%22espadon%22%3B%0A%0A%20%20%20%20%2F%2F%20Les%20cha%C3%AEnes%20de%20caract%C3%A8res%20ont%20une%20dur%C3%A9e%20de%20vie%20statiques.%0A%20%20%20%20let%20msg%3A%20%26%27static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26%27static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20On%20peut%20casser%20les%20r%C3%A8gles%2C%20mais%20il%20faut%20%C3%AAtre%20explicite.%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20On%20peut%20modifier%20la%20variable%20statique%20SECRET.%20La%20nouvelle%20valeur%0A%20%20%20%20%20%20%20%20%2F%2F%20reste%20une%20cha%C3%AEne%20de%20caract%C3%A8res%20statiques.%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Durée de vie dans les structures
+  content_markdown: |
+    De la même manière que les fonctions, les champs d'une structure peuvent
+    être paramétrés avec des spécifieurs de durée de vie pour un ou plusieurs
+    de ses membres.
+
+    Si une structure contient une référence, alors le compilateur Rust s'assure
+    que la durée de vie de la structure n'excède pas celle du 'propriétaire' de
+    la référence.
+
+    Le compilateur Rust ne permet pas d'avoir une structure possédant
+    des références pointant vers rien du tout.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: Chapitre 5 - Conclusion
+  content_markdown: >
+    Ouf, félicitations pour être arrivé jusque là! Je sais que c'est beaucoup à
+    apprendre mais tu es en bonne
+
+    voie pour devenir un Rustacean. J'espère que tu arrive à voir comment Rust
+    en tant que langage vise à
+
+    résoudre bon nombre des défis communs à la programmation système:
+
+
+    * Modification involontaire de ressources.
+
+    * Oubli de déconstruire les ressources.
+
+    * Ressources accidentellement déconstruites deux fois.
+
+    * Utilisation des ressources après leur déconstruction.
+
+    * Accès concurrentiels causés par l'écriture d'une ressource tandis que
+    quelqu'un est en train de la lire.
+
+    * Voir clairement les zones du code dont le compilateur ne garantit pas les
+    effets.
+
+
+    Dans le chapitre suivant, nous appliquerons une partie de nos connaissances
+    en examinant comment Rust gère le texte.

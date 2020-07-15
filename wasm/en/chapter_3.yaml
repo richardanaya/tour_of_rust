@@ -1,0 +1,262 @@
+- title: Chapter 3 - Dynamic Invocation
+  content_markdown: >
+    In this chapter we will talk about how we can create our own dynamic
+    functions at runtime to call from WebAssembly.
+- title: Why Dynamic Invocation?
+  content_markdown: >
+    We saw in the first chapters that we could easily write our own JavaScript
+    functions by hand in our `.js` files, so why
+
+    dynamically create functions?
+
+
+    * Most people come to WebAssembly to escape JavaScript. Dynamic creation of
+    JavaScript functions allow us to use
+      libraries in our native language that do the hard part of dynamically creating their bindings without everyone having
+      to recreate the wheel.
+    * Simplifies our setup and bootstrapping of our WebAssembly module to a bare
+    minimum. We only need the ability to register 
+      new functions and call those new functions instead of specifying a litany of hand written JavaScript functions.
+    * It's difficult for JavaScript to know what dependencies your module needs,
+    by allowing the WebAssembly program to create its own functions
+      it creates only exactly what it needs.
+- title: Logging Revisited
+  content_markdown: >
+    In our first chapter we manually wrote our log functions to do logging with
+    `console.log`.  Let's consider how we would do this dynamically.
+
+
+    * We need some way to register a function at runtime.
+
+    * We need some way to call that function.
+
+    * We'll need some way for that dynamic function to have access to memory
+    (e.g. for extracting utf-8 bytes.)
+- title: Registering Functions
+  content_markdown: >
+    In order to register a function we need two things:
+
+
+    * we need to pass body of function we want to create in JavaScript as a
+    string
+
+    * we need to get back a handle so we can call that function later with
+    parameters
+
+
+    ```rust
+
+    register_function(js:&str) -> usize
+
+    ``` 
+
+
+    Since WebAssembly can only pass back and forth numbers, and since all
+    numbers in JavaScript are 64-bit floats, 
+
+    what this will look like ultimately is an imported function:
+
+
+    ```
+
+    register_function(js_start:f64,js_len:f64) -> f64
+
+    ```
+
+
+    Underneath the covers we take advantage of JavaScript's `eval` function to
+    make these functions real.
+- title: Calling Functions
+  content_markdown: >
+    When we later want to call our dynamic function, we'll need some sort of
+    invocation function that can take 
+
+    in our function handle and arguments.
+
+
+    Again, since WebAssembly can only pass back and forth numbers, and since all
+    numbers in JavaScript are 64-bit floats, 
+
+    what this will look like ultimately is an imported function:
+
+
+    ```
+
+    js_invoke_with_2_params(fn_handle:f64, a:f64, b:f64) -> f64
+
+    ``` 
+
+
+    Putting it all together we
+
+
+    ```rust
+
+    let log_handle = register_function("
+      (param_a, param_b) => {
+        // somehow call console_log  
+      }");
+
+    let msg = "hello world";
+
+
+    js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
+        msg.len() as f64 );
+    ```
+
+
+    You'll notice there is a problem with our JavaScript function though. It has
+    the start and end of our utf-8 but not memory!
+- title: Context Of Dynamic Invocation
+  code: 'https://webassembly.studio/?embed&f=70lhg7nwda9'
+  content_markdown: >
+    When our dynamically invoked functions are called, the functions need to
+    have access to the module's memory. We can place
+
+    important resources on a context object so our function has all the
+    available tools to do it's job.
+
+
+    ```rust
+
+    let log_handle = register_function("
+      (context, msgStart, msgEnd) => {
+        let msg = context.getUtf8FromMemory(msgStart,msgEnd);
+        console.log(msg); 
+      }");
+
+    let msg = "hello world";
+
+
+    js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
+      msg.len() as f64);
+    ```
+
+
+    Look at the example for the complete implementation.
+- title: Returning References
+  content_markdown: >
+    We run into an issue with dynamic functions when we want to return a
+    reference to an object. WebAssembly can only pass
+
+    around numbers! To break past this challenge, we must establish a convention
+    of using a numerical handle to represent
+
+    a reference to our object in JavaScript.
+
+
+    ```rust
+
+    let query_selector_handle = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart,selectorEnd);
+        let domEl = document.querySelector(selector);
+        let objHandle = context.storeObject(domEl);
+        return objHandle;
+      }");
+
+    let selector = "#fancy-button";
+
+
+    let dom_element_handle = js_invoke_with_2_params(
+        log_handle,selector.as_ptr() as f64, 
+        selector.len() as f64 );
+    ```
+- title: Allocators
+  code: 'https://webassembly.studio/?embed&f=mz2gu9y29tn'
+  content_markdown: >
+    As we can see to properly communicate objects, we need to have some kind of
+    storage mechanism for objects:
+
+
+    * `storeObject(object) -> f64` - Stores an object and returns a numerical
+    handle.
+
+    * `getObject(f64) -> object` - Get a reference to an object by it's
+    numerical handle.
+
+    * `releaseObject(f64) -> object` - Release a reference to an object from
+    storage, allowing it's memory to be freed.
+
+
+    The implementation of something like this is called an *allocator*. This is
+    beyond the scope of this tutorial. We
+
+    could imagine a very naive implementation of this which is essentially just
+    an ever growing vector where 
+
+    when an object is stored in the vector and it's index is returned as the
+    handle.
+
+
+    ```
+
+    let storage = [];
+
+
+    function storeObject(obj){
+      let index = storage.length;
+      storage.push(obj);
+      return index;
+    }
+
+
+    function getObject(handle){
+      return storage[handle];
+    }
+
+
+    function releaseObject(handle){
+      return storage[handle] = null;
+    }
+
+    ```
+
+
+    There are many issues for you to consider with your implementation.
+- title: Drawing To The Screen
+  code: 'https://webassembly.studio/?embed&f=bdhga9zwlem'
+  content_markdown: >
+    Let's put it all together with a an example by drawing a red square to the
+    screen. Let's think about the functions we'll need
+
+    to register:
+
+
+    ```rust
+
+    let get_2d_context = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart,selectorEnd);
+        let domEl = document.querySelector(selector);
+        let ctx = domEl.getContext("2d");
+        let objHandle = context.storeObject(ctx);
+        return objHandle;
+      }");
+
+    let set_context_color = register_function("
+      (context, ctxHandle, colorStart, colorEnd) => {
+        let color = context.getUtf8FromMemory(
+          colorStart,colorEnd);
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillStyle = color;
+      }");
+
+    let draw_rect = register_function("
+      (context, ctxHandle, x, y, width, height) => {
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillRect(x,y,width,height);
+      }");
+    ```
+- title: Chapter 3 Conclusion
+  content_markdown: >
+    We now have the ability to invoke any kind of JavaScript! How cool is that?
+    Using eval obviously is not that ideal,
+
+    but WebAssembly is an evolving technology that will one day have better ways
+    to access any aspect of the 
+
+    browser. Until then we do our best! The next chapter is on asynchronous
+    programming!

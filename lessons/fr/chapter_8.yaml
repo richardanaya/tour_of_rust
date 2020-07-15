@@ -1,0 +1,333 @@
+- title: Chapitre 8 - Pointeurs intelligents (smart pointers)
+  content_markdown: |
+    Dans ce chapitre, nous allons démystifier les pointeurs intelligents
+    (en anglais Smart Pointers). Explorons ces structures de données qui
+    nous permettent d'interagir au plus bas niveau de la Mémoire.
+
+    Ferris dit: "Ne te sens pas submergé par ce chapitre, je n'attends pas de
+    toi que tu sois capable d'écrire ton propre code de gestion de la mémoire
+    bas niveau après une première lecture. Ce chapitre est surtout là pour te
+    présenter quelques outils utiles et te donner un aperçu de leur
+    fonctionnement!"
+- title: Références revisitées
+  content_markdown: >
+    Une référence est fondamentalement juste un nombre qui donne la position
+
+    de départ d'octets en mémoire, son seul but est d'indiquer où des données
+
+    d'un type spécifique sont situés en mémoire. Une référence n'est pas juste
+
+    qu'un nombre, Rust va valider la durée de vie de la référence pour qu'elle
+    ne
+
+    dépasse par celle de l'objet qu'elle réfère (sinon nous obtiendrions une
+
+    erreur dès que nous essayerions de l'utiliser!).
+- title: Pointeurs bruts (en anglais raw pointers)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22La%20donn%C3%A9e%20se%20trouve%20%C3%A0%20l%27adresse%20m%C3%A9moire%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: |
+    Les références peuvent être converties en un type plus primitif appelé
+    *pointeurs bruts* (en anglais raw pointers). Ce type de pointeur peut
+    être copié et déplacé avec peu de restrictions. Cependant, Rust ne garantit
+    pas la validité de l'emplacement de mémoire vers lequel il pointe.
+
+    Il existe deux types de pointeurs bruts:
+
+    * `*const T` - Un pointeur brut vers des données de type T qui ne devraient
+    jamais changer.
+    * `*mut T` - Un pointeur brut vers des données de type T qui peuvent
+    changer.
+
+    Les pointeurs bruts peuvent être convertis en et à partir de nombres
+    (par exemple `usize`).
+
+    Les pointeurs bruts peuvent accéder aux données avec un code *unsafe*
+    (plus d'informations à ce sujet plus tard).
+
+    Détails de la mémoire:
+    * En termes d'utilisation, une référence en Rust est très similaire
+    à un pointeur en C mais avec beaucoup plus de restrictions lors de la
+    compilation (notamment sur la manière dont la référence peut être stockée
+    et déplacée vers d'autres fonctions).
+    * Un pointeur brut en Rust est similaire à un pointeur en C du fait qu'ils
+    représentent tous les deux un nombre qui peut être copié, passé en argument
+    de fonction ou même transformé en un type numérique avec lequel on pourra
+    faire certaines opérations arithmétiques (i.e. arithmétique des pointeurs).
+- title: Déréférencement
+  content_markdown: |
+    Le fait d'accéder ou de manipuler des données à partir d'une *référence*
+    (i.e. un `&i32`) est appelé *déréférencement* (en anglais dereferencing).
+
+    Les références sont utilisées pour accéder ou manipuler des données de deux
+    manières:
+    * Accéder à la donnée référencée lors de l'affectation d'une variable.
+    * Accéder aux champs ou méthodes de la donnée référencée.
+
+    Pour cela, Rust met à notre disposition des opérateurs très puissants.
+- title: L'opérateur *
+  content_markdown: |
+    L'opérateur `*` est un moyen explicite de déréférencer une référence. 
+
+    ```rust
+    let a: i32 = 42;
+    let ref_ref_ref_a: &&&i32 = &&&a;
+    let ref_a: &i32 = **ref_ref_ref_a;
+    let b: i32 = *ref_a;
+    ```
+
+    Détail de la mémoire:
+    - Parce que i32 est un type primitif qui implémente le trait Copy,
+    les octets de la variable `a` sur la pile sont copiés dans les octets
+    de la variable `b`.
+- title: L'opérateur .
+  content_markdown: |
+    L'opérateur `.` est utilisé pour accéder aux champs et aux méthodes d'une
+    référence. Cela fonctionne un peu plus subtilement que l'opérateur `*`.
+
+    ```rust
+    let f = Foo { value: 42 };
+    let ref_ref_ref_f = &&&f;
+    println!("{}", ref_ref_ref_f.value);
+    ```
+    Whoa, pourquoi n'avons-nous pas dû ajouter `***` avant `ref_ref_ref_f`?
+    La raison est que l'opérateur `.` déréférence automatiquement une
+    séquence de références. La dernière instruction du bloc ci-dessus est
+    automatiquement transformée par le compilateur en:
+
+    ```rust
+    println!("{}", (***ref_ref_ref_f).value);
+    ```
+- title: Pointeurs intelligents
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20Un%20d%C3%A9r%C3%A9f%C3%A9rencement%20est%20fait%20par%20l%27appel%0A%20%20%20%20%2F%2F%20de%20la%20fonction%20%60len%60.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    En plus de la possibilité de créer des références de données typées à
+
+    l'aide de l'opérateur `&`, Rust nous donne la possibilité de créer des
+
+    structures similaires aux références (en anglais reference-like) appelées
+
+    **pointeurs intelligents**.
+
+
+    Les références peuvent être vues comme un type qui nous donne accès à un
+
+    autre type. Les pointeurs intelligents peuvent faire la même chose que les
+
+    références et plus encore, c'est au programmeur de définir la logique
+    interne
+
+    d'un pointeur intelligent. La partie *intelligente* est le programmeur.
+
+
+    Les pointeurs intelligents implémentent généralement les traits Deref,
+
+    DerefMut et Drop pour spécifier le comportement du pointeur lorsque la
+
+    structure est déréférencée avec les opérateurs `*` et `.`.
+- title: Code intelligents mais dangereux
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20C%27est%20un%20pointeur%20brut.%20Obtenir%20l%27adresse%20m%C3%A9moire%0A%20%20%20%20%2F%2F%20d%27un%20nombre%20est%20totalement%20s%C3%BBr.%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20%20%20%20%20println!(%22Adresse%20m%C3%A9moire%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Transformer%20notre%20nombre%20en%20un%20pointeur%20brut%20vers%20un%0A%20%20%20%20%2F%2F%20f32%20est%20%C3%A9galement%20s%C3%BBr.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20C%27est%20dangereux%20car%20nous%20demandons%20au%20compilateur%0A%20%20%20%20%20%20%20%20%2F%2F%20de%20supposer%20que%20notre%20pointeur%20est%20un%20f32%20valide%0A%20%20%20%20%20%20%20%20%2F%2F%20et%20de%20d%C3%A9r%C3%A9f%C3%A9rencer%20sa%20valeur%20dans%20la%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20n%27a%20aucun%20moyen%20de%20v%C3%A9rifier%20que%20cette%20hypoth%C3%A8se%0A%20%20%20%20%20%20%20%20%2F%2F%20soit%20vraie.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Je%20jure%20que%20c%27est%20une%20tarte!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Les pointeurs intelligents ont tendance à utiliser assez souvent du code
+
+    *dangereux* (en anglais unsafe). Comme mentionné précédemment, ce sont des
+
+    outils courants pour interagir au plus bas niveau de la mémoire.
+
+
+    Qu'est-ce qu'un code dangereux? Un code dangereux se comporte exactement
+
+    comme un code normal à l'exception que le compilateur Rust ne garantie pas
+
+    la validité du programme.
+
+
+    La première cause d'un code dangereux est lorsqu'on essaye de
+
+    *déréférencer un pointeur brut*. Cela signifie prendre un *pointeur brut*
+
+    correspondant à une adresse mémoire, déclarer "une structure de données
+    existe ici!"
+
+    et transformer les octets de cet emplacement mémoire dans une représentation
+
+    de données que l'on pourra utiliser (par exemple `*const u8` en `u8`).
+
+    Puisque Rust ne garantie pas la signification des octets (il ne garde
+
+    pas de traces), il place le déréférencement dans un bloc `unsafe {...}`.
+- title: Amis familiers
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20On%20d%C3%A9finit%20l'agencement%20que%20doit%20avoir%20la%20m%C3%A9moire%0A%20%20%20%20%20%20%20%20%2F%2F%20pour%20pouvoir%20allouer%204%20octets.%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Alloue%20nos%204%20octets%20en%20m%C3%A9moire%20et%20sauvegarde%20la%20position%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20de%20d%C3%A9but%20en%20tant%20qu'entier.%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20On%20%C3%A9crit%20quelques%20valeurs%20u8%20en%20m%C3%A9moire%20avec%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20un%20peu%20d'arithm%C3%A9tique%20des%20pointeurs.%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Interpr%C3%A8te%20le%20pointeur%20secret_recipe%20en%20tant%20que%0A%20%20%20%20%20%20%20%20%2F%2F%20pointeur%20brut%20f32.%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20D%C3%A9r%C3%A9f%C3%A9rence%20le%20pointeur%20brut%20et%20retourne%20une%0A%20%20%20%20%20%20%20%20%2F%2F%20valeur%20%26f32.%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20On%20d%C3%A9r%C3%A9f%C3%A9rence%20le%20pointeur%20intelligent%20de%20notre%0A%20%20%20%20%2F%2F%20structure%20Pie.%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    Revenons sur quelques pointeurs intelligents que tu connais déjà: `Vec<T>`
+    et `String`.
+
+
+    `Vec <T>` est un pointeur intelligent vers des octets en mémoire. Le
+
+    compilateur Rust n'a aucune idée de la manière dont il faut interpréter ces
+    octets.
+
+    Le pointeur intelligent est capable d'interpréter ces octets en gardant
+
+    une trace de l'endroit dans ces octets où une structures de données commence
+
+    et se termine. Le pointeur intelligent déréférence un pointeur brut pour
+
+    exposer la structure de données dans une belle interface ergonomique propre
+
+    que nous utilisons (par exemple `my_vec [3]`).
+
+
+    De même, `String` garde une trace des octets en mémoire et restreint par
+
+    programmation le contenu qui y est écrit à toujours être de l'`utf-8`
+
+    valide. Il déréférence cette région de mémoire dans un type` &str`.
+
+
+    Ces deux structures de données doivent procéder à un déréférencement
+
+    dangereux de pointeurs bruts.
+
+
+    Détails de la mémoire:
+
+    * Rust possède l'équivalent de `malloc` du langage C avec
+
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) et
+
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
+
+    pour allouer soi-même une région de la mémoire.
+- title: Mémoire allouée sur le tas
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: |
+    `Box` est un pointeur intelligent qui nous permet de déplacer des données
+    de la pile vers le tas.
+
+    Le déréférencement nous permet d'utiliser les données allouées sur le tas
+    de manière ergonomique comme s'il s'agissait du type d'origine.
+- title: Renvoi d'erreurs dans le main revisité
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C%27_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22La%20tarte%20n%27est%20pas%20fra%C3%AEche!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: |
+    Rust possède une pléthore de représentations d'erreurs, mais la bibliothèque
+    standard met à disposition un trait universel `std::error::Error` pour
+    décrire les erreurs.
+
+    En utilisant le pointeur intelligent `Box`, nous pouvons utiliser le type
+    `Box<dyn std::error::Error>` comme type courant pour renvoyer des erreurs
+    car celui-ci nous permet de propager une erreur sur le tas et d'interagir
+    avec elle sans avoir à connaître le type spécifique.
+
+    Au début du Tour de Rust, nous avons appris que `main` pouvait renvoyer une
+    erreur. Avec `Box`, nous pouvons maintenant retourner un type capable de
+    décrire presque tout type d'erreur qui pourrait se produire dans notre
+    programme à condition que la structure de données de l'erreur implémente
+    le trait `Error` de Rust.
+
+    ```rust
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+    ```
+- title: Multi-propriétaire
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20Les%20donn%C3%A9es%20de%20Pie%20se%20trouvant%20sur%20le%20tas%20sont%0A%20%20%20%20%2F%2F%20d%C3%A9sallou%C3%A9es%20ici.%0A%7D%0A
+  content_markdown: |
+    `Rc` (en anglais Reference Counting) est un pointeur intelligent qui
+    déplace les données de la pile vers le tas. Celui-ci peut être cloné
+    et permet d'emprunter immuablement les données se trouvant sur le tas.
+
+    Ce n'est que lorsque le dernier pointeur intelligent est déalloué que les
+    données du tas sont désallouées.
+- title: Partage d'accès
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22C%27est%20bien%20meilleur%20sur%20le%20tas!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20valide%20les%20r%C3%A8gles%20de%20s%C3%A9curit%C3%A9%20li%C3%A9es%0A%20%20%20%20%2F%2F%20%C3%A0%20la%20m%C3%A9moire%20lors%20de%20l%27ex%C3%A9cution.%0A%20%20%20%20%2F%2F%20Note%3A%20pie_cell%20n%27est%20pas%20mutable!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Mais%20rien%20n%27emp%C3%AAche%20d%27emprunter%20une%20r%C3%A9f%C3%A9rence%20mutable!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20est%20d%C3%A9sallou%C3%A9%20ici.%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Nous%20pouvons%20emprunter%20une%20r%C3%A9f%C3%A9rence%20immuable%20car%0A%20%20%20%20%2F%2F%20la%20r%C3%A9f%C3%A9rence%20mutable%20vient%20d%27%C3%AAtre%20d%C3%A9sallou%C3%A9e.%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell` est une structure de données couramment détenue par des pointeurs
+
+    intelligents et qui contient des données. `RefCell`nous permet d'emprunter
+
+    des références mutables et immuables vers ces données. Il empêche d'abuser
+
+    de la fonctionnalité d'emprunt (en anglais borrowing) de Rust en appliquant
+
+    des règles de sécurité liées à la mémoire lors de l'exécution:
+
+
+    **Une seule référence mutable OU plusieurs références immuables, mais pas
+    les deux!**
+
+
+    Si vous violez ces règles, `RefCell` paniquera.
+- title: Partage entre threads
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Je%20suis%20le%20seul%20%C3%A0%20pouvoir%20manger%20la%20tarte!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20On%20emprunte%20une%20r%C3%A9f%C3%A9rence%20immuable.%20Celle-ci%20doit%20%C3%AAtre%0A%20%20%20%20%2F%2F%20verrouill%C3%A9e%20(en%20anglais%20locked).%20On%20doit%20%C3%A9galement%20faire%0A%20%20%20%20%2F%2F%20appel%20%C3%A0%20'unwrap'%20car%20l'appel%20%C3%A0%20'lock'%20peut%20%C3%A9chouer.%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20La%20r%C3%A9f%C3%A9rence%20ref_pie%20est%20d%C3%A9sallou%C3%A9e%20ici.%20mutex_pie%0A%20%20%20%20%2F%2F%20pourrait%20de%20nouveau%20%C3%AAtre%20utilis%C3%A9%20ici.%0A%20%20%20%20%0A%7D%0A
+  content_markdown: >
+    `Mutex` est une structure de données (couramment détenue par des pointeurs
+
+    intelligents) pouvant contenir des données et nous permet d'emprunter des
+
+    références mutable ou immuables vers les données qu'elle contient. `Mutex`
+
+    restreint l'accès aux données à un seul thread CPU, bloquant les autres
+
+    threads jusqu'à ce que le thread d'origine ait terminé et déverrouillé les
+
+    données.
+
+
+    Le multithreading dépasse le cadre de Tour of Rust, mais `Mutex` est un
+
+    élément fondamental de la programmation concurrentielle avec Rust.
+
+
+    Il existe un pointeur intelligent spécial `Arc` qui est identique à `Rc`
+
+    mais pour les threads. La particularité de `Arc` est qu'il est thread-safe,
+
+    Rust gardera en mémoire le nombre de références existantes vers une donnée
+
+    même dans une application utilisant plusieurs threads. Il est souvent
+    utilisé
+
+    pour avoir plusieurs références vers un même `Mutex`.
+- title: Utilisation avancée des pointeurs intelligents
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20a%20pris%20une%20part!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Utilise%20un%20pointeur%20intelligent%20vers%20Pie%20pour%0A%20%20%20%20%20%20%20%20%2F%2F%20effectuer%20un%20emprunt%20mutable.%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20On%20modifie%20la%20donn%C3%A9e.%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Ferris%20et%20Sarah%20sont%20cr%C3%A9%C3%A9s%20avec%20des%20clones%20de%0A%20%20%20%20%2F%2F%20pointeurs%20intelligents%20vers%20Pie.%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%2)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20parts%20restantes.%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: |
+    Les pointeurs intelligents peuvent sembler limités, mais ils peuvent
+    être utilisés de manière très puissante avec les structures que nous
+    venons de voir.
+
+    `Rc<Vec<Foo>>` - Permet de cloner plusieurs pointeurs intelligents pouvant
+    emprunter le même vecteur de données immuables. Pour rappel `Rc` place les
+    données sur le tas.
+
+    `Rc<RefCell<Foo>>` - Permet à plusieurs pointeurs intelligents d'emprunter
+    mutuellement ou immuablement la même structure `Foo`.
+
+    `Arc<Mutex<Foo>>` - Permet à un pointeur intelligent de verrouiller
+    temporairement une donnée (celle-ci ne pourra plus être emprunté mutablement
+    ou immuablement) de manière exclusive à un thread du CPU (les autres threads
+    n'y auront pas accès).
+
+    Détail de la mémoire:
+    * Vous remarquerez un thème commun avec plusieurs de ces utilisations:
+      l'utilisation d'un type de données immuable (possiblement emprunté par
+      plusieurs pointeurs intelligents) pour modifier les données internes.
+      C'est ce qu'on appelle la "mutabilité intérieure" (en anglais interior
+      mutability) de Rust. C'est un modèle qui nous permet de contourner les
+      règles d'utilisation de la mémoire à l'exécution mais en gardant le même
+      niveau de sécurité que Rust nous offre lors de la compilation.
+- title: Chapitre 8 - Conclusion
+  content_markdown: |
+    Les pointeurs intelligents sont très utilisés avec Rust car cela nous
+    évite de recréer nous-même ces schémas très courants d'utilisation de
+    la mémoire. Avec eux, tu sera prêt à affronter tous les défis! Maintenant
+    que nous avons vu les fondations de Rust, nous verrons dans le prochain
+    chapitre comment se structure un projet Rust au-delà d'un simple fichier.

@@ -1,0 +1,61 @@
+- title: Capítulo 1 - Qué es WebAssembly?
+  content_markdown: >
+    WebAssembly es un formato binario para representar un código ejecutable de
+    forma aislada. Foi
+
+    Fue creado para para ser executado en los navegadores como una alternativa
+    a 
+
+    JavaScript con las siguientes ventajas:
+
+
+    * Por ser un bytecode de bajo nivel, capaz de ejecutar cálculos rápidamente
+    y acceder a la memoria
+      de una forma más directa.
+    * WebAssembly fue creado teniendo a los compiladores existentes en mente,
+    haciendo posible que fuera
+      compilado a partir de lenguajes nativos como C/C++ y Rust.
+    * Creado con seguridad e isolación en mente, permitiendo un control de
+    acesso detallado.
+
+    * WebAssembly fue creado para ser agnóstico, permitiendo que los usuarios
+    usaran WebAssembly 
+      [fuera de los navegadores](https://wasmer.io/) también!
+
+    WebAssembly es frecuentemente mencionado como **WASM**.
+- title: Dentro de un Módulo
+  content_markdown: >
+    Cuando compilas a WebAssembly, su compilador debe crear un archivo acabado
+    en 
+
+    `.wasm` llamado **módulo**.
+
+
+    El módulo es un [formato
+    binario](https://webassembly.github.io/spec/core/index.html) con 
+
+    toda la información necesaria para que un programa wasm y su memoria sean
+    configurados e interaccionen
+
+    con:
+
+    * una lista de funciones.
+
+    * qué funciones deben de ser exportadas/importadas.
+
+    * qué datos tienen que estar inicialmente en la memoria de los módulos wasm.
+- title: Cargando un Módulo
+  content_markdown: >
+    Como un módulo de WebAssembly es apenas un conjunto de bytes, necesitamos
+    primero cargar esos bytes
+
+    en nuestro navegador.
+
+
+    ```
+
+    let file = await fetch('mi_modulo.wasm');
+
+    let bytes = await file.arrayBuffer();
+
+    ```

@@ -1,0 +1,34 @@
+- title: 'Hello, WebAssembly'
+  content_markdown: >
+    Welcome to the *Tour of WebAssembly*. This is meant to be a introduction to
+    the technology 
+
+    and how C can be used to power the web. This tour is also available in Rust.
+
+
+    * [Rust (english)] (index.html)
+
+    * [Rust (français)] (index_fr.html)
+
+    * [Rust (Interlingue)] (index_ie.html)
+
+    * [Rust (Português Brasileiro)] (index_pt-br.html)
+
+    * [Rust (Español)] (index_es.html)
+
+    * [Rust (日本語)] (index_ja.html)
+
+    * [C (english)] (index_en_c.html)
+
+    * [C (français)] (index_fr_c.html)
+
+
+    If you have suggestions on content or would like to contribute to
+    translations, 
+
+    checkout out Tour of WebAssembly's [github
+    repository](https://github.com/richardanaya/tour_of_rust).
+
+
+    You can navigate through the tour with keyboard <span
+    class="emoji">⬅️</span> and <span class="emoji">➡️</span>

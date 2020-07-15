@@ -1,0 +1,208 @@
+- title: Capitul 6 - Textu
+  content_markdown: >
+    Nam noi ja comprende un poc pri qualmen Rust concepte memorie, noi es
+    preparat parlar plu detalliatmen pri textu.
+
+    Rust sucia sempre pri textu international e li concernes sur li nivelle de
+    bytes queles fórsan es nov por tis
+
+    qui ha venit de altri lingues. Támen, Rust possede mult utensiles por gerer
+    ti-ci problemas.
+- title: String Literals
+  content_markdown: >
+    String literals (caten-litterales) es sempre Unicode
+
+
+    Li tip por string literals es `&'static str`
+
+
+    * `&` significa que it refere a un loc in memorie, e it manca un `&mut` nam
+    li compilator nequande va permisser modificar it
+
+    * `static` significa que li data del string va sempre esser disponibil til
+    li fine del programma (it nequande cade)
+
+    * `str` significa que it indica un sequentie de bytes queles sempre es valid
+    **utf-8**
+
+
+    Detallies pri memorie:
+
+    * max probabilmen li compilator Rust va plazzar tui string in li segment de
+    data del memorie de tui programma
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22salute%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: Pri utf-8
+  content_markdown: "Con plu e plu lingues usat in computatores, li munde besonat representar li caracteres usat in ili\nqueles ASCII sol ne posset monstrar (1 byte possibilisat solmen 256 caracteres).\n\nOn introductet **utf-8** con un byte-longore variant inter 1-4 bytes, creante un spacie por mult plu caracteres possibil.\n\nUn avantage de caracteres con grandore variabil es que con li max comun caracteres (ASCII) on besonat solmen un sol byte mem in **utf-8**\n\nUn desavantage es que caractere-serchada ne plu esset possibil con rapiditá\n(**O(1)** constant témpor) con un simplic indexation (p.ex. `my_text[3]` por trovar li 4im caractere). Nam in ti-ci exemple it es\npossibil que chascun caractere possede un largore diferent, e in li sequentie de bytes on ne posse garantir li loc ú it comensa e fini se.\n\nPro to noi deve iterar tra un sequentie de bytes in **utf-8** por comprender ú comensa li caracteres unicode (**O(n)** lineari témpor).\n\nFerris: \"Por mi parte yo es felici posser usar **utf-8** por usar li emojis de mi amics submarin.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: Caracteres de escapa
+  content_markdown: >
+    Quande representar un caractere es desfacil, un **code de escapa** fa it
+    possibil.
+
+
+    In Rust es usat li comun codes de escapa trovat in lingues basat sur C.
+
+    * `\n` - nov linea
+
+    * `\r` - coche-retorna (carriage return)
+
+    * `\t` - tabellator
+
+    * `\\` - barre inversat
+
+    * `\0` - null
+
+    * `\'` - quote singul
+
+
+    Li liste complet trova se
+    [ci](http://doc.rust-lang.org/reference/tokens.html)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20di%3A%5Ct%5C%22salute%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+- title: String Literals sur Lineas Multiplic
+  content_markdown: |
+    Catenes in Rust es predefinit quam multilineal.    
+
+    On usa un `\` al fine de un linea si on ne vole que li linea mey rupter se.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku_angl%C3%A9s%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22salute%20%5C%0A%20%20%20%20munde%22)%20%2F%2F%20n.b.%20li%20spacie%20avan%20m%20es%20ignorat%0A%7D%0A
+- title: String Literals Crud
+  content_markdown: >
+    Con raw strings (crud catenes de caracteres) noi posse scrir un sequentie de
+    caracteres quel comensa con `r#"` e fini se con `"#` Talmen
+
+    noi posse inserter caracteres tales quam "" o \ queles normalmen es
+    confusent in normal string literals.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Crud%20catenes%20es%20util%20de%20t%C3%A9mpor%20a%20t%C3%A9mpor.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%20%20%20%20%2F%2F%20Quo%20far%20si%20un%20%23%20trova%20se%20in%20un%20catene%3F%20On%20simplicmen%20adjunte%20un%20%23%20in%20plu%3A%0A%20%20%20%20%2F%2F%20r%23%23%22%20catene%20de%20caracteres%20%22%23%23%0A%20%20%20%20%2F%2F%20Quo%20far%20si%20trova%20se%20du%20%23%23%3F%20On%20adjunte%20un%20%23%20in%20plu!%20On%20posse%20usar%20quantcunc%0A%20%20%20%20%2F%2F%20si%20necessi%3A%20mem%20r%23%23%23%23%23%22catene%20de%20caracteres%22%23%23%23%23%23%20es%20possibil.%0A%7D%0A
+- title: String Literals ex Archives
+  content_markdown: >
+    Si on possede mult textu, on posse usar li macro `include_str!` por includer
+    li textu de archives local in li programma:
+
+
+    ```rust
+
+    let 00_html = include_str!("00_en.html");
+
+    ```
+- title: String Slice
+  content_markdown: >
+    Un string slice (tranche de un catene de caracteres) es un referentie a un
+    sequentie de bytes in memorie quel deve sempre esser
+
+    valid utf-8
+
+
+    Anc un string slice (un tal-nominat sub-slice) de un `str` slice deve esser
+    valid utf-8.
+
+
+    Metodes comun de `&str`:
+
+    * Con `len` on obtene li longore del string literal in bytes (ne li númere
+    de caracteres).
+
+    *  `starts_with`/`ends_with` por comparar to quo trova se al comense o al
+    fine del catene
+
+    * `is_empty` retorna true si li longore es zero
+
+    * `find` retorna un `Option<usize>` del unesim position de alquel textu
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22salute%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20unesim_parol%20%3D%20%26a%5B0..6%5D%3B%0A%20%20%20%20let%20duesim_parol%20%3D%20%26a%5B7..11%5D%3B%0A%20%20%20%20%2F%2F%20let%20demi_crabe%20%3D%20%26a%5B9..11%5D%3B%20FALLIMENT%0A%20%20%20%20%2F%2F%20Rust%20ne%20accepta%20tranches%20de%20caracteres%20unicode%20queles%20es%20%C3%ADnvalid%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20unesim_parol%2C%20duesim_parol)%3B%0A%7D%0A
+- title: Chars
+  content_markdown: >
+    Nam utilisar unicode posse esser desfacil, in Rust on posse retrovar un
+    sequentie de bytes in utf-8 quam un vector de caracteres del tip `char`
+    (caractere).
+
+
+    Un `char` possede sempre un grandore de 4 bytes, con quel on posse facilmen
+    trovar caracteres individual.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20colecter%20li%20caracteres%20quam%20un%20vector%20de%20char%0A%20%20%20%20let%20chars%20%3D%20%22salute%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20deve%20esser%204%0A%20%20%20%20%2F%2F%20nam%20chars%20es%204%20bytes%20noi%20posse%20converter%20les%20a%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: String
+  content_markdown: >
+    Un **String** es un struct quel possede un sequentie de bytes in utf-8 in
+    memorie sur li heap.
+
+
+    Essente sur li heap, on posse extender e modificar it etc. con un
+    flexibilitá quel ne trova se in string literals.
+
+
+    Metodes comun:
+
+
+    * `push_str` por adjunter plu bytes utf-8 al fine de un catene.
+
+    * `replace` por remplazzar sequenties de bytes utf-8 con altris.
+
+    * `to_lowercase`/`to_uppercase` por maju-/minusculisation.
+
+    * `trim` por remover spacies
+
+
+    Quande un String cade, su memorie sur li heap cade junt con it.
+
+
+    `String` have un operator `+` con quel on extende it con un `&str` e retorna
+    se self, ma it ne es tam ergonomic quam on vell esperar.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20salute_munde%20%3D%20String%3A%3Afrom(%22salute%22)%3B%0A%20%20%20%20salute_munde.push_str(%22%20munde%22)%3B%0A%20%20%20%20salute_munde%20%3D%20salute_munde%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20salute_munde)%3B%0A%7D%0A
+- title: Textu quam Parametres de Functiones
+  content_markdown: >
+    In general on transfere string literals e strings quam un string slice
+    (tranche de caracteres) a functiones. Con to on have 
+
+    flexibilitá in li pluparte de situationes quande on ne besona transferer
+    proprietá.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20di_it_vocosimen(msg%3A%20%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2C%20msg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20di_it_vocosimen%20posse%20pruntar%20%26%27static%20str%20quam%20un%20%26str%0A%20%20%20%20di_it_vocosimen(%22salute%22)%3B%0A%20%20%20%20%2F%2F%20di_it_vocosimen%20posse%20anc%20pruntar%20String%20quam%20un%20%26str%0A%20%20%20%20di_it_vocosimen(%26String%3A%3Afrom(%22a%20revidentie%22))%3B%0A%7D%0A
+- title: Construction de Strings
+  content_markdown: |
+    Li simplic ma potent `concat` e `join` possibilisa li creation de catenes.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20salute_munde%20%3D%20%5B%22salute%22%2C%20%22%20%22%2C%20%22munde%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20salute_munde)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20abc)%3B%0A%7D%0A
+- title: Formate de Strings
+  content_markdown: >
+    Con li macro `format!` noi posse crear un catene per definir un tal quel es
+    parametrisat con placeholders (marcas substitutiv) pri u e qualmen li
+    valores deve esser plazzat (usante `{}`).
+
+
+    `format!` usa li sam catenes parametrisat quam tis in `println!`
+
+
+    Li capabilitás de ti-ci function es tro grand por nor litt *Tour of Rust*;
+    plu detallies trova se [in li
+    documentation](https://doc.rust-lang.org/std/fmt/)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secrete%20del%20vive%3A%20%7B%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f)%3B%0A%7D%0A
+- title: Conversion de Strings
+  content_markdown: >
+    On posse utilisar `to_string` por converter mult tipes a un string.
+
+
+    Li function géneric `parse` posse esser usat por converter strings o string
+    literals
+
+    ad-in un altri tip. Ti-ci function retorna un `Result` pro li possibilitá
+
+    de falliment.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Capitul 6 - Conclusion
+  content_markdown: >
+    Nu tu comprende li basic coses a saver pri textu! Quam ja videt, unicode fa
+    li manipulation de textu un poc desfacil, ma in li
+
+    standard library trova se mult functionalitá con quel it deveni plu facil.
+
+
+    Til nu noi ha videt Rust del vispunctu procedural (a saver solmen functiones
+    e data), ma li témpor ha venit
+
+    por parlar pri traits (trates) e li capabilitás liberat del paradigma
+    "object oriented" (object-orientat) de Rust.

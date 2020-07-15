@@ -1,0 +1,134 @@
+- title: 第 1 章 - 基礎
+  content_markdown: >
+    最初の章では、関数、変数、プリミティブ型などの基本的なことを探っていきます。皆さんのご参加をお待ちしております。
+
+
+    また、あなたに話し掛けているこの愛らしいカニが誰なのか気になるかもしれません。私は Rust プログラミング言語の非公式マスコット **Ferris**
+    です。はじめまして。
+- title: Rust Playground
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Playground%20%E3%81%B8%E3%82%88%E3%81%86%E3%81%93%E3%81%9D%E3%80%82%E3%81%93%E3%81%93%E3%81%A7%E3%82%B3%E3%83%BC%E3%83%89%E3%82%92%E4%BF%AE%E6%AD%A3%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82%22)%3B%0A%7D%0A
+  content_markdown: >
+    このツアーでは、[Rust Playground](https://play.rust-lang.org)
+    のインタラクティブなコーディングツールを使用します。
+
+
+    Rust で遊んで、あなたの創造性と挑戦を他の人に見せるのに最適な方法です。
+- title: 変数
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20x%20%E3%81%AE%E5%9E%8B%E3%82%92%E6%8E%A8%E8%AB%96%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20x%20%E3%81%AE%E5%9E%8B%E3%82%92%E6%8C%87%E5%AE%9A%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20%E5%AE%A3%E8%A8%80%E3%81%AE%E5%BE%8C%E3%81%A7%E5%88%9D%E6%9C%9F%E5%8C%96%EF%BC%88%E3%81%82%E3%81%BE%E3%82%8A%E4%BD%BF%E3%82%8F%E3%82%8C%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: |
+    変数は **let** キーワードを使用して宣言します。
+
+    値を割り当てる際、Rust は 99% のケースで変数の型を推論できます。それができない場合、変数宣言に型を追加できます。
+
+    同じ変数名に複数回割り当てできることに注目してください。
+    これは変数のシャドウイングと呼ばれるもので、型を変更して後でその名前で参照できます。
+
+    変数名にはスネークケース `snake_case` を使用します。
+- title: 変数の変更
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: |
+    Rustは変数の変更についてとても配慮しています。値は 2 種類に分類されます。
+
+    * **可変** - コンパイラは変数の書き込みと読み込みを許可します。
+    * **不変** - コンパイラは変数の読み込みだけを許可します。
+
+    可変値は **mut** キーワードで表します。
+
+    この概念については後で詳しく説明しますが、今のところはこのキーワードに注意してください。
+- title: 基本的な型
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%A7%E3%81%AF%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%A7%E3%81%AF%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: |
+    Rustにはよく知られた様々な型があります。
+
+    * ブール型 - `bool` は true または false を表します
+    * 符号なし整数型 - `u8` `u32` `u64` `u128` は正の整数を表します
+    * 符号付き整数型 - `i8` `i32` `i64` `i128` は正と負の整数を表します
+    * ポインタサイズ整数型 - `usize` `isize` はメモリ内のインデックスとサイズを表します
+    * 浮動小数点数型 - `f32` `f64`
+    * タプル型 - `(value, value, ...)` スタック上の固定された値の組を渡すために使用されます
+    * 配列型 - コンパイル時に長さが決まる同じ要素のコレクション
+    * スライス型 - 実行時に長さが決まる同じ要素のコレクション
+    * `str`(string slice) - 実行時に長さが決まるテキスト
+
+    Rust はシステムプログラミング言語であるため、他の言語よりも複雑かもしれません。あまり意識しなかったようなメモリの問題を扱います。
+    これについては後ほど詳しく説明します。
+
+    数値型は、数値の最後に型を付加することで明示的に指定できます。（例: `13u32`, `2u8`）
+- title: 基本型の変換
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: |
+    Rust で数値型を扱う際、型を明示する必要があります。`u8` と `u32` を混ぜるとエラーになります。
+
+    幸い、Rust は **as** キーワードで数値型を簡単に変換できます。
+- title: 定数
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E3%82%A2%E3%83%83%E3%83%97%E3%83%AB%20%7B%7D%20%E3%82%92%E4%BD%9C%E3%82%8B%E3%81%AB%E3%81%AF%E3%80%81%E3%81%BE%E3%81%9A%E5%AE%87%E5%AE%99%E3%82%92%E5%89%B5%E9%80%A0%E3%81%99%E3%82%8B%E5%BF%85%E8%A6%81%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: |
+    定数を使用すると、コード全体で何度も使用される共通の値を効率的に指定できます。
+    定数は、変数のように値が使われる場所でコピーするのではなく、コンパイル時に値が使われる場所の識別子を直接置き換えます。
+
+    変数とは異なり、定数は明示的な型指定が必要です。
+
+    定数名には大文字のスネークケース `SCREAMING_SNAKE_CASE` を使用します。
+- title: 配列
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: |
+    *配列*は、データ要素がすべて同じ型の固定長コレクションです。
+
+    *配列*のデータ型は `[T;N]` であり、T は要素の型、N はコンパイル時に決まる固定長です。
+
+    個々の要素は `[x]` 演算子によって取得できます。ここで *x* は取り出そうとする要素の *usize* 型のインデックス（0 始まり）です。
+- title: 関数
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: |
+    関数には 0 個以上の引数があります。
+
+    この例では、add は `i32` 型（32 ビット長の整数）の引数を 2 つ取ります。
+
+    関数名にはスネークケース `snake_case` を使用します。
+- title: 複数の戻り値
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E6%88%BB%E3%82%8A%E5%80%A4%E3%82%92%E3%82%BF%E3%83%97%E3%83%AB%E3%81%A7%E8%BF%94%E3%81%99%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20%E3%82%BF%E3%83%97%E3%83%AB%E3%82%922%E3%81%A4%E3%81%AE%E5%A4%89%E6%95%B0%E3%81%AB%E5%88%86%E8%A7%A3%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: |
+    関数は、値を**タプル**で返すことによって、複数の値を返せます。
+
+    タプルの要素はインデックス番号で参照できます。
+
+    Rust はデータ構造の一部を抽出する機能を提供します。これについては後ほど他の方法も見ていきます。
+- title: 空の戻り値
+  content_markdown: |
+    関数に戻り値の型が指定されていない場合、*unit* と呼ばれる空のタプルを返します。
+
+    空のタプルは `()` と表記します。
+
+    `()` はあまり使われませんが、時々出てくるので意味は知っておく必要があります。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%AF%20()%20%E3%81%A8%E6%8E%A8%E8%AB%96%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20%E3%81%93%E3%81%AE%E9%96%A2%E6%95%B0%E3%81%AF%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%8C%E6%8C%87%E5%AE%9A%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%20()%20%E3%82%92%E8%BF%94%E3%81%99%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20%E7%A9%BA%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E3%81%AE%E3%81%AF%E9%9B%A3%E3%81%97%E3%81%84%E3%81%AE%E3%81%A7%E3%80%81%0A%20%20%20%20%2F%2F%20a%20%E3%81%A8%20b%20%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E8%A1%A8%E7%A4%BA%0A%20%20%20%20println!(%22a%20%E3%81%AE%E5%80%A4%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22b%20%E3%81%AE%E5%80%A4%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: 第 1 章 - まとめ
+  content_markdown: >
+    ここまでお疲れ様でした。Rust の基本はそれほど難しくなかったですよね？
+
+    Rust のコンパイラがどのように考えているのかを覗いてみました。
+
+    システムプログラミング言語として、メモリ内の値のサイズ、変更が可能かどうか、計算を確実にすることを重視しています。
+
+    次はお馴染みの `if` と `for` ループについて見ていきます。
+
+
+    その他の資料:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)

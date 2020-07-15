@@ -1,0 +1,45 @@
+- title: >-
+    你好，<img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%E4%BD%A0%E5%A5%BD%EF%BC%8C%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: >
+    欢迎来到 *Rust 语言之旅*。本教程旨在逐步介绍 Rust 编程语言的特性。Rust 通常被认为是一门学习曲线陡峭的语言，
+
+    我希望能说服你，在我们开始学习复杂的部分之前，还有很多东西需要探索。
+
+
+    你可以通过以下这些语言来阅读本教程：
+
+
+    * [Deutsch](00_de.html)
+
+    * [English](00_en.html)
+
+    * [Español](00_es.html)
+
+    * [Français](00_fr.html)
+
+    * [Interlingue](00_ie.html)
+
+    * [Magyar](00_hu.html)
+
+    * [Português Brasileiro](00_pt-br.html)
+
+    * [Русский](00_ru.html)
+
+    * [简体中文](00_zh-cn.html)
+
+    * [日本語](00_ja.html)
+
+    * [한국어](00_ko.html)
+
+
+    如果你对内容有任何建议，或者想参与翻译做出贡献，请查看 Rust 语言之旅的 [github
+    代码库](https://github.com/richardanaya/tour_of_rust)。
+
+
+    你可以使用 <span class="emoji">⬅️</span> 和 <span class="emoji">➡️</span> 浏览整个教程。
+
+
+    在这个经典的例子中，我们展示了 Rust 对 Unicode 字符串的支持。

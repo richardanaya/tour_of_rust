@@ -1,0 +1,100 @@
+- title: Chapter 1 - What Is WebAssembly?
+  content_markdown: >
+    WebAssembly is a binary format for representating isolated executable code. 
+    It was developed for web
+
+    browsers as an alternative to JavaScript with some distinct advantages:
+
+
+    * Because its a low level bytecode, it's able to perform math quickly and
+    manage memory more concisely.
+
+    * WebAssembly was built with existing compilers in mind, allowing native
+    languages like C/C++ and Rust to compile to it as a target.
+
+    * Built with isolation in mind, allowing fine grain access control.
+
+    * WebAssembly was built rather host agnostic, allowing some people to use
+    WebAssembly [outside of browsers](https://wasmer.io/) too!
+
+
+    WebAssembly is often called **WASM**
+- title: Inside A Module
+  content_markdown: >
+    When you compile to a WebAssembly target your compiler should create a file
+    ending in `.wasm` called a **module**.
+
+
+    The module is a [binary
+    format](https://webassembly.github.io/spec/core/index.html) full of
+    information on how a 
+
+    wasm program and its memory should be setup and interacted with:
+
+    * a list of functions
+
+    * what functions should be exported/imported
+
+    * what data should initially be in the wasm modules memory
+- title: Loading A Module
+  content_markdown: >
+    Since a WebAssembly module is just a file of bytes. We first need to load
+    those bytes in our browser.
+
+
+    ```
+
+    let file = await fetch('my_file.wasm');
+
+    let bytes = await file.arrayBuffer();
+
+    ```
+- title: Creating a Module
+  content_markdown: >
+    Modules are created from bytes.
+
+
+    ```
+
+    let module = await WebAssembly.instantiate(bytes);
+
+    ```
+
+
+    During this phase we can **import** JavaScript functions we want our module
+    to have access to. 
+
+    We'll show an example of this next chapter.
+- title: Using a Module
+  content_markdown: >
+    A module will have one or more **export** functions that are accessible to
+    JavaScript. Typically
+
+    there is some export function to call in order to start a wasm program (e.g.
+    `main`, `start`).
+
+
+    ```
+
+    module.instance.main();
+
+    ```
+- title: 1+1
+  code: 'https://webassembly.studio/?embed&f=jg96xg1ovj'
+  content_markdown: >
+    Let's put our knowledge all together and make a WebAssembly
+
+    module with a single **export** function `add` for adding two numbers, and
+    put the
+
+    results in HTML.
+
+
+    `#[no_mangle]` tells our compiler to keep our function name human readable.
+- title: Chapter 1 Conclusion
+  content_markdown: >
+    I hope it's clear that WebAssembly is not that complex fundamentally! In our
+    next chapter we will 
+
+    start looking into the details of how JavaScript and WebAssembly can talk
+    about the same data.

@@ -1,0 +1,155 @@
+- title: Capítulo 3 - Tipos Básicos de Estructuras de Datos
+  content_markdown: >
+    ¡Ha llegado la hora de explorar más allá de los tipos básicos! En este
+    capítulo veremos
+
+    las estructuras de datos más primitivas de Rust, prestando mucha atención a
+    sus representaciones en
+
+    memoria. También te darás cuenta de lo poco que oculta Rust sobre cómo
+    funcionan las cosas.
+- title: Estructuras
+  content_markdown: >
+    Una estructura `struct` es una colección de campos.
+
+
+    Un *campo* es simplemente un valor de datos asociado a una estructura de
+    datos. Su valor puede ser de tipo primitivo o una estructura de datos.
+
+
+    Su definición es como una plantilla para el compilador sobre cómo disponer
+    los campos en memoria cerca unos de otros.
+- title: Llamadas a Métodos
+  content_markdown: >
+    A diferencia de las funciones, los métodos son funciones asociadas con un
+    tipo de datos específico.
+
+
+    **Métodos estáticos** — los métodos que pertenecen a un tipo determinado se
+    llaman usando el operador `::`.
+
+
+    **Métodos de instancia** — los métodos que pertenecen a una instancia de un
+    tipo se llaman usando el operador `.`.
+
+
+    Hablaremos de cómo hacer tus propios métodos en próximos capítulos.
+- title: Memoria
+  content_markdown: >
+    Los programas Rust tienen 3 regiones de memoria donde almacenar los datos:
+
+    * **Data memory (o memoria de datos)** - Para datos de tamaño fijo y
+    **estáticos** (es decir, siempre disponibles a lo largo
+      de la vida del programa). Considera el texto del programa (por ejemplo, "¡Hola, Mundo!"), los bytes de este texto son de sólo
+      lectura, por lo tanto se almacenan en esta región. Los compiladores hacen muchas optimizaciones
+      con este tipo de datos, generalmente se consideran muy rápidos de usar ya que
+      las ubicaciones son conocidas y fijas.
+    * **stack memory (o memoria de pila)** - Para los datos que se declaran como
+    variables dentro de
+      una función. La ubicación de esta memoria nunca cambia durante la duración de la llamada a la función, debido a esto los
+      compiladores pueden optimizar el código para que los datos de la pila sean rápidos de usar.
+    * **heap memory (memoria de montículo o dinámica)** - Para los datos que se
+    crean mientras la aplicación se está ejecutando.
+      Los datos de esta región pueden ser añadidos, movidos, eliminados, redimensionados, etc.
+      Debido a su naturaleza dinámica, se considera generalmente más lento de usar, pero permite
+      usos mucho más creativos de la memoria. Cuando se añaden datos a esta región, lo llamamos
+      **asignación**. Cuando los datos se eliminan de esta sección lo llamamos **desasignación**.
+- title: Creación de Datos en Memoria
+  content_markdown: >
+    Cuando **instanciamos** una estructura **struct** en nuestro código, nuestro
+    programa crea los datos asociados a cada campo uno al lado del otro en
+    memoria.
+
+
+    Para instanciar una estructura, especificaremos todos los valores de los
+    campos dentro de 
+
+
+    `StructName { ... }`.
+
+
+    Los campos de una estructura se acceden mediante el operador de punto `.`.
+
+
+    Detalles de memoria de nuestro ejemplo:
+
+    * El texto dentro de las comillas es de sólo lectura de datos (por ejemplo,
+    "ferris"), por lo tanto se
+      coloca en la *región de memoria de datos*.
+    * La llamada a la función `String::from` crea una estructura `String` que se
+    coloca al lado de los campos
+      de SeaCreature en la *pila*. Un string representa un texto que se puede modificar y lo hace de la siguiente manera: 
+      1. Crea memoria en el montículo para el texto, donde se puede modificar.
+      2. Guarda una referencia a esa ubicación de memoria en el montículo y lo almacena en la estructura `String` 
+      (Nos centraremos en esto en futuras lecciones).
+    * Finalmente nuestros amigos *Ferris* y *Sarah* tienen estructuras de datos
+    que siempre tendrán
+      ubicaciones fijas en nuestro programa, así que se colocan en la *pila*.
+- title: Estructuras en Forma de Tupla
+  content_markdown: |
+    Para ser concisos, puedes crear estructuras que se usan como una tupla
+- title: Estructuras Tipo-Unitario
+  content_markdown: >
+    No es necesario que las estructuras tengan campos.
+
+
+    Como ya se mencionó en el capítulo 1, una *unidad (unit)* es otra palabra
+    para una tupla vacía `()`. Es por eso que este tipo de estructura se llama
+    *de Tipo-Unitario*.
+
+
+    Este tipo de estructura no es muy común.
+- title: Enumeraciones
+  content_markdown: >
+    Las enumeraciones permiten crear un nuevo tipo que puede tener un valor
+    entre varios elementos etiquetados utilizando
+
+    la palabra reservada `enum`.
+
+
+    `match` ayuda a asegurar un manejo exhaustivo de todos los posibles valores
+    del enumerado, convirtiéndolo en una
+
+    herramienta muy útil para asegurar un código de calidad.
+- title: Enumeraciones con Datos
+  content_markdown: >
+    Los elementos de un `enum` también pueden tener uno o más tipos de datos que
+    les permitan comportarse como *union* en C.
+
+
+    Cuando un elemento `enum` se empareja con un patrón usando `match`, se puede
+    vincular un nombre de variable a cada valor de datos.
+
+
+    Detalles de memoria para `enum`:
+
+    * Un valor de datos enum tendrá un tamaño de memoria igual a su elemento más
+    grande. Esto permite que todos
+
+    los potenciales valores quepan en el mismo espacio de memoria.
+
+    * Además de los tipos de datos de los elementos (si los hay), cada elemento
+    tiene también un valor numérico
+
+    que representa qué etiqueta es.
+
+
+    Otros detalles:
+
+    * El `enum` de Rust también se conoce como *unión etiquetada*
+    (tagged-union).
+
+    * La combinación de tipos para hacer otros nuevos es a lo que nos referimos
+    al decir que Rust tiene *tipos algebraicos*.
+- title: Capítulo 3 - Conclusión
+  content_markdown: >
+    ¡Genial! Ahora tenemos las herramientas más básicas para representar
+    nuestras ideas en código.
+
+    Esperemos que ahora podamos ver un atisbo de cómo las operaciones
+    fundamentales de Rust funcionan
+
+    en armonía y concisión con sus tipos. A continuación hablaremos de un
+    concepto que da a nuestros
+
+    tipos de datos aún más flexibilidad de representación: *los genéricos*.

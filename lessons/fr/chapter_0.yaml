@@ -1,0 +1,55 @@
+- title: >-
+    Bonjour, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Bonjour%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: >
+    Bienvenue au *Tour de Rust*. Celui-ci a pour but de te guider pas à
+
+    pas au travers des fonctionnalités du language de programmation Rust. Rust
+    est souvent
+
+    considéré comme difficile et il y a beaucoup à explorer avant d'aborder
+
+    les choses complexes.
+
+
+    Tu peux trouver ce guide dans les languages suivants:
+
+
+    * [Deutsch](00_de.html)
+
+    * [English](00_en.html)
+
+    * [Español](00_es.html)
+
+    * [Français](00_fr.html)
+
+    * [Interlingue](00_ie.html)
+
+    * [Magyar](00_hu.html)
+
+    * [Português Brasileiro](00_pt-br.html)
+
+    * [Русский](00_ru.html)
+
+    * [简体中文](00_zh-cn.html)
+
+    * [日本語](00_ja.html)
+
+    * [한국어](00_ko.html)
+
+
+    Si tu as des suggestions sur le contenu
+
+    ou si tu souhaites contribuer aux traductions, rends-toi sur le
+
+    [dépôt github](https://github.com/richardanaya/tour_of_rust).
+
+
+    Tu peux naviguer au fil du site avec <span class="emoji">⬅️</span> et <span
+    class="emoji">➡️</span>
+
+
+    Dans cet exemple classique nous te montrons le support des caractères
+    unicode par Rust.

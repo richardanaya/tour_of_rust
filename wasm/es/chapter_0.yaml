@@ -1,0 +1,40 @@
+- title: 'Hola, WebAssembly'
+  content_markdown: >
+    Bienvenido al *Tour de WebAssembly*. Este tutorial pretende introducirte a
+    la tecnología y
+
+    a cómo Rust puede ser usado para mejorar la web.  Si eres completamente
+    nuevo en Rust, quizá te 
+
+    interese el [Tour de Rust](https://tourofrust.com/)! La mayoría de nuestros
+    ejemplos serán lo
+
+    suficientemente fáciles para cualquier persona que quiera seguirlos.
+
+
+    * [Rust (english)] (index.html)
+
+    * [Rust (français)] (index_fr.html)
+
+    * [Rust (Interlingue)] (index_ie.html)
+
+    * [Rust (Português Brasileiro)] (index_pt-br.html)
+
+    * [Rust (Español)] (index_es.html)
+
+    * [Rust (日本語)] (index_ja.html)
+
+    * [C (english)] (index_en_c.html)
+
+    * [C (français)] (index_fr_c.html)
+
+
+    En el caso de que tengas sugerencias respecto al contenido o quieras
+    contribuir con traducciones,
+
+    vaya al repositorio del Tour de WebAssembly [github
+    repository](https://github.com/richardanaya/tour_of_rust).
+
+
+    Puedes navegar por el tour usando el teclado <span class="emoji">⬅️</span> y
+    <span class="emoji">➡️</span>

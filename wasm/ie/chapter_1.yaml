@@ -1,0 +1,95 @@
+- title: Chapter 1 - Quo es WebAssembly?
+  content_markdown: >
+    WebAssembly es un formate binari por representar code executabil isolat. On
+    developat it por navigatores web
+
+    quam un alternative a JavaScript con quelc avantages distint:
+
+
+    * Essente bytecode de bass nivelle, it posse far matematica rapidmen e gerer
+    memorie con plu concisitá.
+
+    * On constructet WebAssembly pensante pri compilatores existent, por que
+    lingues nativ quam C/C++ e Rust mey compilar con it quam cible.
+
+    * It esset constructet sur li principie de isolation, possibilisante control
+    de accesse rafinat.
+
+    * On constructet WebAssembly sin egard al hósped, con quel alcunes posse
+    usar it anc [éxter navigatores web](https://wasmer.io/)!
+
+
+    On nomina WebAssembly sovente **WASM**
+- title: Quo Sta in un Modul
+  content_markdown: >
+    Quande on compila a un cible de WebAssembly, li compilator deve crear un
+    archive quel fini se con `.wasm` nominat un **modul**.
+
+
+    Li modul es in [formate
+    binari](https://webassembly.github.io/spec/core/index.html) e plen de
+    information pri qualmen
+
+    on mey crear e interacter con un programma wasm program e su memorie:
+
+    * un liste de functiones
+
+    * quel functiones mey esser exportat/importat
+
+    * quel data mey esser in prim in li memorie del modules wasm
+- title: Cargar un Modul
+  content_markdown: >
+    Nam un modul WebAssembly es solmen un archive de bytes, noi va in prim
+    cargar ti-ci bytes in nor navigator
+
+
+    ```
+
+    let file = await fetch('my_file.wasm');
+
+    let bytes = await file.arrayBuffer();
+
+    ```
+- title: Crear un Modul
+  content_markdown: >
+    Modules es creat de bytes.
+
+
+    ```
+
+    let module = await WebAssembly.instantiate(bytes);
+
+    ```
+
+
+    Durant ti-ci fase noi posse **importar** li functiones de JavaScript a quel
+    noi vole que nor modul mey posser accesser. 
+
+    Noi va dar un exemple de to in li capitul a sequer.
+- title: Usar un Modul
+  content_markdown: >
+    Un modul va haver un o pluri functiones **export** queles es accessibil a
+    JavaScript. Tipicmen
+
+    hay alquel function de export a vocar por comensar un programma de wasm
+    (p.ex. `main`, `start`).
+
+
+    ```
+
+    module.instance.main();
+
+    ```
+- title: 1+1
+  code: 'https://webassembly.studio/?embed&f=jg96xg1ovj'
+  content_markdown: >
+    Lass nos combinar nor conossenties por crear un module de WebAssembly
+
+    con un sol **export**-function nominat `add` por addir du ciffres, e plazzar
+    li 
+
+    resultates in HTML.
+
+
+    Con `#[no_mangle]` noi instructe li compilator mantener li nómine de nor
+    function leibil por entes homan.

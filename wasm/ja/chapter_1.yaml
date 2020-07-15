@@ -1,0 +1,62 @@
+- title: 1章 - WebAssemblyとは?
+  content_markdown: |
+    WebAssemblyは、単体で実行可能なバイナリ形式のコードです。
+    JavaScriptの代わりとしてWebブラウザのために開発されたもので、いくつかの優位性があります。
+
+    * ローレベルのバイトコードのため、メモリ安全に高速な演算が可能
+    * 既存のプログラミング言語でコンパイルできるよう設計されているので、C/C++やRustなどからもターゲットとしてコンパイルできる
+    * 独立性を保ちつつ、きめ細かいアクセス管理が可能
+    * もとより実行される環境を問わない設計のため、[Webブラウザ外](https://wasmer.io/)でも実行可能です！
+
+    WebAssemblyは、しばしば**WASM**と呼ばれます。
+- title: Moduleについて
+  content_markdown: >
+    WebAssemblyをターゲットにしてコードをコンパイルすると、`.wasm`ファイルができます。これを、**モジュール**と呼びます。
+
+
+    モジュールは、[バイナリ形式](https://webassembly.github.io/spec/core/index.html)で、どのようにプログラムが振る舞うのかのすべての情報が入っています。
+
+    たとえば、これらです。
+
+    * 関数のリスト
+
+    * どの関数がエクスポート、インポートされるか
+
+    * どんなデータがあらかじめWASMモジュールのメモリに格納されるか
+- title: モジュールのロード
+  content_markdown: |
+    WebAssemblyのモジュールはただのバイト列です。まずはそれをブラウザで読み込む必要があります。
+
+    ```
+    let file = await fetch('my_file.wasm');
+    let bytes = await file.arrayBuffer();
+    ```
+- title: モジュールの作成
+  content_markdown: |
+    モジュールはバイト列から作成されます。
+
+    ```
+    let module = await WebAssembly.instantiate(bytes);
+    ```
+
+    このとき、JavaScriptの関数などをモジュールがアクセスできるように**import**して渡すこともできます。
+    次の章で紹介します。
+- title: モジュールを使用する
+  content_markdown: |
+    モジュールには、JavaScriptからアクセスできる1つ以上の**export**された関数があるはずです。
+    多くの場合、WASMプログラムを起動するための関数があると思います。(例えば`main`, `start`など)
+
+    ```
+    module.instance.main();
+    ```
+- title: 1+1
+  code: 'https://webassembly.studio/?embed&f=jg96xg1ovj'
+  content_markdown: |
+    今までに覚えたことを使って、WebAssemblyのモジュールを作ってみましょう。
+    2つの数値を足し合わせてHTMLに表示するだけの関数を**export**してみます。
+
+    `#[no_mangle]` を付与することで、コンパイラーに関数名を難読化しないよう伝えます。
+- title: 1章のまとめ
+  content_markdown: |
+    WebAssemblyが基本的には複雑なものではないということが伝わったでしょう！
+    次の章では、JavaScriptとWebAssemblyが互いにデータをやり取りする部分を見ていきます。

@@ -1,0 +1,91 @@
+- title: Capitul 9 - Organisation e Structura de un Projecte
+  content_markdown: >
+    Til nu nor exemples de code ha esset scrit in singul archives. Lass nos
+    discusser pri qualmen plu bon organisar e partiprender it!
+- title: Modules
+  content_markdown: >
+    Chascun programma o biblioteca in Rust es un *crate*.
+
+    Chascun crate es creat ex un hierarchie de *modules*.
+
+    Chascun crate possede un root (radical) modul.
+
+    Un model possede variabiles global, functiones, structs, traits, e altri
+    modules!
+- title: Scrir un Programma
+  content_markdown: |
+    Un programma have un modul root in un archive nominat `main.rs`.
+- title: Scrir un Biblioteca
+  content_markdown: |
+    Un biblioteca have un modul root in un archive nominat `lib.rs`.
+- title: Referentiar Coses Multiplic
+  content_markdown: |
+    On posse referentiar coses multiplic in un sol modul quam seque:
+    ```rust
+    use std::f64::consts::{PI, TAU}
+    ```
+    Ferris ne manja TAU, solmen PI.
+- title: Creation de un Modul
+  content_markdown: >
+    Quande on pensa pri code, on imagina por li pluparte un hierarchie de
+    archives organisat in archivieres.
+
+    Rust let you create modules closely related to your file
+
+    structure.
+
+
+    There are two ways in Rust to declare a module. Rust posse posseder un modul
+    `foo` representat quam
+      * un archive nominat `foo.rs`
+      * un archiviere nominat `foo` in quel sta un archive `mod.rs`
+- title: Hierarchie de un Modul
+  content_markdown: >
+    A module can depends on another one. Por etablisser un relation inter un
+    model e su sub-modul, on deve scrir quam seque in li modul genitori.
+      ```rust
+      // This declaration will look for a file named `foo.rs` or `foo/mod.rs` and
+      // will insert its contents inside a module named `foo` under this scope
+      mod foo;
+    ```
+- title: Modul Inlineari
+  content_markdown: |
+    On posse 'inlinear' un sub-modul directmen in li code de un model.
+    On fa talmen tre frequentmen por crear provas unitic (unit tests).
+    ```
+    // Ti-ci macro remove li modul inlineari quande Rust
+    // ne sta in prova-mode.
+    #[cfg(test)]
+    mod tests {
+      // A notar que a nos ne es ínmediatmen dat accesse al
+      // modul genitori. Noi deve esser explicit.
+      use super::*;
+      ... li provas sta ci ...
+    }
+    ```
+- title: Referenties Intern a Modules
+  content_markdown: >
+    Rust possede mult clave-paroles queles tu posse usar in tui `use`-path por
+    rapidmen trovar li modul desirat:
+
+
+    * `crate` - li root modul de tui crate
+
+    * `super` - li modul genitori del modul quel tu usa actualmen
+
+    * `self` - li modul in quel on nu sta
+- title: Exportation
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_module%20%7B%0A%20%20fn%20far_alquo()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%22)%0A%20%20%7D%0A%0A%20%20pub%20fn%20far_alquo_in_plu()%20%7B%0A%20%20%20%20println!(%22fant%20alquo%20in%20plu%22)%0A%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20mi_sub_module%3A%3Afar_alquo()%3B%0A%20%20mi_sub_module%3A%3Afar_alquo_in_plu()%3B%0A%7D%0A
+  content_html: >-
+    <p>In Rust, noi exporta membres de un module usante li clave-parol
+    <b>pub</b>.</p><p>Quande on usa un module, sive in su propri code sive in un
+    crate extern, on posse solmen aluder a membres possedent li marcation
+    public.</p><p>Li code in ti-ci exemple es ruptet; ples adjunter li
+    clave-parol <b>pub</b> in li loc necessi por reparar it.</p>
+- title: Visibilitá de Structuras
+  content_markdown: >
+    Just quam functiones, structuras posse usar `pub` por declarar to quo ili
+    desira esser exposit éxter su modul.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Li%20struct%20CreaturaMarin%20va%20esser%20usabil%20%C3%A9xter%20nor%20modul%0Apub%20struct%20CreaturaMarin%20%7B%0A%20%20%20%20%2F%2F%20String%20es%20un%20struct%0A%20%20%20%20pub%20tip_de_animale%3A%20String%2C%0A%20%20%20%20pub%20nomine%3A%20String%2C%0A%20%20%20%20pub%20brasses%3A%20i32%2C%0A%20%20%20%20pub%20jambes%3A%20i32%2C%0A%20%20%20%20%2F%2F%20ma%20noi%20vole%20que%20li%20arme%20mey%20esser%20privat%0A%20%20%20%20arme%3A%20String%2C%0A%7D

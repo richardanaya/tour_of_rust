@@ -1,0 +1,83 @@
+- title: Chapter 2 - Basic Control-flution
+  content_html: >-
+    <p>Lass nos in ti-ci capitul parlar pri li metodes de basic control-flution
+    in Rust. Si tu ha ja conossentat te con lingues basat sur C tu va trovar it
+    tre familiari, ma con un o du plesent surprises.</p>
+- title: if/else if/else
+  content_html: >-
+    <p>Code-ramification in Rust ne es surprisant.</p><p>Conditiones ne prende
+    parentheses! Esque noi vermen alquande besonat les? Nu nor logica sembla
+    nett e clar.</p><p>Omni tui usual operatores logical functiona quam sempre:
+    <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>,
+    <code>&lt;=</code>, <code>&gt;=</code>, <code>!</code>, <code>||</code>,
+    <code>&&</code></p>
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20exemple()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20return%20-1%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20return%200%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20return%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: loop (cicle)
+  content_html: >-
+    <p>Tu besona un cicle ínfinit?</p><p>Con Rust it es simplic.</p><p>Con
+    <code>break</code> on exea un cicle quande on es
+    pret.</p><p><code>loop</code> have un secrete pri quel noi va parlar max
+    bentost.</p>
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while (durant)
+  content_html: >-
+    <p><code>while</code> possibilisa te adjunter un condition a un
+    cicle.</p><p>Si li condition evalua se a <code>false</code>, li cicle va
+    exear.</p>
+  code-ie: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: for (por)
+  content_html: >-
+    <p>Li cicle <code>for</code> de Rust es un potent amelioration. It itera sur
+    valores de quelcunc expression queles evalua se ad-in un iterator. Quo es un
+    iterator? Un iterator es un object a quel on posse demandar: "Quo es li cose
+    sequent quel tu possede?" til quande ti coses es exhaustet.</p><p>Noi va
+    explorar pri to in plu detallie in un capitul futuri, ma por li moment it
+    mey suficer a saver que in Rust it es facil crear iteratores queles genera
+    un sequentie de ciffres integral.</p><p>Li operator <code>..</code> crea un
+    iterator quel genera ciffres ex un comensant ciffre til, ma ne includent, un
+    final ciffre.</p><p>Con li operator <code>..=</code> on crea un iterator
+    quel genera ciffres ex un comensant ciffre til, e includent, un final
+    ciffre.</p>
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_html: >-
+    <p>Tui declaration 'switch' te manca? In Rust trova se un íncredibilmen util
+    clave-parol por verificar li corespondentie de omni possibil conditiones de
+    un valore e executer li code si on trova paritá. Lass nos vider qualmen it
+    functiona por ciffres. In li capitules a sequer noi va parlar plu
+    detalliatmen con data con plu complexitá, e yo promesse te que it va valer
+    li pena atender un poc.</p><p><code>match</code> es exhaustiv, significante
+    que omni possibil casus mey esser inscrit.</p><p>Serchar coresponses poy
+    destructurar les es un modelle quel es de long li max comun inter tis queles
+    on va vider in Rust.</p>
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22trovat%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20noi%20posse%20controlar%20li%20corespondentie%20de%20valores%20multiplic%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22trovat%201%20o%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20e%20noi%20posse%20controlar%20ti%20contra%20iteratores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22trovat%20un%20ciffre%20inter%203%20e%209%20inclusivmen%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20noi%20posse%20ligar%20li%20corespondent%20ciffre%20a%20un%20variabile%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22trovat%20li%20ciffre%20%7B%7D%20inter%2010%20til%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20ti-ci%20es%20li%20coresponse%20predefenit%20quel%20deve%20exister%20si%20ne%20omni%20casus%0A%20%20%20%20%20%20%20%20%2F%2F%20es%20inscrit%3B%20pro%20que%20noi%20compara%20contra%20un%20ciffre%20quel%20posse%20esser%0A%20%20%20%20%20%20%20%20%2F%2F%20presc%20quelcunc%20valore.%20T%C3%A1men%20p.ex.%20si%20on%20vell%20comparar%20contra%20un%20bool%0A%20%20%20%20%20%20%20%20%2F%2F%20on%20vell%20besonar%20solmen%20li%20casus%20true%20e%20false%3B%20null%20_%20es%20besonat%20nam%0A%20%20%20%20%20%20%20%20%2F%2F%20li%20possibil%20coresponses%20es%20solmen%20du.%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22trovat%20alquicos%20diferent!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: Retornar valores de loop
+  content_markdown: |
+    `loop` posse exear (break) por retornar un valore.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22trovat%20li%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22del%20loop%20(cicle)%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Retornar valores de bloc-expressiones
+  content_html: >-
+    <p><code>if</code>,<code>match</code>, functiones, e cadre-blocs omni
+    possede un maniere unic por retornar valores in Rust.</p><p>Si li ultim
+    declaration in un bloc <code>if</code>, functiones, o cadre-bloc es un
+    expression sin un <code>;</code>, Rust va retornar it quam un valore ex li
+    bloc. To-ci es un bonissim maniere de crear logic concis quel retorna un
+    valore quem on posse plazzar in un nov variabile.</p><p>Ples notar que to
+    possibilisa que un declaration <code>if</code> opera quam un expression
+    ternari concis.</a>
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20exemple()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Li%20expression%20ternari%20de%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22de%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20manjage%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20resultate%20%3D%20match%20manjage%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22es%20un%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20nota%20que%20li%20inbrassamentes%20es%20optional%20quande%20hay%20solmen%20un%0A%20%20%20%20%20%20%20%20%2F%2F%20expression%20de%20retorna%20simplic%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22ne%20es%20un%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifcante%20li%20manjage%3A%20%7B%7D%22%2C%20resultate)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Ti-ci%20cadre-bloc%20fa%20it%20possibil%20por%20nos%20a%20trovar%20un%20resultate%20sin%0A%20%20%20%20%20%20%20%20%2F%2F%20polluer%20li%20cadre%20del%20function%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22del%20bloc%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Vi%20li%20metode%20idiomatic%20in%20Rust%20por%20retornar%20li%20valore%20de%20un%20function%0A%20%20%20%20%2F%2F%20al%20fine%20de%20it%20(quam%20monstrat%20un%20vez%20in%20Capitul%201)%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22del%20function%3A%20%7B%7D%22%2C%20exemple())%3B%0A%7D%0A
+- title: Capitul 2 - Conclusion
+  content_html: >-
+    <p>Vi li tot contenete til nu in li capitul! Yo espera har monstrat te un
+    poc pri li potentie de Rust quel trova se mem in li declarationes max basic.
+    Noi va parlar mem plu detalliatmen pri <code>for</code> e <code>match</code>
+    durant que nor conossentie augmenta se pri qualmen utilisar lor capabilitás.
+    Por li proxim vez, noi va conossentar nos pri li fundamental data-structuras
+    de Rust.</p>

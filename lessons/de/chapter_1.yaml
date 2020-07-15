@@ -1,0 +1,208 @@
+- title: Kapitel 1 - Die Basics
+  content_markdown: >
+    Im ersten Kapitel werden grundlegende Eigenschaften von Funktionen,
+
+    Variablen und (fast) allen primitiven Datentypen präsentiert. Willkommen an
+    Board!
+
+
+    Ach ja! Falls du dich fragst, wer diese süße sprechende Krabbe ist, das ist
+    **Ferris**,
+
+    das inoffizielle Maskottchen der Programmiersprache Rust. Sag hallo!
+- title: Der Rust Playground
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Willkommen%20im%20Playground!%20Du%20kannst%20den%20Code%20hier%20drin%20modifizieren.%22)%3B%0A%7D
+  content_markdown: >
+    Diese Tour macht sich das interaktive Coding Tool vom [Rust
+    Playground](https://play.rust-lang.org)
+
+    zu Nutze.
+
+
+    Beispiele in Rust lassen sich so spielend leicht testen. Hierbei sind deiner
+    Kreativität auch keine Grenzen 
+
+    gesetzt. Ändere Codeschnipsel, teste Funktionen, lass deiner Fantasie freien
+    Lauf!
+- title: Variablen
+  content_html: >-
+    <p>Variablen werden mit dem Schlüsselwort <code>let</code>
+    deklariert.</p><p>Im Regelfall sollte man Rust die Entscheidung überlassen,
+    um welchen Datentypen es sich handelt. In Sonderfällen kann der Typ explizit
+    angegeben werden.</p><p>Huch, was ist denn bei dem Beispiel los? Die
+    Variable <code>x</code> wird mehrmals deklariert?</p><p>Das ist kein Fehler
+    - Rust erlaubt sogenanntes <b>variable shadowing</b> (Variable
+    überschatten). Bei Neudeklaration "verfällt" die vorige Deklaration und wir
+    können mit der Variable arbeiten, als ob es sie davor noch nie gegeben
+    hätte. Der Datentyp darf sich dabei auch ändern.</p><p>Variablennamen werden
+    ebenfalls in <code>snake_case</code> geschrieben.</p>
+- title: Variablenwerte ändern
+  content_markdown: >
+    Rust sorgt sich sehr darum, welche Variablen verändert werden können
+
+    und welche nicht. Daher gibt es die folgende Unterscheidung:
+
+
+    * **mutable** - der Speicherort der Variable kann beschrieben und gelesen
+    werden
+
+    * **immutable** - der Compiler lässt nur das Lesen des Speicherortes zu
+
+
+    Variablen, die verändert werden können, werden mit einem extra `mut`
+
+    Schlüsselwort gekennzeichnet.
+
+
+    Auf dieses Konzept wird im späteren Verlauf noch mehr eingegangen, für jetzt
+    ist es wichtig
+
+    zu wissen, dass "mutable" die Veränderbarkeit einer Variablen bestimmt.
+- title: Basistypen
+  content_markdown: >
+    Rust besitzt eine vielzahl an bekannten Datentypen
+
+
+    * booleans - `bool` für true/false bzw. wahr/falsch Werte
+
+    * unsigned integers - `u8` `u32` `u64` für positive Ganzzahlen (inkl. 0 für
+    die Mathematiker)
+
+    * signed integers - `i8` `i32` `i64` für vorzeichenbehaftete Ganzzahlen
+
+    * pointer sized integers - `uint` `isize` für Indizes und Größen im Speicher
+
+    * floating point - `f32` `f64` für Dezimalzahlen
+
+    * tuple - `(Wert, Wert, ...)` um festgelegte Sequenzen von Werten auf dem
+    Stack zu speichern
+
+    * arrays - `[Wert, Wert, ...]`eine Kollektion von ähnlichen Elementen mit
+    zur Compile-Zeit festgelegter Länge
+
+    * slices - eine Kollektion von ähnlichen Elementen mit Länge bekannt zur
+    Laufzeit
+
+    * `str` (string slice) - Text mit zur Laufzeit bekannter Länge
+
+
+    Wir sehen schon, dass es einiges zum Anpacken geben wird!
+
+
+    Eine Warnung vorweg: Text wird etwas komplexer sein als du es vielleicht von
+    anderen
+
+    Programmiersprachen gewohnt bist, da Rust eine Systemprogrammiersprache ist
+    und daher mehr
+
+    auf effektives Speichermanagement fokussiert. Keine Panik auf der Titanic
+    aber, wir werden unser
+
+    Bestes geben, dich darauf vorzubereiten!
+
+
+    Noch ein Hinweis: Numerische Datentypen können auch nach dem Zahlenliteral
+    spezifiziert werden
+
+    (z.B. `13u32`)
+- title: Basistypen konvertieren
+  content_markdown: >
+    Rust fordert explizite Konvertierungen, wenn es um Zahlentypen geht.
+
+    Ein `u8` (8-bit unsigned integer) kann nicht mit einem `u32` locker aus dem
+    Handgelenk
+
+    zusammengerechnet werden ohne das Programm zum Absturz zu bringen.
+
+
+    Glücklicherweise ist auf die Konvertierung mit dem `as` Schlüsselwort
+    Verlass.
+- title: Konstanten
+  content_markdown: >
+    Konstanten (`const`) erlauben uns einen Wert in der Kompilierzeit zu setzen,
+    die in unserem Code eingesetzt 
+
+    werden. Kompilierzeit ist hier das Stichwort: anstelle von Variablen sitzen
+    dann an Orten, an denen
+
+    Konstanten eingestetzt werden, die Werte selbst.
+
+
+    Anders als bei Variablen muss bei Konstanten der Datentyp explizit angeben
+    werden.
+
+
+    Die Namensgebung erfolgt generell in `SCREAMING_SNAKE_CASE`.
+- title: Arrays
+  content_markdown: >
+    Ein *Array* ist eine Kollektion von Datenelementen vom selben Datentyp mit
+    festgelegter Länge.
+
+
+    Der Datentyp eines *Arrays* wird `[T;N]` geschrieben. `T` ist der Datentyp
+    der Arrayelemente und `N` ist die festgelegte Länge dieser zur Compile-Zeit.
+
+
+    Einzelne Elemente können mit dem `[x]` Operator abgerufen werden, in welchem
+    *x* den *usize* Index (beginnend bei 0) des gesuchten Elementes darstellt.
+- title: Funktionen
+  content_markdown: >
+    Eine Funktion kann eine beliebige (nicht-negative) Anzahl an Argumenten bzw.
+    Parametern aufnehmen.
+
+
+    In diesem Beispiel verlangt die Funktion `add` zwei Parameter vom Typ `i32`
+    (32 Bit Ganzzahl).
+
+
+    Funktionsnamen sollten im `snake_case` Format vergeben werden.
+- title: Mehrere return-Variablen
+  content_markdown: >
+    Funktionen können mehrere Variablen auf einmal zurückgeben mittels eines
+    **tuples**.
+
+
+    Die Werte können danach über einen Index gelesen werden.
+
+
+    Rust unterstützt verschiedene Formen von "destructuring", wodurch sich
+    Wertepaare auf
+
+    einzelne Variablen aufteilen lassen. Halte Ausschau danach!
+- title: Keine return-Variablen
+  content_markdown: >
+    Wenn kein Variablentyp als Rückgabewert einer Funktion angegeben wird, gibt
+    die Funktion ein leeres Tupel zurück, auch bekannt als *unit*.
+
+
+    Ein leeres Tupel wird durch ein `()` repräsentiert.
+
+
+    Die leeren Klammern werden selten verwendet, finden trotzdem an manchen
+    Orten ihren Platz, weshalb wir diese hier kurz zum Vorschein bringen wollen.
+- title: Kapitel 1 Fazit
+  content_markdown: >
+    Puh! Das wäre schon mal geschafft! War nicht so übel, oder? Wir wissen
+
+    schon ein wenig, wie der Compiler denkt. Er setzt viel Wert auf
+    Speichermanagement,
+
+    wie groß Variablen sind, ob diese "mutable" sind oder nicht, und ob du
+    garantiert
+
+    weißt, welche Datentypen zusammenaddiert werden. Das sind erste kleine
+    Einblicke
+
+    in die **Sicherheit**, die sich durch die gesamte Rustsprache hindurchzieht
+
+    - nicht unbedingt die Sicherheit des Systems, aber die Sicherheit, dass du
+    weißt,
+
+    was du tust.
+
+
+    Im nächsten Kapitel werden wir uns mit den altbekannten
+    Datenkontrollstrukturen
+
+    `if` und `for` Schleifen beschäftigen! Worauf wartest du noch!

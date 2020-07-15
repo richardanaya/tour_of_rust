@@ -1,0 +1,245 @@
+- title: Chapter 2 - Sharing Data Structures
+  content_markdown: >
+    JavaScript and your WebAssembly program have very different representations
+    of data at the memory level.
+
+    To make matters more complex, interacting with the host environment from
+    WebAssembly is very limited.
+
+    In this chapter we will explore the strategies used to move data back and
+    forth.
+- title: Importing Functions
+  code: 'https://webassembly.studio/?embed&f=pp20eedhka'
+  content_markdown: >
+    WebAssembly modules can only call functions that have been explicitly
+    imported.
+
+
+    Rust uses `extern "C" { ... }` to list the function signatures of those
+    imported functions.
+
+
+    Notice that calling an imported function is considered `unsafe` in Rust
+    because the compiler
+
+    can make no gaurantees about what happens within it's implementation.
+- title: Limitations of Functions
+  content_markdown: >
+    Parameter and return types of functions are limited to:
+
+
+    * i32/i64
+
+    * f32/f64
+
+
+    So in order to communicate between JavaScript and WebAssembly we will have
+    to get clever with the meaning of numbers!
+
+
+    Rust is fairly good at converting it's primitive types to WebAssembly's
+    numerical equivalents.
+- title: Exporting Memory
+  content_markdown: >
+    WebAssembly programs export their memory as a long array of bytes (up to
+    4GB!). 
+
+
+    The host can interpret from these bytes the data structures created by the
+    program's code.
+
+
+    Arrays of bytes can also be written directly into a program's memory from
+    the host.
+
+
+    Writing/reading bytes to/from a WebAssembly programs memory is
+
+    the primary means of input and output of non-primitive types.
+- title: ArrayBuffer
+  content_markdown: |
+    JavaScript represents a long array of bytes as an `ArrayBuffer`
+
+    You can get a typed view of this buffer that is very efficient to
+    interact with.
+
+    ```JavaScript
+    // create an array of 8 bytes
+    let bytes = new ArrayBuffer(8);
+    // view those 8 bytes as 8-bit unsigned integers
+    let u8_bytes = new Uint8Array(bytes);
+    // modify the array buffer
+    u8_bytes[0] = 16; // 00010000
+    u8_bytes[1] = 1;  // 00000001
+    // re-interpret the u8_bytes's array buffer as 
+    // little endian 32-bit signed integers
+    let i32_bytes = new Int32Array(u8_bytes.buffer);
+    console.log(i32_bytes[0]); 
+    ///272 or 00010000000000010000000000000000
+    ```
+- title: UTF-8 Encoding/Decoding
+  content_markdown: >
+    JavaScript provides utility functions for writing/reading UTF-8 strings
+    to/from
+
+    bytes inside of `ArrayBuffer` objects.
+
+
+    ```JavaScript
+
+    let bytes = new ArrayBuffer(8);
+
+    const data = new Uint8Array(bytes);
+
+    data[0] = 72;  // H
+
+    data[1] = 105; // i
+
+    data[2] = 33;  // !
+
+    let str_len = 3;
+
+    const utf8dec = new TextDecoder("utf-8");
+
+    // sub array takes start and end index
+
+    let text = utf8dec.decode(data.subarray(0,str_len));
+
+    console.log(text) // Hi!
+
+
+    const utf8enc = new TextEncoder("utf-8");
+
+    let text_bytes = utf8enc.encode(text);
+
+    console.log(text_bytes) 
+
+    // Uint8Array(3) [72, 105, 33]
+
+    ```
+- title: Logging Text
+  code: 'https://webassembly.studio/?embed&f=1gxcr004p3x'
+  content_markdown: >
+    Let's explore a simple example of logging some text from a WebAssembly
+    program.
+
+
+    We must:
+
+    1. Create some utf-8 compliant text in our program's memory
+
+    2. Determine the length of our text's bytes
+
+    3. Somehow send the starting byte start index and length in bytes of that
+    text data to the host browser so it can call `console.log`.
+
+
+    Here's an example of what that receiving JavaScript function would look
+    like:
+
+
+    ```JavaScript
+
+    wasm_log(start,len) {
+      // extract text from memory location and length
+      const utf8dec = new TextDecoder("utf-8");
+      let buffer = module.instance.exports.memory.buffer;
+      let memory = new Uint8Array(buffer);
+      let text = utf8dec.decode(memory.subarray(start,start+len));
+      console.log(text);
+    }
+
+    ```
+- title: Reading Text
+  code: 'https://webassembly.studio/?embed&f=ubmxmavgf2'
+  content_markdown: >
+    Let's explore the opposite idea. Imagine we want to give some text to a
+    WebAssembly program.
+
+
+    We must:
+
+    1. Determine the length in bytes of the text we want to pass in.
+
+    1. Allocate some space in our memory of that byte length.
+
+    2. Copy bytes into our program's memory at the start of the space we
+    allocated.
+
+    3. Let the WebAssembly program know we have put some data in it's memory at
+    a specific index and lenth in bytes. 
+
+
+    Here's an example of what that initialization looks like:
+
+
+    ```JavaScript
+
+    // Turn "Ferris" into bytes
+
+    const utf8enc = new TextEncoder("utf-8");
+
+    let text = "Ferris";
+
+    let text_bytes = utf8enc.encode(text);
+
+
+    // Allocate enough space for the text
+
+    let len = text_bytes.length;
+
+    let start = module.instance.exports.wasm_malloc(len);
+
+
+    // Put the text in WebAssembly program's memory
+
+    let buffer = module.instance.exports.memory.buffer;
+
+    let memory = new Uint8Array(buffer);
+
+    memory.set(text_bytes, start);
+
+
+    // Run the program
+
+    module.instance.exports.main(start,len);
+
+    ```
+- title: Discovering Representations
+  content_markdown: >
+    You might find it annoying to pass around the length along with the start
+    index of text.
+
+
+    Consider this an opportunity to reflect upon useful conventions of the past
+    like *C strings*
+
+    that declare the end of text is a 0 value character `\0`.
+
+
+    Don't want to pass around a byte packed data structure? Consider passing
+    around json.
+
+
+    You are in control of your representations in memory and what they mean and
+    if they
+
+    are appropriate for your use cases!
+- title: Chapter 2 Conclusion
+  content_markdown: >
+    Crossing the boundry between host and WebAssembly program is cumbersome, but
+    with it can come great performance. 
+
+    It's important to remind ourselves that WebAssembly is a low -level
+    executable byte code with concerns about memory
+
+    structures that are much fine-grained than JavaScript. Check out your
+    programming language's
+
+    library support for tools that help make this an easier task! For Rust,
+    [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) is a popular
+    option.
+
+
+    In our next chapter we will talk about a technique for dynamically calling
+    JavaScript functions and garbage collection!

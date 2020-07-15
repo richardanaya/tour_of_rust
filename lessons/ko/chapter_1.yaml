@@ -1,0 +1,14 @@
+- title: 1장 - 기초
+  content_markdown: |
+    이번 1장에서는 함수, 변수 그리고 Rust가 지원하는 기본 자료형에 대해서
+    아주 기초적인 내용을 알아봅니다. 여기에 오신 것이 기쁩니다!
+
+    또한! 여러분에게 이야기하고 있는 사랑스러운 꽃게가 누구인지 궁굼하다면, 
+    저는 **페리스(Ferris)**입니다, Rust 프로그래밍 언어의 비공식적인 마스코드입니다. 만나서 반갑습니다.
+- title: Rust 실습장
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+  content_markdown: |
+    [Rust 실습장](https://play.rust-lang.org)과 같은 대화형 코딩 도구를 이용해서 여행을 합니다.
+
+    Rust로 실습을 하고, 여러분의 창의성과 도전성을 보여줄 수 있는 아주 훌륭한 방법입니다!

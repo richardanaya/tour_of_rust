@@ -1,0 +1,155 @@
+- title: Capítulo 1 - Lo Básico
+  content_html: >-
+    <p>En este primer capítulo vamos a ver lo más básico respecto a funciones,
+    variables y los tipos de datos primitivos. ¡Bienvenido a bordo!</p><p>Y por
+    si te estas preguntando quién es el adorable cangrejo parlante, me llamo
+    <b>Ferris</b>, y soy la mascota no oficial del lenguaje de programación
+    Rust. Encantado de conocerte.</p>
+- title: Familiarízate con Rust
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%C2%A1Bienvenido%20al%20%C3%A1rea%20de%20pruebas!%20Puedes%20modificar%20tu%20c%C3%B3digo%20aqu%C3%AD.%22)%3B%0A%7D%0A
+  content_html: >
+    <p>En el tour usaremos la siguiente herramienta de programación interactiva:
+    <a href="https://play.rust-lang.org/">https://play.rust-lang.org</a>
+
+    </p><p>De esta manera podrás trastear con Rust y demostrar tu creatividad y
+    aptitudes.</p>
+- title: Variables
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20deduce%20el%20tipo%20de%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20ser%20expl%C3%ADcito%20con%20el%20tipo%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20tambi%C3%A9n%20puede%20declarar%20primero%20e%20inicializar%20despu%C3%A9s%2C%20pero%20es%20poco%20com%C3%BAn%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Las variables se declaran usando la palabra reservada **let**.
+
+
+    Al asignar un valor, Rust podrá deducir el tipo de la variable el 99% de las
+    veces.
+
+    Si no puede, tú mismo podrás especificar el tipo al declarar una variable.
+
+
+    Fíjate en cómo podemos declarar variables con el mismo nombre varias veces.
+    Esto se llama
+
+    sombreado (shadowing) de variables y se puede modificar el tipo para futuras
+    referencias a ese nombre.
+
+
+    Los nombres de las variables se escriben siempre en `snake_case`
+- title: Modificar Variables
+  content_markdown: >
+    En Rust es importante tener en cuenta qué valores se modifican.
+
+    Los valores se dividen en dos tipos:
+
+
+    * **mutables** - la ubicación en memoria puede ser escrita y leída
+
+    * **inmutables** - la ubicación en memoria sólo puede ser leída
+
+
+    Los valores mutables siempre se denotan con la palabra reservada **mut**.
+
+
+    Hay mucho más que explicar aún sobre este concepto, pero de momento presta
+    atención solamente a la palabra reservada.
+
+    We will have more to say on this concept later, but for now just keep an eye
+    out for this keyword.
+- title: Tipos básicos
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20Por%20defecto%20es%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20Por%20defecto%20es%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22%C2%A1Hola%2C%20mundo!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_html: >-
+    <p>Rust tiene una variedad de tipos que puede que te resulten familiares:
+    <ul><li>booleanos - <code>bool</code> para representar
+    verdadero/falso</li><li>números enteros sin signo -
+    <code>u8</code><code>u32</code><code>u64</code><code>u128</code> para
+    representar números enteros positivos</li><li>números enteros con signo -
+    <code>i8</code><code>i32</code><code>i64</code><code>i128</code> para
+    representar números enteros positivos y negativos</li><li>números enteros de
+    tamaño de puntero - <code>usize</code><code>isize</code> se usan para
+    representar índices y tamaños de elementos en memoria </li><li>números en
+    coma flotante - <code>f32</code><code>f64</code></li> <li>En relación a
+    textos - <code>str</code><code>char</code></li><li>tuplas -
+    <code>(valor,valor,...)</code> para pasar secuencias fijas de valores en la
+    pila <li>slices - <code>&[T]</code> para referenciar “vistas” en secuencias
+    de valores en la memoria</ul></p><p>Profundizaremos en algunos más
+    adelante.</p> <p>Advertencia: los formatos de texto pueden ser más complejos
+    de lo que estás acostumbrado en otros lenguajes, ya que Rust es un lenguaje
+    de programación de sistemas, está orientado a gestionar los problemas de la
+    memoria, algo a lo que puedes no estar acostumbrado. Entraremos en detalles
+    sobre los textos más tarde.</p><p>Observa cómo los tipos numéricos pueden
+    especificarse explícitamente añadiendo el tipo al final del número (por
+    ejemplo, <code>13u32</code>)</p>
+- title: Conversión de tipos básica
+  content_html: >-
+    <p>Rust requiere ser explícito cuando se trata de tipos numéricos. No se
+    puede usar un <code>u8</code> cuando necesitemos un <code>u32</code> sin que
+    se produzca un error.</p><p>Por suerte, Rust hace que las conversiones de
+    tipos numéricos sean muy fáciles con la palabra reservada <b>as</b>.</p>
+- title: Constantes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Vamos%20de%20paseo%2C%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20PI%2C%20PI%2C%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_html: >-
+    <p>Las constantes nos permiten especificar un valor común que se utiliza
+    muchas veces a lo largo de nuestro código de manera eficiente. En vez de
+    copiar valores como variables en el lugar donde se usan, las constantes
+    reemplazan directamente el identificador de texto (donde se haya usado) por
+    su valor en tiempo de compilación.</p> <p>A diferencia de las variables, el
+    tipo de las constantes se debe especificar explícitamente.</p> <p>Los
+    nombres de las constantes se escriben siempre en
+    <code>SCREAMING_SNAKE_CASE</code></p>
+- title: Arrays
+  content_markdown: >
+    Un *array* es una colección de longitud fija de elementos de datos del mismo
+    tipo.
+
+
+    El tipo de datos para un *array* es `[T;N]` siendo T el tipo del elemento, y
+    N la longitud fija conocida en tiempo de compilación.
+
+
+    Los elementos individuales se pueden recuperar con el operador `[x]`, siendo
+    *x* un índice de tipo *usize* (empezando por 0) del elemento que quieras.
+- title: Funciones
+  content_markdown: >
+    Una función tiene cero o más parámetros.
+
+
+    En este ejemplo, "add" recibe dos argumentos de tipo `i32` (entero de 32
+    bits).
+
+
+    Los nombres de las funciones se escriben siempre en `snake_case`.
+- title: Múltiples variables de retorno
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20intercambiar(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Devuelve%20una%20tupla%20de%20valores%0A%20%20%20%20let%20result%20%3D%20intercambiar(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20Desestructura%20la%20tupla%20en%20dos%20variables%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20intercambiar(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_html: >-
+    <p>Las funciones pueden devolver múltiples valores utilizando una
+    <b>tupla</b> de valores.</p><p>Los valores se pueden referenciar por su
+    posición en la tupla.</p><p>Rust soporta varios modos de desestructuración
+    que veremos en diferentes formas, esto nos permite extraer subconjuntos de
+    estructuras de datos de manera práctica. ¡Presta mucha atención!</p>
+- title: No devolver nada
+  content_markdown: >
+    Si no se especifica un tipo de retorno para una función, esta devuelve una
+    tupla vacía, también conocida como *unidad*.
+
+
+    Una tupla vacía se representa mediante `()`
+
+
+    El uso de `()` es poco común, pero es necesario saber su significado ya que
+    aparecerá de vez en cuando.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20no_hagas_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20El%20valor%20de%20retorno%20es%20impl%C3%ADcitamente%20()%0Afn%20no_hagas_nada2()%20%7B%0A%20%20%20%20%2F%2F%20Esta%20funci%C3%B3n%20devuelve%20()%20si%20no%20se%20especifica%20nada%20que%20devolver%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20no_hagas_nada()%3B%0A%20%20%20%20let%20b%20%3D%20no_hagas_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Mostrando%20una%20sentencia%20de%20depuraci%C3%B3n%20para%20a%20y%20b%0A%20%20%20%20%2F%2F%20porque%20es%20dif%C3%ADcil%20no%20mostrar%20nada%0A%20%20%20%20println!(%22El%20valor%20de%20a%20es%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22El%20valor%20de%20b%20es%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: Capítulo 1 - Conclusión
+  content_html: >-
+    <p>¡Buen trabajo! No ha sido tan complicado, ¿verdad? Esta ha sido una
+    visión general de cómo trabaja el compilador de Rust. Como ya has
+    comprobado, hay que tener muy en cuenta el tamaño de los valores en memoria,
+    las cosas que se pueden modificar y las que no, y asegurarse de que tu
+    código de el resultado que esperas. Estos son pequeños avances de un
+    principio de <b>seguridad</b> que prevalece a través de Rust. Este
+    compilador pretende asegurarse de que tu código hace lo que esperas. A
+    continuación echaremos un vistazo a algunos viejos conocidos:
+    <code>if</code> y <code>for</code>.</p>

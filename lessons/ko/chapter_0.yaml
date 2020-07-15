@@ -1,0 +1,48 @@
+- title: >-
+    안녕하세요, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: >
+    *Tour of Rust로의 여행*에 오신 것을 환영합니다. Rust 프로그래밍 언어의 특징을
+
+    하나씩 알아보려 합니다. Rust는 배우기 어려운 언어로 인식되고는 합니다. 그러나,
+
+    복잡한 내용을 다루기 전에 알아봐야 할 많은 것들이 있다는 것을 알 수 있기를
+
+    희망합니다.</p><p>이 가이드는 다른 언어로도 존재합니다:
+
+
+    * [독일어](00_de.html)
+
+    * [영어](00_en.html)
+
+    * [스페인어](00_es.html)
+
+    * [프랑스어](00_fr.html)
+
+    * [Interlingue](00_ie.html)
+
+    * [Magyar](00_hu.html)
+
+    * [브라질 포르투갈어](00_pt-br.html)
+
+    * [러시아어](00_ru.html)
+
+    * [중국어](00_zh-cn.html)
+
+    * [일본어](00_ja.html)
+
+    * [한국어](00_ko.html)
+
+
+    내용에 대해 제안이 있거나 번역에 기여하고 싶은 경우, Rust로의 여행 저장소를 확인해주세요 
+
+    [github repository](https://github.com/richardanaya/tour_of_rust).
+
+
+    <span class="emoji">⬅️</span>키와 <span class="emoji">➡️</span>키로 여행을 다닐 수
+    있습니다.
+
+
+    이번 프로그래밍 언어의 고전적인 예제에서, 유니코드 문자열을 지원하는 Rust를 알아봅니다.

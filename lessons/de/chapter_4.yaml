@@ -1,0 +1,26 @@
+- title: Kapitel 4 - Generische Typen
+  content_markdown: >
+    Generische Typen sind unglaublich wichtig in Rust. Sie werden benutzt um
+    Variablen mit potenziell abewesendem
+
+    Wert, Error Handling, Sammlungen und mehr zu ermöglichen. In diesem
+    Abschnitt werden wir über die grundlegenden
+
+    generischen Typen lernen, für welche Du warscheinlich anschließend oft
+    Anwendung finden wirst!
+- title: Was sind generische Typen?
+  content_markdown: >
+    Generische Typen ermöglichen es uns ein `struct` oder `enum` nur teilweise
+    zu definieren, was dem Compiler ermöglicht
+
+    eine komplett definierte Version zur Compile-Zeit aus unserem Code zu
+    generieren.
+
+
+    Generell kann sich Rust aus unserer Instanziierung den finalen Datentypen
+    erschließen, aber wenn es einmal Hilfe
+
+    benötigt kannst du immer ganz einfach und explizit mit dem `::<T>` operator,
+    auch bekannt unter dem Namen `turbofisch`
+
+    (ein guter Freund von mir), nachhelfen.

@@ -1,0 +1,258 @@
+- title: Chapitre 6 - Texte
+  content_markdown: >
+    Maintenant que nous en savons un peu plus sur la manière dont Rust gère la
+    mémoire,
+
+    nous sommes prêts à parler des chaînes de caractères en détail.
+
+    Rust se soucie beaucoup du support des textes internationaux et des
+    problèmes associés au niveau des bits 
+
+    (dont vous n'êtes peut-être pas familier). Cela dit, Rust dispose
+    d'excellents
+
+    outils pour gérer ces préoccupations.
+- title: Chaînes de caractères
+  content_markdown: >
+    Les chaînes de caractères (en anglais string literals) sont toujours
+    encodées avec le standard Unicode.
+
+
+    Le type d'une chaîne de caractères est `&'static str`.
+
+
+    * `&` signifie que c'est une référence. Remarque l'abscence du mot-clé
+    `&mut`,
+
+    cela nous dit également que le compilateur n'autorisera pas la modification.
+
+    * `'static` signifie que la donnée sera disponible jusqu'à la fin du
+    programme (celle-ci n'est jamais désallouée).
+
+    * `str` signifie que la référence pointe vers une séquence de bytes qui sera
+    toujours interprétable en tant qu'**utf-8**.
+
+
+    Détails de la mémoire:
+
+    * Le compilateur Rust va dans la plupart des cas placer les données de la
+    chaîne de caractères
+
+    sur le segment de données (en anglais data segment) de la mémoire du
+    programme.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22salut%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: Introduction à l'utf-8
+  content_markdown: "De plus en plus de langues doivent être supportées par les ordinateurs d'aujourd'hui.\nMalheureusement, le système d'encodage ASCII initialement utilisé sur les premiers ordinateurs ne suffit plus\npour représenter tout les caractères. L'encodage ASCII ne permet d'encoder seulement 256 caractères sur 1 byte.\n\nL'introduction du standard unicode **utf-8** a permis d'augmenter grandement le nombre caractères utilisable en\noffrant un encodage pouvant varier de 1 à 4 bytes.\n\nUn avantage d'avoir des caractères à taille variable est qu'on n'utilise pas de bytes superflues\npour représenter les caractères communs ASCII (requiert un seul byte même avec l'encodage **utf-8**).\n\nUn désavantage d'avoir des caractères à taille variable est que l'accès ne peut plus être fait\nrapidemment (temps constant **O(1)**) avec un simple accès par index (e.g.\n`my_text[3]` pour récupérer le 4ème caractère). \nEn effet, il est possible que les caractères précédants le caractère que l'on souhaite lire aient une taille variable, altérant\nla position où le 4ème caractère se situe dans la séquence d'octets.\n\nAu lieu de cela, nous devons itérer sur la séquence de byte **utf-8** pour trouver où se situe\nle caractère unicode (temps linéaire **O(n)**).\n\nFerris: \"Je suis surtout content d'avoir l'encodage ** utf-8 ** pour représenter les emojis de mes amis sous-marins!\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: Caractères d'échappement
+  content_markdown: >
+    Certains caractères spéciaux posent problèmes dans les chaînes de
+    caractères.
+
+    Mais fort heureusement, les **caractères d'échappement** nous permettent de
+    les représenter.
+
+
+    Rust supporte la plupart des codes d'échappement communs aux langages de
+    programmation basés sur le C:
+
+    * `\n` - nouvelle ligne
+
+    * `\r` - retour charriot
+
+    * `\t` - tabulation
+
+    * `\\` - backslash
+
+    * `\0` - null
+
+    * `\'` - apostrophe
+
+
+    La liste complète existe
+    [ici](https://doc.rust-lang.org/reference/tokens.html).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20dit%3A%5Ct%5C%22salut%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+- title: Chaînes de caractères sur plusieurs lignes
+  content_markdown: |
+    Avec Rust, les chaînes de caractères sont 'multi-lignes' par défaut.
+
+    Utilise `\` à la fin d'une ligne si tu ne veux pas de retour à la ligne.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20J%27%C3%A9cris%2C%20efface%2C%20r%C3%A9%C3%A9cris%0A%20%20%20%20%20%20%20%20Effacez%20%C3%A0%20nouveau%2C%20puis%0A%20%20%20%20%20%20%20%20Un%20coquelicot%20fleurit%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20l%27espace%20devant%20le%20%27w%27%20est%20ignor%C3%A9%0A%7D%0A
+- title: Chaînes de caractères bruts
+  content_markdown: >
+    Les chaînes de caractères bruts (en anglais raw string literals) permettent
+    d'écrice textuellement
+
+    une séquence de caractères en commençant par `r#"` et finissant par `"#`.
+
+    Cela nous permet d'insérer des caractères qui seraient autrement pris
+
+    pour un autre (notamment les caractères **"** et **\**).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Les%20cha%C3%AEnes%20de%20caract%C3%A8res%20bruts%20sont%20parfois%20utiles.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: Chaînes de caractères depuis un fichier
+  content_markdown: |
+    Si tu as du texte très volumineux à lire depuis un fichier en local,
+    tu peux utiliser la macro `include_str!`:
+
+    ```rust
+    let 00_html = include_str!("00_en.html");
+    ```
+- title: String Slice
+  content_markdown: >
+    Une 'slice' (littéralement tranche) de chaîne de caractères est une
+    référence
+
+    à une séquence de bytes en mémoire qui doit être de l'utf-8 valide. Elle
+    fait référence
+
+    à une partie ou la totalité d'une chaîne de caractères.
+
+
+    Une 'slice' (également nommée 'sub-slice') d'une 'slice' `str` doit
+    également être de l'utf-8 valide.
+
+
+    Méthodes utiles de `&str`:
+
+    * `len` retourne la taille de la chaîne de caractères en bytes (pas le
+    nombre de caractères!).
+
+    * `starts_with`/`ends_with` pour tester si la chaîne de caractères commence
+    ou finit par un certain motif.
+
+    * `is_empty` retourne vrai si la taille est zéro.
+
+    * `find` retourne une structure de type `Option<usize>` donnant la première
+    position du modif à trouver.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22salut%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..5%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B6..10%5D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20L'instruction%20suivante%20%C3%A9chouerait%3A%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B6..8%5D%3B%20%0A%20%20%20%20%2F%2F%20En%20effet%2C%20Rust%20n'accepte%20pas%20de%20'slice'%20de%20caract%C3%A8re%20unicode%20invalide.%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+- title: Chars
+  content_markdown: |
+    Du fait de la difficulté de travailler avec des caractères unicodes,
+    Rust offre un moyen de récupérer une séquence d'octets utf-8 sous forme
+    de vecteur de caractères de type `char`.
+
+    Un `char` possède toujours une taille de 4 bytes (rendant la recherche
+    d'un caractère particulier d'une chaîne de caractères plus rapide).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Collecte%20les%20caract%C3%A8res%20sous%20forme%20de%20vecteur%20de%20'char'.%0A%20%20%20%20let%20chars%20%3D%20%22salut%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20Devrait%20afficher%207.%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Etant%20donn%C3%A9%20que%20un%20'char'%20est%20stock%C3%A9%20sur%204%20bytes%2C%20%0A%20%20%20%20%2F%2F%20celui-ci%20peut%20donc%20%C3%AAtre%20converti%20en%20u32.%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: String
+  content_markdown: >
+    Une structure **String** possède une séquence de bytes utf-8 située sur le
+    tas (en anglais heap).
+
+
+    Du fait que la donnée se trouve sur le tas, celle-ci peut être étendue,
+    modifiée, etc., contrairement
+
+    aux chaînes de caractères (en anglais string literals).
+
+
+    Méthodes utiles:
+
+
+    * `push_str` pour ajouter d'autres bytes utf-8 à la fin.
+
+    * `replace` pour remplacer une séquence de bytes utf-8 par une autre.
+
+    * `to_lowercase`/`to_uppercase` pour tout mettre en minuscule ou en
+    majuscule.
+
+    * `trim` pour supprimer les espaces.
+
+
+    Lorsqu'une structure String est désallouée, ses données
+
+    se trouvant sur la pile le sont également.
+
+
+    Une structure `String` possède l'opérateur `+` qui permet d'étendre la
+    structure
+
+    avec une autre chaîne de caractères de type `&str` et retourne la structure,
+
+    mais ce n'est peut-être pas aussi ergonomique que vous l'espérez.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+- title: Texte en tant que paramètre de fonction
+  content_markdown: >
+    Les chaînes de caractères et les structures String sont généralement passées
+    aux fonctions sous forme de 'string slice'.
+
+    Cela offre beaucoup de flexibilité pour la plupart des scénarios où vous
+    n'avez pas besoin de transmettre la propriété (en anglais ownership).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20peut%20emprunter%20%26%27static%20str%20en%20tant%20que%20%26str%0A%20%20%20%20say_it_loud(%22bonjour%22)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20say_it_loud%20peut%20%C3%A9galement%20emprunter%20String%20en%20tant%20que%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22au%20revoir%22))%3B%0A%7D%0A
+- title: Construction de String
+  content_markdown: >
+    `concat` et` join` sont deux façons simples mais puissantes de construire
+    les structures String.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
+- title: Formatage de Strings
+  content_markdown: >
+    La macro `format!` nous permet de créer une chaîne de caractères en
+    définissant
+
+    une chaîne paramétrée avec des espaces réservés (e.g. `{}`) qui seront
+    remplacés
+
+    par certaines valeurs.
+
+
+    `format!` utilise les mêmes chaînes de caractères paramétrées que
+    `println!`.
+
+
+    Les possibilités offertes par cette fonction sont trop larges pour être
+    toutes
+
+    vues dans note modeste * Tour de Rust *. Si vous souhaitez cependant en
+    savoir plus,
+
+    vous pouvez consulter la documentation
+    [ici](https://doc.rust-lang.org/std/fmt/).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20de%20la%20vie%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+- title: Conversion en String
+  content_markdown: >
+    Plusieurs types peuvent être convertis en String en utilisant `to_string`.
+
+
+    La fonction générique `parse` peut être utilisée pour convertir une
+    structure String
+
+    ou une chaîne de caratères en un autre type.
+
+
+    La fonction de l'exemple ci-contre retourne une structure `Result` car elle
+    pourrait échouer.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Chapitre 6 - Conclusion
+  content_markdown: >
+    Maintenant, tu sais tout ce que tu as à connaître sur la gestion des textes
+    avec Rust!
+
+    Comme tu l'as vu, l'encodage unicode rend le travail avec le texte un peu
+    délicat,
+
+    mais la bibliothèque standard de Rust possède beaucoup de fonctionnalités
+    pour nous
+
+    éviter ce travail.
+
+
+    Jusqu'à présent, nous avons principalement utilisé Rust avec le paradigme de
+    programmation
+
+    procédural (e.g. uniquement des fonctions avec des données).
+
+    Il est temps que nous parlions maintenant des traits (c'est le même terme en
+    anglais)
+
+    et des capacités débloquées par le paradigme de programmation orienté objet
+    de Rust.
