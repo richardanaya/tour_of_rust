@@ -228,6 +228,27 @@ pages:
         vaya al repositorio del Tour de WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
         Puedes navegar por el tour usando el teclado <span class="emoji">⬅️</span> y <span class="emoji">➡️</span>
+    ja:
+      title: こんにちは, WebAssembly
+      content_markdown: |
+        *WebAssembly ツアー*へようこそ。 ここでは、Webを発展させるために、Rustを使ってなにができるかを紹介します。
+        ほとんどの例は、誰にでも十分わかるように書かれていますが、もしあなたが完全なRust初心者の場合は、[Rust ツアー](https://tourofrust.com/)がおすすめです。
+        このツアーはCでも利用可能です。
+
+        * [Rust (english)] (index.html)
+        * [Rust (français)] (index_fr.html)
+        * [Rust (Interlingue)] (index_ie.html)
+        * [Rust (Português Brasileiro)] (index_pt-br.html)
+        * [Rust (Español)] (index_es.html)
+        * [Rust (日本語)] (index_ja.html)
+        * [C (english)] (index_en_c.html)
+        * [C (français)] (index_fr_c.html)
+
+        コンテンツへの提案や翻訳に貢献したい場合、
+        WebAssembly ツアーの [github リポジトリ](https://github.com/richardanaya/tour_of_rust)をチェックしてください。
+
+        キーボードの <span class="emoji">⬅️</span> と <span class="emoji">➡️</span> でツアーをナビゲートできます。
+
   - chapter: 1
     en:
       title: Chapter 1 - What Is WebAssembly?
