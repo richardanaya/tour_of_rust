@@ -517,6 +517,16 @@ pages:
 
         Durante esta fase podemos **importar** funções JavaScript que desejamos que nosso módulo
         tenha acesso. Mostraremos um exemplo no próximo capítulo.
+    ja:
+      title: モジュールのロード
+      content_markdown: |
+        WebAssemblyのモジュールはただのバイト列です。まずはそれをブラウザで読み込む必要があります。
+
+        ```
+        let file = await fetch('my_file.wasm');
+        let bytes = await file.arrayBuffer();
+        ```
+
   - en:
       title: Using a Module
       content_markdown: |
