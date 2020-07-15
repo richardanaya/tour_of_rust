@@ -696,6 +696,12 @@ pages:
         JavaScript e seu WebAssembly têm representações de dados muito diferentes no nível da memória.
         Para tornar as coisas mais complexas, a interação com o ambiente host do WebAssembly é muito limitada.
         Neste capítulo exploraremos as estratégias usadas para o vai-e-vem dos dados.
+    ja:
+      title: チャプター 1 まとめ
+      content_markdown: |
+        WebAssemblyが基本的には複雑なものではないということが伝わったでしょう！
+        次のチャプターでは、JavaScriptとWebAssemblyが互いにデータをやり取りする部分を見ていきます。
+
   - en:
       title: Importing Functions
       code: https://webassembly.studio/?embed&f=pp20eedhka
