@@ -404,6 +404,17 @@ pages:
         * una lista de funciones.
         * qué funciones deben de ser exportadas/importadas.
         * qué datos tienen que estar inicialmente en la memoria de los módulos wasm.
+    ja:
+      title: Moduleについて
+      content_markdown: |
+        WebAssemblyをターゲットにしてコードをコンパイルすると、`.wasm`ファイルができます。これを、**モジュール**と呼びます。
+
+        モジュールは、[バイナリ形式](https://webassembly.github.io/spec/core/index.html)で、どのようにプログラムが振る舞うのかのすべての情報が入っています。
+        たとえば、
+        * 関数のリスト
+        * どの関数がエクスポート、インポートされるか
+        * どんなデータがあらかじめWASMモジュールのメモリに格納されるか
+
   - en:
       title: Loading A Module
       content_markdown: |
