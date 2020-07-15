@@ -582,6 +582,16 @@ pages:
         ```
         module.instance.main();
         ```
+    ja:
+      title: モジュールを使用する
+      content_markdown: |
+        モジュールには、JavaScriptからアクセスできる1つ以上の**export**された関数があるはずです。
+        多くの場合、WASMプログラムを起動するための関数があると思います。(例 `main`, `start`)
+
+        ```
+        module.instance.main();
+        ```
+
   - en:
       title: 1+1
       code: https://webassembly.studio/?embed&f=jg96xg1ovj
