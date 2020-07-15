@@ -332,7 +332,7 @@ pages:
 
         WebAssembly es frecuentemente mencionado como **WASM**.
     ja:
-      title: Chapter 1 - WebAssemblyとは?
+      title: 1章 - WebAssemblyとは?
       content_markdown: |
         WebAssemblyは、単体で実行可能なバイナリ形式のコードです。
         JavaScriptの代わりとしてWebブラウザのために開発されたもので、いくつかの優位性があります。
