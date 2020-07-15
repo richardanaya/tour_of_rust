@@ -410,7 +410,7 @@ pages:
         WebAssemblyをターゲットにしてコードをコンパイルすると、`.wasm`ファイルができます。これを、**モジュール**と呼びます。
 
         モジュールは、[バイナリ形式](https://webassembly.github.io/spec/core/index.html)で、どのようにプログラムが振る舞うのかのすべての情報が入っています。
-        たとえば、
+        たとえば、これらです。
         * 関数のリスト
         * どの関数がエクスポート、インポートされるか
         * どんなデータがあらかじめWASMモジュールのメモリに格納されるか
@@ -537,7 +537,7 @@ pages:
         ```
 
         このとき、JavaScriptの関数などをモジュールがアクセスできるように**import**して渡すこともできます。
-        次のチャプターで紹介します。
+        次の章で紹介します。
 
   - en:
       title: Using a Module
@@ -586,7 +586,7 @@ pages:
       title: モジュールを使用する
       content_markdown: |
         モジュールには、JavaScriptからアクセスできる1つ以上の**export**された関数があるはずです。
-        多くの場合、WASMプログラムを起動するための関数があると思います。(例 `main`, `start`)
+        多くの場合、WASMプログラムを起動するための関数があると思います。(例えば`main`, `start`など)
 
         ```
         module.instance.main();
@@ -697,10 +697,10 @@ pages:
         Para tornar as coisas mais complexas, a interação com o ambiente host do WebAssembly é muito limitada.
         Neste capítulo exploraremos as estratégias usadas para o vai-e-vem dos dados.
     ja:
-      title: チャプター 1 まとめ
+      title: 1章のまとめ
       content_markdown: |
         WebAssemblyが基本的には複雑なものではないということが伝わったでしょう！
-        次のチャプターでは、JavaScriptとWebAssemblyが互いにデータをやり取りする部分を見ていきます。
+        次の章では、JavaScriptとWebAssemblyが互いにデータをやり取りする部分を見ていきます。
 
   - en:
       title: Importing Functions
