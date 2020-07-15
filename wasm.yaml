@@ -72,6 +72,14 @@ common_words:
     toc: Índice
     lessons: Unidades
     untranslated: Untranslated
+  ja:
+    chapter: 章
+    tor: Rust ツアー
+    next: 次
+    previous: 前
+    toc: 目次
+    lessons: レッスン
+    untranslated: 未翻訳
 pages:
   - en:
       title: Hello, WebAssembly
