@@ -88,6 +88,16 @@ common_words:
     untranslated: 미번역
     welcometothe: "환영합니다"
     presstocontinue: "진행하기 위해 아무 키나 눌러주세요"    
+  hu:
+    chapter: Fejezet
+    tor: Rust-túra
+    next: Következő
+    previous: Előző
+    toc: Tartalomjegyzék
+    lessons: Egységek
+    untranslated: Lefordításra vár
+    welcometothe: "Üdvözöllek a"
+    presstocontinue: "Nyomd meg a folytatáshoz"
 pages:
   - en:
       title: "Hello, <img src=\"/favicon-32x32.png\" style=\"display:inline; vertical-align:bottom\">"
@@ -104,6 +114,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -134,6 +145,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -171,6 +183,7 @@ pages:
         * [English](00_en.html)
         * [Español](00_es.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -207,6 +220,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -232,6 +246,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -261,6 +276,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -288,6 +304,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -315,6 +332,7 @@ pages:
         * [Español](00_es.html)
         * [Français](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [Português Brasileiro](00_pt-br.html)
         * [Русский](00_ru.html)
         * [简体中文](00_zh-cn.html)
@@ -341,6 +359,7 @@ pages:
         * [스페인어](00_es.html)
         * [프랑스어](00_fr.html)
         * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
         * [브라질 포르투갈어](00_pt-br.html)
         * [러시아어](00_ru.html)
         * [중국어](00_zh-cn.html)
@@ -353,6 +372,35 @@ pages:
         <span class="emoji">⬅️</span>키와 <span class="emoji">➡️</span>키로 여행을 다닐 수 있습니다.
 
         이번 프로그래밍 언어의 고전적인 예제에서, 유니코드 문자열을 지원하는 Rust를 알아봅니다.
+    hu:
+      title: "Helló, <img src=\"/favicon-32x32.png\" style=\"display:inline; vertical-align:bottom\">"
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hell%C3%B3%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+      content_markdown: |
+        Üdvözöllek a *Rust-túrán*. Ez egy olyan lépésekre bontott leírás, aminek segítségével
+        megismerheted a Rust képességeit. Sokan úgy tartják a Rust egy nehezen megtanulható nyelv,
+        de reményeim szerint meg tudlak győzni, hogy épp elég érdekes dolgot lehet felfedezni benne
+        azelőtt, hogy a bonyolult részekhez érnénk.</p><p>Ez a leírás a következő nyelveken érhető
+        el:
+
+        * [Deutsch](00_de.html)
+        * [English](00_en.html)
+        * [Español](00_es.html)
+        * [Français](00_fr.html)
+        * [Interlingue](00_ie.html)
+        * [Magyar](00_hu.html)
+        * [Português Brasileiro](00_pt-br.html)
+        * [Русский](00_ru.html)
+        * [简体中文](00_zh-cn.html)
+        * [日本語](00_ja.html)
+        * [한국어](00_ko.html)
+
+
+        Ha bármilyen hozzáfűznivalód van vagy a fordításban szeretnél segíteni, keresd fel a
+        Rust-túra [github oldalát](https://github.com/richardanaya/tour_of_rust).
+
+        A túrán való navigációhoz használhatod a <span class="emoji">⬅️</span> és <span class="emoji">➡️</span> billenytűket is.
+
+        Ebben a klasszikus példában a Rust Unicode támogatását mutatjuk be.
   - chapter: 1
     en:
       title: Chapter 1 - The Basics
@@ -432,6 +480,14 @@ pages:
 
         또한! 여러분에게 이야기하고 있는 사랑스러운 꽃게가 누구인지 궁굼하다면, 
         저는 **페리스(Ferris)**입니다, Rust 프로그래밍 언어의 비공식적인 마스코드입니다. 만나서 반갑습니다.
+    hu:
+      title: 1. Fejezet - Az Alapok
+      content_markdown: |
+        Az első fejezetben a nyelv alapjaival fogunk megismerkedni, többek között a függvényekkel, a
+        változókkal és a legalapabb típusokkal. Üdv a fedélzeten!
+
+        Ja igen! Ha kíváncsi vagy ki ez az aranyos rák, aki épp hozzád beszél, a nevem **Ferris**,
+        én vagyok a Rust nyelv nem-hivatalos kabalája. Örülök a találkozásnak.
   - en:
       title: The Rust Playground
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
@@ -503,6 +559,13 @@ pages:
         [Rust 실습장](https://play.rust-lang.org)과 같은 대화형 코딩 도구를 이용해서 여행을 합니다.
 
         Rust로 실습을 하고, 여러분의 창의성과 도전성을 보여줄 수 있는 아주 훌륭한 방법입니다!
+    hu:
+      title: A Rust Homokozó
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%C3%9Cdv%20a%20homokoz%C3%B3ban!%20Az%20itt%20tal%C3%A1lhat%C3%B3%20k%C3%B3d%20szabadon%20megv%C3%A1ltoztathat%C3%B3!%22)%3B%0A%7D
+      content_markdown: |
+        Ez a bemutató egy interaktív programozó eszközt használ a [Rust Homokozóból](https://play.rust-lang.org).
+
+        Remek arra, hogy kipróbálhass dolgokat, kihívásokat oldj meg és, hogy bemutathasd a kreativitásod.
   - en:
       title: Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -615,6 +678,20 @@ pages:
         これは変数のシャドウイングと呼ばれるもので、型を変更して後でその名前で参照できます。
 
         変数名にはスネークケース `snake_case` を使用します。
+    hu:
+      title: Változók
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        A változókat a **let** kulcsszóval hozzuk létre.
+
+        Amikor egy változóhoz hozzárendelünk, a Rust az esetek 99%-ban képes lesz kitalálni, mi is a
+        típusa. Ha ez mégse sikerül neki, akkor a változó deklarációjában ezt te magad is
+        megteheted.
+
+        Figyeld meg, hogy ugyanahhoz a változónévhez többször is hozzárendelhetünk értékeket. Ezt
+        változó-árnyékolásnak nevezzük, a változó típusa is megváltozhat ilyenkor.
+
+        A változóneveket mindig 'kígyó_módon' adjuk meg.
   - en:
       title: Changing Variables
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -728,6 +805,21 @@ pages:
         可変値は **mut** キーワードで表します。
 
         この概念については後で詳しく説明しますが、今のところはこのキーワードに注意してください。
+    hu:
+      title: Változók megváltoztatása
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+      content_markdown: |
+        A Rust nagy figyelmet fordít afelé, hogy mely változókat lehet megváltoztatni. Minden érték
+        kétféle kategóriába esik:
+
+        * **megváltoztatható** - a fordító megengedi, hogy az ilyen változókba való írást és a belőlük való olvasást is.
+        * **megváltoztathatatlan** - a fordító csak a változóból való olvasást engedi.
+
+        A megváltoztatható értékek a **mut** ("mutable", "megváltoztatható") kulcsszóval vannak
+        jelölve.
+
+        A későbbiekben több szó is lesz majd erről a kulcsszóról, de egyelőre csak tartsd észben,
+        hogy létezik.
   - en:
       title: Basic Types
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
@@ -925,6 +1017,28 @@ pages:
         これについては後ほど詳しく説明します。
 
         数値型は、数値の最後に型を付加することで明示的に指定できます。（例: `13u32`, `2u8`）
+    hu:
+      title: Alapvető típusok
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        Rust has a variety of familiar types:
+        A Rust sokféle, valószínűleg már ismert típust különböztet meg:
+
+        * boolean - `bool` igaz és hamis értékekhez
+        * előjel nélküli egészek - `u8` `u16` `u32` `u64` `u128` pozitív egész számok kifejezésére
+        * előjeles egészek - `i8` `i16` `i32` `i64` `i128` pozitív és negatív egész számok kifejezésére
+        * mutató méretű egészek - `usize` `isize` tömbök indexeinek és a memóriában tárolt dolgok méretének tárolására
+        * lebegőpontos törtek - `f32` `f64`
+        * rendezett párok - `(érték, érték, ...)` meghatározott hosszú és típusú értékek a veremben való eltárolására szánt gyűjtemény
+        * tömbök - `[érték, érték, ...]` ugyanolyan típusú értékek fordításkor is ismert hosszal rendelkező gyűjteménye
+        * szeletek - ugyanolyan típusú értékek futáskor ismert hosszal rendelkező gyűjteménye
+        * `str` (szöveg szelet) - szöveg, melynek a hosszát csak futáskor ismerjük
+
+        A szövegek kezelése kicsit bonyultabb, mint ahogy azt más nyelvekben megszokhattad. Mivel a
+        Rust egy alacsony-szintű programozási nyelv, így fontosnak tartja az olyan memória-hibák
+        elkerülését is, amikre esetleg eddig nem is gondoltál. De erről majd később.
+
+        A számértékek típusait explicit módon is meg lehet adni azzal, hogy a szám végére illesztjük annak típusát (pl.: `13u32`, `2u8`).
   - en:
       title: Basic Type Conversion
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -995,6 +1109,14 @@ pages:
         Rust で数値型を扱う際、型を明示する必要があります。`u8` と `u32` を混ぜるとエラーになります。
 
         幸い、Rust は **as** キーワードで数値型を簡単に変換できます。
+    hu:
+      title: Egyszerű típusok közötti átalakítás
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+      content_markdown: |
+        A Rust elvárja, hogy a számtípusok közötti átalakítást explicit módon tedd. Például nem
+        használhatsz `u8`-t olyan helyen, ami `u32`-t vár anélkül, hogy hibát dobna.
+
+        Szerencsére a típusok közötti átalakítás nagyon egyszerű az **as** kulcsszó használatával.
   - en:
       title: Constants
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -1092,6 +1214,17 @@ pages:
         変数とは異なり、定数は明示的な型指定が必要です。
 
         定数名には大文字のスネークケース `SCREAMING_SNAKE_CASE` を使用します。
+    hu:
+      title: Konstansok
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+      content_markdown: |
+        A konstansok lehetővé teszik nekünk, hogy sebességvesztés nélkül adhassunk nevet gyakori
+        értékeknek. Ahelyett, hogy változók értékeit másolgatnánk oda, ahol azok használva vannak, a
+        konstansok helyére rögtön fordítás közben azok értéke kerül.
+
+        A változókkal ellentétben a konstansoknak mindig explicit módon meg kell adnunk a típusát.
+
+        A konstansok neveit mindig `ORDÍTÓ_KÍGYÓ_MÓDON` adjuk meg.
   - en:
       title: Arrays
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
@@ -1174,6 +1307,17 @@ pages:
         *配列*のデータ型は `[T;N]` であり、T は要素の型、N はコンパイル時に決まる固定長です。
 
         個々の要素は `[x]` 演算子によって取得できます。ここで *x* は取り出そうとする要素の *usize* 型のインデックス（0 始まり）です。
+    hu:
+      title: Tömbök
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+      content_markdown: |
+        Egy *tömb* egy olyan megegyező típusú elemeket tartalmazó csoport, aminek a hossza
+        megváltoztathatatlan.
+
+        A *tömbök* típusa `[T;N]`, ahol T az elemek típusa és N pedig a hossza, amit fordításkor már tudnunk kell.
+
+        Egyes elemek elérhetőek a `[x]` operátorral, ahol **x** egy *usize* indexe (ami 0-nál
+        kezdődik) annak az elemnek, amit szeretnél.
   - en:
       title: Functions
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
@@ -1253,6 +1397,15 @@ pages:
         この例では、add は `i32` 型（32 ビット長の整数）の引数を 2 つ取ります。
 
         関数名にはスネークケース `snake_case` を使用します。
+    hu:
+      title: Függvények
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+      content_markdown: |
+        A függvényeknek nulla vagy több paraméterük van.
+
+        Ebben a példában az add két `i32`-t (32 bit hosszú előjeles számokat) fogad.
+
+        A függvények nevei mindig `kígyó_módon` vannak megadva.
   - en:
       title: Multiple Return Values
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
@@ -1340,6 +1493,16 @@ pages:
         タプルの要素はインデックス番号で参照できます。
 
         Rust はデータ構造の一部を抽出する機能を提供します。これについては後ほど他の方法も見ていきます。
+    hu:
+      title: Több visszatérési érték
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+      content_markdown: |
+        A függvények több értékkel is visszatérhetnek egy **rendezett pár** képében.
+
+        A rendezett párok elemeit az indexük számával lehet elérni.
+
+        A Rust többféle elérési módot is biztosít, amivel az adatok bizonyos részeit érhetjük el
+        ergonomikus módon. De erről később lesz szó!
   - en:
       title: Returning Nothing
       content_markdown: |
@@ -1422,6 +1585,18 @@ pages:
 
         `()` はあまり使われませんが、時々出てくるので意味は知っておく必要があります。
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%AF%20()%20%E3%81%A8%E6%8E%A8%E8%AB%96%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20%E3%81%93%E3%81%AE%E9%96%A2%E6%95%B0%E3%81%AF%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%8C%E6%8C%87%E5%AE%9A%E3%81%95%E3%82%8C%E3%81%AA%E3%81%84%E3%81%9F%E3%82%81%20()%20%E3%82%92%E8%BF%94%E3%81%99%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20%E7%A9%BA%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E3%81%AE%E3%81%AF%E9%9B%A3%E3%81%97%E3%81%84%E3%81%AE%E3%81%A7%E3%80%81%0A%20%20%20%20%2F%2F%20a%20%E3%81%A8%20b%20%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E8%A1%A8%E7%A4%BA%0A%20%20%20%20println!(%22a%20%E3%81%AE%E5%80%A4%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22b%20%E3%81%AE%E5%80%A4%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+    hu:
+      title: Semmivel való visszatérés
+      content_markdown: |
+        Ha nincs visszatérési érték megadva egy függvénynek, akkor egy üres rendezett párral tér
+        vissza, melyet *unit*-nak hívunk.
+
+        Az üres rendezett párokat `()`-al jelöljük.
+
+        Using `()` is uncommon, but will come up often enough that it's good to know whats happening.
+
+        A `()` használata ritkán fordul elő, de mégis elég gyakori ahhoz, hogy érdemes tudni miről is van szó.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
   - en:
       title: Chapter 1 - Conclusion
       content_markdown: |
@@ -1524,6 +1699,21 @@ pages:
         * [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
         * [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
         * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
+    hu:
+      title: 1. Fejezet - Konklúzió
+      content_markdown: |
+        Gratula az első fejezet teljesítéséhez! Ugye nem is olyan rossz eddig? Bepillantást nyertünk
+        abba, hogyan is gondolkodik a fordító. Mivel a Rust egy alacsony-szintű programozási nyelv,
+        így nagy figyelmet fordít a memóriában tárolt értékek méretére, arra, hogy a változók
+        megváltoztathatóak-e vagy sem és, hogy a számításaid valóban úgy történnek, ahogy
+        szeretnéd. A következő oldalon két régi baráttal fogunk megismerkedni: az `if`-el és a `for`
+        ciklussal.
+
+        További források angolul:
+
+        * [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
+        * [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+        * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
   - chapter: 2
     en:
       title: Chapter 2 - Basic Control Flow
@@ -1577,6 +1767,12 @@ pages:
       content_markdown: |
         この章では、Rustの基本的な制御フローについて説明します。
         C 系の言語に慣れていればすぐに馴染めますし、ちょっとした驚きがあるかもしれません。
+    hu:
+      title: 2. Fejezet - Egyszerű ciklusok és elágazások
+      content_markdown: |
+        Ebben a fejezetben a Rust alapvető ciklusairól és elágazásairól lesz szó.
+        Ha használtál már C-re alapuló nyelveket, akkor itt otthon fogod magad érezni, bár lehet egy-két meglepetés
+        fog érni.
   - en:
       title: if/else if/else
       content_markdown: |
@@ -1660,6 +1856,16 @@ pages:
 
         いつもの論理演算子が使えます: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20%E3%82%88%E3%82%8A%E5%B0%8F%E3%81%95%E3%81%84%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20%E3%81%AB%E7%AD%89%E3%81%97%E3%81%84%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%20%E3%82%88%E3%82%8A%E5%A4%A7%E3%81%8D%E3%81%84%22)%3B%0A%20%20%20%20%7D%0A%7D
+    hu:
+      title: if/else if/else
+      content_markdown: |
+        A Rust elágazásai nem éppen meglepőek.
+
+        Az elágazások feltételei nincsenek zárójelek között. Valljuk be, volt bármikor is szükség
+        ezekre? A logika így szépen és tisztán néz ki.
+
+        Minden logikai és összehasonlító operátor ugyanúgy működik: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
   - en:
       title: loop
       content_markdown: |
@@ -1740,6 +1946,17 @@ pages:
 
         `break` によってループから脱出できます。</p><p>後で見ますが `loop` には秘密があります。
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+    hu:
+      title: loop
+      content_markdown: |
+        Szükséged volna egy végtelen ciklusra?
+
+        A Rust-tal ez egyszerű.
+
+        A `break` utasítás pedig kitör a ciklusból, ha arra van szükség.
+
+        A `loop` rendelkezik egy titokkal, amiről hamarosan fogunk beszélni.
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   - en:
       title: while
       content_markdown: |
@@ -1794,6 +2011,13 @@ pages:
         `while` を使えば、ループに条件を簡単に追加できます。
 
         条件が `false` と評価された場合、ループは終了します。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+    hu:
+      title: while
+      content_markdown: |
+        A `while` segítségével egy feltételt szabhatsz a ciklusodnak.
+
+        Amint a feltétel `false` (hamis) értéket vesz, a ciklus megszakad.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: for
@@ -1928,6 +2152,22 @@ pages:
         `..` 演算子は、開始番号から終了番号の手前までの数値を生成するイテレータを作成します。
 
         `..=` 演算子は、開始番号から終了番号までの数値を生成するイテレータを作成します。
+      code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+    hu:
+      title: for
+      content_markdown: |
+        A `for` ciklus a Rust nyelvben sokkal többet tud, mint az más nyelvekben megszokott. Képes
+        minden iterátorrá váló kifejezés elemein átlépkedni. Mit is jelent az, hogy valami iterátor?
+        Olyan objektumok, amiknél megkérdezhető, hogy "Mi a következő elem?" egészen addig, amíg már
+        nem marad elem.
+
+        Ezt egy későbbi fejezetben jobban is át fogjuk nézni. Addig is elég ha azt tudod, hogy a
+        Rust egyszerűvé teszi a számok sorait létrehozó iterárotok készítését.
+
+        A `..` operátor egy olyan iterátort hoz létre, ami egy megadott kezdőszámtól elszámol a
+        megadott végső szám előtti számig.
+
+        A `..=` operátor pedig ugyanezt teszi, viszont ekkor a végső szám is benne van a sorban.
       code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
   - en:
       title: match
