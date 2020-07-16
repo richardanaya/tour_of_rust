@@ -1,3 +1,4 @@
 lessons.json
 docs/*.html
 docs/webassembly/*.html
+node_modules
