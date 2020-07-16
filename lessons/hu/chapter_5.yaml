@@ -1,0 +1,181 @@
+- title: 5. Fejezet - Birtoklás & Az adatok kölcsönkérése
+  content_markdown: >
+    A Rust egy egyedi paradigmával rendelkezik a memóriakezeléssel kapcsolatban. Egyesével fogjuk
+    átnézni a fordító viselkedését és különböző ellenőrzéseit, hogy az egész könnyedén befogadható
+    maradjon. Fontos megjegyezni, hogy az itt bemutatott szabályok nem azért léteznek, hogy
+    megnehezítsék az életed, hanem hogy kevésbé hibákra érzékeny kódot tudj írni.
+- title: Birtoklás
+  content_markdown: >
+    Egy típus példányosítása és változóhoz **kötése** létrehoz egy memóriában található erőforrást,
+    amit a fordító a változó egész **lifetime**-ja (élettartama) során ellenőrizni fog. Ezt a változót
+    ekkor az erőforrás **owner**-ének (tulajdonosának/birtokosának) nevezzük.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20instantiate%20structs%20and%20bind%20to%20variables%0A%20%20%20%20%2F%2F%20to%20create%20memory%20resources%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20the%20owner%0A%7D%0A
+- title: Hatáskör-alapú erőforráskezelés
+  content_markdown: >
+    Az egyes értékek az utolsó használatuk helyén vagy a létrehozó
+    függvény hatáskörének végén szabadulnak fel és deallokálódnak. Ezt
+    a folyamatot **drop**-nak (ejtésnek) hívjuk.
+
+    Hogy érinti ez a memóriát:
+
+    * A Rust nem rendelkezik garbage collection-el (szemétgyűjtés)
+    * Ennek a folyamatnak a másik neve *Resource Aquisition Is Initialization* ("Az erőforrás
+      megszerzése egyben annak inicializálása is"). A C++ nyelv ugyanezt használja.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%20because%20it's%20no%20longer%0A%20%20%20%20%2F%2F%20used%20to%20after%20this%20location%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%20because%20of%20the%20end%0A%20%20%20%20%2F%2F%20of%20the%20function%20scope%0A%7D%0A
+- title: A drop-olás hierarchikus
+  content_markdown: >
+    Mikor egy struct kerül drop-olásra, először maga a struct, majd a hozzá tartozó mezők
+    drop-olnak.
+
+    Hogy érinti ez a memóriát:
+
+    * Az automatikus memória-felszabadítás elősegíti a felszabadítatlanul hagyott memóriarégiók
+      létrejöttét (memory leak).
+    * A memóriában elhelyezett erőforrások csupán egyszer drop-olhatók.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
+- title: A birtoklás átadása
+  content_markdown: >
+    Mikor egy tulajdonost argumentumként átadunk egy függvénynek, a birtokolt erőforrás a
+    függvény paraméterének tulajdonává válik.
+
+    Egy **move** (mozgatás) után az eredeti függvényben lévő változó már nem használható.
+
+    Hogy érinti ez a memóriát:
+
+    * Egy **move** közben a tulajdonos veremmemóriája a meghívott függvény paramétereinek
+      veremmmemóriájába másolódik.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20moved%20to%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20can%20no%20longer%20be%20used%0A%7D%0A
+- title: A birtoklás visszaadása
+  content_markdown: |
+    Egy függvény, ha szükséges vissza is adhatja az erőforrás birtoklását.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
+- title: Kölcsönkérés referenciák használatával
+  content_markdown: |
+    A referenciák használata lehetővé teszi számunkra, hogy "kölcsönkérjünk" egy erőforrást a `&`
+    operátor segítségével.
+
+    Ezek a referenciák ugyanúgy drop-olhatók, mint bármilyen más erőforrás is.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Megváltoztatásra is jogosult birtoklás kölcsönkérése referenciák használatával
+  content_markdown: >
+    A `&mut` operátor használatával olyan módon is kölcsönkérhetjük az erőforrást, ami annak
+    megváltoztatását is lehetővé teszi.
+
+    Az ilyen kölcsönkérés során a tulajdonost nem mozgathatjuk máshova és meg se változtathatjuk.
+
+    Hogyan érinti ez a memóriát:
+
+    * A Rust nem engedi, hogy egyszerre többen is úgy birtokolják az adatot, hogy az
+      megváltoztatható, mivel ez lehetővé tenné az úgy nevezett *data race*-k létrejöttét.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20would%20fail%20because%0A%20%20%20%20%2F%2F%20foo%20cannot%20be%20moved%20while%20mutably%20borrowed%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20fail%20here%20because%0A%20%20%20%20%2F%2F%20foo%20is%20not%20modifiable%20while%20mutably%20borrowed%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%20because%20its%20no%20longer%20used%20after%20this%20point%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20works%20now%20because%20there%20all%20mutable%20references%20were%20dropped%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20foo%27s%20ownership%20to%20a%20function%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: Dereferenciálás
+  content_markdown: >
+    A `*` operátor segítségével elérheted egy `&mut` referencia tulajdonosának értékét.
+
+    Emellett a `*` operátor képes még egy birtokolt érték lemásolására is (már ha az adott érték
+    másolható - de erről egy későbbi fejezetben lesz szó).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20get%20a%20copy%20of%20the%20owner's%20value%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%20the%20reference's%20owner's%20value%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: A kölcsönkért adatok ide-oda helyezése
+  content_markdown: >
+    A Rust referenciáinak szabályait talán így lehet a legjobban megfogalmazni:
+
+    * Egyszerre csak egy megváltoztatható referencia létezhet **vagy** több nem-megváltoztatható, de
+      **sosem mindkettő.**
+
+    * A referenciák élettartama sose lehet a tulajdonosnál hosszabb. Ez általában nem okoz
+      problémát, ha a függvények egymásnak adogatják át a referenciákat.
+
+    Hogyan érinti ez a memóriát:
+
+    * Az első szabály a *data race*-k létrejöttét akadályozza meg. De mi is ez a data race
+      ("adatverseny")? Egy data race akkor jön létre, amikor egy olyan adatot próbálunk kiolvasni,
+      ami időközben felülírásra került, mivel egyszerre próbálunk belőle olvasni és bele írni is. Ez
+      gyakran előfordul több szálon futó programokban.
+
+    * A második szabály pedig a már megsemmisült adatokra mutató referenciákat akadályozza meg. A C
+      nyelvben járatosak ezeket dangling pointer-nek (lógó mutatónak) nevezik.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20because%20all%20mutable%20references%20are%20dropped%20within%0A%20%20%20%20%2F%2F%20the%20function%20do_something.%20We%20can%20create%20another.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Referenciák referenciáji
+  content_markdown: |
+    Egy referencia egy másik referenciára is mutathat.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%20allow%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Explicit élettartamok
+  content_markdown: >
+    Bár a Rust nem mindig mutatja magában a kódban, a fordító figyelembe veszi minden egyes változó
+    élettartamát és megpróbálja biztosítani, hogy semelyik referencia se létezik tovább mint a
+    tulajdonosa.
+
+    A függvények explicit módon is kijelölhetik a paramétereik élettartamát olyan szimbólumokkal,
+    amik megmutatják a fordítónak melyik értékek osztoznak azonos élettartalmakon.
+
+    Az élettartamot kifejező szimbólumok mindig `'`-el kezdődnek. Például `'a`, `'b`, `'valami`,
+    stb.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20the%20parameter%20foo%20and%20return%20value%20share%20the%20same%20lifetime%0Afn%20do_something%3C'a%3E(foo%3A%20%26'a%20Foo)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%20allow%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Több élettartam
+  content_markdown: >
+    Az élettartamot kifejező szimbólumok lehetővé teszik, hogy módon kifejezzünk bizonyos
+    szituációkat, amikre a fordító önmagától nem képes, azzal hogy minden egyes élettartamot jelző
+    szimbólumot kiteszünk.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20and%20the%20return%20value%20share%20the%20same%20lifetime%0A%2F%2F%20foo_a%20has%20an%20unrelated%20lifetime%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%20because%20only%20foo_b's%20lifetime%20exist%20beyond%20here%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%0A%7D%0A
+- title: Statikus élettartam
+  content_markdown: >
+    Egy statikus változó olyan memóriában létrehozott erőforrás, ami a program kezdetétől végéig
+    létezik. Az ilyen változók típusait mindig explicit módon meg kell adni.
+
+    Egy **statikus élettartammal** rendelkező erőforrás a program végéig folyamatosan
+    létezik. Fontos megjegyezni, hogy a statikus változókkal ellentétben, statikus élettartammal
+    rendelkező értékek bizonyos esetekben a program futása közben is létrejöhetnek. Az ilyen
+    élettartamot a `'static` kulcsszóval jelöljük és az ilyen értékek sose drop-olnak.
+
+    Ha egy ilyen élettartammal rendelkező adat referenciát is tartalmaz magában, ennek a
+    referenciának szintén egy másik `'static` élettartamú tulajdonosra kell mutatnia (bármilyen más
+    esetben a tulajdonos előbb megszűnne létezni, minthogy a program véget ér).
+
+    Hogyan érinti ez a memóriát:
+
+    * A statikus változók megváltoztatása veszélyes, hisz bárki bármikor hozzájukférhet. Ez data
+      race-hez vezethet. Később még beszélni fogunk arról, hogy mit lehet ez ellen tenni.
+
+    * Az `unsafe { ... }` kulcsszó használatával a Rust megenged nekünk bizonyos műveleteket,
+    amiknek a memóriával kapcsolatos biztonságáról a fordító nem tud teljes bizonyossággal
+    meggyőződni. A [<span style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) nem olyasvalami amit csak úgy félvállról szabad venni.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Élettartamok adattípusokban
+  content_markdown: >
+    A függvényekhez hasonlóan az adattípusok mezőinek élettartamát is jelölhetjük szimbólumokkal. A
+    fordító tesz róla, hogy ezek a referenciák sose rendelkezzenek a bennük tárolt adatnál hosszabb
+    élettartammal.
+
+    Hisz mégse lehetnek olyan struct-jaink, amik a semmire mutatnak!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: 5. Fejezet - Konklúzió
+  content_markdown: >
+    Ejha! Hosszú fejezeten rágtuk át magunkat, de ezért cserébe jó úton vagy, hogy belőled is igazi
+    Rustacean váljék!
+
+    Az eddigi ismereteidet figyelembe véve tisztává válhat, hogy a Rust célja, hogy elkerüljön olyan
+    hibákat, amik más nyelvekben nagyon is gyakoriak:
+
+    * Változók akaratlan módosítása
+    * Felszabadítatlan erőforrások
+    * Már felszabadított erőforrások mégegyszeri felszabadítása
+    * Erőforrások felszabadítás után való használata
+    * Data race-k
+    * A fordító által garantált biztonság nem egyértelműsége
+
+    A következő fejezetben a Rust szövegkezelésével fogunk foglalkozni.
