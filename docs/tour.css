@@ -76,6 +76,7 @@ html, body {
 }
 
 .page {
+    font-family: 'IBM Plex Serif', serif;
     overflow-y: auto;
     -webkit-animation: fadein .5s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein .5s; /* Firefox < 16 */
