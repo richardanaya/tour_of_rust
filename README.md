@@ -77,7 +77,7 @@ to see the changes you've made.
 * Chapter 4 released in Chinese and Spanish
 * Chapter 3 released in French
 * Minor fixes
-* Chapter 2 of Tour of Web Assembly released
+* Chapter 2 of Tour of WebAssembly released
 
 ## Release 4 - May 30, 2020
 * Chapter 5 released on ownership and sharing
@@ -85,7 +85,7 @@ to see the changes you've made.
 * French translations for chapter 1-3
 * Brazillian portuguese translations for chapter 2-4
 * Spanish translations for chapter 3
-* Starting new section for web assembly
+* Starting new section for WebAssembly
 
 ## Release 3 - May 23, 2020
 * Chapter 4 released on generic data structures
