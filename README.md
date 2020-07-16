@@ -77,7 +77,7 @@ to see the changes you've made.
 * Chapter 4 released in Chinese and Spanish
 * Chapter 3 released in French
 * Minor fixes
-* Chapter 2 of Tour of Web Assemblhy released
+* Chapter 2 of Tour of Web Assembly released
 
 ## Release 4 - May 30, 2020
 * Chapter 5 released on ownership and sharing
