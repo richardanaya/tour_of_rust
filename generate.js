@@ -1,5 +1,5 @@
 
-let showdown = require("./showdown.js");
+let showdown = require("showdown");
 const fs = require('fs')
 const yaml = require('js-yaml');
 

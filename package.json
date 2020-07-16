@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "js-yaml": "^3.14.0"
+    "js-yaml": "^3.14.0",
+    "showdown": "^1.9.1"
   }
 }
