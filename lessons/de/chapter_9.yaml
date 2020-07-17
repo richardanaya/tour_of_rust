@@ -1,3 +1,24 @@
+- title: Kapitel 9 - Projektorganisation und -struktur
+  content_markdown: >
+    So far all of our code examples have been a single file. Let's discuss how
+    our code can be better organized and shared by others!
+
+    Bis jetzt waren alle unsere Code Beispiele in einer einzelnen Datei untergebracht.
+    Lass uns darüber diskutieren, wie unser Code besser organisiert und mit anderen geteilt werden kann!
+
+- title: Module
+  content_markdown: >
+    Jedes Rust Programm oder jede Bibliothek wird *crate* genannt.
+
+
+    Jedes create besteht aus einer Hierarchie von *Modulen*.
+
+
+    Jedes crate hat ein root Modul.
+
+
+    Ein Modul kann globale Variablen, Funktionen, Strukturen, Traits oder sogar andere Module beinhalten.
+
 - title: Export
   content_markdown: >
     Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch
