@@ -5,7 +5,7 @@ Every time you finish the translation of a chapter update the table underneath.
 
 
 
-|#| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|Chapter| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |------|---|---|---|---|---|---|---|---|---|---|----|
 |de    | ✓ | ✓ | ✓ | ✓ | x | x | x | x | x | x | x  |
 |es    | ✓ | ✓ | ✓ | ✓ | ✓ | x | x | x | x | x | x  |
