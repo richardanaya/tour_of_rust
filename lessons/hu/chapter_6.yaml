@@ -1,13 +1,13 @@
 - title: 6. Fejezet - Szövegek
-  content_markdown: >
-    Most hogy már értjük, hogy is kezeli a Rust memóriát, készen állunk arra, hogy a nyelv
+  content_markdown: |
+    Most hogy értjük, hogy kezeli a Rust a memóriát, készen állunk arra, hogy a nyelv
     szövegkezeléséről is részletesen beszélhessünk.
 
     A Rust nagy figyelmet fordít a byte szinten előforduló és a nemzetközi szövegek által okozott
-    problémák kezelésére, melyek sokszor figyelmen kívül vannak hagyva más programozási
+    problémák elkerülésére, melyek sokszor figyelmen kívül vannak hagyva más programozási
     nyelvekben. Ezek korrigálására a Rust robusztus eszközökkel rendelkezik.
 - title: Beágyazott szövegek
-  content_markdown: >
+  content_markdown: |
     Az ilyen szövegek mindig Unicode kódolásúak.
 
     A típusuk `&'static str`:
@@ -46,8 +46,7 @@
 
     <span class="emoji">🐠🐙🐟🐬🐋</span>
 - title: Escape-elt karakterek
-  content_markdown: >
-
+  content_markdown: |
     Van pár karakter amit nehéz vizuálisan reprezentálni, ezért ezekre úgynevezett **escape
     code**-okat (kikerülési kódokat) alkalmazunk, amikkel szimbólumokra cserélhetjük ezeket a
     karaktereket.
@@ -77,7 +76,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
 - title: Nyers beágyazott szövegek
-  content_markdown: >
+  content_markdown: |
     Az úgynevezett raw string-ek (nyers szövegek) lehetővé teszik számunkra, hogy a fordító
     bármiféle átalakítás nélkül értelmezze a szövegünk. Egy ilyet a következő módon tudunk
     készíteni:
@@ -89,7 +88,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
 - title: Fájlokból betöltött beágyazott szövegek
-  content_markdown: >
+  content_markdown: |
     Ha egy nagyon nagy szöveget szeretnél a programodban elhelyezni, érdemes lehet az `include_str!`
     macrot alkalmaznod, amivel egy fájl szövegét tudod egy-az-egyben bemásolni egy változóba.
 
@@ -97,7 +96,7 @@
     let 00_html = include_str!("00_en.html");
     ```
 - title: Szöveg szeletek
-  content_markdown: >
+  content_markdown: |
     A string slice (szöveg szelet) egy memóriában lévő, csak érvényes utf-8 értékeket tartalmazó
     bájtszekvenciára mutató referencia.
 
@@ -113,12 +112,12 @@
     * `is_empty` - Igaz, ha `len` == 0.
 
     * `find` - Megpróbálja megkeresni az első előfordulását a megadott paraméternek a szövegben,
-      majd ennek indexével tér vissza egy `Option<usize` képében. Ha nem talál ilyet, a visszatérési
+      majd ennek indexével tér vissza egy `Option<usize>` képében. Ha nem talál ilyet, a visszatérési
       érték None.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
 - title: Char-ok
-  content_markdown: >
+  content_markdown: |
     Mivel az Unicode használata igencsak nehéz, a Rust lehetőséget ad arra, hogy egy utf-8
     bájtszekvenciát `char` típusú vektorként kérjünk le.
 
@@ -126,7 +125,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
 - title: String-ek
-  content_markdown: >
+  content_markdown: |
 
     A **String** egy olyan struct, ami egy kupacmemórián tárolt utf-8 bájtszekvenciát
     birtokol. Mivel a kupacon van tárolva, így a beágyazott szövegekkel ellentétben meg lehet
@@ -161,7 +160,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
 - title: Szövegek formázása
-  content_markdown: >
+  content_markdown: |
     A `format!` macro használatával egy paraméterezett szöveget hozhatunk létre, amiben meg vannak
     hova és milyen módon kell értékeknek kerülnie. Az ilyen "lyukak" elhelyezésére a `{}`-t
     használjuk a szövegben.
@@ -183,7 +182,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
 - title: 6. Fejezet - Konklúzió
-  content_markdown: >
+  content_markdown: |
     Most már ismered a szövegek alapjait! A Unicode miatt kicsit nehézkes a velük való munka, de az
     alapkönyvtár épp ezért sok olyan funkcióval rendelkezik, ami megkönnyíti ezt.
 
