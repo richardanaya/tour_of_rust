@@ -4,23 +4,11 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
   content_markdown: >
-    Welcome to the *Tour of Rust*. This is meant to be a step by
-
-    step guide through the features of the Rust programming language.  Rust is
-    often
-
-    considered a language with a steep learning curve, but I hope I can convince
-    you there's
-
-    a lot to explore before we even get to complex parts.</p><p>You can find
-    this
-
-    guide in these languages:
-
+    Welcome to the *Tour of Rust*. This is meant to be a step by step guide through the features of the Rust programming language.  Rust is often considered a language with a steep learning curve, but I hope I can convince you there's a lot to explore before we even get to complex parts.
+    
+    You can also find this guide in these languages:
 
     * [Deutsch](00_de.html)
-
-    * [English](00_en.html)
 
     * [Español](00_es.html)
 
@@ -40,18 +28,8 @@
 
     * [한국어](00_ko.html)
 
+    If you have suggestions on content or would like to contribute to translations, check out Tour of Rust's [github repository](https://github.com/richardanaya/tour_of_rust).
 
-    If you have suggestions on content
+    You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>
 
-    or would like to contribute to translations, check out Tour of Rust's 
-
-    [github repository](https://github.com/richardanaya/tour_of_rust).
-
-
-    You can navigate through the tour with keyboard <span
-    class="emoji">⬅️</span> and <span class="emoji">➡️</span>
-
-
-    In this classic example we show Rust's support for Unicode
-
-    strings.
+    In this classic example we show Rust's support for Unicode strings.
