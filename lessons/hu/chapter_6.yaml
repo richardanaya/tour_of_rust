@@ -1,0 +1,191 @@
+- title: 6. Fejezet - Szövegek
+  content_markdown: |
+    Most hogy értjük, hogy kezeli a Rust a memóriát, készen állunk arra, hogy a nyelv
+    szövegkezeléséről is részletesen beszélhessünk.
+
+    A Rust nagy figyelmet fordít a byte szinten előforduló és a nemzetközi szövegek által okozott
+    problémák elkerülésére, melyek sokszor figyelmen kívül vannak hagyva más programozási
+    nyelvekben. Ezek korrigálására a Rust robusztus eszközökkel rendelkezik.
+- title: Beágyazott szövegek
+  content_markdown: |
+    Az ilyen szövegek mindig Unicode kódolásúak.
+
+    A típusuk `&'static str`:
+
+    * A `&` azt jelöli, hogy egy memóriában található helyre mutatunk, a `mut` hiánya pedig, hogy ez
+      egy megváltoztathatatlan érték.
+
+    * A `'static` jelöli, hogy a szöveg a program futásának egésze alatt elérhető számunkra (sose
+      drop-ol).
+
+    * Az `str` pedig azt jelenti, hogy ez az érték egy olyan bájt-szekvencia, ami mindig érvényes
+      **utf-8** bájtokat tartalmaz.
+
+    Hogyan érinti ez a memóriát:
+
+    * A fordító az ilyen szövegeket majdnem mindig az adatmemóriába fogja helyezni.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: Mi is az az utf-8?
+  content_markdown: |
+    Ahogy egyre több nyelvet kezdtünk használni a számítógépeken, hirtelen szükségessé vált, hogy több
+    karaktert tudjunk reprezentálni, mint arra az ASCII képes volt (mely 1 byteon tárolt a
+    karaktereket, így összesen 256 különböző betűt megengedve).
+
+    Az **utf-8** egy új formátum, ami 1-4 bájt közötti hosszal rendelkezik karakterenként, ezzel
+    lényegesen megnövelve, hány karaktert is képes reprezentálni. Mivel a gyakori, ASCII-ban is
+    előforduló karakterek itt is egy bájton vannak reprezentálva, ezért a kódolás ne pazarolja a
+    helyet fölöslegesen. Ugyanakkor, a változó hossz iatt így már nem lehet egyszerűen lekérni a
+    szöveg egyes karaktereit (O(1) időben) azzal, hogy a szövegbe indexelünk (pl.: `szövegem[3]`),
+    hisz könnyen meglehet, hogy mindegyik bájt más hosszúságú, így az indexelt karakter lehet nem is
+    ott van, ahol a program keresné. Ehelyett a megoldás az, hogy végigiterálunk a szövegen, amíg a
+    keresett karaktert el nem érjük (O(n) időben.
+
+    Ferris: "Csak örülni tudok, hogy az **utf-8** segítségével a víz alatti barátaim képei
+    megjelenhetnek!"
+
+    <span class="emoji">🐠🐙🐟🐬🐋</span>
+- title: Escape-elt karakterek
+  content_markdown: |
+    Van pár karakter amit nehéz vizuálisan reprezentálni, ezért ezekre úgynevezett **escape
+    code**-okat (kikerülési kódokat) alkalmazunk, amikkel szimbólumokra cserélhetjük ezeket a
+    karaktereket.
+
+    A Rust a már C-ben is megszokott escape code-okat támogatja:
+
+    * `\n` - újsor
+
+    * `\r` - kurzor a sor elejére
+
+    * `\t` - tab
+
+    * `\\` - rep-jel / visszaper
+
+    * `\0` - null karakter
+
+    * `\'` - aposztrof
+
+    Az ilyen szimbólumok teljes listáját [itt](https://doc.rust-lang.org/reference/tokens.html) találod angolul.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+- title: Többsoros beágyazott szövegek
+  content_markdown: |
+    A Rust nyelv szövegei alapból többsorosak.
+
+    Ha szükséges egy `\` jelet tehetsz a sor végére, mely esetén nem kerül sortörés a szövegbe.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
+- title: Nyers beágyazott szövegek
+  content_markdown: |
+    Az úgynevezett raw string-ek (nyers szövegek) lehetővé teszik számunkra, hogy a fordító
+    bármiféle átalakítás nélkül értelmezze a szövegünk. Egy ilyet a következő módon tudunk
+    készíteni:
+
+    `r#"Ide jön a szöveg"#`
+
+    Ezt használva bátran írhatunk olyan karaktereket és szimbólumokat, amiknek egyéb esetben más
+    jelentése vagy hatása volna, mint például az idézőjelek vagy az előbb említett escape code-ok.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: Fájlokból betöltött beágyazott szövegek
+  content_markdown: |
+    Ha egy nagyon nagy szöveget szeretnél a programodban elhelyezni, érdemes lehet az `include_str!`
+    macrot alkalmaznod, amivel egy fájl szövegét tudod egy-az-egyben bemásolni egy változóba.
+
+    ```rust
+    let 00_html = include_str!("00_en.html");
+    ```
+- title: Szöveg szeletek
+  content_markdown: |
+    A string slice (szöveg szelet) egy memóriában lévő, csak érvényes utf-8 értékeket tartalmazó
+    bájtszekvenciára mutató referencia.
+
+    Egy `str`-ből készült slice-nál is teljesülnie kell ezeknek a feltételeknek.
+
+    A `&str` gyakran használt metódusai:
+
+    * `len` - A szöveg hosszát adja meg bájtokban (**nem** azt, hogy hány karakter van benne!)
+
+    * `starts_with`/`ends_with` - Ellenőrizni lehet velük, hogy a szöveg egy bizonyos módon kezdődik
+      vagy végződik-e.
+
+    * `is_empty` - Igaz, ha `len` == 0.
+
+    * `find` - Megpróbálja megkeresni az első előfordulását a megadott paraméternek a szövegben,
+      majd ennek indexével tér vissza egy `Option<usize>` képében. Ha nem talál ilyet, a visszatérési
+      érték None.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+- title: Char-ok
+  content_markdown: |
+    Mivel az Unicode használata igencsak nehéz, a Rust lehetőséget ad arra, hogy egy utf-8
+    bájtszekvenciát `char` típusú vektorként kérjünk le.
+
+    Az ilyen `char`-ok mindig 4 bájtosak, így a belőlük összeállított vektorba könnyű indexelni.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: String-ek
+  content_markdown: |
+
+    A **String** egy olyan struct, ami egy kupacmemórián tárolt utf-8 bájtszekvenciát
+    birtokol. Mivel a kupacon van tárolva, így a beágyazott szövegekkel ellentétben meg lehet
+    hosszabbítani, át lehet alakítani, stb.
+
+    Gyakran használt metódusok:
+
+    * `push_str` - A szöveg végéhez illeszti a paraméterként átadott utf-8 bájtokat.
+
+    * `replace` - Kicserél egy megadott utf-8 szekvenciát egy másikra.
+
+    * `to_lowercase`/`to_uppercase` - Kisbetűssé vagy nagybetűssé alakítja a szöveget.
+
+    * `trim` - A szöveg végi helykihagyásokat (space, tab) vágja le.
+
+    Amikor a String drop-ol, az általa birtokolt memória is felszabadításra kerül.
+
+    Bár a String rendelkezik a `+` operátorral, ami egy `&str`-t illeszt a végére majd visszaadja az
+    újonnan meghosszabbodott szöveget, de ez sajnos sokkal kevésbé ergonomikus, mint az elsőre
+    tűnhet.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+- title: Szöveg mint funkció-paraméter
+  content_markdown: >
+    A beágyazott és egyéb szövegek általában szeletek formájában kerülnek átadásra a
+    függvényeknek. Ez nagy rugalmasságot biztosít anélkül, hogy a szöveg birtoklását át kéne adni.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+- title: Szövegek építése
+  content_markdown: |
+    A `concat` és `join` két egyszerű, de erőteljes módszer arra, hogy szövegeket építsünk.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
+- title: Szövegek formázása
+  content_markdown: |
+    A `format!` macro használatával egy paraméterezett szöveget hozhatunk létre, amiben meg vannak
+    hova és milyen módon kell értékeknek kerülnie. Az ilyen "lyukak" elhelyezésére a `{}`-t
+    használjuk a szövegben.
+
+    A `format!` ugyanúgy használja a paraméterezett szövegeket, mint a már megszokott `println!`.
+
+    Ez a függvény túlságosan sokat tud ahhoz, hogy a *Rust-túra* keretei között ennél jobban
+    átnézzük, de érdemes átolvasni az [angol nyelvű dokumentációt](https://doc.rust-lang.org/std/fmt/)
+    a témával kapcsolatban.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+- title: Szövegek átalakítása
+  content_markdown: |
+    Sokféle típus átalakítható szöveggé a `to_string` metódus segítségével.
+
+    A generikus `parse` függvény pedig a szövegeket alakítja más típusú értékekké
+    (pl. számokká). Ennek a visszatérési értéke egy `Result`, mivel ha átalakíthatatlan értékre
+    hívjuk meg, hibát dobhat.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: 6. Fejezet - Konklúzió
+  content_markdown: |
+    Most már ismered a szövegek alapjait! A Unicode miatt kicsit nehézkes a velük való munka, de az
+    alapkönyvtár épp ezért sok olyan funkcióval rendelkezik, ami megkönnyíti ezt.
+
+    Egészen eddig a Rust nyelv a procedúrális paradigmához releváns részeivel foglalkoztunk csak
+    (tehát, hogy mit tudnak a függvények meg az adatok), de épp ideje, hogy beszéljünk a
+    tulajdonságokról és a Rust objektum-orientált paradigmája által nyújtott lehetőségekről.
