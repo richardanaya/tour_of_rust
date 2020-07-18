@@ -1,0 +1,153 @@
+- title: 第五章 - 所有权和数据借用
+  content_markdown: >
+    相较于其他编程语言，Rust 具有一套独特的内存管理范例。为了不让您被概念性的东西所淹没，我们将一一展示这些编译器的行为和验证方式。
+    有一点很重要：所有这些规则的终极目的不是为了为难您，而是为了更好地降低的代码出错率！
+- title: 所有权
+  content_markdown: >
+    实例化一个类型并且将其**绑定**到变量名上将会创建一些内存资源，而这些内存资源将会在其整个**生命周期**中被 Rust 编译器检验。
+    被绑定的变量即为该资源的**所有者**。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%99%E4%B8%AA%E7%BB%93%E6%9E%84%E4%BD%93%E5%B9%B6%E5%B0%86%E5%85%B6%E7%BB%91%E5%AE%9A%E5%88%B0%E5%85%B7%E4%BD%93%E7%9A%84%E5%8F%98%E9%87%8F%E4%B8%8A%0A%20%20%20%20%2F%2F%20%E6%9D%A5%E5%88%9B%E5%BB%BA%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%E5%8D%B3%E4%B8%BA%E8%AF%A5%E8%B5%84%E6%BA%90%E7%9A%84%E6%89%80%E6%9C%89%E8%80%85%0A%7D%0A
+- title: 基于域的资源管理
+  content_markdown: >
+    Rust 将使用资源最后被使用的位置或者一个函数域的结束来作为资源被析构和释放的地方。
+    此处析构和释放的概念被称之为 **drop**。
+
+
+    内存细节：
+
+    * Rust 没有垃圾回收机制。
+
+    * 在 C++ 中，这被也称为“资源获取即初始化“（RAII）。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20%2F%2F%20foo_a%20%E5%B0%86%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E5%9B%A0%E4%B8%BA%E5%85%B6%E5%9C%A8%E8%BF%99%E4%B9%8B%E5%90%8E%E5%86%8D%E4%B9%9F%E6%B2%A1%E6%9C%89%E8%A2%AB%E4%BD%BF%E7%94%A8%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20%E5%B0%86%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E5%9B%A0%E4%B8%BA%E8%BF%99%E6%98%AF%E5%87%BD%E6%95%B0%E5%9F%9F%E7%9A%84%E7%BB%93%E5%B0%BE%0A%7D%0A
+- title: 释放是分级进行的
+  content_markdown: >
+    删除一个结构体时，结构体本身会先被释放，紧接着才分别释放相应的子结构体并以此类推。
+
+
+    内存细节：
+
+    * Rust 通过自动释放内存来帮助确保减少内存泄漏。
+
+    * 每个内存资源仅会被释放一次。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20%E9%A6%96%E5%85%88%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%20%20%20%20%2F%2F%20%E7%B4%A7%E6%8E%A5%E7%9D%80%E6%98%AF%20foo.bar%0A%7D%0A
+- title: 移交所有权
+  content_markdown: >
+    将所有者作为参数传递给函数时，其所有权将移交至该函数的参数。
+    在一次**移动**后，原函数中的变量将无法再被使用。
+
+
+    内存细节:
+
+    * 在**移动**期间，所有者的堆栈值将会被复制到函数调用的参数堆栈中。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%E8%A2%AB%E7%A7%BB%E4%BA%A4%E8%87%B3%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20%E6%AD%A4%E5%90%8E%20foo%20%E4%BE%BF%E6%97%A0%E6%B3%95%E5%86%8D%E8%A2%AB%E4%BD%BF%E7%94%A8%0A%7D%0A
+- title: 归还所有权
+  content_markdown: |
+    所有权也可以从一个函数中被归还。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20%E6%89%80%E6%9C%89%E6%9D%83%E8%A2%AB%E7%A7%BB%E5%87%BA%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20%E6%88%90%E4%B8%BA%E4%BA%86%E6%89%80%E6%9C%89%E8%80%85%0A%20%20%20%20%2F%2F%20foo%20%E5%9C%A8%E5%87%BD%E6%95%B0%E5%9F%9F%E7%BB%93%E5%B0%BE%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A
+- title: 使用引用借用所有权
+  content_markdown: |
+    引用允许我们通过 `&` 操作符来借用对一个资源的访问权限。
+    引用也会如同其他资源一样被释放。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%20%20%20%20%2F%2F%20foo%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A
+- title: 通过引用借用可变所有权
+  content_markdown: >
+    我们也可以使用 `&mut` 操作符来借用对一个资源的可变访问权限。
+    在发生了可变借用后，一个资源的所有者便不可以再次被借用或者修改。
+
+
+    内存细节：
+
+    * Rust 之所以要避免同时存在两种可以改变所拥有变量值的方式，是因为此举可能会导致潜在的数据争用（data race）。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20%E6%93%8D%E4%BD%9C%E5%A4%B1%E8%B4%A5%3A%20do_something(foo)%20%E5%B0%86%E4%BC%9A%E5%9B%A0%E4%B8%BA%20foo%20%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%8F%AF%E5%8F%98%E5%80%9F%E7%94%A8%E8%80%8C%E6%97%A0%E6%B3%95%E5%8F%96%E5%BE%97%E5%85%B6%E6%89%80%E6%9C%89%E6%9D%83%0A%0A%20%20%20%20%2F%2F%20%E6%93%8D%E4%BD%9C%E5%A4%B1%E8%B4%A5%3A%20foo.x%20%3D%2013%3B%20%E5%B0%86%E4%BC%9A%E5%9B%A0%E4%B8%BA%20foo%20%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%8F%AF%E5%8F%98%E5%80%9F%E7%94%A8%E8%80%8C%E6%97%A0%E6%B3%95%E8%A2%AB%E4%BF%AE%E6%94%B9%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20%E4%BC%9A%E5%9B%A0%E4%B8%BA%E6%AD%A4%E5%90%8E%E4%B8%8D%E5%86%8D%E8%A2%AB%E4%BD%BF%E7%94%A8%E8%80%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%E7%8E%B0%E5%9C%A8%E4%BF%AE%E6%94%B9%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E8%BF%9B%E8%A1%8C%E5%9B%A0%E4%B8%BA%E5%85%B6%E6%89%80%E6%9C%89%E5%8F%AF%E5%8F%98%E5%BC%95%E7%94%A8%E5%B7%B2%E7%BB%8F%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%E7%A7%BB%E5%8A%A8%20foo%20%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%83%E5%88%B0%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E4%B8%AD%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: 解引用
+  content_markdown: >
+    使用 `&mut` 引用时, 你可以通过 `*` 操作符来修改其指向的值。
+    你也可以使用 `*` 操作符来对所拥有的值进行拷贝（前提是该值可以被拷贝——我们将会在后续章节中讨论可拷贝类型）。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20%E5%8F%96%E5%BE%97%E6%89%80%E6%9C%89%E8%80%85%E5%80%BC%E7%9A%84%E6%8B%B7%E8%B4%9D%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20%E8%AE%BE%E7%BD%AE%E5%BC%95%E7%94%A8%E6%89%80%E6%9C%89%E8%80%85%E7%9A%84%E5%80%BC%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: 传递借用的数据
+  content_markdown: >
+    Rust 对于引用的规则也许最好用以下的方式总结：
+
+    * Rust 只允许同时存在一个可变引用**或者**多个不可变引用，**不允许两种情况同时存在**。
+
+    * 一个引用永远也不会比它的所有者存活得更久。
+
+
+    而在函数间进行引用的传递时，以上这些通常都不会成为问题。
+
+
+    内存细节：
+
+    * 上面的第一条规则避免了数据争用的出现。什么是数据争用？在对数据进行读取的时候，数据争用可能会因为同时存在对数据的写入而产生不同步。这一点往往会出现在多线程编程中。
+
+    * 而第二条引用规则则避免了通过引用而错误的访问到不存在的数据（在 C 语言中被称之为悬垂指针）。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20%E5%8F%AF%E5%8F%98%E5%BC%95%E7%94%A8%20f%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20%E5%9B%A0%E4%B8%BA%E6%89%80%E6%9C%89%E7%9A%84%E5%8F%AF%E5%8F%98%E5%BC%95%E7%94%A8%E9%83%BD%E5%9C%A8%20do_something%20%E5%87%BD%E6%95%B0%E5%86%85%E9%83%A8%E8%A2%AB%E9%87%8A%E6%94%BE%E4%BA%86%0A%20%20%20%20%2F%2F%20%E6%AD%A4%E6%97%B6%E6%88%91%E4%BB%AC%E4%BE%BF%E5%8F%AF%E4%BB%A5%E5%86%8D%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A
+- title: 引用的引用
+  content_markdown: |
+    引用甚至也可以用在其他引用上。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%E4%BB%8E%E8%80%8C%E5%85%81%E8%AE%B8%E6%88%91%E4%BB%AC%E5%86%8D%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%BC%95%E7%94%A8%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%20%20%20%20%2F%2F%20foo%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A
+- title: 显式生命周期
+  content_markdown: >
+    尽管 Rust 不总是在代码中将它展示出来，但编译器会理解每一个变量的生命周期并进行验证以确保一个引用不会有长于其所有者的存在时间。
+    同时，函数可以通过使用一些符号来参数化函数签名，以帮助界定哪些参数和返回值共享同一生命周期。
+    生命周期注解总是以 `'` 开头，例如 `'a`，`'b` 以及 `'c`。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20%E5%8F%82%E6%95%B0%20foo%20%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC%E5%85%B1%E4%BA%AB%E5%90%8C%E4%B8%80%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%0Afn%20do_something%3C'a%3E(foo%3A%20%26'a%20Foo)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%E4%BB%8E%E8%80%8C%E5%85%81%E8%AE%B8%E6%88%91%E4%BB%AC%E5%86%8D%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%BC%95%E7%94%A8%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%20%20%20%20%2F%2F%20foo%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A
+- title: 多个生命周期
+  content_markdown: >
+    生命周期注解可以通过区分函数签名中不同部分的生命周期，来允许我们显式地明确某些编译器靠自己无法解决的场景。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC%E5%85%B1%E4%BA%AB%E5%90%8C%E4%B8%80%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%0A%2F%2F%20foo_a%20%E5%88%99%E6%8B%A5%E6%9C%89%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%8D%E7%9B%B8%E5%85%B3%E8%81%94%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%E5%9B%A0%E4%B8%BA%E5%8F%AA%E6%9C%89%20foo_b%20%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9C%A8%E6%AD%A4%E4%B9%8B%E5%90%8E%E8%BF%98%E5%9C%A8%E5%BB%B6%E7%BB%AD%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20x%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%20%20%20%20%2F%2F%20foo_b%20%E5%9C%A8%E8%BF%99%E9%87%8C%E8%A2%AB%20dropped%20%E9%87%8A%E6%94%BE%0A%7D%0A
+- title: 静态生命周期
+  content_markdown: >
+    一个**静态**变量是一个在编译期间即被创建并存在于整个程序始末的内存资源。他们必须被明确指定类型。
+    一个**静态生命周期**是指一段内存资源无限期地延续到程序结束。需要注意的一点是，在此定义之下，一些静态生命周期的资源也可以在运行时被创建。
+    拥有静态生命周期的资源会拥有一个特殊的生命周期注解 `'static`。
+    `'static` 资源永远也不会被 **drop** 释放。
+    如果静态生命周期资源包含了引用，那么这些引用的生命周期也一定是 `'static` 的。（任何缺少了此注解的引用都不会达到同样长的存活时间）
+
+
+    内存细节：
+
+    * 因为静态变量可以全局性地被任何人访问读取而潜在地引入数据争用，所以修改它具有内在的危险性。我们会在稍后讨论使用全局数据的一些挑战。
+
+    * Rust 允许使用 `unsafe { ... }` 代码块来进行一些无法被编译器担保的内存操作。The [<span
+    style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)（常见的中文翻译为：Rust 死灵书）在讨论时应该被严肃地看待，
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E8%8C%83%E5%9B%B4%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%A2%AB%E9%99%90%E5%88%B6%E5%9C%A8%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E5%86%85%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E5%80%BC%E6%8B%A5%E6%9C%89%20'static%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20%E4%BD%A0%E5%8F%AF%E4%BB%A5%E6%89%93%E7%A0%B4%E4%B8%80%E4%BA%9B%E8%A7%84%E5%88%99%EF%BC%8C%E4%BD%86%E6%98%AF%E5%BF%85%E9%A1%BB%E6%98%AF%E6%98%BE%E5%BC%8F%E5%9C%B0%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9%20SECRET%20%E5%88%B0%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E5%80%BC%E5%9B%A0%E4%B8%BA%E5%85%B6%E5%90%8C%E6%A0%B7%E6%98%AF%20'static%20%E7%9A%84%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: 数据类型中的生命周期
+  content_markdown: >
+    和函数相同，数据类型也可以用生命周期注解来参数化其成员。
+    Rust 会验证引用所包含的数据结构永远也不会比引用指向的所有者存活周期更长。
+    我们不能在运行中拥有一个包括指向虚无的引用结构存在！
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: 第五章 - 总结
+  content_markdown: >
+    哇，恭喜您成功走完了本章！我知道这下可能会有很多需要吸收的东西，但是您已经在成为一名 Rustacean 的路上走得很好了。希望您能愈发清晰地认识到 Rust 是如何致力于解决系统编程中的诸多常见挑战：
+
+    * 无意间对资源的修改
+
+    * 忘记及时地释放资源
+
+    * 资源意外地被释放两次
+
+    * 在资源被释放后使用了它
+
+    * 由于读取数据的同时有其他人正在向资源中写入数据而引起的数据争用
+
+    * 在编译器无法做担保时，清晰看到代码的作用域
+
+
+    在下一章中，我们会研究一些 Rust 如何处理文本的相关知识。
