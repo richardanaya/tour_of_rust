@@ -1,43 +1,16 @@
 - title: 'Olá, WebAssembly'
   content_markdown: >
-    Bem-vindo ao *Tour por WebAssembly*. Pretendemos ser uma introdução a esta
-    tecnologia e de
-
-    como o Rust pode ser usado para dar mais força à web. Se você é
-    completamente novo no Rust pode
-
-    apreciar o [Tour por Rust](https://tourofrust.com/)! A maioria dos nossos
-    exemplos será fácil
-
-    o suficiente para qualquer pessoa acompanhar. Este tour também está
-    disponível para a
-
-    linguagem C.
-
+    Bem-vindo ao *Tour por WebAssembly*. Pretendemos ser uma introdução a esta tecnologia e de como o Rust pode ser usado para dar mais força à web. Se você é completamente novo no Rust pode apreciar o [Tour por Rust](https://tourofrust.com/)! A maioria dos nossos exemplos será fácil o suficiente para qualquer pessoa acompanhar. Este tour também está disponível para a linguagem C.
 
     * [Rust (english)] (index.html)
-
     * [Rust (français)] (index_fr.html)
-
     * [Rust (Interlingue)] (index_ie.html)
-
     * [Rust (Português Brasileiro)] (index_pt-br.html)
-
     * [Rust (Español)] (index_es.html)
-
     * [Rust (日本語)] (index_ja.html)
-
     * [C (english)] (index_en_c.html)
-
     * [C (français)] (index_fr_c.html)
 
+    Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com as traduções, veja o repositório do Tour do WebAssembly [github repository](https://github.com/richardanaya/tour_of_rust).
 
-    Caso tenha alguma sugestão a respeito do conteúdo ou queira contribuir com
-    as
-
-    traduções, veja o repositório do Tour do WebAssembly [github
-    repository](https://github.com/richardanaya/tour_of_rust).
-
-
-    Você pode navegar pelo tour usando <span class="emoji">⬅️</span> e <span
-    class="emoji">➡️</span>
+    Você pode navegar pelo tour usando <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>
