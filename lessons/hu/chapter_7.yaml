@@ -12,20 +12,19 @@
 
     * Betokozás - Mind az adatok, mind a függvények egy egységes típusba az *objektum*-ba való
       tömörítése.
-
     * Absztrakció - A nem-releváns adattagok és függvények elrejtése, mellyel az implementáció
       részleteit nem tárjuk fölöslegesen a programozó elé.
-
     * Polimorfizmus - Annak a módja, hogy egy függvényt sokféle módon implementálhassunk, így
       különböző esetekre mindig a megfelelő verziót használhassuk.
-
     * Öröklés - Annak a lehetősége, hogy más objektumokból adatokat és viselkedést örökölhessünk.
 - title: A Rust nem OOP
   content_markdown: >
     A Rust nyelvből hiányzik az adatok és viselkedés öröklése. Tehát:
 
     * A struct-ok nem képesek mezőket örökölni az őket szülő struct-ból.
+
     * Ugyanígy függvényeket se képesek átvenni.
+
 
     Ennek ellenére, a Rust elég sok más nyelvekben megszokott képességgel rendelkezik, így ezek a
     limitációk talán nem is fognak annyira hiányozni, mint gondolod.
@@ -34,7 +33,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
   content_markdown: >
     A Rust támogatja az *objektumok*-at, ami egy olyan struct-ot jelent, ami függvényekkel
-    rendelkezik (más néven *metódusokkal*).
+    rendelkezik (vagyis metódusokkal).
 
     Minden metódus első paraméterének az azt meghívó példánynak kell lennie (tehát:
     `objektumPeldany.foo()`). A Rust a következő jelöléseket használja:
@@ -73,10 +72,12 @@
     Először is meghatározzuk, hogy is néz ki a trait és az általa nyújtott metódusok paraméterei:
 
     ```
+
     trait MyTrait {
         fn foo(&self);
         ...
     }
+
     ```
 
     A trait-ek megvalósítását úgy is felfoghatjuk, mint egy "szerződés," ami kimondja, hogy a
@@ -86,12 +87,14 @@
     A struct-ok előírt metódusait szintén egy implementációs blokkon belül írhatjuk meg:
 
     ```rust
+
     impl MyTrait for MyStruct { 
         fn foo(&self) {
             ...
         }
         ... 
     }
+
     ```
 - title: Trait-ek által megvalósított metódusok
   code: >-
@@ -114,7 +117,6 @@
 
     * statikus meghívás - Tudjuk mi a típus, így pontosan tudjuk azt is, melyik függvény kerül
       meghívásra.
-
     * dinamikus meghívás - Nem tudjuk mi a típus, így először meg kell találnunk melyik függvénynek
       is kell meghívásra kerülnie.
 
@@ -137,6 +139,7 @@
     objektum nem más, mint egy struct, ami egy listára mutat, ami a példány metódusaira mutató
     referenciákat tartalmazza.
 
+
     Hogyan érinti ez a memóriát:
 
     * Az ilyen függvényeket tartalmazó listát a C++ nyelvben *vtable*-nek nevezzük.
@@ -148,10 +151,9 @@
 
     Az ilyen ismeretlen méretű értékek tárolását a Rust kétféleképp oldja meg:
 
-    * generikus értékek használatával - A paraméterezett típusok segítségével egyszerűen tudunk
+    * `generikus értékek használatával` - A paraméterezett típusok segítségével egyszerűen tudunk
       ismert méretű struct-okat és függvényeket létrehozni.
-
-    * indirekt tárolás - Ha a példányokat a kupacon tároljuk, az lehetővé teszi számunkra, hogy ne
+    * `indirekt tárolás` - Ha a példányokat a kupacon tároljuk, az lehetővé teszi számunkra, hogy ne
       törődjunk magával az adat méretével, csak a rámutató pointer-ével.
 
     Ezen kívül még vannak módszerek, de ebben az útmutatóban nem kerül szó róluk.
@@ -187,19 +189,23 @@
     Az előzőleg tárgyalt generikus függvényeket rövidebb módon is le lehet írni:
 
     ```rust
+
     fn my_function(foo: impl Foo) {
         ...
     }
+
     ```
-    Ez ugyanazt a hatást váltja ki, mintha a következőt írnánk:
+    Ez ugyanazt teszi, mintha a következőt írnánk:
 
     ```rust
+
     fn my_function<T>(foo: T)
     where
         T:Foo
     {
         ...
     }
+      
     ```
 - title: Box - Doboz
   code: >-
@@ -208,16 +214,20 @@
     A `Box` vagyis Doboz olyan adatstruktúra, aminek segítségével egy értéket a veremből a kupacra
     helyezhetünk.
 
-    A `Box` valójában nem más mint egy *smart pointer* ("okos mutató"-nak) nevezett struct, ami a
-    kupacon elhelyezett adatainkra mutat.
 
-    Mivel a `Box` egy ismert méretű struct (a pointer-eknek meghatározott mérete van) így általában
-    olyan structokban használjuk más adatra való mutatáshoz, aminek ismert méretűnek kell lennie.
+    A adatstruktúra valójában nem más mint egy *smart pointer* ("okos mutató"-nak) nevezett struct,
+    ami a kupacon elhelyezett adatainkra mutat. Mivel ennek a mérete ismert (a pointer-ek mérete
+    meghatározott), így általában olyan más adatokra is mutató structokban használjuk, ahol fontos
+    az előre meghatározott méret.
+
 
     A `Box` olyan gyakori, hogy bárhol használhatjuk:
 
+
     ```rust
+
     Box::new(Foo { ... })
+
     ```
 - title: Visszatekintés a generikus struct-okra
   content_markdown: >
