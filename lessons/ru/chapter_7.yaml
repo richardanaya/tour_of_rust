@@ -152,33 +152,31 @@
     Детали для запоминания:
 
     * Этот список функций известен в языке C++ как *vtable* (таблица виртуальных методов).
-- title: Обработка Handling Unsized Data
+- title: Обработка не размерных данных (Unsized Data)
   content_markdown: >
-    Traits introduce an interesting challenge when we want to store them within
-    another struct. Traits obfuscate the original
+    Типажи представляют интересную проблему, когда мы хотим сохранить их в другой структуре.
+    Типажи обфусцируют (obfuscate - запутывает) оригинальную структуру,
 
-    struct thus it also obfuscates the original size. Unsized values being
-    stored in structs are handled in two ways in Rust:
+    таким образом это также запутывает ее оригинальный размер.
+    Не размерные значения, хранящиеся в структурах, обрабатываются в Rust двумя способами:
 
 
-    * `generics` - Using parameterized types effectively create struct/functions
-    known types and thus known sizes.
+    * `generics` (обобщенные типы) - Использование обощенных типов эффективно создает структуру/функции
+    известных типов и, следовательно, известных размеров
 
-    * `indirection` - Putting instances on the heap gives us a level of
-    indirection that allow us to not have to worry about the size of the actual
-    type and just store a pointer to it. There are other ways as well!
-- title: Generic Functions
+    * `indirection` (косвенность) - Размещение экземпляров класса в куче дает нам уровень косвенности,
+    который позволяет нам не беспокоиться о размере фактического типа и просто хранить указатель на него.
+    Есть и другие способы
+- title: Обобщенные функции (Generic Functions)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: >
-    Generics in Rust work hand in hand with traits. When we describe a
-    parameterized type `T` we can constrain what types 
-
-    can be used as an argument by listing what required traits the argument must
-    implement.
+    Обобщенные типы (generics) в Rust работают рука об руку с типажами.
+    Когда мы описываем обобщенный тип `T`, мы можем ограничить, какие типы можно использовать в качестве аргумента,
+    перечисляя какие обязательные типажи должен реализовывать данный обобщенный аргумент.
 
 
-    In this example type `T` must implement trait `Foo`:
+    В данном примере тип `T` должен реализовывать типаж `Foo`:
 
     ```rust
 
@@ -193,15 +191,14 @@
     ```
 
 
-    By using generics we create static typed functions at compile time that will
-    have known types and sizes, allowing us to
-
-    perform static dispatch and store as a sized value.
-- title: Generic Function Shorthand
+    Используя обобщенный тип (generics), мы создаем статические типизированные функции во время компиляции,
+    которые будут иметь известные типы и размер, что позволяет нам выполнять статическую диспетчеризацию вызова
+    и сохранять (функцию) в виде значения известного размера.
+- title: Сокращение в обобщенной функции (Generic Function Shorthand)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: |
-    Rust has a shorthand for expressing generics constrained by a trait:
+    В Rust есть сокращение для записи факта того, что обобщенный тип ограничен каким-то типажом:
 
     ```rust
     fn my_function(foo: impl Foo) {
@@ -209,7 +206,7 @@
     }
     ```
 
-    This is equivalent to writing:
+    Что эквивалентно записи:
 
     ```rust
     fn my_function<T>(foo: T)
@@ -219,28 +216,23 @@
         ...
     }
     ```
-- title: Box
+- title: Тип умного указателя Box
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
   content_markdown: >
-    `Box` is a data structure that allows us to move our data from the stack to
-    the heap.
+    `Box` - это структура данных, которая позволяет нам размешать, перемещать наши данные из стека в кучу.
 
 
-    `Box` is a struct known as a *smart pointer* that holds the pointer to our
-    data on the heap.
+    `Box` - это структура, известная как *smart pointer* (умный указатель), который содержит указатель на наши данные
+    хранящиеся в куче.
 
 
-    Because `Box` is a struct with a known size (because it just holds a
-    pointer), it is 
-
-    often used as a way to store a reference to something in a struct that must
-    know the size 
-
-    of its fields.
+    Поскольку `Box` является структурой с известным размером (поскольку он просто содержит указатель),
+    то он часто используется как способ хранения ссылки на что-то в структуре, которая должна иметь
+    известные размеры ее полей.
 
 
-    `Box` is so common it can be used from anywhere:
+    Тип `Box` является настолько общим, что может использоваться почти в любом месте:
 
 
     ```rust
@@ -248,10 +240,9 @@
     Box::new(Foo { ... })
 
     ```
-- title: Generic Structs Revisited
+- title: Обощенные структуры снова (Generic Structs Revisited)
   content_markdown: >
-    Generic structs can also have their parameterized types constrained by
-    traits.
+    Обобщенные структуры также могут иметь свои обобщенные, параметризованные типы, ограниченные типажами.
 
 
     ```rust
@@ -268,8 +259,7 @@
     ```
 
 
-    Generic structs have their parameterized type in their implementation
-    blocks:
+    Обобщенная структура имеет обобщенный, параметризованный тип в блоке реализации:
 
 
     ```rust
@@ -279,22 +269,18 @@
     }
 
     ```
-- title: Chapter 7 - Conclusion
+- title: Глава 7 - Заключение
   content_markdown: >
-    We now have more language features at hand to represent our ideas clearly! 
+    Теперь у нас есть больше языковых возможностей для ясного представления наших идей!
 
-    Rust abstractions might be simple but they are powerful enough to make
+    Абстракции Rust могут быть простыми, но они достаточно мощные, чтобы сделать работу с кодом приятной.
 
-    working with code a joy. In this chapter, we caught a glimpse of smart
-    pointers
-
-    with `Box`. In the next chapter we'll learn about how smart pointers can
-    help us with other
-
-    specialized memory situations.
+    В этой главе мы увидели умные указатели `Box`. В следующей главе вы изучите о том, как
+    умные указатели могут помочь нам в других специализированных ситуациях работы с памятью.
 
 
-    Resources:
+
+    Ресурсы для изучения на английском:
 
     * [Video - Object-oriented Programming in 7
     minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
