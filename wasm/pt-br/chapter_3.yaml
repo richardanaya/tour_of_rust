@@ -1,0 +1,163 @@
+- title: Capítulo 3 - Invocação Dinâmica
+  content_markdown: >
+    Neste capítulo falaremos sobre como podemos criar nossas próprias funções dinâmicas em tempo de execução para chamar do WebAssembly.
+- title: Por Que Invocação Dinâmica?
+  content_markdown: >
+    Vimos nos primeiros capítulos que poderíamos facilmente escrever as nossas próprias funções JavaScript manualmente em nossos arquivos `.js`, então por que criar funções dinamicamente?
+
+    * A maioria das pessoas vem ao WebAssembly para escapar do JavaScript. A criação dinâmica de funções no JavaScript nos permite usar bibliotecas em nossa linguagem nativa que fazem a parte mais difícil de criar dinamicamente suas ligações sem que todos tenham que reinventar a roda.
+    * Simplifica nossa configuração e inicialização do módulo WebAssembly ao mínimo. Precisamos apenas da capacidade de registrar novas funções e chamar essas novas funções em vez de especificar uma ladainha de funções JavaScript escritas à mão.
+    * É difícil para o JavaScript saber de quais dependências seu módulo precisa, ao permitir que o programa WebAssembly crie suas próprias funções, ele cria apenas exatamente o que precisa.
+- title: Registro Revisitado
+  content_markdown: >
+    Em nosso primeiro capítulo, escrevemos manualmente nossas funções de log para fazer o registro com o `console.log`. Vamos considerar como faríamos isso dinamicamente.
+
+    * Precisamos de alguma maneira de registrar uma função em tempo de execução.
+    * Precisamos de alguma maneira de chamar essa função.
+    * Precisamos de alguma maneira para que essa função dinâmica tenha acesso à memória (por exemplo, para extrair bytes utf-8).
+- title: Registrando Funções
+  content_markdown: >
+    Para registrar uma função precisamos de duas coisas:
+
+    * Precisamos passar o corpo da função que queremos criar no JavaScript como uma string.
+    * Precisamos recuperar um identificador para podermos chamar essa função posteriormente com parâmetros.
+
+    ```rust
+    register_function(js:&str) -> usize
+    ``` 
+
+    Como o WebAssembly só pode passar e receber números e como todos os números em JavaScript são floats de 64 bits, a aparência final será de uma função importada:
+
+    ```
+    register_function(js_start:f64, js_len:f64) -> f64
+    ```
+
+    Por baixo dos panos aproveitamos a função `eval` do JavaScript para tornar essas funções reais.
+- title: Chamando Funções
+  content_markdown: >
+    Quando mais tarde desejarmos chamar nossa função dinâmica, precisaremos de algum tipo de invocação de função que possa incluir o identificador e os argumentos da nossa função.
+
+    Novamente, como o WebAssembly só pode passar e receber números e como todos os números em JavaScript são floats de 64 bits, a aparência final será de uma função importada:
+
+    ```
+    js_invoke_with_2_params(fn_handle:f64, a:f64, b:f64) -> f64
+    ``` 
+
+    Juntando tudo nós
+
+    ```rust
+    let log_handle = register_function("
+      (param_a, param_b) => {
+        // de alguma forma chame console_log  
+      }");
+
+    let msg = "olá, mundo";
+
+    js_invoke_with_2_params( log_handle, msg.as_ptr() as f64, 
+        msg.len() as f64 );
+    ```
+
+    Você notará que há um problema com nossa função JavaScript. Ele tem o início e o fim do nosso utf-8, mas não a memória!
+- title: Contexto da Invocação Dinâmica
+  code: 'https://webassembly.studio/?embed&f=70lhg7nwda9'
+  content_markdown: >
+    Quando nossas funções invocadas dinamicamente são chamadas, as funções precisam ter acesso à memória do módulo. Podemos colocar recursos importantes em um objeto de contexto para que nossa função tenha todas as ferramentas disponíveis para fazer seu trabalho.
+
+    ```rust
+    let log_handle = register_function("
+      (context, msgStart, msgEnd) => {
+        let msg = context.getUtf8FromMemory(msgStart, msgEnd);
+        console.log(msg); 
+      }");
+
+    let msg = "olá mundo";
+
+    js_invoke_with_2_params( log_handle, msg.as_ptr() as f64, 
+      msg.len() as f64);
+    ```
+
+    Veja o exemplo para a implementação completa.
+- title: Retornando Referências
+  content_markdown: >
+    Nos deparamos com um problema com funções dinâmicas quando queremos retornar uma referência a um objeto. O WebAssembly pode retornar somente números! Para superar esse desafio precisamos estabelecer uma convenção de uso de um identificador numérico para representar uma referência ao nosso objeto em JavaScript.
+
+
+    ```rust
+    let query_selector_handle = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart, selectorEnd);
+        let domEl = document.querySelector(selector);
+        let objHandle = context.storeObject(domEl);
+        return objHandle;
+      }");
+
+    let selector = "#fancy-button";
+
+    let dom_element_handle = js_invoke_with_2_params(
+        log_handle, selector.as_ptr() as f64, 
+        selector.len() as f64 );
+    ```
+- title: Alocadores
+  code: 'https://webassembly.studio/?embed&f=mz2gu9y29tn'
+  content_markdown: >
+    Como podemos ver para comunicar os objetos corretamente precisamos ter algum tipo de mecanismo de armazenamento para os objetos:
+
+    * `storeObject(object) -> f64` - Armazena um objeto e retorna um identificador numérico.
+    * `getObject(f64) -> object` - Obtém a referência de um objeto por seu identificador numérico.
+    * `releaseObject(f64) -> object` - Libere uma referência de um objeto do armazenamento, permitindo que sua memória seja liberada.
+
+    A implementação de algo assim é chamado de *alocador*. Isso está além do escopo deste tutorial. Poderíamos imaginar uma implementação muito ingênua disso, que é essencialmente apenas um vetor sempre crescente, no qual um objeto é armazenado no vetor e seu índice é retornado como identificador.
+
+    ```
+    let storage = [];
+
+    function storeObject(obj){
+      let index = storage.length;
+      storage.push(obj);
+      return index;
+    }
+
+    function getObject(handle){
+      return storage[handle];
+    }
+
+    function releaseObject(handle){
+      return storage[handle] = null;
+    }
+    ```
+
+    Há muitas questões que você deve considerar na sua implementação.
+- title: Desenhando na Tela
+  code: 'https://webassembly.studio/?embed&f=bdhga9zwlem'
+  content_markdown: >
+    Vamos juntar tudo em um exemplo desenhando um quadrado vermelho na tela. Vamos pensar a respeito das funções que precisaremos registrar:
+
+    ```rust
+    let get_2d_context = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart, selectorEnd);
+        let domEl = document.querySelector(selector);
+        let ctx = domEl.getContext("2d");
+        let objHandle = context.storeObject(ctx);
+        return objHandle;
+      }");
+
+    let set_context_color = register_function("
+      (context, ctxHandle, colorStart, colorEnd) => {
+        let color = context.getUtf8FromMemory(
+          colorStart, colorEnd);
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillStyle = color;
+      }");
+
+    let draw_rect = register_function("
+      (context, ctxHandle, x, y, width, height) => {
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillRect(x, y, width, height);
+      }");
+    ```
+- title: Capítulo 3 - Conclusão
+  content_markdown: >
+    Agora temos a capacidade de invocar qualquer tipo de JavaScript! Quão legal é isso? Usar eval obviamente não é o ideal, mas o WebAssembly é uma tecnologia em evolução que um dia terá melhores maneiras de acessar qualquer aspecto do navegador. Até lá, fazemos o nosso melhor! O próximo capítulo é sobre programação assíncrona!
