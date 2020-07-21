@@ -11,6 +11,94 @@
     Jedes crate hat ein root Modul.
 
     Ein Modul kann globale Variablen, Funktionen, Strukturen, Traits oder sogar andere Module beinhalten.
+- title: Ein Programm schreiben
+  content_markdown: |
+    Ein Programm hat ein Hauptmodul, das in der Datei `main.rs` untergebracht ist.
+- title: Eine Bibliothek schreiben
+  content_markdown: |
+    Eine Bibliothek hat ein Hauptmodul, das in der Datei `lib.rs` untergebracht ist.
+- title: Referenzierung zu anderen Modulen und Crates
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: >
+    Um auf Elemente in Modulen zu referenzieren, kann der vollständige Modulpfad verwendet werden:
+    `std::f64::consts::PI`.
+
+    Ein einfacherer Weg ist das **use** Schlüsselwort. Es erlaubt uns anzugeben, welche Elemente wir 
+    durchgehend in unserem Code verwenden wollen, ohne jedes Mal den vollständigen Pfad angeben zu müssen.
+
+    Als Beispiel:
+    `use std::f64::consts::PI` erlaubt Dir nur die Bezeichnung `PI` in der main Funktion zu verwenden.
+
+    **std** ist das Create der **Standard Bibliothek** von Rust. Sie ist voll mit nützlichen Datenstrukturen
+    und Funktionen, um mit deinem Betriebssystem zu interagieren.
+
+    Eine durchsuchbare Bibliothek aller Creates, die von der Community erstellt wurden, findest Du unter:
+    [https://crates.io](https://crates.io/).
+- title: Mehrere Elemente referenzieren
+  content_markdown: |
+    Möchtest Du auf mehrere Elemente in einem einzelnen Modulpfad referenzieren, verwendest du folgenden Code:
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris isst kein TAU, er isst nur PI.
+- title: Module erstellen
+  content_markdown: |
+    Denken wir über Code nach, so stellen wir uns üblicher Weise eine Hierarchie von Dateien in Ordnern vor.
+    Rust macht es möglich, dass du sehr nah an dieser Dateistruktur Module erstellen kannst.
+
+    Es gibt zwei Wege um ein Modul zu erstellen. Zum Beispiel kann das Modul `foo` dargestellt werden als,
+      * eine Datei mit dem Namen `foo.rs`
+      * ein Verzeichnis mit dem Namen `foo` und einer darin erstellten Datei `mod.rs`
+- title: Modulhierarchie
+  content_markdown: >
+    Ein Modul kann von einem anderen Modul abhänig sein. Um eine Beziehung zwischen einem Modul und einem
+    Sub-Modul aufzubauen, musst Du folgendes ins übergeordnete Modul schreiben:
+
+    ```rust
+
+    mod foo;
+
+    ```
+
+    Die Deklaration sucht nun eine Datei `foo.rs` oder `foo/mod.rs` und inkludiert deren Inhalt in ein Modul
+    `foo` innerhalb des Scopes.
+- title: Inline-Module
+  content_markdown: >
+    Ein Sub-Modul kann direkt in einen Modulcode eingebettet werden.
+
+    Das ist vor allem üblich für Unit Tests. Wir erzeugen ein Inline-Modul nur dann, wenn Rust zum Testen verwendet wird.
+
+    Hier ein Beispiel dazu:
+
+    ```
+
+    // Dieses Macro entfernt das Inline-Modul,
+    // wenn Rust nicht im Testmodus ausgeführt wird.
+
+    #[cfg(test)]
+
+    mod tests {
+        // Beachte, dass wir nicht sofort Zugriff auf das übergeordnete Modul erhalten.
+        // Wir müssen das explizit anfordern.
+        use super::*;
+
+        ... tests go here ...
+    }
+
+    ```
+- title: Interne Modul Referenzierung
+  content_markdown: >
+    Rust hat verschiedene Schlüsselwörter, die Du in deinem `use` Pfad verwenden kannst,
+    um schnell das richtige Modul in die Finger zu bekommen:
+      
+    * `crate` - das Hauptmodul deines Crates
+
+    * `super` - das übergeordnete Modul deines derzeitigen Moduls
+
+    * `self` - das derzeitige Modul
 - title: Export
   content_markdown: >
     Die Inhalte eines Moduls sind außerhalb des Moduls nicht automatisch
@@ -37,3 +125,33 @@
     nach außen hin sichtbar sein sollen.
 
     Diese sind wieder mit dem Schlüsselwort `pub` versehen.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Das `Prelude` Modul
+  content_markdown: |
+    Du wunderst dich vielleicht, wie wir von überall Zugriff auf `Vec` oder `Box` haben, ohne dass wir ein `use` Statement
+    verwenden müssen. Der Grund liegt im `Prelude` Modul in der Standard Bibliothek.
+
+    Du musst wissen, dass alles aus der Standard Bibliothek, das mit `std::prelude::*` exportiert wird, in jedem Bereich von
+    Rust automatisch verfügbar ist. Das trifft auch für `Vec`, `Box` und viele anderen Elemente, wie z.B. Option, Copy etc. zu.
+- title: Dein eigenes `Prelude` Modul
+  content_markdown: >
+    Wie bei der Standard Bibliothek ist es üblich, für eigene Bibliotheken, ein eigenes Prelude Modul bereit zu stellen.
+    Es dient den Usern deiner Bibliothek als Startpunkt, um die üblichsten Datenstrukturen aus deiner Bibliothek zu importieren
+    (z.B. `use my_library::prelude::*`).
+
+    Es wird nicht automatisch in Programmen/Bibliotheken verwendet werden, die dein Crate nutzen,
+    aber es ist eine Konvention dem zu folgen, damit Benutzer wissen, wo sie starten können.
+
+    Ferris sagt, "Sein ein guter Rustacean und hilf einer verbündeten Krabbe mit einem guten Prelude"
+- title: Chapter 9 - Fazit
+  content_markdown: >
+    Jetzt hast Du ein paar Tricks in der Tasche, wenn es um das Schreiben von Rust Programmen und Bibliotheken geht,
+    die auf der ganzen Welt verwendet werden. Mach Dir keine Gedanken, an alles zu denken. Sobald deine Bibliothek
+    wächst und von anderen Menschen genutzt wird, wirst Du mit jedem neuen Meilenstein herausfinden, was am besten ist.
+
+    Ferris wünscht Dir viel Erfolg auf dem Weg dorthin!
+
+    Ressourcen:
+
+    - [Richtlinien zum Schreiben von Rust APIs](https://rust-lang.github.io/api-guidelines/)

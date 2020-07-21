@@ -1,0 +1,272 @@
+- title: 7. Fejezet - Objektum-Orientált Programozás
+  content_markdown: >
+    A gondolatok függvényekkel való kifejezése egy bizonyított módja az adatok és viselkedésük
+    reprezentálására (a C nyelv már évtizedek óta ezt csinálja!) A tudományág létrejötte óta sokféle
+    módszer jött létre az adatok aggregálására és egyszerűbben kezelhető csoportokra való
+    bontására. Például ismerős lehet számodra az OOP vagyis Objektum-Orientált Programozás. Ebben a
+    fejezetben a Rust nyelv függvényeken túlmutató képességeivel fogunk megismerkedni.
+- title: Mi az az OOP?
+  content_markdown: >
+    Az Objektum-Orientált Programozás többé-kevésbé olyan nyelvekre utal, amik a következő
+    tulajdonságokkal rendelkeznek:
+
+    * Betokozás - Mind az adatok, mind a függvények egy egységes típusba az *objektum*-ba való
+      tömörítése.
+    * Absztrakció - A nem-releváns adattagok és függvények elrejtése, mellyel az implementáció
+      részleteit nem tárjuk fölöslegesen a programozó elé.
+    * Polimorfizmus - Annak a módja, hogy egy függvényt sokféle módon implementálhassunk, így
+      különböző esetekre mindig a megfelelő verziót használhassuk.
+    * Öröklés - Annak a lehetősége, hogy más objektumokból adatokat és viselkedést örökölhessünk.
+- title: A Rust nem OOP
+  content_markdown: >
+    A Rust nyelvből hiányzik az adatok és viselkedés öröklése. Tehát:
+
+    * A struct-ok nem képesek mezőket örökölni az őket szülő struct-ból.
+
+    * Ugyanígy függvényeket se képesek átvenni.
+
+
+    Ennek ellenére, a Rust elég sok más nyelvekben megszokott képességgel rendelkezik, így ezek a
+    limitációk talán nem is fognak annyira hiányozni, mint gondolod.
+- title: Betokozás metódusok segítségével
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    A Rust támogatja az *objektumok*-at, ami egy olyan struct-ot jelent, ami függvényekkel
+    rendelkezik (vagyis metódusokkal).
+
+    Minden metódus első paraméterének az azt meghívó példánynak kell lennie (tehát:
+    `objektumPeldany.foo()`). A Rust a következő jelöléseket használja:
+
+    * `&self` - Egy megváltoztathatatlan referencia a példányra.
+
+    * `&mut self` - Egy megváltoztatható referencia a példányra.
+
+    A metódusok az úgynevezett implementációs blokkon belül kerülnek létrehozásra, melyet az `impl` kulcsszóval jelölünk:
+
+    ```rust
+
+    impl MyStruct { 
+        ...
+        fn foo(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Absztrakció csak bizonyos mezők elérhetővé tételével
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    A Rust képes elrejteni az objektumok belső működésést.
+
+    Alapvetően a metódusok és mezők csak az őket tartalmazó modulok számára elérhetőek. A `pub`
+    kulcsszó segítségével a modulon kívül is elérhetővé lehet őket tenni.
+- title: Polimorfizmus Trait-ek segítségével
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
+  content_markdown: >
+    A Rust az úgynevezett trait-ek segítségével oldja meg a polimorfizmust. Minden trait meghatároz
+    metódusokat, amikkel a struct-okat fel lehet ruházni.
+
+    Először is meghatározzuk, hogy is néz ki a trait és az általa nyújtott metódusok paraméterei:
+
+    ```
+
+    trait MyTrait {
+        fn foo(&self);
+        ...
+    }
+
+    ```
+
+    A trait-ek megvalósítását úgy is felfoghatjuk, mint egy "szerződés," ami kimondja, hogy a
+    trait-et megvalósító struct-okra innentől a trait-en át is hivatkozhatunk (`&dyn MyTrait`),
+    annak ellenére is, hogy nem tudjuk a struct pontos típusát.
+
+    A struct-ok előírt metódusait szintén egy implementációs blokkon belül írhatjuk meg:
+
+    ```rust
+
+    impl MyTrait for MyStruct { 
+        fn foo(&self) {
+            ...
+        }
+        ... 
+    }
+
+    ```
+- title: Trait-ek által megvalósított metódusok
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: >
+    A trait-ek maguk is megvalósíthatnak metódusokat.
+
+    Az ilyen metódusok nem képesek elérni a struct-ok mezőit, de hasznos lehet olyan esetekben,
+    amikor olyasvalamit szeretnénk létrehozni, ami sokféle struct-ban előfordul.
+- title: Trait-ek öröklése
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: |
+    A trait-ek képesek más trait-ekből metódusokat örökölni.
+- title: Dinamikus és statikus meghívás
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    A metódusok kétféleképp hívhatóak meg:
+
+    * statikus meghívás - Tudjuk mi a típus, így pontosan tudjuk azt is, melyik függvény kerül
+      meghívásra.
+    * dinamikus meghívás - Nem tudjuk mi a típus, így először meg kell találnunk melyik függvénynek
+      is kell meghívásra kerülnie.
+
+    A trait-típusok, mint például `&dyn MyTrait` lehetővé teszik számunkra, hogy a dinamikus
+    meghívás segítségével hívjuk meg az ezt megvalósító struct-ok példányait.
+
+    Amikor dinamikus meghívást használsz, erősen ajánlott a `dyn` kulcsszó használata, hogy a többi
+    kódon dolgozó ember is tisztában legyen azzal, hogy mi történik.
+
+    Hogyan érinti ez a memóriát:
+
+    * A dinamikus meghívás kissé lassabb, mert először le kell követnünk egy mutatót, hogy
+      megtaláljuk melyik függvényről is van szó.
+- title: Trait objektumok
+  content_markdown: >
+    Amikor egy `&dyn MyTrait`típusú objektumot paraméterként adunk át, akkor ezt az objektumot
+    *trait objektumnak* nevezzük.
+
+    A trait objektumok segítségével egy példány megfelelő metódusait tudjuk meghívni. A trait
+    objektum nem más, mint egy struct, ami egy listára mutat, ami a példány metódusaira mutató
+    referenciákat tartalmazza.
+
+
+    Hogyan érinti ez a memóriát:
+
+    * Az ilyen függvényeket tartalmazó listát a C++ nyelvben *vtable*-nek nevezzük.
+- title: Ismeretlen méretű adatok kezelése
+  content_markdown: >
+    A trait-ek magukban hordoznak egy érdekes kihívást is azokban az esetekben, amikor egy másik
+    struct-ban akarjuk tárolni őket. Mivel a trait-ek elrejtik az eredeti struct-ot, így
+    értelemszerűen annak mérete is elérhetetlenné válik.
+
+    Az ilyen ismeretlen méretű értékek tárolását a Rust kétféleképp oldja meg:
+
+    * `generikus értékek használatával` - A paraméterezett típusok segítségével egyszerűen tudunk
+      ismert méretű struct-okat és függvényeket létrehozni.
+    * `indirekt tárolás` - Ha a példányokat a kupacon tároljuk, az lehetővé teszi számunkra, hogy ne
+      törődjunk magával az adat méretével, csak a rámutató pointer-ével.
+
+    Ezen kívül még vannak módszerek, de ebben az útmutatóban nem kerül szó róluk.
+- title: Generikus függvények
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    A Rust generikus függvényei kéz a kézben járnak a trait-ekkel. Például egy paraméterezett `T`
+    típus esetén meghatározhatjuk, hogy mely típusok is illhetnek `T` helyére, az által, hogy
+    felsoroljuk a teljesítendő traiteket.
+
+    Az alábbi példában `T`-nek meg kell valósítania a `Foo` trait-et:
+
+    ```rust
+
+    fn my_function<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+    A generikus függvények használatával olyan típusos függvényeket tudunk létrehozni, amik mérete
+    és típusa már a fordítás idején ismert, így ezeken lehetővé válik a statikus meghívás és
+    ismert-méretű értékekként lehet őket tárolni.
+- title: A generikus függvények rövidebb írásmódja
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Az előzőleg tárgyalt generikus függvényeket rövidebb módon is le lehet írni:
+
+    ```rust
+
+    fn my_function(foo: impl Foo) {
+        ...
+    }
+
+    ```
+    Ez ugyanazt teszi, mintha a következőt írnánk:
+
+    ```rust
+
+    fn my_function<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+      
+    ```
+- title: Box - Doboz
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
+  content_markdown: >
+    A `Box` vagyis Doboz olyan adatstruktúra, aminek segítségével egy értéket a veremből a kupacra
+    helyezhetünk.
+
+
+    A adatstruktúra valójában nem más mint egy *smart pointer* ("okos mutató"-nak) nevezett struct,
+    ami a kupacon elhelyezett adatainkra mutat. Mivel ennek a mérete ismert (a pointer-ek mérete
+    meghatározott), így általában olyan más adatokra is mutató structokban használjuk, ahol fontos
+    az előre meghatározott méret.
+
+
+    A `Box` olyan gyakori, hogy bárhol használhatjuk:
+
+
+    ```rust
+
+    Box::new(Foo { ... })
+
+    ```
+- title: Visszatekintés a generikus struct-okra
+  content_markdown: >
+    A generikus struct-ok szintén rendelkezhetnek trait-ek által megkötött paraméteres típusokkal.
+
+    ```rust
+
+    struct MyStruct<T>
+
+    where
+        T: MyTrait
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+    A generikus struct-ok paraméterezett típusa az implementációs blokkban is megjelenik:
+
+    ```rust
+
+    impl<T> MyStruct<T> {
+        ...
+    }
+
+    ```
+- title: 7. Fejezet - Konklúzió
+  content_markdown: >
+    Így már még több eszköz áll a rendelkezésünkre, hogy a gondolatainkat tisztán fejezhessük ki! A
+    Rust absztrakciói lehet egyszerűnek tűnnek, de elég erősek ahhoz, hogy örömmé tegyék a velük
+    való kódolást. Ebben a fejezetben egy pillantást vetettünk a smart pointer-ekre a `Box`
+    képében. A következő fejezetben részletesebben fogunk ezekről beszélni, többek között arról is,
+    hogy hogy segíthetnek bizonyos memóriaproblémák feloldásában.
+
+    További anyagok (angolul):
+
+    * [Videó - Object-oriented Programming in 7
+    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Article - "The faster you unlearn OOP, the better for you and your
+    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
