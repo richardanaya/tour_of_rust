@@ -27,3 +27,5 @@ Here we post when additions to chapters of the English version happen so that we
 
 Follow the following format to mark changes: `10.10.20: ch 1, 'Foobar'`. Afterwards, the chapter should be set to `u` in all translations.
 
+
+* 23.7.2020 - Chapster 5 - Scope-Based Resource Management lesson was rewritten because it incorrectly described the dropping rules
