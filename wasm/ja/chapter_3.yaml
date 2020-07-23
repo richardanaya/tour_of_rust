@@ -1,0 +1,253 @@
+- title: 3章 - 動的に実行する
+  content_markdown: >
+    この章では、ランタイムでWebAssemblyから動的にJavaScriptを実行する方法について話します。
+- title: なぜ動的実行なのか？
+  content_markdown: >
+    1章で、`.js`ファイルの中に簡単に関数を定義し、WebAssemblyから実行できることを学びました。
+    ならばなぜ、動的に実行する手段が必要なのでしょうか？
+
+
+    * WebAssemblyを学ぶ多くの人は、そもそもJavaScriptから逃避することが目的です。
+      JavaScriptの関数を動的に実行できることで、誰もが車輪の再発明をすることなく、動的なバインディングという最も難解な部分を行う既存資産を利用できます。
+    * 準備や起動を単純化することで、WebAssemblyモジュールを小さくできます。
+      手書きのJavaScriptコードをたくさん指定する代わりに、関数を登録する方法と、実行する方法だけが必要なのです。
+    * JavaScriptでは、どんなモジュールに依存しているかを知ることは難しいです。
+      WebAssemblyで関数を作成できるようにすることでは、必要なものだけを使うことができます。
+- title: ロギングふたたび
+  content_markdown: >
+    1章で`console.log`を使ったロギングの関数を書きました。これを動的に行う方法について考えましょう。
+
+
+    * ランタイムに関数を登録する方法が必要です。
+
+    * そしてそれを呼び出す方法が必要です。
+
+    * 動的な関数のためには、メモリにアクセスする方法が必要です。
+    （たとえば、UTF-8のバイトを抽出するために）
+- title: 関数の登録
+  content_markdown: >
+    関数を登録するためには、次の2つが必要となります。
+
+
+    * JavaScriptで実行したい関数の定義を、文字列で渡すこと
+
+    * 後でパラメータを渡して実行するための、ハンドルを得ること
+
+
+    ```rust
+
+    register_function(js: &str) -> usize
+
+    ```
+
+
+    WebAssemblyでは、すべてを数値でやり取りしなければなりません。
+    そして、JavaScriptの数値型は64ビット浮動小数点です。
+    よって、これが最終形です。
+
+
+    ```rust
+
+    register_function(js_start: f64, js_len: f64) -> f64
+
+    ```
+
+
+    水面下では、JavaScriptの`eval`関数を利用しており、実際に実行することができるようになります。
+- title: 関数を呼び出す
+  content_markdown: >
+    後で動的な関数を実行するためには、関数ハンドルとその引数を受け取るための呼び出し方が必要になります。
+
+
+    繰り返しですが、JavaScriptとWebAssemblyは数値だけをやり取りし、JavaScriptの数値は64ビットの浮動小数点です。
+
+
+    関数は最終的にこのようになります。
+
+
+    ```
+
+    js_invoke_with_2_params(fn_handle: f64, a: f64, b: f64) -> f64
+
+    ```
+
+
+    全てを組み合わせるとこうです。
+
+
+    ```rust
+
+    let log_handle = register_function("
+      (param_a, param_b) => {
+        // ここでどうにかして console.log を呼び出す
+      }");
+
+
+    let msg = "hello world";
+
+
+    js_invoke_with_2_params(
+      log_handle,
+      msg.as_ptr() as f64,
+      msg.len() as f64
+    );
+
+    ```
+
+
+    しかしまだこのJavaScriptの関数には問題があることに気付いたでしょう。
+    メモリではなく、UTF-8文字列の開始位置と終了位置が渡されています！
+- title: 動的実行のコンテキスト
+  code: 'https://webassembly.studio/?embed&f=70lhg7nwda9'
+  content_markdown: >
+    我々の動的実行関数が呼ばれるとき、WebAssemblyモジュールのメモリ領域にアクセスできる必要があります。
+    そのためのコンテキストのオブジェクトを用意し、そこに重要なリソースを配置します。
+    こうすることで、関数が仕事をすることができるようになります。
+
+
+    ```rust
+
+    let log_handle = register_function("
+      (context, msgStart, msgEnd) => {
+        let msg = context.getUtf8FromMemory(msgStart, msgEnd);
+        console.log(msg);
+      }");
+
+
+    let msg = "hello world";
+
+
+    js_invoke_with_2_params(
+      log_handle,
+      msg.as_ptr() as f64,
+      msg.len() as f64
+    );
+
+    ```
+
+
+    完全な実装は、実際のコード例を見てください。
+- title: 参照を返す
+  content_markdown: >
+    このやり方では、オブジェクトへの参照を返したい場合に問題があります。
+    WebAssemblyからは数値しか渡すことができないからです！
+
+
+    これを乗り越えるためには、数値ハンドルを使ってJavaScriptのオブジェクトへの参照を保持する仕組みを導入するしかありません。
+
+
+    ```rust
+
+    let query_selector_handle = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart,selectorEnd);
+        let domEl = document.querySelector(selector);
+        let objHandle = context.storeObject(domEl);
+        return objHandle;
+      }");
+
+    let selector = "#fancy-button";
+
+
+    let dom_element_handle = js_invoke_with_2_params(
+      query_selector_handle,
+      selector.as_ptr() as f64,
+      selector.len() as f64
+    );
+
+    ```
+- title: アロケータ
+  code: 'https://webassembly.studio/?embed&f=mz2gu9y29tn'
+  content_markdown: >
+    オブジェクトをやり取りできるよう、ストレージの仕組みが必要です。
+
+
+    * `storeObject(object) -> f64` - オブジェクトを格納し、数値をハンドルとして返す
+
+    * `getObject(f64) -> object` - 数値ハンドルから、オブジェクトへの参照を返す
+
+    * `releaseObject(f64) -> object` - メモリを開放するために、オブジェクトを参照を解除
+
+
+    このような実装のことを、*アロケータ*といいます。（詳細はこのツアーの範疇を超えています）
+
+
+    本質的には、オブジェクトを格納することができ、その際にインデックスがハンドルとして返される無限のベクタです。
+
+
+    ```
+
+    let storage = [];
+
+
+    function storeObject(obj) {
+      let index = storage.length;
+      storage.push(obj);
+      return index;
+    }
+
+
+    function getObject(handle) {
+      return storage[handle];
+    }
+
+
+    function releaseObject(handle) {
+      return storage[handle] = null;
+    }
+
+    ```
+
+
+    実装としては考慮すべき点が多くあります。
+- title: 画面への描画
+  code: 'https://webassembly.studio/?embed&f=bdhga9zwlem'
+  content_markdown: >
+    学んだ全てを組み合わせて、赤い四角を画面に描画する例を考えます。
+
+
+    登録すべき関数はこのようになります。
+
+
+    ```rust
+
+    let get_2d_context = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart, selectorEnd
+        );
+        let domEl = document.querySelector(selector);
+        let ctx = domEl.getContext("2d");
+        let objHandle = context.storeObject(ctx);
+        return objHandle;
+      }");
+
+    let set_context_color = register_function("
+      (context, ctxHandle, colorStart, colorEnd) => {
+        let color = context.getUtf8FromMemory(
+          colorStart, colorEnd
+        );
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillStyle = color;
+      }");
+
+    let draw_rect = register_function("
+      (context, ctxHandle, x, y, width, height) => {
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillRect(x, y, width, height);
+      }");
+
+    ```
+- title: 3章のまとめ
+  content_markdown: >
+    これでどんなJavaScriptでも実行できるようになりました！すごいですよね？
+
+
+    `eval`の使用は理想的ではないかもしれません。
+    しかし進化を続けるWebAssemblyならば、いつの日か
+    ブラウザのあらゆる機能にアクセスするよりよい方法が得られると思います。
+
+
+    その日が来るまでは、やれることをやりましょう！
+    次の章は、非同期プログラミングについてです！
