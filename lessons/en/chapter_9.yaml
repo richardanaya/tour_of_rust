@@ -3,18 +3,16 @@
     So far all of our code examples have been a single file. Let's discuss how
     our code can be better organized and shared by others!
 - title: Modules
-  content_markdown: >
+  content_markdown: |
     Every Rust program or library is a *crate*.
-
 
     Every crate is made of a hierarchy of *modules*.
 
-
     Every crate has a root module.
 
+    A module can hold global variables, functions, structs, traits or even other modules!
 
-    A module can hold global variables, functions, structs, traits or even other
-    modules!
+    In Rust there is not a 1 to 1 mapping of files to the module tree heirarchy. We must build the module tree explicitly by hand in our code.
 - title: Writing a Program
   content_markdown: |
     A program has a root module in a file called `main.rs`.
