@@ -1,0 +1,29 @@
+- title: >-
+    您好, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: |
+    歡迎來到 *Rust 語言之旅*！這裡將會逐步介紹 Rust 語言的功能和特性。Rust 語言常常被認為是很難學的語言。
+    
+    在接觸到複雜的部份之前，希望我能夠讓您有興趣探索更多
+    
+    本教程提供以下的語言版本：
+
+    * [Deutsch](00_de.html)
+    * [English](oo_en.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Magyar](00_hu.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [한국어](00_ko.html)
+    * [日本語](00_ja.html)
+    * [简体中文](00_zh-cn.html)
+
+    如果你對內容有任何意見，或希望貢獻於翻譯，可以到 Tour of Rust 的 [github 源代碼庫](https://github.com/richardanaya/tour_of_rust).
+
+    你可以用鍵盤的 <span class="emoji">⬅️</span> 及 <span class="emoji">➡️</span> 鍵來翻頁。
+
+    在以下的經典例子中，展示了 Rust 對 Unicode 字串的支援。
+    
