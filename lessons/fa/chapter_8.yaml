@@ -1,0 +1,363 @@
+- title: Chapter 8 - Smart Pointers
+  content_markdown: >
+    In this chapter we will demystify smart pointers. Let's explore into
+
+    these data structures that let us interact with the lowest level of 
+
+    memory.
+
+
+    Ferris says: "Don't feel overwhelmed by this chapter if you don't feel 
+
+    you can write your own low level memory management code in one short read.
+    This chapter 
+
+    is mostly to introduce you to some useful tools and give a glimpse at how
+    they work!"
+- title: References Revisited
+  content_markdown: >
+    A reference is fundamentally just a number that is the start position
+
+    of some bytes in memory. Its only purpose is to represent the concept of 
+
+    where data of a specific type exists. What makes a reference different from
+    just a number is that Rust
+
+    will validate the lifetime of references doesn't last longer than what
+
+    it refers to (otherwise we'd get an error when we used it!).
+- title: Raw Pointers
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: >
+    References can be converted into a more primitive type called a *raw
+    pointer*. Much like a number, it
+
+    can be copied and moved around with little restriction. Rust
+
+    makes no assurances of the validity of the memory location it points to.
+
+
+    Two kinds of raw pointers exist:
+
+
+    * `*const T` - A raw pointer to data of type T that should never change.
+
+    * `*mut T` - A raw pointer to data of type T that can change.
+
+
+    Raw pointers can be converted to and from numbers (e.g. `usize`).
+
+
+    Raw pointers can access data with *unsafe* code (more on this later).
+
+
+    Memory Details:
+
+    * A reference in Rust is very similar to a pointer in C in terms of usage,
+    but with much more compile time restrictions on
+      how it can be stored and moved around to other functions.
+    * A raw pointer in Rust is similar to a pointer in C that it represents a
+    number that can be copied 
+      passed around, and even turned into numerical types where it can be modifed as a number to do pointer math.
+- title: Dereferencing
+  content_markdown: |
+    The process of accessing/manipulating data that is being referred to
+    by a *reference* (i.e. `&i32`) is called *dereferencing*. 
+
+    References are used to access/manipulate data in two ways:
+    * Access to the referred data during assignment of variables.
+    * Access to fields or methods of the referred data.
+
+    Rust has some powerful operators that allow us to do this.
+- title: The * Operator
+  content_markdown: >
+    The `*` operator is an explicit way to dereference a reference. 
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    Memory detail:
+
+    - Because i32 is a primitive type that implements the `Copy` trait, 
+
+    the bytes of variable `a` on stack are copied into the bytes of variable
+    `b`.
+- title: The . Operator
+  content_markdown: >
+    The `.` operator is used in accessing fields and methods of a reference. It
+    works a bit more subtly.
+
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+
+    Whoa, why didn't we need to add `***` before `ref_ref_ref_f`? This is
+    because the `.` operator automatically dereferences 
+
+    a sequence of references. That last line is turned into the following by the
+    compiler automatically.
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: Smart Pointers
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    In addition to the ability to create references to existing typed data using
+    the `&` operator, Rust gives us the ability
+
+    to create *reference-like* structs called **smart pointers**. 
+
+
+    We can think of references at a high level as a type that give us access to
+    another type.  Smart pointers are different in their 
+
+    behavior from normal references in that they operate based on internal logic
+    that a programmer writes. You — the programmer —
+
+    are the *smart* part.
+
+
+    Typically smart pointers implement `Deref`, `DerefMut`, and `Drop` traits to
+    specify the logic of what should happen when
+
+    the structure is dereferenced with `*` and `.` operators.
+- title: Smart Unsafe Code
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Smart pointers tend to use *unsafe* code fairly often. As mentioned
+    earlier, 
+
+    they are common tools for interacting with the lowest levels of memory in
+    Rust.
+
+
+    What is unsafe code? Unsafe code behaves exactly like normal Rust with the
+    exception of a few abilities that
+
+    the Rust compiler is unable to make guarantees about.
+
+
+    A primary ability of unsafe code is *dereferencing a raw pointer*. That
+    means taking a *raw pointer* 
+
+    to a position in memory and declaring "a data structure exists here!" and
+    turning it into a representation of data you can use (i.e. `*const u8` into
+    `u8`). 
+
+    Rust has no way to keep track of the meaning of every byte that gets written
+    to memory. Because Rust can't make 
+
+    guarantees about what exists at an arbitrary number used as a *raw pointer*,
+    it puts the dereference in an `unsafe { ... }` block. 
+
+
+    Smart pointers *dereference raw pointers* extensively, but they are well
+    proven in what they do.
+- title: Familiar Friends
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    Consider some smart pointers we've already seen like `Vec<T>` and `String`.
+
+
+    `Vec<T>` is a smart pointer that just owns some memory region of bytes. The
+    Rust compiler has no idea what 
+
+    exists in these bytes. The smart pointer interprets what it means to grab
+    items from the region of memory it manages,
+
+    keeps track of where data structures within those bytes begin and end, and
+    then finally dereferences a raw pointer
+
+    into data structures into a nice clean ergonomic interface for us to use
+    (e.g. `my_vec[3]`).
+
+
+    Similarly, `String` keeps track of a memory region of bytes, and
+    programmatically restricts content written to it to always
+
+    be valid `utf-8` and helps dereference that memory region into a type
+    `&str`.
+
+
+    Both these datastructures use unsafe dereferencing of raw pointers to do
+    their job.
+
+
+    Memory details:
+
+    * Rust has an equivalent of C's `malloc` using
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) and
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) for
+    getting ahold of your own memory regions to manage.
+- title: Heap Allocated Memory
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: >
+    `Box` is a smart pointer that lets us move data from the stack to the heap.
+
+
+    Dereferencing it lets us use the heap allocated data ergonomically as if it
+    were the original type.
+- title: Failable Main Revisited
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+    Rust code may have a plethora of representations of errors, but the standard
+    library has
+
+    a universal trait `std::error::Error` for describing errors.
+
+
+    Using a smart pointer `Box` we can use the type `Box<dyn std::error::Error>`
+    as a common type for returning errors because it allows us to
+
+    propogate up an error on the heap and interact with it at a high level
+    without having to know a specific type.
+
+
+    Early in Tour of Rust we learned that `main` can return an error. We can now
+    return
+
+    a type capable of describing almost any kind of error that might occur in
+    our program 
+
+    so long as the error's data structure implements Rust's common `Error`
+    trait.
+
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: Referencing Counting
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20all%20reference%20count%20smart%20pointers%20are%20dropped%20now%0A%20%20%20%20%2F%2F%20the%20heap%20data%20Pie%20finally%20deallocates%0A%7D%0A
+  content_markdown: >
+    `Rc` is a smart pointer that moves data from the stack onto the heap. It
+    allows us to 
+
+    clone other `Rc` smart pointers that all have the ability to immutably
+    borrow the data 
+
+    that was put on the heap.
+
+
+    Only when the last smart pointer is dropped does the data on the heap become
+    deallocated.
+- title: Sharing Access
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell` is a container data structure commonly held by smart pointers that
+    takes in data and lets us
+
+    borrow mutable and immutable references to what's inside. It prevents
+    borrowing from
+
+    being abused by enforcing Rust's memory safety rules at runtime when you ask
+    to borrow
+
+    the data within:
+
+
+    **Only one mutable reference OR multiple immutable references, but not
+    both!**
+
+
+    If you violate these rules `RefCell` will panic.
+- title: Sharing Across Threads
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20let's%20borrow%20a%20locked%20immutable%20reference%20of%20pie%0A%20%20%20%20%2F%2F%20we%20have%20to%20unwrap%20the%20result%20of%20a%20lock%0A%20%20%20%20%2F%2F%20because%20it%20might%20fail%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20locked%20reference%20drops%20here%2C%20and%20mutex%20protected%20value%20can%20be%20used%20by%20someone%20else%0A%7D%0A
+  content_markdown: >
+    `Mutex` is a container data structure commonly held by smart pointers that
+    takes in data and lets us borrow mutable
+
+    and immutable references to the data within. This prevents borrowing from
+    being abused by 
+
+    having the operating system restrict only one CPU thread at time to have
+    access to the data, 
+
+    blocking other threads until that original thread is done with its locked
+    borrow.
+
+
+    Multithreading is beyond the scope of Tour of Rust, but `Mutex` is a
+    fundamental part of orchestrating
+
+    multiple CPU threads accessing the same data.
+
+
+    There is a special smart pointer `Arc` which is identical to `Rc` except
+    uses thread-safe incrementing of reference counts. 
+
+    It's often used to have many references to the same `Mutex`.
+- title: Combining Smart Pointers
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: >
+    Smart pointers might seem limited, but they can make some very powerful
+    combinations.
+
+
+    `Rc<Vec<Foo>>` - Allow the cloning of multiple smart pointers that can
+    borrow the same vector of immutable data structures on the heap.
+
+
+    `Rc<RefCell<Foo>>` - Allow multiple smart pointers the ability to borrow
+    mutably/immutably the same struct `Foo`
+
+
+    `Arc<Mutex<Foo>>` - Allow multiple smart pointers the ability to lock
+    temporary mutable/immutable borrows in a CPU thread exclusive manner.
+
+
+    Memory detail:
+
+    * You'll notice a theme with many of these combinations. The use of a
+    immutable data type (possibly owned by multiple smart pointers) to modify
+    internal data. This 
+      is referred to as the "interior mutability" pattern in Rust. It is a pattern that lets us bend the rules of memory usage at runtime with the same level of safety as Rust's
+      compile-time checks.
+      
+- title: Chapter 8 - Conclusion
+  content_markdown: >
+    Smart pointers are the idioms of Rust programming and let us not have to
+    re-create the 
+
+    very common patterns of memory usage. With them you are ready to tackle the
+    toughest of
+
+    challenges! Now that we have the foundations of Rust, let's talk a bit about
+    how we make 
+
+    larger projects. In chapter 9 we break free of single page
+
+    lines of code.
