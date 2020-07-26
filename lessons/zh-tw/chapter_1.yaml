@@ -1,0 +1,161 @@
+- title: 第一章 - 基礎概念
+  content_markdown: >
+    在此第一章中，我們會探討最基本的函數(functions)，變量(variables)，及大部份的基本類型 
+    (primitive types)。歡迎你的參加這次 Rust 之旅。
+
+    還有如果您好奇這一隻正在限您說話的，又可愛的螃蟹是誰。請容許我自我介紹！
+    我是非官方的 Rust 語言吉祥物很高興認識您！
+
+- title: The Rust Playground (Rust 語言遊樂場)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+  content_markdown: >
+    本旅程我們會使用這個互動的編程工具 [Rust Playground](https://play.rust-lang.org).
+
+    使用這工具是一個很好的方法去試驗您的 Rust 程序，和展示你的創作及挑戰給其他人看。
+
+- title: 變量 (Variables)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    變量是通過 **let** 關鍵字來宣告。
+
+    當賦予一個值，在 99% 的情況下 Rust 能夠自行判斷變量的類型。如果不能自行判斷，您就要在
+    宣告變量是指明變量的類型。
+
+    留意，我們可以用同一個變量名稱重覆宣告變量，這稱為變量遮蔽。
+    變量遮蔽容許使用同一個變量名稱，但不同的類型宣告。
+
+    變量的命名是用`snake_case`啊！
+
+- title: 改變變數的值
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Rust 語言非常看重變量的可改變性，變量的可改變性分為以下兩種：
+
+
+    * **可改變 (mutable)** - 編譯器容許此變量被寫入和讀取。
+
+    * **不可改變 (immutable)** - 編譯器只容許此變量被寫入
+
+    可改變的變量用 **mut** 關鍵字來標明。
+
+    稍後我們將在這個概念上有更多的探討，但是現在暫時將它放在一旁吧。
+
+- title: 基本類型 (Primitive types)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Rust 具有多種常見的類型：
+
+    * (布林值)booleans - `bool` 來表達 true/false
+
+    * (無符號整數) unsigned integers - `u8` `u16` `u32` `u64` `u128` 來表達正整數
+
+    * (有符號整數) signed integers - `i8` `i16` `i32` `i64` `i128` 來表達正負整數
+
+    * (指針大小的整數) pointer sized integers - `usize` `isize` 來表達索引或記憶體內的東西大小
+
+    * (浮點) floating point - `f32` `f64`
+
+    * (元組) tuple - `(value, value, ...)` 用於在傳遞多個固定的值
+
+    * (陣列) array - `[value, value, ...]` 在編譯時已知具有固定長度的相似元素的集合
+
+    * (片段) slices - 在運行時已知長度的相似元素的集合
+
+    * `str`(字串片段 string slice) - 在運行時已知長度的字串
+
+    在 Rust 裡面，文字處理可能比您在其他程式語言中所理解到的複雜
+    
+    Rust 是一個系統程式語言 (system programming language)，所以它所關注的記憶體問題
+    
+    對於您可能是前所未見。我們遲一點會深入了解。
+
+    數字類型可以在後邊這樣明確標明它的類型： `13u32`, `2u8`
+
+- title: 基本的數據類型轉換
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    當用到數字類型(numeric types)，Rust 要求明確指出哪一個類型。
+    您不可以把 `u32` 和 `u8` 混著來使用。
+
+    幸運地 Rust 有 **as** 這個關鍵字來讓數字類型轉換變得容易。
+    
+- title: 常數 (Constant)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    常數(Constant)讓我們可以定義一些常用的值，在程式中有效地重覆使用。
+
+    跟變數不同，常數的值不會在運行的時候把值複製到使用的地方。
+    編譯器會在編譯時直接以字串取代的方法把值取代常數。
+    
+    跟變數不同，常數的數據類型是必須指明的。
+
+
+    常數通常是以 `SCREAMING_SNAKE_CASE` 命名的。
+- title: 陣列 (Array)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    *陣列(Array)* 是一個固定長度的數據集。裡面只會放著同一種類型的值。
+
+    *陣列* 類型是以 `[T;N]` 來宣告。T 是數據元件的類型，而 N 是在編譯時已經知道的陣列長度。
+
+
+    *陣列* 中的數據元件可以透過`[x]` 來提取。 *x* 是一個由零開始計的 *usize* 類索引。
+
+- title: 函數 (Functions)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    函數(Functions)的參數數量可以從沒有到多個都可以
+
+    在這個例子中, `add` 有兩個 `i32` 類型的參數 (有符號的 32-bit 整數)
+
+    函數的名字通常時使用 `snake_case` 來命名。
+- title: 多個回傳值
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    當函數要回傳幾個值的時候，可以把回傳值放到**元組(Tuple)**回傳。
+
+    元組的元素可以通過索引(Index)來獲取。
+
+    Rust 支持幾種不同的手法來拆解元組，
+    讓我們可以漂亮的從數據結構中分解出部份有用的值來使用。
+
+- title: 沒有回傳類型
+  content_markdown: >
+    當一沒有標明函數的回傳類型時，Rust 會默認回傳空的元組，稱為一個*單元(Unit)*。
+
+
+    一個空的元組是以 `()` 來展示。
+
+    直接使用`()`並不常見，但會經常出現。所以最好也能夠知道它是什麽。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20函數%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: 第一章 - 總結
+  content_markdown: >
+    到目前為止做得很好！ Rust的基礎還不錯，對吧？ 我們是窺探了Rust編譯器的想法。
+
+    作為系統編程語言，它非常關心內存中的值大小，是否可以修改，並確保您的算法是您想要的。
+
+    接下來，我們將看著一些老朋友：
+
+    if 測試 和 for 循環
+
+
+    更多資源:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
