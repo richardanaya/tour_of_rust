@@ -1,0 +1,229 @@
+- title: Chapter 5 - Ownership & Borrowing Data
+  content_markdown: >
+    Rust has a unique paradigm for managing memory compared to other programming
+    languages. We're going to look at
+
+    the behaviors and validations of the compiler one by one so it's not
+    overwhelming. It's important to remember that 
+
+    ultimately the rules we show don't exist to make your life hard, but to help
+    you make your code less error-prone!
+- title: Ownership
+  content_markdown: >
+    Instantiating a type and **binding** it to a variable name creates a memory
+    resource that the Rust compiler will validate
+
+    through its whole **lifetime**.  The bound variable is called the resource's
+    **owner**.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20instantiate%20structs%20and%20bind%20to%20variables%0A%20%20%20%20%2F%2F%20to%20create%20memory%20resources%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20the%20owner%0A%7D%0A
+- title: Scope-Based Resource Management
+  content_markdown: |
+    Rust uses the end of scope as the place to deconstruct and deallocate a resource.
+
+    The term for this deconstruction and deallocation is called a **drop**.
+
+    Memory detail:
+    * Rust does not have garbage collection.
+    * This is also called Resource Aquisition Is Initialization ( RAII ) in C++.
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%20%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%0A%7D%0A
+- title: Dropping is Hierarchical
+  content_markdown: >
+    When a struct is dropped, the struct itself is dropped first, then its
+    children are dropped individually, and so on.
+
+
+    Memory Details:
+
+    * By automatically freeing memory Rust helps ensure that there are fewer
+    memory leaks.
+
+    * Memory resources can only be dropped once.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
+- title: Moving Ownership
+  content_markdown: >
+    When an owner is passed as an argument to a function, ownership is moved to
+    the function parameter.
+
+
+    After a **move** the variable in the original function can no longer be
+    used.
+
+
+    Memory details:
+
+    * During a **move** the stack memory of the owners value is copied to the
+    function call's parameter stack memory.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20moved%20to%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20can%20no%20longer%20be%20used%0A%7D%0A
+- title: Returning Ownership
+  content_markdown: |
+    Ownership can also be returned from a function.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
+- title: Borrowing Ownership with References
+  content_markdown: |
+    References allow us borrow access to a resource with the `&` operator.
+
+    References are also dropped like other resources.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Borrowing Mutable Ownership with References
+  content_markdown: >
+    We can also borrow mutable access to a resource with the `&mut` operator.
+
+
+    A resource owner cannot be moved or modified while mutably borrowed.
+
+
+    Memory detail:
+
+    * Rust prevents having two ways to mutate an owned value because it
+    introduces the possibility of a data race.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20would%20fail%20because%0A%20%20%20%20%2F%2F%20foo%20cannot%20be%20moved%20while%20mutably%20borrowed%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20fail%20here%20because%0A%20%20%20%20%2F%2F%20foo%20is%20not%20modifiable%20while%20mutably%20borrowed%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%20because%20its%20no%20longer%20used%20after%20this%20point%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20works%20now%20because%20there%20all%20mutable%20references%20were%20dropped%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20foo%27s%20ownership%20to%20a%20function%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: Dereferencing
+  content_markdown: >
+    Using `&mut` references, you can set the owner's value using the `*`
+    operator.
+
+
+    You can also get a copy of owned value using the `*` operator (if the value
+    can be copied - we will discuss copyable types in later chapters).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20get%20a%20copy%20of%20the%20owner's%20value%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%20the%20reference's%20owner's%20value%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: Passing Around Borrowed Data
+  content_markdown: >
+    Rust's rules for references might best be summarized by:
+
+
+    * Rust only allows there to be one mutable reference **or** multiple
+    non-mutable references **but not both**.
+
+    * A reference must never **live longer** than its owner.
+
+
+    This doesn't tend to be a problem when passing around references to
+    functions.
+
+
+    Memory details:
+
+    * The first rule of references prevents data races. What's a data race? A
+    data race when reading from data has the possibility of being out of sync
+    due to the existence of a writer to the data at the same time. This happens
+    often in multi-threaded programming.
+
+    * The second rule of references prevents the misuse of references that refer
+    to non-existent data (called dangling pointers in C).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20because%20all%20mutable%20references%20are%20dropped%20within%0A%20%20%20%20%2F%2F%20the%20function%20do_something.%20We%20can%20create%20another.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: References Of References
+  content_markdown: |
+    References can even be used on pieces of references.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%20allow%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Explicit Lifetimes
+  content_markdown: >
+    Even though Rust doesn't always show it in code, the compiler understands
+    the lifetime of every variable and will attempt
+
+    to validate that a reference never exists longer than its owner.
+
+
+    Functions can be explicit by parameterizing the function signature with
+    symbols that help identify 
+
+    which parameters and return values share the same lifetime.
+
+
+    Lifetime specifiers always start with a `'` (e.g. `'a`, `'b`, `'c`)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20the%20parameter%20foo%20and%20return%20value%20share%20the%20same%20lifetime%0Afn%20do_something%3C'a%3E(foo%3A%20%26'a%20Foo)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%20allow%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Multiple Lifetimes
+  content_markdown: >
+    Lifetime specifiers allow us to be explicit with certain scenarios the
+    compiler cannot resolve itself 
+
+    by distinguishing all of a function signature component's lifetimes.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20and%20the%20return%20value%20share%20the%20same%20lifetime%0A%2F%2F%20foo_a%20has%20an%20unrelated%20lifetime%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%20because%20only%20foo_b's%20lifetime%20exist%20beyond%20here%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%0A%7D%0A
+- title: Static Lifetimes
+  content_markdown: >
+    A **static** variable is a memory resource created at compile-time that
+    exists through a program start to 
+
+    finish. They must have their types explicitly specified.
+
+
+    A **static lifetime** is a memory resource that lasts indefinitely to the
+    end of a program.  Note that by this definition
+
+    some static lifetime resources can be created at runtime.
+
+
+    Resources with static lifetimes have a special lifetime specifier `'static`.
+
+
+    `'static` resources will never **drop**.
+
+
+    If static lifetime resources contain references they must all be `'static`
+    (anything less would not live long enough).
+
+
+    Memory detail:
+
+
+    * Modifying static variables is inherently dangerous because they are
+    globally accessable to be read from by anyone
+      introducing the possibility of a data race. We'll talk about the challenges of global data later.
+    * Rust allows the use of `unsafe { ... }` blocks to perform some operations
+    that the compiler cannot make memory guarantees about. The [<span
+    style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+    should not be talked about casually.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Lifetimes In Data Types
+  content_markdown: >
+    Similarly to functions, data types can be parameterized with lifetime
+    specifiers of its members.
+
+
+    Rust validates that the containing data structure of the references never
+    lasts longer than the owners its references point to.
+
+
+    We can't have structs running around with references pointing to
+    nothingness!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: Chapter 5 - Conclusion
+  content_markdown: >
+    Whew, congrats for making it through! I know it's a lot to take in, but you
+    are well
+
+    under way to becoming a Rustacean. Hopefully it's clear how Rust as a
+    language aims to 
+
+    solve many of these common challenges in systems programming:
+
+
+    * Unintentional modification of resources
+
+    * Forgetting to deconstruct resources 
+
+    * Resources accidentally being deconstructed twice
+
+    * Using resources after they have been deconstructed 
+
+    * Data races caused by writing to resources while others are reading from
+    resources 
+
+    * Seeing clearly areas of the code where the compiler can’t make guarantees
+
+
+    In the next chapter we'll apply some of this knowledge as we look at how
+    Rust handles text.
