@@ -33,7 +33,7 @@ This project also aims to provide this book in as many languages as possible.
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
 * Magyar - [Nemin32](https://github.com/Nemin32/)
 * Português Brasileiro - [Denstone](https://github.com/denstone)
-* Русский - [Danil Kondratiev](https://github.com/knightpp)
+* Русский - [Danil Kondratiev](https://github.com/knightpp),[Yuriy Larin](https://github.com/blandger)
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus), [Haizhi Geng](https://github.com/JmPotato)
 * 繁體中文 - [kkpoon](https://github.com/kkpoon)
 * 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213), [Yuji Sugiura](https://github.com/leader22)
