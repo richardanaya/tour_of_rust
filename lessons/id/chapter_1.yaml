@@ -1,0 +1,216 @@
+- title: Chapter 1 - Dasar-Dasar
+  content_markdown: >
+    Di dalam bab pertama ini kita akan menjelajahi hal yang paling dasar
+
+    yaitu fungsi, variabel, dan tipe data primitif. Kami senang anda bergabung!
+
+
+    Jika kamu penasaran siapa kepiting lucu ini yang berbiacara dengan kamu,
+    ia adalah **Ferris**,
+
+    maskot unofficial untuk bahasa pemprograman Rust. Senang bertemu denganmu.
+- title: The Rust Playground
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+  content_markdown: >
+    Tur ini menggunakan sarana interaktif dari [Rust
+    Playground](https://play.rust-lang.org).
+
+
+    Sarana bagus untuk bermain-main dengan Rust dan menunjukkan kepada orang lain
+    kreativitas kamu dan tantangan!
+- title: Variabel
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Variabel dideklaraskan menggunakan kata kunci **let**.
+
+
+    Ketika memberikan nilai kepada variabel, Rust hampir selalu dapat menggambil kesimpulan
+    terhadap tipe data dari sebuah variabel. Jika tidak, kamu dapat menambahkan
+    tipe data pada deklarasi variabel kamu.
+
+
+    Perhatikan, kita dapat menetapkan nilai kepada variabel yang sama
+    berkali-kali. Ini dinamakan *variable shadowing*, serta tipe data dapat dirubah
+    untuk referensi selanjutnya dari nama tersebut.
+
+
+    Nama variabel selalu menggunakan `snake_scase`.
+- title: Merubah Variabel
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Rust sangat peduli apakah variabel dapat dimodifikasi atau tidak. Nilai
+    terdiri dari dua tipe:
+
+
+    * **mutable** - kompiler akan memperbolehkan variabel untuk dibaca dan di
+    tulis.
+
+    * **immutable** - kompiler hanya memperbolehkan variabel untuk dibaca.
+
+
+    Nilai yang dapat mungkin di rubah dilambangkan dengan kata kunci **mut**.
+
+
+    Kita akan berbicara lebih banyak tentang konsep ini nanti, untuk sekarang
+    kita hanya memperhatikan kata kunci ini.
+- title: Tipe Data Dasar
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Rust mempunyai berbagai jenis tipe data:
+
+
+    * booleans - `bool` untuk menyatakan true/false
+
+    * unsigned integers - `u8` `u16` `u32` `u64` `u128` untuk menyatakan
+    integer positif 
+
+    * signed integers - `i8` `i16` `i32` `i64` `i128` untuk menyatakan 
+    integer positif/negatif
+
+    * pointer sized integers - `usize` `isize` untuk menyatakan index dan ukuran
+    dari hal-hal di memori
+
+    * floating point - `f32` `f64`
+
+    * tuple - `(value, value, ...)` untuk mewakili urutan nilai yang bersifat
+    tetap pada stack
+
+    * arrays - `[value, value, ...]` koleksi dari elemen serupa dengan lebar
+    yang di diketahui saat waktu kompilasi
+
+    * slices - koleksi dari elemen serupa dengan lebar yang diketahui pada saat
+    program berjalan
+
+    * `str`(string slice) - teks dengan lebar yang diketahui saat program
+    berjalan
+
+
+    Teks mungkin lebih kompleks dari yang bahasa pemprograman lain;
+
+    Karena rust adalah *system programming language*, maka rust peduli pada
+
+    masalah memory yang kamu mungkin belum terbiasa. Kita akan membahas hal ini
+
+    secara rinci nanti.
+
+
+    Tipe data numerik dapat secara explisit ditetapkan dengan menambahkan tipe
+    di akhir angka (contoh `13u32`, `2u8`)
+- title: Basic Type Conversion
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Rust mengharuskan kejelasan untuk tipe data numerik. Kamu tidak bisa
+
+    menggunnakan `u8` untuk tipe data `u32` tanpa sebuah error.
+
+
+    Untungnya, Rust membuat koversi tipe data numerik mudah dengan kata kunci
+
+    **as**.
+- title: Konstanta
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Konstanta memperbolehkan kita untuk menentukan nilai yang serupa untuk
+
+    digunakan berkali-kali di sepanjang kode kita. Konstanta tidak menyalin
+
+    nilai seperti variabel biasa, tetapi konstanta secara langsung mengganti
+
+    teks pengidentifikasi  dimana konstanta digunakan dengan nilai yang disimpan
+
+    oleh konstanta pada saat kompilasi.
+
+
+    Tidak seperti variabel, konstanta harus selalu mempunyai tipe data secara
+
+    explisit.
+
+
+    Nama konstanta selalu menggunakan `HURUF_BESAR_SNAKE_CASE`.
+- title: Arrays
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    Sebuah *array* adalah koleksi dari elemen data yang mempunyai tipe data yang
+    sama dan panjang yang tetap.
+
+
+    Tipe data untuk *array* adalah `[T;N]` dimana T adalah tipe data elemen dan
+    N adalah panjang array yang diketahui pada saat kompilasi.
+
+
+    Setiap elemen dapat diambil dengan menggunakan operator `[x]` dimana *x*
+    adalah indeks *usize* (dimulai dari 0) dengan elemen yang kamu mau.
+- title: Fungsi
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    Sebuah fungsi memepunyai parameter dengan jumlah nol atau lebih.
+
+
+    Di dalam contoh ini, add membutuhkan dua argumen dengan tipe data `i32` 
+    (signed integer dengan panjang 32-bit).
+
+
+    Nama fungsi selalu menggunakan `snake_case`.
+- title: Pengembalian nilai berganda
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variabel%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Fungsi dapat mengembalikan nilai secara berganda dengan menggunakan **tuple**.
+
+
+    Elemen tuple dapat direferensikan dengan indeksnya. 
+
+
+    Rust mendukung berbagai macam destructuring yang kita akan lihat di dalam
+
+    berbagai macam bentuk, memungkinkan kita untuk mengekstrak sub-bagian dari
+
+    data struktur secara ergonimis.
+- title: Tidak mengembalikan apa-apa
+  content_markdown: >
+    Jika tidak ada nilai yang dikembalikan oleh sebuah fungsi secara tertulis,
+    maka fungsi itu mengembalikan tuple kosong, atau dikenal juga dengan nama
+    *unit*.
+
+
+    Sebuah tuple kosong dipresentasikan dengan `()`.
+
+
+    Menggukan `()` bukanlah hal umum, tapi kita akan sering bertemu denganya
+    secara rutin, jadi alangkah baiknya kita tau apa yang terjadi.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: Bab 1 - Kesimpulan
+  content_markdown: >
+    Kerja bagus! Dasar-dasar Rust tidak begitu buruk, bukan? kita akan mengintip
+
+    bagaimana kompiler Rust berpikir. Sebagai *system proggramming language*
+
+    Rust sangat peduli tentang ukuran nilai di dalam memori, baik dapat
+
+    dimodifikasi atau tidak, dan memastikan matematika yang kamu tulis sesuai
+
+    dengan yang kamu inginkan. Selanjutnya kita kaan melihat pada kawan lama
+
+    kita:
+
+    `if` dan `for`.
+
+
+    Sumber lain:
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
