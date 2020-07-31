@@ -12,7 +12,7 @@
 
     Модуль содержит глобальные переменные, функции, структуры, типажи и даже другие модули!
 
-    В Rust нет 1 к 1 отображения файлов на древовидную, иерархическую структуру модуля. Мы сами должны
+    В Rust нет "1 в 1" отображения файлов на древовидную, иерархическую структуру модуля. Мы сами должны
     создать дерево модулей явным образом "в ручную" в вашем коде.
 - title: Написание программы (Writing a Program)
   content_markdown: |
@@ -24,11 +24,11 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
   content_markdown: >
-    На элементы из модуля можно ссылаться, подключая их в коде с помощью их полного, модульного пути
-    `std::f64::consts::PI`.
+    На элементы из модуля можно ссылаться, подключая их в коде с помощью полного, модульного пути,
+    например `std::f64::consts::PI`.
 
 
-    Использование ключевого слова **use** является Более простым способом.
+    Использование ключевого слова **use** является более простым способом.
     Он позволяет указать определенные элементы модуля, которые мы хотим использовать
     в коде без указания полного пути. Например `use std::f64::consts::PI`
     позволяет использовать короткий идентификатор `PI` в функции main.
@@ -52,9 +52,9 @@
 - title: Создание модулей (Creating Modules)
   content_markdown: |
     Когда мы думаем о коде, мы обычно представляем себе иерархию файлов огранизованную
-    в директориях. Rust позволяет создавать модули тесно связанную со структурой файлов.
+    в директориях. Rust позволяет создавать модули близко похожие на файловую структуру.
 
-    Есть два способа в Rust для объявления модуля. Например, модуль `foo` может быть
+    В Rust есть два способа для объявления модуля. Например, модуль `foo` может быть
     представлен как:
       * файл с именем `foo.rs`
       * каталог с именем `foo` с файлом `mod.rs` внутри
@@ -75,23 +75,24 @@
     и вставит содержимое внутрь модуля с именем `foo` в текущей области видимости.
 - title: Встроенный модуль (Inline Module)
   content_markdown: >
-    Подмодуль может быть напрямую встроен внутри код модуля.
+    Подмодуль может быть напрямую встроен внутрь кода модуля.
 
 
     Одно очень частое использование модулей это создание юнит тестов. Мы создаем
-    встроенный можель, который существует только когда Rust используется для тестирования!
+    встроенный модуль, который существует только когда Rust используется для тестирования!
 
 
     ```
 
-    // Данный макрос удаляет этот встроенный модуль, когда Rust
-    // не в режиме тестирования.
+    // Данный макрос удаляет этот встроенный модуль,
+
+    // когда Rust не в режиме тестирования.
 
     #[cfg(test)]
 
     mod tests {
-        // Заметьте, что не можем сразу получить доступ к родительскому
-        // модулю. Нужно указывать явно.
+        // Заметьте, что мы не можем сразу получить доступ к
+        // родительскому модулю. Его нужно указывать явно.
         use super::*;
 
         ... tests go here ...
@@ -112,7 +113,7 @@
 - title: Экспорт (Exporting)
   content_markdown: >
     По умолчанию элементы *module* (модуля) недоступны вне этого модуля
-    (даже для их наследных модулей!). Элементы модуля можно сделать "видимыми" или
+    (даже для модулей наследников!). Элементы модуля можно сделать "видимыми" или
     доступными, используя ключевое слово `pub`.
 
 
@@ -127,41 +128,35 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
 - title: Автоимпорт (Prelude)
   content_markdown: |
-    Вам может быть интересно, как мы получили доступ к типам `Vec` or `Box`
-    везде в коде без использования `use` для их подключения.
+    Вам может быть интересно, как везде в коде мы получили доступ к типам `Vec` или `Box`
+    без использования `use` для их подключения?
     Это по причине использования модуля `prelude` (автоимпорт) из стандартной библиотеки.
 
 
-    Know that in the Rust standard library anything that is exported in
-    `std::prelude::*` is automatically available to every part of Rust.
-    That is the case for `Vec` and `Box` but others as well (Option, Copy,
-    etc.).
-- title: Your Own Prelude
+    Знайте, что в стандартной библиотеке Rust все типы, которые экспортируются с помощью
+    `std::prelude::*` являются автоматически доступными в каждой части Rust.
+    В данном случае типы `Vec` и `Box`, но и другие (Option, Copy, etc.).
+- title: Ваш собственный автоимпорт (Your Own Prelude)
   content_markdown: >
-    Because of standard library's prelude, it's common for your libary to have
-    its own prelude module as a starting point for
+    Из-за наличия автоимпорта в стандартной библиотеке, ваша библиотека обычно имеет
+    собственный автоимпорт в качестве начальной точки, где пользователи должны импортировать
+    все наиболее общие структуры данных для использования вашей библиотеки
+    (например `use my_library::prelude::*`).
 
-    where users should import all of the most common data structures for using
-    your library (e.g `use my_library::prelude::*`).
-
-    It doesn't automatically get used in programs/libraries that use your crate,
-    but it's a good convention to follow so people
-
-    know where to start.
+    Автоимпорт не используется автоматически в программах/библиотеках, которые используют ваш крейт,
+    но это является хорошим соглашением, чтобы люди знали, с чего начать.
 
 
-    Ferris says, "Be a good rustacean and help a fellow crab out with a good
-    prelude!"
-- title: Chapter 9 - Conclusion
+    Феррис говорит: "Будь хорошим разработчиком и помоги другим удобным автоимпортом!"
+- title: Глава 9 - Заключение
   content_markdown: >
-    You now have a few tricks up your sleeve when it comes to creating Rust
-    applications and libraries ready for the world. Don't
+    Теперь вы знаете несколько хитростей к моменту, когда дело дойдет до создания приложений и библиотек
+    Rust, готовых для всего мира.
 
-    worry about remembering it all. As your library grows and is used by other
-    people, you'll find what works best at each milestone.
+    Не беспокойтесь о том, чтобы их все запомнить. По мере роста вашей библиотеки и использования ее
+    другими пользователями, вы найдете то что лучше всего работает на каждом этапе.
 
 
-    Resources:
+    Ресурсы:
 
-    - [Guidelines For Writing Rust
-    APIs](https://rust-lang.github.io/api-guidelines/)
+    - [Руководство по написанию Rust API - англ.](https://rust-lang.github.io/api-guidelines/)
