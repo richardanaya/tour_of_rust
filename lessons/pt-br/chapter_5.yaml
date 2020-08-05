@@ -8,8 +8,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Instanciamos%20structs%20e%20vinculamos%20a%20vari%C3%A1veis%0A%20%20%20%20%2F%2F%20para%20criar%20recursos%20de%20mem%C3%B3ria%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%C3%A9%20o%20propriet%C3%A1rio%0A%7D%0A
 - title: Gerenciamento de Recursos Baseado em Escopo
   content_markdown: >
-    O Rust usa o último local de utilização ou o final do escopo da função para desconstruir e desalocar um recurso.
-
+    O Rust usa o final do escopo como o lugar para desconstruir e desalocar um recurso.
 
     O termo para esta descontrução e desalocação é chamado **descarte** (ou *drop*).
 
