@@ -5,41 +5,58 @@
   content_markdown: >
     Uma estrutura `struct` é uma coleção de campos.
 
+
     Um *campo* é simplesmente um valor de dado associado a uma estrutura de dados. Seu valor pode ser um tipo primitivo ou uma estrutura de dados.
+
 
     Sua definição é como um modelo para o compilador sobre como organizar os campos na memória próximos uns dos outros.
 - title: Chamando Métodos
   content_markdown: >
     Diferentemente das funções, os métodos são uma função associada a um tipo de dados específico.
 
+
     **Métodos estáticos** — os métodos que pertencem a um tipo determinado são chamados usando o operador `::`.
 
+
     **Métodos de instância** — os métodos que pertencem a uma instância de um tipo são chamados usando o operador `.`.
+
 
     Falaremos mais sobre como criar seus próprios métodos nos próximos capítulos.
 - title: Memória
   content_markdown: >
     Os programas em Rust têm 3 regiões de memória onde os dados são armazenados:
 
+
     * **data memory (memória de dados)** - Para dados com tamanho fixo e **estático** (ou seja, sempre disponíveis durante a vida útil do programa). Considere um texto em seu programa (por exemplo, "Olá, mundo!"), os bytes desse texto são somente lidos, então eles são colocados nesta região. Compiladores fazem muitas otimizações esse tipo de dados, eles geralmente são considerados muito rápidos de usar pois onde estão armazenados são conhecidos e fixos.
+
     * **stack memory (memória de pilha)** - Para dados declarados como variáveis dentro de uma função. O local dessa memória nunca muda durante a duração de uma chamada de função, assim os compiladores podem otimizar o código e por isso a pilha de dados é muito rápida de acessar.
+
     * **heap memory** - Para dados criados enquanto o aplicativo está em execução. Os dados nessa região podem ser adicionados, movidos, removidos, redimensionados etc. Por causa da sua natureza dinâmica geralmente é considerado mais lenta, mas permite usos de memória muito mais criativas. Quando dados são adicionados a essa região, chamamos de **alocação**. Quando os dados são removidos desta seção, chamamos de **desalocação**.
 - title: Criando Dados na Memória
   content_markdown: >
     Quando nós **instanciamos** uma **struct** no nosso código o programa cria os campos associados lado-a-lado na memória.
 
+
     Nós instanciamos uma estrutura especificando todos os valores dos campos dentro de
+
 
     `StructName { ... }`.
 
+
     Os campos são acessados usando o operador de ponto `.`.
+
 
     Detalhes da memória do nosso exemplo:
 
+
     * O texto dentro das aspas é somente leitura (por exemplo, "Ferris"), portanto é colocado na *região da memória de dados*.
+
     * A chamada da função `String::from` cria uma struct `String` que é colocada lado-a-lado com os campos de SeaCreature na *pilha*. Uma String representa um texto que pode ser alterado e faz assim:
+
       1. Criando memória no *heap* para o texto onde ele pode ser modificado.
+
       2. Armazenando uma referência a esse local de memória no *heap* e armazenando-o no struct `String` (mais a respeito em lições futuras).
+
     * Finalmente, nossos dois amigos *Ferris* e *Sarah* têm estruturas de dados que sempre terão locais fixos em nosso programa, portanto, eles são colocados na *pilha*.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Os%20dados%20de%20SeaCreature%20est%C3%A3o%20na%20pilha%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20A%20struct%20da%20String%20tamb%C3%A9m%20est%C3%A1%20na%20pilha%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20mas%20mant%C3%A9m%20uma%20refer%C3%AAncia%20dos%20dados%20na%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22caranguejo%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22garra%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22polvo%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22nenhum%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%A9%20um%20%7B%7D.%20Eles%20t%C3%AAm%20%7B%7D%20bra%C3%A7os%2C%20%7B%7D%20patas%2C%20e%20uma%20arma%20de%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%A9%20um%20%7B%7D.%20Eles%20t%C3%AAm%20%7B%7D%20bra%C3%A7os%20e%20%7B%7D%20patas.%20Eles%20n%C3%A3o%20t%C3%AAm%20armas..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
@@ -52,14 +69,18 @@
   content_markdown: >
     As estruturas não precisam ter nenhum campo.
 
+
     Como mencionado no capítulo 1, a *unit* é outra palavra para uma tupla vazia `()`. 
 
+
     É por isso que esse tipo de estrutura é chamado de *Unit-like*.
+
 
     Este tipo de estrutura raramente é usado.
 - title: Enumerações
   content_markdown: >
     As enumerações permitem criar um novo tipo que pode conter o valor de vários elementos etiquetados usando a palavra-chave `enum`.
+
 
     O `match` ajuda a garantir o tratamento exaustivo de todos os valores possíveis de *enum*, tornando-o uma ferramenta poderosa para garantir um código de qualidade.
   code: >-
@@ -68,16 +89,23 @@
   content_markdown: >
     Os elementos `enum` também podem ter um ou mais tipos de dados permitindo que eles se comportem como o *union* da linguagem C.
 
+
     Quando um `enum` corresponde ao padrão usando `match`, você pode vincular um nome de variável para cada valor de dados.
+
 
     Detalhes de memória do `enum`:
 
+
     * Um valor de dados *enum* terá um tamanho de memória igual ao seu maior elemento. Isso permite que todos os valores possíveis caibam no mesmo espaço de memória.
+
     * Além dos tipos de dados do elemento (se houver), cada elemento também possui um valor numérico que representa qual etiqueta (tag) ele é.
+
 
     Outros detalhes:
 
+
     * O `enum` do Rust também é conhecido como *tagged-union*
+
     * A combinação de tipos para criar um novo tipo é a o que nos referimos quando dizemos que Rust tem *tipos algébricos*.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20esta%20linha%20evita%20avisos%20do%20compilador%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20os%20dados%20de%20SeaCreature%20est%C3%A3o%20na%20pilha%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20A%20struct%20da%20String%20tamb%C3%A9m%20est%C3%A1%20na%20pilha%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20mas%20mant%C3%A9m%20uma%20refer%C3%AAncia%20dos%20dados%20na%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22grandes%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22pequenas%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22Ferris%20%C3%A9%20um%20caranguejo%20com%20%7B%7D%20garras%20%7B%7D%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22Ferris%20%C3%A9%20um%20caranguejo%20com%20outro%20tipo%20de%20arma%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22Ferris%20%C3%A9%20outro%20tipo%20de%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D
@@ -85,5 +113,5 @@
   content_markdown: >
     Que legal! Agora temos as ferramentas mais básicas para representar as nossas idéias no código. 
 
-    Esperamos que agora possamos ver como as operações fundamentais do Rust funcionam em harmonia e concisão com seus tipos. A seguir, falaremos sobre um conceito que oferece
-    aos nossos tipos de dados ainda mais flexibilidade de representação: *genéricos*.
+
+    Esperamos que agora possamos ver como as operações fundamentais do Rust funcionam em harmonia e concisão com seus tipos. A seguir, falaremos sobre um conceito que oferece aos nossos tipos de dados ainda mais flexibilidade de representação: *genéricos*.

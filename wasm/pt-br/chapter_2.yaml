@@ -2,7 +2,9 @@
   content_markdown: >
     JavaScript e seu WebAssembly têm representações de dados muito diferentes no nível da memória.
 
+
     Para tornar as coisas mais complexas, a interação com o ambiente host do WebAssembly é muito limitada.
+
 
     Neste capítulo exploraremos as estratégias usadas para o vai-e-vem dos dados.
 - title: Importando Funções
@@ -10,31 +12,41 @@
   content_markdown: >
     Os módulos WebAssembly podem chamar apenas funçõesque foram importadas explicitamente.
 
+
     O Rust usa `extern "C" { ... }` para listar as assinaturas dessas funções importadas.
+
 
     Observe que chamar uma função importada é considerado `não seguro` no Rust porque o compilador não pode dar garantias sobre o que acontece dentro da sua implementação.
 - title: Limitações das Funções
   content_markdown: >
     Os parâmetros e tipos retornados pelas funções são limitados a:
 
+
     * i32/i64
+
     * f32/f64
 
+
     Portanto, para se comunicar entre JavaScript e WebAssembly, teremos que ficar espertos com o significado dos números!
+
 
     Rust e C são bastante bons em converter seus tipos primitivos nos equivalentes numéricos do WebAssembly.
 - title: Exportando Memória
   content_markdown: >
     Os programas WebAssembly exportam sua memória como uma longa matriz de bytes (até 4 GB!).
 
+
     O host pode interpretar a partir desses bytes as estruturas de dados criadas pelo código do programa.
 
+
     Matrizes de bytes também podem ser gravadas diretamente na memória de um programa a partir do host e vice-versa.
+
 
     Ler e gravar bytes na memória de programas do WebAssembly é o principal meio de entrada e saída de tipos não primitivos.
 - title: ArrayBuffer
   content_markdown: >
     JavaScript representa uma longa matriz de bytes como um `ArrayBuffer`.
+
 
     Você pode obter uma visualização tipada desse buffer de uma maneira muito eficiente para interagir.
 
@@ -55,6 +67,7 @@
 - title: UTF-8 Encoding/Decoding
   content_markdown: >
     O JavaScript fornece funções utilitárias para ler e escrever strings UTF-8 para bytes dentro de objetos `ArrayBuffer` e vice-versa.
+
 
     ```JavaScript
     let bytes = new ArrayBuffer(8);
@@ -78,13 +91,19 @@
   content_markdown: >
     Vamos explorar um exemplo simples de logar um texto de um programa WebAssembly.
 
+
     Nós devemos:
 
+
     1. Criar um texto compatível com utf-8 na memória do nosso programa.
+
     2. Determinar o comprimento em bytes do nosso texto.
+
     3. De alguma forma, enviar o índice do byte inicial e o comprimento em bytes desses dados do texto para o navegador host, e então chamar o `console.log`.
 
+
     Aqui está um exemplo de como seria essa função de recebimento em JavaScript:
+
 
     ```JavaScript
     wasm_log(start,len) {
@@ -101,14 +120,21 @@
   content_markdown: >
     Vamos explorar a ideia oposta. Imagine que queremos passar um texto para um programa WebAssembly.
 
+
     Nós devemos:
 
+
     1. Determinar o comprimento em bytes do texto que queremos passar.
+
     1. Alocar algum espaço em nossa memória com esse comprimento em bytes.
+
     2. Copiar os bytes para a memória do nosso programa no início do espaço que alocamos.
+
     3. Informar o programa WebAssembly que colocamos alguns dados na memória em uma posição e com um comprimento específicos em bytes.
 
+
     Aqui está um exemplo de como é essa inicialização:
+
 
     ```JavaScript
     // Transforma "Ferris" em bytes
@@ -132,15 +158,20 @@
   content_markdown: >
     Você pode achar irritante passar pelo comprimento junto com o índice inicial do texto.
 
+
     Considere isso uma oportunidade para refletir sobre as convenções úteis do passado, tais como as *C strings* que declaram que o final do texto é um caractere de valor `\0`.
 
+
     Não quer passar uma estrutura de dados formatada em bytes? Considere passar um json.
+
 
     Você está no controle de suas representações na memória, o que elas significam e se são apropriadas para seus casos de uso!
 - title: Capítulo 2 - Conclusão
   content_markdown: >
     Atravessar a fronteira entre o host e o programa WebAssembly é complicado, mas com ele podemos ter um ótimo desempenho.
 
+
     É importante lembrar que o WebAssembly é um byte-code executável de baixo nível com preocupações a respeito de estruturas de memória que são muito mais refinadas que o JavaScript. Confira o suporte da biblioteca da sua linguagem de programação para ferramentas que ajudam a tornar essa tarefa mais fácil! Para o Rust, o [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) é uma opção popular.
+
 
     No próximo capítulo falaremos sobre uma técnica para chamar dinamicamente funções JavaScript e garbage collection!

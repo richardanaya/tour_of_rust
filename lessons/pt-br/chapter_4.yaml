@@ -5,6 +5,7 @@
   content_markdown: >
     Tipos genéricos nos permitem definir parcialmente uma `struct` ou `enum`, deixando que o compilador instancie uma versão dela definida em tempo de compilação totalmente com base em nosso código.
 
+
     Geralmente o Rust pode inferir o tipo final observando a nossa instanciação, mas se ele precisar de ajuda você sempre pode ser explícito usando o operador `::<T>`, também conhecido pelo nome `turbofish` (ele é um bom amigo meu!).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Um%20tipo%20struct%20definido%20parcialmente%0Astruct%20Sacola%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Nota%3A%20usando%20tipos%20gen%C3%A9ricos%20aqui%20n%C3%B3s%20criamos%20tipos%20em%20tempo%20de%20compila%C3%A7%C3%A3o%0A%20%20%20%20%2F%2F%20fazendo%20o%20nosso%20c%C3%B3digo%20ficar%20maior.%20O%20turbofish%20nos%20permite%20ser%20expl%C3%ADcitos.%0A%20%20%20%20let%20i32_sacola%20%3D%20Sacola%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_sacola%20%3D%20Sacola%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20O%20Rust%20pode%20inferir%20os%20tipos%20para%20gen%C3%A9ricos%20tamb%C3%A9m!%0A%20%20%20%20let%20float_sacola%20%3D%20Sacola%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Nota%3A%20nunca%20coloque%20uma%20sacola%20dentro%20da%20outra%20na%20vida%20real%0A%20%20%20%20let%20sacola_na_sacola%20%3D%20Sacola%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20Sacola%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_sacola.item%2C%20bool_sacola.item%2C%20float_sacola.item%2C%20sacola_na_sacola.item.item%0A%20%20%20%20)%3B%0A%7D%0A
@@ -12,7 +13,9 @@
   content_markdown: >
     Em outras linguagens, a palavra-chave `null` é usada para representar a ausência de um valor. Isso cria dificuldades nas linguagens de programação, porque possibilita que o nosso programa possa falhar ao interagir com uma variável/campo.
 
+
     O Rust não tem `null`, mas não ignora a importância de representar o *nada*! Considere uma representação ingênua usando uma ferramenta que já conhecemos.
+
 
     Esse padrão para fornecer uma representação alternativa ao `None` por um ou vários valores alternados é muito comum em Rust devido à falta de um valor `null`. Os tipos genéricos ajudam a resolver esse desafio.
   code: >-
@@ -21,12 +24,14 @@
   content_markdown: >
     O Rust possui uma enumeração genérica embutida chamada `Option` que nos permite representar valores nulos sem precisar usar o `null`.
 
+
     ```
     enum Option<T> {
         None,
         Some(T),
     }
     ```
+
 
     Essa enumeração é tão comum que as suas instâncias podem ser criadas em qualquer lugar com a palavra-chave `Some` e `None`.
   code: >-
@@ -35,7 +40,9 @@
   content_markdown: >
     O Rust possui uma enumeração genérica chamada `Result` que nos permite retornar um valor que tem a possibilidade de falhar.
 
+
     Esta é a maneira idiomática pela qual a linguagem faz a manipulação de erros.
+
 
     ```
     enum Result<T, E> {
@@ -44,7 +51,9 @@
     }
     ```
 
+
     Observe que os nosso tipos genéricos possuem vários *tipos parametrizados* separados por vírgula.
+
 
     Esta enumeração é tão comum que instâncias dela podem ser criadas em qualquer lugar com as palavras-chave `Ok` e `Err`.
   code: >-
@@ -58,10 +67,12 @@
   content_markdown: >
     O `Result` é tão comum que o Rust tem o poderoso operador `?` para trabalhar com ele. Estas duas declarações são equivalentes:
 
+
     ```
     do_something_that_might_fail()?
 
     ```
+
 
     ```
     match do_something_that_might_fail() {
@@ -75,15 +86,20 @@
   content_markdown: >
     Trabalhar com `Option`/`Result` pode ser entediante quando você está apenas tentando escrever um código rápido. Tanto `Option` quanto `Result` têm uma função chamada `unwrap` que pode ser útil para obter um valor de maneira rápida e *feia*. `unwrap` irá:
 
+
     1. Obter o valor de Option/Result
+
     2. Se a enumeração for do tipo None/Err, `panic!`
 
+
     Esses dois trechos de código são equivalentes:
+
 
     ```
     my_option.unwrap()
 
     ```
+
 
     ```
     match my_option {
@@ -92,12 +108,15 @@
     }
     ```
 
+
     Similarmente:
+
 
     ```
     my_result.unwrap()
 
     ```
+
 
     ```
     match my_result {
@@ -106,6 +125,7 @@
     }
     ```
 
+
     Seja um bom rustáceo e use `match` apropriadamente quando puder!
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20faz_alguma_coisa_que_pode_falhar(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22este%20n%C3%A3o%20%C3%A9%20o%20n%C3%BAmero%20correto%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20conciso%2C%20mas%20pretencioso%20e%20falha%20r%C3%A1pido%0A%20%20%20%20let%20v%20%3D%20faz_alguma_coisa_que_pode_falhar(42).unwrap()%3B%0A%20%20%20%20println!(%22encontrei%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20erro%20de%20panic!%0A%20%20%20%20let%20v%20%3D%20faz_alguma_coisa_que_pode_falhar(1).unwrap()%3B%0A%20%20%20%20println!(%22encontrei%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
@@ -113,13 +133,18 @@
   content_markdown: >
     Alguns dos tipos genéricos mais úteis são os tipos de coleção. Uma matriz é uma lista de itens de tamanho variável representada pela estrutura `Vec`.
 
+
     A macro `vec!` nos permite criar facilmente uma matriz ao invés de contruir uma manualmente.
+
 
     `Vec` possui o método `iter()` o qual cria um iterador a partir de uma matriz, permitindo-nos facilmente usr uma matriz em um loop `for`.
 
+
     Detalhes da Memória:
 
+
     * `Vec` é um struct, mas internamente contém uma referência a uma lista fixa de seus itens no heap.
+
     * Uma matriz começa com uma capacidade padrão. Quando são adicionados mais itens do que a capacidade inicial, ele realoca seus dados no heap para ter uma nova lista fixa com capacidade maior.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Podemos%20ser%20expl%C3%ADcitos%20com%20o%20tipo%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20Veja%20qu%C3%A3o%20esperto%20o%20Rust%20%C3%A9%20determinando%20o%20tipo%20automaticamente%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20Olha%20que%20macro%20linda!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Ol%C3%A1%22)%2C%20String%3A%3Afrom(%22Mundo%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
