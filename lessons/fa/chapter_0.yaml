@@ -1,0 +1,27 @@
+- title: >-
+    سلام, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: |
+    به *تور راست* خوش آمدی . قراره با هم یه راهنمای مرحله به مرحله برای زبان برنامه نویسی راست رو تجربه کنیم .راست معمولا به عنوان یک زبان با پروسه یادگیری سخت در نظر گرفته میشه . ولی میشه خیلی چیز ها یاد گرفت قبل اینکه به بخش های سخت برسیم.
+
+    راستی این آموزش به زبان های دیگه هم موجوده:    
+
+    * [Deutsch](00_de.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Magyar](00_hu.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [简体中文](00_zh-cn.html)
+    * [繁體中文](00_zh-tw.html)
+    * [日本語](00_ja.html)
+    * [한국어](00_ko.html)
+
+    [github repository](https://github.com/richardanaya/tour_of_rust).اگه در مورد محتوا پیشنهادی داری یا میخای به زبان خودت ترجمه کنی , گیت هاب تور راست رو حتما چک کن
+
+    می تونی توی تور بگردی با <span class="emoji">⬅️</span> و <span class="emoji">➡️</span>
+
+    ما با یک مثال کلاسیک قابلیت راست در unicode string رو بررسی می کنیم.

@@ -1,0 +1,28 @@
+- title: >-
+    Halo, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: |
+    Selamat datang di *Rust Tur*. Ini dimaksudkan sebagai panduan secara bertahap dari fitur bahasa pemprograman Rust. Rust sering dianggap sebagai bahasa yang sukar untuk dipelajari, tetapi saya harap saya dapat meyakinkaan anda bahwa ada banyak hal yang perlu dijelajahi sebelum kita sampai ke bagian yang rumit.
+
+    Kamu juga dapat menemukan panduan ini dalam bahasa-bahasa ini:
+
+    * [Deutsch](00_de.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Bahasa Indonesia](00_id.html)
+    * [Magyar](00_hu.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [简体中文](00_zh-cn.html)
+    * [繁體中文](00_zh-tw.html)
+    * [日本語](00_ja.html)
+    * [한국어](00_ko.html)
+
+    Jika kamu mempunyai saran untuk konten atau ingin berkontribusi pada terjemahan, cek Tur Rust [github repository](https://github.com/richardanaya/tour_of_rust).
+
+    Kamu juga dapat menggunakan keyboard untuk bernavigasi <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>.
+
+    Di dalam contoh klasik ini kita akan menunjukkan dukungan Rust untuk Unicode strings.
