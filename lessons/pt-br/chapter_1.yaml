@@ -2,12 +2,14 @@
   content_markdown: >
     Neste primeiro capítulo iremos explorar o mais básico sobre funções, variáveis e os tipos de dados mais primitivos. Bem-vindo a bordo!
 
+
     E se por acaso você está se perguntando quem é este adorável caranguejo falante, eu me chamo **Ferris** e sou o mascote não oficial da linguagem de programação Rust. Prazer em conhecê-lo.
 - title: O Playgroung do Rust
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Bem-vindo%20%C3%A0%20%C3%A1rea%20de%20testes!%20Voc%C3%AA%20pode%20modificar%20seu%20c%C3%B3digo%20aqui.%22)%3B%0A%7D%0A
   content_markdown: >
     Este tour usa a ferramenta de codificação interativa [Rust Playground](https://play.rust-lang.org)
+
 
     É uma boa maneira de brincar com Rust e mostrar aos outros a sua criatividade e desafios!
 - title: Variáveis
@@ -16,21 +18,29 @@
   content_markdown: >
     Variáveis são declaradas usando a palavra-chave **let**.
 
+
     Quando atribuimos um valor, o Rust poderá inferir o tipo da sua variável em 99% dos casos.
+
 
     Se não for possível, você poderá especificar o tipo ao declarar a variável.
 
+
     Veja que podemos atribuir valores à mesma variável várias vezes. Isto é chamado *sobreamento* de variáveis (shadowing) e podemos mudar o seu tipo para referências futuras a esse nome.
+
 
     Os nomes das variáveis são sempre em `snake_case`.
 - title: Modificando valores
   content_markdown: >
     Em Rust é importante levar em consideração quais valores serão alterados. Os valores se dividem em dois tipos:
 
+
     * **mutáveis** - o compilador permitirá que a variável seja lida e gravada.
+
     * **imutáveis** - o compilador permitirá apenas a leitura da variável.
 
+
     Valores mutáveis são marcados com a palavra-chave **mut**.
+
 
     Temos muito a explicar ainda sobre este conceito, mas por enquanto apenas preste atenção nesta palavra-chave.
 - title: Tipos básicos
@@ -39,22 +49,34 @@
   content_markdown: >
     Rust tem uma variedade tipos que lhe serão familiares:
 
+
     * booleanos - `bool` para representar verdadeiro/falso
+
     * números inteiros sem sinal - `u8` `u32` `u64` `u128` para representar números inteiros positivos
+
     * números inteiros com sinal - `i8` `i32` `i64` `i128` para representar números inteiros positivos e negativos
+
     * ponteiros de números inteiros - `usize` `isize` para representar índices e o comprimento de coleções em memória
+
     * números de ponto flutuante - `f32` `f64`
+
     * tuplas - `(value, value, ...)` para passar sequências de valores fixas para a pilha
+
     * matriz - uma coleção de elementos similares com comprimento fixo conhecidos em tempo de compilação
+
     * slices - uma coleção de elementos similares com comprimento conhecido em tempo de execução
+
     * `str` (string slice) - texto com comprimento conhecido em tempo de execução
 
+
     Textos podem ser mais complexos do que você está acostumado com outras linguagens. Uma vez que o Rust é uma linguagem de programação de sistemas, ele cuida do gerenciamento de memória de uma maneira que pode não estar familiarizado. Entraremos em detalhes mais adiante.
+
 
     Tipos numéricos podem ser especificados explicitamente adicionando o tipo ao final do número (por exemplo: `13u32`, `2u8`)
 - title: Conversão de tipos básica
   content_markdown: >
     O Rust requer que sejamos explícitos quando se trata de tipos numéricos. Não podemos usar um `u8` quando precisamos usar um `u32` sem que se produza um erro.
+
 
     Por sorte o Rust faz com que as conversões de tipos numéricos sejam muito simples usando a plavra-chave **as**.
 - title: Constantes
@@ -63,21 +85,27 @@
   content_markdown: >
     As constantes nos permitem especificar um valor comum que pode ser usado muitas vezes por todos o nosso código de maneira eficiente. Ao invés de copiar os valores como variáveis onde serão utilizadas, as constantes substituirão o identificador de texto pelo seu valor onde quer que estejam sendo usadas em tempo de compilação.
 
+
     Diferentemente das variáveis, o tipo das constantes devem ter sempre declarados.
+
 
     Os nomes das constantes são sempre em `SCREAMING_SNAKE_CASE`.
 - title: Matrizes
   content_markdown: >
     Uma *matriz* é uma coleção de elementos de tamanho fixo todos os seu valores do mesmo tipo.
 
+
     O tipo de dado para uma *matriz* é `[T;N]`, onde T é o tipo dos valores e N é o comprimento fixo conhecido em tempo de compilação.
+
 
     Os elementos podem ser recuperados individualmente com o operador `[x]`, onde *x* é o índice do tipo *usize* (começando de 0) do elemento que deseja recuperar.
 - title: Funções
   content_markdown: >
     Uma função pode receber zero ou mais parâmetros.
 
+
     Neste exemplo, *add* recebe dois parâmetros do tipo `i32` (número inteiro de 32 bits).
+
 
     Os nomes das funções são sempre em `snake_case`.
 - title: Retorno de Múltiplos Valores
@@ -86,7 +114,9 @@
   content_markdown: >
     Funções podem devolver múltiplos valores retornando uma **tupla** de valores.
 
+
     Os elementos da tupla podem ser referenciados pelo seu índice.
+
 
     O Rust suporta vários modos de desestruturação que veremos em diferentes formas, permintindo extrair subconjuntos de dados de maneira prática.
 - title: Retornando nada
@@ -95,7 +125,9 @@
   content_markdown: >
     Se nenhum tipo for especificado para o retorno de uma função, ele devolve uma tupla vazia, também conhecida como *unit*.
 
+
     Uma tupla vazia é representada por `()`.
+
 
     O uso de `()` é incomum, mas é necessário saber o seu significado uma vez que aparecerá de vez em quando.
 - title: Capítulo 1 - Conclusão

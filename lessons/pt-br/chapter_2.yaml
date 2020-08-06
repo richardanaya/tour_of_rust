@@ -2,12 +2,15 @@
   content_markdown: >
     Neste capítulo falaremos das estruturas de controle de fluxo básicas em Rust.
 
+
     Se você está familiarizado com linguagens baseadas em C, se sentirá em casa e, quem sabe, algumas agradáveis surpresas.
 - title: if/else if/else
   content_markdown: >
     A ramificação de código em Rust não tem nenhuma novidade.
 
+
     Não há parêntesis nas condições! Realmente precisamos deles? Assim a nossa lógica fica mais simples e limpa.
+
 
     Todos os nossos operadores relacionais e lógicos habituais continuam funcionando: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
   code: >-
@@ -16,30 +19,39 @@
   content_markdown: |
     Precisando de um loop infinito?
 
+
     Rust faz isso fácil.
 
+
     O `break` nos permite sair de um loop quando precisar.
+
 
     O `loop` tem um segredo do qual falaremos em breve.
 - title: while
   content_markdown: |
     O `while` permite que você estabeleça facilmente uma condição no loop.
 
+
     Se a condição avaliar `falso`, o loop terminará.
 - title: for
   content_markdown: |
     O loop `for` do Rust é uma grande melhoria, uma vez que ele itera sobre valores de qualquer expressão que se avalie como um iterador. O que é um iterador? Um iterador é um objeto ao qual você pode perguntar "qual o seu próximo item?" até que não haja mais itens.
 
+
     Iremos explorar mais isso em um capítulo futuro, mas por enquanto basta saber que em Rust é fácil criar iteradores que geram uma seqüência de números inteiros.
 
+
     O operador `..` cria um iterador que gera uma seqüência a partir de um número inicial até, mas não incluso, um número final.
+
 
     O operador `..=` cria um iterador que gera uma seqüência a partir de um número inicial até um número final, inclusive.
 - title: match
   content_markdown: >
     Sentiu falta do operador *switch*? O Rust tem uma palavra-chave muito útil para comparar um valor com todas as condições possíveis e executar um bloco de código se a condição for verdadeira. Vejamos como isso funciona com números. Falaremos mais a respeito de padrões de correspondência com dados mais complexos em capítulos futuros. Prometo que a espera valerá a pena.
 
+
     O `match` é exaustivo, então todos os casos devem ser avaliados.
+
 
     Correspondências (matching) combinado com desestruturação é um dos padrões mais comuns que você verá no Rust.
   code: >-
@@ -53,9 +65,12 @@
   content_markdown: >
     `if`, `match`, funções e blocos de código têm maneiras únicas de retornar valores em Rust.
 
+
     Se a última instrução de um `if`, `match`, função ou bloco de código for uma expressão sem `;`, o Rust vai retorná-la como um valor do bloco.
 
+
     Esta é uma ótima maneira de criar uma lógica concisa que retorna um valor que pode ser atribuída a uma nova variável.
+
 
     Note isso também permite que o operador `if` funcione como uma expressão ternária concisa.
   code: >-

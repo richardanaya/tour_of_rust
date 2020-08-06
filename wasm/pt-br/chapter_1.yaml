@@ -2,24 +2,34 @@
   content_markdown: >
     O WebAssembly é um formato binário para representar um código executável isolado. Foi projetado para ser executado nos navegadores de internet como uma alternativa ao JavaScript com algumas vantagens nítidas:
 
+
     * Por ser um bytecode de baixo nível, é capaz de executar cálculos rapidamente e gerenciar a memória de forma mais concisa.
+
     * O WebAssembly foi projetado tendo os compiladores existentes em mente, permitindo que seja compilado a partir de linguagens nativas como C/C++ e Rust.
+
     * Projetado com o isolamento em mente, permitindo um controle de acesso detalhado.
+
     * O WebAssembly foi projetado para ser bem agnóstico, permitindo que as pessoas usem o web assembly [fora dos navegadores](https://wasmer.io/) também!
+
 
     O WebAssembly é frequentemente chamado de **WASM**.
 - title: Por Dentro de um Módulo
   content_markdown: >
     Quando você compila para WebAssembly, seu compilador deve criar um arquivo terminado em `.wasm` chamado de **módulo**.
 
+
     O módulo é um [formato binário](https://webassembly.github.io/spec/core/index.html) com todas as informações para que um programa wasm e a sua memória sejam configurados e interajam com:
 
+
     * uma lista de funções.
+
     * quais funções devem ser exportadas/importadas.
+
     * quais dados devem inicialmente estar na memória dos módulos wasm.
 - title: Carregando um Módulo
   content_markdown: >
     Como um módulo de WebAssembly é apenas um arquivo de bytes, precisamos primeiro carregar esses bytes em nosso navegador.
+
 
     ```
     let file = await fetch('meu_arquivo.wasm');
@@ -30,16 +40,20 @@
   content_markdown: >
     Módulos são criados a partir de bytes.
 
+
     ```
     let module = await WebAssembly.instantiate(bytes);
     ```
+
 
     Durante esta fase podemos **importar** funções JavaScript que desejamos que nosso módulo tenha acesso. Mostraremos um exemplo no próximo capítulo.
 - title: Usando um Módulo
   content_markdown: >
     Um módulo tem uma ou mais funções **exportadas** que estarão acessíveis ao JavaScript.
 
+
     Tipicamente há uma função exportada que será chamada para iniciar um programa wasm (por exemplo: `main`, `start`).
+
 
     ```
     module.instance.main();
@@ -48,6 +62,7 @@
   code: 'https://webassembly.studio/?embed&f=jg96xg1ovj'
   content_markdown: >
     Vamos juntar nossos conhecimentos e criar um módulo WebAssembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
+
 
     `#[no_mangle]` diz ao nosso compilador para manter o nome da nossa função legível para seres humanos.
 - title: Capítulo 1 - Conclusão
