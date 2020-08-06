@@ -1,0 +1,80 @@
+- title: Bab 2 - Dasar Flow Kontrol
+  content_markdown: >
+    Di dalam bab ini kita akan membahas tentang metode dasar flow kontrol dari Rust.
+
+    Jika kamu familiar dengan bahasa pemprograman berbasis C, kamu tidak akan kesulitan atau mungkin menyukai satu atau dua kejutan.
+- title: if/else if/else
+  content_markdown: >
+    Code branching pada Rust tidaklah mengejutkan.
+
+
+    Kondisi tidak mempunyai tanda kurung! Apakah kita sangat memebutuhkannya? Logika kita sekarang terlihat bagus dan bersih.
+
+
+    Semua operator relasioinal dan logika tetap berkerja: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+- title: loop
+  content_markdown: |
+    Butuh loop tak-terbatas?
+
+    Rust membuat hal tersebut menjadi mudah.
+
+    `break` akan menghentikan loop ketika kamu siap.
+
+    `loop` mempunyai rahasia, kita akan membicarakannya nanti.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while
+  content_markdown: |
+    `while` mempermudah kita untuk menambahkan kondisi pada loop.
+
+    Jika kondisi terevaluasi menjadi `false`, maka loop akan selesai.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: for
+  content_markdown: >
+    Rust `for` loop sangatlah powerful untuk mengiterasi suatu nilai dengan expresi apapun yang dievaluasi sebagai iterator.
+
+    Apa itu Iterator? Iterator adalah objek yang dapat menjawab pernyataan seperti "item apa yang selanjutnya kau punya?" sampai tidak ada item lagi.
+
+
+    Kita akan menjelajahi hal ini lebih lanjut pada bab selanjutnya. Sementara itu, ketahuilah bahwa Rust membuat hal tersebut mudah dengan membuat iterator yang menghasilkan serangkaian integer.
+
+
+    `..` operator membuat sebuah iterator yang menghasilkan angka-angka dari suatu angka sampai sebuah angka lain yang menandakan akhiran tetapi tanpa angka akhir tersesbut.
+
+
+    `..=` operator membuat sebuah iterator yang menghasilkan angka-angka dari suatu angka sampai sebuah angka lain yang menandakan akhiran beserta angka tersebut.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_markdown: >
+    Kangen dengan switch statement? Rust mempunyai kata kunci yang sangat powerful untuk mencocokkan semua kemungkinan kondisi dari sebuah nilai dan mengksekusi code tersebut ketika kondisi cocok (dievaluasi sebagai true). Kita akan  melihat bagaimana hal ini hal ini bekerja pada angka. Kita punya banyak hal yang akan disampaikan pada bab yang akan datang pada bab pencocokkan pola pada data struktur kompleks. Saya berjanji hal tersebut sangatlah layak untuk ditunggu.
+
+
+    `match` merupakan kata kunci yang bersifat menyeluruh, jadi semua kasus harus di tangani.
+
+
+    Match dikombinasikan dengan destructuring, sampai saat ini sangatlah umum dan kamu akan melihat hal tersebut disepanjang Rust.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: Mengembalikan Nilai dari Loop
+  content_markdown: |
+    `loop` dapat menggukan `break` untuk mengembalikan nilai.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Mengembalikan Nilai dari Expresi Blok
+  content_markdown: >
+    `if`, `match`, fungsi, dan blok scope semua mempunyai sebuah hal unik untuk mengembalikan nilai di dalam Rust.
+
+
+    Jika statement terakhir di dalam `if`, `match`, fungsi, atau blok scope adalah tanpa menggunakan `;`, maka Rust akan mengembalikan nilai tersebut dari blok. Ini merupakan cara yang bagus untuk membuat sebuah logika ringkas yang mengembalikan sebuat nilai yang dapat dimasukkan ke dalam sebuah variabel.
+
+
+    Perhatikan bahwa hal tersebut juga memperbolehkan kita menggunakan `if` statement layaknya expresi ternary.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: Bab 2 - Kesimpulan
+  content_markdown: >
+    Saya berharap bahwa saya telah memperlihatkan sekilas kekuatan dari Rust bahkan pada fitur dasar dari bahasa pemprograman. Kita akan membicarakan tentang `for` dan `match` lebih lanjut secara mendalam sambil kita mendapatkan pengetahuan yang dapat memfaatkan kemampuan mereka. Selanjutkan kita akan masuk pada data struktur dasar pada Rust.
