@@ -192,5 +192,5 @@
     Up to now, we've mostly looked at Rust from the lens of a procedural
     paradigm (i.e. just functions and data),
 
-    but it's time we now talk about traits and the capabilties unlocked by
+    but it's time we now talk about traits and the capabilities unlocked by
     Rust's object oriented paradigm.

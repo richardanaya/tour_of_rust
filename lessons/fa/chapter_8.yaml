@@ -237,7 +237,7 @@
     Using a smart pointer `Box` we can use the type `Box<dyn std::error::Error>`
     as a common type for returning errors because it allows us to
 
-    propogate up an error on the heap and interact with it at a high level
+    propagate up an error on the heap and interact with it at a high level
     without having to know a specific type.
 
 
