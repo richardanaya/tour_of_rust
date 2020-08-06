@@ -1,20 +1,20 @@
 - title: Capítulo 6 - Texto
   content_markdown: >
-    Agora que entendemos um pouco como Rust pensa a memória estamos preparados para falar a respeito de texto com mais detalhes.
+    Agora que entendemos um pouco como Rust pensa a memória, estamos preparados para falar a respeito de texto com mais detalhes.
 
 
     O Rust se preocupa muito com as questões de texto internacional e byte-level de um jeito que talvez não lhe seja familiar em outras linguagens. Dito isto, o Rust possui muitas ótimas ferramentas para gerenciar essas preocupações.
 - title: Literais string
   content_markdown: >
-    Literais string são sempre Unicode.
+    Asd literais string são sempre Unicode.
 
 
     O tipo de literais String é `&'static str`:
 
 
-    * `&` significa que está se referindo a uma posição na memória, e a falta de um `& mut` significa que o compilador não permitirá modificações.
+    * `&` significa que está se referindo a uma posição na memória e a falta de um `& mut` significa que o compilador não permitirá modificações.
 
-    * `'static` significa que os dados da string estarão disponíveis até o final da execução do nosso programa (nunca será descartada).
+    * `'static` significa que os dados da string estarão disponíveis até o final da execução do nosso programa (isto é, nunca será descartada).
 
     * `str` significa que aponta para uma sequência de bytes que serão sempre **utf-8**  válidos.
 
@@ -25,7 +25,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22ol%C3%A1%2C%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
 - title: O que é utf-8
-  content_markdown: "À medida que mais idiomas eram usados nos computadores o mundo precisava representar mais caracteres de texto do que o permitido pelo ASCII (1 byte permitia apenas 256 caracteres).\n\n**utf-8** foi introduzido com um comprimento de bytes variável de 1 a 4 bytes aumentando bastante o intervalo de caracteres possíveis.\n\nUma vantagem dos caracteres de tamanho variável é que o texto não tem bytes desnecessários para os caracteres ASCII comumente usados (requer apenas 1 byte mesmo em **utf-8**).\n\nUma desvantagem dos caracteres de tamanho variável é que a pesquisa de caracteres não pode mais ser feita rapidamente (tempo constante de **O(1)**) com uma indexação simples (por exemplo `my_text[3]` para obter o 4º caractere). É possível que os caracteres anteriores tenham larguras variáveis, alterando onde o quarto caractere realmente começa na sequência de bytes.\n\nEm vez disso, devemos iterar por uma sequência de bytes **utf-8** para entender onde os caracteres Unicode realmente começam (tempo linear de **O(n)**).\n\nFerris: \"Estou muito feliz por ter **utf-8** para representar os emojis dos meus amigos subaquáticos.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>"
+  content_markdown: "À medida que mais idiomas eram usados nos computadores o mundo precisava representar mais caracteres de texto do que o permitido pelo ASCII (1 byte permitia apenas 256 caracteres).\n\nO **utf-8** foi introduzido com um comprimento em bytes variável de 1 a 4 bytes, aumentando bastante o intervalo de caracteres possíveis.\n\nUma vantagem dos caracteres de tamanho variável é que o texto não tem bytes desnecessários para os caracteres ASCII comumente usados (requer apenas 1 byte mesmo em **utf-8**).\n\nUma desvantagem dos caracteres de tamanho variável é que a pesquisa de caracteres não pode mais ser feita rapidamente (tempo constante de **O(1)**) com uma indexação simples (por exemplo `my_text[3]` para obter o 4º caractere). É possível que os caracteres anteriores tenham larguras variáveis, alterando onde o quarto caractere realmente começa na sequência de bytes.\n\nEm vez disso, devemos iterar por uma sequência de bytes **utf-8** para entender onde os caracteres Unicode realmente começam (tempo linear de **O(n)**).\n\nFerris: \"Estou muito feliz por ter **utf-8** para representar os emojis dos meus amigos subaquáticos.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>"
 - title: Caractere de escape
   content_markdown: >
     É um desafio representar visualmente certos caracteres, portanto os **códigos de escape** nos permitem colocar um símbolo em seu lugar.
@@ -58,12 +58,12 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20Ah%2C%20o%20passado.%0A%20%20%20%20O%20tempo%20onde%20se%20acumularam%0A%20%20%20%20%20%20%20%20%20%20%20%20os%20dias%20lentos.%0A%20%20%20%20%20%20%20%20-%20Busson%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22ol%C3%A1%20%5C%0A%20%20%20%20mundo%22)%20%2F%2F%20perceba%20que%20o%20espa%C3%A7o%20antes%20de%20%22mundo%22%20%C3%A9%20ignorado%0A%7D%0A
 - title: Literais de string brutas
   content_markdown: >
-    Strings brutos nos permitem escrever uma sequência de caracteres literais começando com `r#"` e terminando com `"#`. Ela nos permite inserir caracteres que, de outra forma, poderiam confundir uma string normal com literais (como aspas duplas e barras invertidas).
+    As strings brutas nos permitem escrever uma sequência de caracteres literais começando com `r#"` e terminando com `"#`. Ela nos permite inserir caracteres que, de outra forma, poderiam confundir uma string normal com literais (como aspas duplas e barras invertidas).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22conselho%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Strings%20brutas%20s%C3%A3o%20%C3%BAteis%20para%20algumas%20situa%C3%A7%C3%B5es.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
 - title: Literais de string de arquivos
   content_markdown: >
-    Se você possui um texto muito grande, considere usar a macro `include_str!` Para incluir texto de arquivos locais no seu programa:
+    Se você possui um texto muito grande, considere usar a macro `include_str!` para incluir texto de arquivos locais no seu programa:
 
 
     ```rust
@@ -92,7 +92,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22oi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20primeira_palavra%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20segunda_palavra%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20meio_caranguejo%20%3D%20%26a%5B3..5%5D%3B%20falha!%0A%20%20%20%20%2F%2F%20Rust%20n%C3%A3o%20aceita%20fatias%20de%20strings%20inv%C3%A1lidos%20de%20unicode%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20primeira_palavra%2C%20segunda_palavra)%3B%0A%7D%0A
 - title: Caracteres
   content_markdown: >
-    Com tanta dificuldade para trabalhar com Unicode, o Rust oferece uma maneira de recuperar uma sequência de utf-8 bytes como um vetor de caracteres do tipo `char`.
+    Com tanta dificuldade para trabalhar com Unicode, o Rust oferece uma maneira de recuperar uma sequência de bytes utf-8 como um vetor de caracteres do tipo `char`.
 
 
     Um `char` sempre tem 4 bytes de comprimento (permitindo uma pesquisa eficiente de caracteres individuais).
@@ -103,7 +103,7 @@
     Uma **String** é uma estrutura que contém uma sequência de bytes utf-8 na memória heap.
 
 
-    Como sua memória está na pilha, ela pode ser estendida, modificada etc. de tal maneira que os literais de cadeia não podem.
+    Como sua memória está na pilha, ela pode ser estendida, modificada etc. de tal maneira que os literais de string não podem.
 
 
     Métodos comuns:
@@ -126,12 +126,12 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22ol%C3%A1%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20mundo%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
 - title: Texto como parâmetros de função
   content_markdown: >
-    Literais de string e strings geralmente são passados como uma fatia de string para as funções. Isso oferece muita flexibilidade para a maioria dos cenários em que você realmente não precisa passar a propriedade.
+    As literais de string e strings geralmente são passados como uma fatia de string para as funções. Isso oferece muita flexibilidade para a maioria dos cenários em que você realmente não precisa passar a propriedade.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20gritar(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20gritar%20pode%20pegar%20emprstado%20uma%20%26'static%20str%20como%20%26str%0A%20%20%20%20gritar(%22ol%C3%A1%22)%3B%0A%20%20%20%20%2F%2F%20gritar%20tamb%C3%A9m%20pode%20pegar%20emprestado%20uma%20string%20como%20%26str%0A%20%20%20%20gritar(%26String%3A%3Afrom(%22adeus%22))%3B%0A%7D
 - title: Criando Strings
   content_markdown: |
-    `concat` e `join` são duas maneiras simples, mas poderosas, de criar strings.
+    O `concat` e o `join` são duas maneiras simples, mas poderosas, de criar strings.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20olamundo%20%3D%20%5B%22ol%C3%A1%22%2C%20%22%20%22%2C%20%22mundo%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20olamundo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20abc)%3B%0A%7D%0A
 - title: Formatando Strings
@@ -139,10 +139,10 @@
     A macro `format!` nos permite criar uma string definindo uma string parametrizada com espaços reservados para onde e como os valores devem ser colocados (por exemplo, `{}`).
 
 
-    `format!` usa as mesmas strings parametrizadas que o `println!`
+    O `format!` usa as mesmas strings parametrizadas que o `println!`.
 
 
-    Os recursos desta função têm um escopo muito grande para *Um tour por Rust*. Confira a documentação [aqui](https://doc.rust-lang.org/std/fmt/).
+    Os recursos desta função têm um escopo muito maior que o do *Um tour por Rust*. Confira a documentação [aqui](https://doc.rust-lang.org/std/fmt/).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22o%20segredo%20da%20vida%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
 - title: Convertendo Strings
@@ -154,7 +154,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
 - title: Capítulo 6 - Conclusão
   content_markdown: >
-    Agora você conhece o básico de texto! Como você viu, o Unicode torna o trabalho com texto um pouco complicado, mas a biblioteca padrão tem muitas funcionalidades que facilitam o gerenciamento.
+    Agora você conhece o básico de texto! Como você viu, o Unicode torna o trabalho com texto um pouco complicado, mas a biblioteca padrão tem muitas funcionalidades que facilitam o seu gerenciamento.
 
 
-    Até agora, olhamos principalmente para Rust a partir da ótica de um paradigma procedural (ou seja, apenas funções e dados), mas agora é hora de falarmos das características e capacidades liberadas pelo paradigma orientado a objetos do Rust.
+    Até agora olhamos principalmente para Rust a partir da ótica de um paradigma procedural (ou seja, apenas funções e dados), mas já é a hora de falarmos das características e capacidades liberadas pelo paradigma orientado a objetos do Rust.
