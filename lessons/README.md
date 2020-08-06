@@ -2,9 +2,6 @@ Every time you finish the translation of a chapter update the table underneath.
 
 ## Finished chapters
 
-
-
-
 |Chapter| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |------|---|---|---|---|---|---|---|---|---|---|----|
 |de    | ✓ | ✓ | ✓ | ✓ | x | x | x | x | x | x | x  |
@@ -12,7 +9,7 @@ Every time you finish the translation of a chapter update the table underneath.
 |fr    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |es    | ✓ | ✓ | ✓ | ✓ | ✓ | x | x | x | x | x | x  |
 |hu    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | x | x | x  |
-|id    | ✓ | x | x | x | x | x | x | x | x | x | x  |
+|id    | ✓ | ✓ | ✓ | x | x | x | x | x | x | x | x  |
 |ie    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |ja    | ✓ | ✓ | ✓ | ✓ | x | x | x | x | x | x | ✓  |
 |ko    | ✓ | ✓ | x | x | x | x | x | x | x | x | x  |
