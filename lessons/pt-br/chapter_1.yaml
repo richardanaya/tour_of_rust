@@ -133,3 +133,13 @@
 - title: Capítulo 1 - Conclusão
   content_markdown: |
     Bom trabalho! O básico do Rust não foi tão ruim, não é? Este foi só o comecinho de como o compilador Rust trabalha. Por ser uma linguagem de programação de sistemas, ele se importa muito com o tamanho dos valores na memória, se as coisas podem ser modificadas ou não, e garantir que sua matemática seja o que você quer que seja. A seguir veremos alguns velhos amigos: `if` e `for`.
+
+
+    Mais recursos:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
