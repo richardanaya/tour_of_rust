@@ -1,36 +1,27 @@
 - title: 第 6 章 - テキスト
-	content_markdown: >
-		さて、Rustにおけるメモリの考え方について少し理解できたので、テキストについてもう少し深く見ていくための準備が整いました。
-    Now that we understand a bit how Rust thinks of memory, we are prepared to
-    talk about text in more detail.
+  content_markdown: >
+    さて、Rustにおけるメモリの考え方について少し理解できたので、テキストについて深堀りするための準備が整いました。
 
-    Rust cares a great deal about international text and byte level concerns you
-    might not be familiar with
+    Rustでは、他の言語ではあまり馴染みのない国際的なテキストやバイトレベルの問題が考慮されています。
 
-    from other languages. That said, Rust has many great tools for managing
-    those concerns.
+    それでも、Rustにはこれらの問題を管理するための優れたツールが多くあります。
 - title: 文字列リテラル
-	content_markdown: >
-		文字列リテラルは常にユニコードです。
-		String literals are always Unicode.
+  content_markdown: >
+    文字列リテラルは常にユニコードです。
 
-    String literals type are `&'static str`:
+    文字列リテラルの型は`&'static str`です。:
 
+    * `&` はメモリ中の場所を参照していることを意味しており、 `&mut` を欠いているのは、
+    コンパイラがそれを修正することを認めていないということです。
 
-    * `&` meaning that it's referring to a place in memory, and it lacks a
-    `&mut` meaning that the compiler will not allow modification
+    * `'static` は文字列データがプログラムの終了まで有効であるということを意味している。（文字列データは決して消えません。）
 
-    * `'static` meaning the string data will be available till the end of our
-    program (it never drops)
-
-    * `str` means that it points to a sequence of bytes that are always valid
-    **utf-8**
+    * `str` は常に有効な**utf-8**であるバイト列を指していることを意味しています。
 
 
-    Memory details:
+    メモリに関する詳細:
 
-    * The Rust compiler will likely put your string in the data segment of your
-    program memory
+    * Rustのコンパイラは文字列をプログラムメモリのデータセグメントに入れるでしょう。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
 - title: What is utf-8
