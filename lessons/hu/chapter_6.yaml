@@ -51,8 +51,8 @@
 
     A Rust a már C-ben is megszokott escape code-okat támogatja:
 
-    * `\n` - újsor
-    * `\r` - kurzor a sor elejére
+    * `\n` - soremelés / újsor
+    * `\r` - kocsivissza / kurzor a sor elejére
     * `\t` - tab
     * `\\` - rep-jel / visszaper
     * `\0` - null karakter
