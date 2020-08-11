@@ -150,7 +150,7 @@
     A generikus típusok egyik leghasznosabb fajtája a gyűjtemény típusok. A vektor - melyet a `Vec`
     struct-al reprezentálunk - egy változó-hosszú lista, amely elemeket tartalmaz.
 
-    A `vec!` macro segítségével könnyedén hozhatunk létre vektorokat, ahelyett, hogy manuálisan
+    A `vec!` makró segítségével könnyedén hozhatunk létre vektorokat, ahelyett, hogy manuálisan
     kellene összeraknunk.
 
     A `Vec` tartalmaz egy `iter()` nevű metódust, ami egy iterátort készít a vektorból, melyet, ha a

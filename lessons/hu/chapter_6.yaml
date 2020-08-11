@@ -83,7 +83,7 @@
 - title: Fájlokból betöltött beágyazott szövegek
   content_markdown: |
     Ha egy nagyon nagy szöveget szeretnél a programodban elhelyezni, érdemes lehet az `include_str!`
-    macrot alkalmaznod, amivel egy fájl szövegét tudod egy-az-egyben bemásolni egy változóba.
+    makrót alkalmaznod, amivel egy fájl szövegét tudod egy-az-egyben bemásolni egy változóba.
 
     ```rust
     let 00_html = include_str!("00_en.html");
@@ -149,7 +149,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
 - title: Szövegek formázása
   content_markdown: |
-    A `format!` macro használatával egy paraméterezett szöveget hozhatunk létre, amiben meg vannak
+    A `format!` makró használatával egy paraméterezett szöveget hozhatunk létre, amiben meg vannak
     hova és milyen módon kell értékeknek kerülnie. Az ilyen "lyukak" elhelyezésére a `{}`-t
     használjuk a szövegben.
 
