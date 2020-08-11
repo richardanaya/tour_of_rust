@@ -125,7 +125,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
   content_markdown: >
-    A Rust elvárja, hogy a számtípusok közötti átalakítást explicit módon tedd.
+    A Rust a számtípusok használatakor meglehetősen szigorú.
     Például nem
 
     használhatsz `u8`-t olyan helyen, ami `u32`-t vár anélkül, hogy hibát dobna.
@@ -137,13 +137,12 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
-    A konstansok lehetővé teszik nekünk, hogy sebességvesztés nélkül adhassunk
-    nevet gyakori
+    A konstansok lehetővé teszik nekünk, hogy elnevezhessünk gyakran használt
+    értékeket.
 
-    értékeknek. Ahelyett, hogy változók értékeit másolgatnánk oda, ahol azok
-    használva vannak, a
-
-    konstansok helyére rögtön fordítás közben azok értéke kerül.
+    Ahelyett, hogy változók értékeit kézzel másolgatnánk oda, ahol azokat
+    használjuk, a fordító lecseréli helyettünk a konstansok nevét a megfelelő
+    értékre.
 
 
     A változókkal ellentétben a konstansoknak mindig explicit módon meg kell
@@ -155,7 +154,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
   content_markdown: >
-    Egy *tömb* egy olyan megegyező típusú elemeket tartalmazó csoport, aminek a
+    Egy *tömb* egy olyan azonos típusú elemeket tartalmazó csoport, aminek a
     hossza
 
     megváltoztathatatlan.
@@ -165,24 +164,22 @@
     fordításkor már tudnunk kell.
 
 
-    Egyes elemek elérhetőek a `[x]` operátorral, ahol **x** egy *usize* indexe
-    (ami 0-nál
-
-    kezdődik) annak az elemnek, amit szeretnél.
+    Egyes elemek elérhetőek a `[x]` operátorral, ahol *x* egy *usize* indexe
+    (0-val kezdődő sorszáma) annak az elemnek, amit szeretnél.
 - title: Függvények
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
   content_markdown: |
     A függvényeknek nulla vagy több paraméterük van.
 
-    Ebben a példában az add két `i32`-t (32 bit hosszú előjeles számokat) fogad.
+    Ebben a példában az add két `i32` (32 bit hosszú előjeles szám) paramétert vár.
 
     A függvények nevei mindig `kígyó_módon` vannak megadva.
 - title: Több visszatérési érték
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
   content_markdown: >
-    A függvények több értékkel is visszatérhetnek egy **tuple** képében.
+    A függvények több értékkel is visszatérhetnek egy **tuple** formájában.
 
 
     A tuple-k elemeit az indexük számával lehet elérni.
@@ -191,7 +188,7 @@
     A Rust többféle elérési módot is biztosít, amivel az adatok bizonyos részeit
     érhetjük el
 
-    ergonomikus módon. De erről később lesz szó!
+    kényelmes módon. De erről később lesz szó!
 - title: Semmivel való visszatérés
   content_markdown: >
     Ha nincs visszatérési érték megadva egy függvénynek, akkor egy üres tuple-el
@@ -201,10 +198,6 @@
 
 
     Az üres tuple-öket `()`-al jelöljük.
-
-
-    Using `()` is uncommon, but will come up often enough that it's good to know
-    whats happening.
 
 
     A `()` használata ritkán fordul elő, de mégis elég gyakori ahhoz, hogy
