@@ -56,7 +56,7 @@
     * `\t` - tab
     * `\\` - rep-jel / visszaper
     * `\0` - null karakter
-    * `\'` - aposztrof
+    * `\'` - aposztróf
 
     Az ilyen szimbólumok teljes listáját [itt](https://doc.rust-lang.org/reference/tokens.html) találod angolul.
   code: >-
