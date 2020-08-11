@@ -19,8 +19,8 @@
     Hogy érinti ez a memóriát:
 
     * A Rust nem rendelkezik garbage collection-el (szemétgyűjtés)
-    * Ennek a folyamatnak a másik neve *Resource Aquisition Is Initialization* ("Az erőforrás
-      megszerzése egyben annak inicializálása is"). A C++ nyelv ugyanezt használja.
+    * A C++ nyelvben ennek a megközelítésnek a neve *Resource Aquisition Is Initialization* ("Az
+      erőforrás megszerzése egyben annak inicializálása is").
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%20because%20it's%20no%20longer%0A%20%20%20%20%2F%2F%20used%20to%20after%20this%20location%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%20because%20of%20the%20end%0A%20%20%20%20%2F%2F%20of%20the%20function%20scope%0A%7D%0A
 - title: A drop-olás hierarchikus
