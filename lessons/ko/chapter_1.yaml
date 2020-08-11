@@ -1,14 +1,173 @@
 - title: 1장 - 기초
   content_markdown: |
     이번 1장에서는 함수, 변수 그리고 Rust가 지원하는 기본 자료형에 대해서
-    아주 기초적인 내용을 알아봅니다. 여기에 오신 것이 기쁩니다!
+    아주 기초적인 내용을 알아봅니다. 여기에 와주셔서 기쁩니다!
 
-    또한! 여러분에게 이야기하고 있는 사랑스러운 꽃게가 누구인지 궁굼하다면, 
-    저는 **페리스(Ferris)**입니다, Rust 프로그래밍 언어의 비공식적인 마스코드입니다. 만나서 반갑습니다.
-- title: Rust 실습장
+    또한! 여러분에게 이야기하고 있는 사랑스러운 꽃게가 누구인지 궁금하다면,
+    저는 **페리스(Ferris)**입니다. Rust 프로그래밍 언어의 비공식적인 마스코트입니다. 만나서 반갑습니다.
+- title: Rust 놀이터
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%EB%86%80%EC%9D%B4%ED%84%B0%EC%97%90%20%EC%98%A4%EC%8B%A0%20%EA%B1%B8%20%ED%99%98%EC%98%81%ED%95%A9%EB%8B%88%EB%8B%A4!%20%EC%97%AC%EA%B8%B0%EC%84%9C%20%EC%BD%94%EB%93%9C%EB%A5%BC%20%EC%88%98%EC%A0%95%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.%22)%3B%0A%7D%0A
   content_markdown: |
-    [Rust 실습장](https://play.rust-lang.org)과 같은 대화형 코딩 도구를 이용해서 여행을 합니다.
+    [Rust 놀이터](https://play.rust-lang.org)와 같은 대화형 코딩 도구를 이용해서 여행을 합시다.
 
-    Rust로 실습을 하고, 여러분의 창의성과 도전성을 보여줄 수 있는 아주 훌륭한 방법입니다!
+    Rust를 갖고 놀며 다른 사람에게 여러분의 창의성과 도전을 보여줄 수 있는 아주 훌륭한 방법입니다!
+- title: 변수
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%EA%B0%80%20x%EC%9D%98%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%9C%A0%EC%B6%94%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EB%AA%85%EC%8B%9C%EC%A0%81%EC%9C%BC%EB%A1%9C%20%EC%A7%80%EC%A0%95%ED%95%A0%20%EC%88%98%EB%8F%84%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20%EC%84%A0%EC%96%B8%20%ED%9B%84%20%EB%82%98%EC%A4%91%EC%97%90%20%EC%B4%88%EA%B8%B0%ED%99%94%EB%8F%84%20%EA%B0%80%EB%8A%A5%ED%95%98%EC%A7%80%EB%A7%8C%2C%20%EB%B3%B4%ED%86%B5%20%EA%B7%B8%EB%A0%87%EA%B2%8C%20%ED%95%98%EC%A7%84%20%EC%95%8A%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    변수는 **let** 키워드를 사용해 선언됩니다.
+
+
+    값을 할당할 때, Rust는 99% 확률로 여러분의 변수의 자료형을 유추할 수 있습니다.
+
+    유추가 불가능한 경우, 여러분의 변수 선언에 자료형을 추가해도 됩니다.
+
+
+    동일한 이름의 변수에 여러번 값을 할당할 수 있다는걸 알아차리셨나요?
+
+
+    이는 변수 숨김(variable shadowing)이라 불리며, 자료형도 변경할 수 있습니다.
+
+
+    변수 이름은 언제나 `snake_case` 형태로 짓습니다.
+- title: 변수의 값 변경하기
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Rust는 어떤 변수가 변경 가능한지에 대해 굉장히 주의합니다. 값에는 다음의 두 가지가 있습니다:
+
+
+    * **변경 가능(mutable)** - 컴파일러가 변수에 값이 씌어지고 읽혀지는 것을 허용함
+
+    * **변경 불가(immutable)** - 컴파일러가 변수의 값이 읽히는 것만 허용함
+
+
+    변경 가능(mutable)한 값은 **mut** 키워드로 표시합니다.
+
+
+    이 개념에 대해서는 나중에 더 얘기하겠지만, 일단은 이 키워드를 눈여겨 봅시다.
+- title: 기본 자료형
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9C%BC%EB%A1%9C%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9C%BC%EB%A1%9C%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Rust에는 다양하지만 익숙한 자료형들이 있습니다:
+
+
+    * 부울 값 - 참/거짓 값을 나타내는 `bool`
+
+    * 부호가 없는 정수형 - 양의 정수를 나타내는 `u8` `u16` `u32` `u64` `u128`
+
+    * 부호가 있는 정수형 - 양/음의 정수를 나타내는 `i8` `i16` `i32` `i64` `i128`
+
+    * 포인터 사이즈 정수 - 메모리에 있는 값들의 인덱스와 크기를 나타내는 `usize` `isize`
+
+    * 부동 소수점 - `f32` `f64`
+
+    * 튜플(tuple) - stack에 있는 값들의 고정된 순서를 전달하기 위한 `(값, 값, ...)`
+
+    * 배열(array) - 컴파일 타임에 정해진 길이를 갖는 유사한 원소들의 모음(collection)인 `[값, 값, ...]`
+
+    * 슬라이스(slice) - 런타임에 길이가 정해지는 유사한 원소들의 collection
+
+    * `str`(문자열 slice) - 런타임에 길이가 정해지는 텍스트
+
+
+    텍스트는 다른 익숙한 언어에서보다 복잡한데, 이는 Rust가 시스템 프로그래밍 언어이며
+
+    여러분이 지금까지 익숙하지 않았을 메모리 문제에 신경쓰기 때문입니다.
+
+    이에 대해서는 나중에 더 자세히 다루겠습니다.
+
+
+    숫자형 자료형들은 숫자 뒤에 자료형 이름을 붙여 명시적으로 지정할 수 있습니다 (예: `13u32`, `2u8`).
+- title: 기본 자료형 변환
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Rust에서는 숫자형 자료형을 쓸 때 명시적으로 써야 합니다. 생각 없이 `u8`을 `u32`에 쓴다거나 하면 오류가 발생합니다.
+
+
+    다행히도 Rust에서는 **as** 키워드를 사용해 숫자형 자료형을 매우 쉽게 변환할 수 있습니다.
+- title: 상수
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%EC%95%84%EB%AC%B4%20%EC%9E%AC%EB%A3%8C%20%EC%97%86%EC%9D%B4%20%EC%95%A0%ED%94%8C%20%7B%7D%EB%A5%BC%20%EB%A7%8C%EB%93%A4%EB%A0%A4%EB%A9%B4%2C%20%EB%A8%BC%EC%A0%80%20%EC%9A%B0%EC%A3%BC%EB%A5%BC%20%EB%A7%8C%EB%93%A4%EC%96%B4%EC%95%BC%20%ED%95%9C%EB%8B%A4.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    상수는 우리의 코드 내에서 여러번 사용되는 공통 값을 효과적으로 지정할 수 있게 해줍니다.
+
+    사용될 때 값이 복사되는 변수와 달리, 상수는 컴파일 타임에 텍스트 지정자를 직접 값으로 대체합니다.
+
+
+    변수와 달리, 상수는 반드시 명시적으로 자료형을 지정해야 합니다.
+
+
+    상수의 이름은 언제나 `SCREAMING_SNAKE_CASE` 형태로 짓습니다.
+- title: 배열
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    *배열(array)*은 고정된 길이로 된 모두 같은 자료형의 자료를 가진 collection입니다.
+
+
+    *array*의 자료형은 `[T;N]`로 표현하며, 여기서 T는 원소의 자료형, N은 컴파일 타임에 주어지는 고정된 길이입니다.
+
+
+    각각의 원소는 `[x]` 연산자로 가져올 수 있는데, 여기서 *x*는 여러분이 원하는 원소의 (0에서부터 시작하는) *usize* 형의 인덱스입니다.
+- title: 함수
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    함수는 0개 또는 그 이상의 인자를 가집니다.
+
+
+    이 예제에서 add 함수는 `i32` (32비트 길이의 부호가 있는 정수형) 자료형의 인자 2개를 받습니다.
+
+
+    함수의 이름은 언제나 `snake_case` 형태로 짓습니다.
+- title: 여러개의 리턴 값
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EB%A6%AC%ED%84%B4%20%EA%B0%92%EC%9D%98%20%ED%8A%9C%ED%94%8C%EC%9D%84%20%EB%A6%AC%ED%84%B4%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20%ED%8A%9C%ED%94%8C%EC%9D%84%20%EB%91%90%20%EB%B3%80%EC%88%98%EB%AA%85%EC%9C%BC%EB%A1%9C%20%EB%B6%84%ED%95%B4%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    함수는 **튜플(tuple)**을 리턴함으로써 여러개의 값을 리턴할 수 있습니다.
+
+
+    tuple의 원소는 인덱스 숫자를 통해 참조할 수 있습니다.
+
+
+    Rust는 데이터 구조의 일부분을 편하게 추출할 수 있도록 해주는 다양한 형태의 분해(destructuring) 방법을 지원합니다. 잘 지켜보세요!
+- title: 아무것도 리턴하지 않기
+  content_markdown: >
+    함수에 리턴형을 지정하지 않은 경우 빈 tuple을 리턴하는데, 이는 *unit*이라고도 합니다.
+
+
+    빈 tuple은 `()`로 표현합니다.
+
+
+    `()`를 사용하는 경우는 드물지만, 뭔지 알아두는 것이 좋을 정도로 꽤 자주 마주치게 될겁니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20%EB%A6%AC%ED%84%B4%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%80%20()%EB%A1%9C%20%EC%95%94%EC%8B%9C%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20%EB%A6%AC%ED%84%B4%ED%95%A0%20%EA%B2%83%EC%9D%B4%20%EC%A7%80%EC%A0%95%EB%90%98%EC%A7%80%20%EC%95%8A%EC%9C%BC%EB%A9%B4%20%EC%9D%B4%20%ED%95%A8%EC%88%98%EB%8A%94%20()%EB%A5%BC%20%EB%A6%AC%ED%84%B4%ED%95%A8%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%97%86%EB%8A%94%20%EA%B2%83%EC%9D%80%20%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0%20%ED%9E%98%EB%93%A4%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%97%90%0A%20%20%20%20%2F%2F%20a%EC%99%80%20b%EC%9D%98%20%EB%94%94%EB%B2%84%EA%B7%B8%20%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%84%20%EC%B6%9C%EB%A0%A5%ED%95%9C%EB%8B%A4%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: 1장 - 마무리
+  content_markdown: >
+    여기까지 잘 하셨습니다! Rust의 기초는 꽤 나쁘지 않습니다, 그렇죠?
+
+
+    우리는 Rust 컴파일러가 어떻게 생각을 하는지 들여다 보았습니다.
+
+    Rust는 시스템 프로그래밍 언어로서 메모리 내 값들의 크기와, 값들이 변경 가능한지 아닌지, 
+
+    그리고 계산식이 의도한 대로인지를 매우 조심히 따져봅니다.
+
+
+    다음에는 우리의 오랜 친구인 `if` 조건문과 `for` 반복문에 대해 살펴보겠습니다.
+
+
+    더 많은 볼거리:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)

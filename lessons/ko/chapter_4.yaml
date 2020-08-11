@@ -1,0 +1,202 @@
+- title: 4장 - Generic 자료형
+  content_markdown: >
+    generic 자료형은 Rust에서 엄청나게 중요합니다. 널 허용(nullable) 값을
+    표현할 때에도 쓰이며
+
+    (i.e. 아직 값이 없을 수도 있는 변수), 오류 처리, collection, 등등에도 쓰입니다!
+
+    이 장에서는 언제든 사용될만한 기본적인 generic 자료형을 살펴보겠습니다.
+- title: Generic 자료형이란?
+  content_markdown: >
+    generic 자료형은 `struct`나 `enum`을 부분적으로 정의하여, 컴파일러가
+
+    컴파일 타임에 코드 사용을 기반으로 완전히 정의된 버전을 만들 수 있게 해줍니다.
+
+
+    Rust는 일반적으로 인스턴스화 하는 것을 보고 최종 자료형을 유추할 수 있으나,
+
+    여러분의 도움이 필요한 경우에는 `turbofish` (내 친한 친구입니다!)로도 알려진 `::<T>` 연산자를 사용해
+    언제든 명시적으로 지정할 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20%EC%9D%BC%EB%B6%80%EB%A7%8C%20%EC%A0%95%EC%9D%98%EB%90%9C%20struct%20%EC%9E%90%EB%A3%8C%ED%98%95%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EC%A4%91%EC%9A%94%3A%20%EC%97%AC%EA%B8%B0%EC%84%9C%20generic%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%93%B0%EB%A9%B4%2C%20%EC%BB%B4%ED%8C%8C%EC%9D%BC%20%ED%83%80%EC%9E%84%EC%97%90%20%EC%83%9D%EC%84%B1%EB%90%9C%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%83%9D%EC%84%B1%ED%95%98%EA%B2%8C%20%EB%90%A8.%0A%20%20%20%20%2F%2F%20Turbofish%EB%A5%BC%20%EC%93%B0%EB%A9%B4%20%EB%AA%85%EC%8B%9C%EC%A0%81%EC%9D%BC%20%EC%88%98%20%EC%9E%88%EB%8B%A4.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Rust%EB%8A%94%20generic%EC%97%90%EB%8F%84%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%9C%A0%EC%B6%94%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20%EC%A4%91%EC%9A%94%3A%20%EC%8B%A4%EC%83%9D%ED%99%9C%EC%97%90%EC%84%9C%EB%8A%94%20%EA%B0%80%EB%B0%A9%20%EC%86%8D%EC%97%90%20%EA%B0%80%EB%B0%A9%EC%9D%84%20%EB%84%A3%EC%A7%80%20%EB%A7%88%EC%8B%9C%EC%98%A4%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22%EC%BE%85!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
+- title: 아무 것도 없는 것을 표현하기
+  content_markdown: >
+    다른 언어에서 `null` 키워드는 값이 없음을 나타내기 위해 사용됩니다.
+
+    이는 프로그래밍 언어에 어려움을 유발하는데, 변수나 field를 처리하는 중에
+
+    프로그램이 실패할 수도 있기 때문입니다.
+
+
+    Rust에는 `null`이 없습니다만, 아무 것도 없음을 표현하는 것의 중요성을 무시하는 것은 아닙니다!
+
+    우리가 이미 아는 도구를 사용한 순수한 표현법을 고려해봅시다.
+
+
+    이렇게 한 개 이상의 선택 가능한 값에 대해 `None` 선택지를 제공하는 방법은
+
+    `null` 값이 없는 Rust에서 매우 흔한 패턴입니다. generic 자료형은 이러한 어려움을
+    해결하는 데에 도움을 줍니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%EC%9D%80%20%ED%95%AD%EB%AA%A9%EC%9D%98%20%EB%B6%80%EC%9E%AC%EB%A5%BC%20%EB%82%98%ED%83%80%EB%83%84%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
+- title: 옵션
+  content_markdown: >
+    Rust에는 `null`을 쓰지 않고도 nullable한 값을 표현할 수 있는
+
+    `Option`이라 불리는 내장된 generic enum이 있습니다.
+
+
+    ```
+
+    enum Option<T> {
+        None,
+        Some(T),
+    }
+
+    ```
+
+
+    이 enum은 매우 흔해서, 어디서나 `Some`과 `None`으로 enum을 인스턴스화 할 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20%EC%9D%BC%EB%B6%80%EB%A7%8C%20%EC%A0%95%EC%9D%98%EB%90%9C%20struct%20%EC%9E%90%EB%A3%8C%ED%98%95%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20%EC%9E%90%EB%A3%8C%ED%98%95%20T%EC%9D%98%20%EC%9D%B8%EC%9E%90%EB%8A%94%20%EB%8B%A4%EB%A5%B8%20%EA%B3%B3%EC%9C%BC%EB%A1%9C%20%EB%84%98%EA%B2%A8%EC%A7%88%20%EC%88%98%20%EC%9E%88%EC%9D%8C%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EC%A4%91%EC%9A%94%3A%20i32%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EA%B0%80%EB%B0%A9%EC%97%90%20%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%95%88%EB%93%A4%EC%97%88%EB%8B%A4!%0A%20%20%20%20%2F%2F%20Rust%EA%B0%80%20%EB%AC%B4%EC%8A%A8%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%98%20%EA%B0%80%EB%B0%A9%EC%9D%B8%EC%A7%80%20%EC%95%8C%20%EC%88%98%EA%B0%80%20%EC%97%86%EC%9C%BC%EB%AF%80%EB%A1%9C%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%A7%80%EC%A0%95%ED%95%B4%EC%95%BC%20%ED%95%A8.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%97%86%EB%8B%A4!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EB%AD%94%EA%B0%80%20%EC%9E%88%EB%8B%A4!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EB%AD%94%EA%B0%80%20%EC%9E%88%EB%8B%A4!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%97%86%EB%8B%A4!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%EB%8A%94%20Option%EC%9D%84%20%EC%9A%B0%EC%95%84%ED%95%98%EA%B2%8C%20%EB%B6%84%ED%95%B4%ED%95%98%EA%B3%A0%2C%20%EB%AA%A8%EB%93%A0%20%EC%BC%80%EC%9D%B4%EC%8A%A4%EB%A5%BC%20%EC%B2%98%EB%A6%AC%ED%95%98%EB%8F%84%EB%A1%9D%20%ED%95%B4%EC%A4%80%EB%8B%A4!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%EC%84%9C%20%7B%7D%EB%A5%BC%20%EC%B0%BE%EC%95%98%EB%8B%A4!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%B0%BE%EC%A7%80%20%EB%AA%BB%ED%96%88%EB%8B%A4%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: 결과
+  content_markdown: >
+    Rust에는 실패할 가능성이 있는 값을 리턴할 수 있도록 해주는 `Result`라 불리는
+    내장된 generic enum이 있습니다.
+
+    이는 Rust에서 오류 처리를 하는 관용적인 방법입니다.
+
+
+    ```
+
+    enum Result<T, E> {
+        Ok(T),
+        Err(E),
+    }
+
+    ```
+
+
+    우리의 generic 자료형이 쉼표로 구분된 여러개의 *매개화된 자료형(parameterized types)*을
+    갖고 있는 것을 기억해 두기 바랍니다.
+
+
+    이 enum은 매우 흔해서, 어디서나 `Ok`와 `Err`로 enum을 인스턴스화 할 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%EB%A7%9E%EB%8A%94%20%EC%88%AB%EC%9E%90%EA%B0%80%20%EC%95%84%EB%8B%99%EB%8B%88%EB%8B%A4%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20match%EB%8A%94%20Result%EB%A5%BC%20%EC%9A%B0%EC%95%84%ED%95%98%EA%B2%8C%20%EB%B6%84%ED%95%B4%ED%95%98%EA%B3%A0%2C%20%EB%AA%A8%EB%93%A0%20%EC%BC%80%EC%9D%B4%EC%8A%A4%EB%A5%BC%20%EC%B2%98%EB%A6%AC%ED%95%98%EB%8F%84%EB%A1%9D%20%ED%95%B4%EC%A4%80%EB%8B%A4!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%7B%7D%20%EB%B0%9C%EA%B2%AC%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22%EC%98%A4%EB%A5%98%3A%20%7B%7D%22%2C%20e)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: 실패할 수 있는 메인
+  content_markdown: |
+    `main`은 `Result`를 리턴할 수 있다!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%EB%A7%9E%EB%8A%94%20%EC%88%AB%EC%9E%90%EA%B0%80%20%EC%95%84%EB%8B%99%EB%8B%88%EB%8B%A4%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%EC%9D%80%20%EC%95%84%EB%AC%B4%20%EA%B0%92%EB%8F%84%20%EB%A6%AC%ED%84%B4%ED%95%98%EC%A7%80%20%EC%95%8A%EC%A7%80%EB%A7%8C%2C%20%EC%98%A4%EB%A5%98%EB%A5%BC%20%EB%A6%AC%ED%84%B4%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%7B%7D%20%EB%B0%9C%EA%B2%AC%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%EC%9D%B4%20%EC%98%A4%EB%A5%98%EB%A5%BC%20%EC%9A%B0%EC%95%84%ED%95%98%EA%B2%8C%20%EC%B2%98%EB%A6%AC%ED%95%9C%EB%8B%A4%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20main%EC%9C%BC%EB%A1%9C%EB%B6%80%ED%84%B0%20%EB%AC%B4%EC%8A%A8%20%EC%9D%BC%EC%9D%B4%20%EB%B0%9C%EC%83%9D%ED%96%88%EB%8A%94%EC%A7%80%20%EC%83%88%20%EC%98%A4%EB%A5%98%EB%A5%BC%20%EB%A6%AC%ED%84%B4%ED%95%9C%EB%8B%A4!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22main%EC%97%90%EC%84%9C%20%EB%AD%94%EA%B0%80%20%EC%9E%98%EB%AA%BB%20%EB%90%98%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20%EB%AA%A8%EB%93%A0%20%EC%9D%BC%EC%9D%B4%20%EC%9E%98%20%EB%81%9D%EB%82%AC%EC%9D%8C%EC%9D%84%20%ED%91%9C%ED%98%84%ED%95%98%EA%B8%B0%20%EC%9C%84%ED%95%B4%0A%20%20%20%20%2F%2F%20Result%20Ok%20%EC%95%88%EC%97%90%20unit%20%EA%B0%92%EC%9D%84%20%EC%93%B0%EA%B3%A0%20%EC%9E%88%EB%8A%94%EA%B1%B8%20%EC%9E%98%20%EB%B4%90%EB%91%90%EC%8B%AD%EC%8B%9C%EC%98%A4%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: 우아한 오류 처리
+  content_markdown: >
+    Rust는 매우 흔히 사용되는 `Result`와 함께 쓸 수 있는 강력한 연산자 `?`를 갖고 있습니다.
+    다음 두 구문은 동일합니다:
+
+
+    ```
+
+    do_something_that_might_fail()?
+
+    ```
+
+
+    ```
+
+    match do_something_that_might_fail() {
+        Ok(v) => v,
+        Err(e) => return Err(e),
+    }
+
+    ```
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%EB%A7%9E%EB%8A%94%20%EC%88%AB%EC%9E%90%EA%B0%80%20%EC%95%84%EB%8B%99%EB%8B%88%EB%8B%A4%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20%EC%96%BC%EB%A7%88%EB%82%98%20%EC%BD%94%EB%93%9C%EB%A5%BC%20%EC%A4%84%EC%98%80%EB%8A%94%EC%A7%80%20%EB%B3%B4%EC%84%B8%EC%9A%94!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%EB%B0%9C%EA%B2%AC%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: 추한 옵션/결과 처리
+  content_markdown: >
+    간단한 코드를 짤 때에도 `Option`/`Result`를 쓰는 것은 귀찮은 일일 수 있습니다.
+
+    `Option`과 `Result` 둘 다 빠르고 더러운 방식으로 값을 가져오는데 유용한
+    `unwrap`이라는 함수를 갖고 있습니다. `unwrap`은:
+     
+    1. Option/Result 내부의 값을 꺼내오고
+
+    2. enum이 None/Err인 경우에는 `panic!`
+
+
+    다음 두 코드는 동일합니다:
+
+
+    ```
+
+    my_option.unwrap()
+
+    ```
+
+
+    ```
+
+    match my_option {
+        Some(v) => v,
+        None => panic!("some error message generated by Rust!"),
+    }
+
+    ```
+
+
+    비슷합니다:
+
+
+    ```
+
+    my_result.unwrap()
+
+    ```
+
+
+    ```
+
+    match my_result {
+        Ok(v) => v,
+        Err(e) => panic!("some error message generated by Rust!"),
+    }
+
+    ```
+
+
+    좋은 러스타시안(rustacean)이 되어 가능한 제대로 `match`를 사용하세요!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%EB%A7%9E%EB%8A%94%20%EC%88%AB%EC%9E%90%EA%B0%80%20%EC%95%84%EB%8B%99%EB%8B%88%EB%8B%A4%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20%EA%B0%84%EA%B2%B0%ED%95%98%EC%A7%80%EB%A7%8C%20%EA%B0%80%EC%A0%95%EC%A0%81%EC%9D%B4%EA%B3%A0%20%EB%B9%A0%EB%A5%B4%EA%B2%8C%20%EC%A7%80%EC%A0%80%EB%B6%84%20%ED%95%B4%EC%A7%90%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22%7B%7D%20%EB%B0%9C%EA%B2%AC%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20panic!%20%EB%90%A0%20%EA%B2%83%EC%9E%84%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22%7B%7D%20%EB%B0%9C%EA%B2%AC%22%2C%20v)%3B%0A%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: 벡터
+  content_markdown: >
+    가장 유용한 generic 자료형들 중 하나가 collection 자료형입니다.
+
+    vector는 `Vec` struct로 표현되는 가변 크기의 리스트입니다.
+
+
+    `vec!` macro는 vector를 수동으로 일일이 만드는 대신, 손쉽게 생성할 수 있게 해줍니다.
+
+
+    `Vec`는 vector를 `for` 반복문에 손쉽게 넣을 수 있도록
+
+    vector로부터 반복자를 생성할 수 있는 `iter()` 메소드를 갖고 있습니다.
+
+
+    메모리 상세:
+
+    * `Vec`은 struct이나, 내부적으로는 내용물이 heap에 있는 고정 리스트에 대한 참조를
+    포함하고 있습니다.
+
+    * vector는 기본 용량을 갖고 시작하는데, 용량보다 많은 내용물이 추가될 경우,
+      큰 용량을 가진 새 고정 리스트를 위해 heap에 데이터를 재할당합니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EB%AA%85%EC%8B%9C%EC%A0%81%EC%9C%BC%EB%A1%9C%20%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%9D%8C%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20%ED%95%98%EC%A7%80%EB%A7%8C%20Rust%EA%B0%80%20%EC%96%BC%EB%A7%88%EB%82%98%20%EB%98%91%EB%98%91%ED%95%98%EA%B2%8C%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C%20%EA%B2%B0%EC%A0%95%ED%95%98%EB%8A%94%EC%A7%80%20%EB%B3%B4%EC%8B%AD%EC%8B%9C%EC%98%A4%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4%20macro%EC%9E%85%EB%8B%88%EB%8B%A4!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: 4장 - 마무리
+  content_markdown: >
+    우리에게 generic 자료형이 얼마나 도움이 되는지 한 장만에 배웠습니다!
+
+    모든걸 완벽히 다 쓸줄 모른다고 걱정 마십시오. 지금은 코드에서 보고 또 보게 될
+
+    주요 개념들을 알고 있는 것만으로도 충분합니다. 함수들이 꽤 길어지고 있습니다!
+
+    다음 장에서는 Rust의 중요한 개념인 데이터 소유권(data ownership)에 대해 알아봅시다.

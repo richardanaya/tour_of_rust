@@ -1,0 +1,10 @@
+- title: 끝
+  content_markdown: >
+    Tour of Rust를 함께 해서 즐거웠습니다. Ferris와 Tour of Rust 팀은
+    여러분이 앞에 놓인 여정을 즐기시길 진심으로 바랍니다!
+
+    여기까지 오는 데에 어려움이 없으셨다면, 다음 자료와 함께
+    더 깊이 뛰어들어보시는 것을 강력히 추천드립니다:
+
+    * [The Official Rust Programming
+    Book](https://doc.rust-lang.org/stable/book/)
