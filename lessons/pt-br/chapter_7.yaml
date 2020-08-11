@@ -1,0 +1,256 @@
+- title: Capítulo 7 - Programação orientada a objetos
+  content_markdown: >
+    Expressar idéias com funções é uma maneira comprovada de representar comportamentos e dados (C faz isso há décadas!). Historicamente, a ciência da computação encontrou outras agregações e abstrações expressivas úteis para os dados. Você pode estar familiarizado com a programação orientada a objetos (OOP) como uma dessas maneiras. Neste capítulo exploraremos a linguagem de programação Rust para além das funções.
+- title: O que é OOP?
+  content_markdown: >
+    A programação orientada a objetos refere-se *grosso modo* a linguagens de programação que possuem vários recursos icônicos:
+
+    * Encapsulamento - associando dados e funções à unidade conceitual de um único tipo chamado *objeto*.
+
+    * Abstração - ocultando dados e membros da função para obscurecer detalhes da implementação de um objeto.
+
+    * Polimorfismo - a capacidade de interagir com um objeto de diferentes perspectivas funcionais.
+
+    * Herança - a capacidade de herdar dados e comportamentos de outros objetos.
+- title: Rust não é OOP
+  content_markdown: >
+    O Rust carece de herança de dados e comportamentos de qualquer maneira significativa.
+
+    * Structs não podem herdar campos de uma struct pai.
+
+    * Structs não podem herdar funções de uma struct pai.
+
+
+    Dito isto, o Rust implementa muitos recursos da linguagem de programação para que você não se importe com isso.
+- title: Encapsulamento com métodos
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20criatura.pega_barulho())%3B%0A%7D%0A
+  content_markdown: >
+    O Rust suporta o conceito de um *objeto* que é uma estrutura associada a algumas funções (também conhecidas como *métodos*).
+
+
+    O primeiro parâmetro de qualquer método deve ser uma referência à instância associada à chamada do método (por exemplo, `instanceOfObj.foo()`). O Rust usa:
+
+    * `&self` - referência imutável da instância.
+
+    * `&mut self` - referência mutável da instância.
+
+
+    Os métodos são definidos dentro de um bloco de implementação com a palavra-chave `impl`:
+
+    ```rust
+
+    impl MinhaStruct { 
+        ...
+        fn foo(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Abstração com exposição seletiva
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20criatura.pega_barulho())%3B%0A%7D%0A
+  content_markdown: >
+    O Rust pode esconder o funcionamento interno dos objetos.
+
+
+    Por padrão, os campos e métodos são acessíveis apenas ao módulo ao qual pertencem.
+
+
+    A palavra-chave `pub` expõe os campos e métodos do struct fora do módulo.
+- title: Polimorfismo com traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20criatura.pega_barulho())%3B%0A%7D%0A
+  content_markdown: >
+    O Rust suporta o polimorfismo com traits. As traits nos permitem associar um conjunto de métodos a um tipo struct.
+
+
+    Primeiro definimos as assinaturas dos métodos de uma trait em:
+    We first define the signatures of methods of a trait within:
+
+
+    ```
+
+    trait MinhaTrait {
+        fn foo(&self);
+        ...
+    }
+
+    ```
+
+
+    Quando uma estrutura implementa uma trait, ela estabelece um contrato que nos permite interagir indiretamente com a struct por meio do tipo da trait (por exemplo, `&dyn MinhaTrait`) sem precisar conhecer o tipo real.
+
+
+    Os métodos da trait implementados na struct são definidos dentro de um bloco de implementação:
+
+
+    ```rust
+
+    impl MinhaTrait for MinhaStruct { 
+        fn foo(&self) {
+            ...
+        }
+        ... 
+    }
+
+    ```
+- title: Métodos implementados nas traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%0A%20%20%20%20fn%20faz_muito_barulho(%26self)%7B%0A%20%20%20%20%20%20%20%20self.faz_barulho()%3B%0A%20%20%20%20%20%20%20%20self.faz_barulho()%3B%0A%20%20%20%20%20%20%20%20self.faz_barulho()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20criatura.faz_muito_barulho()%3B%0A%7D%0A
+  content_markdown: >
+    As traits podem ter métodos implementados.
+
+
+    The functions have no direct access to the inner fields of a struct, but it canbe useful for sharing behavior between many trait implementors.
+    As funções não têm acesso direto aos campos internos de uma struct, mas podem ser úteis para compartilhar comportamentos entre muitos implementadores de traits.
+- title: Herança das traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%7D%0A%0Atrait%20LoudFazedorBarulho%3A%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_muito_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.faz_barulho()%3B%0A%20%20%20%20%20%20%20%20self.faz_barulho()%3B%0A%20%20%20%20%20%20%20%20self.faz_barulho()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudFazedorBarulho%20for%20CriaturaMarinha%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20criatura.faz_muito_barulho()%3B%0A%7D%0A
+  content_markdown: |
+    As traits podem herdar métodos de outras traits.
+- title: Dispatch dinâmico x estático
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_faz_barulho(criatura%3A%20%26CriaturaMarinha)%20%7B%0A%20%20%20%20%2F%2F%20sabemos%20o%20tipo%20real%0A%20%20%20%20criatura.faz_barulho()%3B%0A%7D%0A%0Afn%20dynamic_faz_barulho(fazedor_barulho%3A%20%26dyn%20FazedorBarulho)%20%7B%0A%20%20%20%20%2F%2F%20n%C3%A3o%20sabemos%20o%20tipo%20real%0A%20%20%20%20fazedor_barulho.faz_barulho()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_faz_barulho(%26criatura)%3B%0A%20%20%20%20dynamic_faz_barulho(%26criatura)%3B%0A%7D%0A
+  content_markdown: >
+    Os métodos são executados de duas maneiras:
+
+    * static dispatch - quando o tipo de instância é conhecido, temos conhecimento direto de qual função chamar.
+
+    * dynamic dispatch - quando um tipo de instância não é conhecido, precisamos descobrir uma maneira de chamar a função correta.
+
+
+    Os tipos de trait `&dyn MinhaTrait` nos permite a habilidade de trabalhar com instâncias  de objetos indiretamente usando dispatch dinâmico.
+
+
+    Quando o dispatch dinâmino é usado, o Rust irá encorajar você a pôr o `dyn` antes do seu tipo da trait, assim os outros ficarão cientes.
+
+
+    Detalhes da memória:
+
+
+    * O dispatch dinâmico é um pouco mais lento por causa da procura que o ponteiro realiza para localizar a verdadeira chamada da função.
+- title: Objetos trait
+  content_markdown: >
+    Quando passamos uma instância de um objeto para um parâmetro do tipo `&dyn MinhaTrait`, passamos o que é chamado de *objeto trait*.
+
+
+    Um objeto trait é o que nos permite chamar indiretamente os métodos corretos de uma instância. Um objeto trait é uma estrutura que contém o ponteiro de nossa instância com uma lista de ponteiros de função para os métodos de nossa instância.
+
+
+    Detalhes da memória:
+
+    * Essa lista de funções é conhecida em C ++ como *vtable*.
+- title: Manipulando dados não dimensionados
+  content_markdown: >
+    As traits introduzem um desafio interessante quando queremos armazená-las em outra struct. As traits obscurecem a struct original, portanto, também obscurecem o tamanho original. Os valores não dimensionados armazenados em structs são tratados de duas maneiras no Rust:
+
+    * `generics` - usando tipos parametrizados cria efetivamente tipos conhecidos de structs/funções e, portanto, tamanhos conhecidos.
+
+    * `indirection` - colocando instâncias no heap fornece um contorno que permite que não nos preocupemos com o tamanho do tipo atual e apenas armazenar um ponteiro nele. Há outras maneiras também!
+- title: Funções genéricas
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_faz_barulho%3CT%3E(criatura%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20FazedorBarulho%2C%0A%7B%0A%20%20%20%20%2F%2F%20conhecemos%20o%20tipo%20real%20em%20tempo%20de%20compila%C3%A7%C3%A3o%0A%20%20%20%20criatura.faz_barulho()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_faz_barulho(%26criatura)%3B%0A%7D%0A
+  content_markdown: >
+    Os genéricos no Rust trabalham lado a lado com as traits. Quando descrevemos um tipo parametrizado `T`, podemos restringir quais tipos podem ser usados como argumento listando as traits necessárias que o argumento deve implementar.
+
+
+    Neste exemplo o tipo `T` deve implementar a trait `Foo`:
+
+    ```rust
+
+    fn minha_funcao<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+
+    Usando genéricos criamos funções tipadas estáticas em tempo de compilação que terão tipos e tamanhos conhecidos, permitindo executar dispatchs estáticos e armazená-lo como um valor dimensionado.
+- title: Função genérica abreviada
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_faz_barulho(criatura%3A%20%26impl%20FazedorBarulho)%0A%7B%0A%20%20%20%20%2F%2F%20conhecemos%20o%20tipo%20real%20em%20tempo%20de%20compila%C3%A7%C3%A3o%0A%20%20%20%20criatura.faz_barulho()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_faz_barulho(%26criatura)%3B%0A%7D%0A
+  content_markdown: |
+    O Rust possui uma abreviação para expressar genéricos restritos por uma trait:
+
+    ```rust
+    fn minha_funcao(foo: impl Foo) {
+        ...
+    }
+    ```
+
+    Isso é equivalente a escrever:
+
+    ```rust
+    fn minha_funcao<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Oceano%20%7B%0A%20%20%20%20animais%3A%20Vec%3CBox%3Cdyn%20FazedorBarulho%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22zum%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20oceano%20%3D%20Oceano%20%7B%0A%20%20%20%20%20%20%20%20animais%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20oceano.animais.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.faz_barulho()%3B%0A%20%20%20%20%7D%0A%7D%0A
+  content_markdown: >
+    `Box` é uma estrutura de dados que nos permite mover nossos dados da stack para a heap.
+
+
+    `Box` é uma estrutura conhecida como *ponteiro inteligente* que contém o ponteiro dos nossos dados na heap.
+
+
+    Como o `Box` é uma struct com tamanho conhecido (porque apenas contém um ponteiro), é frequentemente usada como uma maneira de armazenar uma referência a algo em uma struct que deve saber o tamanho de seus campos.
+
+
+    O `Box` é tão comum que pode ser usado de qualquer lugar:
+
+
+    ```rust
+
+    Box::new(Foo { ... })
+
+    ```
+- title: Structs genéricas revisitada
+  content_markdown: >
+    As structs genéricas também podem ter seus tipos parametrizados restritos por traits.
+
+
+    ```rust
+
+    struct MinhaStruct<T>
+
+    where
+        T: MinhaTrait
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+
+    As structs genéricas têm seu tipo parametrizado em seus blocos de implementação:
+
+
+    ```rust
+
+    impl<T> MinhaStruct<T> {
+        ...
+    }
+
+    ```
+- title: Capítulo 7 - Conclusão
+  content_markdown: >
+    Agora temos mais recursos da linguagem em mãos para representar nossas idéias com clareza! As abstrações do Rust podem ser simples, mas são poderosas o suficiente para tornar o trabalho de codar uma alegria. Neste capítulo vislumbramos ponteiros inteligentes com o `Box`. No próximo capítulo aprenderemos como os ponteiros inteligentes podem nos ajudar com outras situações especiais de memória.
+
+
+    Recursos:
+
+    * [Vídeo - Object-oriented Programming in 7 minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Artigo - "The faster you unlearn OOP, the better for you and your software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
