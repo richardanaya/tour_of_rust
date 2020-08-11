@@ -12,7 +12,7 @@
     A `struct` egy mezőkból álló gyűjtemény.
 
 
-    Egy *mező* pedig szimplán egy érték, ami az adatstruktúrához van rendelve. 
+    Egy *mező* pedig szimplán egy érték, ami az adatstruktúrához van rendelve.
     Ez lehet egy
 
     primitív tipus vagy egy másik adatszerkezet.
