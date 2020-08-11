@@ -81,11 +81,10 @@
 
     * boolean - `bool` igaz és hamis értékekhez
 
-    * előjel nélküli egészek - `u8` `u16` `u32` `u64` `u128` pozitív egész
+    * előjel nélküli egészek - `u8` `u16` `u32` `u64` `u128` nemnegatív egész
     számok kifejezésére
 
-    * előjeles egészek - `i8` `i16` `i32` `i64` `i128` pozitív és negatív egész
-    számok kifejezésére
+    * előjeles egészek - `i8` `i16` `i32` `i64` `i128` egész számok kifejezésére
 
     * mutató méretű egészek - `usize` `isize` tömbök indexeinek és a memóriában
     tárolt dolgok méretének tárolására

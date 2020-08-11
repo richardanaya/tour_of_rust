@@ -71,10 +71,9 @@
     * booleans - `bool` for representing true/false
 
     * unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing
-    positive whole numbers
+    nonnegative whole numbers
 
-    * signed integers - `i8` `i16` `i32` `i64` `i128` for representing
-    positive/negative whole numbers
+    * signed integers - `i8` `i16` `i32` `i64` `i128` for representing whole numbers
 
     * pointer sized integers - `usize` `isize` for representing indexes
 
