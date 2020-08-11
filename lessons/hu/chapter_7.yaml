@@ -46,7 +46,7 @@
 
     ```rust
 
-    impl MyStruct { 
+    impl MyStruct {
         ...
         fn foo(&self) {
             ...
@@ -88,11 +88,11 @@
 
     ```rust
 
-    impl MyTrait for MyStruct { 
+    impl MyTrait for MyStruct {
         fn foo(&self) {
             ...
         }
-        ... 
+        ...
     }
 
     ```
@@ -205,7 +205,7 @@
     {
         ...
     }
-      
+
     ```
 - title: Box - Doboz
   code: >-
