@@ -13,9 +13,8 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20instantiate%20structs%20and%20bind%20to%20variables%0A%20%20%20%20%2F%2F%20to%20create%20memory%20resources%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20the%20owner%0A%7D%0A
 - title: Hatáskör-alapú erőforráskezelés
   content_markdown: >
-    Az egyes értékek az utolsó használatuk helyén vagy a létrehozó
-    függvény hatáskörének végén szabadulnak fel és deallokálódnak. Ezt
-    a folyamatot **drop**-nak (ejtésnek) hívjuk.
+    Az egyes értékek az utolsó használatuk helyén vagy a létrehozó függvény hatáskörének végén
+    szabadulnak fel és deallokálódnak. Ezt a folyamatot **drop**-nak (ejtésnek) hívjuk.
 
     Hogy érinti ez a memóriát:
 
@@ -38,8 +37,8 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
 - title: A birtoklás átadása
   content_markdown: >
-    Mikor egy tulajdonost argumentumként átadunk egy függvénynek, a birtokolt erőforrás a
-    függvény paraméterének tulajdonává válik.
+    Mikor egy tulajdonost argumentumként átadunk egy függvénynek, a birtokolt erőforrás a függvény
+    paraméterének tulajdonává válik.
 
     Egy **move** (mozgatás) után az eredeti függvényben lévő változó már nem használható.
 

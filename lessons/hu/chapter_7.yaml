@@ -22,9 +22,7 @@
     A Rust nyelvből hiányzik az adatok és viselkedés öröklése. Tehát:
 
     * A struct-ok nem képesek mezőket örökölni az őket szülő struct-ból.
-
     * Ugyanígy függvényeket se képesek átvenni.
-
 
     Ennek ellenére, a Rust elég sok más nyelvekben megszokott képességgel rendelkezik, így ezek a
     limitációk talán nem is fognak annyira hiányozni, mint gondolod.
@@ -39,7 +37,6 @@
     `objektumPeldany.foo()`). A Rust a következő jelöléseket használja:
 
     * `&self` - Egy megváltoztathatatlan referencia a példányra.
-
     * `&mut self` - Egy megváltoztatható referencia a példányra.
 
     A metódusok az úgynevezett implementációs blokkon belül kerülnek létrehozásra, melyet az `impl` kulcsszóval jelölünk:
