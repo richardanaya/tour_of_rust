@@ -1,133 +1,103 @@
-- title: 2장 - 흐름제어 기초
+- title: 2장 - 기초적인 흐름 제어
   content_markdown: >
-    2장에서는 Rust에서 제공하는 기본 흐름제어에 대해서 설명합니다.
+    이번 장에서는 Rust의 기초적인 흐름 제어 방법에 대해 얘기해 봅시다.
 
-    C 기반의 프로그래밍 언어에 익숙하다면 쉽게 배울 수 있을 것입니다. 
+    만약 여러분이 C 기반의 언어에 익숙하다면 마치 집에 온 것처럼 편안할 것이며
 
-    자! 빠져봅시다!
+    아마 한 두가지 정도의 놀랄 거리를 즐길 수 있을겁니다.
 - title: if/else if/else
   content_markdown: >
-    Code branching in Rust is not surprising.
+    Rust에서의 코드 분기는 놀랄게 없습니다.
 
 
-    Conditions don't have parentheses! Did we ever really need them? Our logic
-    now looks nice and clean.
+    조건문에 괄호가 없습니다! 괄호가 필요하긴 했던가요? 우리의 로직이 이제 멋지고 깔끔해 보입니다.
 
 
-    All your usual relational and logical operators still work: `==`, `!=`, `<`,
+    모든 일반적인 관계 연산자와 논리 연산자가 그대로 동작합니다: `==`, `!=`, `<`,
     `>`, `<=`, `>=`, `!`, `||`, `&&`.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%EB%B3%B4%EB%8B%A4%20%EC%9E%91%EB%8B%A4%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%EC%99%80%20%EA%B0%99%EB%8B%A4%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%2242%EB%B3%B4%EB%8B%A4%20%ED%81%AC%EB%8B%A4%22)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: loop
   content_markdown: |
-    Need an infinite loop?
+    무한 반복문이 필요하십니까?
 
-    Rust makes it easy.
+    Rust에서는 쉬운 일입니다.
 
-    `break` will escape a loop when you are ready.
+    `break`는 여러분이 준비되면 loop을 탈출하게 해줍니다.
 
-    `loop` has a secret we'll talk about soon.
+    `loop`에는 우리가 곧 알아볼 비밀이 한 가지 있습니다.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
 - title: while
   content_markdown: |
-    `while` lets you easily add a condition to a loop.
+    `while`은 반복문에 조건을 간단히 넣을 수 있게 해줍니다.
 
-    If the condition evaluates to `false`, the loop will exit.
+    조건의 평가결과가 `false`인 경우, 반복문은 종료됩니다.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: for
   content_markdown: >
-    Rust's `for` loop is a powerful upgrade. It
+    Rust의 `for` 반복문은 강력한 업그레이드입니다.
 
-    iterates over values from any expression that evaluates into an iterator.
-    What's
+    어떠한 표현이든지, 그로부터 평가된 반복자의 값을 반복합니다.
 
-    an iterator? An iterator is an object that you can ask the question "What's
-    the
-
-    next item you have?" until there are no more items.
+    반복자란 무엇일까요? 반복자는 더 가진게 없을 때까지 "다음에 가진게 뭐야?" 라고 요청할 수 있는 객체입니다.
 
 
-    We'll explore this more in a future chapter. In the meantime, just know Rust
-    makes 
+    이건 앞으로 더 살펴볼겁니다. 그동안에는 일단 Rust가
 
-    it easy to create iterators that generate a sequence of integer numbers.
-
-
-    The `..` operator creates an iterator that generates numbers from a start
-    number up to
-
-    but not including an end number.
+    정수의 배열을 생성하는 반복자를 만들기 쉽게 한다고만 알고 있읍시다.
 
 
-    The `..=` operator creates an iterator that generates numbers from a start
-    number up to 
+    `..` 연산자는 시작 숫자에서 끝 숫자 전까지의 숫자들을 생성하는 반복자를 만듭니다.
 
-    and including an end number.
+
+    `..=` 연산자는 시작 숫자에서 끝 숫자까지의 숫자들을 생성하는 반복자를 만듭니다.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: match
   content_markdown: >
-    Miss your switch statement? Rust has an incredibly useful keyword
+    switch 구문이 그리우십니까? Rust는 모든 가능한 조건의 값들을 대조하고
 
-    for matching all possible conditions of a value and executing a code path if
-    the
+    그 결과가 true인 경우 해당 코드 경로를 실행하는, 엄청나게 유용한 키워드를 갖고 있습니다.
 
-    match is true. Let's see how this works for numbers. We will have more to
-    say
+    앞으로의 장에서는 더 복잡한 데이터의 패턴을 대조하는 방법에 대해 얘기할 것입니다.
 
-    in future chapters on pattern matching more complex data. I promise you it
-    will
-
-    be worth the wait.
+    약속컨대, 기다린 보람이 있을겁니다.
 
 
-    `match` is exhaustive so all cases
-
-    must be handled.
+    `match`의 조건은 빠짐 없이 모든 케이스를 처리해야 합니다.
 
 
-    Matching combined with destructuring is by far one of the
-
-    most common patterns you will see in all of Rust.
+    match와 분해의 조합은 현재까지 Rust에서 가장 흔하게 사용하는 패턴입니다.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
-- title: Returning Values From loop
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%220%20%EB%B0%9C%EA%B2%AC%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%97%AC%EB%9F%AC%20%EA%B0%9C%20%EA%B0%92%EA%B3%BC%20%EB%8C%80%EC%A1%B0%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%221%20%EB%98%90%EB%8A%94%202%20%EB%B0%9C%EA%B2%AC!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EB%B2%94%EC%9C%84%EB%A1%9C%20%EB%8C%80%EC%A1%B0%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%223%EC%97%90%EC%84%9C%209%EA%B9%8C%EC%A7%80%EC%9D%98%20%EC%88%AB%EC%9E%90%20%EB%B0%9C%EA%B2%AC%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%B0%BE%EC%9D%80%20%EC%88%AB%EC%9E%90%EB%A5%BC%20%EB%B3%80%EC%88%98%EC%97%90%20%EB%B0%94%EC%9D%B8%EB%94%A9%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%2210%EC%97%90%EC%84%9C%20100%EA%B9%8C%EC%A7%80%EC%9D%98%20%EC%88%AB%EC%9E%90%20%7B%7D%20%EB%B0%9C%EA%B2%AC!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EB%AA%A8%EB%93%A0%20%EC%BC%80%EC%9D%B4%EC%8A%A4%EA%B0%80%20%EC%B2%98%EB%A6%AC%EB%90%98%EC%A7%80%20%EC%95%8A%EC%95%98%EC%9D%84%20%EA%B2%BD%EC%9A%B0%20%EB%B0%98%EB%93%9C%EC%8B%9C%20%EC%A1%B4%EC%9E%AC%ED%95%B4%EC%95%BC%20%ED%95%98%EB%8A%94%20%EA%B8%B0%EB%B3%B8%20match%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22%EB%AD%94%EA%B0%80%20%EB%8B%A4%EB%A5%B8%EA%B1%B0%20%EB%B0%9C%EA%B2%AC!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: loop에서 값 리턴하기
   content_markdown: |
-    `loop` can break to return a value.
+    `loop`에서 break과 동시에 값을 리턴할 수 있습니다.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
-- title: Returning Values From Block Expressions
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%2213%20%EC%B0%BE%EC%95%98%EB%8B%A4%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22loop%EC%97%90%EC%84%9C%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: 블록 표현에서 값 리턴하기
   content_markdown: >
-    `if`, `match`, functions, and scope blocks all have a unique way of
-    returning values in Rust.
+    Rust에서 `if`, `match`, 함수, 그리고 범위 블록은 모두 고유의 값 리턴 방식을 갖고 있습니다.
 
 
-    If the last statement in an `if`, `match`, function, or scope block is an
-    expression without
+    `if`, `match`, 함수, 또는 범위 블록의 마지막 구문에 ';'가 없다면
 
-    a `;`, Rust will return it as a value from the block. This
+    Rust는 그 값을 블록의 리턴 값으로 간주합니다.
 
-    is a great way to create concise logic that returns a value that can be put
-    into
-
-    a new variable.
+    이는 새 변수에 할당할 값을 리턴하는 간단한 로직을 생성하는데 아주 좋은 방법입니다.
 
 
-    Notice that it also allows an `if` statement to operate like a concise
-    ternary expression.
+    `if` 구문을 간단한 3항 연산자처럼 쓸 수도 있다는 점 눈여겨 보세요.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
-- title: Chapter 2 - Conclusion
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust%EC%9D%98%203%ED%95%AD%20%EC%97%B0%EC%82%B0%20%ED%91%9C%ED%98%84%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22if%EB%A1%9C%EB%B6%80%ED%84%B0%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22%ED%96%84%EB%B2%84%EA%B1%B0%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22%ED%95%AB%EB%8F%84%EA%B7%B8%22%20%3D%3E%20%22%ED%95%AB%EB%8F%84%EA%B7%B8%EB%8B%A4%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%EB%A6%AC%ED%84%B4%EB%AC%B8%20%ED%95%98%EB%82%98%20%EB%BF%90%EC%9D%B4%EB%9D%BC%EB%A9%B4%20%EC%A4%91%EA%B4%84%ED%98%B8%EB%8A%94%20%ED%95%84%EC%88%98%EA%B0%80%20%EC%95%84%EB%8B%98%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22%ED%95%AB%EB%8F%84%EA%B7%B8%EA%B0%80%20%EC%95%84%EB%8B%88%EB%8B%A4%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%EC%9D%8C%EC%8B%9D%20%ED%8C%90%EB%B3%84%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%9D%B4%20%EB%B2%94%EC%9C%84%20%EB%B8%94%EB%A1%9D%EC%9D%80%20%ED%95%A8%EC%88%98%20%EB%B2%94%EC%9C%84%EB%A5%BC%20%EB%8D%94%EB%9F%BD%ED%9E%88%EC%A7%80%20%EC%95%8A%EA%B3%A0%20%EA%B0%92%EC%9D%84%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B2%8C%20%ED%95%B4%EC%A4%80%EB%8B%A4%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22block%EC%97%90%EC%84%9C%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%EC%97%90%EC%84%9C%20%ED%95%A8%EC%88%98%20%EB%A7%88%EC%A7%80%EB%A7%89%EC%97%90%20%EA%B0%92%EC%9D%84%20%EB%A6%AC%ED%84%B4%ED%95%98%EB%8A%94%20%EA%B4%80%EC%9A%A9%EC%A0%81%20%ED%91%9C%ED%98%84%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22function%EC%97%90%EC%84%9C%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: 2장 - 마무리
   content_markdown: >
-    Hopefully I've shown a glimpse of Rust's power even in the most
+    가장 기초적인 기능이었지만 Rust의 강력함을 맛보셨길 바랍니다.
 
-    basic language features. We'll be talking about `for` and
+    `for`와 `match`에 대해서는 이들을 활용할 지식을 더 얻게 됨에 따라
 
-    `match` even more in depth as we gain more knowledge that
+    훨씬 더 자세히 살펴보도록 하겠습니다.
 
-    can utilize their capabilities. Next time we'll get into Rust's foundational
-    data
-
-    structures.
+    다음 번에는 Rust의 기본 데이터 구조에 대해 배우겠습니다.
