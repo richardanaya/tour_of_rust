@@ -37,7 +37,7 @@ This project also aims to provide this book in as many languages as possible.
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus), [Haizhi Geng](https://github.com/JmPotato)
 * 繁體中文 - [kkpoon](https://github.com/kkpoon)
 * 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213), [Yuji Sugiura](https://github.com/leader22), [TaKO8Ki](https://github.com/TaKO8Ki)
-* 한국어 - [fermat39](fermat39) 
+* 한국어 - [fermat39](https://github.com/fermat39), [Sungjin Han](https://github.com/meinside)
 
 # Looking for translators!
 
