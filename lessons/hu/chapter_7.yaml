@@ -39,7 +39,8 @@
     * `&self` - Egy megváltoztathatatlan referencia a példányra.
     * `&mut self` - Egy megváltoztatható referencia a példányra.
 
-    A metódusok az úgynevezett implementációs blokkon belül kerülnek létrehozásra, melyet az `impl` kulcsszóval jelölünk:
+    A metódusok az úgynevezett implementációs blokkon belül kerülnek létrehozásra, melyet az `impl`
+    kulcsszóval jelölünk:
 
     ```rust
 
