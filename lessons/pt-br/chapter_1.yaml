@@ -52,7 +52,7 @@
 
     * booleanos - `bool` para representar verdadeiro/falso
 
-    * números inteiros sem sinal - `u8` `u32` `u64` `u128` para representar números inteiros positivos
+    * números inteiros sem sinal - `u8` `u32` `u64` `u128` para representar números inteiros não negativos
 
     * números inteiros com sinal - `i8` `i32` `i64` `i128` para representar números inteiros positivos e negativos
 
