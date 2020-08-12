@@ -78,11 +78,11 @@
 
     ```
 
-    A trait-ek megvalósítását úgy is felfoghatjuk, mint egy "szerződés," ami kimondja, hogy a
-    trait-et megvalósító struct-okra innentől a trait-en át is hivatkozhatunk (`&dyn MyTrait`),
-    annak ellenére is, hogy nem tudjuk a struct pontos típusát.
+    A trait-ekre gondolhatunk úgy, mint egy "szerződés," ami kimondja, hogy a trait-et megvalósító
+    struct-okra innentől a trait-en át is hivatkozhatunk (`&dyn MyTrait`), anélkül is, hogy tudnánk
+    a struct pontos típusát.
 
-    A struct-ok előírt metódusait szintén egy implementációs blokkon belül írhatjuk meg:
+    A struct-ok trait által előírt metódusait szintén egy implementációs blokkon belül írhatjuk meg:
 
     ```rust
 
@@ -100,8 +100,8 @@
   content_markdown: >
     A trait-ek maguk is megvalósíthatnak metódusokat.
 
-    Az ilyen metódusok nem képesek elérni a struct-ok mezőit, de hasznos lehet olyan esetekben,
-    amikor olyasvalamit szeretnénk létrehozni, ami sokféle struct-ban előfordul.
+    Az ilyen metódusok nem képesek elérni a struct-ok mezőit, de hasznosak lehetnek olyan esetekben,
+    amikor olyan viselkedlst szeretnénk leírni, ami sokféle struct-ban előfordul.
 - title: Trait-ek öröklése
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
@@ -115,8 +115,8 @@
 
     * statikus meghívás - Tudjuk mi a típus, így pontosan tudjuk azt is, melyik függvény kerül
       meghívásra.
-    * dinamikus meghívás - Nem tudjuk mi a típus, így először meg kell találnunk melyik függvénynek
-      is kell meghívásra kerülnie.
+    * dinamikus meghívás - Nem tudjuk mi a típus, így először meg kell találnunk, melyik függvényt
+      is kell meghívni.
 
     A trait-típusok, mint például `&dyn MyTrait` lehetővé teszik számunkra, hogy a dinamikus
     meghívás segítségével hívjuk meg az ezt megvalósító struct-ok példányait.
@@ -127,7 +127,7 @@
     Hogyan érinti ez a memóriát:
 
     * A dinamikus meghívás kissé lassabb, mert először le kell követnünk egy mutatót, hogy
-      megtaláljuk melyik függvényről is van szó.
+      megtaláljuk, melyik függvényről is van szó.
 - title: Trait objektumok
   content_markdown: >
     Amikor egy `&dyn MyTrait`típusú objektumot paraméterként adunk át, akkor ezt az objektumot
@@ -161,7 +161,7 @@
   content_markdown: >
     A Rust generikus függvényei kéz a kézben járnak a trait-ekkel. Például egy paraméterezett `T`
     típus esetén meghatározhatjuk, hogy mely típusok is illhetnek `T` helyére, az által, hogy
-    felsoroljuk a teljesítendő traiteket.
+    felsorolunk traiteket, amiket az adott típusparaméternek meg kell valósítania (trait-megkötés).
 
     Az alábbi példában `T`-nek meg kell valósítania a `Foo` trait-et:
 
@@ -170,7 +170,7 @@
     fn my_function<T>(foo: T)
 
     where
-        T:Foo
+        T: Foo
     {
         ...
     }
@@ -199,7 +199,7 @@
 
     fn my_function<T>(foo: T)
     where
-        T:Foo
+        T: Foo
     {
         ...
     }
@@ -229,7 +229,8 @@
     ```
 - title: Visszatekintés a generikus struct-okra
   content_markdown: >
-    A generikus struct-ok szintén rendelkezhetnek trait-ek által megkötött paraméteres típusokkal.
+    A generikus struct-ok szintén rendelkezhetnek olyan típusparaméterekkel, melyeknek meghatározott
+    trait-eket meg kell valósítaniuk (trait-megkötés).
 
     ```rust
 
@@ -244,7 +245,7 @@
 
     ```
 
-    A generikus struct-ok paraméterezett típusa az implementációs blokkban is megjelenik:
+    A generikus struct-ok típusparaméterei az implementációs blokkban is megjelennek:
 
     ```rust
 
