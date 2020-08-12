@@ -66,8 +66,7 @@
     O Rust suporta o polimorfismo com traits. As traits nos permitem associar um conjunto de métodos a um tipo struct.
 
 
-    Primeiro definimos as assinaturas dos métodos de uma trait em:
-    We first define the signatures of methods of a trait within:
+    Primeiro definimos as assinaturas dos métodos de uma trait internamente:
 
 
     ```
@@ -103,7 +102,6 @@
     As traits podem ter métodos implementados.
 
 
-    The functions have no direct access to the inner fields of a struct, but it canbe useful for sharing behavior between many trait implementors.
     As funções não têm acesso direto aos campos internos de uma struct, mas podem ser úteis para compartilhar comportamentos entre muitos implementadores de traits.
 - title: Herança das traits
   code: >-
@@ -116,15 +114,15 @@
   content_markdown: >
     Os métodos são executados de duas maneiras:
 
-    * static dispatch - quando o tipo de instância é conhecido, temos conhecimento direto de qual função chamar.
+    * static dispatch - quando o tipo da instância é conhecido, temos conhecimento direto de qual função chamar.
 
-    * dynamic dispatch - quando um tipo de instância não é conhecido, precisamos descobrir uma maneira de chamar a função correta.
+    * dynamic dispatch - quando o tipo da instância não é conhecido precisamos descobrir uma maneira de chamar a função correta.
 
 
     Os tipos de trait `&dyn MinhaTrait` nos permite a habilidade de trabalhar com instâncias  de objetos indiretamente usando dispatch dinâmico.
 
 
-    Quando o dispatch dinâmino é usado, o Rust irá encorajar você a pôr o `dyn` antes do seu tipo da trait, assim os outros ficarão cientes.
+    Quando o dispatch dinâmico é usado, o Rust irá encorajar você a pôr o `dyn` antes do seu tipo da trait, assim os outros ficarão cientes.
 
 
     Detalhes da memória:
@@ -148,7 +146,10 @@
 
     * `generics` - usando tipos parametrizados cria efetivamente tipos conhecidos de structs/funções e, portanto, tamanhos conhecidos.
 
-    * `indirection` - colocando instâncias no heap fornece um contorno que permite que não nos preocupemos com o tamanho do tipo atual e apenas armazenar um ponteiro nele. Há outras maneiras também!
+    * `indirection` - colocando instâncias no heap fornece um contorno que permite que não nos preocupemos com o tamanho do tipo atual e apenas armazenar um ponteiro nele.
+    
+    
+    Há outras maneiras também!
 - title: Funções genéricas
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20nome%3A%20String%2C%0A%20%20%20%20barulho%3A%20String%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20pub%20fn%20pega_barulho(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.barulho%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FazedorBarulho%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%3B%0A%7D%0A%0Aimpl%20FazedorBarulho%20for%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20faz_barulho(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.pega_barulho())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_faz_barulho%3CT%3E(criatura%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20FazedorBarulho%2C%0A%7B%0A%20%20%20%20%2F%2F%20conhecemos%20o%20tipo%20real%20em%20tempo%20de%20compila%C3%A7%C3%A3o%0A%20%20%20%20criatura.faz_barulho()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20criatura%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20barulho%3A%20String%3A%3Afrom(%22glub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_faz_barulho(%26criatura)%3B%0A%7D%0A
