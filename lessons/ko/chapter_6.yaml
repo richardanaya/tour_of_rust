@@ -1,0 +1,182 @@
+- title: 6장 - 텍스트
+  content_markdown: >
+    이제 Rust가 메모리를 어찌 다루는지 살짝 이해했으니, 텍스트에 대해 더 자세히 알아볼 준비가 된 것 같습니다.
+
+    Rust는 아마도 여러분이 다른 언어에서는 익숙하지 않았을 만국의 텍스트와 바이트 수준의 관심사를
+    상당히 신경써서 다룹니다.
+
+    즉, Rust는 그러한 관심사를 다룰 다양하고 훌륭한 도구들을 갖고 있습니다.
+- title: 문자열
+  content_markdown: >
+    문자열은 언제나 유니코드로 되어 있습니다.
+
+
+    문자열의 자료형은 `&'static str`입니다:
+
+
+    * `&`는 메모리 내의 장소를 참조하고 있다는 의미이며, `&mut`가 빠졌다는 것은
+    컴파일러가 값의 변경을 허용하지 않을 것이라는 뜻입니다
+
+    * `'static`은 string 데이터가 프로그램이 끝날 때까지 유효하다는 의미입니다
+    (절대 drop 되지 않습니다)
+
+    * `str`은 언제나 유효한 **utf-8**인 바이트 열을 가리키고 있다는 의미입니다
+
+
+    메모리 상세:
+
+    * Rust 컴파일러는 문자열을 프로그램 메모리의 데이터 세그먼트에 저장할 것입니다
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: utf-8이란 무엇인가
+  content_markdown: "컴퓨터로 점점 더 많은 나라의 언어가 사용되면서, 세계는 ASCII가 허용하던 것보다 \n(1 바이트는 256 문자 밖에 허용하지 않음) 더 많은 문자를 필요로 하게 되었습니다. \n\n**utf-8**은 1에서 4 바이트의 가변 길이 바이트로 도입되어, 사용 가능한 문자의 범위를 엄청나게 늘려 주었습니다. \n\n가변 크기 문자의 한 가지 장점은 매우 흔한 ASCII 문자(**utf-8**에서도 여전히 1 바이트만 필요로 함)에 쓸데 없는 바이트를 필요로 하지 않는다는 점입니다. \n\n한 가지 단점은 단순한 인덱싱(예: `my_text[3]`으로 네 번째 문자를 가져옴)으로는 \n더 이상 빠르게(**O(1)** 상수 시간으로) 문자를 찾을 수 없다는 점입니다. \n바로 앞의 글자가 가변 길이를 가질 수 있어, 바이트 열에서 4번째 문자가 실제로 시작하는 위치가 달라질 수도 있습니다. \n\n우리는 그 대신에 **utf-8** 바이트 열을 하나하나 돌면서 각각의 유니코드 문자가 실제로 어디에서 시작하는지 찾아야 합니다 (**O(n)** 선형 시간). \n\nFerris: \"**utf-8**로 내 물밑 친구들의 이모지를 보여줄 수 있어서 기쁩니다.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: 예외처리문자
+  content_markdown: >
+    어떤 문자들은 시각적으로 표현하기 어려우므로, **예외처리 코드(escape code)**
+    로 대체하여 씁니다.
+
+
+    Rust는 C 기반 언어들의 일반적인 예외처리 코드를 지원합니다:
+
+    * `\n` - 줄바꿈
+
+    * `\r` - 캐리지리턴
+
+    * `\t` - 탭
+
+    * `\\` - 역슬래시
+
+    * `\0` - null
+
+    * `\'` - 작은 따옴표
+
+
+    전체 목록은 [여기](https://doc.rust-lang.org/reference/tokens.html)서 보실 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%EA%B0%80%20%EB%A7%90%ED%95%98%EA%B8%B8%3A%5Ct%5C%22%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: 여러 줄로 된 문자열
+  content_markdown: |
+    Rust의 문자열은 기본적으로 여러 줄로 되어 있습니다.
+
+    줄바꿈 문자를 원하지 않을 경우, 줄 맨 뒤에 `\`를 사용하세요.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20%EB%82%98%EB%8A%94%20%EC%93%B0%EA%B3%A0%2C%20%EC%A7%80%EC%9A%B0%EA%B3%A0%2C%20%EB%8B%A4%EC%8B%9C%20%EC%93%B4%EB%8B%A4%0A%20%20%20%20%20%20%20%20%EB%8B%A4%EC%8B%9C%20%EC%A7%80%EC%9A%B0%EA%B3%A0%2C%20%EA%B7%B8%EB%9F%AC%EA%B3%A0%20%EB%82%98%EB%A9%B4%0A%20%20%20%20%20%20%20%20%EC%96%91%EA%B7%80%EB%B9%84%20%EA%BD%83%EC%9D%B4%20%ED%95%80%EB%8B%A4.%0A%20%20%20%20%20%20%20%20-%20%EA%B0%80%EC%93%B0%EC%8B%9C%EC%B9%B4%20%ED%98%B8%EC%BF%A0%EC%82%AC%EC%9D%B4%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22hello%20%5C%0A%20%20%20%20world%22%0A%20%20%20%20)%20%2F%2F%20w%20%EC%95%9E%EC%9D%98%20%EA%B3%B5%EB%B0%B1%EC%9D%B4%20%EB%AC%B4%EC%8B%9C%20%EB%90%98%EC%97%88%EC%9D%8C%EC%9D%84%20%EC%A3%BC%EC%9D%98%ED%95%98%EC%84%B8%EC%9A%94%0A%7D%0A
+- title: 원시 문자열
+  content_markdown: >
+    원시 문자열은 `r#"`로 시작하고 `"#`로 끝나며 문자열을 있는 그대로 쓰는데 쓰입니다.
+
+    일반 문자열을 여럿으로 착각하게 할만한 문자들(큰 따옴표나 역슬래시처럼)을 넣을 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%EC%9B%90%EC%8B%9C%20%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%80%20%EC%9D%BC%EB%B6%80%20%EC%83%81%ED%99%A9%EC%97%90%EC%84%9C%20%EC%9C%A0%EC%9A%A9%ED%95%A9%EB%8B%88%EB%8B%A4.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: 파일에서 문자열 가져오기
+  content_markdown: >
+    매우 큰 텍스트가 필요하다면 `include_str!` macro를 이용하여 로컬 파일에서 텍스트를
+    읽어오는 것을 고려해보세요:
+
+
+    ```rust
+
+    let 00_html = include_str!("00_ko.html");
+
+    ```
+- title: 문자열 슬라이스
+  content_markdown: >
+    문자열 slice는 메모리 상의 바이트 열에 대한 참조이며, 언제나 유효한 utf-8이어야 합니다.
+
+
+    `str` slice의 문자열 slice (sub-slice)도 역시 유효한 utf-8이어야 합니다.
+
+
+    `&str`의 흔히 사용되는 메소드는 다음과 같습니다:
+
+    * `len`은 문자열의 바이트 길이(글자수가 아닌)를 가져옵니다.
+
+    * `starts_with`/`ends_with`는 기본적인 비교에 쓰입니다.
+
+    * `is_empty`는 길이가 0일 경우 true를 리턴합니다.
+
+    * `find`는 주어진 텍스트가 처음 등장하는 위치인 `Option<usize>` 값을 리턴합니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20%EC%8B%A4%ED%8C%A8%0A%20%20%20%20%2F%2F%20Rust%EB%8A%94%20%EC%9C%A0%ED%9A%A8%ED%95%98%EC%A7%80%20%EC%95%8A%EC%9D%80%20%EC%9C%A0%EB%8B%88%EC%BD%94%EB%93%9C%20%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%98%20slice%EB%A5%BC%20%ED%97%88%EC%9A%A9%ED%95%98%EC%A7%80%20%EC%95%8A%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+- title: 문자
+  content_markdown: >
+    유니코드를 다루는 것이 꽤나 어렵다보니, Rust에서는
+    utf-8 바이트 열을 `char` 자료형의 vector로 돌려주는 기능을 제공합니다.
+
+
+    `char` 하나는 4 바이트입니다 (각각의 문자를 효율적으로 찾을 수 있습니다).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EB%AC%B8%EC%9E%90%EB%93%A4%EC%9D%84%20char%EC%9D%98%20vector%EB%A1%9C%20%EA%B0%80%EC%A0%B8%EC%98%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%204%EC%97%AC%EC%95%BC%20%ED%95%A9%EB%8B%88%EB%8B%A4%0A%0A%20%20%20%20%2F%2F%20char%EA%B0%80%204%20%EB%B0%94%EC%9D%B4%ED%8A%B8%EC%9D%B4%EB%AF%80%EB%A1%9C%20u32%EB%A1%9C%20%EB%B3%80%ED%99%98%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: 스트링
+  content_markdown: >
+    **String**은 utf-8 바이트 열을 heap memory에 소유하는 struct입니다.
+
+
+    String의 메모리는 heap에 있기 때문에, 문자열과는 달리 늘리거나 변경하거나
+    기타 등등을 할 수 있습니다.
+
+
+    흔히 쓰는 메소드입니다:
+
+
+    * `push_str`은 string의 맨 뒤에 utf-8 바이트들을 더 붙일 때 사용합니다.
+
+    * `replace`는 utf-8 바이트 열을 다른 것으로 교체할 때 사용합니다.
+
+    * `to_lowercase`/`to_uppercase`는 대소문자를 바꿀 때 사용합니다.
+
+    * `trim`은 공백을 제거할 때 사용합니다.
+
+
+    String이 drop 되면, 그 heap memory도 함께 drop 됩니다.
+
+
+    `String`은 `&str`로 string을 확장하고 자신을 리턴하는 `+` 연산자를 갖고 있지만,
+    기대하는 것만큼 효율적이진 않을 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+- title: 함수의 매개변수로서의 텍스트
+  content_markdown: >
+    문자열과 string은 일반적으로 함수에 문자열 slice 형태로 전달됩니다.
+
+    이 방법은 소유권을 넘길 필요가 없어 대부분의 경우에 유연성을 제공합니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%20%26str)%20%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2C%20msg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%EB%8A%94%20%26'static%20str%EC%9D%84%20%26str%EB%A1%9C%20%EB%8C%80%EC%97%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%EB%8A%94%20%EB%98%90%ED%95%9C%20String%EC%9D%84%20%26str%EB%A1%9C%20%EB%8C%80%EC%97%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+- title: 스트링 만들기
+  content_markdown: |
+    `concat`과 `join`은 string을 만드는 간단하지만 강력한 방법입니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
+- title: 스트링 양식 만들기
+  content_markdown: >
+    `format!` macro는 값이 어디에 어떻게 놓일지 매개변수화 된 (예: `{}`)
+    string을 정의하여 string을 생성합니다.
+
+
+    `format!`은 `println!`과 동일한 매개변수화 된 string을 사용합니다.
+
+
+    이 함수의 기능은 너무 방대해서 *Tour of Rust*의 범위를 넘어가니,
+    [이 문서](https://doc.rust-lang.org/std/fmt/)를 확인하시기 바랍니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22%EC%82%B6%2C%20%EC%9A%B0%EC%A3%BC%2C%20%EA%B7%B8%EB%A6%AC%EA%B3%A0%20%EB%AA%A8%EB%93%A0%20%EA%B2%83%EC%97%90%20%EB%8C%80%ED%95%9C%20%ED%95%B4%EB%8B%B5%3A%20%7B%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f)%3B%0A%7D%0A
+- title: 스트링 변환
+  content_markdown: |
+    많은 자료형이 `to_string`을 이용하여 string으로 변환될 수 있습니다.
+
+    generic 함수인 `parse`로 string이나 문자열을 다른 자료형을 가진 값으로 변환할 수 있습니다.
+    이 함수는 실패할 수도 있기 때문에 `Result`를 리턴합니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: 6장 - 마무리
+  content_markdown: >
+    이제 텍스트의 기본을 배웠습니다! 보셨다시피 유니코드는
+    텍스트를 다루기 까다롭게 하지만,
+
+    standard library에는 이를 쉽게 관리할 수 있는 기능들이 많이 있습니다.
+
+
+    지금까지는 주로 절차적 패러다임의 관점으로 Rust를 보아 왔지만 (i.e. 함수와 데이터만),
+
+    이제 trait과 더불어 Rust의 객체지향적 패러다임에 의해 잠금 해제될 기능들에 대해
+    얘기해 볼 시간입니다.
