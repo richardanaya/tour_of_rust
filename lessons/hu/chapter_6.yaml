@@ -82,8 +82,8 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
 - title: Fájlokból betöltött szöveg értékek
   content_markdown: |
-    Ha egy nagyon nagy szöveget szeretnél a programodban elhelyezni, érdemes lehet az `include_str!`
-    makrót alkalmaznod, amivel egy fájl szövegét tudod egy-az-egyben bemásolni egy változóba.
+    Ha egy nagyon nagy szöveget szeretnél a programodban elhelyezni, az `include_str!` makróval
+    egy fájl szövegét egy-az-egyben be tudod másolni egy változóba.
 
     ```rust
     let 00_html = include_str!("00_en.html");
@@ -97,7 +97,7 @@
 
     A `&str` gyakran használt metódusai:
 
-    * `len` - A szöveg hosszát adja meg bájtokban (**nem** azt, hogy hány karakter van benne!)
+    * `len` - A szöveg hosszát adja meg bájtokban (**nem** azt, hogy hány karakterből áll!)
     * `starts_with`/`ends_with` - Ellenőrizni lehet velük, hogy a szöveg egy bizonyos módon kezdődik
       vagy végződik-e.
     * `is_empty` - Igaz, ha `len` == 0.
