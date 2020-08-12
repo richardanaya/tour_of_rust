@@ -7,26 +7,26 @@
     それでも、Rustにはこれらの問題を管理するための優れたツールが多くあります。
 - title: 文字列リテラル
   content_markdown: >
-    文字列リテラルは常にユニコードです。
+    文字列リテラルは常にUnicodeです。
 
     文字列リテラルの型は`&'static str`です。:
 
     * `&` はメモリ中の場所を参照していることを意味しており、 `&mut` を欠いているのは、
     コンパイラがそれを修正することを認めていないということです。
 
-    * `'static` は文字列データがプログラムの終了まで有効であるということを意味している。（文字列データは決して消えません。）
+    * `'static` は文字列データがプログラムの終了まで有効であるということを意味しています。（文字列データは決して消えません。）
 
     * `str` は常に有効な**utf-8**であるバイト列を指していることを意味しています。
 
 
-    メモリに関する詳細:
+    メモリに関する詳細：
 
     * Rustのコンパイラは文字列をプログラムメモリのデータセグメントに入れるでしょう。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
-- title: What is utf-8
-  content_markdown: "As more languages were used on computers, the world needed to represent more text characters\nthan ASCII allowed (1 byte only allowed 256 characters). \n\n**utf-8** was introduced with a variable byte length of 1-4 bytes greatly increasing the range of possible characters.\n\nAn advantage of variable sized characters is text did not have unnecessary bytes for very common ASCII (only requiring 1 byte still in **utf-8**).\n\nA downside of variable sized characters is that character lookup can no longer be done quickly \n(**O(1)** constant time) with a simple indexing (e.g. `my_text[3]` to get the 4th character). It's possible that the \npreceding characters could have variable widths, altering where the 4th character actually begins in the sequence of bytes.\n\nInstead we must iterate through a **utf-8** byte sequence to understand where the Unicode characters actually begin (**O(n)** linear time).\n\nFerris: \"I'm mostly just happy to have **utf-8** for representing emojis of my underwater friends.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
-- title: Escaping Characters
+- title: utf-8とは
+  content_markdown: "様々な言語がコンピュター上で使われるようになるに連れて, ASCIIで許可されている以上のテキスト文字を表現する必要が出てきました。（ASCIIで許可されているのは1バイト、つまり256文字です）\n\n**utf-8** は1～4バイトの可変バイト長で導入され、それによって表現可能な文字の範囲が大幅に広がりました。\n\n可変サイズ文字の利点として挙げられるのは、テキストが非常に一般的なASCIIのための不要なバイトを持たなかったことです。（**utf-8** で必要とされるのはたった1バイトです）\n\n可変サイズの文字の欠点として挙げられるのは、簡単なインデキシング（例：4番目の文字を取得するために `my_text[3]` を使用すること）における文字の検索が（**O(1)** 定数時間で）素早くできなくなることです。すぐ前にある文字が可変幅を持つことで、4番目の文字がバイト列のどこから実際に始まるのかが変わってしまう可能性があります。\n\nその代わり、Unicode文字が実際にどこから始まるのかを知るために **utf-8** バイトのシーケンスを繰り返さなければなりません。（計算量は線形時間 **O(n)**）\n\nFerris「水中にいるお友達の絵文字を表現するのに **utf-8** があると嬉しいね！」\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: エスケープ文字
   content_markdown: >
     It's challenging to visually represent certain characters, so **escape
     codes** allow us to put a symbol in their place.
@@ -61,7 +61,7 @@
 - title: Raw String Literals
   content_markdown: >
     Raw strings allow us to write a sequence of characters verbatim by starting
-    with `r#"` and ending with `"#`. It lets us insert
+    with `r#"`  and ending with `"#`. It lets us insert
 
     characters that might otherwise confuse a normal string as literals (like
     double quotes and backslashes).
