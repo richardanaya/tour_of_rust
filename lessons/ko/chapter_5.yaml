@@ -1,0 +1,211 @@
+- title: 5장 - 소유권과 데이터 대여
+  content_markdown: >
+    Rust는 메모리 관리에 있어 다른 프로그래밍 언어에 비해 독특한 패러다임을 갖고 있습니다.
+
+    이제 컴파일러의 동작과 검증방식에 대해 차근차근 살펴볼 예정입니다.
+
+    중요한 것은, 앞으로 나올 규칙들은 여러분의 삶을 힘들게 하려고 존재하는게 아니라,
+    코드의 오류를 줄여주기 위한 것이란 점입니다!
+- title: 소유권
+  content_markdown: >
+    자료형을 인스턴스화 하여 변수명에 **할당(binding)**하는 행위는
+    
+    Rust 컴파일러가 전체 **생명주기(lifetime)**동안 검증할 메모리 리소스를 생성하는 것입니다.
+
+    할당된 변수는 리소스의 **소유자(owner)**라고 불립니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20struct%EB%A5%BC%20%EC%9D%B8%EC%8A%A4%ED%84%B4%EC%8A%A4%ED%99%94%20%ED%95%98%EA%B3%A0%20%EB%B3%80%EC%88%98%EC%97%90%20bind%ED%95%98%EC%97%AC%0A%20%20%20%20%2F%2F%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EB%A6%AC%EC%86%8C%EC%8A%A4%EB%A5%BC%20%EC%83%9D%EC%84%B1%ED%95%A8%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%EA%B0%80%20owner%EC%9E%84%0A%7D%0A
+- title: 범위 기반 리소스 관리
+  content_markdown: |
+    Rust는 범위(scope)가 끝나는 곳에서 리소스를 소멸하고 할당 해제합니다.
+
+    이 소멸과 할당 해제를 의미하는 용어로 **drop**을 사용합니다.
+
+    메모리 상세:
+    * Rust에는 가비지 컬렉션이 없습니다.
+    * 이는 C++에서는 Resource Aquisition Is Initialization ( RAII ) 라고 부릅니다.
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%EA%B0%80%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20foo_a%EA%B0%80%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
+- title: Dropping은 계층적이다
+  content_markdown: >
+    struct가 drop 될 때는, struct 자신이 제일 먼저 drop 되고,
+    이후에 그 자식들이 각각 drop 되고, 등의 순서로 처리됩니다.
+
+
+    메모리 상세:
+
+    * Rust에서는 메모리를 자동으로 해제함으로써 메모리 누수가 덜 일어나도록 합니다.
+
+    * 메모리 리소스는 단 한 번 drop 될 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%EA%B0%80%20%EB%A8%BC%EC%A0%80%20drop%20%EB%90%98%EA%B3%A0%0A%20%20%20%20%2F%2F%20%EA%B7%B8%20%EB%8B%A4%EC%9D%8C%EC%97%90%20foo.bar%EA%B0%80%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
+- title: 소유권 이전
+  content_markdown: >
+    owner가 함수의 인자로 전달되면, ownership은 그 함수의 매개변수로 이동(move)됩니다.
+
+
+    **move** 이후에는 원래 함수에 있던 변수는 더 이상 사용할 수 없습니다.
+
+
+    메모리 상세:
+
+    * **move** 중에는 owner 값의 stack 메모리가 함수 호출의 매개변수 stack 메모리로 복사됩니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%EA%B0%80%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%EA%B0%80%20do_something%EC%9C%BC%EB%A1%9C%20move%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%EB%8A%94%20%EB%8D%94%20%EC%9D%B4%EC%83%81%20%EC%82%AC%EC%9A%A9%ED%95%A0%20%EC%88%98%20%EC%97%86%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%7D%0A
+- title: 소유권 리턴하기
+  content_markdown: |
+    ownership은 함수에서도 리턴될 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%EC%9D%B4%20%EB%B0%96%EC%9C%BC%EB%A1%9C%20move%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%EA%B0%80%20owner%EA%B0%80%20%EB%90%98%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20%ED%95%A8%EC%88%98%EC%9D%98%20scope%20%EB%81%9D%EC%97%90%20%EB%8F%84%EB%8B%AC%ED%96%88%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%97%90%20foo%EB%8A%94%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
+- title: 참조로 소유권 대여하기
+  content_markdown: |
+    `&` 연산자를 통해 참조로 리소스에 대한 접근권한을 대여할 수 있습니다.
+
+    참조도 다른 리소스와 마찬가지로 drop 됩니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20foo%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
+- title: 참조로 변경 가능한 소유권 대여하기
+  content_markdown: >
+    `&mut` 연산자를 통해 리소스에 대한 mutable한 접근 권한도 대여할 수 있습니다.
+
+
+    리소스의 owner는 mutable하게 대여된 상태에서는 move 되거나 변경될 수 없습니다.
+
+
+    메모리 상세:
+
+    * Rust는 데이터 경합의 가능성 때문에 소유된 값을 변경하는 방법이 여러 개 생기는 것을 방지합니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20%EC%9D%80%20%EC%8B%A4%ED%8C%A8%ED%95%A0%20%EA%B2%83%EC%9E%85%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20%EC%99%9C%EB%83%90%ED%95%98%EB%A9%B4%20foo%EB%8A%94%20mutable%ED%95%98%EA%B2%8C%20borrow%EB%90%9C%20%EC%83%81%ED%83%9C%EC%97%90%EC%84%9C%EB%8A%94%20move%EB%90%A0%20%EC%88%98%20%EC%97%86%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%9E%85%EB%8B%88%EB%8B%A4%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20%EC%8B%A4%ED%8C%A8%ED%95%A0%20%EA%B2%83%EC%9E%85%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20%EC%99%9C%EB%83%90%ED%95%98%EB%A9%B4%20foo%EB%8A%94%20mutable%ED%95%98%EA%B2%8C%20borrow%EB%90%9C%20%EC%83%81%ED%83%9C%EC%97%90%EC%84%9C%EB%8A%94%20%EB%B3%80%EA%B2%BD%ED%95%A0%20%EC%88%98%20%EC%97%86%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%9E%85%EB%8B%88%EB%8B%A4%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%EB%8A%94%20%EC%9D%B4%20%EC%8B%9C%EC%A0%90%20%EC%9D%B4%ED%9B%84%20%EB%8D%94%20%EC%9D%B4%EC%83%81%20%EC%82%AC%EC%9A%A9%EB%90%98%EC%A7%80%20%EC%95%8A%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%97%90%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%0A%20%20%20%20%2F%2F%20%EB%AA%A8%EB%93%A0%20mutable%20%EC%B0%B8%EC%A1%B0%EA%B0%80%20drop%20%EB%90%98%EC%97%88%EC%9C%BC%EB%AF%80%EB%A1%9C%20%EC%9D%B4%EC%A0%9C%20%EB%AC%B8%EC%A0%9C%20%EC%97%86%EC%9D%B4%20%EB%8F%99%EC%9E%91%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20foo.x%20%3D%207%3B%0A%0A%20%20%20%20%2F%2F%20foo%EC%9D%98%20ownership%EC%9D%84%20%ED%95%A8%EC%88%98%EB%A1%9C%20move%20%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: 역참조
+  content_markdown: >
+    `&mut` 참조를 이용해 `*` 연산자로 owner의 값을 설정할 수 있습니다.
+
+
+    `*` 연산자로 own된 값의 복사본도 가져올 수 있습니다
+    (복사 가능한 경우만 - 복사 가능한 자료형에 대해서는 이후에 설명하겠습니다).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20owner%EC%9D%98%20%EA%B0%92%EC%9D%98%20%EB%B3%B5%EC%82%AC%EB%B3%B8%EC%9D%84%20%EA%B0%80%EC%A0%B8%EC%98%B4%0A%20%20%20%20*f%20%3D%2013%3B%20%2F%2F%20%EC%B0%B8%EC%A1%B0%EC%9D%98%20owner%EC%9D%98%20%EA%B0%92%EC%9D%84%20%EC%84%A4%EC%A0%95%ED%95%A8%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: 대여한 데이터 전달하기
+  content_markdown: >
+    Rust의 참조 규칙은 다음과 같이 요약될 수 있습니다:
+
+
+    * Rust는 단 하나의 mutable한 참조 **또는** 여러개의 non-mutable 참조만 허용하며,
+    **둘 다는 안됨**.
+
+    * 참조는 그 owner보다 **더 오래 살** 수 없음.
+
+
+    이는 보통 함수로 참조를 넘겨줄 때에는 문제가 되지 않습니다.
+
+
+    메모리 상세:
+
+    * 첫 번째 참조 규칙은 데이터 경합을 방지합니다. 데이터 경합이 뭐냐구요?
+    데이터 경합은 데이터를 읽는 행위가 동시에 데이터를 쓰는 이의 존재로 인해
+    동기화가 어긋날 가능성이 있을 때 일어납니다.
+    이는 멀티쓰레드 프로그래밍에서 종종 발생합니다.
+
+    * 두 번째 참조 규칙은 존재하지 않는 데이터를 바라보는 잘못된 참조를 사용하는 것을
+    방지합니다 (이를 C에서는 허상 포인터(dangling pointers)라고 부릅니다).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20%EC%B0%B8%EC%A1%B0%20f%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20%EB%AA%A8%EB%93%A0%20mutable%20%EC%B0%B8%EC%A1%B0%EA%B0%80%20do_something%20%ED%95%A8%EC%88%98%20%EB%82%B4%EC%97%90%EC%84%9C%20drop%20%EB%90%98%EB%AF%80%EB%A1%9C%2C%0A%20%20%20%20%2F%2F%20%ED%95%98%EB%82%98%20%EB%8D%94%20%EC%83%9D%EC%84%B1%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
+- title: 참조의 참조
+  content_markdown: |
+    참조는 심지어 참조에도 사용될 수 있습니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20%EC%97%AC%EA%B8%B0%EC%84%9C%20x%EA%B0%80%20drop%20%EB%90%98%EC%96%B4%20non-mutable%20%EC%B0%B8%EC%A1%B0%EB%A5%BC%20%EC%83%9D%EC%84%B1%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20foo%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
+- title: 명시적인 생명주기
+  content_markdown: >
+    Rust 코드에서 항상 볼 수 있는 것은 아니지만, 컴파일러는
+    모든 변수의 lifetime을 이해하며
+
+    참조가 절대로 그 owner보다 더 오래 존재하지 못하도록 검증을 시도합니다.
+
+
+    함수에서는 어떤 매개변수와 리턴 값이 서로 같은 lifetime을 공유하는지 식별할 수 있도록
+
+    심볼로 표시하여 명시적으로 생명주기를 지정할 수 있습니다.
+
+
+    lifetime 지정자는 언제나 `'`로 시작합니다. (예: `'a`, `'b`, `'c`)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98%20foo%EC%99%80%20%EB%A6%AC%ED%84%B4%20%EA%B0%92%EC%9D%80%20%EB%8F%99%EC%9D%BC%ED%95%9C%20lifetime%EC%9D%84%20%EA%B3%B5%EC%9C%A0%ED%95%A8%0Afn%20do_something%3C'a%3E(foo%3A%20%26'a%20Foo)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%EA%B0%80%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%98%EC%96%B4%2C%20non-mutable%20%EC%B0%B8%EC%A1%B0%EB%A5%BC%20%EC%83%9D%EC%84%B1%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%9D%8C%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A8%0A%20%20%20%20%2F%2F%20foo%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A8%0A%7D%0A
+- title: 여러 개의 생명주기
+  content_markdown: >
+    lifetime 지정자는 컴파일러가 스스로 함수 매개변수들의 lifetime을 판별하지 못하는 경우,
+
+    이를 명시적으로 지정할 수 있게 도와줍니다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%EC%99%80%20%EB%A6%AC%ED%84%B4%20%EA%B0%92%EC%9D%80%20%EB%8F%99%EC%9D%BC%ED%95%9C%20lifetime%EC%9D%84%20%EA%B3%B5%EC%9C%A0%ED%95%A8%0A%2F%2F%20foo_a%EB%8A%94%20%EB%AC%B4%EA%B4%80%ED%95%9C%20lifetime%EC%9D%84%20%EA%B0%80%EC%A7%90%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20%EC%97%AC%EA%B8%B0%20%EC%9D%B4%ED%9B%84%EC%97%90%EB%8A%94%20foo_b%EC%9D%98%20lifetime%EB%A7%8C%20%EC%A1%B4%EC%9E%AC%ED%95%98%EB%AF%80%EB%A1%9C%20foo_a%EB%A7%8C%20drop%20%EB%90%A8%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20%EC%97%AC%EA%B8%B0%EC%84%9C%20x%EA%B0%80%20drop%20%EB%90%A8%0A%20%20%20%20%2F%2F%20%EC%97%AC%EA%B8%B0%EC%84%9C%20foo_b%EA%B0%80%20drop%20%EB%90%A8%0A%7D%0A
+- title: 정적인 생명주기
+  content_markdown: >
+    **static** 변수는 컴파일 타임에 생성되어 프로그램의 시작부터 끝까지 존재하는 
+    메모리 리소스입니다.
+
+    이들은 명시적으로 자료형을 지정해 주어야 합니다.
+
+
+    **static lifetime**은 프로그램이 끝날 때까지 무한정 유지되는 메모리 리소스입니다.
+
+    이 정의에 따르면, 어떤 static lifetime의 리소스는 런타임에 생성될 수도 있다는 점 알아두세요.
+
+
+    static lifetime을 가진 리소스는 `'static`이라는 특별한 lifetime 지정자를 갖습니다.
+
+
+    `'static`한 리소스는 절대 **drop** 되지 않습니다.
+
+
+    만약 static lifetime을 가진 리소스가 참조를 포함하는 경우, 그들도 모두 `'static`이어야 합니다
+    (그 이하의 것들은 충분히 오래 살아남지 못합니다).
+
+
+    메모리 상세:
+
+
+    * static 변수는 어느 누구에 의해서든 전역적으로 접근 가능하기 때문에,
+      이를 변경하는 것은 데이터 경합을 유발하는, 본질적으로 위험한 행위입니다.
+      전역 데이터에 대한 내용은 이후에 얘기하도록 하겠습니다.
+    * Rust에서는 `unsafe { ...  }` 블록을 이용하여 특정 동작에 대해
+    컴파일러가 메모리 검사를 하지 않도록 할 수 있습니다.
+    생각 없이 [<span style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)에 대해 이야기 하지 않도록 합시다.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20%EB%B3%80%EC%88%98%EB%8A%94%20%ED%95%A8%EC%88%98%20scope%20%EC%95%88%EC%97%90%EB%8F%84%20%EB%84%A3%EC%9D%84%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20%EA%B0%92%EB%93%A4%EC%9D%80%20'static%20lifetime%EC%9D%84%20%EA%B0%96%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20%EC%9D%BC%EB%B6%80%20%EA%B7%9C%EC%B9%99%EC%9D%80%20%EA%B9%B0%20%EC%88%98%20%EC%9E%88%EC%9C%BC%EB%82%98%2C%20%EB%B0%98%EB%93%9C%EC%8B%9C%20%EB%AA%85%EC%8B%9C%EC%A0%81%EC%9C%BC%EB%A1%9C%20%ED%95%B4%EC%95%BC%20%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20SECRET%EC%97%90%20string%20%EA%B0%92%EC%9D%84%20%EC%84%A4%EC%A0%95%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8A%94%EB%8D%B0%2C%20%EC%9D%B4%20%EA%B0%92%20%EC%97%AD%EC%8B%9C%20'static%EC%9D%B4%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%9E%85%EB%8B%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: 데이터 자료형의 생명주기
+  content_markdown: >
+    함수와 마찬가지로, 데이터 자료형의 구성원들도 lifetime 지정자로 지정할 수 있습니다.
+
+
+    Rust는 참조가 품고 있는 데이터 구조가 참조가 가리키는 owner보다 절대
+    오래 살아남지 못하도록 검증합니다.
+
+
+    아무 것도 아닌 것을 가리키는 참조를 들고 다니는 struct란 있을 수 없습니다!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: 5장 - 마무리
+  content_markdown: >
+    휴, 끝까지 오신 것을 축하드립니다!
+
+    배워야 할 게 많긴 하지만, rustacean이 되는 길을 잘 따라오고 있습니다.
+
+    어떻게 Rust가 이런 시스템 프로그래밍의 일반적인 도전과제들을 해결하고자 하는지는 잘 아셨길 바랍니다:
+
+
+    * 의도하지 않은 리소스 변경
+
+    * 리소스를 깜빡하고 소멸하지 않음
+
+    * 리소스를 실수로 두 번 소멸함
+
+    * 리소스가 소멸된 뒤에 사용함
+
+    * 다른 곳에서 읽고 있는 리소스에 쓰기를 하여 데이터 경합을 일으킴
+
+    * 컴파일러가 보증할 수 없는 코드가 뻔히 보임
+
+
+    다음 장에서는 Rust가 어떻게 텍스트를 다루는지 보면서
+    이런 지식들을 적용해볼 예정입니다.
