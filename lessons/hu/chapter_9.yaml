@@ -1,0 +1,141 @@
+- title: 9. Fejezet - Projektszervezés És Struktúra
+  content_markdown: |
+    Egészen eddig a példakódjaink egyetlen fájlból álltak. Lássuk, hogyan tudjuk munkánkat jobban
+    szervezni és másokkal megosztani!
+- title: Modulok
+  content_markdown: |
+    Minden Rust programot, vagy könyvtárat *crate*-nek (ládának) hívunk.
+
+    Minden láda *modulok* hierarchiáját tartalmazza.
+
+    Minden ládának van legfelső szintű (root, gyökér) modulja.
+
+    A modulok tartalmazhatnak globális változókat, függvényeket, struct-okat, traiteket, vagy akár
+    másik modulokat is!
+
+    Rust-ban nincs 1:1 megfeleltetés a fájlok és a modul-hierarchia között. A modulok fáját kézzel
+    kell felépítenünk a kódunkban.
+- title: Hogyan Írjunk Futtatható Programot
+  content_markdown: |
+    Egy programnak mindig kell egy legfelső szintű modul, melyet a `main.rs` fájl tartalmaz.
+- title: Hogyan Írjunk Programkönyvtárat
+  content_markdown: |
+    Egy könyvtárnak mindig kell egy legfelső szintű modul, melyet a `lib.rs` fájl tartalmaz.
+- title: Hogyan Hivatkozzunk Más Modulokra és Ládákra
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: |
+    Modulokban lévő elemekre teljes elérési útjukkal lehet hivatkozni, például:
+    `std::f64::consts::PI`.
+
+    Ennél egyszerűbb a **use** kulcsszó. Ez lehetővé teszi számunkra más modulok adott elemeire
+    hivatkozást anélkül, hogy a teljes elérési útjukat ki kéne újra írnunk. Például, ha modulunk,
+    függvényünk vagy blokkunk elejére írjuk, hogy `use std::f64::consts::PI`, az adott helyen már
+    elég csak `PI`-ként hivatkoznunk rá.
+
+    A Rust **alapkönyvtárának** ládájára **std** néven hivatkozhatunk. Ez tele van hasznos
+    adatstruktúrákkal és függvényekkel, valamint az operációs rendszer képességeit elérő
+    funkciókkal.
+
+    A közösség által készített ládák kereshető gyűjteményét a
+    [https://crates.io](https://crates.io/) weboldalon találod.
+- title: Hivatkozás Több Elemre
+  content_markdown: |
+    Egy időben több elemre is hivatkozhatunk:
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris nem szereti a TAUtát, ő csak PItét eszik.[1]
+
+    [1]: Bocs. -- *A fordító*
+- title: Modulok Készítése
+  content_markdown: |
+    Amikor kódra gondolunk, általában egy fájlokból és mappákból álló struktúrát képzelünk magunk
+    elé. A Rust megengedi számunkra, hogy a fájlstruktúrához hasonló modul-hierarchiát építsünk fel.
+
+    Több módon is létrehozhatunk modulokat. Például, egy `foo` nevű modul az alábbi formákat veheti
+    fel:
+     * `foo.rs` nevű fájl
+     * `foo` nevű mappa, benne `mod.rs` nevű fájl
+- title: Modul Hierarchia
+  content_markdown: |
+    Modulok tartalmazhatnak más modulokat is. Ahhoz, hogy egy al-modult hozzunk létre, a szülő
+    modulba az alábbi sort kell írnunk:
+
+    ```rust
+    mod foo;
+    ```
+
+    Ez a deklaráció megkeresi a `foo.rs` vagy `foo/mod.rs` fájlt és a tartalmát beilleszti a
+    modulunkba.
+- title: Beágyazott Modulok
+  content_markdown: |
+    Egy almodult közvetlenül elhelyezhetünk a szülő modul kódjában is.
+
+    Ennek egy nagyon gyakori felhasználása a teszt kódok készítése. Létre tudunk hozni olyn
+    almodult, ami csak teszt környezetben fog létezni!
+
+    ```
+    // Ez a tulajdonság eltávolítja a modult, ha a Rust nem tesztkörnyezetben fut
+    #[cfg(test)]
+    mod tests {
+        // Vegyük észre, hogy alapból nem férünk hozzá a szülő modul tartalmához, azt importálnunk
+        // kell.
+        use super::*;
+
+        ... ide jönnek a tesztek ...
+    }
+    ```
+- title: Beágyazott Modulokra Hivatkozás
+  content_markdown: |
+    A Rust több kulcsszót is ismer, amit a `use` útvonalainál használhatsz, hogy könnyebben
+    hivatkozhass arra, amit szeretnél:
+
+    * `crate` - a láda legkülső modulja
+    * `super` - az aktuális modul szülőmodulja, az eggyel kintebbi modul
+    * `self` - az aktuális modul
+- title: Exportálás
+  content_markdown: |
+    Alapértelmezés szerint egy *modulban* definiált elemek nem láthatóak kívülről (még a modul
+    részét képző gyermek-modulokban sem!). Hogy elérhetővé tegyük ezeket a definíciókat, a `pub`
+    kulcsszóra van szükségünk.
+
+    Ugyanígy, egy *láda* tagjai sem látszanak alapból más ládákban. Hogy elérhetővé tegyünk valamit,
+    annak a `pub` kulcsszóval publikusnak kell lennie a *legkülső modulban* (`lib.rs` vagy
+    `main.rs`).
+- title: Struktúra Láthatóság
+  content_markdown: |
+    Csakúgy, mint a függvényeknél, a `pub` kulcsszóval a struktúráknál is megmondhatjuk, elérhetőek
+    legyenek-e az őket definiáló modulon kívül.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Bevezetés (Prelude)
+  content_markdown: |
+    Feltűnhetett már, hogy a `Vec` vagy `Box` elérhető bárhonnan anélkül, hogy `use`-zal importálni
+    kellene őket. Ez azért van, mert az alapkönyvtárnak van egy úgynevezett bevezetése (`prelude`).
+
+    Minden, ami a Rust alapkönyvtárában a `std::prelude::*` alatt exportálva van, automatikusan
+    elérhető minden Rust kódban. Ez az eset a `Vec` és `Box` típusokkal, de sok mással is (Option,
+    Copy, stb.).
+- title: A Saját Bevezetésed
+  content_markdown: |
+    Ha már az alapkönyvtárhoz tartozik bevezetés, nem ritka, hogy a saját könyvtáraink is
+    tartalmaznak ilyen előzmény modult. Ez egyfajta kiindulópontként szolgál, amivel a felhasználók
+    a leggyakrabban használt típusokat egyszerűen importálhatják (pl.: `use konyvtaram::prelude::*`).
+
+    Az alapkönyvtárral ellentétben a saját bevezetés nem kerül automatikusan betöltésre, de jó ötlet
+    csinálni, hogy a felhasználók tudják, hogyan is kezdjenek neki a könyvtárunkat használni.
+
+    "Légy jó rustacean és segítsd a társaidat egy jó bevezetéssel!" - Ferris
+- title: 9. Fejezet - Konklúzió
+  content_markdown: |
+    Most már ismersz néhány trükköt, amik szükségesek lehetnek, ha programokat és könyvtárakat
+    szeretnél a világ elé tárni. Ne aggódj, ha nem emlékszel mindenre - ahogy a könyvtárad növekszik
+    és egyre többet használják, meg fogod látni, mi működik legjobban az egyes fejlődési
+    szakaszokban.
+
+    További olvasnivaló:
+
+    - [Rust API írás útmutató (angol)](https://rust-lang.github.io/api-guidelines/)
