@@ -50,13 +50,13 @@
     エスケープ文字の一覧は[ここ](https://doc.rust-lang.org/reference/tokens.html)にあります。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%E3%81%AF%E8%A8%80%E3%81%86%3A%5Ct%5C%22%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
-- title: Multi-line String Literals
+- title: 複数行の文字列リテラル
   content_markdown: |
-    Rust strings are multiline by default.
+    Rustにおける文字列はデフォルトで複数行に対応しています。
 
-    Use a `\` at the end of a line if you don't want a line break.
+    改行したくない場合は、行の最後に `\` を挿入しましょう。
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20%E6%9B%B8%E3%81%84%E3%81%A6%E3%81%BF%E3%81%9F%E3%82%8A%0A%20%20%20%20%20%20%20%20%E3%81%91%E3%81%97%E3%81%9F%E3%82%8A%E6%9E%9C%E3%81%A6%E3%81%AF%0A%20%20%20%20%20%20%20%20%E3%81%91%E3%81%97%E3%81%AE%E8%8A%B1%0A%20%20%20%20%20%20%20%20-%20%E7%AB%8B%E8%8A%B1%E5%8C%97%E6%9E%9D%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF%20%5C%0A%20%20%20%20%E4%B8%96%E7%95%8C%22)%20%2F%2F%20%E4%B8%96%E7%95%8C%E3%81%AE%E5%89%8D%E3%81%AB%E3%81%82%E3%82%8B%E9%96%93%E9%9A%94%E3%81%AF%E7%84%A1%E8%A6%96%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%0A%7D%0A
 - title: Raw String Literals
   content_markdown: >
     Raw strings allow us to write a sequence of characters verbatim by starting
