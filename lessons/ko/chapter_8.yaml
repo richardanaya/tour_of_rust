@@ -1,0 +1,311 @@
+- title: 8장 - 스마트 포인터
+  content_markdown: >
+    이번 장에서는 smart pointer에 대해 명확하고 쉽게 이해해 보겠습니다.
+
+    가장 저수준의 메모리를 다룰 수 있게 해주는 자료 구조에 대해 알아봅시다.
+
+
+    Ferris가 말합니다: "이번 장을 짧게 한 번 읽고서
+
+    저수준 메모리 관리 코드를 짜지 못한다고 해도 거기에 압도되지 마세요.
+
+    이번 장은 주로 유용한 도구들의 소개와 함께 그들의 동작 방식을 가볍게 살펴보기 위함이니까요!"
+- title: 참조 다시 보기
+  content_markdown: >
+    참조는 근본적으로 메모리 상의 어떤 바이트들의 시작 위치를 가리키는 숫자일 뿐입니다.
+
+    참조의 유일한 용도는 특정 자료형의 데이터가 어디에 존재하는지에 대한 개념을 나타내는 것입니다.
+
+    일반 숫자와의 차이점은 Rust에서 참조가 가리키는 값보다 더 오래 살지 않도록
+
+    lifetime을 검증한다는 것입니다 (안그러면 그걸 사용했을 때 오류가 날 것입니다!).
+- title: 원시 포인터
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%8A%94%20%EC%97%AC%EA%B8%B0%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%3A%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: >
+    참조는 더 원시적인 자료형인 *raw pointer*로 변환될 수 있습니다.
+
+    raw pointer는 숫자와 마찬가지로 거의 제한 없이 여기저기 복사하고 이동할 수 있습니다.
+
+    Rust는 raw pointer가 가리키는 메모리 위치의 유효성을 보증하지 않습니다.
+
+
+    raw pointer에는 두 종류가 있습니다:
+
+
+    * `*const T` - 자료형 T의 데이터를 가리키는 절대 변경되지 않는 raw pointer.
+
+    * `*mut T` - 자료형 T의 데이터를 가리키는 변경될 수 있는 raw pointer.
+
+
+    raw pointer는 숫자와 상호 변환이 가능합니다 (예: `usize`).
+
+
+    raw pointer는 *unsafe*한 코드의 데이터에 접근할 수 있습니다 (이에 대해서는 뒤에 다루겠습니다).
+
+
+    메모리 상세:
+
+    * Rust에서의 참조는 사용 방법에 있어서 C의 pointer와 매우 유사하나,
+      저장되는 방식이나 다른 함수에 전달되는 부분에 있어 훨씬 많은 컴파일 타임의 제약을 받습니다.
+    * Rust에서의 raw pointer는 복사하고 전달하고 심지어 pointer 연산을 할 수 있는 숫자 자료형으로 변환할 수도 있다는 점에서
+      C의 pointer와 유사합니다.
+- title: 역참조
+  content_markdown: |
+    *참조* (i.e. `&i32`)를 통해 참조되는 데이터를 접근/변경하는 과정을
+    *역참조*라고 합니다.
+
+    참조로 데이터에 접근/변경하는 데에는 다음의 두 가지 방법이 있습니다:
+    * 변수 할당 중에 참조되는 데이터에 접근.
+    * 참조되는 데이터의 field나 메소드에 접근.
+
+    Rust에는 이를 가능케 하는 강력한 연산자가 있습니다.
+- title: "* 연산자"
+  content_markdown: >
+    `*` 연산자는 참조를 역참조 하는 명시적인 방법입니다.
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    메모리 상세:
+
+    - i32는 `Copy` trait을 구현하는 기본 자료형이기 때문에,
+
+    stack에 있는 변수 `a`의 바이트들은 변수 `b`의 바이트들로 복사됩니다.
+- title: ". 연산자"
+  content_markdown: >
+    `.` 연산자는 참조의 field와 메소드에 접근하는 데에 쓰입니다.
+    이건 좀 더 미묘하게 동작합니다.
+
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+
+    아니, 왜  `ref_ref_ref_f` 앞에 `***`을 안넣어도 되는거죠?
+    그건 바로 `.` 연산자가 참조 열을 자동으로 역참조 했기 때문입니다.
+
+    저 마지막 줄은 컴파일러에 의해 자동적으로 다음과 같이 바뀌게 됩니다:
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: 스마트 포인터
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%EA%B0%80%20%60len%60%20%ED%95%A8%EC%88%98%EB%A5%BC%20%EC%9C%84%ED%95%B4%20%EC%9E%90%EB%8F%99%EC%B0%B8%EC%A1%B0%EB%90%9C%20%ED%9B%84%0A%20%20%20%20%2F%2F%20%EC%97%AC%EA%B8%B0%EC%84%9C%20%EC%97%AD%EC%B0%B8%EC%A1%B0%EA%B0%80%20%EC%A6%89%EC%8B%9C%20%EC%9D%BC%EC%96%B4%EB%82%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    `&` 연산자로 이미 존재하는 데이터의 참조를 생성하는 기능과 더불어,
+
+    Rust에서는 **smart pointer**라 불리는 *참조 같은* struct를 생성하는 기능을 제공합니다.
+
+
+    고수준에서 보자면 참조는 다른 자료형에 대한 접근을 제공하는 자료형이라고 볼 수 있습니다.
+
+    smart pointer가 일반적인 참조와 다른 점은, 프로그래머가 작성하는 내부 로직에 기반해 작동한다는 것입니다.
+
+    여러분(프로그래머)이 바로 *smart*한 부분을 담당하는 겁니다.
+
+
+    일반적으로 smart pointer는 struct가 `*`와 `.` 연산자로 역참조될 때 무슨 일이 발생할지
+
+    지정하기 위해 `Deref`, `DerefMut`, 그리고 `Drop` trait을 구현합니다.
+- title: 위험한 스마트 코드
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20%EC%9D%B4%EA%B2%8C%20%EC%9B%90%EC%8B%9C%20pointer%EC%9E%85%EB%8B%88%EB%8B%A4.%0A%20%20%20%20%2F%2F%20%EB%AC%B4%EC%96%B8%EA%B0%80%EC%9D%98%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EC%A3%BC%EC%86%8C%EB%A5%BC%20%EC%88%AB%EC%9E%90%EB%A1%9C%20%EA%B0%80%EC%A0%B8%EC%98%A4%EB%8A%94%20%EA%B2%83%EC%9D%80%20%EC%99%84%EC%A0%84%ED%9E%88%20%EC%95%88%EC%A0%84%ED%95%9C%20%EC%9D%BC%EC%9E%85%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EC%A3%BC%EC%86%8C%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20%EC%88%AB%EC%9E%90%EB%A5%BC%20%EC%9B%90%EC%8B%9C%20pointer%EB%A1%9C%2C%20%EB%8B%A4%EC%8B%9C%20f32%EB%A1%9C%20%EB%B3%80%ED%99%98%ED%95%98%EB%8A%94%20%EA%B2%83%20%EC%97%AD%EC%8B%9C%0A%20%20%20%20%2F%2F%20%EC%95%88%EC%A0%84%ED%95%9C%20%EC%9D%BC%EC%9E%85%EB%8B%88%EB%8B%A4.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%9D%B4%EA%B1%B4%20unsafe%ED%95%9C%EB%8D%B0%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC%EC%97%90%EA%B2%8C%20%EC%9A%B0%EB%A6%AC%EC%9D%98%20pointer%EA%B0%80%20%EC%9C%A0%ED%9A%A8%ED%95%9C%20f32%EB%9D%BC%EA%B3%A0%20%EA%B0%80%EC%A0%95%ED%95%98%EA%B3%A0%0A%20%20%20%20%20%20%20%20%2F%2F%20%EA%B7%B8%20%EA%B0%92%EC%9D%84%20%EB%B3%80%EC%88%98%20b%EB%A1%9C%20%EC%97%AD%EC%B0%B8%EC%A1%B0%20%ED%95%98%EB%9D%BC%EA%B3%A0%20%ED%95%98%EA%B3%A0%20%EC%9E%88%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%9E%85%EB%8B%88%EB%8B%A4.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%EB%8A%94%20%EC%9D%B4%EB%9F%B0%20%EA%B0%80%EC%A0%95%EC%9D%B4%20%EC%B0%B8%EC%9D%B8%EC%A7%80%20%EA%B2%80%EC%A6%9D%ED%95%A0%20%EB%B0%A9%EB%B2%95%EC%9D%B4%20%EC%97%86%EC%8A%B5%EB%8B%88%EB%8B%A4.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%EB%A7%B9%EC%84%B8%ED%95%98%EA%B1%B4%EB%8C%80%20%EC%9D%B4%EA%B1%B4%20%ED%8C%8C%EC%9D%B4%EB%8B%A4!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    smart pointer는 *unsafe*한 코드를 꽤 자주 쓰는 경향이 있습니다.
+
+    앞서 말했듯이, smart pointer는 Rust에서 가장 저수준의 메모리를 다루기 위한 일반적인 도구입니다.
+
+
+    뭐가 unsafe한 코드일까요?
+
+    unsafe한 코드는 Rust 컴파일러가 보증할 수 없는 몇 가지 기능이 있다는 예외사항을 제외하고는 일반적인 코드와 완전히 똑같이 동작합니다.
+
+
+    unsafe한 코드의 주기능은 *raw pointer를 역참조*하는 것입니다.
+
+    이는 *raw pointer*를 메모리 상의 위치에 가져다 놓고 "데이터 구조가 여깄다!"고 선언한 뒤
+    사용할 수 있는 데이터 표현으로 변환하는 것을 의미합니다 (i.e. `*const u8`을 `u8`로).
+
+    Rust에는 메모리에 쓰여지는 모든 바이트의 의미를 추적하는 방법은 없습니다.
+
+    Rust는 *raw pointer*로 쓰이는 임의의 숫자에 무엇이 존재하는지 보증할 수 없기 때문에,
+    역참조를 `unsafe { ... }` 블록 안에 넣습니다.
+
+
+    smart pointer는 *raw pointer를 역참조*하는데 널리 쓰이지만, 그 기능은 잘 입증 되었습니다.
+- title: 익숙한 친구들
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%204%20%EB%B0%94%EC%9D%B4%ED%8A%B8%EB%A5%BC%20%EC%9A%94%EC%B2%AD%ED%95%B4%20%EB%B4%85%EC%8B%9C%EB%8B%A4%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EC%9C%84%EC%B9%98%EB%A5%BC%20%EC%88%AB%EC%9E%90%EB%A1%9C%20%ED%95%A0%EB%8B%B9%ED%95%98%EA%B3%A0%20%EC%A0%80%EC%9E%A5%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20pointer%20%EC%97%B0%EC%82%B0%EC%9D%84%20%EC%82%AC%EC%9A%A9%ED%95%B4%20u8%20%EA%B0%92%20%EB%AA%87%20%EA%B0%9C%EB%A5%BC%20%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%97%90%20%EC%8D%A8%EB%B4%85%EC%8B%9C%EB%8B%A4%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20secret_recipe%3A%20ptr%20as%20usize%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20secret_recipe%20pointer%EB%A5%BC%20f32%20raw%20pointer%EB%A1%9C%20%EB%B3%80%ED%99%98%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%97%AD%EC%B0%B8%EC%A1%B0%20%ED%95%98%EC%97%AC%20%26f32%20%EA%B0%92%EC%9C%BC%EB%A1%9C%20%EB%A6%AC%ED%84%B4%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20Pie%20struct%EC%9D%98%20smart%20pointer%EB%A5%BC%20%EC%97%AD%EC%B0%B8%EC%A1%B0%20%ED%95%98%EC%97%AC%0A%20%20%20%20%2F%2F%20%22%ED%8C%8C%EC%9D%B4%EB%A5%BC%20%EB%A7%8C%EB%93%AD%EB%8B%88%EB%8B%A4%22%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    이미 본 적 있는 `Vec<T>`나 `String` 같은 smart pointer를 생각해 봅시다.
+
+
+    `Vec<T>`는 바이트들의 메모리 영역을 소유하는 smart pointer입니다.
+
+    Rust 컴파일러는 이 바이트들에 뭐가 존재하는지 모릅니다.
+
+    smart pointer는 관리하는 메모리 영역에서 내용물을 꺼내기 위해 자기가 뭘 의미하는지 해석하고,
+
+    데이터 구조가 그 바이트들 내 어디에서 시작하고 끝나는지 추적하며,
+
+    마지막으로 raw pointer를 데이터 구조로, 또 쓰기 편한 멋지고 깔끔한 인터페이스로 역참조 합니다.
+    (e.g. `my_vec[3]`)
+
+
+    유사하게, `String`은 바이트들의 메모리 영역을 추적하며,
+    쓰여지는 내용물이 언제나 유효한 `utf-8`이도록 프로그램적으로 제한하며,
+
+    그 메모리 영역을 `&str` 자료형으로 역참조할 수 있도록 도와줍니다.
+
+
+    이 데이터 구조들 둘 다, 자기 할 일을 하기 위해 raw pointer에 대한 unsafe한 역참조를 사용합니다.
+
+
+    메모리 상세:
+
+    * Rust는 C의 `malloc`에 상응하는 
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html)과
+    관리할 메모리 영역을 가져오기 위한
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)을 갖고 있습니다.
+- title: 힙에 할당된 메모리
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22heap%EC%97%90%20%EC%9E%88%EC%9C%BC%EB%8B%88%20%EB%8D%94%20%EB%A7%9B%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: >
+    `Box`는 데이터를 stack에서 heap으로 옮길 수 있게 해주는 smart pointer입니다.
+
+
+    이를 역참조하면 마치 원래 자료형이었던 것처럼 heap에 할당된 데이터를 편하게 쓸 수 있습니다.
+- title: 실패할 수 있는 메인 다시 보기
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22%EC%9D%B4%20%ED%8C%8C%EC%9D%B4%EB%8A%94%20%EC%8B%A0%EC%84%A0%ED%95%98%EC%A7%80%20%EC%95%8A%EA%B5%B0%EC%9A%94!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+    Rust 코드에는 많고도 많은 오류 표현 방법이 있지만, 그 중에도 standard library에는
+
+    오류를 설명하기 위한 범용 trait인 `std::error::Error`가 있습니다.
+
+
+    smart pointer인 `Box`를 사용하면 `Box<dyn std::error::Error>`를
+    오류 리턴 시 공통된 자료형으로 사용할 수 있는데,
+
+    이는 오류를 heap에 전파하고 특정한 자료형을 몰라도
+    고수준에서 상호작용할 수 있도록 해주기 때문입니다.
+
+
+    Tour of Rust 초반에 `main`은 오류를 리턴할 수 있다고 배웠습니다.
+
+    이제 우리는 오류의 데이터 구조가 Rust의 일반적인 `Error` trait을 구현하는 한,
+
+    프로그램에서 발생할 수 있는 거의 모든 종류의 오류를 설명할 수 있는 자료형을 리턴할 수 있습니다.
+
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: 참조 카운팅
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22heap%EC%97%90%20%EC%9E%88%EC%9C%BC%EB%8B%88%20%EB%8D%94%20%EB%A7%9B%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20%EB%AA%A8%EB%93%A0%20%EC%B0%B8%EC%A1%B0%20%EC%B9%B4%EC%9A%B4%ED%8A%B8%20smart%20pointer%EA%B0%80%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20heap%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%9D%B8%20Pie%EA%B0%80%20%EB%93%9C%EB%94%94%EC%96%B4%20%ED%95%A0%EB%8B%B9%20%ED%95%B4%EC%A0%9C%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
+  content_markdown: >
+    `Rc`는 stack에 있는 데이터를 heap으로 옮겨주는 smart pointer입니다.
+
+    이는 heap에 놓인 데이터를 immutable하게 대여하는 기능을 가진 다른 `Rc` smart pointer들을 복제할 수 있게 해줍니다.
+
+
+    마지막 smart pointer가 drop 될 때에만 heap에 있는 데이터가 할당 해제됩니다.
+- title: 접근 공유하기
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22heap%EC%97%90%20%EC%9E%88%EC%9C%BC%EB%8B%88%20%EB%8D%94%20%EB%A7%9B%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%EC%9D%80%20%EB%9F%B0%ED%83%80%EC%9E%84%EC%97%90%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EC%95%88%EC%A0%84%EC%84%B1%EC%9D%84%20%EA%B2%80%EC%A6%9D%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20%EC%A3%BC%EC%9D%98%3A%20pie_cell%EC%9D%80%20mut%EA%B0%80%20%EC%95%84%EB%8B%99%EB%8B%88%EB%8B%A4!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D)%3B%0A%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%EA%B7%B8%EB%A0%87%EC%A7%80%EB%A7%8C%20mutable%20%EC%B0%B8%EC%A1%B0%EB%A5%BC%20%EB%8C%80%EC%97%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%EB%8A%94%20scope%EC%9D%98%20%EB%A7%88%EC%A7%80%EB%A7%89%EC%97%90%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20%EC%9D%B4%EC%A0%9C%20mutable%20%EC%B0%B8%EC%A1%B0%EA%B0%80%20drop%20%EB%90%98%EA%B3%A0%20%EB%82%98%EB%A9%B4%20immutable%ED%95%98%EA%B2%8C%20%EB%8C%80%EC%97%AC%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20%EC%A1%B0%EA%B0%81%20%EB%82%A8%EC%95%98%EC%8A%B5%EB%8B%88%EB%8B%A4%22%2C%20ref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell`은 보통 smart pointer가 보유하는 컨테이너 데이터 구조로서,
+
+    데이터를 가져오거나 안에 있는 것에 대한 mutable 또는 immutable한 참조를 대여할 수 있게 해줍니다.
+
+    데이터를 대여할 때, Rust는 런타임에 다음의 메모리 안전 규칙을 적용하여 남용을 방지합니다:
+
+
+    **단 하나의 mutable한 참조 또는 여러개의 immutable한 참조만 허용하며, 둘 다는 안됨!**.
+
+
+    이 규칙을 어기면 `RefCell`은 panic을 일으킵니다.
+- title: 쓰레드 간에 공유하기
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EC%A7%80%EA%B8%88%EC%9D%80%20%EC%98%A4%EC%A7%81%20%EB%82%98%EB%A7%8C%EC%9D%B4%20%ED%8C%8C%EC%9D%B4%EB%A5%BC%20%EB%A8%B9%EB%8A%94%EB%8B%A4!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20%ED%8C%8C%EC%9D%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%9E%A0%EA%B2%A8%EC%9E%88%EB%8A%94%20immutable%ED%95%9C%20%EC%B0%B8%EC%A1%B0%EB%A5%BC%20%EB%B9%8C%EB%A0%A4%EB%B4%85%EC%8B%9C%EB%8B%A4%0A%20%20%20%20%2F%2F%20lock%EC%9D%80%20%EC%8B%A4%ED%8C%A8%ED%95%A0%20%EC%88%98%EB%8F%84%20%EC%9E%88%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%97%90%20%EA%B7%B8%20%EA%B2%B0%EA%B3%BC%EB%8A%94%20unwrap%20%ED%95%B4%EC%95%BC%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20%EC%9E%A0%EA%B8%B4%20%EC%B0%B8%EC%A1%B0%EB%8A%94%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%98%EB%A9%B0%2C%20mutex%EB%A1%9C%20%EB%B3%B4%ED%98%B8%EB%90%98%EB%8A%94%20%EA%B0%92%EC%9D%80%20%EB%8B%A4%EB%A5%B8%20%EC%9D%B4%EC%97%90%20%EC%9D%98%ED%95%B4%20%EC%93%B0%EC%9D%BC%20%EC%88%98%20%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4%0A%7D%0A
+  content_markdown: >
+    `Mutex`는 보통 smart pointer가 보유하는 컨테이너 데이터 구조로서,
+
+    데이터를 가져오거나 내부 데이터에 대한 mutable 또는 immutable한 참조를 대여할 수 있게 해줍니다.
+
+    이는 잠긴 대여를 통해 운영체제가 동시에 오직 하나의 CPU만 데이터에 접근 가능하도록 하고,
+
+    원래 쓰레드가 끝날 때까지 다른 쓰레드들을 막음으로써 대여가 남용되는 것을 방지합니다.
+
+
+    멀티쓰레드는 Tour of Rust의 범위를 벗어나지만, `Mutex`는
+
+    여러 개의 CPU 쓰레드가 같은 데이터에 접근하는 것을 조율하는 근본적인 부분입니다.
+
+
+    특별한 smart pointer인 `Arc`도 있는데,
+    쓰레드-안전성을 가진 참조 카운트 증가 방식을 사용한다는 것을 제외하고는 `Rc`와 동일합니다.
+
+    이는 동일한 `Mutex`에 다수의 참조를 가질 때 종종 사용되곤 합니다.
+- title: 스마트 포인터 조합하기
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%EA%B0%80%20%ED%95%9C%20%EC%A1%B0%EA%B0%81%20%EB%A8%B9%EC%97%88%EC%8A%B5%EB%8B%88%EB%8B%A4!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20mutable%20%EB%8C%80%EC%97%AC%EB%A5%BC%20%EC%9C%84%ED%95%B4%20%ED%8C%8C%EC%9D%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20smart%20pointer%EB%A5%BC%20%EC%82%AC%EC%9A%A9%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20%ED%95%9C%20%EC%9E%85%20%EB%A8%B9%EC%9E%90!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%EC%99%80%20sarah%EC%97%90%EA%B2%90%20%ED%8C%8C%EC%9D%B4%EC%97%90%20%EB%8C%80%ED%95%9C%20smart%20pointer%EC%9D%98%20%EB%B3%B5%EC%A0%9C%EA%B0%80%20%EC%A3%BC%EC%96%B4%EC%A7%91%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20%EC%A1%B0%EA%B0%81%20%EB%82%A8%EC%95%98%EC%8A%B5%EB%8B%88%EB%8B%A4%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: >
+    smart pointer는 한계가 있는 것처럼 보이지만, 조합해서 사용하면 매우 강력해질 수 있습니다.
+
+
+    `Rc<Vec<Foo>>` - heap에 있는 immutable한 데이터 구조의 동일한 vector를 대여할 수 있는
+    복수의 smart pointer를 복제할 수 있게 해줍니다.
+
+
+    `Rc<RefCell<Foo>>` - 복수의 smart pointer가
+    동일한 `Foo` struct를 mutable/immutable하게 대여할 수 있게 해줍니다.
+
+
+    `Arc<Mutex<Foo>>` - 복수의 smart pointer가 임시의 mutable/immutable한 대여를
+    CPU 쓰레드 독점 방식으로 잠글 수 있게 해줍니다.
+
+
+    메모리 상세:
+
+    * 이런 조합이 많이 포함된 주제를 확인할 수 있을겁니다.
+    내부 데이터를 변경하기 위해 immutable한 데이터 유형(복수의 smart pointer가 소유할 수 있음)을 사용합니다.
+    이를 Rust에서는 "내부 가변성" 패턴이라고 합니다.
+    이는 Rust의 컴파일 타임 체크와 동일 수준의 안전성으로
+    런타임의 메모리 사용 규칙을 변경할 수 있는 패턴입니다.
+      
+- title: 8장 - 마무리
+  content_markdown: >
+    smart pointer는 Rust 프로그래밍의 관용구로서
+    매우 일반적인 메모리 사용 패턴들도 다시 만들 필요 없게 해줍니다.
+
+    이들만 있으면 어려운 도전도 해결할 준비가 된 것입니다!
+
+    이제 Rust의 기초를 다졌으니, 더 큰 프로젝트를 만드는 방법에 대해 조금 얘기해 봅시다.
+
+    9장에서는 한 페이지짜리 코드에서 벗어날 수 있습니다.
