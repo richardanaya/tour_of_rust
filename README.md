@@ -31,9 +31,9 @@ This project also aims to provide this book in as many languages as possible.
 * Español - [Alba Martínez Martínez](https://github.com/albatraduce)
 * Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
-* Magyar - [Nemin32](https://github.com/Nemin32/) [Dániel Buga](https://github.com/bugadani)
+* Magyar - [Nemin32](https://github.com/Nemin32/), [Dániel Buga](https://github.com/bugadani)
 * Português Brasileiro - [Denstone](https://github.com/denstone)
-* Русский - [Danil Kondratiev](https://github.com/knightpp),[Yuriy Larin](https://github.com/blandger)
+* Русский - [Danil Kondratiev](https://github.com/knightpp), [Yuriy Larin](https://github.com/blandger)
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus), [Haizhi Geng](https://github.com/JmPotato)
 * 繁體中文 - [kkpoon](https://github.com/kkpoon)
 * 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213), [Yuji Sugiura](https://github.com/leader22), [TaKO8Ki](https://github.com/TaKO8Ki)
@@ -41,9 +41,9 @@ This project also aims to provide this book in as many languages as possible.
 
 # Looking for translators!
 
-If you would like to contribute translations in a language that doesn't exist yet.  Feel free to make a PR!
+If you would like to contribute translations in a language that doesn't exist yet. Feel free to make a PR!
 
-Look for your appropriate appropriate language under the `lessons` folder.  Each chapter has its own file. You can modify an existing chapter's content or if there is one you'd like to translate from the english lessons, copy that chapter file over and modify it's content to your own language. Each page has various properties.
+Look for your appropriate appropriate language under the `lessons` folder. Each chapter has its own file. You can modify an existing chapter's content or if there is one you'd like to translate from the english lessons, copy that chapter file over and modify it's content to your own language. Each page has various properties.
 
 * **title** - this would be your localized page's title
 * **content_markdown** - this would be your localized page's content as markdown using [shodown markdown](https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax)
@@ -64,7 +64,7 @@ Lastly, there is a file for common words you should fill out your localized tran
 
 ## How to run the project locally
 
-To run the site locally you need to install `yq`. There are several projects with the name `yq`, this 
+To run the site locally you need to install `yq`. There are several projects with the name `yq`, this
 project uses [this one](https://kislyuk.github.io/yq/).
 
 Run `yarn` to install javascript dependencies.
