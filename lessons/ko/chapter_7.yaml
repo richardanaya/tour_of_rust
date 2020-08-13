@@ -241,7 +241,7 @@
     Box::new(Foo { ... })
 
     ```
-- title: Generic 구조체 재검토
+- title: Generic 구조체 다시 보기
   content_markdown: >
     generic struct는 trait으로 제한된 매개변수 자료형을 가질 수도 있습니다.
 
