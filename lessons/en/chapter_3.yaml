@@ -75,7 +75,7 @@
 
     Memory details of our example:
 
-    * The text inside the quotes is read only data (e.g. "ferris"), therefore it
+    * The text inside the quotes is read only data (e.g. "Ferris"), therefore it
     is 
       placed in the *data memory region*.
     * The function call `String::from` creates a struct `String` that is placed
