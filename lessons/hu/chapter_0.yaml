@@ -6,7 +6,9 @@
     Üdvözöllek a *Rust-túrán*. Ez egy olyan lépésekre bontott leírás, aminek segítségével
     megismerheted a Rust képességeit. Sokan úgy tartják a Rust egy nehezen megtanulható nyelv,
     de reményeim szerint meg tudlak győzni, hogy épp elég érdekes dolgot lehet felfedezni benne
-    azelőtt, hogy a bonyolult részekhez érnénk.</p><p>Ez a leírás a következő nyelveken érhető el:
+    azelőtt, hogy a bonyolult részekhez érnénk.
+
+    Ez a leírás a következő nyelveken érhető el:
 
     * [Deutsch](00_de.html)
     * [English](00_en.html)
