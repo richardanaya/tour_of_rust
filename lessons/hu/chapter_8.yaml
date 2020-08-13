@@ -1,0 +1,235 @@
+- title: 8. Fejezet - Okos Mutatók
+  content_markdown: |
+    Ebben a fejezetben az okos mutatókat fogjuk megismerni. Nézzük meg, milyen lehetőségeket adnak
+    számunkra ezek az adatstruktúrák, melyek a legközvetlenebb módon engednek a memóriával dolgozni!
+
+    "Ne stresszelj nagyon, ha az első olvasás után nem tudnál alacsonyszintű memóriakezelő kódot
+    írni. Ez a fejezet leginkább egy betekintést ad csupán néhány hasznos eszköz belső működésébe!"
+    - Ferris
+- title: Referenciák Ismét
+  content_markdown: |
+    Egy referencia lényegében csak egy szám, ami azt jelenti, hogy hol kezdődik a memóriában egy
+    marék bájt. Egyetlen feladata annak reprezentálása, hogy egy adott típusú adat hol található.
+    Egy egyszerű számtól az különbözteti meg, hogy a Rust biztosítja, hogy a referencia élettartama
+    nem tart tovább, mint az adaté, amire az hivatkozik. (Ellenkező esetben ha megpróbálnánk
+    használni, a programunk hülyeséget csinálna!)
+- title: Nyers Mutatók
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: |
+    A referenciákat át lehet alakítani egy valamivel primitívebb típussá, úgynevezett *nyers
+    mutató*vá. Hasonlóan a számokhoz, ezeket is lehet másolni, mozgatni különösebb megkötések
+    nélkül. A Rust nem garantál semmit azzal a memóriahellyel kapcsolatban, amire a mutató mutat.
+
+    Kétféle nyers mutatót különböztetünk meg:
+    * `*const T` - Olyan, T típusú adatra mutat, aminek nem szabad megváltoznia.
+    * `mut T` - Olyan, T típusú adatra mutat, ami megváltoztatható.
+
+    Nyers mutatók szabadon konvertálhatók számokká (pl. `usize`), és vissza.
+    Nyers mutatók nem biztonságos (`unsafe`) kódban használhatók adatok elérésére. (Erre még
+    visszatérünk.)
+
+    Hogyan érinti ez a memóriát:
+    * Egy Rust-beli referencia felhasználását tekintve nagyon hasonló egy C-beli mutatóhoz,
+      ugyanakkor sokkal erősebb fordítási időben biztosított megkötései vannak annak, hogyan lehet
+      őket tárolni és más függvényeknek átadni.
+
+    * Egy Rust-beli nyers mutató egy C-beli mutatóhoz hasonlóan egy szám, ami szabadon másolható,
+      átadható, számmá alakítható, így akár matekozhatunk is vele.
+- title: Lekövetés
+  content_markdown: |
+    Egy *referencia* (pl.: `&i32`) által hivatkozott adat olvasását/módosítását *lekövetésnek*
+    nevezzük.
+
+    Referenciákat kétféleképpen használhatunk adatok elérésére, vagy módosítására:
+    * Változók értékadásakor hozzáférünk a hivatkozott adathoz.
+    * A hivatkozott adat mezőihez vagy metódusaihoz férünk hozzá.
+
+    A Rust ismer néhány hasznos operátort, amik segítenek nekünk ezeket megtenni.
+- title: A * Operátor
+  content_markdown: |
+    A `*` operátor a referenciák lekövetésének kifejezésére használható.
+
+    ```rust
+    let a: i32 = 42;
+    let ref_ref_ref_a: &&&i32 = &&&a;
+    let ref_a: &i32 = **ref_ref_ref_a;
+    let b: i32 = *ref_a;
+    ```
+
+    Hogyan érinti ez a memóriát:
+    - Mivel az i32 egy primitív típus ami a `Copy` traitet megvalósítja, az `a` változó bájtjai a
+      veremmemóriában a `b` változóba másolódnak.
+- title: A . Operátor
+  content_markdown: |
+    A `.` operátor mezők és metódusok elérésére való. Egy kicsit kifinomultabb, mint a `*` volt.
+
+    ```rust
+    let f = Foo { value: 42 };
+    let ref_ref_ref_f = &&&f;
+    println!("{}", ref_ref_ref_f.value);
+    ```
+
+    Hűha, miért nem kellett `***`-ot írnunk a `ref_ref_ref_f` elé? Azért, mert a `.` operátor
+    automatikusan visszaköveti a referenciák láncát! Az utolsó sort a fordító automatikusan átírja
+    ilyenre:
+
+    ```rust
+    println!("{}", (***ref_ref_ref_f).value);
+    ```
+- title: Okos Mutatók
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: |
+    Azon túl, hogy a `&` operátorral referenciákat csinálhatunk már létező, adott típusú adatra,
+    a Rust ad nekünk olyan, referencia-szerű struktúrákat, amiket **okos mutatónak** hívunk.
+
+    A referenciákra gondolhatunk úgy, mint típusokra, melyek másik típusokhoz engednek hozzáférni.
+    Az okos mutatók abban mások, hogy belső működésüket programozók által írt logika adja. Te, mint
+    programozó vagy az *okos* rész.
+
+    Általában az okos pointerek megvalósítják a `Deref`, `DerefMut` és `Drop` traiteket, így tudják
+    meghatározni, mit csináljon velük a `*` és `.` operátor.
+- title: Okos Nem Biztonságos Kód
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: |
+    Az okos mutatók elég gyakran használnak nem biztonságos (*unsafe*) kódot. Ahogy korábban
+    említettük, ezek gyakran használt eszközök, ha a legközvetlenebb módon kell a memóriával
+    dolgozni.
+
+    Mit jelent az, hogy nem biztonságos kód? A nem biztonságos kódok ugyanúgy működnek, mint a
+    rendes Rust, azzal a kivétellel, hogy van néhány képessége, amire a Rust fordító nem tud
+    semmiféle garanciát adni.
+
+    Az egyik legfontosabb ilyen képesség a *nyers mutatók lekövetése*. Ez azt jelenti, hogy
+    készítünk egy *nyers mutatót*, ami mutat valahova a memóriában és kijelentjük róla, hogy amire
+    mutat, az "márpedig igenis érvényes adat!" és olyan formára hozzuk, amivel tudunk dolgozni (pl.:
+    `*const u8`-ból `u8`-at csinálunk).
+
+    A Rust nem képes a memória minden bájtjának jelentését követni. Mivel nem képes garantálni, hogy
+    egy *nyers mutatóként* használt tetszőleges szám által hivatkozott memóriaterületen mit fogunk
+    találni, ezt a memória-hozzáférés műveletet `unsafe { ...}` blokkba kell tennünk.
+
+    Bár az okos mutatók rengetegszer *követnek nyers mutatókat*, ezek a típusok meglehetősen
+    alaposan ellenőrzött eszközök és elég biztosak lehetünk benne, hogy biztonságosak.
+- title: Ismerős Barátok
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: |
+    Nézzünk meg néhány okos mutatót, amivel már találkoztunk, úgymint a `Vec<T>` és `String`!
+
+    A `Vec<T>` egy okos mutató, ami a memóriában egy marék bájt tulajdonosa. A Rust fordítónak
+    halvány fogalma sincs róla, mi van ezekben a bájtokban. Az okos mutató azonban megmondja, hogyan
+    kell értelmezni az általa birtokolz bájthalmazt, nyilván tartja, hol kezdődnek és végződnek a
+    tartalmazott adatstruktúrák, majd végül leköveti a nyers mutatót egy kellemesen ergonomikus
+    felhasználási módot biztosítva (pl.: `vektorom[3]`).
+
+    Hasonlóképp, a `String` is egy memóriaterületet követ nyomon. Megköti, hogy minden oda írt adat
+    érvényes `utf-8` szöveg kell, hogy legyen, és segít ezt a memóriaterületet `&str` típusként
+    értelmezni.
+
+    Mindkét adatstruktúra nem biztonságos kódban lekövetett nyers mutatókat használ ezekre a
+    feladatokra.
+
+    Hogyan érinti ez a memóriát:
+
+    * A C `malloc` függvényének megfelelője Rustban az
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) és a
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html), amikkel saját magad
+    foglalhatsz és kezelhetsz memóriát.
+- title: Kupacmemória
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: |
+    A `Box` (doboz) egy olyan okos mutató, amivel a veremből a kupacmemóriára mozgathatunk adatot.
+
+    Lekövetésével a kupacmemóriát úgy használhatjuk, mintha az eredeti adattal dolgoznánk.
+- title: Hibával Visszatérő Main Függvény, Ismét
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: |
+    A Rust-ban írt kódok számtalan módon jelezhetnek hibákat, de az alapkönyvtár tartalmaz egy
+    univerzális traitet hibák leírására. Ez a `std::error::Error`.
+
+    A `Box` okos mutató segítségével lehetőségünk van létrehozni egy közös hibatípust, a
+    `Box<dyn std::error::Error>` típust, amivel bármilyen hibaértéket a kupacmemóriára helyezhetünk
+    és képesek lehetünk magas szinten dolgozni vele, a konkrét típusa ismerete nélkül.
+
+    A Rust-túra során korábban már érintettük, hogy a `main` függvény visszatérhet hibával. Most már
+    visszaadhatunk egy olyan hibatípust is, ami képes a programunkban előforduló majdnem összes hiba
+    reprezentálására, ha a hiba típusa megvalósítja a Rust közös `Error` traitjét.
+
+    ```rust
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+    ```
+- title: Referenciaszámlálás
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20all%20reference%20count%20smart%20pointers%20are%20dropped%20now%0A%20%20%20%20%2F%2F%20the%20heap%20data%20Pie%20finally%20deallocates%0A%7D%0A
+  content_markdown: |
+    Az `Rc` egy olyan okos mutató, ami a veremből a kupacmemóriára mozgat adatot. Lehetővé teszi
+    számunkra, hogy további `Rc` mutatókat klónozzunk belőle, amik a kupacra mozgatott adatunkat
+    képesek - módosítást nem megengedő módon - kölcsönvenni.
+
+    Amikor az utolsó okos mutató is drop-ol, a kupacmemóriában lévő adat felszabadításra kerül.
+- title: Hozzáférés Megosztása
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: |
+    A `RefCell` egy olyan adatstruktúra, ami képes kölcsönadni mind meg nem változtatható, mind
+    pedig megváltoztatható módon az általa birtokolt adatot. Gyakran használják egyéb okos mutatók
+    megvalósításakor. Az egyszerű referenciákkal szemben nem fordítási, hanem futásidőben ellenőrzi
+    a Rust kölcsönvételi szabályait, így segít megakadályozni azok megkerülését:
+
+    **Egyszerre csak egy megváltoztatható VAGY akármennyi meg nem változtatható referencia lehet, de
+    sosem lehet egyszerre mindkettő!**
+
+    Ha megsértjük ezt a szabályt, a `RefCell` pánikol.
+- title: Megosztás Szálak Között
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20let's%20borrow%20a%20locked%20immutable%20reference%20of%20pie%0A%20%20%20%20%2F%2F%20we%20have%20to%20unwrap%20the%20result%20of%20a%20lock%0A%20%20%20%20%2F%2F%20because%20it%20might%20fail%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20locked%20reference%20drops%20here%2C%20and%20mutex%20protected%20value%20can%20be%20used%20by%20someone%20else%0A%7D%0A
+  content_markdown: |
+    A `RefCell` egy olyan adatstruktúra, ami képes kölcsönadni mind meg nem változtatható, mind
+    pedig megváltoztatható módon az általa birtokolt adatot. Gyakran használják egyéb okos mutatók
+    megvalósításakor. Egy időben csak egy programszál számára enged hozzáférést a benne tárolt
+    adathoz, így segíti a Rust memóriahasználati szabályainak betartását többszálú környezetben. Ha
+    más szál is megpróbál hozzáférni a tárolt adathoz, miközben az kölcsön van adva, a második szál
+    blokkolásra kerül.
+
+    A többszálúság túlmutat a Rust-túra anyagán, de a `Mutex` az adatok több szálból történő
+    elérésének egyik alapvető részét képzi.
+
+    Van egy különleges okos mutató, az `Arc`, ami hasonló az `Rc`-hez, kivéve, hogy többszálú
+    környezetben is biztonságosan használható. Gyakran használják, hogy több helyen hivatkozzanak
+    ugyan arra a `Mutex`-re.
+- title: Okos Mutatók Kombinálása
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: |
+    Bár az okos mutatók képességei meglehetősen korlátozottnak tűnhetnek, létezik néhány
+    kifejezetten hasznos kombinációjuk:
+
+    * `Rc<Vec<Foo>>` - Lehetővé teszi több okos mutató klónozását, amik képesek egy, a kupacon lévő
+      vektort meg nem változtatható módon kölcsönkérni.
+    * `Rc<RefCell<Foo>>` - Lehetővé teszi több okos mutató számára ugyan annak az adatnak az
+      elérését mint megváltoztatható, mind pedig meg nem változtatható módon.
+    * `Arc<Mutex<Foo>>` - Lehetővé teszi több okos mutató létrehozását, melyen keresztül egyazon
+      adat zárolható és többszálú környezetben is biztonságosan kölcsönkérhető. Több programszál is
+      képes ugyan azt az adatot kölcsönkérni, de egy időben mindig csak egy hozzáférést enged meg a
+      program. A többi szál várakozni fog, amíg az adat zárolva van.
+
+    Hogyan érinti ez a memóriát:
+
+    * Több ilyen kombinációnál is észrevehetted, hogy meg nem változtatható adattípuson (amit akár
+      több okos mutató is birtokol) keresztül lehetséges adatok megváltoztatása. Ezt a mintát "belső
+      megváltoztathatóság" néven ismerjük Rust-ban. Ez segít kicsit rugalmasabbá tenni a memória
+      felhasználásával kapcsolatos szabályokat a Rust fordítási idejű ellenőrzéseihez hasonló
+      biztonságossággal.
+
+- title: 8. Fejezet - Konklúzió
+  content_markdown: |
+    Az okos pointerek a Rust programozás szerves részét képzik és idiomatikus eszközöket nyújtanak
+    ahhoz, hogy ne kelljen nagyon gyakori memóriakezelési mintákat ismételten megírnunk.
+    Segítségükkel készen állsz arra, hogy megbírkózz a legnehezebb kihívásokkal is! Most, hogy
+    végeztünk a Rust alapjaival, beszéljünk egy kicsit arról, hogyan csinálhatunk nagyobb
+    projekteket. A 9. fejezetben kitörünk az egy oldalra kiférő kódok világából.
