@@ -1,5 +1,5 @@
 - title: 1. Fejezet - Az Alapok
-  content_markdown: >
+  content_markdown: |
     Az első fejezetben a nyelv alapjaival fogunk megismerkedni, többek között a függvényekkel, a
     változókkal és a legalapabb típusokkal. Üdv a fedélzeten!
 
@@ -8,7 +8,7 @@
 - title: A Rust Homokozó
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%C3%9Cdv%20a%20homokoz%C3%B3ban!%20Az%20itt%20tal%C3%A1lhat%C3%B3%20k%C3%B3d%20szabadon%20megv%C3%A1ltoztathat%C3%B3!%22)%3B%0A%7D
-  content_markdown: >
+  content_markdown: |
     Ez a bemutató egy interaktív programozó eszközt használ a [Rust
     Homokozóból](https://play.rust-lang.org).
 
@@ -17,7 +17,7 @@
 - title: Változók
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
-  content_markdown: >
+  content_markdown: |
     A változókat a **let** kulcsszóval hozzuk létre.
 
     Amikor egy változóhoz hozzárendelünk, a Rust az esetek 99%-ban képes lesz kitalálni, mi is a
@@ -30,7 +30,7 @@
 - title: Változók megváltoztatása
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
-  content_markdown: >
+  content_markdown: |
     A Rust nagy figyelmet fordít afelé, hogy mely változókat lehet megváltoztatni. Minden érték
     kétféle kategóriába esik:
 
@@ -45,7 +45,7 @@
 - title: Alapvető típusok
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
-  content_markdown: >
+  content_markdown: |
     A Rust sokféle, valószínűleg már ismert típust különböztet meg:
 
     * boolean - `bool` igaz és hamis értékekhez
@@ -77,7 +77,7 @@
 - title: Egyszerű típusok közötti átalakítás
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
-  content_markdown: >
+  content_markdown: |
     A Rust a számtípusok használatakor meglehetősen szigorú. Például nem használhatsz `u8`-t olyan
     helyen, ami `u32`-t vár anélkül, hogy hibát dobna.
 
@@ -85,7 +85,7 @@
 - title: Konstansok
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
-  content_markdown: >
+  content_markdown: |
     A konstansok lehetővé teszik nekünk, hogy elnevezhessünk gyakran használt értékeket. Ahelyett,
     hogy változók értékeit kézzel másolgatnánk oda, ahol azokat használjuk, a fordító lecseréli
     helyettünk a konstansok nevét a megfelelő értékre.
@@ -96,7 +96,7 @@
 - title: Tömbök
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
-  content_markdown: >
+  content_markdown: |
     Egy *tömb* egy olyan azonos típusú elemeket tartalmazó csoport, aminek a hossza (elemeinek
     száma) megváltoztathatatlan.
 
@@ -117,7 +117,7 @@
 - title: Több visszatérési érték
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
-  content_markdown: >
+  content_markdown: |
     A függvények több értékkel is visszatérhetnek egy **tuple** formájában.
 
     A tuple-k elemeit az indexük számával lehet elérni.
@@ -125,7 +125,7 @@
     A Rust többféle elérési módot is biztosít, amivel az adatok bizonyos részeit kényelmes módon
     érhetjük el. De erről később lesz szó!
 - title: Semmivel való visszatérés
-  content_markdown: >
+  content_markdown: |
     Ha nincs visszatérési érték megadva egy függvénynek, akkor egy üres tuple-el tér vissza, melyet
     *unit*-nak hívunk.
 
@@ -136,7 +136,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
 - title: 1. Fejezet - Konklúzió
-  content_markdown: >
+  content_markdown: |
     Gratula az első fejezet teljesítéséhez! Ugye nem is olyan rossz eddig? Bepillantást nyertünk
     abba, hogyan is gondolkodik a fordító. Mivel a Rust egy alacsony-szintű programozási nyelv, így
     nagy figyelmet fordít a memóriában tárolt értékek méretére, arra, hogy a változók
