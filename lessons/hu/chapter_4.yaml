@@ -1,16 +1,16 @@
 - title: 4. Fejezet - Generikus Típusok
   content_markdown: >
-    A generikus típusok nagyon fontos részét képezik a Rust-nak. Használva vannak többek között a
-    nullázható típusok (tehát olyan változók, amik vagy egy értéket vagy egy üres értéket
-    tartalmaznak), a hibakezelésben, a különböző gyűjteményekben és még sok másban. Ebben a
-    fejezetben a leggyakrabban használt generikus típusokról fogunk tanulni.
+    A generikus típusok nagyon fontos részét képezik a Rust-nak. Többek között a nullázható típusok
+    (tehát olyan változók, amik vagy egy értéket vagy egy üres értéket tartalmaznak)
+    megvalósításában, a hibakezelésben, a különböző gyűjteményekben és még sok más helyen használja
+    őket a nyelv. Ebben a fejezetben a leggyakrabban használt generikus típusokról fogunk tanulni.
 - title: De mik is azok a generikus típusok?
   content_markdown: >
     A generikus típusok lehetővé teszik számunkra, hogy részben definiáljunk egy `struct`-ot vagy
-    `enum`-ot. Ezt később a fordító automatikusan kiegészíti az alapján, hogy hogy használjuk
-    őket. A Rust általában képes kitalálni mi is lesz a végleges típus a példányosítás során, de ha
-    segítségre van szüksége, akkor expliciten te magad is megadhatod a `::<T>` operátor
-    segítségével, ami ismeretes még a `turbofish` néven is (és nem mellesleg egy jó barátom is!).
+    `enum`-ot. Ezt később a fordító automatikusan kiegészíti az alapján, hogy hogyan használjuk
+    őket. A Rust általában képes kitalálni, mi is lesz a végleges típus a példányosítás során, de ha
+    segítségre van szüksége, akkor expliciten te magad is megadhatod a `::<T>`, becenevén
+    `turbofish` operátor segítségével is (aki nem mellesleg egy jó barátom is!).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20by%20using%20generic%20types%20here%2C%20we%20create%20compile-time%20created%20types.%20%0A%20%20%20%20%2F%2F%20Turbofish%20lets%20us%20be%20explicit.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20can%20infer%20types%20for%20generics%20too!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20never%20put%20a%20bag%20of%20holding%20in%20a%20bag%20of%20holding%20in%20real%20life%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
 - title: A Semmi reprezentációja
@@ -19,7 +19,7 @@
     vezet komplikációkhoz, hisz ezek a nyelvek lehetővé teszik, hogy a program hibába fusson amikor
     egy változóhoz hozzáfér. Éppen ezért a Rust nem rendelkezik ilyesfajta `null` értékkel. Viszont
     ez nem jelenti azt, hogy a fejlesztők nem voltak tisztában a koncepció hasznosságával, de
-    mielőtt megnézzük az ő megoldásukat, próbáljuk meg mi magunk írni egy naív megoldást a
+    mielőtt megnézzük az ő megoldásukat, próbáljuk meg mi magunk írni egy naiv megoldást a
     problémára.
 
     A `None` ("Üres"/"Semmi") mint alternatív érték amivel még nem létező adatot jelölünk
@@ -47,9 +47,9 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20A%20bag%20for%20i32%2C%20holding%20nothing!%20We%20have%20to%20specify%20the%20type%0A%20%20%20%20%2F%2F%20because%20otherwise%20Rust%20would%20not%20know%20what%20type%20of%20bag%20it%20is.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22found%20%7B%7D%20in%20bag!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22found%20nothing%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
 - title: Result - Sikert kifejező értékek
   content_markdown: >
-    Az `Option`-höz hasonlóan a Rust-ban egy másik beépített generikus enum is van, a
-    `Result`. Ennek segítségével egy olyan értékkel térhetünk vissza, aminek a létrejötte során
-    lehetséges, hogy hiba történt.
+    Az `Option`-höz hasonlóan a Rust-ban egy másik beépített generikus enum is van, a `Result`.
+    Ennek segítségével egy olyan értékkel térhetünk vissza, aminek a létrejötte során lehetséges,
+    hogy hiba történt.
 
     A nyelv ennek az enumnak a segítségével oldja meg a hibakezelést.
 
@@ -61,8 +61,8 @@
 
     ```
 
-    Figyeljük meg, ahogy a generikus típus több *paraméterezett típust* is fogad, melyek vesszővel
-    vannak elválasztva.
+    Figyeljük meg, ahogy a generikus típus több *típus paramétert* is fogad, melyek vesszővel vannak
+    elválasztva.
 
     Társához hasonlóan ez az enum is nagyon gyakori, így a kódban bárhol példányosítható az `Ok` és
     `Err` változatok segítségével.
@@ -76,8 +76,8 @@
 - title: Kíméletes hibakezelés
   content_markdown: >
 
-    A `Result` gyakorisága egy új operátor bevezetését is érdemessé tette. Ez a `?`. Hogy bemutassuk
-    mit is tud, nézzünk meg két példát, melyek végeredménye ugyanaz:
+    A `Result` gyakorisága egy új operátor bevezetését is indokolttá tette. Ez a `?`. Hogy
+    bemutassuk mit is tud, nézzünk meg két példát, melyek végeredménye ugyanaz:
 
 
     ```
@@ -99,11 +99,11 @@
   content_markdown: >
 
     Néha kissé fárasztó lehet az `Option` és `Result` használata, amikor csak valamit gyorsan össze
-    szeretnénk dobni. Épp ezért mindkét enum rendelkezik egy `unwrap` nevű függvénnyel, ami képes
-    kinyerni az enum-ból az értéket. A függvény a következőket teszi:
+    szeretnénk dobni. Épp ezért mindkét enum rendelkezik egy `unwrap` [1] nevű metódussal, ami
+    képes kinyerni az enum-ból az értéket. A függvény a következőket teszi:
 
     1. Kinyeri az Option/Result értékét.
-    2. Ha ennek az enum-nak az értéke `None`/`Err` akkor, `panic!`
+    2. Ha ennek az enum-nak az értéke `None`/`Err`, akkor `panic!`
 
     A következő két kód ugyanazt az eredményt adja:
 
@@ -139,22 +139,24 @@
 
     ```
 
-    Légy jó rustacean [1] és használd a `match` kulcsszót, amikor csak tudod!
+    Légy jó rustacean [2] és használd a `match` kulcsszót, amikor csak tudod!
 
-    [1]: A "rustacean" a "crustacean" vagyis "rákféle" és a "Rust" szavak összerakása. A Rust
+    [1]: Kicsomagolás
+    [2]: A "rustacean" a "crustacean" vagyis "rákféle" és a "Rust" szavak összerakása. A Rust
     közösség tagjai így nevezik egymást.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concise%20but%20assumptive%20and%20gets%20ugly%20fast%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20will%20panic!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
 - title: Vektorok
   content_markdown: >
     A generikus típusok egyik leghasznosabb fajtája a gyűjtemény típusok. A vektor - melyet a `Vec`
-    struct-al reprezentálunk - egy változó-hosszú lista, amely elemeket tartalmaz.
+    struct-tal reprezentálunk - egy változtatható hosszúságú, azonos típusú elemeket tartalmazó
+    lista.
 
-    A `vec!` macro segítségével könnyedén hozhatunk létre vektorokat, ahelyett, hogy manuálisan
-    kellene összeraknunk.
+    A `vec!` makró segítségével könnyedén hozhatunk létre vektorokat, ahelyett, hogy manuálisan
+    kellene azokat összeraknunk.
 
     A `Vec` tartalmaz egy `iter()` nevű metódust, ami egy iterátort készít a vektorból, melyet, ha a
-    `for` ciklussal kombinálunk, könnyedén átlépkedhetünk a lista összes elemén.
+    `for` ciklussal kombinálunk, könnyedén végiglépkedhetünk a lista összes elemén.
 
     `Vec` a memóriában:
 
