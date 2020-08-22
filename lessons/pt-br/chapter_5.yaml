@@ -147,7 +147,10 @@
 
     * A modificação de variáveis estáticas é inerentemente perigosa, porque elas são acessíveis globalmente para serem lidas por qualquer um introduzindo a possibilidade de uma corrida de dados. Falaremos sobre os desafios dos dados globais mais tarde.
 
-    * O Rust permite o uso do bloco `unsafe {...}` para executar algumas operações sobre as quais o compilador não pode garantir a integridade do que está guardado na memória. O [<span style="color:red; font-weight:bold; >R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) não deve ser mencionado em vão.
+    * O Rust permite o uso do bloco `unsafe {...}` para executar algumas operações sobre as quais o compilador não pode garantir a integridade do que está guardado na memória. O [<span
+    style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+    não deve ser mencionado em vão.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20vari%C3%A1veis%20est%C3%A1ticas%20tamb%C3%A9m%20podem%20ter%20escopo%20definido%20para%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20static%20mut%20SECRETO%3A%20%26'static%20str%20%3D%20%22senha%22%3B%0A%0A%20%20%20%20%2F%2F%20strings%20t%C3%AAm%20o%20mesmo%20tempo%20de%20vida%20que%20as%20vari%C3%A1veis%20est%C3%A1ticas%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Ol%C3%A1%20Mundo!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20voc%C3%AA%20pode%20quebrar%20algumas%20regras%2C%20mas%20deve%20ser%20expl%C3%ADcito%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20atribuir%20uma%20string%20a%20SECRETO%20porque%20ela%20tamb%C3%A9m%20%C3%A9%20est%C3%A1tica%0A%20%20%20%20%20%20%20%20SECRETO%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRETO)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: Tempos de Vida em Tipos de Dados
