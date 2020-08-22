@@ -26,10 +26,12 @@
 
 
     ```
+
     enum Option<T> {
         None,
         Some(T),
     }
+
     ```
 
 
@@ -45,10 +47,12 @@
 
 
     ```
+
     enum Result<T, E> {
         Ok(T),
         Err(E),
     }
+
     ```
 
 
@@ -69,16 +73,19 @@
 
 
     ```
+
     do_something_that_might_fail()?
 
     ```
 
 
     ```
+
     match do_something_that_might_fail() {
         Ok(v) => v,
         Err(e) => return Err(e),
     }
+
     ```
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20faz_alguma_coisa_que_pode_falhar(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22este%20n%C3%A3o%20%C3%A9%20o%20n%C3%BAmero%20correto%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Olha%20quanto%20c%C3%B3digo%20n%C3%B3s%20salvamos!%0A%20%20%20%20let%20v%20%3D%20faz_alguma_coisa_que_pode_falhar(42)%3F%3B%0A%20%20%20%20println!(%22encontrei%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
@@ -96,16 +103,19 @@
 
 
     ```
+
     my_option.unwrap()
 
     ```
 
 
     ```
+
     match my_option {
         Some(v) => v,
         None => panic!("alguma mensagem de erro gerada pelo Rust!"),
     }
+
     ```
 
 
@@ -113,16 +123,19 @@
 
 
     ```
+
     my_result.unwrap()
 
     ```
 
 
     ```
+
     match my_result {
         Ok(v) => v,
         Err(e) => panic!("alguma mensagem de erro gerada pelo Rust!"),
     }
+
     ```
 
 
