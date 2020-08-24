@@ -28,7 +28,6 @@
 
 
     Rust soporta los códigos de escape comunes de los lenguajes basados en C.
-:
 
     * `\n` - salto de línea
 
