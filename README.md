@@ -28,7 +28,7 @@ This project also aims to provide this book in as many languages as possible.
 
 * Deutsch - [Felix](https://github.com/jassler), [Ramin Azhdari](https://github.com/raminos)
 * English - [Richard Anaya](https://github.com/richardanaya)
-* Español - [Alba Martínez Martínez](https://github.com/albatraduce)
+* Español - [Alba Martínez Martínez](https://github.com/albatraduce), (Tech review by [Alberto Moreta](https://github.com/AlbertoMoreta) and [Fran Torres](https://github.com/franute))
 * Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
 * Magyar - [Nemin32](https://github.com/Nemin32/), [Dániel Buga](https://github.com/bugadani)
