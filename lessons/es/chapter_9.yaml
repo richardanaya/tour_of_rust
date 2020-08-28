@@ -24,12 +24,19 @@
   content_markdown: >
     Los elementos de los módulos se pueden referenciar con la ruta completa de su módulo
     `std::f64::consts::PI`.
+    
 
-    Una forma más simple es con el uso de la palabra reservada **use**. Esta nos permite especificar elementos particulares de los módulos que queremos usar en todo nuestro código sin una ruta completa. Por ejemplo, el uso de `std::f64::consts::PI` nos permite usar el identificador `PI` en la función principal.
+    Una forma más simple es con el uso de la palabra reservada **use**. Esta nos permite especificar 
+    elementos particulares de los módulos que queremos usar en todo nuestro código sin una ruta completa. 
+    Por ejemplo, el uso de `std::f64::consts::PI` nos permite usar el identificador `PI` en la función principal.
 
-    **std** es un crate de la **librería estándar** de Rust que está lleno de estructuras de datos y funciones para interactuar con tu sistema operativo.
 
-    En el siguiente enlace: [https://crates.io](https://crates.io/) puedes encontrar un directorio de crates creado por la comunidad.
+    **std** es un crate de la **librería estándar** de Rust que está lleno de estructuras de datos y 
+    funciones para interactuar con tu sistema operativo.
+
+
+    En el siguiente enlace: [https://crates.io](https://crates.io/) puedes encontrar un directorio de 
+    crates creado por la comunidad.
 - title: Referenciar Múltiples Elementos
   content_markdown: |
     En este ejemplo podemos ver cómo referenciar múltiples elementos utilizando una única ruta al módulo.
@@ -38,14 +45,14 @@
     use std::f64::consts::{PI,TAU}
     ```
 
-    TAUro y PIscis son los signos del zodiaco más compatibles con Ferris.
+    **TAU**ro y **PI**scis son los signos del zodiaco más compatibles con Ferris.
 - title: Crear Módulos
   content_markdown: |
     Cuando pensamos en el código, solemos imaginar una jerarquía de archivos que se organizan en directorios. Rust nos permite crear módulos que están estrechamente relacionados con la estructura de archivos.
 
     En Rust hay dos maneras de declarar un módulo. Por ejemplo, podemos representar un módulo `foo` de la siguiente forma:
-      * un archivo llamado `foo.rs`
-      * un directorio llamado `foo` que contiene un fichero llamado `mod.rs`
+      * Un archivo llamado `foo.rs`.
+      * Un directorio llamado `foo` que contiene un fichero llamado `mod.rs`.
 - title: Jerarquía de Módulos
   content_markdown: >
     Un módulo puede depender de otro. Para establecer una relación entre un módulo y su submódulo, debemos escribir el módulo padre: 
@@ -89,14 +96,15 @@
   content_markdown: >
     Rust tiene varias palabras reservadas que puedes usar en tu ruta `use` para conseguir rápidamente el módulo que quieres:
       
-    * `crate` - el módulo raíz de tu crate
+    * `crate` - el módulo raíz de tu crate.
 
-    * `super` - el módulo padre del módulo actual
+    * `super` - el módulo padre del módulo actual.
 
-    * `self` - el módulo actual
+    * `self` - el módulo actual.
 - title: Exportar
   content_markdown: >
     Por defecto, los miembros de un *módulo* no son accesibles desde fuera del módulo (¡ni siquiera a sus módulos hijo!). Hacemos que los miembros de un módulo sean accesibles usando la palabra reservada `pub`.
+    
 
     Por defecto, no se puede acceder a los miembros de un *crate* fuera del mismo. Hacemos que los miembros de un crate sean accesibles marcándolos como `pub` en el *módulo raíz* de tu crate (`lib.rs` o `main.rs`).
 - title: Visibilidad de Estructuras
@@ -120,6 +128,7 @@
 - title: Capítulo 9 - Conclusión
   content_markdown: >
     Ahora tienes algunos trucos bajo la manga para crear aplicaciones y librerías en Rust. No te preocupes por tener que acordarte de todo, ya que a medida que tu librería crezca y lo usen otras personas, descubrirás lo que mejor funciona en cada caso.
+
 
     Recursos (en inglés):
 

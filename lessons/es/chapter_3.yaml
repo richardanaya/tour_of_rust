@@ -87,7 +87,7 @@
       ubicaciones fijas en nuestro programa, así que se colocan en la *pila*.
 - title: Estructuras en Forma de Tupla
   content_markdown: |
-    Para ser concisos, puedes crear estructuras que se usan como una tupla
+    Para ser concisos, puedes crear estructuras que se usan como una tupla.
 - title: Estructuras Tipo-Unitario
   content_markdown: >
     No es necesario que las estructuras tengan campos.

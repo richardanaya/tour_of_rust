@@ -29,17 +29,17 @@
 
     Rust soporta los códigos de escape comunes de los lenguajes basados en C.
 
-    * `\n` - salto de línea
+    * `\n` - salto de línea.
 
-    * `\r` - retorno de carro
+    * `\r` - retorno de carro.
 
-    * `\t` - tabulación
+    * `\t` - tabulación.
 
-    * `\\` - barra invertida
+    * `\\` - barra invertida.
 
-    * `\0` - nulo
+    * `\0` - nulo.
 
-    * `\'` - comilla simple
+    * `\'` - comilla simple.
 
 
     Puedes encontrar la lista completa
