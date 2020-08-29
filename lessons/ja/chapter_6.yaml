@@ -77,25 +77,23 @@
     ```
 - title: 文字列スライス
   content_markdown: >
-    A string slice is a reference to a sequence of bytes in memory that must
-    always be valid utf-8.
+    文字列スライスは、常に有効な utf-8 でなければならないメモリ内のバイト列への参照です。
 
 
-    A string slice (a sub-slice) of a `str` slice, must also be valid utf-8.
+    文字列のスライス(サブスライス)である `str` のスライスも有効な utf-8 でなければなりません。
 
 
-    Common methods of `&str`:
+    `&str` の一般的なメソッド：
 
-    * `len` gets the length of the string literal in bytes (not number of
-    characters).
+    * `len` は文字列リテラルの長さをバイト単位で取得します。（文字数ではない）
 
-    *  `starts_with`/`ends_with` for basic testing.
+    * 基本的なテストのための `starts_with`/`ends_with`
 
-    * `is_empty` returns true if zero length.
+    * `is_empty` は長さがゼロの時にtrueを返します。
 
-    * `find` returns an `Option<usize>` of the first position of some text.
+    * `find` はテキストの最初の位置の `Option<usize>` を返します。
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20%E3%81%AF%E5%A4%B1%E6%95%97%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20%2F%2F%20Rust%20%E3%81%AF%E7%84%A1%E5%8A%B9%E3%81%AA%20unicode%20%E6%96%87%E5%AD%97%E3%81%AE%E3%82%B9%E3%83%A9%E3%82%A4%E3%82%B9%E3%82%92%E5%8F%97%E3%81%91%E4%BB%98%E3%81%91%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
 - title: Chars
   content_markdown: >
     With so much difficulty in working with Unicode, Rust offers a way to
