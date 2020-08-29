@@ -77,35 +77,31 @@
     ```
 - title: 文字列スライス
   content_markdown: >
-    A string slice is a reference to a sequence of bytes in memory that must
-    always be valid utf-8.
+    文字列スライスは、常に有効な utf-8 でなければならないメモリ内のバイト列への参照です。
 
 
-    A string slice (a sub-slice) of a `str` slice, must also be valid utf-8.
+    文字列のスライス(サブスライス)である `str` のスライスも有効な utf-8 でなければなりません。
 
 
-    Common methods of `&str`:
+    `&str` の一般的なメソッド：
 
-    * `len` gets the length of the string literal in bytes (not number of
-    characters).
+    * `len` は文字列リテラルの長さをバイト単位で取得します。（文字数ではない）
 
-    *  `starts_with`/`ends_with` for basic testing.
+    * 基本的なテストのための `starts_with`/`ends_with`
 
-    * `is_empty` returns true if zero length.
+    * `is_empty` は長さがゼロの時にtrueを返します。
 
-    * `find` returns an `Option<usize>` of the first position of some text.
+    * `find` はテキストの最初の位置の `Option<usize>` を返します。
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20%E3%81%AF%E5%A4%B1%E6%95%97%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20%2F%2F%20Rust%20%E3%81%AF%E7%84%A1%E5%8A%B9%E3%81%AA%20unicode%20%E6%96%87%E5%AD%97%E3%81%AE%E3%82%B9%E3%83%A9%E3%82%A4%E3%82%B9%E3%82%92%E5%8F%97%E3%81%91%E4%BB%98%E3%81%91%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
 - title: Chars
   content_markdown: >
-    With so much difficulty in working with Unicode, Rust offers a way to
-    retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
+    Unicodeでの作業が非常に困難なため、Rustではutf-8バイトのシーケンスを `char` 型の文字のベクトルとして取得する方法が提供されています。
 
 
-    A `char` is always 4 bytes long (allowing for efficient lookup of individual
-    characters).
+    char` は常に 4 バイトの長さです。(これによって個々の文字を効率的に検索できるようになっています)
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E6%96%87%E5%AD%97%E3%82%92char%E3%81%AE%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%A8%E3%81%97%E3%81%A6%E9%9B%86%E3%82%81%E3%82%8B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20chars%20%E3%81%AF%204%20%E3%83%90%E3%82%A4%E3%83%88%E3%81%AA%E3%81%AE%E3%81%A7%E3%80%81u32%20%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
 - title: String
   content_markdown: >
     A **String** is a struct that owns a sequence of utf-8 bytes in heap memory.
@@ -142,9 +138,9 @@
     most scenarios where you don't actually have to pass ownership.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
-- title: Building Strings
+- title: 文字列の構築
   content_markdown: |
-    `concat` and `join` are two simple but powerful ways for building strings.
+    `concat` と `join` は、文字列を構築するためのシンプルだが強力な方法です。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
 - title: Formatting Strings
@@ -161,13 +157,11 @@
     check out the documentation [here](https://doc.rust-lang.org/std/fmt/).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
-- title: Converting Strings
+- title: 文字列変換
   content_markdown: |
-    Many types can be converted to a string using `to_string`.
+    多くの型は `to_string` を用いて文字列に変換することができます。
 
-    The generic function `parse` can be used to convert strings 
-    or string literals into a typed value. This function returns 
-    a `Result` because it could fail.
+    ジェネリック関数 `parse` を用いることで文字列や文字列リテラルを型付きの値に変換できます。この関数は失敗する可能性があるので、`Result`を返します。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
 - title: Chapter 6 - Conclusion
