@@ -96,14 +96,12 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20%E3%81%AF%E5%A4%B1%E6%95%97%E3%81%97%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20%2F%2F%20Rust%20%E3%81%AF%E7%84%A1%E5%8A%B9%E3%81%AA%20unicode%20%E6%96%87%E5%AD%97%E3%81%AE%E3%82%B9%E3%83%A9%E3%82%A4%E3%82%B9%E3%82%92%E5%8F%97%E3%81%91%E4%BB%98%E3%81%91%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
 - title: Chars
   content_markdown: >
-    With so much difficulty in working with Unicode, Rust offers a way to
-    retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
+    Unicodeでの作業が非常に困難なため、Rustではutf-8バイトのシーケンスを `char` 型の文字のベクトルとして取得する方法が提供されています。
 
 
-    A `char` is always 4 bytes long (allowing for efficient lookup of individual
-    characters).
+    char` は常に 4 バイトの長さです。(これによって個々の文字を効率的に検索できるようになっています)
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E6%96%87%E5%AD%97%E3%82%92char%E3%81%AE%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%A8%E3%81%97%E3%81%A6%E9%9B%86%E3%82%81%E3%82%8B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20chars%20%E3%81%AF%204%20%E3%83%90%E3%82%A4%E3%83%88%E3%81%AA%E3%81%AE%E3%81%A7%E3%80%81u32%20%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
 - title: String
   content_markdown: >
     A **String** is a struct that owns a sequence of utf-8 bytes in heap memory.
