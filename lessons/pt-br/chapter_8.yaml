@@ -4,7 +4,7 @@
 
 
     Ferris diz: "Não se sinta pressionado por este capítulo se você acha que não pode escrever seu próprio código de gerenciamento de memória de baixo nível em uma leitura rápida. Este capítulo é principalmente para apresentá-lo a algumas ferramentas úteis e dar uma ideia de como eles trabalham!"
-- title: Referências revisitadas
+- title: Revisitando referências
   content_markdown: >
     Uma referência é fundamentalmente apenas um número que é a posição inicial de alguns bytes na memória. Seu único propósito é representar o conceito de onde os dados de um tipo específico estão. O que torna uma referência diferente de apenas um número é que o Rust validará o tempo de vida das referências para que não dure mais do que a o que ele se refere (caso contrário, obteríamos um erro quando o usarmos!).
 - title: Ponteiros brutos
@@ -25,7 +25,7 @@
     Os ponteiros brutos podem ser convertidos de e para números (por exemplo, `usize`).
 
 
-    Os ponteiros brutos podem acessar dados com código *inseguro* (mais a respeito mais tarde).
+    Os ponteiros brutos podem acessar dados com código *inseguro* (falaremos a respeito mais tarde).
 
 
     Detalhes da memória:
@@ -40,6 +40,7 @@
 
     As referências são usadas para acessar/manipular dados de duas maneiras:
 
+
     * Acesso aos dados referidos durante a atribuição de variáveis.
 
     * Acesso a campos ou métodos dos dados referidos.
@@ -48,7 +49,7 @@
     O Rust tem alguns operadores poderosos que nos permitem fazer isso.
 - title: O operador *
   content_markdown: >
-    O operador * `` é uma forma explícita de desreferenciamento de uma referência.
+    O operador `*` é uma forma explícita de desreferenciamento de uma referência.
 
 
     ```rust
@@ -111,7 +112,7 @@
     O que é um código inseguro? O código inseguro se comporta exatamente como Rust normal, com exceção de algumas habilidades sobre as quais o compilador Rust é incapaz de oferecer garantias.
 
 
-    Uma habilidade primária do código inseguro é o *desreferenciamento de um ponteiro bruto*. Isso significa pegar um *ponteiro bruto* de uma posição na memória e declarar que "há uma estrutura de dados aqui!" e transformá-lo em uma representação de dados que você pode usar (ou seja, `*const u8` em `u8`).
+    Uma habilidade primária do código inseguro é o *desreferenciamento de um ponteiro bruto*. Isso significa pegar um *ponteiro bruto* de uma posição na memória, declarar que "há uma estrutura de dados aqui!" e transformá-lo em uma representação de dados que você pode usar (ou seja, `*const u8` em `u8`).
 
 
     O Rust não tem como rastrear o significado de cada byte que é gravado na memória. E porque o Rust não pode dar garantias sobre o que existe em um número arbitrário usado como um *ponteiro bruto* que ele põe o desreferenciamento em um bloco `unsafe { ... }`.
@@ -125,7 +126,7 @@
     Considere alguns ponteiros inteligentes que já vimos como `Vec<T>` e `String`.
 
 
-    o `Vec<T>` é um ponteiro inteligente que simplesmente possui uma região da memória em bytes. O compilador Rust não tem ideia do que existe nesses bytes. O ponteiro inteligente interpreta o que significa pegar os itens da região da memória que ele gerencia, mantém o controle de onde os bytes das estruturas de dados começam e terminam e, finalmente, desreferencia um ponteiro bruto para uma estrutura de dados com uma interface ergonômica, limpa e fácil para nós usarmos (por exemplo, `my_vec[3]`).
+    O `Vec<T>` é um ponteiro inteligente que simplesmente possui uma região da memória em bytes. O compilador Rust não tem ideia do que existe nesses bytes. O ponteiro inteligente interpreta o que significa pegar os itens da região da memória que ele gerencia, mantém o controle de onde os bytes das estruturas de dados começam e terminam e, finalmente, desreferencia um ponteiro bruto para uma estrutura de dados com uma interface ergonômica, limpa e fácil para nós usarmos (por exemplo, `my_vec[3]`).
 
 
     Da mesma forma, `String` mantém o controle de uma região de memória em bytes, restringe programaticamente o conteúdo escrito nele para ser sempre `utf-8` válido, e ajuda a desreferenciar essa região de memória em um tipo `&str`.
