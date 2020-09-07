@@ -1,67 +1,56 @@
-- title: Chapter 1 - The Basics
+- title: Bölüm 1 - Temel Bilgiler
   content_markdown: >
-    In this first chapter we're going to be exploring the very basics
-    with functions, variables, and the most primitive types. Glad to have you on
-    board!
-    Also! In case you are wondering who this adorable crab who is speaking to
-    you is, I am **Ferris**,
-    the unofficial mascot for the Rust programming language. Nice to meet you.
-- title: The Rust Playground
+    Aramızda olmanıza sevindim. Turun ilk bölümünde işlevler, değişkenler ve basit türler hakkında temel bilgilere değineceğiz.
+
+    Ayrıca, sizinle konuşan bu sevimli yengecin kim olduğunu merak ediyorsanız ben, Rust programlama dilinin resmi olmayan maskotu **Ferris**im. 
+    Tanıştığımıza memnun oldum.
+- title: Rust Oyun Alanı
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=067d7f594a925b54bf16df9956fe8ef6
   content_markdown: >
-    This tour uses an interactive coding tool from [Rust
-    Playground](https://play.rust-lang.org).
-    It's a great way to play around with Rust and show others your creativity
-    and challenges!
-- title: Variables
+    Tur boyunca [Rust oyun alanındaki](https://play.rust-lang.org) etkileşimli kodlama aracı kullanılıyor.
+        
+    Bu araç Rust ile oynamak ve ürettiklerinizi başkalarıyla paylaşmak için harika bir olanaktır!
+- title: Değişkenler
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6db511016a9091d0a097d3a1e0f3b738
   content_markdown: >
-    Variables are declared using the **let** keyword.
-    When assigning a value, Rust will be able to infer the type of your variable
-    99% of
-    the time. If it cannot you may add the type to your variable declaration.
-    Notice how we can assign to the same variable name multiple times. This is
-    called variable
-    shadowing and the type can be changed for subsequent references to that
-    name.
-    Variable names are always in `snake_case`.
-- title: Changing Variables
+    Değişkenler **let** anahtar sözcüğü kullanılarak bildirilir.
+
+    Bir değişkene değer atadığınız anda bu değişkenin türü %99 Rust tarafından bilinir. Eğer tür otomatik olarak çıkarsanamamışsa değişken türünü kendiniz ekleyebilirsiniz
+
+    Aynı değişken adını tekrar tekrar atayabildiğimize dikkat edin. Buna değişken gölgeleme denir ve bu isme her başvurulduğunda değişkenin türü de değiştirilebilir.
+
+    Değişken isimleri kelimelerin alttire ile birbirine bağlandığı `lover_snake_case` biçiminde seçilmelidir.
+- title: Değişkenlerin Değiştirilmesi
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=723acfe27f79659876e1f7f2eee16a8d
   content_markdown: >
-    Rust cares a great deal about what variables are modifiable. Values
-    fall into two types:
-    * **mutable** - the compiler will allow the variable to be written to and
-    read from.
-    * **immutable** - the compiler will only allow the variable to be read from.
-    Mutable values are denoted with a **mut** keyword.
-    We will have more to say on this concept later, but for now just keep an eye
-    out for this keyword.
-- title: Basic Types
+    Rust hangi değişkenlerin değiştilebilir olduğuna çok dikkat eder. İki tür değişken vardır:
+
+    * **mutable** - Derleyici bu tür değişkenlerin hem yazılmasına hem okunmasına izin verir.
+    * **immutable** - Derleyici bu tür değişkenlerin sadece okunmasına izin verir.
+
+    Değişebilir değerler **mut** anahtar sözcüğü ile belirtilir.
+        
+    İleride bu kavrama daha fazla değineceğiz. Ancak şu an için bu anahtar sözcüğe dikkat etmeniz yeterlidir.
+- title: Temel Türler
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=4443a0deb58f4f3e9ab8c007a9834689
   content_markdown: >
-    Rust has a variety of familiar types:
-    * booleans - `bool` for representing true/false
-    * unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing
-    nonnegative whole numbers
-    * signed integers - `i8` `i16` `i32` `i64` `i128` for representing whole numbers
-    * pointer sized integers - `usize` `isize` for representing indexes
-    and sizes of things in memory
-    * floating point - `f32` `f64`
-    * tuple - `(value, value, ...)` for passing fixed sequences of values on the
-    stack
-    * arrays - `[value, value, ...]` a collection of similar elements with fixed
-    length known at compile time
-    * slices - a collection of similar elements with length known at runtime
-    * `str`(string slice) - text with a length known at runtime
-    Text might be more complex than you are used to in other languages;
-    since Rust is a system programming language, it cares about memory 
-    issues you might not be used to. We will be going into this in detail later.
-    Numeric types can be explicitly specified by appending the type to the end
-    of the number (e.g. `13u32`, `2u8`).
+    Rust'ta aşina olduğunuz pek çok tür yer almaktadır:
+    * Mantıksal veri türü - `bool` sadece true/false olabilecek bir değeri temsil eder.
+    * İşaretsiz tam sayılar - `u8` `u32` `u64` `u128` bit boyutlu **(0/+)** tam sayı değerlerini temsil eder.
+    * İşaretli tam sayılar - `i8` `i32` `i64` `i128` bit boyutlu **(-/+)** işaretli tam sayı değerlerini temsil eder.
+    * İşaretçi boyutlu tam sayılar - `usize` `isize` işaretçi boyutunda işaretsiz ve işaretli tam sayı türlerini temsil eder.
+    * Kayan noktalı sayılar - `f32` `f64` 32 bit ve 64 bit boyutlarında kayan noktalı sayıları temsil eder.
+    * Çokuzlular - `(değer, değer, ...)` stack üzerinde depolanan aynı veya farklı tür öğelerin sabit boyutlu listesini tutar.
+    * Diziler - `[değer, değer, ...]` değerleri derleme zamanında bilinen aynı veri türündeki öğelerin sabit boyutlu listesini tutar.
+    * Dilimler - `&[1..4]` boyutu çalışma zamanında bilinen öğelerin listesini tutar.
+    * Dizge dilimleri - `str` boyutu çalışma zamanında bilinen metin parçalarını temsil eder.
+    
+    Metinlerle çalışmak size diğer dillerde alışık olduğunuzdan daha karmaşık gelebilir. Rust bir sistem programlama dili olduğundan, aşina olmadığınız bellek sorunlarını önemser. Daha sonra bu konuya ayrıntılarıyla değineceğiz.
+    Sayısal tür bildirimlerinde tür sayının hemen sonunda eklenerek şu şekilde (`13u32`, `2u8` v.b.) açıkça belirtilebilir.
 - title: Basic Type Conversion
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
