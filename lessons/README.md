@@ -17,6 +17,7 @@ Every time you finish the translation of a chapter update the table underneath.
 |ru    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |zh-cn | ✓ | ✓ | ✓ | ✓ | ✓ | x | x | x | x | x | x  |
 |zh-tw | ✓ | ✓ | x | x | x | x | x | x | x | x | x  |
+|tr    | ✓ | ✓ | x | x | x | x | x | x | x | x | x  |
 
 Legend: ✓ = done, x = not done, u = needs update
 
