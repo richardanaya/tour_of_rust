@@ -8,6 +8,7 @@
     Aha! W razie gdyby nie było jasne kim jest ten przesłodki krab który właśnie
     do Ciebie mówi, możesz mi mówić **Ferris**.
 
+    
     Jestem nieoficjalną maskotką języka programowania Rust. Miło Cię poznać.
 - title: "Piaskownica Rusta"
   code: >-
@@ -35,7 +36,7 @@
 
 
     Zauważ, że jesteśmy w stanie dokonać przypisania do tej samej zmiennej wielokrotnie.
-    Taki manewr jest nazywany "przyćmiewaniem zmiennej" (ang. "variable shadowing"), i można
+    Taki manewr jest nazywany *przyćmiewaniem zmiennej* (ang. *variable shadowing*), i można
     w ramach niego dokonać również zmiany typu zmiennej.
 
 
@@ -89,7 +90,7 @@
 
     * typ slice - kolekcja podobnych elementów której długość jest znana na etapie wykonywania programu
 
-    * `str` (string slice) - tekst którego długość jest znana na etapie wykonywania programu
+    * `str` (ang. string slice) - tekst którego długość jest znana na etapie wykonywania programu
 
 
     Sprawa reprezentowania tekstu może sprawić więcej problemu w Ruscie niż w innych językach;
@@ -141,10 +142,10 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
   content_markdown: >
-    Funckcja posiada zero lub więcej parametrów.
+    Funkcja posiada zero lub więcej parametrów.
 
 
-    W naszym przykładzie, `add` bierze dwa argumenty typu `i32` (liczby całkowitej ze znakiem
+    W naszym przykładzie, `add` bierze dwa argumenty typu `i32` (liczby całkowitej ze znakiem,
     o długości 32 bitów).
 
 
@@ -153,7 +154,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
   content_markdown: >
-    Funkcje mogą zwracać wiele wartości przy użyciu **krotki** (ang. **tuple**).
+    Funkcje mogą zwracać wiele wartości przy użyciu **krotki** (ang. tuple).
 
 
     Do elementów krotki możemy odnieść się za pomocą ich numerycznych indeksów. 
