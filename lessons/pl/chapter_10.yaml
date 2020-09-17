@@ -1,10 +1,12 @@
-- title: The End
+- title: Koniec
   content_markdown: >
-    It's been a joy to have you on the Tour of Rust. Ferris and the Tour of Rust
-    team sincerely hope you enjoy the journey ahead! If you 
+    Było mi niezmiernie przyjemnie mieć możliwość oprowadzenia Cię po zakamarkach języka Rust.
+    Ferris i cała załoga Przewodnika po Języku Rust życzy Ci wszystkiego najlepszego
+    w Twojej podróży z Rustem!
 
-    have felt comfortable this far, we strongly recommend diving deeper with
-    these resources:
+    Jeśli spodobało Ci się to co zostało przedstawione w niniejszym przewodniku
+    koniecznie zajrzyj do oficjalnej książki Rusta, dostępnej za darmo pod następującym
+    adresem:
 
     * [The Official Rust Programming
     Book](https://doc.rust-lang.org/stable/book/)
