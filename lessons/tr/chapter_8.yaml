@@ -1,0 +1,256 @@
+- title: Bölüm 8 - Akıllı İşaretçiler
+  content_markdown: >
+    Bu bölümde düşük bellek seviyesiyle etkileşmemizi sağlayan akıllı işaretçileri inceleyecek ve onlara dair gizemleri birer birer çözeceğiz.
+
+
+    Ama başlamadan önce Ferris'in uyarısına kulak vermenin motivasyonumuzu güçlendireceğini düşünüyorum: “Bu bölüme göz gezdirirken, 
+    düşük seviyeli bellek yönetim kodlarını yazamayacağınızı düşünerek moralinizi bozmayın. Zira bu bölüm, bazı temel ve yararlı araçlara 
+    giriş niteliğinde olup, nasıl çalıştıkları hakkında sizi bilgilendirmeyi amaçlar!"
+- title: Referanslara Yeniden Bakış
+  content_markdown: >
+    Aslında referanslar, bellekteki bazı baytların başlangıç konumunu gösteren sayılardan ibarettir. Ve bu sayıların tek amacı, belirli türden verilerin 
+    belleğin neresinde bulunduğunu belirtmektir. Ancak Rust açısından referanslar, bir sayıdan daha fazla anlam taşırlar. Derleyici olası bir hatanın 
+    önüne geçmek için, referansın yaşam süresinin, başvurduğu nesne ömründen daha uzun olup olmadığını daima bilmek ister.
+- title: Ham İşaretçiler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f98da87c2fe84aeb3436bb612d0d9d6d
+  content_markdown: >
+    Referanslar **ham işaretçi** adı verilen daha ilkel bir türe dönüştürülebilirler. Bu onların azıcık kısıtlama ile tıpkı bir sayıymış gibi 
+    kopyalanabilecekleri ve taşınabililecekleri anlamına gelmektedir. Bununla birlikte Rust bu dönüşüm işleminde, işaret edilen bellek konumunun 
+    geçerli olduğunu garantilemez.
+
+
+    Rust'un iki türlü ham işareçisi vardır:
+
+
+    * `*const T` - Asla değişmemesi gereken **T** türündeki verilere yönelik ham işaretçi.
+
+    * `*mut T` - Değişebilen **T** türündeki verilere yönelik ham işaretçi.
+
+
+    Ham işaretçiler `usize` gibi sayılara dönüştürülebildikleri gibi, bu tür sayılardan da dönüştürülebilirler.
+
+
+    Bu tür işaretçiler, ayrıntılarına ileride değineceğimiz güvenli olmayan Rust kodları aracılığıyla verilere erişebilirler.
+
+
+    Bellek ayrıntıları:
+
+    * Rust'ın referansları, kullanım açısından C'nin işaretçilerine benzemekle birlikte, saklanma ve taşınma aşamalarında daha çok 
+    derleme zamanı kısıtlaması içerirler.
+    
+    * Rust'ın ham işaretçileri, C'nin işaretçilerine benzemekle beraber; kopyalanabilen, bir işleve bağımsız değişken olarak iletilebilen, 
+    hatta tıpkı işaretçi aritmediğinde olduğu gibi, aritmetik işlemlerin yapılabileceği sayısal türe dönüştürülebilen bir sayıyı temsil eder.
+- title: Referansı Kaldırmak
+  content_markdown: |
+    Bir **referans**ın atıfta bulunduğu verilere erişme ve/veya o verileri değiştirme işlemine **dereferencing**, dilimizdeki yaklaşık 
+    karşılığıyla **referansı kaldırmak** adı verilir.
+
+    Referansları verilere erişmek veya verileri değiştirmek amacıyla kullanmanın iki sebebi vardır:
+    
+    * Değişkenlerin atanması sırasında başvurulan verilere erişmek.
+    
+    * Başvurulan verilerin alan veya metotlarına erişmek.
+
+    Rust, bunları gerçekleştirebilmemiz için güçlü işleçler sunar.
+- title: Yıldız İmi * İşleci
+  content_markdown: >
+    Bir referans tarafından atıfta bulunulan verilere açık biçimde erişmenin yolu, asteriks olarak da bilinen yıldız imi `*` işlecini kullanmaktan geçer. 
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    Bellek ayrıntıları:
+
+    - Temel bir tür olan **i32**, `Copy` özelliğini uygulayacağından, yığın üzerindeki `a` değişkeninin baytları, `b` değişkeninin baytlarına kopyalanmış olacaktır.
+- title: Nokta . İşleci
+  content_markdown: >
+    Bir noktadan ibaret olan `.` işleci ise, bir referansın alan ve yöntemlerine erişirken kullanılır. Zekice çalışan bu işlece 
+    [bir örnek yardımıyla](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=e17e9a477a8ab5a0d0b075ff07e33d4a) daha yakından bakalım:
+
+
+    ```rust
+
+    let f = Tur { deger: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.deger);
+
+    ```
+
+    `ref_ref_ref_f`'den önce `***` işleçlerinin eklenmediğini fark ettiniz değil mi?. Bu şaşırtıcı durum `.` işlecinin, bir dizi referansı otomatik olarak 
+    kaldırmasından kaynaklanır. Oysa gerçekte örneğin son satırı, derleyici tarafından otomatik olarak aşağıda gösterildiği gibi değerlendirilmektedir.
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).deger);
+
+    ```
+- title: Akıllı İşaretçiler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=2e831c6b3f6601c23501e4a164bb1fd7
+  content_markdown: >
+    Rust mevcut veri türlerine `&` işleci aracılığıyla başvurabilme yeteneğine ek olarak, *akıllı işaretçiler** olarak bilinen referans yapıları 
+    oluşturabilmemize de izin verir. 
+
+
+    Bu referansları daha yüksek seviyede ve diğer türlere erişim sağlayan, normal referanslardan farklı biçimde davranan türlermiş gibi düşünebilirsiniz. 
+    Akıllı işaretçiler, programcının yazdığı dahili mantığa dayalı olarak çalıştıklarından ve bu dahili mantığı tanımlamak da programcıya bağlı 
+    olduğundan, aslında buradaki **akıllı** kısım programcının ta kendisidir.
+
+
+    Bu açıklamadan hareketle akıllı işaretçiler için, "bir yapıya `*` ve `.` işleçleri kullanılarak başvurulduğunda, olacakların mantığını tanımlamak 
+    amacıyla `Deref`, `DerefMut` ve `Drop` özelliklerini uygulayan yapılar" diyebiliriz.
+- title: Akıllı Güvensiz Kodlar
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=18313307e42ea7f2bae1b1ea2b817cb9
+  content_markdown: >
+    Rust'ta düşük bellek seviyeleriyle etkileşebilmek için çoğunlula güvenli olmayan kod bloklarından yararlanıldığından, akıllı işaretçiler bu kodları 
+    sıklıkla kullanırlar.
+
+
+    Daha önce de kabaca değindiğimiz güvenli olmayan kodlar, derleyicinin garanti edemediği birkaç özellik dışında, tam olarak normal Rust kodu gibi davranırlar.
+
+
+    Güvenli olmayan kodun ana özelliği, **bir ham işaretçinin referansını kaldırmak**tır. Bu, ham işaretçiyi bir bellek konumuna götürerek: "Burada bir 
+    veri yapısı var." şeklinde bildirim almak ve bu veriyi, örneğin `u8` için `*const u8` olarak kullanabileceğimiz başka bir veri türü temsiline
+    dönüştürmek demektir. 
+    Rust'ta, belleğe yazılan her baytın anlamını takip etmenin bir yolu olmadığından ve Rust, ham işaretçi olarak kullanılan rasgele bir sayının arkasında
+    tam olarak neyin bulunduğunu garanti edemediğinden, bu referansın güvensiz olarak işaretlenmiş bir `unsafe {...}` bloğunun içine konulmasını bekler. 
+
+
+    Akıllı işaretçiler ham işaretçi referanslarını büyük ölçüde kaldırmalarına rağmen, yaptıkları işleri başarıyla sonuçlandırırlar.
+- title: Yakın Arkadaşlarımız
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9de516c1300ab3e7f15bd738614e9935
+  content_markdown: >
+    Zaten daha önce tanışmış olduğumuz `Vec<T>` ve `String` gibi akıllı işaretçilere bir kez daha bakalım.
+
+
+    Bellek üzerindeki bazı baytlara sahip olan `Vec<T>` akıllı bir işaretçi olmasına rağmen, derleyicinin bu baytlarda ne olduğuna dair en ufak 
+    bir fikri yoktur. Yönettiği bellek bölgesinden öğe elde etmenin anlamını yorumlayan akıllı işaretçi, bu baytlarda bulunan veri yapısının 
+    nerede başlayıp bittiğini takip edip, ham işaretçiyi **bir_vektor[3]** benzeri, kullanıcı dostu, hoş ve temiz bir arayüzle kullanıbilecek 
+    şekilde veri yapılarına aktarır.
+
+
+    Benzer şekilde `String` türü de bellek bölgesindeki baytları izleyerek, kendisine yazılan içeriğin daima geçerli `utf-8` olmasını sağlar. 
+    Ve bu bellek bölgesinin `&str` türü içine aktarılmasına yardımcı olur.
+
+
+    Bu veri yapılarının her ikisi de işlerini gerçekleştirebilmek için, ham işaretçilerin referanslarına güvensiz kodlar aracılığıyla ulaşmaya çalışır.
+
+
+    Bellek ayrıntıları:
+
+    * Rust C'deki `malloc` eş değerinde ve yönetilebilir bellek bölgelerini kullanımımıza sunan, [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) 
+    ve [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html) özelliklerine sahiptir.
+- title: Öbek Üzerinde Bellek Ayırmak
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=eac030d1b90f587706af4bdf8d7aedbb
+  content_markdown: >
+    `Box` verilerimizin, yığın bölgesinden öbek bölgesine taşınmasını sağlayan, bir **akıllı işaretçi**dir.
+
+
+    Box'a ait referansın kaldırılması, öbek bölgesinde konumlandırılan verilerin, tıpkı orijinal türlermiş gibi ergonomik biçimde kullanılmasını sağlar.
+- title: Main İşlevine Yeniden Bakış
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d9349e34ecb0733011df67022e33da1f
+  content_markdown: >
+    Rust bize hataları işleyebilmemiz için çok sayıda olanak sunar. Standart kitaplık tarafından sağlanan ve hataları evrensel düzeyde ele almamızı 
+    sağlayan `std::error::Error` özelliği de bunlardan biridir.
+
+
+    Hata döndürmek için `Box` akıllı işaretçisinden yararlanmak ve onu ortak genel tür olarak `Box<dyn std::error::Error>` şeklinde kullanmak, 
+    öbek üzerindeki hatayı belirli bir tür bildirmeksizin yaymamıza ve bu hatayla yüksek düzeyde etkileşim kurmamıza olanak sağlar.
+
+
+    Turumuzun ilk bölümlerinde Rust'un main işlevinin hata döndürebileceğini öğrenmiştik. Buna ek olarak yine main işlevinden, hatanın temsil 
+    edildiği veri yapısı Rust'un ortak `Error` özelliğini uyguladığı sürece, bir programda meydana gelebilecek her türlü hatayı tanımlayabilen 
+    bir tür döndürebiliriz.
+
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: Referans Sayımı
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=3e89c3f55853f8846252cdc5238dfe5f
+  content_markdown: >
+    `Rc`, verileri yığından öbeğe taşıyan akıllı bir işaretçidir. Ve bu işaretçi gerektiğinde, öbek üzerinde bulunan verileri ödünç alma yeteneğine 
+    sahip, diğer `Rc` akıllı işaretçilerini klonlamamızı sağlar.
+
+
+    Öbek üzerindeki veriler, yalnızca son akıllı işaretçi düşürüldüğünde serbest bırakılır.
+- title: Erişim Paylaşımı
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=64b154c2416cc74de20144cc8bec4d8e
+  content_markdown: >
+    `RefCell`, kapsadığı verilere değişmez veya değişken referanslar ödünç almamızı sağlayan ve genellikle akıllı işaretçiler tarafından tutulan 
+    kapsayıcı bir veri yapsıdır. Bu veri yapısının biricik özelliği, bellekle ilgili güvenlik kurallarını çalışma zamanında uygulamak ve borçlanma
+    sisteminin kötüye kullanılmasını önlemektir. Bu yapıyla ilgili bilinmesi gereken tek kural aşağıda yer almaktadır:
+
+
+    **Ya sadece bir tane değişken referansınız, YA DA çok sayıda değişmez referansınız olabilir. İkisinin birden olmasına izin verilmez!**
+
+
+    Bu kuralın ihlali `RefCell` özelliğinin panik üretmesine ve programın durdurulmasına sebep olur.
+- title: İş Parçacıkları Arasında Paylaşım
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=dec224cf971fbcdce31f2e5274314bad
+  content_markdown: >
+    `Mutex`, kapsadığı verilere değişmez veya değişken referansları ödünç alabilmemizi sağlayan ve genellikle akıllı işaretçiler tarafından 
+    tutulan kapsayıcı bir veri yapsıdır. Mutex'in biricik özelliği, veri erişimini tek bir CPU iş parçacığıyla kısıtlayarak, asıl iş parçacığının 
+    çalışmasını beklemek, bu bekleme sırasında diğer iş parçacıklarını engellemek ve beklemenin sonunda verilere erişimin kilidini açmaktır.
+
+
+    Eşzamanlılık konusu, bu turun kapsamı dışında kaldığından daha fazla detaya girmek yerine `Mutex`'in, aynı verilere erişen çok sayıda 
+    CPU iş parçacığını kontrol eden bir kilitleme düzeneği olduğunu bilmeniz şu an için yeterlidir.
+
+
+    Referansların iş parçacığı açısından güvenli şekilde sayılması haricinde, `Rc` ile aynı özelliklere sahip `Arc` adında bir akıllı 
+    işaretçimiz daha vardır. Bu işaretçi genellikle aynı Mutex kilidine birden fazla referansla erişirken kullanılır. 
+- title: Akıllı İşaretçileri Bir Araya Getirmek
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c90b8a42b1352703cfa329cad5f857fd
+  content_markdown: >
+    Akıllı işaretçiler sınırlıymış gibi görünmelerine rağmen, bazen çok güçlü kombinasyonlar oluşturabilirler.
+
+
+    `Rc<Vec<Tur>>` - Öbek üzerinde bulunan değişmez veri yapısı vektörünü ödünç alan, birden çok akıllı işaretçinin klonlanmasına izin verir.
+
+
+    `Rc<RefCell<Tur>>` - Birden fazla akıllı işaretçinin aynı `Tur` yapısını, değişken ya da değişmez olarak ödünç almasına izin verir.
+
+
+    `Arc<Mutex<Tur>>` - Bir akıllı işaretçinin, değişken ya da değişmez olarak borç alınmış bir veriyi, yalnızca bir CPU iş parçacığına *ve diğer 
+    iş parçacıklarının erişimine müsaade etmeyecek şekilde* geçici olarak kilitlemesine izin verir.
+
+
+    Bellek ayrıntıları:
+
+    * Bu kombinasyonların çoğu olasılıkla çok sayıda akıllı işaretçiye ait olan ve dahili verileri değiştirmek için değişmez bir veri türünü kullanan 
+    tek bir modeli takip eder. Rust'ın "dahili değişkenlik" olarak adlandırdığı bu model, çalışma zamanında bellek kullanım kurallarını atlamamıza 
+    izin verirken, Rust'un derleme zamanında bize verdiği güvenlik düzeyini de korumamıza yardımcı olur.
+      
+- title: Bölüm 8 - Sonuç
+  content_markdown: >
+    Aslında birer Rust programlama dili deyimi olan ve oldukça sık kullanılan akıllı işaretçiler, bizleri yaygın bellek kullanım modellerini yeniden 
+    oluşturma zahmetinden kurtarmakla beraber, her türlü zorlukla yüzleşmeye hazır hale getirir. Artık Rust'un temellerini kavradığımıza göre daha 
+    büyük projelere yelken açabiliriz.
+    
+    Bir sonraki bölümde tek sayfalık kodlara veda edecek ve büyük projelerin nasıl oluşturulduğunu tartışacağız.
