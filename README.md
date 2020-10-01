@@ -44,7 +44,7 @@ This project also aims to provide this book in as many languages as possible.
 
 If you would like to contribute translations in a language that doesn't exist yet. Feel free to make a PR!
 
-Look for your appropriate appropriate language under the `lessons` folder. Each chapter has its own file. You can modify an existing chapter's content or if there is one you'd like to translate from the english lessons, copy that chapter file over and modify it's content to your own language. Each page has various properties.
+Look for your appropriate language under the `lessons` folder. Each chapter has its own file. You can modify an existing chapter's content or if there is one you'd like to translate from the english lessons, copy that chapter file over and modify it's content to your own language. Each page has various properties.
 
 * **title** - this would be your localized page's title
 * **content_markdown** - this would be your localized page's content as markdown using [shodown markdown](https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax)
