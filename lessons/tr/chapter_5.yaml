@@ -40,9 +40,7 @@
     Kaynağın sahibi değişken, herhangi bir işleve argüman olarak iletildiğinde, o kaynağın mülkiyeti işlev parametresine taşınır. 
     Bu taşınma işlemine **move** yani **taşıma** adı verilir.
 
-
     Bir değişkenin sahip olduğu kaynak taşındıktan sonra, orijinal işlevdeki değişken artık kullanılamaz.
-
 
     Bellek ayrıntıları:
 
@@ -65,9 +63,7 @@
   content_markdown: >
     Yine bir referans olanağı olan `&mut` işleci yardımıyla, değişebilen bir kaynağın mülkiyetini ödünç alabiliriz.
 
-
     Bir kaynak değişebilen referansla ödünç alındığında, kaynağı sahibi, borç alınan mülkiyet iade edilene dek taşınamaz ve değiştirilemez.
-
 
     Bellek ayrıntıları:
 
@@ -78,14 +74,12 @@
   content_markdown: >
     Bir kaynağa `&mut` ile değişebilir başvuru yapıldığında, o kaynağa ait değer `*` işleci kullanılarak yeniden ayarlanabilir.
 
-
-   Akıllı işaretçiler bölümünde daha yakından inceleyeceğimiz bu işleç yardımıyla, kopyalama özelliği uygulayan bir türün kopyasına da erişmemiz mümkündür.
+    Akıllı işaretçiler bölümünde daha yakından inceleyeceğimiz bu işleç yardımıyla, kopyalama özelliği uygulayan bir türün kopyasına da erişmemiz mümkündür.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=045dd6870e253ec70b42c3832f88740a
 - title: Ödünç Alınan Verinin Taşınması
   content_markdown: >
     Rust'un referans kuralları aşağıdaki şekilde özetlenebilir:
-
 
     * Rust sadece; ya bir tane `&mut` değişebilir referansın, **ya da** dilediğiniz sayıda değişebilir olmayan referansın bulunmasına izin verir. 
       Aynı anda bunların **her ikisinin de olmasına** izin verilmez!
