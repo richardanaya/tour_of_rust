@@ -32,6 +32,7 @@ This project also aims to provide this book in as many languages as possible.
 * Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
 * Magyar - [Nemin32](https://github.com/Nemin32/), [Dániel Buga](https://github.com/bugadani)
+* Polski - [adamsky](https://github.com/adamsky)
 * Português Brasileiro - [Denstone](https://github.com/denstone)
 * Русский - [Danil Kondratiev](https://github.com/knightpp), [Yuriy Larin](https://github.com/blandger)
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus), [Haizhi Geng](https://github.com/JmPotato)

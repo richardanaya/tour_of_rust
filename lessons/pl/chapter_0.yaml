@@ -2,7 +2,7 @@
     Witaj, <img src="/favicon-32x32.png" style="display:inline;
     vertical-align:bottom">
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Witaj%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
   content_markdown: |
     Witaj w *Przewodniku po Języku Rust*. Przewodnik ten ma za zadanie oprowadzić Cię krok po kroku po języku programowania Rust i jego rozmaitych funkcjach. Pomimo, że Rust jest uważany za język trudny do nauczenia się od zera, to jednak mam nadzieję, że przekonam Cię, że wcale nie jest on taki straszny jak go malują, i że nie zniechęcisz się zbyt szybko (przynajmniej dopóki nie dojdziemy to bardziej zaawansowanych tematów).
     
