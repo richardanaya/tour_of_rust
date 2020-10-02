@@ -101,12 +101,10 @@
     
     *Panik üretildiğinde Rust programlarının işletilmeleri bir hata mesajı eşliğinde durdurulur.*
 
-
-   Bu iki kod parçası birbirinin eşdeğeridir:
-
+    Bu iki kod parçası birbirinin eşdeğeridir:
 
     ```
-
+    
     bir_option.unwrap()
 
     ```
