@@ -1,0 +1,92 @@
+- title: Bölüm 2 - Temel Kontrol Akışı
+  content_markdown: >
+    Bu bölümde Rust'ın temel kontrol akış yöntemlerinden bahsedeceğiz. Eğer C tabanlı dillere aşinaysanız, 
+    bu bölümde kendinizi evinizde hissedecek ve birkaç sürprizin tadını çıkaracaksınız.
+- title: if/else if/else
+  content_markdown: >
+    Dallanma yapısının eksik parantezleri dışında, burada gördüğünüz Rust kodu bizi fazla şaşırtmaz.
+
+
+    Rust'ın koşullu ifadelerde paranteze ihtiyaç duymaması, kodumuzun daha temiz ve
+    
+    daha rahat okunabilir olmasını sağlar. Parantezlerin yokluğu mantıksal işleçlerin çalışmasını engellemeyeceğinden, 
+    bu işleçlerin her birini: `!`, `!=`, `||`, `&&`, `<`, `>`, `<=`, `>=` yandaki örnek kod üzerinde kolaylıkla deneyip değerlendirebilirsiniz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=cbfce3343b7aec9e6e1751ed59aca1cd
+- title: loop
+  content_markdown: |
+    Bir sonsuz döngüye ihtiyaç duyduğunuzda, Rust bu işi sizin için kolaylaştırır.
+
+    
+    Eğer sonsuz döngüden çıkmak isterseniz, `break` anahtar sözcüğünü kullanabilirsiniz.
+    
+    
+    `loop` anahtar kelimesininin sırlarını keşfetmeye ilerleyen bölümlerde devam edeceğiz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=aada356c9d6b188558e28d342c1bf99f
+- title: while
+  content_markdown: |
+    `while` Anahtar kelimesi bir döngüye kolayca koşul eklemenizi sağlar.
+
+    
+    Koşul `true` olduğu sürece işletilen bu döngüden, koşul `false` olduğunda çıkılır.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=8d051861c1d797a49e3085f50c93869b
+- title: for
+  content_markdown: >
+    Rust'un `for` döngüsü, yineleyici olarak değerlendirilen bir ifadenin, elemanları üzerinde yineleme yapılmasına izin veren güçlü bir yükseltmedir.
+    
+    Yineleyici ise, tüm elemanlar tüketilene kadar "bir sonraki eleman nedir?" sorusunu yöneltebileceğimiz bir nesnedir.
+
+    
+    Yineleyiciler konusunu daha sonra ayrıntılı olarak işleyeceğimizden şimdilik Rust'ta, tam sayı dizisi üreten yineleyiciler oluşturmanın 
+    oldukça kolay olduğunu bilmeniz yeterlidir.
+    
+    
+    `..` işleciyle, verilen aralığın başlangıç sınırı dahil, bitiş sınırı hariç, arada kalan elemanlarının üretildiği bir yineleyici oluşturulur.
+   
+    
+    `..=` işleci ise, verilen aralığın hem başlangıç, hem bitiş sınırını kapsayan elemanlarının üretildiği bir yineleyici oluşturur.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=65a8e9a66cd8caa0388358089b4da408
+- title: match
+  content_markdown: >
+    Aramızda "switch" ifadesini ne zaman değineceğimizi merak edenleriniz mutlaka vardır. 
+    Uzatmadan söyleyelim Rust'ta, bir değerin olası tüm koşullarını mantıksal bir değerle eşleştiren 
+    ve doğruluğun sağlandığı durum için bir kod bloğunu işleten, son derecede yararlı bir anahtar kelime vardır. 
+    
+    Bunun sayılar üzerinde nasıl çalıştığını gösteren basit örneğimize geçmeden önce, örüntü eşleme konusuna ilerleyen bölümlerde 
+    daha karmaşık veriler üzerinden değineceğimizi ve o bölümün beklenmeye değer olduğunu söylemek istiyorum.
+
+
+    `match` epey kapsamlı olduğundan, eşleşme olasılığı bulunan tüm durumlar ayrı ayrı değerlendirilmelidir.
+
+
+    Rust'ta göreceğiniz en yaygın eşleme modellerinden biri ise yıkım ile birleştirilen eşleme modelidir.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=433d6db81762c5c4df175ed356edb27d
+- title: loop İçinden Değer Döndürmek
+  content_markdown: |
+    `loop` içinden değer döndürebilmek için, break anahtar kelimesinden yararlanabilirsiniz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=cafe5810ccfdeb9be074666b4d4f8789
+- title: Blok İfadelerinden Değer Döndürmek
+  content_markdown: >
+    `if`, `match`, işlevler veya kapsam bloklarının her biri, Rust'ta değer döndürmenin benzersiz bir yoludur.
+
+
+    `if`, `match`, işlev veya ifade bloklarının son satırlarında, satır sonunu belirtecinin `;` kullanılmaması, 
+    bu satırların işletilmesine ve elde edilen değerin döndürülmesine yol açar. Bu pratik kestirme elde edilen değerleri, 
+    yeni bir işleve ihtiyaç duymaksızın değişkenlere atamanın hızlı ve mantıklı bir yoludur.
+
+    
+    Bu kestirme yöntemine dikkat ettiğinizde, `if` deyiminin tıpkı bir üçlü ifadeymişcesine kullanılabilir hale geldiğini görüyorsunuz değil mi?
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=2f973c9f4d6227c272b374ce66a57617
+- title: Bölüm 2 - Sonuç
+  content_markdown: >
+    En temel özelliklerine şöyle bir göz atmakla bile, Rust'ın ne kadar güçlü ve yetenekli olduğunu fark ettiğinizi umuyorum. 
+    Rust hakkında bildiklerimiz çoğaldıkça, `for` ve `match` ifadeleri hakkında edindiğimiz bilgilerin derinleşeceğini söylemek istiyorum.
+    
+    
+    Sonraki bölümde Rust'ın temel veri yapılarını konuşacağız.

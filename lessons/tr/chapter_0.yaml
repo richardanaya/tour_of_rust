@@ -1,10 +1,10 @@
 - title: >-
-    Merhaba, <img src="/favicon-32x32.png" style="display:inline;
-    vertical-align:bottom">
+    Merhaba <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">,
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6c4b961091ef8e437683a89f3990fe6e
   content_markdown: |
-    *Rust Turuna* Hoş Geldiniz. Bu turun Rust programlama dili özelliklerinin adım adım anlatıldığı bir rehber olması amaçlanmıştır. Rust, genellikle dik öğrenme eğrisine sahip bir dil olarak kabul edilir. Ancak ben sizi daha karmaşık bölümlere gelmeden önce Rust'ın keşfedilecek pekçok şeyi olduğuna ikna debileceğimi umuyorum.
+    *Rust Turuna* Hoş Geldiniz. Bu turun Rust programlama dili özelliklerinin adım adım anlatıldığı bir rehber olması amaçlanmıştır. Rust, genellikle dik öğrenme eğrisine sahip bir dil olarak kabul edilir. Ancak ben sizi daha karmaşık bölümlere gelmeden önce Rust'ın keşfedilecek pek çok şeyi olduğuna ikna edebileceğimi umuyorum.
         
     Bu rehberi aşağıdaki dillerde okuyabilirsiniz:
 
@@ -25,4 +25,4 @@
     İçeriğe dair önerileriniz varsa yahut çevirilere katkıda bulunmak istiyorsanız, Rust Turu'nun [Github deposuna](https://github.com/richardanaya/tour_of_rust) göz atabilirsiniz.
         
     Tur süresince klavyenizin <span class="emoji">⬅️</span> ve <span class="emoji">➡️</span> tuşlarını kullanabilirsiniz.
-    Bu klasik örnek Rust'ın Unicede dizgilerini desteklediğini gösterir.
+    Bu klasik örnek Rust'ın Unicode dizgilerini desteklediğini gösterir.

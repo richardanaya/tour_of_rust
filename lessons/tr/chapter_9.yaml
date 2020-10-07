@@ -1,0 +1,142 @@
+- title: Bölüm 9 - Proje Organizasyonu ve Yapısı
+  content_markdown: >
+    Şu ana dek tüm kod örneklerimiz tek bir dosyadan oluşmaktaydı. Artık kodlarımızı organize ederek başkalarının kullanımına nasıl 
+    sunabileceğimizi konuşma zamanının geldiğini hissediyorum.
+- title: Modüller
+  content_markdown: |
+    Her Rust programı veya kütüphanesi birer **sandık**tır.
+
+    Her sandık bir **modül** hiyerarşisinden oluşur.
+
+    Her sandıkta bir kök modül bulunur.
+
+    Her modül evrensel değişkenler, işlevler, yapılar, özellikler hatta başka modüllerden bile oluşabilir!
+
+    Rust'ta ağaç benzeri hiyerarşik modül yapısına 1 e 1 dosya eşlemesi bulunmadığından, modül ağacının kod içinde, açıkça ve bizim tarafımızdan 
+    oluşturulması gerekir.
+- title: Bir Program Yazmak
+  content_markdown: |
+    Her program `main.rs` adlı dosyadan oluşan bir kök modüle sahiptir.
+- title: Bir Kütüphane Yazmak
+  content_markdown: |
+    Her kütüphane `lib.rs` adlı dosyadan oluşan bir kök modüle sahiptir.
+- title: Başka Modül ve Sandıklara Referans Vermek
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d8492f3cd0f1a16c2a01278de8c10537
+  content_markdown: >
+    Modül öğelerine `std::f64::consts::PI` şeklinde, modül içi tam yolun gösterilmesi ile başvuru yapılabilir.
+
+
+    `use` anahtar sözcüğü daha basit bir yöntemdir. Bu sözcüğün kullanımı kod boyunca kullanılacak modül öğelerine tam yollarını belirtmeden 
+    ulaşma olanağı sunar. Örneğin `use std::f64::consts::PI` şeklinde bir yol bildirmek, main işlevi içinde yalnızca `PI` tanımlayıcısını kullanmamıza izin verir.
+
+
+    Standart kütüphanemiz **std**, işletim sisteminizle etkileşimde bulunabilmemiz için yararlı veri yapıları ve işlevlerden oluşan bir Rust sandığıdır.
+
+
+    Topluluk tarafından oluşturulan sandıklara [https://crates.io](https://crates.io/) üzerindeki dizinden ulaşabilirsiniz.
+- title: Çok Sayıda Öğeye Başvurmak
+  content_markdown: |
+    Aşağıda örneklendiği şekilde tek bir modül yolunda çok sayıda öğeye referans verilebilir.
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris TAU yiyemez, o sadece PI yemeyi tercih eder. 
+- title: Modüller Oluşturmak
+  content_markdown: |
+    Bir programı hakkında düşündüğünüzde, çoğu zaman gözlerinizin önüne  dizinler halinde düzenlenmiş dosya hiyerarşisinden oluşan bir yapı geliyordur. 
+    Rust, dosya yapınızla çok benzeşen modüller oluşturmanıza olanak sağlar. 
+
+    Rust'ta bir modül bildirmenin iki yolu vardır. Örnek bir modül olan `turler` modülü, aşağıdaki iki yoldan biriyle oluşturulabilir:
+      * `turler.rs` adındaki bir dosya oluşturarak.
+      * içinde `mod.rs` dosyası bulunan `turler` adlı bir dizin biçiminde.
+- title: Modül Hiyerarşisi
+  content_markdown: >
+    Bir modül bir başka modüle bağlı olduğunda, modül ile alt modülü arasında bir ilişki kurabilmesi için, alt modülün üst modülde bildirilmesi gerekir:
+
+
+    ```rust
+
+    mod turler;
+
+    ```
+
+
+    Yukarıdaki bildirim, `turler.rs` veya `turler/mod.rs` adlı bir dosyayı çağıracak ve içeriğini mevcut kapsamda yer alan `turler` adlı modüle ekleyecektir.
+- title: Satır İçi Modül
+  content_markdown: >
+    Bir alt modül, üst modülün kodu içine doğrudan yerleştirilebilir.
+
+
+    Satır içi modüller en çok birim testleri oluştururken kullanılırlar. Aşağıdaki kodda sadece test amaçlı kullanıldığında var olabilen 
+    çevrim içi bir modül örneklenmektedir.
+
+
+    ```
+
+    // Aşağıdaki satır içi modül, bu makro tarafından, 
+
+    // Rust test modunda kullanılmadığında kaldırılacaktır!
+
+    #[cfg(test)]
+
+    mod testler {
+        // Üst modüle hemen erişemeyeceğimizden
+        // daha açık davranmamamız gerekir.
+        use super::*;
+
+        ... testler başlasın ...
+    }
+
+    ```
+- title: Yerleşik Modüllere Başvurmak
+  content_markdown: >
+    Rust, dilediğimiz modüle hemen erişebilmemiz için `use` eşliğinde kullanabileceğiniz birkaç anahtar kelime sunar.
+      
+    * `crate` - sandığınızın kök modülü.
+
+    * `super` - mevcut modülününüzün üst modülü
+
+    * `self` - mevcut modülünüz.
+- title: Dışa Aktarmak
+  content_markdown: >
+    Varsayılan olarak, bir modülün üyelerine modülün dışından erişilemez. Bu kısıtlama alt modüller için de geçerli olduğundan modüllerin erişilir 
+    olabilmesi için `pub` anahtar kelimesiyle belirtilmeleri gerekir.
+
+
+    Benzer şekilde, bir sandık üyelerine sandık dışından da erişilemeyeceği varsayılır. O nedenle bir sandığın üyelerini dışarıdan erişime açmak 
+    istiyorsanız, her bir üyenin, sandığın kök modülü olan `lib.rs` veya `main.rs` içinde `pub` anahtar sözcüğü ile bildirilmesi gerekir.
+- title: Yapısal Görünürlük
+  content_markdown: >
+    İşlevlerde olduğu gibi yapı alanlarının dışarıya açılabilmesi için `pub` anahtar kelimesiyle belirtilmeleri gerekir.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5ea5dd58c287602ceb4a1e4b7d7c018a
+- title: Ön Yükleme Modülü
+  content_markdown: |
+    Şu ana kadar `Vec` ve `Box` türlerine `use` anahtar kelimesi kullanmak zorunda kalmadan nasıl eriştiğimizi merak ediyor olabilirsiniz. 
+    Bunun cevabı standart kütüphanede yer alan ve `prelude` olarak adlandırılan ön yükleme modülünde gizlidir.
+
+    Standart kütüphaneden `std::prelude::*` olarak dışa aktarılan her şey, Rust'un her bir parçası tarafından otomatik olarak erişilebilir durumdadır. 
+    Bu, `Vec`, `Box` için olduğu gibi **Option**, **Copy** gibi özellikler için de geçerlidir.
+- title: Kendi Ön Yükleme Kütüphaneniz
+  content_markdown: >
+    Standart kütüphanede olduğu gibi, kişisel kütüphanelere özgü ön yükleme müdülleri sunmak oldukça yaygın bir davranış şeklidir. Örneğin 
+    `use  kutuphanem::prelude::*` şeklindeki ön yükleme modülleri, kütüphanenizden yararlanmak isteyen kullanıcılara, sık kullanacakları veri 
+    yapılarını içe aktarabilecekleri, hızlı başlangıç yapma olanağını sağlar. Bu özel ön yükleme modülleri, kullanıldıkları program tarafından 
+    otomatik şekilde yüklenmiyor olsa bile, kullanıcılara nereden başlayacaklarını gösterdiğinden, çoğunlukla uyulan faydalı bir gelenektir.
+
+
+    Ve son olarak Ferris'in sözlerine kulak verelim: "İyi bir rustacean olup sandıklarınız için ön yükleme kütüphaneleri sağlayarak diğer, 
+    Rust programcılarının güzel bir başlangıç yapmalarına yardımcı olun!"
+- title: Bölüm 9 - Sonuç
+  content_markdown: >
+    Artık Rust kitaplıkları ve uygulamaları oluşturmak hakkında çok şey biliyor durumdasınız. Sizden burada anlatılan her şeyi, her zaman 
+    hatırlamanız gerektiği yanılgısına düşmemenizi istiyorum. Kütüphaneleriniz büyüyüp geliştikçe ve diğer geliştiriciler tarafından 
+    kullanıldıkça, karşılaşacağınız her soruna doğru çözümler getireceğinizi şimdiden biliyorum.
+
+
+    Kaynaklar:
+
+    - [Rust API Yazma Kılavuzu](https://rust-lang.github.io/api-guidelines/)
