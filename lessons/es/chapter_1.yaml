@@ -61,15 +61,15 @@
 
     * booleanos - `bool` para representar verdadero/falso.
     
-    * números enteros sin signo - `u8``u32``u64``u128` para representar números enteros positivos.
+    * números enteros sin signo - `u8` `u32` `u64` `u128` para representar números enteros positivos.
     
-    * números enteros con signo - `i8``i32``i64``i128` para representar números enteros positivos y negativos.
+    * números enteros con signo - `i8` `i32` `i64` `i128` para representar números enteros positivos y negativos.
     
-    * números enteros de tamaño de puntero - `usize``isize` se usan para representar índices y tamaños de elementos en memoria.
+    * números enteros de tamaño de puntero - `usize` `isize` se usan para representar índices y tamaños de elementos en memoria.
     
-    * números en coma flotante - `f32``f64`.
+    * números en coma flotante - `f32` `f64`.
     
-    * En relación a textos - `str``char`.
+    * En relación a textos - `str` `char`.
     
     * tuplas - `(valor,valor,...)` para pasar secuencias fijas de valores en la pila.
     
