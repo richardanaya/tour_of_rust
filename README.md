@@ -28,22 +28,24 @@ This project also aims to provide this book in as many languages as possible.
 
 * Deutsch - [Felix](https://github.com/jassler), [Ramin Azhdari](https://github.com/raminos)
 * English - [Richard Anaya](https://github.com/richardanaya)
-* Español - [Alba Martínez Martínez](https://github.com/albatraduce)
+* Español - [Alba Martínez Martínez](https://github.com/albatraduce), (Tech review by [Alberto Moreta](https://github.com/AlbertoMoreta) and [Fran Torres](https://github.com/franute))
 * Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
 * Interlingue - [David MacLeod](https://github.com/Dhghomon/)
 * Magyar - [Nemin32](https://github.com/Nemin32/), [Dániel Buga](https://github.com/bugadani)
+* Polski - [adamsky](https://github.com/adamsky)
 * Português Brasileiro - [Denstone](https://github.com/denstone)
 * Русский - [Danil Kondratiev](https://github.com/knightpp), [Yuriy Larin](https://github.com/blandger)
 * 简体中文 - [Tengfei Niu](https://github.com/spartucus), [Haizhi Geng](https://github.com/JmPotato)
 * 繁體中文 - [kkpoon](https://github.com/kkpoon)
 * 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213), [Yuji Sugiura](https://github.com/leader22), [TaKO8Ki](https://github.com/TaKO8Ki)
 * 한국어 - [fermat39](https://github.com/fermat39), [Sungjin Han](https://github.com/meinside)
+* Türkçe - [Rust Dili](https://github.com/RustDili/), [mertataol](https://github.com/mertataol), [doganid](https://github.com/doganid), [mhmmdd](https://github.com/mhmmdd)
 
 # Looking for translators!
 
 If you would like to contribute translations in a language that doesn't exist yet. Feel free to make a PR!
 
-Look for your appropriate appropriate language under the `lessons` folder. Each chapter has its own file. You can modify an existing chapter's content or if there is one you'd like to translate from the english lessons, copy that chapter file over and modify it's content to your own language. Each page has various properties.
+Look for your appropriate language under the `lessons` folder. Each chapter has its own file. You can modify an existing chapter's content or if there is one you'd like to translate from the english lessons, copy that chapter file over and modify it's content to your own language. Each page has various properties.
 
 * **title** - this would be your localized page's title
 * **content_markdown** - this would be your localized page's content as markdown using [shodown markdown](https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax)

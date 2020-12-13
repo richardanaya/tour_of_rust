@@ -16,7 +16,7 @@
     permitiendo a un compilador crear una versión completamente definida en
     tiempo de compilación
 
-    basada en el uso de nuestro código
+    basada en el uso de nuestro código.
 
 
     Por lo general, Rust puede inferir el tipo final mirando nuestra

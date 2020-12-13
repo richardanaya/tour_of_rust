@@ -24,6 +24,8 @@
 
     * [Magyar](00_hu.html)
 
+    * [Polski](00_pl.html)
+
     * [Português Brasileiro](00_pt-br.html)
 
     * [Русский](00_ru.html)
@@ -35,6 +37,10 @@
     * [日本語](00_ja.html)
 
     * [한국어](00_ko.html)
+    
+    * [Türkçe](00_tr.html)
+
+    * [Українська](00_ua.html)
 
 
     如果你对内容有任何建议，或者想参与翻译做出贡献，请查看 Rust 语言之旅的 [GitHub 代码库](https://github.com/richardanaya/tour_of_rust)。

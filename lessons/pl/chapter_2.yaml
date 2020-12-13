@@ -1,0 +1,131 @@
+- title: Rozdział 2 - Podstawy Kontroli Przepływu Sterowania
+  content_markdown: >
+    W tym rozdziale przyjrzymy się podstawom kontroli przepływu sterowania w Ruscie.
+
+
+    Jeśli znasz choć trochę języki programowania oparte o C to jest dobra szansa, że
+    poczujesz się jak w domu. 
+
+    
+    Może z wyjątkiem kilku niewielkich różnic.
+- title: if/else if/else
+  content_markdown: >
+    Zjawisko rozgałęziania z pewnością nie jest nowością wprowadzoną na potrzeby Rusta.
+
+
+    Co może zaskoczyć to brak nawiasów w naszych wyrażeniach warunkowych! Czy rzeczywiście
+    były one potrzebne? Wychodzi na to, że bez nich nasz kod wygląda jednak nieco czyściej.
+
+
+    Wszystkie powszechnie stosowane wyrażenia logiczne i porównania oczywiście nadal znajdują
+    w Ruscie zastosowanie: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22mniejsze%20ni%C5%BC%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22dok%C5%82adnie%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22wi%C4%99ksze%20ni%C5%BC%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+- title: loop
+  content_markdown: |
+    Potrzebujesz nieskończonej pętli?
+
+
+    Nie ma sprawy. W Ruscie jest to bardzo prosta sprawa. Wystarczy napisać `loop`.
+
+
+    `break` zatrzyma wykonywanie pętli kiedy tylko sobie tego zażyczysz. 
+
+
+    Pętla `loop` kryje pewien sekret o którym powiemy sobie więcej już wkrótce.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while
+  content_markdown: |
+    `while` pozwala na dodanie warunku do naszej pętli. 
+
+
+    Jeśli warunek zostanie obliczony i wykaże `false`, wykonywanie pętli zostanie przerwane.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: for
+  content_markdown: >
+    `for` oznacza poważny awans w hierarchii pętli Rusta. Ta pętla będzie iterować na zbiorze 
+    wartości dostarczonym przez przypisane wyrażenie. Wyrażenie to musi zwracać iterator.
+
+
+    Czym jest iterator? Iterator to obiekt któremu możemy zadać pytanie "Jaki jest następny
+    element w twoim zbiorze?" dopóki zbiór nie zostanie wyczerpany.  
+
+
+    Iteratorom przyjrzymy się bliżej w jednym z przyszłych rozdziałów. Póki co wystarczy, że 
+    zapamiętasz, że w Ruscie proste jest tworzenie z pomocą iteratorów sekwencji liczb
+    całkowitych, co bardzo przydaje się przy definicji pętli `for`.
+
+
+    Operator `..` tworzy iterator który generuje liczby począwszy od pewnej liczby startowej
+    aż to, lecz nie wliczając, liczby końcowej.  
+
+
+    Jeśli chcemy wliczyć liczbę końcową w zbiór generowany przez taki iterator, możemy 
+    skorzystać z `..=`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_markdown: >
+    Tęsknisz za instrukcją `switch` z języka C? Rust oferuje dla niego niesamowicie przydatny
+    zamiennik w postaci `match`. 
+
+
+    `match` pozwala na przypasowywanie możliwych stanów danej wartości do konkretnych
+    wyników, wykonując dany kod tylko w przypadku kiedy spełniony został warunek 
+    wskazany przez programistę.   
+
+
+    Spójrzmy jak to wygląda w przypadku liczb. 
+
+
+    W przyszłych rozdziałach dowiemy się o wiele więcej na temat bardziej skomplikowanych
+    wzorów dopasowań na bardziej skomplikowanych typach danych. Wytrwałości!
+
+    
+    Należy wspomnieć, że `match` musi zawsze wyczerpać wszystkie możliwe warunki, co oznacza
+    że musimy stworzyć dopasowanie dla każdej możliwej wartości.
+
+
+    Dopasowanie, razem z destrukturyzacją, czyli rozkładaniem struktur na części pierwsze,
+    stanowią jeden z najpowszechniejszych wzorów programistycznych w całym Ruscie. Im szybciej
+    się do tego przyzwyczajsz tym łatwiej będzie Ci zrozumieć kod Rust!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22dostali%C5%9Bmy%200%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mo%C5%BCemy%20dopasowa%C4%87%20do%20wi%C4%99cej%20ni%C5%BC%20jednej%20warto%C5%9Bci%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22dostali%C5%9Bmy%201%20lub%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mo%C5%BCemy%20dopasowa%C4%87%20do%20zakres%C3%B3w%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22dostali%C5%9Bmy%20liczb%C4%99%20pomi%C4%99dzy%203%20a%209%2C%20w%C5%82%C4%85cznie%20z%203%20i%209%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mo%C5%BCemy%20przypisa%C4%87%20dopasowan%C4%85%20liczb%C4%99%20do%20zmiennej%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22dostali%C5%9Bmy%20nast%C4%99puj%C4%85c%C4%85%20liczb%C4%99%20pomi%C4%99dzy%2010%20a%20100%3A%20%7B%7D%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20domy%C5%9Blny%20wariant%20musi%20zosta%C4%87%20wypisany%20je%C5%9Bli%20nie%20obs%C5%82u%C5%BCyli%C5%9Bmy%0A%20%20%20%20%20%20%20%20%2F%2F%20wszystkich%20mo%C5%BCliwych%20%C5%9Bcie%C5%BCek%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22dostali%C5%9Bmy%20co%C5%9B%20innego!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: Zwracanie Wartości z Pętli
+  content_markdown: |
+    Pętle `loop` oraz pochodne mogą zostać wstrzymane z użyciem słowa kluczowego `return`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22znale%C5%BAli%C5%9Bmy%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22z%20p%C4%99tli%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Zwracanie Wartości z Bloków Wyrażeniowych
+  content_markdown: >
+    Bloki `if`, `match`, funkcji oraz zakresów - w Ruscie wszystkie one mają swoje
+    własne sposoby na zwracanie wartości. 
+
+
+    Ostatnie wyrażenie bloku `if`, `match` czy bloku funkcji lub zakresu może być 
+    wyjątkowo niezakończone średnikiem `;`. W takim wypadku Rust zinterpretuje to jako
+    wyrażenie które zwraca wartość bloku.
+
+
+    Takie zwracanie wartości przez ominięcie średnika stanowi prosty sposób na zwiększenie
+    czytelności kodu. Zwrócona przez blok wartość może zostać przypisana do nowej wartości.
+
+
+    Zauważ, że pozwala to również na stworzenie z pomocą `if` czegoś co przypomina zwięzłą
+    wersję klasycznego *wyrażenia trójskładnikowego* (*ternary expression*).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20wyra%C5%BCenie%20tr%C3%B3jargumentowe%20w%20ruscie%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22wynik%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22kanapka%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22sa%C5%82atka%22%20%3D%3E%20%22to%20sa%C5%82atka%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%5Cnawiasy%20klamrowe%20nie%20s%C4%85%20konieczne%20gdy%20zwracamy%20proste%20wyra%C5%BCenia%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22to%20nie%20sa%C5%82atka%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22dostali%C5%9Bmy%20nast%C4%99puj%C4%85ce%20jedzenie%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20ten%20blok%20zasi%C4%99gowy%20pozwala%20nam%20obliczy%C4%87%20wynik%20bez%0A%20%20%20%20%20%20%20%20%2F%2F%20zanieczyszczania%20nowymi%20nazwami%20zmiennych%20g%C5%82%C3%B3wnego%20zasi%C4%99gu%20funkcji%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22wynik%20bloku%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20w%20ruscie%20zwracamy%20warto%C5%9B%C4%87%20funkcji%20w%20ten%20spos%C3%B3b%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22wynik%20funkcji%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: Rozdział 2 - Podsumowanie
+  content_markdown: >
+    Pomimo, że póki co nadal skupiamy się na podstawach mam nadzieję, że udało mi się
+    przedstawić Tobie część wyjątkowych możliwości Rusta i jego silnych stron.
+
+    
+    W miarę jak wejdziemy głębiej w arkana tego języka, będziemy powracać do przedstawionych
+    w tym rozdziale wyrażeń `for` oraz `match`. Mają nam one bowiem znacznie więcej do zaoferowania
+    niż zdążyliśmy sobie opowiedzieć do tej pory.
+    
+
+    W następnym rozdziale przyjrzymy się podstawowym strukturom w Ruscie. 

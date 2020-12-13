@@ -1,0 +1,263 @@
+- title: Capítulo 7 - Programación Orientada a Objetos
+  content_markdown: >
+    Expresar ideas con funciones es una manera comprobada de representar el comportamiento y los datos (¡C lo ha estado haciendo durante décadas!). Históricamente, la informática ha encontrado otras agregaciones y abstracciones expresivas útiles para los datos. Puede que estés familiarizado con la Programación Orientada a Objetos (POO) como una de esas formas. En este capítulo exploraremos el lenguaje de programación Rust más allá de las funciones.
+- title: ¿Qué Es POO?
+  content_markdown: >
+    La Programación Orientada a Objetos (POO) se refiere a los lenguajes de programación que tienen una serie de características distintivas:
+
+    * Encapsulación: Asociar datos y funciones en la unidad conceptual de un solo tipo llamado *objeto*.
+
+    * Abstracción: Ocultar datos y miembros de la función para obstruir los detalles de implementación de un objeto.
+
+    * Polimorfismo: La capacidad de interactuar con un objeto desde diferentes perspectivas funcionales.
+
+    * Herencia: Como su propio nombre indica, es la habilidad de heredar datos y comportamiento de otros objetos.
+- title: Rust No Es POO
+  content_markdown: >
+    Rust carece de herencia de datos y comportamiento de un modo significativo.
+
+
+    * Las estructuras no pueden heredar los campos ni las funciones de una estructura madre.
+
+    * Las estructuras no pueden heredar funciones de una estructura madre.
+
+
+    Dicho esto, Rust implementa muchas características del lenguaje de programación que compensa esas ausencias/carencias.
+- title: Encapsulación Con Métodos
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    Rust admite el concepto de un *objeto* que es una estructura asociada a algunas funciones (también conocidas como *métodos*).
+
+
+    El primer parámetro de cualquier método debe ser una referencia a la instancia asociada a la llamada de dicho método (por ejemplo, `instanceOfObj.foo()`). Rust utiliza:
+
+    * `&self` - para una referencia inmutable a la instancia.
+
+
+    * `&mut self` - para una referencia mutable a la instancia.
+
+
+    Los métodos se definen dentro de un bloque de implementación haciendo uso de `impl`:
+
+    ```rust
+
+    impl MyStruct { 
+        ...
+        fn foo(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Abstracción Con Exposición Selectiva
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    Rust puede ocultar el funcionamiento interno de los objetos.
+
+
+    Por defecto, los campos y métodos son accesibles sólo al módulo al que pertenecen.
+
+
+    El uso de la palabra reservada `pub` expone los campos y métodos de las estructuras fuera del módulo.
+- title: Polimorfismo Con Traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
+  content_markdown: >
+    Rust permite el polimorfismo con traits. Los traits nos permiten asociar un conjunto de métodos con una estructura.
+
+
+    Primero definimos las especificaciones de los métodos en un trait:
+
+
+    ```
+
+    trait MyTrait {
+        fn foo(&self);
+        ...
+    }
+
+    ```
+
+
+    Cuando una estructura implementa un trait, establece un contrato que nos permite interactuar indirectamente con la estructura a través del Trait (e.g. `&dyn MyTrait`) sin tener que conocer el tipo real.
+
+
+    Los métodos de traits implementados en una estructura se definen dentro de un bloque de implementación:
+
+
+    ```rust
+
+    impl MyTrait for MyStruct { 
+        fn foo(&self) {
+            ...
+        }
+        ... 
+    }
+
+    ```
+- title: Métodos Implementados en Traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: >
+    Los traits pueden tener métodos implementados.
+
+
+    Las funciones no tienen acceso directo a los campos internos de una estructura, pero puede ser útil para compartir el comportamiento entre muchos implementadores de traits.
+- title: Herencia de Traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: |
+    Los traits pueden heredar los métodos de otros traits.
+- title: Resolución Dinámica y Estática
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Los métodos se ejecutan de dos maneras:
+
+    * Resolución estática - Cuando se conoce el tipo de instancia, tenemos conocimiento directo de qué función llamar.
+
+    * Resolución dinámica - Cuando no se conoce el tipo de instancia, debemos encontrar alguna forma de llamar a la función correcta.
+
+
+    Los tipos de traits `&dyn MyTrait` nos dan la capacidad de trabajar con instancias de objetos indirectamente usando la resolución dinámica.
+
+
+    Al usar resolución dinámica, Rust te recomendará anteponer `dyn` al tipo de trait para que quede reflejado. 
+
+
+    Detalles de la memoria:
+
+    * La resolución dinámica es ligeramente más lenta debido a que el puntero tiene que buscar la llamada a la función correcta.
+- title: Objetos Trait
+  content_markdown: >
+    Cuando pasamos una instancia de un objeto a un parámetro de tipo `&dyn MyTrait`
+    pasamos lo que se llama  *objeto trait*. 
+
+
+    Un objeto trait es lo que nos permite llamar indirectamente a los métodos correctos de una instancia. Un objeto trait es una estructura que contiene el puntero de nuestra instancia con una lista de puntero de función a los métodos de nuestra instancia.
+
+
+    Detalles de la memoria:
+
+    * Esta lista de funciones se conoce en C++ como un *vtable*.
+- title: Manejo de Datos Sin Tamaño (Unsized)
+  content_markdown: >
+    Los traits introducen un reto interesante cuando queremos almacenarlos dentro de otra estructura. Estos ofuscan la estructura original y por lo tanto también obstruyen el tamaño original. Los valores sin tamaño (unsized) que se almacenan en las estructuras se manejan de dos maneras en Rust:
+
+
+    * `Tipos genéricos` - Al usar tipos parametrizados se crean de forma efectiva estructuras/funciones de tipos conocidos y por lo tanto tamaños conocidos.
+
+    * `indirección` - Poner instancias en el montículo os da un nivel de indirección que nos permite no tener que preocuparnos por el tamaño del tipo y sólo almacenar un puntero. ¡También hay otras maneras de hacerlo!
+
+- title: Funciones Genéricas
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Los genéricos y los traits trabajan codo con codo en Rust. Cuando describimos un tipo parametrizado `T` podemos restringir qué tipos pueden se pueden usar como argumento listando los traits requeridos que debe implementar el argumento.
+
+    En este ejemplo, el tipo `T` debe implementar el trait `Foo`:
+
+    ```rust
+
+    fn my_function<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+
+    Al crear una función estática, el sistema sabrá de antemano cuanta memoria reservar para esta acción, la cual quedará almacenada en un espacio con el tamaño adecuado y no lo resolverá de forma dinámica.
+- title: Función Genérica Abreviada
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: |
+    Rust tiene una forma abreviada para expresar genéricos limitados por un trait:
+
+    ```rust
+    fn my_function(foo: impl Foo) {
+        ...
+    }
+    ```
+
+    Esto equivale a escribir:
+
+    ```rust
+    fn my_function<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
+  content_markdown: >
+    `Box` es una estructura de datos que nos permite mover nuestros datos de la pila (stack) al montículo (heap).
+
+
+    `Box` es una estructura conocida como un *puntero inteligente* (smart pointer) que almacena un puntero a nuestros datos en el montículo.
+
+
+    Debido a que `Box` es una estructura con un tamaño conocido (porque sólo contiene un puntero), a menudo se utiliza como una forma de almacenar una referencia a algo en una estructura que debe conocer el tamaño de sus campos.
+
+
+    `Box` es tan común que se puede usar desde cualquier lugar:
+
+
+    ```rust
+
+    Box::new(Foo { ... })
+
+    ```
+- title: Repaso de Estructuras Genéricas
+  content_markdown: >
+    Las estructuras genéricas también pueden tener sus tipos parametrizados restringidos por traits.
+
+
+    ```rust
+
+    struct MyStruct<T>
+
+    where
+        T: MyTrait
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+
+    Las estructuras genéricas tienen su tipo parametrizado en sus bloques de implementación:
+
+
+    ```rust
+
+    impl<T> MyStruct<T> {
+        ...
+    }
+
+    ```
+- title: Capítulo 7 - Conclusión
+  content_markdown: >
+    Ahora tenemos más características del lenguaje a mano para representar nuestras ideas. 
+
+    Las técnicas de Rust pueden ser simples pero son lo suficientemente eficaces para hacer que sea un placer trabajar con el código.
+    
+    En este capítulo, hemos visto algunos consejos prácticos con `Box`. En el próximo capítulo aprenderemos cómo los punteros inteligentes pueden ayudarnos con otras situaciones de memoria específicas.
+
+
+    Recursos (en inglés):
+
+    * [Video - Object-oriented Programming in 7
+    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Article - "The faster you unlearn OOP, the better for you and your
+    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)

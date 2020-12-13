@@ -1,0 +1,170 @@
+- title: Bölüm 4 - Genel Türler
+  content_markdown: >
+    Rust'ta genel türler veri içermeyen null değerlerin temsilinde, hata işleme yöntemlerinde ve koleksiyonlar ile çalışırken sıklıkla karşımıza 
+    çıktıklarından oldukça önemlidir. Rust hakkındaki bilgilerimiz derinleştikçe, kullanmayı daha çok tercih edeceğimiz genel türleri bu bölümde 
+    incelemeye başlıyoruz. 
+- title: Genel TürLer Nelerdir?
+  content_markdown: >
+    Bunlar, derleyicinin kısmen tanımladığımız bir yapı (`struct`) yahut numaralandırmayı (`enum`), kodun kullanım 
+    şekline göre değerlendirip, mükemmel şekilde tanımlanmış **derleme zamanı sürümü**nü oluşturmasına olanak 
+    sağlayan genelleştirilmiş türlerdir.
+
+
+    Türlerin genellenerek tektipleştirildiği programlarda nihai tür, kod bağlamımının derleyici tarafından değerlendirimesiyle elde edilmektedir. 
+    Bununla birlikte bazı durumlarda, tür çıkarsama işlemi karmaşaya neden olabileceğinden, türün açıkça bildirilmesi gerekebilir. 
+    Bu gibi durumlarda bir yengecin en iyi arkadaşı olan ve benim de çok sevdiğim, `turbofish` adıyla bilinen `::<T>` işlecini kullanabilirsiniz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=34b3b80e42200b1b8ac78fd48953e4b0
+- title: Boş Değer Gösterimi
+  content_markdown: >
+    Pek çok programlama dilinde `null` anahtar sözcüğü, değer yokluğunun temsilinde kullanılır. Bu değerin varlık ya da yokluğunun denetlenmememesi, 
+    değişken ve nesne alanlarıyla etkileşime giren programlarda, çok ciddi sorunlara yol açabilmektedir.
+
+
+    Rust'ta `null` anahtar kelimesi olmamasına rağmen, boş değer denetimi hiçbir zaman ihmal edilmez. Bir değerin varlık ya da yokluğu **enum** türü 
+    kullanılarak temsil edilebilir.
+
+
+    Rust'ta `null` değerlerin yokluğu, olmayan değerlerin olası tüm hallerini temsil eden ve **hiç biri** anlamına gelen `None` ifadesinin, 
+    genelleştirilen türler aracılığıyla kullanılmasına neden olur.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=ec66249d0fff94707bdda579060a80ca
+- title: Option
+  content_markdown: >
+    Rust'ta yerleşik olarak gelen ve boş değerlerin `null` kullanılmadan temsil edilmesine izin veren, `Option` adında genelleştirilmiş bir `enum` türü bulunur.
+
+
+    ```
+    enum Option<T> {
+        None,
+        Some(T),
+    }
+    ```
+
+
+    Yaygın olarak kullanılan bu türün örnekleri, `Some` ve `None` varyantlarının bir araya getirilmesiyle oluşturulur.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9f2adf5110ed3c07cee885b23ae43ac4
+- title: Result
+  content_markdown: >
+    Rust, yerleşik olarak gelen ve kodun başarısız olması durumunda değer döndürmemize izin veren, `Result` adında genellenmiş 
+    bir *enum* türüne de sahiptir. Genellenmiş bu enum türü bize, Rust ile hata işlemenin deyimsel yolunu sunar.
+
+
+    ```
+    enum Result<T, E> {
+        Ok(T),
+        Err(E),
+    }
+    ```
+
+
+    `Result` türünün, virgülle ayrık şekilde *parametreleştirilmiş* `Ok` ve `Err` adında iki farklı türden oluştuğuna dikkat edin.
+
+
+    Sıklıkla kullanılan `Result` türü örneklerini, dilediğiniz yer ve zamanda `Ok` ve `Err` varyantlarını belirterek oluşturulabilirsiniz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=bd84e6a7e499eeed58b552fa6a01c46a
+- title: Main İşlevinden Hata Döndürmek
+  content_markdown: |
+    Programlarımızın giriş noktası olan `main` işlevi, `Result` türü varyantlarına sarılı değerleri elde etme yeteneğine sahiptir!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=3e94d4f7ce2eb234f26196dc2a319192
+- title: Hataları Zarif Şekilde İşlemek
+  content_markdown: >
+    `Result` türü o kadar yaygın kullanılmaktadır ki, Rust kendisiyle çalışabilmek için güçlü bir `?` işleci sunar. 
+    Aşağıdaki iki ifade birbirinin eşdeğeridir:
+
+    ```
+    basarisiz_durum_olustur()?
+    ```
+
+        
+    ```
+    match basarisiz_durum_olustur() {
+        Ok(d) => d,
+        Err(e) => return Err(e),
+    }
+    ```
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=fd595fdb472487112b142315a5c5872e
+- title: Option/Result Türlerini Üstünkörü İşlemek
+  content_markdown: >
+    Bir programı hızlıca yazıp bitirmek gerektiğinde, `Option`/`Result` türlerini ayrı ayrı işlemek size yorucu gelebilir. Bu tür durumlarla karşılaştığınızda,
+    kodunuzu hızlı ancak kaba şekilde tamamlamanıza olanak sağlayan ve her iki türün de uyguladığı `unwrap` işlevinden yararlanabilirsiniz. Aslında bir 
+    yöntem olan bu işlevle etkileşiminiz aşağıdaki gibi gelişecektir: 
+     
+    1. Önce Option/Result içindeki değeri alın,
+
+    2. Eğer enum türü None/Err türündeyse `panic!` üretmeyi düşünün. 
+    
+    
+    *Panik üretildiğinde Rust programlarının işletilmeleri bir hata mesajı eşliğinde durdurulur.*
+
+    Bu iki kod parçası birbirinin eşdeğeridir:
+
+    ```
+    
+    bir_option.unwrap()
+
+    ```
+
+
+    ```
+
+    match bir_option {
+        Some(v) => v,
+        None => panic!("Rust'ın hata mesajları!"),
+    }
+
+    ```
+
+
+    Benzer şekilde:
+
+
+    ```
+
+    bir_result.unwrap()
+
+    ```
+
+
+    ```
+
+    match bir_result {
+        Ok(v) => v,
+        Err(e) => panic!("Rust'ın hata mesajları!!"),
+    }
+
+    ```
+
+
+    Ferris'in kıskaçlarını görür gibiyim: "İyi bir **rustacean** olun ve gerektiği hallerde `match` ifadesini doğru şekilde kullanın!"
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c6cbfcbf896a9a9570a769078db7d6c7
+- title: Vektörler
+  content_markdown: >
+    Koleksiyonlar kullanışlı şekilde genelleştirilebilen veri yapılarıdır. Bir koleksiyon türü olan `Vec` ise, içeriği dinamik olarak 
+    değişebilen dizileri ifade eder.
+
+    Vektörleri elle oluşturmak yerine basitçe `vec!` makrosunu kullanabilirsiniz.
+
+
+    Vektörler elemanları üzerinde yineleyici oluşturmayı sağlayan `iter()` özelliğini uyguladıklarından, her bir elemanı için `for` döngüsü kullanarak 
+    yineleme işlemleri gerçekleştirebilirsiniz.
+
+
+    Bellek ayrıntıları:
+
+    * `Vec` aslında bir yapı olmasına rağmen, öbek üzerinde konumlandırılan elemanlarının sabit uzunluktaki listesine atıf yapan bir referans içermektedir.
+
+    * Belleğin öbek kısmında tutulduklarından, varsayılan kapasiteleri aşıldığı hallerde, daha büyük bir kapasiteyle yeniden konumlandırılırlar.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=3dcf1f039ab999e485d2c6e562024479
+- title: Bölüm 4 - Sonuç
+  content_markdown: >
+    Türleri genelleyerek kullanmanın kodlarımızı ne kadar güçlü ve esnek hale getirebildiğini fark ettiniz değil mi? Bu bölümde anlattığım konuların
+    paratiğe nasıl döküleceği hakkında aklınızda soru işaretleri oluştuğunun farkındayım. Ancak şu an için, kodlarımızda sıkça karşılaşacağınız ana 
+    fikirlere aşina olmanızı yeterli sayıyorum. Artık gittikçe yoğunlaşan işlevlerimize soluk aldırmak için **Veri Mülkiyeti** kavramını incelemek zorundayız.  
+    Bir sonraki bölümümüzü Rust'ın önemli kavramlarından biri olan bu konuya ayıracağız.

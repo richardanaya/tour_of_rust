@@ -14,10 +14,15 @@
     href="00_en.html">English</a></li><li><a
     href="00_es.html">Español</a></li><li><a
     href="00_ie.html">Interlingue</a></li><li><a
+    href="00_pl.html">Polski</a></li><li><a
     href="00_ru.html">Русский</a></li><li><a
     href="00_zh-cn.html">简体中文</a></li><li><a
     href="00_zh-tw.html">繁體中文</a></li><li><a
-    href="00_ja.html">日本語</a></li><li><a href="00_ko.html">한국어</a></li></ul></p>
+    href="00_ja.html">日本語</a></li><li><a 
+    href="00_ko.html">한국어</a></li><li><a
+    href="00_tr.html">Türkçe</a></li><li><a
+    href="00_ua.html">Українська</a></li> 
+    </ul></p>
     <p>Si tu have suggestiones pri contenete o vole contribuer un traduction,
     ples visitar li <a
     href="https://github.com/richardanaya/tour_of_rust">repositoria github</a>

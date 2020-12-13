@@ -1,0 +1,222 @@
+- title: Rozdział 4 - Typy Generyczne
+  content_markdown: >
+    Typy generyczne są niezwykle ważną częścią Rusta. Są one wykorzystywane
+    do rzeczy takich jak reprezentacja pustych wartości (np. zmienne które
+    nie mają jeszcze żadnej wartości), obsługa błędów, rozmaite kolekcje
+    i wiele wiele więcej!
+    
+
+    W tym rozdziale poznamy podstawy typów generycznych Rusta.
+- title: Czym Są Typy Generyczne?
+  content_markdown: >
+    Typy generyczne pozwalają nam na stworzenie *częściowej* definicji struktury
+    `struct` czy wyliczenia `enum`, która pozwoli kompilatorowi na stworzenie 
+    bardziej konkretnej implementacji naszej wersji kodu w procesie kompilacji.
+
+
+    Ogólnie rzecz biorąc, Rust jest w stanie domyśleć się większości typów zmiennych
+    analizując nasz kod. Jeśli jednak kompilator nie będzie w stanie samodzielnie
+    określić typu, zawsze możemy udzielić mu wskazówki korzystając z operatora 
+    `::<T>`. Ze względu na swój osobliwy wygląd przypominający tekstową reprezentację
+    niewielkiej (choć zwinnej) ryby, operator ten jest znany pod nazwą `turbofish`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20cz%C4%99%C5%9Bciowo%20zdefiniowany%20typ%20struct%0Astruct%20PojemnikNaRzecz%3CT%3E%20%7B%0A%20%20%20%20rzecz%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20u%C5%BCywaj%C4%85c%20typ%C3%B3w%20generycznych%2C%20tworzymy%20sytuacj%C4%99%20w%20kt%C3%B3rej%20bardziej%0A%20%20%20%20%2F%2F%20konkretne%20typy%20s%C4%85%20tworzone%20w%20czasie%20kompilacji%0A%20%20%20%20let%20poj_i32%20%3D%20PojemnikNaRzecz%3A%3A%3Ci32%3E%20%7B%20rzecz%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20u%C5%BCywaj%C4%85c%20operatora%20%22turbofish%22%20mo%C5%BCemy%20okre%C5%9Bli%C4%87%20typ%20kt%C3%B3ry%20chcemy%20u%C5%BCy%C4%87%0A%20%20%20%20let%20poj_bool%20%3D%20PojemnikNaRzecz%3A%3A%3Cbool%3E%20%7B%20rzecz%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20kompilator%20jest%20te%C5%BC%20w%20stanie%20domy%C5%9Ble%C4%87%20si%C4%99%20konkretnego%20typu!%0A%20%20%20%20let%20poj_float%20%3D%20PojemnikNaRzecz%20%7B%20rzecz%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20nie%20r%C3%B3bcie%20tego%20w%20domu%0A%20%20%20%20let%20poj_poj%20%3D%20PojemnikNaRzecz%20%7B%0A%20%20%20%20%20%20%20%20rzecz%3A%20PojemnikNaRzecz%20%7B%20rzecz%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20poj_i32.rzecz%2C%20poj_bool.rzecz%2C%20poj_float.rzecz%2C%20poj_poj.rzecz.rzecz%0A%20%20%20%20)%3B%0A%7D%0A
+- title: Reprezentacja Niczego
+  content_markdown: >
+    W wielu językach programowania, słowo kluczowe `null` jest używane
+    do oznaczenia *braku wartości*. Jednym z problemów związanych z takim podejściem
+    jest sytuacja, w której nasz program może niespodziewanie zakończyć działanie
+    kiedy próbujemy wejść w interakcję ze zmienną która akurat jest *niczym*.
+
+    W Ruscie nie istnieje koncepcja `null`. Nie oznacza to jednak braku możliwości
+    reprezentacji *niczego* w tym języku!
+
+
+    Po prawej stronie mamy przykładową implementację wykorzystującą znane nam już
+    narzędzie. 
+
+
+    Taki wzorzec, polegający na reprezentacji *niczego* opcją `None` dla
+    jednej lub więcej wartości, jest bardzo częstym widokiem w Ruscie.
+    Powodem jest właśnie możliwość zastąpienia w ten sposów niewygodnego
+    `null`. 
+    
+    Typy generyczne pomogą nam definiować uniwersalne rozwiązania
+    z wykorzystaniem `None` zamiast `null`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Rzecz%20%7B%0A%20%20%20%20Inwentarz(String)%2C%0A%20%20%20%20%2F%2F%20None%20opisuje%20brak%20przedmiotu%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20PojemnikNaRzecz%20%7B%0A%20%20%20%20rzecz%3A%20Rzecz%2C%0A%7D%0A
+- title: Opcja (Option)
+  content_markdown: >
+    Wbudowany w język Rust został specjalny generyczny typ wyliczenia o nazwie
+    `Option` (ang. *opcja*), który pozwala na korzystanie z *pustych* wartości bez użycia
+    `null`.
+
+
+    ```
+
+    enum Option<T> {
+        None,
+        Some(T),
+    }
+
+    ```
+
+    To wyliczenie jest niezwykle powszechne w Ruscie. Możemy z niego korzystać
+    w jakimkolwiek miejscu w naszym kodzie, przywołując jego warianty `Some`
+    (ang. *coś*) oraz `None` (ang. *nic*).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20cz%C4%99%C5%9Bciowo%20zdefiniowany%20typ%20struct%0Astruct%20PojemnikNaRzecz%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20parametr%20T%20mo%C5%BCe%20by%C4%87%20przekazany%20dalej%0A%20%20%20%20rzecz%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Oto%20pojemnik%20na%20i32%2C%20kt%C3%B3ry%20jednak%20nie%20ma%20nic%20w%20%C5%9Brodku!%0A%20%20%20%20%2F%2F%20Zauwa%C5%BC%2C%20%C5%BCe%20tutaj%20musimy%20koniecznie%20sprecyzowa%C4%87%20typ%20pojemnika%2C%0A%20%20%20%20%2F%2F%20bo%20rust%20sam%20si%C4%99%20go%20nie%20domy%C5%9Bli.%0A%20%20%20%20let%20poj_i32%20%3D%20PojemnikNaRzecz%3A%3A%3Ci32%3E%20%7B%20rzecz%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20poj_i32.rzecz.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pusto!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pe%C5%82no!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20poj_i32%20%3D%20PojemnikNaRzecz%3A%3A%3Ci32%3E%20%7B%20rzecz%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20poj_i32.rzecz.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pe%C5%82no!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pusto!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20pozwala%20wygodnie%20roz%C5%82o%C5%BCy%C4%87%20Option%20na%20czynniki%20pierwsze%0A%20%20%20%20%2F%2F%20obs%C5%82uguj%C4%85c%20wszystkie%20mo%C5%BCliwe%20przypadki%0A%20%20%20%20match%20poj_i32.rzecz%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22pojemnik%20zawiera%20%7B%7D!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22pojemnik%20jest%20pusty%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Rezultat (Result)
+  content_markdown: >
+    Kolejnym wbudowanym generycznym typem wyliczeniowym w Ruscie jest `Result` (ang. *rezultat*, *wynik*).
+    `Result` pozwala nam zwracać wartość w sposób który bierze pod uwagę możliwość wystąpienia błędu.
+
+    Korzystanie z `Result` jest idiomatycznym (tj. przyjętym za najlepszą praktykę) sposobem obsługi
+    błędów w Ruscie.
+
+
+    ```
+
+    enum Result<T, E> {
+        Ok(T),
+        Err(E),
+    }
+
+    ```
+
+
+    Zauważ, że nasz typ generyczny ma tutaj kilka *parametryzowanych typów* oddzielonych
+    przecinkiem.
+
+
+    Tak jak w przypadu `Option`, typ `Result` jest na tyle powszechny, że jest dostępny
+    na poziomie języka, więc możemy go używać gdziekolwiek bez konieczności importowania
+    czegokolwiek - wystarczy wywołać jego warianty `Ok` lub `Err`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22to%20nie%20jest%20liczba%20kt%C3%B3rej%20szukasz%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20match%20pozwala%20wygodnie%20roz%C5%82o%C5%BCy%C4%87%20Result%20na%20czynniki%20pierwsze%0A%20%20%20%20%2F%2F%20obs%C5%82uguj%C4%85c%20wszystkie%20mo%C5%BCliwe%20przypadki%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22znaleziono%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22B%C5%82%C4%85d%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Zawodna Funkcja Main
+  content_markdown: |
+    Główna funkcja wejściowa programu, `main`, posiada możliwość zwrócenia typu `Result`!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22to%20nie%20jest%20liczba%20kt%C3%B3rej%20szukasz%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20main%20nie%20zwraca%20%C5%BCadnej%20warto%C5%9Bci%2C%20cho%C4%87%20mo%C5%BCe%20potencjalnie%20zwr%C3%B3ci%C4%87%20b%C5%82%C4%85d!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22znaleziono%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20obs%C5%82u%C5%BCmy%20ten%20b%C5%82%C4%85d%20z%20gracj%C4%85%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20zwr%C3%B3%C4%87my%20nowy%20b%C5%82%C4%85d%20kt%C3%B3ry%20opisze%20co%20posz%C5%82o%20nie%20tak!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22funkcja%20main%20zawiod%C5%82a!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20zauwa%C5%BC%2C%20%C5%BCe%20do%20rezultatu%20Ok%20wk%C5%82adamy%20pust%C4%85%20krotk%C4%99%0A%20%20%20%20%2F%2F%20w%20ten%20spos%C3%B3b%20zaznaczaj%C4%85c%2C%20%C5%BCe%20funkcja%20wykona%C5%82a%20swoje%20zadanie%20bezb%C5%82%C4%99dnie%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Elegancka Obsługa Błędów
+  content_markdown: >
+    Typ `Result` jest na tyle powszechny, że doczekał się swojego własnego operatora.
+    Używając znaku zapytania `?` możemy dokonać propagacji błędu w niezwykle zwięzły sposób. 
+    Oba z poniższych fragmentów kodu wykonują w praktyce tą samą pracę:
+
+
+    ```
+
+    zrob_cos_co_moze_nie_zadzialac()?
+
+    ```
+
+
+    ```
+
+    match zrob_cos_co_moze_nie_zadzialac() {
+        Ok(v) => v,
+        Err(e) => return Err(e),
+    }
+
+    ```
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22to%20nie%20jest%20liczba%20kt%C3%B3rej%20szukasz%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20sp%C3%B3jrz%20ile%20zaoszcz%C4%99dzili%C5%9Bmy%20sobie%20pisania!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22znaleziono%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Mniej Elegancka Obsługa Błędów
+  content_markdown: >
+    W przypadkach kiedy jesteśmy dopiero na etapie prototypowania, prawidłowa obsługa 
+    `Option` czy `Result` może okazać się niepotrzebnie żmudna. 
+
+
+    Zarówno `Option` jak i `Result` definiują funkcję o nazwie `unwrap`, służącą, jak nazwa
+    wskazuje, do "odwijania" opakowanej przez taki typ wartości. 
+    
+    
+    Takie "odwijanie" ma jednak jeden problem: jeśli nasz typ okaże się być wariantem `None`/`Err`
+    to `unwrap` wywoła `panic!`, czyli bez ogródek zatrzyma działanie całego programu.
+
+    
+    Następujące dwa przykłady są równoważne:
+
+
+    ```
+
+    moja_opcja.unwrap()
+
+    ```
+
+
+    ```
+
+    match moja_opcja {
+        Some(v) => v,
+        None => panic!("miejsce na Twoją wiadomość o błędzie!"),
+    }
+
+    ```
+
+
+    Podobnie:
+
+
+    ```
+
+    moj_rezultat.unwrap()
+
+    ```
+
+
+    ```
+
+    match moj_rezultat {
+        Ok(v) => v,
+        Err(e) => panic!("miejsce na Twoją wiadomość o błędzie!"),
+    }
+
+    ```
+
+
+    Bądź dobrym rustowcem i korzystaj z wyrażenia `match` gdzie to tylko możliwe!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22to%20nie%20jest%20liczba%20kt%C3%B3rej%20szukasz%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20zwi%C4%99z%C5%82y%20cho%C4%87%20niespecjalnie%20bezpieczny%20spos%C3%B3b%20na%0A%20%20%20%20%2F%2F%20odzyskanie%20warto%C5%9Bci%20z%20Result%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22znaleziono%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20ten%20manewr%20wywo%C5%82a%20panic!%20ko%C5%84cz%C4%85c%20dzia%C5%82anie%20programu%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22znaleziono%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Wektory
+  content_markdown: >
+    Jednym z najbardziej przydatnych typów generycznych są w Ruscie typy kolekcji.
+
+    Wektorem nazywamy w Ruscie listę elementów której długość jest zmienna. Typ
+    ten reprezentuje struktura o nazwie `Vec`.
+
+
+    Makro `vec!` pozwala nam ułatwić nieco proces konstrukcji wektora i zaoszczędzić
+    tym samym trochę czasu.
+
+
+    `Vec` posiada metodę `iter()` która jest w stanie stworzyć dla nas iterator danego
+    wektora. W ten sposób możemy łatwo wrzucić wektor w pętlę `for`.
+
+
+    Kilka szczegółów odnośnie wykorzystania pamięci:
+
+    * `Vec` sam w sobie jest strukturą, ale jednocześnie wewnątrz niego znajduje się
+    referencja do listy jego elementów na stercie, która to lista jest listą o stałej
+    długości.
+
+    * nowo stworzony wektor startuje z pewną domyślną wielkością; kiedy zostaje do niego
+    dodane więcej elementów niż przewiduje obecna wielkość, dane wektora przechowywane 
+    na stercie zostają przeniesione w nowe miejsce na nową listę o stałej długości.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20mo%C5%BCemy%20jasno%20okre%C5%9Bli%C4%87%20typ%20kt%C3%B3ry%20chcemy%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20kompilator%20jest%20jednak%20ca%C5%82kiem%20cwany%20i%20b%C4%99dzie%20w%20stanie%0A%20%20%20%20%2F%2F%20zgadn%C4%85%C4%87%20jaki%20typ%20nas%20interesuje%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20sp%C3%B3jrz%20tylko%20na%20to%20pi%C4%99kne%20makro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Witaj%22)%2C%20String%3A%3Afrom(%22%C5%9Awiecie%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Rozdział 4 - Podsumowanie
+  content_markdown: >
+    W tym rozdziale dowiedzieliśmy się jak wielką moc mają typy generyczne!
+
+
+    Nie przejmuj się jeśli nadal czujesz lekkie zagubienie i nie do końca rozumiesz
+    "z czym to się je". Głównym celem tego rozdziału było bardziej ogólne przedstawienie
+    pewnych pomysłów i cech języka z których istnienia należy sobie zdawać sprawę zanim
+    będziemy w stanie przejść dalej.
+
+
+    Nasze przykłady zaczynają się robić coraz dłuższe! W następnym rozdziale poruszymy kolejny
+    ważny temat stanowiący jeden z filarów języka Rust, mianowicie koncepcję *własności* danych.

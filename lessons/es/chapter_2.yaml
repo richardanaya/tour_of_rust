@@ -1,76 +1,73 @@
-- title: Capítulo 2 - Estructuras de control básicas
-  content_html: >-
-    <p>En este capítulo hablaremos de las estructuras de control básicas en
-    Rust. Si estás familiarizado con lenguajes basados en C, te sentirás como en
-    casa y quizá te lleves alguna que otra sorpresa.</p>
+- title: Capítulo 2 - Estructuras de Control Básicas
+  content_markdown: >
+    En este capítulo hablaremos de las estructuras de control básicas en Rust. 
+    
+    Si estás familiarizado con lenguajes basados en C, te sentirás como en casa 
+    y quizá te lleves alguna que otra sorpresa.
 - title: if/else if/else
-  content_html: >-
-    <p>La ramificación de código en Rust te resultará familiar.</p><p>Las
-    condiciones no van entre paréntesis, ¿acaso son necesarios? De esta manera
-    nuestra lógica se ve más limpia y sencilla.</p> <p>Los demás operadores
-    relacionales y lógicos conocidos siguen funcionando: <code>==</code>,
-    <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
-    <code>&gt;=</code>, <code>!</code>, <code>||</code>, <code>&&</code></p>
+  content_markdown: >
+    La ramificación de código en Rust te resultará familiar.
+
+
+    Las condiciones no van entre paréntesis, ¿son realmente necesarios? De esta manera nuestra lógica se ve más limpia y sencilla.
+
+
+    Los demás operadores relacionales y lógicos conocidos siguen funcionando: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%20menor%20que%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22es%20mayor%20que%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
 - title: loop
-  content_html: >-
-    <p>¿Necesitas un bucle infinito?</p><p>Con Rust es muy
-    sencillo.</p><p><code>break</code> nos permite salir de un bucle cuando lo
-    indiquemos.</p><p><code>loop</code> guarda un secreto del que te hablaremos
-    más adelante.</p>
+  content_markdown: >
+    ¿Necesitas un bucle infinito?
+
+    Con Rust es muy sencillo.
+
+    `break` nos permite salir de un bucle cuando lo indiquemos.
+
+    `loop` guarda un secreto del que te hablaremos más adelante.
 - title: while
-  content_html: >-
-    <p><code>while</code> permite añadir fácilmente una condición al
-    bucle.</p><p>El bucle terminará cuando la condición se evalúe a
-    <code>false</code></p>
+  content_markdown: >
+    `while` permite añadir fácilmente una condición al bucle.
+
+    El bucle terminará cuando la condición se evalúe a `false`
 - title: for
-  content_html: >
-    <p>El bucle <code>for</code> en Rust es una gran mejora, ya que itera sobre
-    valores en cualquier expresión que se evalúe como un iterador. ¿Qué es un
-    iterador? Un iterador es un objeto al que le puedes hacer la pregunta:
-    "¿Cuál es el siguiente elemento?" hasta que ya no queden más
-    elementos.</p><p>Nos centraremos más en esto en próximos capítulos, mientras
-    tanto, sólo necesitas saber que en Rust es sencillo crear iteradores que
-    generen secuencias de números enteros.</p><p>El operador <code>..</code>
-    crea un iterador que genera números a partir de un número inicial pero sin
-    incluir el número final.</p><p>El operador <code>..=</code> crea un iterador
-    que genera números a partir de un número inicial, incluyendo el número
-    final.</p>
+  content_markdown: >
+    El bucle `for` en Rust es una gran mejora, ya que itera sobre valores en cualquier expresión que se evalúe como un iterador. ¿Qué es un iterador? Un iterador es un objeto al que le puedes hacer la pregunta: "¿Cuál es el siguiente elemento?" hasta que ya no queden más elementos.
+    
+
+    Nos centraremos más en esto en próximos capítulos, mientras tanto, sólo necesitas saber que en Rust es sencillo crear iteradores que generen secuencias de números enteros.
+    
+
+    El operador `..` crea un iterador que genera números a partir de un número inicial pero sin incluir el número final.
+    
+
+    El operador `..=` crea un iterador que genera números a partir de un número inicial, incluyendo el número final.
 - title: match
-  content_html: >-
-    <p>¿Echas de menos el “switch”? Rust tiene una palabra reservada muy útil
-    para hacer coincidir (matching) todas las condiciones posibles de un valor y
-    ejecutar una ruta de código si la condición es verdadera. Veamos cómo
-    funciona esto para los números. Nos centraremos en los patrones de
-    coincidencia con datos más complejos en próximos capítulos, te prometo que
-    valdrá la pena la espera.</p><p><code>match</code> es exhaustivo, así que
-    todos los casos deben ser evaluados.</p><p>El emparejamiento (matching)
-    combinado con la desestructuración es uno de los patrones más comunes que
-    verás en Rust</p>
+  content_markdown: >
+    ¿Echas de menos el “switch”? Rust tiene una palabra reservada muy útil para hacer coincidir (matching) todas las condiciones posibles de un valor y ejecutar una ruta de código si la condición es verdadera. Veamos cómo funciona esto para los números. Nos centraremos en los patrones de coincidencia con datos más complejos en próximos capítulos, te prometo que valdrá la pena la espera.
+
+
+    `match` es exhaustivo, así que todos los casos deben ser evaluados.
+
+
+    El emparejamiento (matching) combinado con la desestructuración es uno de los patrones más comunes que verás en Rust.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%200%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20m%C3%BAltiples%20valores%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%201%20o%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20hacer%20comparaciones%20con%20iteradores%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20un%20numero%20entre%203%20y%209%2C%20ambos%20incluidos%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20asignar%20el%20valor%20encontrado%20a%20una%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20%7B%7D%2C%20un%20n%C3%BAmero%20entre%2010%20y%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20esta%20es%20la%20condici%C3%B3n%20por%20defecto%20que%20debe%20existir%20%0A%20%20%20%20%20%20%20%20%2F%2F%20si%20no%20se%20han%20evaluado%20todos%20los%20casos%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22encontr%C3%A9%20otra%20cosa!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
-- title: Devolviendo valores en loop
+- title: Devolviendo Valores en loop
   content_markdown: |
     Podemos devolver un valor en un `loop` cuando usamos `break`
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22encontr%C3%A9%20el%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Del%20bucle%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
-- title: Devolviendo valores en bloques de expresiones
-  content_html: >-
-    <p>Las sentencias <code>if</code>,<code>match</code>, funciones y bloques de
-    código presentan maneras únicas de devolver valores en Rust.</p> <p>Si la
-    última sentencia de un <code>if</code>, <code>match</code>, función o bloque
-    de código es una expresión sin <code>;</code>, Rust la devolverá como valor
-    de retorno del bloque. Esta es una gran manera de crear una lógica concisa
-    que devuelva un valor que pueda ser asignado a un nueva variable.</p><p>Ten
-    en cuenta que también permite a una sentencia <code>if</code> operar como
-    una expresión ternaria concisa.</a>
+- title: Devolviendo Valores en Bloques de Expresiones
+  content_markdown: >
+    Las sentencias `if`,`match`, funciones y bloques de código presentan maneras únicas de devolver valores en Rust.
+
+
+    Si la última sentencia de un `if`, `match`, función o bloque de código es una expresión sin `;`, Rust la devolverá como valor de retorno del bloque. Esta es una gran manera de crear una lógica concisa que devuelva un valor que pueda ser asignado a un nueva variable.
+
+
+    Ten en cuenta que también permite a una sentencia `if` operar como una expresión ternaria concisa.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Expresi%C3%B3n%20ternaria%20en%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22Del%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburguesa%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22perrito%20caliente%22%20%3D%3E%20%22es%20un%20perrito%20caliente%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20los%20par%C3%A9ntesis%20son%20opcionales%20cuando%20hay%20una%20sola%20expresi%C3%B3n%20de%20retorno%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22no%20es%20un%20perrito%20caliente%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Identificando%20comida%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Este%20bloque%20de%20c%C3%B3digo%20nos%20permite%20obtener%20un%20resultado%0A%20%20%20%20%20%20%20%20%2F%2F%20sin%20tener%20que%20definir%20una%20funci%C3%B3n%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Del%20bloque%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Esta%20es%20la%20forma%20de%20devolver%20un%20valor%20en%20Rust%20al%20final%20de%20una%20funci%C3%B3n%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22De%20la%20funci%C3%B3n%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
 - title: Capítulo 2 - Conclusión
-  content_html: >-
-    <p>Con esto ya hemos echado un vistazo a las características más básicas del
-    lenguaje Rust. Hablaremos de <code>for</code> y <code>match</code> en más
-    profundidad a medida que aumentemos nuestro conocimiento sobre cómo aplicar
-    sus capacidades. Lo siguiente será adentrarnos en las estructuras de datos
-    fundamentales de Rust.</p>
+  content_markdown: >
+    Con esto ya hemos echado un vistazo a las características más básicas del lenguaje Rust. Hablaremos de `for` y `match` en más profundidad a medida que aumentemos nuestro conocimiento sobre cómo aplicar sus capacidades. Lo siguiente será adentrarnos en las estructuras de datos fundamentales de Rust.

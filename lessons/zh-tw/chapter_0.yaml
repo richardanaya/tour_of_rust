@@ -10,16 +10,19 @@
     本教程提供以下的語言版本：
 
     * [Deutsch](00_de.html)
-    * [English](oo_en.html)
+    * [English](00_en.html)
     * [Español](00_es.html)
     * [Français](00_fr.html)
     * [Interlingue](00_ie.html)
     * [Magyar](00_hu.html)
+    * [Polski](00_pl.html)
     * [Português Brasileiro](00_pt-br.html)
     * [Русский](00_ru.html)
     * [한국어](00_ko.html)
     * [日本語](00_ja.html)
     * [简体中文](00_zh-cn.html)
+    * [Türkçe](00_tr.html)
+    * [Українська](00_ua.html)
 
     如果你對內容有任何意見，或希望貢獻於翻譯，可以到 Tour of Rust 的 [github 源代碼庫](https://github.com/richardanaya/tour_of_rust).
 

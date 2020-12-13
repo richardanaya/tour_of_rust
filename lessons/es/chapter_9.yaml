@@ -1,10 +1,136 @@
-- title: Exportar
+- title: Capítulo 9 - Organización y Estructura de Proyectos
+  content_markdown: >
+    Todos los ejemplos de código que hemos visto hasta ahora tenían un solo archivo. Veamos cómo se puede organizar y compartir.
+- title: Módulos
+  content_markdown: |
+    Cada programa o librería de Rust es un *crate*.
+
+    Cada crate está compuesto por una jerarquía de *módulos*.
+
+    Cada crate tiene un módulo raíz.
+
+    Un módulo puede contener variables globales, funciones, estructuras, traits, o incluso otros módulos.
+
+    En Rust no existe una relación 1 a 1 entre los archivos y el árbol jerárquico de módulos. Debemos construir el árbol de módulos manualmente en nuestro código.
+- title: Escribir un Programa
+  content_markdown: |
+    Un programa tiene un módulo raíz en un archivo llamado `main.rs`.
+- title: Escribir una Librería
+  content_markdown: |
+    Una librería tiene un módulo raíz en un archivo llamado `lib.rs`.
+- title: Referenciar Otros Módulos y Crates
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=mod%20mi_sub_modulo%20%7B%0A%20%20%20%20fn%20haz_algo()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20pub%20fn%20haz_algo_mas()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22haciendo%20algo%20m%C3%A1s%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo()%3B%0A%20%20%20%20mi_sub_modulo%3A%3Ahaz_algo_mas()%3B%0A%7D%0A
-  content_html: >-
-    <p>En Rust, exportamos elementos de un módulo usando la palabra reservada
-    <b>pub</b>.</p><p>Cuando se utiliza un módulo dentro de su propio código o
-    en un crate externo, sólo se permiten referencias a aquellos elementos que
-    hayan sido marcados como públicos.</p><p>El código en este ejemplo da error,
-    añade la palabra reservada <b>pub</b> en el lugar apropiado para
-    arreglarlo.</p>
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: >
+    Los elementos de los módulos se pueden referenciar con la ruta completa de su módulo
+    `std::f64::consts::PI`.
+    
+
+    Una forma más simple es con el uso de la palabra reservada **use**. Esta nos permite especificar 
+    elementos particulares de los módulos que queremos usar en todo nuestro código sin una ruta completa. 
+    Por ejemplo, el uso de `std::f64::consts::PI` nos permite usar el identificador `PI` en la función principal.
+
+
+    **std** es un crate de la **librería estándar** de Rust que está lleno de estructuras de datos y 
+    funciones para interactuar con tu sistema operativo.
+
+
+    En el siguiente enlace: [https://crates.io](https://crates.io/) puedes encontrar un directorio de 
+    crates creado por la comunidad.
+- title: Referenciar Múltiples Elementos
+  content_markdown: |
+    En este ejemplo podemos ver cómo referenciar múltiples elementos utilizando una única ruta al módulo.
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    **TAU**ro y **PI**scis son los signos del zodiaco más compatibles con Ferris.
+- title: Crear Módulos
+  content_markdown: |
+    Cuando pensamos en el código, solemos imaginar una jerarquía de archivos que se organizan en directorios. Rust nos permite crear módulos que están estrechamente relacionados con la estructura de archivos.
+
+    En Rust hay dos maneras de declarar un módulo. Por ejemplo, podemos representar un módulo `foo` de la siguiente forma:
+      * Un archivo llamado `foo.rs`.
+      * Un directorio llamado `foo` que contiene un fichero llamado `mod.rs`.
+- title: Jerarquía de Módulos
+  content_markdown: >
+    Un módulo puede depender de otro. Para establecer una relación entre un módulo y su submódulo, debemos escribir el módulo padre: 
+
+
+    ```rust
+
+    mod foo;
+
+    ```
+
+
+    La declaración anterior buscará un archivo llamado `foo.rs` o `foo/mod.rs`
+    e insertará el contenido dentro de un módulo llamado `foo`.
+- title: Módulo en Línea
+  content_markdown: >
+    Un sub-módulo se puede insertar directamente dentro del código del módulo.
+
+
+    Un uso muy común de los módulos en línea es la creación de pruebas unitarias/tests unitarios. Creamos un módulo en línea que sólo existe cuando al usar Rust para hacer pruebas.
+
+
+    ```
+
+    // This macro removes this inline module when Rust 
+
+    // is not in test mode.
+
+    #[cfg(test)]
+
+    mod tests {
+        // Notice that we don't immediately get access to the 
+        // parent module. We must be explicit.
+        use super::*;
+
+        ... tests go here ...
+    }
+
+    ```
+- title: Referenciar Módulos Internos
+  content_markdown: >
+    Rust tiene varias palabras reservadas que puedes usar en tu ruta `use` para conseguir rápidamente el módulo que quieres:
+      
+    * `crate` - el módulo raíz de tu crate.
+
+    * `super` - el módulo padre del módulo actual.
+
+    * `self` - el módulo actual.
+- title: Exportar
+  content_markdown: >
+    Por defecto, los miembros de un *módulo* no son accesibles desde fuera del módulo (¡ni siquiera a sus módulos hijo!). Hacemos que los miembros de un módulo sean accesibles usando la palabra reservada `pub`.
+    
+
+    Por defecto, no se puede acceder a los miembros de un *crate* fuera del mismo. Hacemos que los miembros de un crate sean accesibles marcándolos como `pub` en el *módulo raíz* de tu crate (`lib.rs` o `main.rs`).
+- title: Visibilidad de Estructuras
+  content_markdown: >
+    Al igual que las funciones, las estructuras pueden declarar lo que quieren que se exponga fuera de su módulo usando `pub`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Prelude
+  content_markdown: |
+    Te estarás preguntando cómo es que tenemos acceso a `Vec` o `Box`
+    en todas partes sin necesidad de utilizar `use` para importarlos. Esto se debe al módulo `prelude` de la librería estándar.
+
+    Es importante saber que, en la librería estándar de Rust, todo lo que se exporta en
+    `std::prelude::*` está automáticamente disponible en cualquier parte de Rust.
+    Ese es el caso de `Vec` y `Box` pero también de otros (Option, Copy, etc.).
+- title: Prelude Propio
+  content_markdown: >
+    Debido al preludio de la librería estándar, es común que la librería tenga su propio módulo de preludio como punto de partida para que los usuarios importen todas las estructuras de datos más comunes. (por ejemplo, `use my_library::prelude::*`).
+
+    No se usa automáticamente en programas/librerías que usan tu crate, pero es una buena convención a seguir para saber por dónde empezar.
+- title: Capítulo 9 - Conclusión
+  content_markdown: >
+    Ahora tienes algunos trucos bajo la manga para crear aplicaciones y librerías en Rust. No te preocupes por tener que acordarte de todo, ya que a medida que tu librería crezca y lo usen otras personas, descubrirás lo que mejor funciona en cada caso.
+
+
+    Recursos (en inglés):
+
+    - [Guidelines For Writing Rust
+    APIs](https://rust-lang.github.io/api-guidelines/)

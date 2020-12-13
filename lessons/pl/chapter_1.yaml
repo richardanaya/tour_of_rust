@@ -1,0 +1,198 @@
+- title: Rozdział 1 - Podstawy
+  content_markdown: >
+    W pierwszym rozdziale przyjrzymy się najbardziej podstawowym funkcjom języka
+    skupiając się na funkcjach, zmiennych oraz podstawowych typach. Super, że
+    chcesz dowiedzieć się więcej o Ruscie!
+
+
+    Aha! W razie gdyby nie było jasne kim jest ten przesłodki krab który właśnie
+    do Ciebie mówi, możesz mi mówić **Ferris**.
+
+    
+    Jestem nieoficjalną maskotką języka programowania Rust. Miło Cię poznać.
+- title: "Piaskownica Rusta"
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Witaj%20w%20piaskownicy!%20Mo%C5%BCesz%20edytowa%C4%87%20kod%20w%20tym%20oknie.%22)%3B%0A%7D%0A
+  content_markdown: >
+    Niniejszy Przewodnik korzysta z interaktywnego narządzia [Rust
+    Playground](https://play.rust-lang.org), zwanego po polsku *Piaskownicą Rusta*.
+
+
+    *Piaskownica* jest świetnym sposobem na zabawę z kodem i testowanie czegokolwiek
+    co przyjdzie nam akurat do głowy. Jest ona także dobrym sposobem na dzielenie się
+    swoimi problemami i osiągnięciami przy nauce Rusta z innymi.
+- title: Zmienne
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20jest%20w%20stanie%20wywnioskowa%C4%87%20typ%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20mo%C5%BCemy%20te%C5%BC%20jasno%20okre%C5%9Bli%C4%87%20typ%20naszej%20zmiennej%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20w%20ruscie%20mo%C5%BCemy%20r%C3%B3wnie%C5%BC%20dokona%C4%87%20deklaracji%20i%20inicjalizacji%20osobno%2C%0A%20%20%20%20%2F%2F%20cho%C4%87%20takie%20rozwi%C4%85zanie%20jest%20raczej%20rzadko%20spotykane%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Zmienne są w Ruscie deklarowane przy użyciu słowa kluczowego **let**.
+
+
+    Podczas przypisywania wartości zmiennej, w 99% przypadków Rust będzie w stanie
+    domyśleć się jakiego powinna być ona typu.
+
+    W przypadku kiedy automatyczne wykrycie typu się nie uda, możesz zawsze dodać 
+    typ ręcznie, dopisując go przy deklaracji zmiennej.
+
+
+    Zauważ, że jesteśmy w stanie dokonać przypisania do tej samej zmiennej wielokrotnie.
+    Taki manewr jest nazywany *przyćmiewaniem zmiennej* (ang. *variable shadowing*), i można
+    w ramach niego dokonać również zmiany typu zmiennej.
+
+
+    Nazwy zmiennych są zawsze zapisywane `małymi_literami_z_podkreślnikami_zamiast_spacji`,
+    czyli inaczej mówiąc stylem `snake_case`.
+- title: Zmienianie Zmiennych
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Rust skupia się mocno na tym jakie zmienne są mutowalne, czyli inaczej mówiąc
+    *zmienialne*.
+    Zmienne w Ruscie możemy podzielić na dwie grupy:
+
+
+    * **mutowalne** - kompilator pozwoli nam zarówno odczytywać jak i zapisywać dane
+    do zmiennej
+
+    * **niemutowalne** - kompilator pozwoli nam tylko odczytywać wartość zmiennej
+
+
+    Mutowalne zmienne muszą być opatrzone dodatkowym słowem kluczowym **mut**. 
+
+
+    Póki co nie będziemy wchodzić głębiej w temat mutowalnych i niemutowalnych zmiennych,
+    miej jednak oko na powyższe nowe słowo kluczowe.
+- title: Podstawowe Typy
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20domy%C5%9Blnie%20b%C4%99dzie%20to%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20domy%C5%9Blnie%20b%C4%99dzie%20to%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22witaj%20%C5%9Bwiecie!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    W Ruscie mamy do dyspozycji całą gamę popularnych typów:
+
+
+    * boolowski typ logiczny - `bool`, służący przedstawianiu wartości prawda/fałsz (ang. true/false)
+
+    * liczby całkowite bez znaku (ang. unsigned integers) - `u8` `u16` `u32` `u64` `u128`, przedstawiające
+    nieujemne liczby całkowite
+
+    * liczby całkowite ze znakiem (ang. signed integers) - `i8` `i16` `i32` `i64` `i128`, przedstawiające
+    liczby całkowite
+
+    * liczby całkowite wielkości wskaźnika (ang. pointer size numbers) - `usize` `isize`, używane do przedstawiania indeksów
+    oraz wielkości rozmaitych rzeczy w pamięci
+
+    * liczby zmiennoprzecinkowe (ang. floating point numbers) - `f32` `f64`
+
+    * krotki (ang. tuple) - `(wartość, wartość, ...)` służące do zapisywania sekwencji o stałej długości
+    na stosie
+
+    * tablice (ang. array) - `[wartość, wartość, ...]` kolekcja podobnych elementów, której długość jest stała
+    i znana na etapie kompilacji
+
+    * typ slice - kolekcja podobnych elementów której długość jest znana na etapie wykonywania programu
+
+    * `str` (ang. string slice) - tekst którego długość jest znana na etapie wykonywania programu
+
+
+    Sprawa reprezentowania tekstu może sprawić więcej problemu w Ruscie niż w innych językach;
+    ze względu na bycie *językiem systemów*, Rust przykłada dużą wagę do kwestii zarządzania pamięcią
+    które mogą być Ci obce. Przyjrzymy się tej kwestii w późniejszych rozdziałach.
+
+
+    Typy liczbowe mogą być wyraźnie zaznaczone poprzez dopisanie odpowiedniego oznaczenia na końcu
+    danej liczby (np. `13u32`, `2u8`).
+- title: Podstawowe Konwersje Typów
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Kiedy przychodzi do typów liczbowych, Rust wymaga od nas precyzyjnego wyrażenia co chcemy
+    osiągnąć. Nie jest dozwolone przykładowo przypisanie liczby o typie `u8` zmiennej o typie `u32`.
+
+    Na szczęście Rust umożliwia nam konwersję pomiędzy rozmaitymi typami liczbowymi z użyciem słowa
+    kluczowego **as**.
+- title: Stałe
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Liczb%C4%99%20%7B%7D%20okre%C5%9Blamy%20jako%20stosunek%20d%C5%82ugo%C5%9Bci%20okr%C4%99gu%20do%20jego%20%C5%9Brednicy.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Stałe (ang. constants) pozwalają nam zdefiniować popularne wartości które mają być
+    dostępne z wielu miejsc w naszym kodzie. Zamiast kopiować wartości, tak jakby to zwykle
+    miało miejsce w przypadku normalnych zmiennych, w przypadku stałych kompilator już na etapie
+    budowania naszego programu przekopiuje wartość stałej w każde miejsce gdzie została ona użyta.
+     
+
+    W przeciwieństwie do zmiennych, stałe muszą zawsze mieć wyraźnie określony typ - nie ma tu miejsca
+    na domysły ze strony kompilatora.
+
+
+    Nazwy stałych są zawsze pisane w stylu `SCREAMING_SNAKE_CASE`.
+- title: Tablice
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    *Tablica* to kolekcja o stałej długości której wszystkie elementy są tego samego
+    typu.
+
+
+    Typ danych dla danej *tablicy* to `[T;N]`, gdzie T to typ elementów tablicy, 
+    a N to stała długość tej tablicy znana na etapie kompilacji.
+
+
+    Poszczególne elementy mogą pobrane z tablicy z wykorzystaniem operatora `[x]`, gdzie
+    *x* to indeks elementu który chcemy odczytać. Typ indeksu *x* to `usize` (zaczyna się od 0).
+- title: Funkcje
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    Funkcja posiada zero lub więcej parametrów.
+
+
+    W naszym przykładzie, `add` bierze dwa argumenty typu `i32` (liczby całkowitej ze znakiem,
+    o długości 32 bitów).
+
+
+    Nazwy funkcji są zawsze zapisywane stylem `snake_case`.
+- title: Zwracanie Wielu Wartości
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20zwracamy%20krotk%C4%99%20z%C5%82o%C5%BCon%C4%85%20z%20dw%C3%B3ch%20warto%C5%9Bci%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20rozk%C5%82adamy%20krotk%C4%99%20na%20czynniki%20pierwsze%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Funkcje mogą zwracać wiele wartości przy użyciu **krotki** (ang. tuple).
+
+
+    Do elementów krotki możemy odnieść się za pomocą ich numerycznych indeksów. 
+
+
+    Jak przekonamy się w kolejnych rozdziałach, Rust dostarcza rozmaitych sposobów
+    ergonomicznego *rozkładania* struktur na czynniki pierwsze. 
+- title: Zwracanie Niczego
+  content_markdown: >
+    W przypadku kiedy definicja funkcja nie obejmuje zwracanego typu, funkcja taka zwraca
+    pustą krotkę, znaną też jako *jednostka* (ang. *unit*)
+
+
+    Pusta krotka jest zapisywana jako `()`.
+
+
+    Używanie pustej krotki `()` nie jest specjalnie częste, ale nadal dobrze wiedzieć co taki
+    zapis oznacza.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20domy%C5%9Blny%20zwracany%20typ%20to%20pusta%20krotka%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20ta%20funkcja%20zwr%C3%B3ci%20()%20nawet%20je%C5%9Bli%20nie%20wskazali%C5%9Bmy%0A%20%20%20%20%2F%2F%20jasno%20co%20powinna%20zwr%C3%B3ci%C4%87%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20wypisanie%20%22niczego%22%20w%20normalnym%20trybie%20mo%C5%BCe%20by%C4%87%20problematyczne%2C%0A%20%20%20%20%2F%2F%20wypisujemy%20wi%C4%99c%20a%20i%20b%20jako%20debug%20string%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D
+- title: Rozdział 1 - Podsumowanie
+  content_markdown: >
+    Nieźle Ci idzie! Podstawy Rusta nie są takie trudne jak się mogło wydawać.
+    Zaczynamy podpatrywać działania kompilatora i tego jak myśli. Jako język 
+    programowania przeznaczony do budowania systemów, Rust poświęca dużą uwagę
+    rzeczom takim jak wielkość wartości w pamięci komputera, mutowalność zmiennych
+    a także poprawność zapisanych przez nas działań matematycznych. W następnym 
+    rozdziale przyjrzymy się kilku *starym znajomym*, mianowicie: kondycjom `if`
+    oraz pętlom `for`.
+    
+
+    Dowiedz się więcej:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)

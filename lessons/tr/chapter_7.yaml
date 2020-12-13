@@ -1,0 +1,273 @@
+- title: Bölüm 7 - Nesne Yönelimli Programlama
+  content_markdown: >
+    Onlarca yıldır kullanılan C Programlama dilinde olduğu gibi, fikirleri işlevlerle ifade etmek, veriler ve program davranışını 
+    temsil etmenin kanıtlanmış bir yoludur. Ancak zaman içinde bilgisayar bilimi, veri toplama ve soyutlamaya izin veren başka 
+    programlama paradigmalarından da yararlanmıştır.
+    
+    Diğer programlama dillerinden geliyorsanız, bu programlama paradigmalarından biri olan nesne yönelimli programlamaya, yani **OOP**'a 
+    aşina olabilirsiniz. 
+    
+    Bu bölümde Rust programlama dilini, işlevlerin ötesinde bir programlama dili olarak yeniden keşfedeceğiz.
+- title: Nesne Yönelimli Programlama Nedir?
+  content_markdown: >
+    Nesne yönelimli programlama aşağıda kabaca özetlenen, bir dizi ikonik özelliğe sahip programlama dillerini ifade eder:
+
+    * Kapsülleme  - Veri ve işlevleri, tek bir türden oluşan ve **nesne** adı verilen kavramsal birimle ilişkilendirebilmek.
+
+    * Soyutlama - Bir nesnenin uygulama ayrıntılarını gizlemek için veri ve üye işlevlerini saklayabilmek.
+
+    * Çok biçimlilik - Bir nesneyle farklı işlevsel perspektiflerden etkileşim kurma yeteneği.
+
+    * Kalıtım - Diğer nesnelerin veri ve davranışlarını devralma yeteneği.
+- title: Rust Bir Nesne Yönelimli Programlama Dili Değildir
+  content_markdown: >
+    Rust, veri ve davranışları anlamlı olacak şekilde miras alma yeteneğinden yoksundur.
+
+
+    * Yapılar **alanlarını** bir üst yapıdan kalıtım yoluyla devralamazlar.
+
+    * Yapılar **işlevlerini** bir üst yapıdan kalıtım yoluyla edinemezler.
+
+
+    Ancak Rust, bu eksiklikleri giderecek pek çok özellik sunduğundan, kalıtımın yokluğunu hissetmeyeceksiniz.
+- title: Metotlarla Kapsülleme
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=900c806a5b91969e8ae862e94aedc94a
+  content_markdown: >
+    Rust, **metot** veya **yöntem** olarak adlandırabileceğimiz, belirli işlevlerle ilişkilendirilmiş bir veri yapısı olan **nesne** kavramını destekler.
+
+
+    Herhangi bir metodun ilk parametresi, `nesne_ornegi.metot()` söz dizimindeki gibi, o metoda yapılan çağrı ile ilişkili olan, **örneğin kendisini** 
+    referans almalıdır. Bu ilk parametre için Rust aşağıdaki referans türlerini kullanmaktadır:
+
+    * `&self` - Örnek için değişmez bir referans.
+
+    * `&mut self` - Örnek için değişken bir referans.
+
+
+    Metotlar, `impl` anahtar kelimesiyle başlayan bir uygulama bloğunda tanımlanır:
+
+    ```rust
+
+    impl BirYapi { 
+        ...
+        fn ornekle(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Farklı Görünürlük Seviyelerindeki Soyutlamalar
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=403679578ea7c5d804cfc749a80e97ba
+  content_markdown: >
+    Rust, nesnelerin iç işleyişi ve yapılarını gizleyebilir.
+
+
+    Halihazırda yapı tarafından bildirilen tüm alan ve metodlara, yalnızca ait oldukları modül tarafından erişilebileceği varsayılır.
+
+
+    Yapı alan ve metodlarının modül dışından erişilebilir olması için `pub` anahtar sözcüğü kullanılır.
+- title: Özellikler ve Çok Biçimlilik
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c8159fc427a65f979803374f1c236ea7
+  content_markdown: >
+    Rust'ta bir dizi yöntemi **struct** ve **enum** gibi yapılandırılmış türlerle ilişkilendirmemize izin veren yapılara özellik adını veririz. 
+    Ve Rust çok biçimlilik özellikler aracılığıyla desteklenir. 
+
+
+    Bir özelliğe ait yöntemi aşağıdaki gibi tanımlayabilirsiniz:
+
+
+    ```
+
+    trait BirOzellik {
+        fn bir_yontem(&self);
+        ...
+    }
+
+    ```
+
+
+    Bir yapı bir özelliği uyguladığında, `&dyn BirOzellik` şeklindeki özellik türü sayesinde ve gerçek tür bilgisine ihtiyaç duymaksızın, 
+    kendisiyle  dolaylı şeklide etkileşebileceğimiz bir sözleşme oluşturur.
+
+
+    Yapı tarafından uygulanması istenen özellik yöntemleri, bir uygulama bloğunda tanımlanmak zorundadır:
+
+
+    ```rust
+
+    impl BirOzellik for BirYapi { 
+        fn bir_yontem(&self) {
+            ...
+        }
+        ... 
+    }
+
+    ```
+- title: Özelliklere Uygulanan Yöntemler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=71bc8fe19162f8f23f9bf9a09a568ccc
+  content_markdown: >
+    Özelliklerin de uyguladıkları kendi yöntemleri olabilir.
+
+
+    Ancak özelliklerin uyguladığı yöntemler yapı alanlarına erişimediklerinden, çeşitli özellik uygulamaları arasındaki davranışları 
+    paylaşırken yararlıdırlar.
+- title: Özellik Kalıtımı
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=91d069f6e1302f4b4a03d6d17e510864
+  content_markdown: |
+    Bir özellik kendi yöntemlerini, diğer özelliklerden kalıtım yoluyla edinebilir.
+- title: Ya Dinamik Ya Statik İletim
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=3d868069b4841fb66d567cc6bb4af46d
+  content_markdown: >
+    Yöntemler iki şekilde işletilir:
+
+    * Statik iletim - Bu çağrı şeklinde örneğin türü zaten bilindiğinden, çağrılacak işlev hakkında doğrudan bilgimiz vardır.
+
+     * Dinamik iletim - Bu çağrı şeklinde örnek türü bilinmediğinden, doğru işlevi çağırmanın bir yolunu bulmamız gerekir.
+
+
+    `&dyn BirOzellik` şeklinde sembolize edebileceğimiz özellik türleri, dinamik iletimi kullanarak, nesne örnekleriyle dolaylı şekilde çalışmamızı sağlarlar.
+
+
+    Dinamik iletim çağrılarında Rust, kullanıcıların bu çağrıyı fark edebilmeleri için, özellik türünün önüne `dyn` belirtecini eklememizi ister.
+
+
+    Bellek ayrıntıları:
+
+    * Dinamik iletim, çağrılan işlevin gerçek adresini bulmak için işaretçi takibi gerektirdiğinden, daha yavaş bir yöntem çağrısı olarak kabul edilir.
+- title: Özellik Nesneleri
+  content_markdown: >
+    Bir nesne örneğini `&dyn BirOzellik` türündeki bir parametreye ilettiğimizde, özellik nesnesini adını verdiğimiz seyi iletmiş oluruz. 
+
+
+    O halde bir özellik nesnesi: "Bir örneğin doğru metotlarını, dinamik iletim yoluyla ve dolaylı olarak çağırmamıza izin veren, hem örneğin kendi 
+    işaretçisini, hem örneğin işlevlerine yönelik işaretçilerin listesini tutan yapıdır" denilebilir.
+
+
+    Bellek ayrıntıları:
+
+    * C++' da bu işlevler listesi *vtable* olarak bilinmektedir.
+- title: Boyutlandırılmamış Verilerle Çalışmak
+  content_markdown: >
+    Bir özelliği yapı içinde saklamak istediğimizde, asıl yapı ve bu yapının boyutuna dair bilgilerin, özellik tarafından gizlendiği görülür. 
+    Özelliklerin karşımıza çıkardığı bu ilginç durum, yani yapılarda saklanan boyutlandırılmamış öğeler iki şekilde ele alınır:
+
+
+    * `Genel türler` - Genel türler gibi parametreleştirilmiş türlerden faydalanmak, yapı ve işlevleri bilinen tür ve boyutlarıyla, 
+    etkin şekilde oluşturmamıza izin verirler.
+
+    * `Dolaylama` -  Her ne kadar dolaylamanın başka yolları olsa da, örneği öbek üzerine konumlandırmak ve bu örneğe yalnızca bir işaretçi depolamak, 
+    tür boyutu hakkında güvenebileceğimiz bir dolaylılık düzeyi sağlar.
+- title: Genel İşlevler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=745f3d602be54c4a9bc738f15af487ac
+  content_markdown: >
+    Rust'ta özellikler ve genel türler birbirleriyle uyum içinde çalışırlar. Bir `T` türünü parametrelerle ifade etmeye çalıştığımızda, 
+    argüman olarak hangi türlerin kullanılabileceğini ve argümanın uygulaması gereken özellikleri sınırlayabiliriz. Böyle bir durumda, `where` 
+    anahtar sözcüğü argümanın uygulaması gereken özellikleri listeler.
+
+
+    Aşağıdaki örnekte yer alan `T` türü, `Tur` özelliğini uygulamak zorundadır:
+
+    ```rust
+
+    fn bir_islev<T>(tur: T)
+
+    where
+        T:Tur
+    {
+        ...
+    }
+
+    ```
+
+
+    Genel türler kullanarak hem türü hem de boyutu bilinen ve derleme zamanında statik yazılmış gibi değerlendirilecek işlevler oluşturabilir, 
+    bunları statik iletim yoluyla, boyutları belirgin değerler olarak saklayabiliriz.
+- title: Genel İşlev Kısaltmaları
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b9eb9414f0d4f76d360d04a6066419d6
+  content_markdown: |
+    Bir özellik tarafından kısıtlanmış genel türleri kısaltmalar kullanarak bildirebilirsiniz:
+
+    ```rust
+    fn bir_islev(tur: impl Tur) {
+        ...
+    }
+    ```
+
+    Yukarıdaki ifadenin eşdeğeridir:
+
+    ```rust
+    fn bir_islev<T>(tur: T)
+    where
+        T:Tur
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=4d7c906f8096fa453978c5eda475ea0e
+  content_markdown: >
+    Dilimize **Kutu** olarak çevirebileceğimiz `Box`, verilerimizi belleğin yığın bölgesinden öbek bölgesine taşımamıza izin veren bir veri yapısı olup, 
+    öbek üzerinde tutulan verileri gösteren bir akıllı işaretçi olarak da bilinir.
+
+
+    `Box` sadece bir işaretçi tuttuğundan, boyutu bilinen bir yapıdır ve genellikle alan boyutlarını bilen yapıya referans vermek amacıyla kullanılmaktadır.
+
+
+    `Box` Rust programlarında oldukça fazla tercih edilmekte ve neredeyse her yerde kullanılmaktadır:
+
+
+    ```rust
+
+    Box::new(Tur { ... })
+
+    ```
+- title: Genellenmiş Yapılara Yeniden Bakış
+  content_markdown: >
+    Genellenmiş bir yapının parametreleştirilmiş türleri de niteliklerine göre sınırlandırılmış olabilir.
+
+
+    ```rust
+
+     struct BirYapi<T>
+
+    where
+        T: BirOzellik
+    {
+        tur: T
+        ...
+    }
+
+    ```
+
+
+    Genellenmiş yapıların uygulama bloklarında, kendi parametreleştirilmiş türleri bulunur:
+
+
+    ```rust
+
+    impl<T> BirYapi<T> {
+        ...
+    }
+
+    ```
+- title: Bölüm 7 - Sonuç
+  content_markdown: >
+    Artık fikirlerimizi açık biçimde sunabileceğimiz daha fazla dil özelliğini öğrenmiş durumdayız! Rust'ın soyutlamaları basit görünmekle birlikte, 
+    kod yazmayı zevkli hale dönüştürecek kadar güçlü ve yeteneklidirler. Bu bölümde, `Box` ile giriş yaptığımız akıllı işaretçilerin, özel bellek 
+    yönetimi gerektiren hallerde nasıl yararlı olduklarına ise bir sonraki bölümde değineceğiz.
+
+
+    Ek kaynaklar (İngilizce):
+
+    * [Video - 7 Dakikada nesne yönelimli programlama](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Makale - "Nesne yönelimli programlamayı ne kadar hızlı öğrenirseniz, siz ve yazılımlarınız için o kadar iyi olur."](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)

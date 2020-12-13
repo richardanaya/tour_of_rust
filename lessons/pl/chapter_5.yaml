@@ -1,0 +1,261 @@
+- title: Rozdział 5 - Koncepcje Własności i Pożyczania Danych
+  content_markdown: >
+    Jedną z rzeczy która odróżnia Rusta od innych języków programowania
+    jest wykorzystanie specjalnego paradygmatu, czy też zestawu koncepcji,
+    pomagającego w zorganizowaniu i optymalizacji procesu zarządzania pamięcią. 
+
+
+    W tym rozdziale przyjrzymy się reakcjom kompilatora sprawdzającego nasz kod.
+    Bez obaw, zaczniemy powoli.
+    
+    
+    Ważne żeby pamiętać, że zasady według których kompilator ocenia nasze
+    wypociny nie istnieją po to by uprzykrzać nam życie. Są one raczej
+    fundamentem na którym jesteśmy w stanie budować solidne i bezpieczne
+    programy.
+- title: Posiadanie Danych
+  content_markdown: >
+    Tworząc nową instancję jakiegoś typu i **przypisując** ją do zmiennej
+    sprawia, że stworzony zostaje pewien zasób pamięci który kompilator będzie
+    próbował zweryfikować. 
+    
+    Weryfikacja ta odbędzie się na podstawie czegoś co nazywamy **lifetime**,
+    czyli *czasem życia* danego zasobu. Zmienna do której przypisaliśmy zasób
+    jest tutaj nazywana **właścicielem** (ang. **owner**) zasobu.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20tworz%C4%85c%20nowe%20instancje%20struktur%20i%20przypisuj%C4%85c%20je%20do%20zmiennych%0A%20%20%20%20%2F%2F%20tworzymy%20nowy%20zasoby%20pami%C4%99ciowe%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20jest%20tu%20w%C5%82a%C5%9Bcicielem%20zasobu%0A%7D%0A
+- title: Zarządzanie Zasobami Z Użyciem Zasięgów
+  content_markdown: |
+    Rust korzysta z końca danego *zasięgu* (ang. *scope*) jako miejsca w którym
+    następuje dekonstrukcja i dealokacja zasobu.
+
+
+    Termin opisujący ten proces dekonstrukcji i dealokacji zasobu to **drop**, czy
+    **wypuszczanie**.
+
+    
+    Kilka szczegółów:
+    * W Ruscie nie ma *odśmiecania pamięci*.
+    * Opisany wyżej model jest też nazywany "RAII" w środowisku C++. Jest to skrót
+    od angielskiego: "Resource Aquisition Is Initialization".
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo_b%20%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo_a%0A%7D%0A
+- title: Wypuszczanie Zasobów Następuje Hierarchicznie
+  content_markdown: >
+    Kiedy zasób jakiejś struktury zostaje wypuszczony (ang. *dropped*), najpierw wypuszczona
+    musi zostać ta struktura a dopiero potem osobno wypuszczane zostają jej obiekty
+    podrzędne. I tak do samego końca hierarchii.
+
+
+    Kilka szczegółów:
+
+    * Dokonując automatycznego zwalniania pamięci, Rust pomaga drastycznie zmniejszyć
+    ryzyko wycieków pamięci.
+
+    * Zasoby pamięci mogą być wypuszczone tylko raz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20najpierw%20wypuszczamy%20foo%0A%20%20%20%20%2F%2F%20potem%20foo.bar%0A%7D%0A
+- title: Przenoszenie Własności
+  content_markdown: >
+    Kiedy zmienna zostaje wysłana jako argument do funkcji, własność zasobu tej zmiennej
+    zostaje przeniesiona do odpowiedniego parametru w ramach tej funkcji.
+    
+
+    Po takim **przeniesieniu** (ang. **move**) zmienna w jej oryginalnym wydaniu
+    nie może zostać ponownie wykorzystana.
+
+
+    Kilka szczegółów:
+
+    * Podczas **przenoszenia** własności, wartość właściciela zasobu na stosie zostaje
+    skopiowana na stos wywoływanej funkcji.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20f%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20przenosimy%20foo%20do%20funkcji%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20teraz%20nie%20wolno%20nam%20ju%C5%BC%20u%C5%BCywa%C4%87%20foo%0A%7D%0A
+- title: Zwracanie Własności
+  content_markdown: |
+    Funkcja może też zwrócić własność nad danym zasobem.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20w%C5%82asno%C5%9B%C4%87%20zasobu%20zostaje%20przeniesiona%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20zostaje%20w%C5%82a%C5%9Bcicielem%20zasobu%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo%20ze%20wzgl%C4%99du%20na%20koniec%20zasi%C4%99gu%20funkcji%0A%7D%0A
+- title: Pożyczanie Zasobu Przy Pomocy Referencji
+  content_markdown: |
+    Referencje pozwalają nam pożyczyć dostęp do zasobu, a dokładniej do odczytu
+    danego zasobu. Żeby stworzyć referencję wystarczy użyć operatora `&`.
+
+    Referencje obowiązują te same zasady wypuszczania z pamięci co inne zasoby.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20f%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo%0A%7D%0A
+- title: Pożyczanie z Możliwością Dokonania Zmian Przy Pomocy Referencji Mutowalnych
+  content_markdown: >
+    Możemy też pożyczyć dany zasób w sposób który pozwoli nam na dokonywanie
+    zmian, czyli tzw. *mutowanie*. Dokonamy tego używając operatora '&mut'.
+
+
+    Właściciel zasobu nie może być przenoszony ani modyfikowany podczas istnienia
+    mutowalnej referencji.
+
+
+    Kilka szczegółów:
+
+    * Rust zabrania więcej niż jednego sposobu na modyfikację posiadanej wartości,
+    ponieważ doprowadziłoby to do możliwości zaistnienia wyścigu do danych.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20f%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20UWAGA%3A%20do_something(foo)%20zako%C5%84czy%C5%82oby%20si%C4%99%20b%C5%82%C4%99dem%0A%20%20%20%20%2F%2F%20poniewa%C5%BC%20foo%20nie%20mo%C5%BCe%20zosta%C4%87%20przeniesione%20podczas%20gdy%0A%20%20%20%20%2F%2F%20istnieje%20do%20niego%20mutowalna%20referencja%20%26mut%20foo%0A%0A%20%20%20%20%2F%2F%20UWAGA%3A%20foo.x%20%3D%2013%3B%20zako%C5%84czy%C5%82oby%20si%C4%99%20b%C5%82%C4%99dem%0A%20%20%20%20%2F%2F%20poniewa%C5%BC%20foo%20nie%20mo%C5%BCe%20by%C4%87%20modyfikowane%20podczas%20gdy%0A%20%20%20%20%2F%2F%20istnieje%20do%20niego%20mutowalna%20referencja%20%26mut%20foo%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20zostaje%20wypuszczone%20ze%20wzgl%C4%99du%20na%20brak%20u%C5%BCycia%20dalej%20w%20kodzie%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20ten%20zabieg%20dzia%C5%82a%20poniewa%C5%BC%20wszystkie%20mutowalne%20referencje%0A%20%20%20%20%2F%2F%20zosta%C5%82y%20wypuszczone%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20przenosimy%20w%C5%82asno%C5%9B%C4%87%20foo%20do%20funkcji%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: Dereferencja
+  content_markdown: >
+    Używając referencji '&mut' mamy możliwość modyfikacji danych na którą
+    ona wskazuje. Możemy to zrobić używając operatora gwiazdki `*`.
+
+
+    W określonych warunkach użycie gwiazdki może też oznaczać skopiowanie
+    zasobu. O typach kopiowalnych powiemy sobie więcej w dalszych rozdziałach.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20uzyskujemy%20kopi%C4%99%20warto%C5%9Bci%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20modyfikujemy%20warto%C5%9B%C4%87%20na%20kt%C3%B3r%C4%85%20wskazuje%20referencja%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: Przekazywanie Pożyczonych Danych
+  content_markdown: >
+    Zasady Rusta dotyczące refencji i pożyczania mogą być ujęte w następujących
+    dwóch punktach:
+
+
+    * Dla każdego zasobu, Rust pozwala na istnienie tylko jednej mutowalnej
+    referencji **albo** dowolnej ilości nie-mutowalnych referencji. Istnienie
+    dwóch typów referencji do jednego zasobu jest niedozwolone.
+
+    * Referencja nie może żyć dłużej niż właściciel, czyli zasób na który wskazuje.
+
+
+    Te zasady nie powinny nam sprawiać zbyt wielu problemów w przypadku przekazywania
+    referencji do wywoływanych funkcji.
+
+
+    Kilka szczegółów:
+
+    * Pierwsza z wymienionych wyżej zasad gwarantuje nam brak wyścigów do danych.
+    Czym jest wyścig do danych? Jest to sytuacja w której odczyt danych z zasobu
+    może być niezgodny z aktualnym stanem zmiennej, ze względu na istniejący
+    jednocześnie wątek który wypisuje do tego samego zasobu w tym samym czasie.
+    Ten problem jest częsty w programowaniu wielowątkowym.
+
+    * Druga z wymienionych wyżej zasad eliminuje problem z referencjami które
+    wskazują na nie istniejące dane (w nomenklaturze języka C nazywamy to
+    zjawisko *dangling pointer*).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20mutowaln%C4%85%20referencj%C4%99%20f%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20poniewa%C5%BC%20wszystkie%20mutowalne%20referencje%20zostaj%C4%85%20wypuszczone%0A%20%20%20%20%2F%2F%20wewn%C4%85trz%20funkcji%20do_something%2C%20mo%C5%BCemy%20tworzy%C4%87%20kolejne%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo%0A%7D%0A
+- title: Referencje Do Referencji
+  content_markdown: |
+    Jeśli chcemy możemy stworzyć referencję do części zasobu na który wskazuje
+    inna referencja.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20zostaje%20wypuszczone%2C%20pozwalaj%C4%85c%20nam%20na%20stworzenie%20%0A%20%20%20%20%2F%2F%20niemutowalnej%20referencji%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20y%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo%0A%7D%0A
+- title: Wyraźne Określanie Czasów Życia Zmiennych
+  content_markdown: >
+    Nawet jeśli nie widać tego w większości kodu, kompilator Rusta nadal
+    jest w stanie, działając "za kulisami", dociec optymalnego czasu życia
+    zmiennych. Jest on też w stanie dokonać na tej podstawie walidacji
+    referencji tak, aby żadna z nich nie istniała dłużej niż jej "właściciel",
+    czyli oryginalny zasób na który wskazuje.
+
+    
+    Aby zapewnić nam większą kontrolę nad domysłami kompilatora, Rust daje nam
+    możliwość modyfikacji definicji funkcji w sposób, który wyraźnie oznaczy
+    czas życia konkretnych zmiennych oraz  podobieństwa w czasie życia
+    pomiędzy różnymi zmiennymi. Dotyczy to zarówno parametrów funkcji oraz
+    zmiennej przez nią zwracanej. 
+
+
+    Oznaczenia czasu życia zmiennych używają operatora `'` 
+    (np. `'a`, `'b`, `'c`).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20parametr%20foo%20oraz%20warto%C5%9B%C4%87%20zwracana%20przez%20funkcj%C4%99%20dziel%C4%85%20ten%20sam%20czas%20%C5%BCycia%0Afn%20do_something%3C'a%3E(foo%3A%20%26'a%20Foo)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20zostaje%20wypuszczone%20w%20tym%20miejscu%2C%20pozwalaj%C4%85c%20nam%20na%20stworzenie%0A%20%20%20%20%2F%2F%20nie-mutowalnej%20referencji%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20y%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo%0A%7D%0A
+- title: Więcej Niż Jeden Znacznik Czasu Życia Zmiennych
+  content_markdown: >
+    Znaczniki czasu życia zmiennych pozwalają nam na sprecyzowanie naszych
+    zamiarów w sytuacjach które mogą okazać się zbyt skomplikowane dla
+    kompilatora.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20oraz%20warto%C5%9B%C4%87%20zwracana%20przez%20funkcj%C4%99%20dziel%C4%85%20ten%20sam%20czas%20%C5%BCycia%0A%2F%2F%20foo_a%20posiada%20zupe%C5%82nie%20inny%20czas%20%C5%BCycia%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20zostaje%20wypuszczone%20tutaj%20poniewa%C5%BC%20jedenym%20pozosta%C5%82ym%0A%20%20%20%20%2F%2F%20czasem%20%C5%BCycia%20jest%20ten%20przypisany%20do%20foo_b%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20x%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo_b%0A%7D%0A  
+- title: Statyczne Czasy Życia
+  content_markdown: >
+    **Statyczna** zmienna to taki zasób w pamięci który istnieje przez
+    cały czas trwania programu, od początku aż do samego końca. Statyczne
+    zmienne są definiowane w kodzie i następnie przetwarzane w specjalny
+    sposób podczas kompilacji. Wymagają one zawsze aby ich typ był wyraźnie
+    sprecyzowany.
+
+
+    **Statyczny czas życia** definiuje zasób który istnieje na czas nieokreślony,
+    domyślnie aż do końca trwania programu. Zauważ, że taka definicja oznacza,
+    że w niektórych sytuacjach będziemy w stanie stworzyć zasoby z takim czasem
+    życia podczas wykonywania programu.
+
+
+    Aby przypisać zasobom statyczny czas życia musimy skorzystać ze specjalnego
+    znacznika `'static`.
+
+
+    Zasoby oznaczone jako `'static` nigdy, tj. dopóki nasz program jest
+    wykonywany, nie zostaną wypuszczone z pamięci.
+    
+
+    Jeśli zasób o czasie życia `'static` zawiera referencje, wszystkie one
+    muszą być również oznaczone jako `'static` (cokolwiek innego będzie
+    po prostu żyć zbyt krótko).
+
+
+    Kilka szczegółów:
+
+    * Modyfikowanie statycznych zmiennych jest niebezpiecznym zadaniem,
+    ponieważ są one globalnie dostępne i mogą być odczytywane przez jakąkolwiek
+    część programu, co oznacza możliwość wystąpienia wyścigu do danych.
+    Poruszymy problematykę globalnie dostępnych danych w późniejszym rozdziale.
+    * Rust pozwala na korzystanie z bloku `unsafe { ... }` w celu wykonania
+    pewnych operacji wobec których kompilator nie jest w stanie zagwarantować
+    bezpieczeństwa pamięci. Zajrzyj w [<span style="color:red; font-weight: 
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+    jeśli chcesz zgłębić tajniki mniej bezpiecznego kodu.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20zmienne%20statyczne%20mog%C4%85%20te%C5%BC%20istnie%C4%87%20wewn%C4%85trz%20zakresu%20funkcji%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22ryba-miecz%22%3B%0A%0A%20%20%20%20%2F%2F%20%C5%82a%C5%84cuchy%20znak%C3%B3w%20maj%C4%85%20czas%20%C5%BCycia%20'static%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Witaj%20%C5%9Awiecie!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20mo%C5%BCemy%20z%C5%82ama%C4%87%20kilka%20zasad%2C%20ale%20tylko%20w%20ramach%20jawnie%0A%20%20%20%20%2F%2F%20okre%C5%9Blonego%20bloku%20unsafe%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20mo%C5%BCemy%20przypisa%C4%87%20inn%C4%85%20warto%C5%9B%C4%87%20do%20zmiennej%20SECRET%0A%20%20%20%20%20%20%20%20%2F%2F%20dzi%C4%99ki%20kompatybilnemu%20czasowi%20%C5%BCycia%20'static%20dla%20%C5%82a%C5%84cuch%C3%B3w%20znak%C3%B3w%20%26str%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Czasy Życia Wewnątrz Typów
+  content_markdown: >
+    Podobnie jak w przypadku funkcji, również elementy typów zawierających
+    dane mogą być parametryzowane z użyciem znaczników czasów życia.
+
+
+    Rust pozwala nam mieć pewność, że struktura zawierająca w sobie
+    referencję do innego obiektu nigdy nie będzie istnieć dłużej niż
+    oryginalny zasób na który wskazuje referencja.
+
+
+    Bo przecież nie możemy godzić się na sytuację w której okazuje się,
+    że mamy w naszym programie struktury z niesprawdzonymi referencjami
+    wskazującymi na nieistniejące zasoby w pamięci!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: Rozdział 5 - Podsumowanie
+  content_markdown: >
+    Uf, gratulacje, że udało Ci się przebrnąć przez ten rozdział! 
+    Jesteś coraz bliżej zostania zawodowym rustowcem.
+
+    
+    Mam nadzieję, że dobrze wyjaśniłem podstawy tego w jaki sposób
+    Rust podchodzi do rozwiązania wielu fascynujących problemów
+    stojących przed współczesnym światem programowania na poziomie 
+    systemów, czyli:
+
+
+    * Nieumyślnego modyfikowania zasobów
+
+    * Zapominania o dekonstrukcji zasobów
+
+    * Przypadkowego dekonstruowania zasobów więcej niż jeden raz
+    
+    * Prób korzystania z zasobów po tym jak zostały zdekonstruowane
+
+    * Wyścigów do danych, powodowanych przez wypisywanie do zasobów
+    podczas gdy inne wątki czytają z tych samych zasobów
+
+    * Jasnego organizowania kodu wobec którego
+    kompilator nie jest w stanie nałożyć żadnych gwarancji dotyczących
+    poprawności czy bezpieczeństwa
+
+
+    W następnym rozdziale zastosujemy nieco z naszej nowo zdobytej wiedzy
+    ucząc się obsługi danych tekstowych w Ruscie.

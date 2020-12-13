@@ -1,0 +1,30 @@
+- title: >-
+    Привіт, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: |
+    Ласкаво просимо до *Tour of Rust*. Це путівник, який крок за кроком проведе вас можливостями, що пропонує мова програмування Rust. Rust часто сприймається як мова з досить крутою кривою навчання, але ми сподіваємося, що зможемо переконати вас в тому, що він вартий вивчення навіть ще до того, як перейдемо до більш складних його аспектів.
+    
+    Також ви можете знайти путівник іншими мовами:
+
+    * [Deutsch](00_de.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Magyar](00_hu.html)
+    * [Polski](00_pl.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [简体中文](00_zh-cn.html)
+    * [繁體中文](00_zh-tw.html)
+    * [日本語](00_ja.html)
+    * [한국어](00_ko.html)
+    * [Türkçe](00_tr.html)
+    * [Українська](00_ua.html)
+
+    Якщо у вас є пропозиції щодо контенту чи ви хотіли б долучитися до перекладу, зверніть увагу на github репозиторій [Tour of Rust](https://github.com/richardanaya/tour_of_rust)
+
+    Ви можете переходити між сторінками сайту використовуючи клавіші <span class="emoji">⬅️</span> і <span class="emoji">➡️</span>.
+
+    В цьому класичному прикладі ми хочемо показати підтримку Unicode рядків у Rust.

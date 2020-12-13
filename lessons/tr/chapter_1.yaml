@@ -1,0 +1,163 @@
+- title: Bölüm 1 - Temel Bilgiler
+  content_markdown: >
+    Aramızda olmanıza sevindim. Turun ilk bölümünde işlevler, değişkenler
+    ve basit türler hakkında temel bilgilere değineceğiz.
+
+
+    Ayrıca, sizinle konuşan bu sevimli yengecin kim olduğunu merak ediyorsanız ben, 
+    Rust programlama dilinin resmi olmayan maskotu **Ferris**'im. 
+    Tanıştığımıza memnun oldum.
+- title: Rust Oyun Alanı
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=067d7f594a925b54bf16df9956fe8ef6
+  content_markdown: >
+    Tur boyunca [Rust oyun alanındaki](https://play.rust-lang.org) etkileşimli kodlama aracı kullanılıyor.
+        
+    Bu araç Rust ile oynamak ve ürettiklerinizi başkalarıyla paylaşmak için harika bir olanaktır!
+- title: Değişkenler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6db511016a9091d0a097d3a1e0f3b738
+  content_markdown: >
+    Değişkenler **let** anahtar sözcüğü kullanılarak bildirilir.
+
+
+    Bir değişkene değer atadığınızda bu değişkenin türü %99 olasılıkla Rust tarafından bilinir. 
+    Eğer tür otomatik olarak çıkarsanamamışsa değişken türünü kendiniz de bildirebilirsiniz.
+
+
+    Aynı değişken adını tekrar tekrar atayabildiğimize dikkat edin. 
+    Buna, **değişken gölgeleme** denir ve bu isme her başvurulduğunda değişkenin türü de değiştirilebilir.
+
+
+    Değişken isimleri kelimelerin alt_tire ile birbirine bağlandığı `lover_snake_case` biçiminde seçilmelidir.
+- title: Değişkenlerin Değiştirilmesi
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=723acfe27f79659876e1f7f2eee16a8d
+  content_markdown: >
+    Rust hangi değişkenlerin değiştirilebilir olduğuna çok dikkat eder. 
+    İki tür değişken vardır:
+
+    * **mutable** - Derleyici bu tür değişkenlerin hem yazılmasına hem okunmasına izin verir.
+    
+    * **immutable** - Derleyici bu tür değişkenlerin sadece okunmasına izin verir.
+    
+    Değişebilir değerler **mut** anahtar sözcüğü ile belirtilir.
+        
+    İleride bu kavrama daha fazla değineceğiz. Ancak şu an için bu anahtar 
+    sözcüğe dikkat etmeniz yeterlidir.
+- title: Temel Türler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=4443a0deb58f4f3e9ab8c007a9834689
+  content_markdown: >
+    Rust'ta aşina olduğunuz pek çok tür yer almaktadır:
+    
+    
+    * Mantıksal veri türü - `bool` sadece true/false olabilecek bir değeri temsil eder.
+    
+    * İşaretsiz tam sayılar - `u8` `u32` `u64` `u128` bit boyutlu **(0/+)** tam sayı değerlerini temsil eder.
+    
+    * İşaretli tam sayılar - `i8` `i32` `i64` `i128` bit boyutlu **(-/+)** işaretli tam sayı değerlerini temsil eder.
+    
+    * İşaretçi boyutlu tam sayılar - `usize` `isize` işaretçi boyutunda işaretsiz ve işaretli tam sayı türlerini temsil eder.
+    
+    * Kayan noktalı sayılar - `f32` `f64` 32 bit ve 64 bit boyutlarında kayan noktalı sayıları temsil eder.
+    
+    * Çokuzlular - `(değer, değer, ...)` stack üzerinde depolanan aynı veya farklı tür öğelerin sabit boyutlu listesini tutar.
+    
+    * Diziler - `[değer, değer, ...]` değerleri derleme zamanında bilinen aynı veri türündeki öğelerin sabit boyutlu listesini tutar.
+    
+    * Dilimler - `&[1..4]` boyutu çalışma zamanında bilinen öğelerin listesini tutar.
+    
+    * Dizge dilimleri - `str` boyutu çalışma zamanında bilinen metin parçalarını temsil eder.
+    
+    
+    Metinlerle çalışmak size diğer dillerde alışık olduğunuzdan daha karmaşık gelebilir. 
+    Rust bir sistem programlama dili olduğundan, aşina olmadığınız bellek sorunlarını önemser. 
+    Daha sonra bu konuya ayrıntılarıyla değineceğiz.
+    
+    
+    Sayısal türleri bildirirken tür bildirimini sayının hemen sonuna ekleyerek 13u32, 2u8 şeklinde açıkça belirtebilirsiniz.
+- title: Temel Türleri Dönüştürmek
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b7ead1ddeb591aa98cd6d9f67d8178dd
+  content_markdown: >
+    Rust türlerle çalışırken katı olmayı seçtiğinden, sayısal türler söz konusu olduğunda bu dönüşümlerin açıkça yapılmasını bekler. 
+    `u8` türündeki bir değeri `u32` türünden bir değerle tür dönüşümü yapmadan sorunsuzca toplayamazsınız.
+    
+    
+    Neyse ki sayısal tür dönüşümleri `as` anahtar kelimesiyle oldukça kolaylaştırır.
+- title: Sabitler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=62f940304624960ef3dc92c0271213f5
+  content_markdown: >
+    Sabitler, kodumuzun çeşitli yerlerinde verimli şekilde kullanabilen 
+    değerleri tanımlamamıza izin verirler. 
+    Derleme sırasında sabitlerin adları tuttukları değerle değiştirildiğinden, 
+    bellekte kalıcı bir adresleri bulunmaz. 
+    Bu nedenle aynı sabite yapılan farklı başvuruların aynı hafıza adresine erişeceği garanti edilmez.
+    
+    
+    Değişkenlerin aksine sabitler tür açıklamaları yapılarak bildirilmeli ve 
+    daima tüm harflerin büyük olarak yazıldığı `SCREAMING_SNAKE_CASE` biçiminde ifade edilmelidir.
+- title: Diziler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=514253033552d835d0feb51c3b127a1a
+  content_markdown: >
+    **Dizi**, aynı tür öğelerden oluşan, sabit boyutlu bir koleksiyon türüdür.
+        
+    Dizinin veri türü `[T; N]` olarak temsil edilir. **T** burada öğenin türünü gösterirken, 
+    **N** derleme zamanında bilinen sabit uzunluğunu ifade eder.
+
+
+    Dizinleri *usize* türünde ve 0'dan başlayan dizi öğelerine erişmek için `dizi[x]` söz dizimi kullanılır. 
+- title: İşlevler
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=7f3b5bd6b59e2d4de6e375e8d29d3a90
+  content_markdown: >
+    Bir işlev herhangi bir sayıda parametreye sahip olabilir.
+    
+
+    Bu örnekte, **ekle** işlevi, `i32` yani 32 bit tam sayı türünde iki parametre kabul eder.
+
+
+    İşlev isimleri her zaman `snake_case` biçiminde tercih edilmelidir.
+- title: Çoklu Dönüş Değerleri
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c949a55fe8b8e9f72af9205f813f3990
+  content_markdown: >
+    Bir **çokuzlu** yardımıyla işlevlerden aynı anda birden çok değer döndürebilir.
+
+
+    Döndürülen çokuzlunun elemanlarına dizin numaraları kullanılarak erişilir.
+
+
+    Rust, çeşitli yıkım biçimlerini desteklediğinden, veri yapılarını ayrı değişkenler halinde değerlendirebilirsiniz!
+- title: Boş Değer Döndürmek
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=61b15ba2b9f347185bc1d7546df7ce7c
+  content_markdown: >
+    Bir işlevin dönüş türü bildirilmediğinde, **unit** olarak da bilinen boş bir çokuzlu döndürülür.
+
+
+    Boş bir çokuzlu `()` şeklinde ifade edilir.
+
+
+    Her ne kadar sık kullanılmıyor olsalar da bu belirtecin `()` boş bir çokuzluyu temsil ettiğini bilmeniz önemlidir.
+- title: Bölüm 1 - Sonuç
+  content_markdown: >
+    Bu bölümü tamamladığınıza göre artık derleyicinin nasıl çalıştığı hakkında az çok bilgi sahibi oldunuz demektir. 
+    Bir sistem programlama dili olarak Rust, değerlerin hafızadaki büyüklüğüne, değişkenlerin değiştirilip değiştirilemeyeceğine, 
+    veri türlerinin birbiriyle örtüşüp örtüşmediğine oldukça önem verir. 
+
+
+    Bu bölümde gördüklerimiz, Rust dilinin bütününü kapsayan **güvenliğin** belirmeye başladığının ilk işaretleridir.
+    Bir sonraki bölümde başka dillerden aşina olduğumuz `if` ve `for` deyimleriyle ilgileneceğiz!
+    
+    
+    Ek kaynaklar (İngilizce):
+    
+    * [Youtube: Rust Cast - Rust'un temel sayı türlerine derinlemesine bakış](https://www.youtube.com/watch?v=n5TRBkbystY)
+      
+    * [Web sitesi: Rust Book 2018 - Temel veri türleri hakkında derinlikli açıklama](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+      
+    * [Web sitesi: Rust Cheat Sheet - Veri Türleri](https://cheats.rs/#basic-types)

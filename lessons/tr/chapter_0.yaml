@@ -1,0 +1,28 @@
+- title: >-
+    Merhaba <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">,
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6c4b961091ef8e437683a89f3990fe6e
+  content_markdown: |
+    *Rust Turuna* Hoş Geldiniz. Bu turun Rust programlama dili özelliklerinin adım adım anlatıldığı bir rehber olması amaçlanmıştır. Rust, genellikle dik öğrenme eğrisine sahip bir dil olarak kabul edilir. Ancak ben sizi daha karmaşık bölümlere gelmeden önce Rust'ın keşfedilecek pek çok şeyi olduğuna ikna edebileceğimi umuyorum.
+        
+    Bu rehberi aşağıdaki dillerde okuyabilirsiniz:
+
+    * [İngilizce](00_en.html)
+    * [Almanca](00_de.html)
+    * [İspanyolca](00_es.html)
+    * [Fransızca](00_fr.html)
+    * [Interlingua](00_ie.html)
+    * [Macarca](00_hu.html)
+    * [Brezilya Portekizcesi](00_pt-br.html)
+    * [Rusça](00_ru.html)
+    * [Basitleştirilmiş Çince](00_zh-cn.html)
+    * [Geleneksel Çince](00_zh-tw.html)
+    * [Japonca](00_ja.html)
+    * [Korece](00_ko.html)
+    * [Українська](00_ua.html)
+        
+    İçeriğe dair önerileriniz varsa yahut çevirilere katkıda bulunmak istiyorsanız, Rust Turu'nun [Github deposuna](https://github.com/richardanaya/tour_of_rust) göz atabilirsiniz.
+        
+    Tur süresince klavyenizin <span class="emoji">⬅️</span> ve <span class="emoji">➡️</span> tuşlarını kullanabilirsiniz.
+    Bu klasik örnek Rust'ın Unicode dizgilerini desteklediğini gösterir.

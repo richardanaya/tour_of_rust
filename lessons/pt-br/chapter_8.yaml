@@ -1,0 +1,218 @@
+- title: Capítulo 8 - Ponteiros inteligentes
+  content_markdown: >
+    Neste capítulo vamos desmistificar os ponteiros inteligentes. Vamos explorar essas estruturas de dados que nos permitem interagir com o mais baixo nível de memória.
+
+
+    Ferris diz: "Não se sinta pressionado por este capítulo se você acha que não pode escrever seu próprio código de gerenciamento de memória de baixo nível em uma leitura rápida. Este capítulo é principalmente para apresentá-lo a algumas ferramentas úteis e dar uma ideia de como eles trabalham!"
+- title: Revisitando referências
+  content_markdown: >
+    Uma referência é fundamentalmente apenas um número que é a posição inicial de alguns bytes na memória. Seu único propósito é representar o conceito de onde os dados de um tipo específico estão. O que torna uma referência diferente de apenas um número é que o Rust validará o tempo de vida das referências para que não dure mais do que a o que ele se refere (caso contrário, obteríamos um erro quando o usarmos!).
+- title: Ponteiros brutos
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20locacao_de_memoria%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22O%20dado%20est%C3%A1%20aqui%20%7B%7D%22%2C%20locacao_de_memoria)%3B%0A%7D%0A
+  content_markdown: >
+    As referências podem ser convertidas em um tipo mais primitivo chamado *ponteiro bruto*. Muito parecido com um número, ele pode ser copiado e movido com poucas restrições. O Rust não garante a validade da localização da memória para o qual aponta.
+
+
+    Há dois tipos de indicadores brutos:
+
+
+    * `*const T` - um ponteiro bruto para dados do tipo T que nunca deve mudar.
+
+    * `*mut T` - um ponteiro bruto para dados do tipo T que podem mudar.
+
+
+    Os ponteiros brutos podem ser convertidos de e para números (por exemplo, `usize`).
+
+
+    Os ponteiros brutos podem acessar dados com código *inseguro* (falaremos a respeito mais tarde).
+
+
+    Detalhes da memória:
+
+    * Uma referência em Rust é muito semelhante a um ponteiro em C em termos de uso, mas com muito mais restrições de tempo de compilação sobre como pode ser armazenado e movido para outras funções.
+
+    * Um ponteiro bruto em Rust é semelhante a um ponteiro em C, pois representa um número que pode ser copiado, passado e até transformado em tipos numéricos onde pode ser modificado como um número para fazer cálculos de ponteiro.
+- title: Desreferenciamento
+  content_markdown: |
+    O processo de acessar/manipular dados que está sendo referido por uma *referência* (ou seja, `&i32`) é chamado de *desreferenciamento*.
+
+
+    As referências são usadas para acessar/manipular dados de duas maneiras:
+
+
+    * Acesso aos dados referidos durante a atribuição de variáveis.
+
+    * Acesso a campos ou métodos dos dados referidos.
+
+
+    O Rust tem alguns operadores poderosos que nos permitem fazer isso.
+- title: O operador *
+  content_markdown: >
+    O operador `*` é uma forma explícita de desreferenciamento de uma referência.
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    Detalhes da memória:
+
+    - Como i32 é um tipo primitivo que implementa a trait `Copy`, os bytes da variável `a` na pilha são copiados para os bytes da variável `b`.
+- title: O operador .
+  content_markdown: >
+    O operador `.` é usado para acessar campos e métodos de uma referência. Ele funciona de uma maneira mais sutil.
+
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+
+    Uau! Por que não precisamos adicionar `***` antes de `ref_ref_ref_f`? Isso ocorre porque o operador `.` desreferencia automaticamente uma sequência de referências. Essa última linha é transformada na seguinte pelo compilador automaticamente.
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: Ponteiros inteligentes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20Linguarudo%3CT%3E%20%7B%0A%20%20%20%20valor%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20Linguarudo%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20foi%20usado!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.valor%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Linguarudo%20%7B%0A%20%20%20%20%20%20%20%20valor%3A%20%22mensagem%20secreta%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20o%20desreferenciamento%20acontece%20aqui%20imediatamente%0A%20%20%20%20%2F%2F%20depois%20foo%20%C3%A9%20auto-referenciado%20para%20a%20%0A%20%20%20%20%2F%2F%20fun%C3%A7%C3%A3o%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    Além da possibilidade de criar referências a dados tipados existentes usando o operador `&`, o Rust nos dá a possibilidade de criar structs *reference-like* chamadas **ponteiros inteligentes**.
+
+
+    *Grosso modo*, podemos pensar nas referências como um tipo que nos dá acesso a outro tipo. Os ponteiros inteligentes são diferentes em seu comportamento das referências normais, pois operam com base na lógica interna que um programador escreve. Você — o programador — é a parte *inteligente*.
+
+
+    Normalmente os ponteiros inteligentes implementam as traits `Deref`, `DerefMut` e `Drop` para especificar a lógica do que deve acontecer quando a estrutura é desreferenciada com os operadores `*` e `.`.
+- title: Código inseguro inteligente
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20Isto%20%C3%A9%20um%20ponteiro%20bruto.%20Obter%20o%20endere%C3%A7o%20de%20mem%C3%B3ria%0A%20%20%20%20%2F%2F%20de%20algo%20como%20um%20n%C3%BAmero%20%C3%A9%20totalmente%20seguro%0A%20%20%20%20let%20ponteiro_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Localiza%C3%A7%C3%A3o%20dos%20dados%20na%20mem%C3%B3ria%3A%20%7B%7D%22%2C%20ponteiro_a)%3B%0A%20%20%20%20%2F%2F%20Transformar%20nosso%20n%C3%BAmero%20em%20um%20ponteiro%20bruto%0A%20%20%20%20%2F%2F%20para%20f32%20tamb%C3%A9m%20%C3%A9%20seguro.%0A%20%20%20%20let%20ponteiro_b%20%3D%20ponteiro_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Isso%20n%C3%A3o%20%C3%A9%20seguro%20porque%20estamos%20dizendo%20ao%20compilador%0A%20%20%20%20%20%20%20%20%2F%2F%20para%20assumir%20que%20o%20nosso%20ponteiro%20%C3%A9%20um%20f32%20v%C3%A1lido%20e%20que%0A%20%20%20%20%20%20%20%20%2F%2F%20desreferencie%20seu%20valor%20para%20a%20vari%C3%A1vel%20b.%20O%20Rust%0A%20%20%20%20%20%20%20%20%2F%2F%20n%C3%A3o%20tem%20como%20verificar%20se%20essa%20suposi%C3%A7%C3%A3o%20%C3%A9%20verdadeira.%0A%20%20%20%20%20%20%20%20*ponteiro_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22Eu%20juro%20que%20isso%20%C3%A9%20uma%20pi.zza!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Os ponteiros inteligentes tendem a usar código *inseguro* com bastante frequência. Como mencionado anteriormente, eles são ferramentas comuns para interagir com os níveis mais baixos de memória no Rust.
+
+
+    O que é um código inseguro? O código inseguro se comporta exatamente como Rust normal, com exceção de algumas habilidades sobre as quais o compilador Rust é incapaz de oferecer garantias.
+
+
+    Uma habilidade primária do código inseguro é o *desreferenciamento de um ponteiro bruto*. Isso significa pegar um *ponteiro bruto* de uma posição na memória, declarar que "há uma estrutura de dados aqui!" e transformá-lo em uma representação de dados que você pode usar (ou seja, `*const u8` em `u8`).
+
+
+    O Rust não tem como rastrear o significado de cada byte que é gravado na memória. E porque o Rust não pode dar garantias sobre o que existe em um número arbitrário usado como um *ponteiro bruto* que ele põe o desreferenciamento em um bloco `unsafe { ... }`.
+
+
+    Ponteiros inteligentes *desreferenciam ponteiros brutos* extensivamente, mas são bem competentes no que fazem.
+- title: Amigos familiares
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pizza%20%7B%0A%20%20%20%20receita_secreta%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20vamos%20pedir%20por%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20alocar%20e%20salvar%20a%20localiza%C3%A7%C3%A3o%20da%20mem%C3%B3ria%20como%20um%20n%C3%BAmero%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20a%20artm%C3%A9tica%20de%20ponteiros%20e%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20escreva%20alguns%20valores%20u8%20na%20mem%C3%B3ria%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pizza%20%7B%20receita_secreta%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pizza%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interprete%20o%20ponteiro%20receita_secreta%20como%20um%20ponteiro%20bruto%20f32%0A%20%20%20%20%20%20%20%20let%20ponteiro%20%3D%20self.receita_secreta%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20desreferencie%20em%20um%20valor%20de%20retorno%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*ponteiro%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pizza%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22Fa%C3%A7a%20uma%20pizza%22%20desreferenciando%20o%20nosso%20%0A%20%20%20%20%2F%2F%20ponteiro%20inteligente%20da%20struct%20Pizza%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    Considere alguns ponteiros inteligentes que já vimos como `Vec<T>` e `String`.
+
+
+    O `Vec<T>` é um ponteiro inteligente que simplesmente possui uma região da memória em bytes. O compilador Rust não tem ideia do que existe nesses bytes. O ponteiro inteligente interpreta o que significa pegar os itens da região da memória que ele gerencia, mantém o controle de onde os bytes das estruturas de dados começam e terminam e, finalmente, desreferencia um ponteiro bruto para uma estrutura de dados com uma interface ergonômica, limpa e fácil para nós usarmos (por exemplo, `my_vec[3]`).
+
+
+    Da mesma forma, `String` mantém o controle de uma região de memória em bytes, restringe programaticamente o conteúdo escrito nele para ser sempre `utf-8` válido, e ajuda a desreferenciar essa região de memória em um tipo `&str`.
+
+
+    Ambas as estruturas de dados usam desreferenciamento inseguro de ponteiros brutos para fazer seu trabalho.
+
+
+    Detalhes da memória:
+
+    * O Rust tem um equivalente ao `malloc` do C usando [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) e [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) para obter suas próprias regiões de memória para gerenciar.
+- title: Memória Alocada para a Heap
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pizza%3B%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22mais%20saborosa%20na%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pizza%20%3D%20Box%3A%3Anew(Pizza)%3B%0A%20%20%20%20heap_pizza.comer()%3B%0A%7D%0A
+  content_markdown: >
+    O `Box` é um ponteiro inteligente que nos permite mover dados da pilha para a heap.
+
+
+    O desreferenciamento nos permite usar os dados alocados na heap ergonomicamente como se fossem do tipo original.
+- title: Revisitando o main falível
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pizza%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22Esta%20pizza%20n%C3%A3o%20est%C3%A1%20quente!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pizza%20%3D%20Box%3A%3Anew(Pizza)%3B%0A%20%20%20%20heap_pizza.comer()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+    O código Rust pode ter uma infinidade de representações dos erros, mas a biblioteca padrão tem uma trait universal `std::error::Error` para descrever os erros.
+
+
+    Usando um ponteiro inteligente `Box` podemos usar o tipo `Box<dyn std::error::Error>` como um tipo comum para retornar os erros, porque nos permite propagar um erro na heap e interagir com ele em alto nível sem precisar conhecer um tipo específico.
+
+
+    No início do Tour por Rust, aprendemos que `main` pode retornar um erro. Agora podemos retornar um tipo capaz de descrever quase qualquer tipo de erro que possa ocorrer em nosso programa, desde que a estrutura de dados do erro implemente a trait usual `Error` do Rust.
+
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: Contando referências
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pizza%3B%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22mais%20saborosa%20na%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pizza%20%3D%20Rc%3A%3Anew(Pizza)%3B%0A%20%20%20%20let%20heap_pizza2%20%3D%20heap_pizza.clone()%3B%0A%20%20%20%20let%20heap_pizza3%20%3D%20heap_pizza2.clone()%3B%0A%0A%20%20%20%20heap_pizza3.comer()%3B%0A%20%20%20%20heap_pizza2.comer()%3B%0A%20%20%20%20heap_pizza.comer()%3B%0A%0A%20%20%20%20%2F%2F%20toda%20a%20contagem%20das%20refer%C3%AAncias%20dos%0A%20%20%20%20%2F%2F%20ponteiros%20inteligentes%20s%C3%A3o%20descartados%0A%20%20%20%20%2F%2F%20agora%20que%20os%20dados%20de%20Pizza%20na%20heap%20s%C3%A3o%0A%20%20%20%20%2F%2F%20finalmente%20desalocados%0A%7D%0A
+  content_markdown: >
+    O `Rc` é um ponteiro inteligente que move os dados da pilha para a heap. Ele nos permite clonar outros ponteiros inteligentes `Rc` que têm a capacidade de imutavelmente tomar emprestado os dados que foram colocados na heap.
+
+
+    Somente quando o último ponteiro inteligente é descartado que os dados na heap são desalocados.
+- title: Compartilhando acesso
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pizza%20%7B%0A%20%20%20%20fatias%3A%20u8%0A%7D%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22mais%20saborosa%20na%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.fatias%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20valida%20a%20seguran%C3%A7a%20da%20mem%C3%B3ria%20em%20tempo%20de%20execu%C3%A7%C3%A3o%0A%20%20%20%20%2F%2F%20aviso%3A%20pizza_cell%20n%C3%A3o%20%C3%A9%20mut!%0A%20%20%20%20let%20pizza_cell%20%3D%20RefCell%3A%3Anew(Pizza%7Bfatias%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20mas%20podemos%20emprestar%20refer%C3%AAncias%20mut%C3%A1veis!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pizza%20%3D%20pizza_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pizza.comer()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pizza.comer()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pizza%20%C3%A9%20descartada%20no%20final%20do%20escopo%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20agora%20podemos%20tomar%20emprestado%20imutavelmente%0A%20%20%20%20%2F%2F%20uma%20vez%20que%20nossa%20refer%C3%AAncia%20mut%C3%A1vel%20%C3%A9%20descartada%0A%20%20%20%20%20let%20ref_pizza%20%3D%20pizza_cell.borrow()%3B%0A%20%20%20%20%20println!(%22sobraram%20%7B%7D%20fatias%22%2C%20ref_pizza.fatias)%3B%0A%7D%0A
+  content_markdown: >
+    O `RefCell` é uma estrutura de dados contêiner comumente mantida por ponteiros inteligentes que obtém dados e nos permite emprestar referências mutáveis e imutáveis para o que está lá dentro. Ele evita o abuso do empréstimo aplicando as regras de segurança de memória do Rust em tempo de execução quando você pede emprestado os dados que estão dentro:
+
+
+    **Apenas uma referência mutável OU várias referências imutáveis, mas não ambas!**
+
+
+    Se você violar essas regras, o `RefCell` retornará um panic.
+- title: Compartilhando entre threads
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pizza%3B%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22s%C3%B3%20eu%20como%20a%20pizza%20agora!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pizza%20%3D%20Mutex%3A%3Anew(Pizza)%3B%0A%20%20%20%20%2F%2F%20vamos%20pegar%20emprestada%20uma%20refer%C3%AAncia%20imut%C3%A1vel%20bloqueada%20de%20Pizza%0A%20%20%20%20%2F%2F%20temos%20que%20desembrulhar%20o%20resultado%20de%20um%20bloqueio%20porque%20pode%20falhar%0A%20%20%20%20let%20ref_pizza%20%3D%20mutex_pizza.lock().unwrap()%3B%0A%20%20%20%20ref_pizza.comer()%3B%0A%20%20%20%20%2F%2F%20a%20refer%C3%AAncia%20bloqueada%20%C3%A9%20descartada%20aqui%0A%20%20%20%20%2F%2F%20e%20o%20valor%20protegido%20da%20mutex%20pode%20ser%20usado%20por%20outra%20pessoa%0A%7D%0A
+  content_markdown: >
+    O `Mutex` é uma estrutura de dados contêiner comumente mantida por ponteiros inteligentes que recebe os dados e nos permite emprestar referências mutáveis e imutáveis aos dados que estão dentro. Isso evita o abuso do empréstimo fazendo com que o sistema operacional restrinja o acesso aos dados a apenas uma thread de CPU por vez, bloqueando as outras threads até que a thread original seja concluída com seu empréstimo bloqueado.
+
+
+    O multithreading está além do escopo do Tour por Rust, mas `Mutex` é uma parte fundamental da orquestração de várias threads de CPU acessando os mesmos dados.
+
+
+    Há um ponteiro inteligente especial `Arc` que é idêntico ao` Rc`, exceto pelo uso de incrementos thread-safe de contagens de referência. Frequentemente é usado para ter muitas referências ao mesmo `Mutex`.
+- title: Combinando ponteiros inteligentes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pizza%20%7B%0A%20%20%20%20fatias%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer_fatia(%26mut%20self%2C%20nome%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20pegou%20uma%20fatia!%22%2C%20nome)%3B%0A%20%20%20%20%20%20%20%20self.fatias%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20CriaturaMarinha%20%7B%0A%20%20%20%20nome%3A%20String%2C%0A%20%20%20%20pizza%3A%20Rc%3CRefCell%3CPizza%3E%3E%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20comer(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20usa%20um%20ponteiro%20inteligente%20da%20pizza%20para%20um%20empr%C3%A9stimo%20mut%C3%A1vel%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pizza.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20d%C3%A1%20uma%20mordida!%0A%20%20%20%20%20%20%20%20p.comer_fatia(%26self.nome)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pizza%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pizza%20%7B%20fatias%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20e%20sarah%20recebem%20clones%20do%20ponteiro%20inteligente%20da%20pizza%0A%20%20%20%20let%20ferris%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pizza%3A%20pizza.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pizza%3A%20pizza.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.comer()%3B%0A%20%20%20%20sarah.comer()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pizza.borrow()%3B%0A%20%20%20%20println!(%22sobraram%20%7B%7D%20fatias%22%2C%20p.fatias)%3B%0A%7D%0A
+  content_markdown: >
+    Os ponteiros inteligentes podem parecer limitados, mas eles podem fazer algumas combinações muito poderosas.
+
+
+    `Rc<Vec<Foo>>` - permite a clonagem de vários ponteiros inteligentes que podem pegar emprestado o mesmo vetor de estruturas de dados imutáveis na heap.
+
+
+    `Rc<RefCell<Foo>>` - permite a múltiplos ponteiros inteligentes a capacidade de emprestar mutável/imutavelmente a mesma estrutura `Foo`.
+
+
+    `Arc<Mutex<Foo>>` - permite que vários ponteiros inteligentes bloqueiem empréstimos mutáveis/imutáveis temporários exclusivamente por thread de CPU.
+
+
+    Detalhes da memória:
+
+    * Você notará um assunto em comum em muitas dessas combinações. O uso de um tipo de dado imutável (possivelmente pertencente a vários ponteiros inteligentes) para modificar dados internos. Isso é conhecido como o padrão "mutabilidade interior" no Rust. É um padrão que nos permite dobrar as regras de uso de memória em tempo de execução com o mesmo nível de segurança das verificações de tempo de compilação do Rust.
+- title: Capítulo 8 - Conclusão
+  content_markdown: >
+    Os ponteiros inteligentes são expressões idiomáticas da programação em Rust, assim não precisamos recriar os padrões mais usuais de uso de memória. Com eles você está pronto para enfrentar os desafios mais difíceis! Agora que temos os fundamentos do Rust, vamos falar um pouco sobre como fazemos projetos maiores. No capítulo 9 nos libertamos das linhas de código de uma única página.

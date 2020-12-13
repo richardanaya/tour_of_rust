@@ -1,0 +1,137 @@
+- title: Bölüm 3 - Temel Veri Yapıları
+  content_markdown: >
+    Artık temel türlerin ötesini keşfetme zamanımız geldi çattı! 
+    
+    Bu bölümde Rust'un temel veri yapıları ve bunların bellekte temsil edilme biçimlerine odaklanırken, 
+    arka plandaki işlerin örtük olmak yerine, açıkça yürütülüyor oluşunu takdir edeceğinizi farz ediyorum.
+- title: Yapılar
+  content_markdown: >
+    Dilimize **yapı** olarak çevirebileceğimiz `struct` veri alanlarından oluşan bir koleksiyondur.
+
+
+    Yapının **veri alanları**na gelince onlar, bir veri türü ile ilişkilendirilmiş değerlerden oluşabildiği gibi, temel türler, 
+    enum türleri yahut başka türleri temsil eden yapılardan da oluşabilir.
+
+
+    Derleyiciye açısından yapı tanımı ise, bellekteki alanların birbirine ne kadar yakın yerleştirileceğini belirten bir şemaya benzetilebilir.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=222882553c5c99a43dec043ae2d747f9
+- title: Çağrı Yöntemleri
+  content_markdown: >
+    Belirli bir veri türüyle ilişkilendirdiğimiz işlevlere yöntem adı veririz. Rust yöntemleri çağrılma şekillerine göre iki şekilde adlandırılır: 
+
+
+    **Statik yöntemler** — Türün kendisine ait olan ve `::` işleciyle çağrılan yöntemlerdir.
+
+
+    **Örnek yöntemleri** - Halihazırda oluşturulmuş bir tür örneğine ait olan ve `.` işleciyle çağrılan yöntemlerdir.
+
+
+    Kendi yöntemlerinizi nasıl oluşturacağımızı ilerleyen bölümlerde öğreneceğiz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=82c61f429f697097fc65c28f42d53f03
+- title: Bellek
+  content_markdown: >
+   Rust programlarında veriler belleğin üç ayrı bölgesinde depolanırlar:
+
+    * **Data memory** - Belleğin Veri Bölgesi olarak telaffuz edebileceğimiz bu bölüm, program işletildiği müddetçe değerlendirilecek 
+      sabit uzunluktaki **statik** verileri saklamak için kullanılır. İlk rust programımızda ekrana yazdırdığımız "Merhaba Dünya!" cümlesi, 
+      aslında değiştirilemeyen ve sadece tek noktadan okunabilen bir byte koleksiyonu olduğundan bu bölgeye yerleştirilir. Belirgin 
+      konumları ve sabit uzunlukları ile derleyicilerin pek çok iyileştirme yapabildiği bu verilerin saklandığı *veri bölümü** çok hızlı 
+      olarak kabul edilmektedir.
+      
+      
+    * **Stack memory** - Belleğin Yığın Bölgesi olarak telaffuz edebileceğimiz bu bölüm, bir işlev içinde değişken olarak bildirilen verilerin 
+      tutulduğu bölgedir. Belleğin bu konumu işlev çağrısı süresince hiçbir zaman değişmediğinden, veri erişim hızı derleyici iyileştirmeleri 
+      sayesinde epeyce arttırılır. 
+    
+    
+    * **Heap memory** - Belleğin Öbek Bölgesi şeklinde telaffuz edebileceğimiz bu bölüm, programın işletilmesi sırasında yani **çalışma zamanında** 
+      oluşturulan veriler için kullanılır. Bu bölgedeki veriler eklenebilir, taşınabilir, silinebilir, ve  hatta yeniden boyutlandırılabilir haldedir. 
+      Bu bölge dinamik yapıda olduğundan, her ne kadar hız bakımından yığından bellek bölgesinden geri kalıyor görünse de, belleğin yaratıcı biçimde 
+      kullanılmasına izin verir. Bu bölgeye veri ekleme işlemine **bellek ayırma**, bu bölümden veri silme işlemine de **belleği iade etme** adı verilmektedir.
+- title: Bellekte Veri Oluşturmak
+  content_markdown: >
+    Bir yapıyı **örneklediğimizde** programımız tarafından o yapının birbiriyle ilişkili alanları, bellekte yan yana gelecek şekilde yerleştirilir.
+
+
+    Bir yapının örneğini, bildirdiği tüm alan değerlerini belirleyerek oluştururuz: 
+
+
+    `YapininAdi {alan1, alan2, ...}`.
+
+
+    Yapı alanlarına ise `.` nokta işlecini kullanarak erişebiliyoruz.
+
+
+    Örneğimiz için bellek aşağıdaki gibi şekillenecektir:
+
+    * Örneğimizdeki "Ferris" benzeri tırnak içindeki metinler, salt okunur veriler olduğundan Belleğin Veri Bölgesine yerleştirilir.
+    
+    * `String::from` işlevine yapılan çağrı, yığındaki DenizCanlisi alanlarıyla yan yana yerleştirilen bir String yapısı oluşturur. 
+      String yani dilimizdeki karşılığıyla dizgi, değiştirilebilir metni temsil eder ve bu değişim şu şekilde mümkün olur:
+      
+      1. Öbek Bölgesi üzerinde ayrılan belleğin boyutu değişebilir olduğundan, metin için gereken düzenlenebilir alan belleğin bu bölgesinde oluşturulur.
+      
+      2. Öbek üzerinde ayrılmış bulunan bu bellek konumuna bir başvuru oluşturulur ve bu başvuru daha sonra değineceğimiz bir `String` yapısında depolanır. 
+    
+    * Nihayetinde, *Ferris* ve *Sarah* adlı bu arkadaşlarımız, bellekte daima sabit biçimde konumlandırılacaklarından, *stack memory* 
+      yani **yığın bölümüne** yerleştirilecek veri yapılarına sahip olacaklardır.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=706295cdac14dbc8beaf8fc4967c1efe
+- title: Çokuzlu Benzeri Yapılar 
+  content_markdown: |
+    Daha kısa ve pratik olmak isterseniz çokuzlu benzeri yapılar kullanabilirsiniz.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=2787ca42bcd61218745843b1adeeb3bf
+- title: Birim Benzeri Yapılar
+  content_markdown: >
+    Herhangi bir üyeye sahip olmayan bu yapı türü boş bir çokuzluya benzer.
+
+
+    Bölüm 1'de bahsedildiği gibi *birim* aslında boş bir çokuzlunun `()` 
+    diğer adı olduğundan bu tür yapılara *Birim benzeri* yapılar adı verilir.
+
+
+    Bu tür yapılar nadiren kullanılmakla beraber, içlerinde veri tutmadıklarından, 
+    uygulamalara özellik eklerken faydalıdırlar.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=e5f9c04919adb415abaf802dde54671a
+- title: Numaralandırmalar
+  content_markdown: >
+    `enum` anahtar sözcüğüyle tanımlanan ve kapsamındaki olası değerler listesinden, değerleri belirgin yeni bir tür oluşumuna izin veren yapılardır.
+
+
+    Örüntü eşlemede kullandığımız `match` sözcüğü, tüm olası enum değerlerini etraflıca işlemeye yardımcı olduğundan, numaralandırmalar 
+    kaliteli kod üretiminde güçlü birer araçtır.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=373c6a6604cd9ddd4de6f16d380a70e5
+- title: Veriler ve Numaralandırmalar
+  content_markdown: >
+    `enum` öğeleri C'deki *birlik*ler gibi davranmalarına izin veren bir veya daha fazla veri türüne sahip olabilir.
+
+
+    Bir `enum` örüntü eşleme modelindeki `match` yardımıyla eşleştirildiğinde, eşleşen her alan veya değeri bir değişken adıyla bağlayabilirsiniz.
+
+
+    Bellek ayrıntıları:
+
+    * Bellek gereksinimi, en büyük öğesinin bellek boyutu kadardır. Bu şekilde, tüm olası değerlerin aynı bellek alanına sığması sağlanır.
+
+    * Öğelerin veri türlerine ek olarak, etiket türlerini gösteren sayısal değerleri de bulunur.
+
+
+    Ek olarak:
+
+    * Rust'ın `enum`ları, *tagged union* olarak bilinen etiketli birliklerdir.
+
+    * Rust *cebirsel türler*e sahiptir denildiğinde anlatılmak istenen; türlerin, yeni bir tür oluşturmak amacıyla birleştirilmesinden başka bir şey değildir.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=377f65f1c68fd2e2375ec30513a17080
+- title: Bölüm 3 - Sonuç
+  content_markdown: >
+    Artık fikirlerimizi kodlarla ifade edebileceğimiz temel araçlara kavuşmamız harika! Umuyorum bu bölümde Rust'un temel işlemlerinin, 
+    türleriyle nasıl özlü ve uyumlu şekilde çalıştığını daha net kavrayabilmişizdir. 
+    
+    Sonraki bölümde veri yapılarının tek bir tür yerine, türden bağımsız şekilde genelleştirilmesine ve  daha esnek biçimde gösterilmesine 
+    olanak sağlayan genel türler kavramına değineceğiz.

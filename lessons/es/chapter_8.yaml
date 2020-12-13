@@ -1,0 +1,250 @@
+- title: Capítulo 8 - Punteros Inteligentes
+  content_markdown: >
+    En este capítulo vamos a desmitificar los punteros inteligentes. Exploraremos estas estructuras de datos que nos permiten interactuar con la memoria a bajo nivel.
+
+
+    Ferris dice: «No te agobies en este capítulo si ves que aún no puedes escribir tu propio código de gestión de memoria a bajo nivel en poco tiempo. En este capítulo te introduciremos, sobre todo, algunas herramientas útiles y veremos cómo funcionan.»
+- title: Repaso de Referencias
+  content_markdown: >
+    Una referencia es principalmente un número que refiere la ubicación inicial de algunos bytes en la memoria. Su único propósito es representar el concepto de dónde existen datos de un tipo específico. Lo que hace que una referencia sea diferente de un número simple es que Rust comprobará que la vida útil de las referencias no dure más de lo que se indica (de lo contrario, al usarlo nos daría error).
+- title: Punteros Sin Procesar
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: >
+    Las referencias pueden convertirse en un tipo más primitivo llamado *puntero sin procesar*. Al igual que un número, se puede copiar y mover sin mucha restricción. Rust no asegura la validez de la ubicación de la memoria a la que apunta.
+
+
+    Existen dos tipos de punteros sin procesar:
+
+
+    * `*const T` - para los datos tipo T que no deben cambiar.
+
+    * `*mut T` - para datos tipo T que pueden cambiar.
+
+
+    Los punteros sin procesar se pueden convertir en números y a partir de números. (Por ejemplo, `usize`).
+
+
+    Los punteros sin procesar pueden acceder a los datos con un código no seguro *unsafe* (Lo veremos más adelante).
+
+
+    Detalles de la memoria:
+
+    * Una referencia en Rust es muy similar a un puntero en C en términos de uso, pero con muchas más restricciones 
+    en tiempo de compilación en cuanto a cómo se puede almacenar y trasladar a otras funciones.
+    * Un puntero sin procesar  en Rust es similar a un puntero en C que representa un número que se puede copiar, 
+    pasar de un lado a otro, e incluso convertir en tipos numéricos donde se pueden modificar como un número para hacer aritmética de punteros.
+
+- title: Indirección
+  content_markdown: |
+    El proceso de acceso/manipulación de los datos a los que indica mediante una *referencia* (es decir, `&i32`) se denomina *indirección*. 
+
+    Las referencias se utilizan para acceder/manipular los datos de dos maneras:
+    * Acceso a los datos indicados durante la asignación de variables.
+    * Acceso a los campos o métodos de los datos indicados.
+
+    Rust tiene algunos operadores eficaces que nos permiten hacerlo.
+- title: El operador * 
+  content_markdown: >
+    El operador `*` es una forma explícita de indireccionar una referencia.
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    Detalle de la memoria:
+
+    - Debido a que i32 es un tipo primitivo que incorpora el trait de copia `(Copy)`, los bytes de la variable `a` en la pila se copian en los bytes de la variable `b`.
+- title: El operador .
+  content_markdown: >
+    El operador `.` se utiliza para acceder a los campos y métodos de una referencia. Funciona de manera un poco más sutil.
+
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+
+    ¿Por qué no hace falta añadir `***` antes de `ref_ref_ref_f`? Pues porque el operador `.` operator indirecciona automáticamente una secuencia de referencias. La última línea se convierte automáticamente en la siguiente por el compilador.
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: Punteros Inteligentes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    Además de la capacidad de crear referencias de tipos de datos existentes utilizando el operador `&` operator, 
+    Rust nos permite crear *estructuras de referencia* llamadas **punteros inteligentes**.  
+
+
+    Podemos pensar en referencias  a alto nivel como un tipo que nos da acceso a otro tipo. Los punteros inteligentes 
+    se diferencian en su comportamiento de las referencias normales en que operan basados en la lógica interna que el 
+    programador (o sea, tú) escribe al ser la parte *inteligente*.
+
+
+    Los punteros inteligentes implementan de forma típica los traits `Deref`, `DerefMut` y `Drop` para especificar la 
+    lógica de lo que debe suceder cuando la estructura se indirecciona con los operadores `*` y `.`.
+- title: Código Inteligente No Seguro
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Los punteros inteligentes tienden a usar código no seguro *(unsafe)* con bastante frecuencia. 
+    Como se mencionó anteriormente, son herramientas comunes para interactuar con los niveles más bajos de memoria en Rust.
+
+
+    ¿Qué es código no seguro? El código no seguro se comporta exactamente como el normal de Rust, 
+    con la excepción de algunas habilidades que el compilador de Rust no puede garantizar.
+
+
+    Una de las principales capacidades de un código no seguro es la de *indireccionar un puntero sin 
+    procesar*. Eso significa mover un puntero sin procesar a una posición en la memoria y declarar que 
+    ahí existe una estructura de datos para después convertirlo en una representación de los datos que 
+    se pueden utilizar (es decir, `*const u8` en `u8`). Rust no tiene forma de rastrear el significado 
+    de cada byte que se escribe en la memoria. Debido a que Rust no puede hacer garantizar lo que existe 
+    en un número arbitrario que se ha usado comoun *puntero sin procesar*, pone la indirección en un bloque 
+    no seguro `unsafe { ... }`. 
+
+
+    Los punteros inteligentes *indireccionan los punteros sin procesar* ampliamente, pero están bien probados en lo que hacen.
+- title: Viejos Conocidos
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    Hay que tener en cuenta algunos punteros inteligentes que ya hemos visto, como `Vec<T>` y `String`.
+    
+
+    `Vec<T>` es un puntero inteligente que sólo posee alguna región de memoria de bytes. El compilador 
+    de Rust no tiene ni idea de lo que existe en estos bytes. El puntero inteligente interpreta lo que 
+    significa tomar elementos de la región de memoria que gestiona, mantiene un registro de dónde comienzan 
+    y terminan las estructuras de datos dentro de esos bytes, y luego finalmente indirecciona un puntero 
+    sin procesar en estructuras de datos en una interfaz ergonómica y sencilla para que la usemos. (e.g. `my_vec[3]`).
+
+
+    `String` mantiene un registro de una región de memoria de bytes, y restringe de forma programada el 
+    contenido que se escribe en ella para que siempre sea válido en `utf-8` y ayude a indireccionar esa 
+    región de memoria en un tipo `&str`.
+
+
+    Ambas estructuras de datos usan la indirección no segura de los punteros sin procesar para desempeñar sus tareas.
+
+
+    Detalles de la memoria:
+
+
+    * Rust tiene un equivalente del `malloc` de C usando
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) y
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) para obtener sus propias regiones de memoria para gestionar.
+- title: Memoria Asignada al Montículo
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: >
+    `Box` es un puntero inteligente que nos permite mover los datos de la pila al montículo.
+
+
+    La indirección nos permite usar los datos asignados al montículo de forma ergonómica, como si fuera el tipo original.
+- title: Repaso de Errores en Main
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+    El código de Rust tiene diversas formas de representar errores, pero la librería estándar 
+    tiene un trait universal para describirlos: `std::error::Error`.
+
+
+    Haciendo uso del puntero inteligente `Box`, podemos usar el tipo `Box<dyn std::error::Error>`
+    como un tipo común para devolver errores porque nos permite propagar un error en el montículo 
+    e interactuar con él a un alto nivel sin tener que conocer ningún tipo específico.
+
+
+    Al principio de este Tour, aprendimos que `main` puede devolver un error. Ahora podemos devolver 
+    un tipo capaz de describir casi cualquier tipo de error que pueda ocurrir en nuestro programa 
+    siempre que la estructura de datos de dicho error implemente el trait de error común de Rust `(Error)`.
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: Rc (Referencing Counting)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20all%20reference%20count%20smart%20pointers%20are%20dropped%20now%0A%20%20%20%20%2F%2F%20the%20heap%20data%20Pie%20finally%20deallocates%0A%7D%0A
+  content_markdown: >
+    `Rc` es un puntero inteligente que mueve los datos de la pila al montículo. Nos permite clonar 
+    otros punteros inteligentes `Rc` que tienen la capacidad de tomar prestados de forma inmutable 
+    los datos que se colocaron en el montículo.
+
+
+    Sólo cuando se libera (*drop*) el último puntero inteligente, los datos en el montículo se liberan.
+- title: Acceso Compartido
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell` es una estructura de datos de tipo contenedor comúnmente compuesta por punteros inteligentes
+    que toma datos y nos permite tomar prestadas referencias mutables e inmutables de lo que hay dentro.
+    Evita que se abuse de los préstamos haciendo cumplir las reglas de seguridad de la memoria de Rust 
+    en tiempo de ejecución cuando pides prestado los datos del interior:
+
+
+    **Sólo permite una referencia mutable o múltiples referencias inmutables, ¡pero no ambas!**
+
+
+    Si incumples estas reglas, `RefCell` entrará en pánico.
+- title: Compartir Datos Entre Hilos
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20let's%20borrow%20a%20locked%20immutable%20reference%20of%20pie%0A%20%20%20%20%2F%2F%20we%20have%20to%20unwrap%20the%20result%20of%20a%20lock%0A%20%20%20%20%2F%2F%20because%20it%20might%20fail%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20locked%20reference%20drops%20here%2C%20and%20mutex%20protected%20value%20can%20be%20used%20by%20someone%20else%0A%7D%0A
+  content_markdown: >
+    `Mutex` es una estructura de datos de tipo contenedor comúnmente compuesta por punteros 
+    inteligentes que toma los datos y nos permite tomar prestadas referencias mutables e 
+    inmutables de los datos que contiene. Así se evita el abuso del préstamo al hacer que 
+    el sistema operativo restrinja sólo un hilo de la CPU en el momento de acceder a los datos, 
+    bloqueando otros hilos hasta que el original termine con los datos prestados.
+
+
+    Los multihilos están fuera del alcance del Tour de Rust, pero `Mutex` es una parte 
+    fundamental de la coordinación de múltiples hilos de CPU que acceden a los mismos datos.
+
+
+    Existe un puntero inteligente especial `Arc` que es idéntico al `Rc` excepto porque usa 
+    un incremento de referencia con seguridad de hilo. A menudo se utiliza para tener muchas 
+    referencias al mismo `Mutex`.
+- title: Combinación de Punteros Inteligentes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: >
+    A simple vista, los punteros inteligentes pueden parecer limitados, pero disponen de algunas combinaciones muy eficaces.
+
+
+    `Rc<Vec<Foo>>` - Permite la clonación de múltiples punteros inteligentes que pueden tomar prestado el mismo vector de estructuras de datos inmutables en el montículo.
+
+
+    `Rc<RefCell<Foo>>` - Permite a varios punteros inteligentes la capacidad de tomar prestada mutablemente/immutablemente la misma estructura `Foo`.
+
+
+    `Arc<Mutex<Foo>>` - Permite a múltiples punteros inteligentes la capacidad de bloquear préstamos temporales mutables/inmutables en un hilo de CPU de manera exclusiva.
+
+
+    Detalle de la memoria:
+
+    * Muchas de estas combinaciones siguen un mismo patrón. El uso de un tipo de datos inmutables (posiblemente propiedad de múltiples punteros inteligentes) para modificar los datos internos. En Rust, esto se conoce como el patrón de "mutabilidad interior". Es un patrón que nos permite saltarnos las reglas de uso de la memoria en tiempo de ejecución con el mismo nivel de seguridad que las comprobaciones en tiempo de compilación de Rust.
+      
+- title: Capítulo 8 - Conclusión
+  content_markdown: >
+    Los punteros inteligentes son como los modismos de la programación Rust y no hace falta recrear los patrones más comunes de uso de la memoria. Concluido este capítulo, ya estás listo para afrontar los desafíos más difíciles. Ahora que ya tenemos conocimientos sobre los principios fundamentales de Rust, hablemos un poco de cómo llevar a cabo proyectos más complejos. En el capítulo 9 nos liberamos de las líneas de código de una sola página.
