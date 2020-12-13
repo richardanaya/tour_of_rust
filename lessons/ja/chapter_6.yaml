@@ -130,31 +130,28 @@
     returns itself, but it might not be as ergonomic as you hope for.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
-- title: Text As Function Parameters
+- title: 関数パラメータとしてのテキスト
   content_markdown: >
-    String literals and strings are generally passed around as a string slice to
-    functions. This offers a lot of flexibility for
-
-    most scenarios where you don't actually have to pass ownership.
+    文字列リテラルや文字列は、一般的に文字列スライスとして関数に渡されます。
+    これによって、実際には所有権を渡す必要がないほとんど場合において柔軟性が増します。
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%E3%81%AF%26'static%20str%E3%82%92%26str%E3%81%A8%E3%81%97%E3%81%A6%E5%80%9F%E7%94%A8%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%E3%81%AFString%E3%82%92%26str%E3%81%A8%E3%81%97%E3%81%A6%E5%80%9F%E7%94%A8%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
 - title: 文字列の構築
   content_markdown: |
     `concat` と `join` は、文字列を構築するためのシンプルだが強力な方法です。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
-- title: Formatting Strings
+- title: 文字列のフォーマット
   content_markdown: >
-    The `format!` macro allows us to create a string by defining a parameterized
-    string with placeholders for where and how values should be placed (e.g.
-    `{}`).
+    `format!`マクロを使うと、パラメータ化された文字列を定義して文字列を作成することができ、
+    値をどこにどのように配置すべきかはプレースホルダ（例：`{}`）で指定します。
 
 
-    `format!` uses the same parameterized strings as `println!`
+    `format!` は `println!` と同じパラメータ付きの文字列を使用します。
 
 
-    The capabilities of this function are too large of scope for *Tour of Rust*;
-    check out the documentation [here](https://doc.rust-lang.org/std/fmt/).
+    この関数の機能は、*Tour of Rust* では説明しきれません。
+    [ドキュメント](https://doc.rust-lang.org/std/fmt/) をチェックしてください。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
 - title: 文字列変換
@@ -164,16 +161,9 @@
     ジェネリック関数 `parse` を用いることで文字列や文字列リテラルを型付きの値に変換できます。この関数は失敗する可能性があるので、`Result`を返します。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
-- title: Chapter 6 - Conclusion
+- title: 第 6 章 - まとめ
   content_markdown: >
-    Now you know the basics of text!  As you have seen, Unicode makes working
-    with text a bit tricky, but the standard library 
-
-    has plenty of functionality to make it easy to manage.  
+    これで、テキストの基本が分かりましたね！これまで見てきたようにUnicodeによってテキストの操作は少し厄介になりますが、標準ライブラリにはその管理を簡単にするための多くの機能があります。 
 
 
-    Up to now, we've mostly looked at Rust from the lens of a procedural
-    paradigm (i.e. just functions and data),
-
-    but it's time we now talk about traits and the capabilties unlocked by
-    Rust's object oriented paradigm.
+    これまでほとんどの場合、手続き的なパラダイム（つまり、関数とデータだけ）からRustを見てきましたが、今回はRustのオブジェクト指向パラダイムによって開放されるtraitsと能力について話します。
