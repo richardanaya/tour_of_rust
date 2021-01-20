@@ -1,0 +1,156 @@
+- title: บทที่ 9 - Project Organization and Structure
+  content_markdown: >
+    จนถึงตอนนี้ ตัวอย่างที่เราเขียนทั้งหมดจะเป็นแบบไฟล์เดียวทั้งนั้น
+    เดียวเราจะมาคุยกันว่าเราจะจัดระเบียบโค้ดให้ดูดีขึ้น และแชร์ให้คนอื่นใช้งานต่อได้อย่างไร!
+- title: Modules
+  content_markdown: |
+    ทุกโปรแกรมและไลบรารีของ Rust ล้วนเป็น *crate*.
+
+    และทุกๆ crate สร้างจากลำดับชั้นของ *modules*.
+
+    ทุกๆ crate ต้องมีโมดูลหลักหนึ่งตัวเสมอ
+
+    โมดูล สามารถถือครองได้ทั้ง ตัวแปร, ฟังก์ชัน, structs, traits แบบโกลบอล หรือแม้แต่โมดูลอื่น
+
+    Rust ไม่ใช้การจับคู่ 1 ไฟล์ต่อ 1 ลำดับชั้นของโมดูล แต่เราใช้วิธีสร้างโมดูลให้ชัดเจนด้วยมือเราเอง
+- title: Writing a Program
+  content_markdown: |
+    ทุกๆโปรแกรมจะมีโมดูลหลักในไฟล์ชื่อ `main.rs`
+- title: Writing a Library
+  content_markdown: |
+    ทุกๆไลบรารีจะมีโมดูลหลักในไฟล์ชื่อ `lib.rs`
+- title: Referencing Other Modules and Crates
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: >
+    ของต่างๆในโมดูลสามารถอ้างถึงได้ด้วย โมดูลพาธแบบเต็ม
+    `std::f64::consts::PI`.
+
+
+    อีกวิธีที่ง่ายกว่าคือการใช้คีย์เวิร์ด **use** ซึ่งจะช่วยให้เราระบุสิ่งที่ต้องการใช้
+    จากโมดูลนั้น โดยไม่ต้องใส่ โมดูลพาธแบบเต็ม ตัวอย่างเช่นเมื่อเราใช้ `use std::f64::consts::PI`
+    จะทำให้เราสามารถระบุเพียงแค่ `PI` ได้ในฟังก์ชันหลัก
+
+
+    **std** คือ crate ของ **standard library** หรือไลบรารีมาตรฐานของ Rust
+
+    ซึ่งเต็มไปด้วย โครงสร้างข้อมูล และฟังก์ชันที่มีประโยชน์ในการติดต่อกับระบบปฏิบัติการ
+
+
+    สามารถค้นหา crates ได้จากแหล่งรวบรวมที่สร้างโดยชุมชนของเราที่
+    [https://crates.io](https://crates.io/).
+- title: Referencing Multiple Items
+  content_markdown: |
+    สามารถอ้างถึงของหลายๆอย่างได้ด้วยการระบุพาธโมดูลครั้งเดียวได้
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris ไม่กิน TAU เขากินแต่ PI
+- title: Creating Modules
+  content_markdown: |
+    เวลาเราคิดถึงโค้ด เรามักจะคิดไปถึงการจัดลำดับชั้นของไฟล์ในไดเร็กทอรี
+    Rust เลยช่วยให้คุณสร้างโมดูลให้ใกล้เคียงกับโครงสร้างไฟล์ของคุณเลย
+
+    Rust มีสองวิธีในการประกาศโมดูล ตัวอย่างเช่นโมดูล `foo` สามารถทำได้โดย:
+      * ตั้งชื่อไฟล์ว่า `foo.rs`
+      * ตั้งชื่อไดเร็กทอรีว่า `foo` และสร้างไฟล์ชื่อ `mod.rs` ไว้ข้างใน
+- title: Module Hierarchy
+  content_markdown: >
+    โมดูลสามารถอาศัยอยู่กับโมดูลอื่นได้ โดยในการสร้างความสัมพันธ์ระหว่าง โมดูล กับโมดูลย่อยแบบนี้
+    คุณจะต้องเขียนในโมดูลหลัก
+
+
+    ```rust
+
+    mod foo;
+
+    ```
+
+
+    การประกาศอย่างที่เห็นด้านบนนี้ มันจะหาไฟล์ที่ชื่อ `foo.rs` หรือ `foo/mod.rs`
+    และจะเอาเนื้อหาใน `foo` มาแทรกอยู่ในนี้เลย
+- title: Inline Module
+  content_markdown: >
+    สามารถเขียนโมดูลย่อยแทรกลงไปในโค้ดของโมดูลได้โดยตรง
+
+
+    ปกติแล้วการทำ inline modules จะเห็นเป็นปกติในการเขียน unit tests
+    เราเขียนแบบนี้เมื่อใช้ Rust ทำการทดสอบเท่านั้น
+
+
+    ```
+
+    // This macro removes this inline module when Rust 
+
+    // is not in test mode.
+
+    #[cfg(test)]
+
+    mod tests {
+        // Notice that we don't immediately get access to the 
+        // parent module. We must be explicit.
+        use super::*;
+
+        ... tests go here ...
+    }
+
+    ```
+- title: Internal Module Referencing
+  content_markdown: >
+    Rust มีหลายคีย์เวิร์ดให้คุณใช้ใน พาธ `use` ของคุณ เพื่อรับโมดูลที่คุณต้องการแบบเร่งด่วน:
+      
+    * `crate` - the root module of your crate
+
+    * `super` - the parent module of your current module
+
+    * `self` - the current module
+- title: Exporting
+  content_markdown: >
+    ด้วยค่าเริ่มต้น สมาชิกใน *โมดูล* จะไม่ยอมให้เข้าถึงได้จากภายนอกโมดูล (แม้แต่โมดูลลูก)
+    เราทำให้สมาชิกของโมดูลสามารถเข้าถึงได้ด้วยการใช้คีย์เวิร์ด `pub`
+
+
+    ด้วยค่าเริ่มต้น สมาชิกใน *crate* จะไม่ยอมให้เข้าถึงได้จากภายนอก crate
+    เราทำให้สมาชิกของมันสามารถเข้าถึงได้ด้วยการทำให้มันเป็น`pub` ที่ *root module*
+    ของ crate (`lib.rs` หรือ `main.rs`)
+- title: Structure Visibility
+  content_markdown: >
+    แบบเดียวกับฟังก์ชัน ตัวโครงสร้างทั้งหลายก็สามารถประกาศได้ว่ามันต้องการเปิดเผยอะไรออกไปได้
+    ด้วยการใช้ `pub`
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Prelude
+  content_markdown: |
+    คุณอาจสงสัยว่าเราสามารถเข้าถึง `Vec` หรือ `Box` ได้ทุกที่
+    โดยไม่ต้องใช้ `use` เพื่อนำพวกมันเข้ามาก่อนได้ นั่นเป็นเพราะโมดูล `prelude` 
+    ในไลบรารีมาตรฐาน
+
+    ให้รู้ไว้ว่าในไลบรารีมาตรฐานของ Rust ทุกตัวที่ถูกเปิดเผยใน `std::prelude::*`
+    ถือว่าพร้อมใช้ได้ทุกที่ใน Rust โดยอัตโนมัติ นี่คือที่มาของ `Vec` และ `Box`
+    ซึ่งก็มีตัวอื่นด้วยเช่นกัน (Option, Copy,และอื่นๆ)
+- title: Your Own Prelude
+  content_markdown: >
+    และเป็นเพราะ prelude ในไลบรารีมาตรฐาน ก็ไม่แปลกถ้าเราจะมี prelude ของเราเอง
+    เพื่อใช้เป็นจุดเริ่มต้นให้ผู้ใช้รับรู้ว่า ควรนำเข้า โครงสร้างข้อมูลที่ใช้ร่วมกันทั้งหมดก่อนใช้ไลบรารีของคุณ
+    (เช่น `use my_library::prelude::*`)
+
+    ควาจริงมันไม่ได้ใช้ได้ทันทีใน โปรแกรมหรือไลบรารี ที่ใช้ crate ของคุณหรอก
+    แต่มันเป็นหลักการที่ดีที่ควรทำตาม เพื่อให้ผู้คนทราบว่าจุดเริ่มต้นอยู่ที่ใด
+
+
+    Ferris บอกว่า, "จงเป็น rustacean ที่ดีและช่วยเหลือเหล่าเพื่อนปูด้วย prelude ดีๆสักอัน!"
+- title: บทที่ 9 - สรุป
+  content_markdown: >
+    ตอนนี้ คุณก็ได้มีกลเม็ดเล็กๆน้อยๆเพียงพอจะสร้าง แอปพลิเคชันและไลบรารี ด้วย Rust
+    ให้พร้อมใช้งานได้สำหรับโลกนี้แล้ว
+
+    ไม่ต้องกังวลว่าจะจำทั้งหมดนี้ได้หรือไม่ เพราะเมื่อใดที่ไลบรารีของคุณใหญ่ขึ้น
+    และมีคนใช้งานมันมากขึ้น คุณจะพัฒนาขึ้นตามไปด้วย
+
+
+    แหล่งข้อมูล:
+
+    - [Guidelines For Writing Rust
+    APIs](https://rust-lang.github.io/api-guidelines/)

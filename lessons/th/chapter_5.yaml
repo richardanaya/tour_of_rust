@@ -1,0 +1,194 @@
+- title: บทที่ 5 - ความเป็นเจ้าของ และการยืมข้อมูล
+  content_markdown: >
+    Rust มีกระบวนทัศน์เฉพาะตัวในการจัดการหน่วยความจำเมื่อเทียบกับภาษาโปรแกรมอื่น ๆ
+
+    เราจะไปดูพฤติกรรมและการตรวจสอบความถูกต้องของคอมไพเลอร์ทีละขั้นทีละตอน
+    ว่ามันจัดการให้อยู่มือได้อย่างไร
+
+    สิ่งสำคัญที่ต้องจำไว้ก็คือ สุดท้ายแล้ว กฎทั้งหลายที่เราตั้งขึ้นนั้น ไม่ได้มีไว้เพื่อทำให้คุณทำงานยากขึ้น
+    แต่มันมีไว้เพื่อช่วยให้โค้ดของคุณมีโอกาสผิดพลาดน้อยลง!
+- title: ความเป็นเจ้าของ
+  content_markdown: >
+    การสร้างอินสแตนซ์สัก type หนึ่ง และ **ผูกไว้** กับชื่อตัวแปรจะสร้างรีซอร์สหน่วยความจำ
+    ที่คอมไพเลอร์ Rust จะตรวจสอบตลอด **อายุการใช้งาน** ตัวแปรที่ถูกผูกไว้ เราจะเรียกว่า **เจ้าของ** รีซอร์ส
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20instantiate%20structs%20and%20bind%20to%20variables%0A%20%20%20%20%2F%2F%20to%20create%20memory%20resources%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20the%20owner%0A%7D%0A
+- title: การจัดการรีซอร์สโดยอิงตามขอบเขตข้อมูล
+  content_markdown: |
+    Rust ใช้จุดสิ้นสุดของขอบเขตเป็นจุดในการ ทำลายโครงสร้าง(deconstruct) และ คืนหน่วยความจำ(deallocate)
+
+    ตอนนี้เราจะเรียกการ ทำลายโครงสร้าง และการคืนหน่วยความจำนี้ว่า **drop**
+
+    รายละเอียดหน่วยความจำ:
+    * Rust ไม่มี garbage collection
+    * เราเรียกสิ่งนี้ว่า Resource Aquisition Is Initialization ( RAII ) ในภาษา C++
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%20%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%0A%7D%0A
+- title: การ drop ตามลำดับชั้น
+  content_markdown: >
+    เมื่อ struct ถูก drop ลง ตัว struct เองจะถูก drop ก่อน จากนั้นลูกๆของมันจึงจะ drop ตัวเอง และเป็นแบบนี้ไปเรื่อยๆ
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * การที่ Rust ใช้วิธีคืนหน่วยความจำโดยอัตโนมัติ จะช่วยให้มั่นใจได้ว่าจะเกิดการรั่วน้อยลง
+
+    * การ drop ทำได้เพียงครั้งเดียว
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
+- title: การเปลี่ยนเจ้าของ
+  content_markdown: >
+    มื่อเจ้าของถูกส่งผ่านเป็นอาร์กิวเมนต์ไปยังฟังก์ชันความเป็นเจ้าของจะถูกย้ายไปที่พารามิเตอร์ฟังก์ชัน
+
+
+    หลังจาก **ย้าย** ไปแล้ว ตัวแปรในฟังก์ชันเดิมจะไม่สามารถใช้งานได้อีกต่อไป
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * ในระหว่างการ **ย้าย** หน่วยความจำ stack ของค่าเจ้าของจะถูกคัดลอกไปยังหน่วยความจำ stack พารามิเตอร์ของการเรียกฟังก์ชัน
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20moved%20to%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20can%20no%20longer%20be%20used%0A%7D%0A
+- title: การกลับมาเป็นเจ้าของ
+  content_markdown: |
+    แน่นอนว่า ความเป็นเจ้าของก็สามารถได้คืนจากฟังก์ชันได้
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
+- title: การยืมความเป็นเจ้าของด้วยวิธีอ้างอิง
+  content_markdown: |
+    การอ้างอิงถึงช่วยให้เรายืมการเข้าถึงรีซอร์สได้ด้วยการใช้ตัวดำเนินการ `&`
+
+    การอ้างอิงก็สามารถ drop ได้เหมือนกัน
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: การยืมความเป็นเจ้าของ กับของที่เปลี่ยนแปลงค่าได้ ด้วยวิธีอ้างอิง
+  content_markdown: >
+    นอกจากนี้เรายังสามารถยืมการเข้าถึงรีซอร์สที่เปลี่ยนค่าได้ด้วยตัวดำเนินการ `&mut`
+
+
+    โดยที่ตัวเจ้าของเองจะไม่สามารถย้ายหรือแก้ไขอะไรได้ในขณะที่ถูกยืม
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * Rust ป้องกันการเข้าถึงจากทั้งสองทางให้กับ คนที่จะเปลี่ยนค่า กับตัวเจ้าของเอง เพราะว่า
+    ไม่เช่นนั้นอาจทำให้เกิดปัญหาแย่งข้อมูลกัน(data race)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20would%20fail%20because%0A%20%20%20%20%2F%2F%20foo%20cannot%20be%20moved%20while%20mutably%20borrowed%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20fail%20here%20because%0A%20%20%20%20%2F%2F%20foo%20is%20not%20modifiable%20while%20mutably%20borrowed%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%20because%20it's%20no%20longer%20used%20after%20this%20point%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20works%20now%20because%20all%20mutable%20references%20were%20dropped%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20foo's%20ownership%20to%20a%20function%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: การอ้างอิง
+  content_markdown: >
+    การอ้างอิงด้ายการใช้ `&mut` เช่นนี้ เวลาที่คุณจะกำหนดค่าใหม่ให้มัน ให้ใช้ตัวดำเนินการ `*`
+
+
+    ในการกลับกัน คุณก็สามารถสำเนาค่านั้นออกมาด้วยตัวดำเนินกาารเดียวกัน `*` (ซึ่งขึ้นอยู่ด้วยว่าค่านั้นยอมให้ทำสำเนาได้หรือไม่ - ไว้เราจะไปคุยกันเรื่อง type ที่ยอมให้สำเนาได้อีกทีในภายหลัง)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20get%20a%20copy%20of%20the%20owner's%20value%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%20the%20reference's%20owner's%20value%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: การส่งผ่านข้อมูลที่ยืมมา
+  content_markdown: >
+    กฎที่ใช้กับการอ้างอิงใน Rust อาจจะสรุปออกมาได้ดังนี้:
+
+
+    * Rust ยอมให้มีการอ้างอิงถึงของที่เปลี่ยนแปลงค่าได้แค่ตัวเดียว **หรือ** หลายตัวก็ได้แต่ต้องเป็นแบบเปลี่ยนแปลงค่าไม่ได้ **แต่ทำทั้งสองอย่างพร้อมกันไม่ได้**
+
+    * ตัวที่อ้างอิงถึงตัวอื่น จะต้องไม่มี **lifetimes** นานกว่าเจ้าของ
+
+
+    สิ่งนี้ไม่มีแนวโน้มที่จะเป็นปัญหาเมื่อส่งต่อการอ้างอิงถึงฟังก์ชัน
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * กฎข้อแรกของ การอ้างอิง ใช้ป้องกันการแย่งข้อมูลกัน แล้วการแย่งข้อมูลกันคืออะไร? การแย่งข้อมูลกัน
+    เกิดขึ้นเมื่อมีการอ่านข้อมูล ที่ในเวลาเดียวกันนั้นก็การเขียนข้อมูลในเวลาเดียวกัน ทำได้การได้ข้อมูลอาจจะไม่ถูกต้อง
+    สิ่งนี้เกิดขึ้นบ่อยครั้งในการเขียนโปรแกรมแบบมัลติเธรด
+
+    * กฎข้อที่สอง ใช้ป้องกันการเกิดตัวอ้างอิง ที่อ้างถึงของที่ไม่มีอยู่จริง (เรียกว่า dangling pointers ในภาษา C)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20because%20all%20mutable%20references%20are%20dropped%20within%0A%20%20%20%20%2F%2F%20the%20function%20do_something,%20we%20can%20create%20another.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: การอ้างอิงถึงตัวอ้างอิงตัวอื่น
+  content_markdown: |
+    การอ้างอิงสามารถใช้อ้างถึงการอ้างอิงอื่นได้
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%20allow%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: lifetimes ที่ชัดเจน
+  content_markdown: >
+    ถึงแม้ว่า Rust จะไม่ได้ให้คุณเห็น lifetime ของตัวแปรในโค้ด แต่คอมไพเลอร์เข้าใจเรื่องนี้เป็นอย่างดี
+    และตรวจสอบอยู่เสมอว่าจะไม่มีตัวอ้างอิงใดมี lifetime นานกว่าเจ้าของ
+ 
+
+    ฟังก์ชันมีวิธีการกำหนดค่าพารามิเตอร์ให้ชัดเจนด้วยสัญลักษณ์ว่า พารามิเตอร์และค่าที่ส่งคืนจะใช้ lifetime เดียวกัน
+
+
+    การระบุ lifetime ให้เริ่มด้วย `'` (เช่น `'a`, `'b`, `'c`)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20the%20parameter%20foo%20and%20return%20value%20share%20the%20same%20lifetime%0Afn%20do_something%3C'a%3E(foo%3A%20%26'a%20Foo)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%2C%20allowing%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: Lifetimes หลายตัว
+  content_markdown: >
+    ตัวระบุ lifetime ช่วยเพิ่มความชัดเจนได้ก็จริง แต่บางทีคอมไพเลอร์เองก็ยังไม่สามารถแยกแยะ lifetime ของทุกตัวได้ทั้งหมด
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20and%20the%20return%20value%20share%20the%20same%20lifetime%0A%2F%2F%20foo_a%20has%20an%20unrelated%20lifetime%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%20because%20only%20foo_b's%20lifetime%20exist%20beyond%20here%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%0A%7D%0A
+- title: Static Lifetimes
+  content_markdown: >
+    ตัวแปรแบบ **static** เป็นรีซอร์สในหน่วยความจำที่ถูกสร้างตั้งแต่ compile-time และจะคงอยู่
+    ตั้งแต่โปรแกรมเริ่มทำงานจนจบ พวกมันต้องระบุ type ให้ชัดเจน
+
+
+    **static lifetime** เป็นรีซอร์สในหน่วยความจำที่จะอยู่ตลอดจนจบโปรแกรม ข้อสังเกตคือ
+    จากนิยามนี้ static lifetime บางตัวอาจจะเกิดตอน runtime ก็ได้
+
+
+    รีซอร์สของ static lifetime ใช้ `'static` เป็นตัวกำหนด
+
+
+    รีซอร์สของ `'static` จะไม่มีวันโดน **drop**
+    `'static` resources will never **drop**.
+
+
+    ถึงแม้ว่าจะใช้รีซอร์สของ static lifetime มาเก็บการอ้างอิง พวกมันก็ยังต้องเป็น 'static` เหมือนกัน
+    (ถ้าน้อยไปมันจะอยู่ได้ไม่นานพอ)
+
+
+    รายละเอียดหน่วยความจำ:
+
+
+    * การแก้ไขข้อมูลในตัวแปรแบบ static ที่จริงแล้วเป็นเรื่องที่อันตรายเพราะว่า
+      ปกติตัวแปรนี้เป็น golbal และมันสามารถถูกอ่านได้จากที่ไหนก็ได้ซึ่งอาจจะทำให้เกิดการแย่งข้อมูลกันได้
+      แล้วเราจะมาพูดกันเรื่องที่ว่า การใช้ตัวแปรแบบ global นี้มีความถ้าทายอย่างไรบ้างในภายหลัง
+    * Rust ยอมให้เราใช้บล็อค `unsafe { ... }` เพื่อทำบางอย่างที่ตัวคอมไพเลอร์เองไม่อาจรับประกัน
+      ได้ว่าจะเกิดอะไรขึ้นกับหน่วยความจำ และ เรื่อง The [<span
+    style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+    นี้ เราควรพูดกันแบบจริงจัง
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Lifetimes In Data Types
+  content_markdown: >
+    ประเภทข้อมูลทั่วไปก็สามารถใส่ lifetime ให้สมาชิกแต่ละตัวได้ เหมือนกับฟังก์ชัน
+
+
+    Rust จะคอยตรวจสอบให้ว่า โครงสร้างข้อมูลที่มีการอ้างอิงไปที่อื่น จะไม่มีทางมีอายุ
+    ยืนยาวไปกว่าเจ้าของตัวจริงที่มันอ้างไปถึง
+
+
+    เพราะเราจะไม่ยอมให้มี struct ที่อ้างอิงไปหาของที่ไม่มีอยู่จริง มาวิ่งเล่นแถวนี้
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: บทที่ 5 - สรุป
+  content_markdown: >
+    โว้ว ยินดีด้วยนะที่ผ่านมาถึงตรงนี้จนได้ ฉันรู้ว่ามันเยอะ แต่นี่เป็นหนทางสู่การเป็น Rustacean
+    และหวังว่ามันจะช่วยให้เข้าใจ Rust ดียิ่งขึ้นในฐานะที่เป็นภาษาโปรแกรมมิ่งที่มีเป้าหมายในการ
+    แก้ปัญหาที่เป็นความท้าทายหลายๆสิ่งเหล่านี้ ที่มักจะเกิดขึ้นในการโปรแกรมงานระบบ
+
+    * การแก้ไขรีซอร์สโดยไม่ตั้งใจ
+
+    * ลืมทำลายโครงสร้างรีซอร์ส
+
+    * ทำลายโครงสร้างรีซอร์สโดยไม่ตั้งใจสองครั้ง
+
+    * ไปใช้รีซอร์สที่ถูกทำลายโครงสร้างไปแล้ว
+
+    * มีการแย่งเขียนรีซอร์สในขณะที่มีคนอื่นกำลังอ่านอยู่
+
+    * ในกรณีที่คอมไพเลอร์ไม่สามารถรับประกันได้ ก็ยังตรวจดูเองได้เนื่องจากโค้ดมีความชัดเจนในตัวมันเอง
+
+
+    เราจะนำความรู้ที่มีในตอนนี้ไปลองดูว่า Rust จะจัดการข้อมูลที่เป็นข้อความได้อย่างไรในบทหน้า
