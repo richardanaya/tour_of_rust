@@ -39,6 +39,7 @@ This project also aims to provide this book in as many languages as possible.
 * 繁體中文 - [kkpoon](https://github.com/kkpoon)
 * 日本語 - [7shi](https://github.com/7shi), [Rossy](https://github.com/rossy0213), [Yuji Sugiura](https://github.com/leader22), [TaKO8Ki](https://github.com/TaKO8Ki)
 * 한국어 - [fermat39](https://github.com/fermat39), [Sungjin Han](https://github.com/meinside)
+* ภาษาไทย - [pallat](https://github.com/pallat)
 * Türkçe - [Rust Dili](https://github.com/RustDili/), [mertataol](https://github.com/mertataol), [doganid](https://github.com/doganid), [mhmmdd](https://github.com/mhmmdd)
 
 # Looking for translators!
