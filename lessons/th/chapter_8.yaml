@@ -1,0 +1,281 @@
+- title: บทที่ 8 - Smart Pointers
+  content_markdown: >
+    ในบทนี้จะช่วยให้เราเข้าใจเกี่ยวกับ smart pointer เพิ่มขึ้น
+    ไปสำรวจโครงสร้างข้อมูลนี้ มันช่วยให้เราจัดการกับหน่วยความจำในเชิงลึก
+
+
+    Ferris says: "อย่าเพิ่งรู้สึกหนักใจกับบทนี้ อย่ากลัวว่าคุณจะเขียนโค้ดจัดการกับ
+    หน่วยความจำเชิงลึกไม่ได้จากการอ่านบทสั้นๆนี้ อันที่จริงเนื้อหาในบทนี้แค่พยายาม
+    แนะนำเครื่องมือบางตัวที่มีประโยชน์ ให้ดูคร่าวๆว่ามันทำงานอย่างไรแค่นั้น"
+- title: กลับมาเรื่อง การอ้างอิง อีกรอบ
+  content_markdown: >
+    ความจริงแล้วการอ้างอิงมันก็แค่ตัวเลขที่บอกจุดเริ่มต้นของไบต์หนึ่งในหน่วยความจำ
+    จุดประสงค์ก็เพื่อบอกให้รู้การมีอยู่ ว่าข้อมูลที่ระบุ type นั้นอยู่ที่ไหน
+
+    สิ่งที่ทำให้การอ้างอิงแตกต่างจากตัวเลขปกติก็คือ Rust จะตรวจสอบ lifetime
+    ของการอ้างอิงอยู่ตลอด ไม่ให้มันมีอายุยาวนานกว่าสิ่งที่มันชี้ไป (เพราะไม่เช่นนั้นเราจะเจอข้อผิดพลาดตอนที่ใช้มัน)
+- title: Raw Pointers
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: >
+    การอ้างอิงสามารถเปลี่ยนไปเป็น type ตั้งต้นที่เรียกว่า *raw pointer* ได้
+    ซึ่งมันมีลักษณะเหมือนเลขปกติที่ คัดลอกได้เคลื่อนที่ได้โดยแทบจะไม่มีข้อจำกัด
+
+    ซึ่ง Rust จะไม่รับประกันความถูกต้องของตำแหน่งในหน่วยความจำที่มันจะชี้ไปถึง
+
+
+    raw pointer มีสองแบบ:
+
+
+    * `*const T` - คือ raw pointer ของข้อมูลจาก type T ที่ไม่ควรมีการเปลี่ยนแปลงเกิดขึ้น
+
+    * `*mut T` - คือ raw pointer ของข้อมูลจาก type T ที่เปลี่ยนแปลงได้
+
+
+    Raw pointers สามารถแปลงค่าไปเป็นตัวเลขและแปลงกลับได้ (เช่น `usize`)
+
+
+    Raw pointers สามารถเข้าถึงข้อมูลได้ด้วยการใช้ *unsafe*  (กล่าวเพิ่มเติมภายหลัง)
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * การอ้างอิงใน Rust มีความคล้ายกับพอยเตอร์ในภาษา C มากในแง่ของการใช้งาน
+    แต่จะมีข้อจำกัดมากหน่อยในช่วง compile time ที่ต้องคิดว่าจะจัดเก็บมันอย่างไร
+    และจะย้ายไปฟังก์ชันอื่นอย่างไร
+    * raw pointer ของ Rust นั้นคล้ายกับพอยเตอร์ของภาษา C ตรงที่มันแสดงตัวเป็นตัวเลขปกติ
+      ทำให้สามารถคัดลอกหรือส่งต่อไปที่อื่นได้ แถมยังเอาไปเข้ากระบวนการทางคณิตศาสตร์
+      เพื่อแก้ค่าได้ เรียกว่า pointer math
+- title: Dereferencing
+  content_markdown: |
+    กระบวนการในการ เข้าถึง/จัดการ ข้อมูลที่ถูกอ้างอิงด้วย *reference* (เช่น `&i32`)
+    เราเรียกว่า *dereferencing*
+
+    
+    การ เข้าถึง/จัดการ ด้วยการอ้างอิงทำได้ 2ทาง:
+    * เข้าถึงในระหว่างการกำหนดค่า ให้ตัวแปรที่ถูกอ้างถึง
+    * เข้าถึงผ่านฟิลด์หรือเมธอดของข้อมูลที่ถูกอ้างถึง
+
+    แน่นอนว่า Rust เตรียมตัวดำเนินการเหมาะๆไว้ให้เราใช้อยู่แล้ว
+- title: The * Operator
+  content_markdown: >
+    ตัวดำเนินการ `*` เป็นวิธีที่ชัดเจนที่นำมาใช้ dereference ตัวอ้างอิง
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    รายละเอียดหน่วยความจำ:
+
+    - เนื่องจาก i32 เป็น type ตั้งต้น ที่อิมพลีเมนต์ `Copy` trait
+
+    ไบต์ของตัวแปร `a` บนแสต็กจึงถูกคัดลอกไปยัง ไบต์ของตัวแปร `b`
+- title: The . Operator
+  content_markdown: >
+    ตัวดำเนินการ `.` ถูกใช้เมื่อทำการเข้าถึงฟิลด์หรือเมธอดของตัวอ้างอิง ซึ่งมันค่อนข้างฉลาดอยู่บ้าง
+
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+
+    ว้าวดูสิ เราไม่ต้องใส่ `***` ข้างหน้า `ref_ref_ref_f` เลยเห็นไหม
+    นี่ก็เพราเจ้าตัวดำเนินการ `.` มัน dereference ตัวอ้างอิงให้อัตโนมัติ
+    โดยตัวคอมไพเลอร์จะเป็นตัวเปลี่ยนบรรทัดสุดท้ายให้เป็นบรรทัดต่อไปนี้เอง
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: Smart Pointers
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    นอกเหนือจากความสามารถในการสร้างตัวอ้างอิงให้กับข้อมูลของ type ที่มีอยู่จริง
+    ด้วยการใช้ตัวดำเนินการ `&` แล้ว Rust มีอีกความสามารถหนึ่งนั่นคือการสร้าง
+    โครงสร้าง *reference-like* (การอ้างอิงเสมือน) ที่มีชื่อเรียกว่า **smart pointers**
+
+
+    การอ้างอิง ในมุมมองที่สูงขึ้นไปอีก มันคือการเข้าถึง type หนึ่งได้จากอีก type หนึ่ง
+    โดยที่ Smart pointer จะมีพฤติกรรมต่างไปจาก การอ้างอิงปกติ ตรงที่มันจะทำงาน
+    ตามที่โปรแกรมเมอร์เขียนตรรกะให้นั่นเพราะว่า
+
+    โปรแกรมเมอร์ - อย่างคุณที่แหล่ะ - คือสิ่งที่ *ฉลาด* ที่สุด
+
+
+    โดยทั่วไป smart pointers จะอิมพลีเมนต์ Trait เหล่านี้ `Deref`, `DerefMut`, และ `Drop`
+    เพื่อกำหนดทิศทางให้ ตรรกะว่าจะเกิดอะไรขึ้นเมื่อ struct พยายาม dereference ด้วยตัวดำเนินการ `*` และ `.`
+- title: Smart Unsafe Code
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    เรามักจะใช้ Smart pointers คู่กับ *unsafe* ในการเขียนโค้ดอยู่บ่อยครั้ง
+    แต่ก็อย่างที่ได้กล่าวมาแล้วก่อนหน้านี้ว่า ของพวกนี้เป็นเครื่องมือพื้นฐานที่ Rust ใช้
+    โต้ตอบกับหน่วยความจำในระดับล่างที่สุด
+
+
+    แล้วโค้ดที่ไม่ปลอดภัย (unsafe code) นี่คืออะไรน่ะเหรอ
+    ที่จริงมันก็คือโค้ด Rust ปกติธรรมดาแต่มีข้อยกเว้นบางอย่างที่คอมไพเลอร์ของ Rust ไม่อาจรับประกันได้
+
+
+    ความสามารถหลักของ unsafe code ก็คือ *dereferencing a raw pointer* (การจัดการ raw pointer)
+    ซึ่งก็คือการใช้ *raw pointer* ขี้ไปที่ตำแหน่งในหน่วยความจำและประกาศว่า
+    "มีโครงสร้างข้อมูลอยู่ตรงนี้!" และเปลี่ยนมันมาอยู่ในรูปที่คุณเอาไปใช้ได้ (เช่นเปลี่ยน `*const u8` ไปเป็น `u8`)
+
+    Rust ไม่มีความสามารถที่จะตามไปดูว่าแต่ละไบต์ที่ถูกเขียนลงไปในหน่วยความจำมีความหมายว่าอย่างไรบ้าง
+    เพราะว่า Rust ไม่สามารถรับประกันสิ่งที่อยู่ในเลขที่ถูกใช้เป็น *raw pointer*
+
+    เราจึงเอา dereference นั้นไปใส่ไว้ในกล่อง `unsafe { ... }`
+
+
+    การใช้ Smart pointers *เพื่อ dereference ไปที่ raw pointers* แบบนี้มันชัดเจนดีว่ากำลังต้องการทำอะไร
+- title: เพื่อนที่คุ้นเคย
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    คราวนี้เรามาพิจารณา smart pointers ที่เราเคยเห็นมาแล้วเช่น `Vec<T>` และ `String`
+
+
+    `Vec<T>` คือ smart pointer ที่ครอบครองพื้นที่ไบต์บางส่วนในหน่วยความจำ โดยที่คอมไพเลอร์ของ Rust
+    ไม่รู้เลยว่า ไบต์พวกนั้นคืออะไร
+
+    smart pointer จะแปลสิ่งนั้นว่ามันหมายถึงอะไรเพื่อจะได้หยิบมันมาจากหน่วยความจำ
+    เพื่อมาจัดการด้วยการตามดูว่า โครงสร้างข้อมูลนั้นมีจุดเริ่มต้นและสิ้นสุดอยู่ที่ไหน จนพบ
+    โครงสร้างข้อมูลตัวจริงที่ raw pointer ที่ชี้ไปถึง และนำมาจัดหน้าตาให้ดูดีใช้งานง่าย
+    ตามอินเตอร์เฟสในที่สุด (ตัวอย่างเช่น `my_vec[3]`)
+    
+
+    ในทำนองเดียวกัน `String` ก็จะตามดูไบต์ในหน่วยความจำ
+    และใช้กระบวนการทางโปรแกรมบังคับให้สิ่งที่เขียนไว้ในนั้นอยู่ในรูปแบบ `utf-8` ที่ถูกต้อง
+    จะได้ dereference ของในหน่วยความจำนั้นผ่าน type `&str`
+
+
+    โครงสร้างข้อมูลทั้งสองตัวนี้ใช้ unsafe ทำงานเพื่อเข้าไปจัดการกับ raw pointers
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * Rust มีของที่เทียบเคียงได้กับ `malloc` ของภาษา C ก็คือ 
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) และ
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html )
+    เพื่อเอาหน่วยความจำของคุณออกมาจัดการ
+- title: การจัดสรรพื้นที่ใน Heap
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: >
+    `Box` คือ smart pointer ที่อนุญาติให้เราย้ายข้อมูลจาก stack ไปไว้ใน heap ได้
+
+
+    Dereferencing ช่วยให้เราสามารถใช้ heap ที่จัดสรรข้อมูลตามหลักสรีรศาสตร์ราวกับว่าเป็นข้อมูลเดิม
+- title: กลับมาที่ Main ที่ผิดพลาดได้ อีกครั้ง
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+    โค้ดของ Rust มีวิธีการมากมายในการแสดงค่า error ซึ่งในไลบรารีมาตรฐานก็มี trait กลาง
+    ชื่อ `std::error::Error` เพื่อแสดงค่า error อยู่ด้วย
+
+
+    เราสามารถใช้ smart pointer `Box` ด้วย type `Box<dyn std::error::Error>`
+    มาเป็น type ส่วนกลางในการคืนค่า error ได้ เพราะมันยอมให้เราส่ง error ใน heap ขึ้นไปเรื่อยๆ
+    เพื่อให้เราจัดการมันในระดับที่สูงขึ้นไปได้ โดยไม่ต้องรู้ว่า type จริงๆมันคืออะไร
+
+
+    เมื่อต้นต้นของ Tour of Rust เราได้เรียนรู้ไปว่า `main` สามารถคือค่า error ได้
+    ตอนนี้ เราจะได้คืน type ที่ครอบคลุม error ได้เกือบทุกแบบที่อาจเกิดขึ้นในโปรแกรม
+    ตราบใดที่ error นั้นอิมพลีเมนต์ trait `Error` กลางของ Rust
+
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: Referencing Counting
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20all%20reference%20count%20smart%20pointers%20are%20dropped%20now%0A%20%20%20%20%2F%2F%20the%20heap%20data%20Pie%20finally%20deallocates%0A%7D%0A
+  content_markdown: >
+    `Rc` เป็น smart pointer ที่ย้ายข้อมูลจาก stack ไปอยู่ใน heap
+    มันช่วยให้เราโคลน smart pointer `Rc` ตัวอื่นๆ โดยทุกตัวจะสามารถ
+    ยืมโดยไม่เปลี่ยนแปลง ข้อมูลที่อยู่ใน heap ได้
+
+
+    เมื่อ smart pointer ตัวสุดท้ายถูก drop เท่านั้นจึงจะคืนหน่วยความจำใน heap
+- title: Sharing Access
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell` เป็นโครงสร้างข้อมูลแบบคอนเทนเนอร์ ที่ถูกถือไว้โดย smart pointer
+    โดยมันจะรับข้อมูลเข้ามา และยอมให้เรายืม การอ้างอิง ของที่อยู่ในนั้นไม่ว่าจะเป็นอะไร ทั้งแบบยืมโดยไม่เปลี่ยนแปลงอะไร และยืมโดยยอมให้เปลี่ยนแปลงได้
+
+    และมีการป้องกันการยืมไม่ให้ถูกละเมืด ด้วยการบังคับใช้กฎรักษาความปลอดภัยในหน่วยความจำของ Rust
+    ตอน runtime เมื่อคุณขอยืมข้อมูล:
+
+
+    **การยืมเลือกได้เพียงอย่างเดียว คือ ยืมแบบเปลี่ยนแปลงค่าได้ หนึ่งตัว หรือยืมแบบเปลี่ยนค่าไม่ได้ หลายตัว จะทำทั้งสอบแบบในเวลาเดียวกันไม่ได้**
+
+
+    หากคุณละเมิดกฎของ `RefCall` จะทำให้เกิด panic
+- title: Sharing Across Threads
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20let's%20borrow%20a%20locked%20immutable%20reference%20of%20pie%0A%20%20%20%20%2F%2F%20we%20have%20to%20unwrap%20the%20result%20of%20a%20lock%0A%20%20%20%20%2F%2F%20because%20it%20might%20fail%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20locked%20reference%20drops%20here%2C%20and%20mutex%20protected%20value%20can%20be%20used%20by%20someone%20else%0A%7D%0A
+  content_markdown: >
+    `Mutex` เป็นโครงสร้างข้อมูลแบบคอนเทนเนอร์ ที่ถูกถือไว้โดย smart pointer
+    โดยมันจะรับข้อมูลเข้ามา และยอมให้เรายืม การอ้างอิง ข้อมูลที่อยู่ในนั้น ทั้งแบบยืมโดยไม่เปลี่ยนแปลงอะไร และยืมโดยยอมให้เปลี่ยนแปลงได้
+
+    โดยป้องกันการยืมไปใช้ในทางที่ผิดด้วยการให้ระบบปฏิบัติการ จำกัดการเข้าถึงได้เพียง CPU เดียวในช่วงเวลาหนึ่ง
+    และกันไม่ให้เธรดอื่นเข้าถึงได้จนกว่าเธรดเดิมจะทำงานเสร็จแล้วค่อยปลดล็อกการยืม
+
+
+    มัลติเธรดอยู่นอกเหนือขอบเขตของ Tour of Rust แต่ `Mutex` เป็นส่วนพื้นฐานของการควบคม CPU หลายเธรดในการเข้าถึงข้อมูลเดียวกัน
+
+
+    มี smart pointer พิเศษอีกตัวที่เหมือนกับ `Rc` แต่ต่างกันที่
+    มันใช้เพิ่มจำนวนตัวอ้างอิงแบบ thread-safe ซึ่งจะใช้บ่อยเมื่อมีการอ้างถึงหลายๆตัวไปที่ `Mutex` เดียวกัน
+- title: Combining Smart Pointers
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: >
+    Smart pointers ดูเหมือนจะมีข้อจำกัด แต่มันสามารถเอามารวมกันเพื่อให้ทำงานได้หลากหลายขึ้นได้
+
+
+    `Rc<Vec<Foo>>` - อนุญาตให้ทำการโคลน smart pointer หลายตัว
+    ที่สามารถยืมเวกเตอร์เดียวกันของโครงสร้างข้อมูลที่ไม่เปลี่ยนรูปบน heap ได้
+
+
+    `Rc<RefCell<Foo>>` - อนุญาตให้ smart pointer หลายตัวสามารถยืมโครงสร้าง Foo ตัวเดียวกัน โดยยืมได้ทั้งแบบ เปลี่ยนแปลงได้/เปลี่ยนแปลงไม่ได้
+
+
+    `Arc<Mutex<Foo>>` - อนุญาตให้ smart pointer หลายตัวสามารถล็อกการยืม โดยยืมได้ทั้งแบบ เปลี่ยนแปลงได้/เปลี่ยนแปลงไม่ได้ ชั่วคราว​ ในลักษณะเฉพาะของเธรด CPU
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * คุณจะสังเกตเห็น รูปแบบการผสมผสานนี้ มาใช้กับข้อมูลประเภทที่แก้ไขไม่ได้ (ซึ่งเป็นไปได้ว่าจะถูกถือครองโดย smart pointer หลายตัว)
+    เพื่อใช้แก้ไขข้อมูลภายในนั้น รูปแบบนี้ใน Rust เรียกว่า "interior mutability"
+    สิ่งนี้เป็นรูปแบบที่เรานำมาใช้เลี่ยงกฎของการใช้หน่วยความจำในขณะ runtime
+    โดยยังมีความปลอดภัยระดับเดียวกับการตรวจสอบของ Rust ในขณะ compile-time
+      
+- title: บทที่ 8 - สรุป
+  content_markdown: >
+    Smart pointer เป็นสำนวนของการเขียนโปรแกรมของ Rust มันช่วยให้เราไม่ต้องสร้างรูปแบบการใช้งานหน่วยความจำขึ้นมาใหม่
+
+    และด้วยสิ่งนี้ คุณจึงพร้อมรับมือกับเรื่องที่ยากที่สุด! ซึ่งตอนนี้เรารู้เรื่องพื้นฐานของ Rust แล้ว
+    เราจะไปคุยกันอีกเล็กน้อยถึงการสร้างโปรเจ็คที่ใหญ่ขึ้น ในบทที่ 9 เราจะไม่เขียนโค้ดแค่หน้าเดียวแล้ว

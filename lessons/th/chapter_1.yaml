@@ -1,0 +1,165 @@
+- title: บทที่ 1 - พื้นฐาน
+  content_markdown: >
+    ในบทแรกเราจะไปสำรวจเรื่องพื้นฐานที่สุด คือเรื่อง ฟังก์ชัน ตัวแปร และประเภทของตัวแปรขั้นพื้นฐาน และเราดีใจที่คุณตัดสินใจร่วมทางไปกับเรา!
+
+
+    นอกจากนี้! ถ้าหากคุณกำลังสงสัยว่า เจ้าปูที่น่ารักตัวนี้ที่กำลังสนทนากับคุณอยู่นั้นคือใคร ฉันบอกได้ว่าฉันชื่อ **Ferris** และฉันคือตัวนำโชคอย่างไม่เป็นทางการของภาษา Rust ยินดีที่ได้รู้จักนะ
+
+- title: The Rust Playground
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+  content_markdown: >
+    ทัวร์นี้ ใช้เครื่องมือที่พร้อมให้คุณทดลองเขียนโค้ดไปพร้อมกันจาก [Rust
+    Playground](https://play.rust-lang.org)
+
+
+    มันเป็นวิธีที่ดีมากที่จะเล่นกับ Rust และเอาไปอวดให้คนอื่นเห็นว่าคุณมี ความคิดสร้างสรรค์อย่างไร และท้าทายเขาด้วยในเวลาเดียวกัน!
+- title: ตัวแปร
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    การประกาศตัวแปร ใช้คียเวิร์ด **let**
+
+
+    ปกติแล้ว Rust จะสามารถอนุมาน type ของตัวแปรที่คุณกำหนดค่าลงไปได้ถึง 99% แต่ถ้าหากมันทำไม่ได้ ก็เพียงแค่เพิ่มการประกาศ type ลงไปด้วยแค่นั้น
+
+
+    สังเกตดูจะพบว่าเราสามารถ กำหนดค่าให้ตัวแปรชื่อเดิมซ้ำๆ ได้หลายครั้ง สิ่งนี้เราเรียกว่าการทำ shadow ให้ตัวแปร และยังสามารถเปลี่ยน type ของตัวแปรชื่อนั้นได้อีกด้วย
+
+
+    และชื่อตัวแปรจะใช้ `snake_case` เสมอนะ
+- title: การเปลี่ยนแปลงค่าในตัวแปร
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Rust ให้ความใส่ใจเป็นอย่างยิ่งในเรื่องการแก้ไขค่าในตัวแปร จึงแบ่งประเภทการประกาศเป็นสองแบบ:
+
+
+    * **mutable** - แบบเปลี่ยนแปลงค่าได้ แบบนี้คอมไพเลอร์จะอนุญาตให้เขียนและอ่านค่าในตัวแปรได้
+
+    * **immutable** - แบบเปลี่ยนแปลงค่าไม่ได้ แบบนี้คอมไพเลอร์จะอนุญาตให้อ่านค่าในตัวแปรได้เท่านั้น
+
+
+    ตัวแปรที่เปลี่ยนค่าได้ จะมีคีเวิร์ด **mut**
+
+
+    เราจะคุยเรื่องนี้กันอีกในภายหลัง แต่ตอนนี้แค่จับตาดูมันไว้ก่อนก็พอ
+- title: Types พื้นฐาน
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Rust มี type ที่เราคุ้นเคยอยู่หลายตัว:
+
+
+    * booleans - `bool` สำหรับค่า true/false
+
+    * unsigned integers - `u8` `u16` `u32` `u64` `u128` สำหรับตัวเลขทั้งหมดที่มีค่าเป็นบวก
+
+    * signed integers - `i8` `i16` `i32` `i64` `i128` สำหรับตัวเลขทั้งหมด
+
+    * pointer sized integers - `usize` `isize` สำหรับค่าดัชนี(index) และขนาดของ ของในหน่วยความจำ
+
+    * floating point - `f32` `f64`
+
+    * tuple - `(value, value, ...)` สำหรับส่งของตามลำดับบน stack
+
+    * arrays - `[value, value, ...]` กลุ่มข้อมูลประเภทเดียวกันที่รู้ขนาดที่แน่นอนตั้งแต่ compile time
+
+    * slices - กลุ่มข้อมูลประเภทเดียวกันที่รู้ขนาดที่แน่นอนเมื่อตอน runtime
+
+    * `str`(string slice) - ข้อความ ที่รู้ขนาดที่แน่นอนเมื่อตอน runtime
+
+
+    เรื่องประเภทข้อมูลแบบข้อความ อาจจะมีความซับซ้อนมากกว่าที่คุณเคยรู้ในภาษาอื่น; เนื่องจากว่า Rust เป็นภาษา system programming language
+
+    จึงให้ความสำคัญกับปัญหาในเรื่องหน่วยความจำที่คุณอาจจะยังไม่คุ้นเคย ซึ่งเราจะลงในรายละเอียดเพิ่มเติมกันภายหลัง
+
+
+    ตัวแปรประเภทตัวเลขทั้งหลาย สามารถระบุความชัดเจนให้มันได้ด้วยการเติมประเภทต่อท้ายตัวเลข (เช่น `13u32`, `2u8`).
+- title: การแปลงประเภทของตัวแปรแบบพื้นฐาน
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Rust ต้องการความชัดเจนเมื่อเป็นเรื่องที่เกียวกับตัวแปรประเภทตัวเลข ทำให้ไม่สามารถใช้ `u8` แทน `u32` กันตามใจได้ โดยไม่มีข้อผิดพลาดเกิดขึ้น
+
+
+    แต่โชคดีที่ Rust มีวิธีแปลงค่าตัวเลขที่ง่ายมากๆด้วยการใช้คีย์เวิร์ด **as**
+- title: ค่าคงที่
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    ค่าคงที่ช่วยให้เรากำหนดค่ากลางที่ใช้ร่วมกันบ่อยๆ ได้อย่างมีประสิทธิภาพ แทนที่จะคัดลอกค่าไปใช้แบบที่ตัวแปรทำ ค่าคงที่จะใช้วิธีแทนที่ค่าไปในข้อความเลยตรงๆ ตั้งแต่ตอน compile time
+
+
+    สิ่งที่ไม่เหมือนกับตัวแปรคือ ค่าคงที่จะต้องระบุ type เสมอ
+
+
+    การตั้งชื่อค่าคงที่จะอยู่ในรูปแบบ `SCREAMING_SNAKE_CASE` เสมอ
+- title: Arrays
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    *array* คือกลุ่มของข้อมูลที่มี type เดียวกัน และมีขนาดที่แน่นอน
+
+
+    ชนิดข้อมูลสำหรับ *array* คือ `[T;N]` โดย T คือ type ของสมาชิก และ `N` คือขนาดที่ถูกกำหนดให้รับรู้ตั้งแต่ compile-time
+
+
+    การดึงข้อมูลแต่ละตัวออกมา ทำได้ด้วยการใช้ตัวดำเนินการ(operator) `[x]` โดยที่ x คือ *usize* index (เริ่มต้นที่เลข 0) ที่คุณต้องการ
+- title: Functions
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    ฟังก์ชัน มีพารามิเตอร์ได้ศูนย์ตัวหรือมากกว่านั้น
+
+
+    ในตัวอย่างนี้ ฟังก์ชัน add รับอากิวเมนต์ประเภท `i32` (signed integer of
+    32-bit
+
+    length)
+
+
+    ชื่อฟังก์ชันจะเป็น `snake_case` เสมอ
+- title: การคืนค่าหลายค่า
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    ฟังก์ชันสามารถคืนค่าได้หลายค่าด้วยการคืนออกมาเป็น **tuple**
+
+
+    สามารถอ้างถึงสมาชิกของ Tuple ได้ด้วย index
+
+
+    Rust รองรับการถอดโครงสร้างได้หลายแบบ ซึ่งเราจะได้เห็นว่าทำได้อีกหลายวิธี โดยจะทำให้เราแยกของที่อยู่ในโครงสร้างออกมาเป็นชิ้นย่อยๆ ตามหลักสรีรศาสตร์ จับตาดูไว้ให้ดี!
+- title: การไม่คืนอะไรเลย
+  content_markdown: >
+    ถ้าฟังก์ชันไม่ได้ระบุ type ที่ต้อง return มันจะคืนออกมาเป็น empty tuple หรือที่รู้จักกันอีกชื่อว่า *unit*
+
+
+    empty tuple แสดงได้ด้วย `()`
+
+
+    ปกติเราจะไม่ค่อยได้ใช้ `()` กันหรอกนะ แต่บ่อยครั้งก็ใช้เพื่อให้รู้ว่ามันเกิดอะไรขึ้นจริงๆ
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: บทที่ 1 - สรุป
+  content_markdown: >
+    ทำได้ดีมาก! พื้นฐานของ Rust ไม่ได้แย่อย่างที่คิด ใช่ไหม? เรากำลังสนใจเรื่องที่ว่า Rust compuler มันคิดอย่างไร
+
+    ในฐานะที่เป็น system programming language มันจึงให้ความสำคัญกับการใช้หน่วยความจำมากหน่อย ว่าของสิ่งนั้นจะถูกแกไขได้หรือไม่
+    
+    และให้ตรวจสอบให้แน่ใจว่า วิชาคำนวณของคุณมันให้ผลลัพธ์อย่างที่คุณต้องการจริงๆ
+
+    อีกสักครู่เราจะไปสำรวจเพื่อนเก่าของเรา: ทดลอง `if` และ `for`
+
+
+    แหล่งข้อมูลเพิ่มเติม:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)

@@ -1,0 +1,294 @@
+- title: Chapter 7 - Object Oriented Programming
+  content_markdown: >
+    แนวคิดเรื่องการใช้ฟังก์ชันมาสะท้อนความเป็นไปของข้อมูลนั้นเป็นที่ยอมรับแล้ว (ซึ่ง ภาษา C ทำมาเป็นสิบปี!)
+
+    และในอดีตที่ผ่านมา วงการวิทยาการคอมพิวเตอร์ ก็ยังค้นพบหนทางอื่นที่สามารถใช้
+    เพื่ออธิบายแนวคิดการจัดการข้อมูลในเชิงนามธรรม และก็อย่างที่เรารู้กัน หนึ่งในนั้นก็คือเรื่องของ
+    object oriented programming (OOP)
+
+    โดยในบทนี้เราจะมาสำรวจภาษา Rust ในการทำงานที่นอกเหนือจากเรื่องของฟังก์ชันกันบ้าง
+- title: แล้ว OOP มันคืออะไร?
+  content_markdown: >
+    Object oriented programming หรือการโปรแกรมเชิงวัตถุ โดยทั่วไปมักจะหมายถึง
+    คุณสมบัติที่โดดเด่นเหล่านี้:
+
+    * Encapsulation - การเชื่อมโยงข้อมูลและฟังก์ชันไว้ใน type เดียวกัน และด้วยแนวคิดนี้ เราเรียกมันว่า *object*
+
+    * Abstraction - การซ่อนสมาชิกที่เป็นข้อมูลและฟังก์ชันไว้ เพื่อป้องกันการนำไปใช้อย่างไม่ถูกจุดประสงค์
+
+    * Polymorphism - วิธีการที่วัตถุโต้ตอบจะแตกต่างกัน ขึ้นอยู่กับมุมมองต่อวัตถุนั้น
+
+    * Inheritance - การสืบทอดพฤติกรรมจากวัตถุอื่น
+- title: Rust ไม่ได้เป็น OOP
+  content_markdown: >
+    อย่างไรก็ดี Rust ยังขาดคุณสมบัติในเรื่องการสืบทอด ทั้งข้อมูลและพฤติกรรมในความหมายนั้น
+
+
+    * Structs ไม่สามารถสือทอดฟิลด์จาก struct ต้นแบบ
+
+    * Structs ไม่สามารถสือทอดฟังก์ชันจาก struct ต้นแบบ
+
+
+    ที่อยากจะบอกก็คือ Rust เองก็มีวิธีการอีกมากมายมาทดแทน คุณก็แค่อย่างสนใจเรื่องนี้ก็พอ
+- title: Encapsulation ด้วยการมีเมธอด
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    Rust สนับสนุนแนวคิดของ *object* ด้วยการผูกฟังก์ชันบางตัวไว้กับ struct ได้ (เราเรียกมันว่า *เมธอด* แทน)
+
+
+    โดยที่พารามิเตอร์ตัวแรกของเมธอดจะต้องอ้างถึง อินสแตนซ์ ที่มันยึดโยงอยู่ เพื่อให้เรียกใช้เป็นเมธอดได้
+    (ตัวอย่างเช่น `instanceOfObj.foo()`) วิธีที่ Rust ทำก็คือ
+
+    * `&self` - ใช้อ้างถึงอินสแตนซ์แบบเปลี่ยนแปลงค่าไม่ได้
+
+    * `&mut self` - ใช้อ้างถึงอินสแตนซ์แบบเปลี่ยนแปลงค่าได้
+
+
+    การกำหนดการทำงานของมันจะทำภายในบล็อกของคีย์เวิร์ด `impl`:
+
+    ```rust
+
+    impl MyStruct { 
+        ...
+        fn foo(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Abstraction ด้วยการทำ Selective Exposure
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    Rust สามารถซ่อนการทำงานภายใน objects ได้
+
+    
+    เพราะโดยปกติแล้วการเข้าถึง ฟิดล์และเมธอด จะทำได้เฉพาะในโมดูลเดียวกันเท่านั้น
+
+
+    ถ้าอยากจะเปิดเผย ฟิลด์และเมธอดของ struct ออกสู่ภายนอกโมดูลให้ใช้คีย์เวิร์ด `pub`
+- title: Polymorphism ด้วย Traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
+  content_markdown: >
+    Rust สนับสนุน polymorphism ด้วย traits
+    Traits ช่วยให้เราเชื่อมโยงกลุ่มของเมธอด เข้ากับ struct type ได้
+
+
+    ขั้นแรกเราต้องกำหนดลักษณะเฉพาะของเมธอดใน trait ก่อน:
+
+
+    ```
+
+    trait MyTrait {
+        fn foo(&self);
+        ...
+    }
+
+    ```
+
+
+    เมื่อมี struct ใดต้องการอิมพลีเมนต์ trait มันจะสร้างสัญญาขึ้นมาเพื่ออนุญาต
+    ให้เราใช้วิธีการโต้ตอบกับ struct แบบที่ trait กำหนดไว้ (จากตัวอย่าง `&dyn MyTrait`)
+
+
+    โดยไม่ต้องรู้เลยว่า type ที่แท้จริงของมันคืออะไร
+
+
+    วิธีการทำให้ struct ใช้เมธอดของ traits ทำภายในบล็อกแบบนี้:
+
+
+    ```rust
+
+    impl MyTrait for MyStruct { 
+        fn foo(&self) {
+            ...
+        }
+        ... 
+    }
+
+    ```
+- title: การสร้างเมธอดไว้ใน Traits
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: >
+    ตัว Traits เองสามารถมีเมธอดที่ทำงานจริงได้ด้วย
+
+
+    แต่ฟังก์ชันพวกนี้จะไม่มีการเข้าถึงฟิลด์ใน struct ตรงๆ แต่จะได้ประโยชน์ในแง่
+    ที่มันเห็นพฤติกรรมที่ trait มีไว้ใช้ทั้งหมด
+- title: Trait สืบทอดได้
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: |
+    Traits ทำการสือทอดเมธอดจาก traits ตัวอื่นได้
+- title: Dynamic vs Static Dispatch
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    เมธอดถูกเรียกได้จากสองวิธี:
+
+    * static dispatch - เมื่อรู้ type ของอินสแตนซ์เราก็รู้อยู่แล้วว่ามันจะเรียกใช้อย่างไร
+
+    * dynamic dispatch -เมื่อเราไม่รู้ว่าอินสแตนซ์นั้นเป็น type อะไรกันแน่ เราจึงต้อง
+    หาวิธีที่รู้ให้ได้ว่าจะเรียกใช้ฟังก์ชันอะไรถึงจะถูกต้อง
+
+
+    `&dyn MyTrait` เป็นประเภทของ trait ที่จะทำให้เราทำงานกับอินสแตนซ์นั้นได้
+    โดยทางอ้อม ผ่านทาง dynamic dispatch
+
+
+    เมื่อจะใช้ dynamic dispatch เมื่อไหร่ Rust แนะนำให้ใส่ `dyn` เข้าไปหน้าตัวแปร trait เพื่อให้คนอื่นรับรู้
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * Dynamic dispatch นั้นจะทำงานได้ช้า เพราะว่า ต้องเสียเวลาค้นหาฟังก์ชันตัวจริงมาใช้งาน
+- title: Trait Objects
+  content_markdown: >
+    เมื่อเราส่งผ่านอินสแตนซ์ของ object ลงไปเป็นพารามิเตอร์ด้วยประเภท `&dyn MyTrait`
+    หมายถึงเรากำลังส่งวิธีเรียก *trait object* ลงไป
+
+
+    แปลว่า trait object ก็คือวิธีการ ที่จะเรียกเมธอดของอินสแตนซ์ แบบอ้อมๆ
+    ซึ่งความจริง trait object ก็คือ struct ที่ครอบครอง พอยเตอร์ ที่ชี้ไปที่อินสแตนซ์ของเรา
+    กับลิสต์ พอยเตอร์ของฟังก์ชัน ที่ชี้ไปเมธอดของอินสแตนซ์ตัวนั้น
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * ลิสต์ของฟังก์ชันนี้ในภาษา C++ เรียกว่า *vtable*
+- title: การจัดการข้อมูลที่ไม่รู้ไซส์
+  content_markdown: >
+    Traits ทำให้เกิดความยุ่งยากเมื่อเราอยากจะเก็บมันไว้ใน struct ตัวอื่น
+    เพราะว่า Traits ทำให้เรามองเห็น struct ไม่ชัดเจน และความไม่ชัดเจนยังส่งผลไปที่ไซส์อีกด้วย
+
+    ตอนที่เราเอา ของที่เราไม่รู้ไซส์ที่แน่นอนนี้ไปใส่ใน struct จะมีวิธีจัดการมัน 2 วิธีคือ:
+
+
+    * `generics` - โดยใช้ type เป็นพารามิเตอร์ในการสร้าง struct/ฟังก์ชัน เพื่อที่เราจะได้รู้ขนาดที่แน่นอน
+
+    * `indirection` - นำอินสแตนซ์ไปไว้ใน heap ซะเลย จะได้ไม่ต้องกังวลว่า
+    ขนาดของ type จริงๆมันจะเป็นเท่าไร เราแค่เก็บพอยเตอร์ชี้ไปที่มันก็พอ
+    นี่เป็นแค่วิธีหนึ่งเท่านั้น
+- title: Generic Functions
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Generics ใน Rust ทำงานประสานกับ traits เมื่อเราประกาศพารามิเตอร์ type `T`
+    เราสามารถระบุว่า type ไหนที่สามารถใช้เป็นอาร์กิวเมนต์ได้บ้าง ด้วยการลิสต์รายการ
+    ว่าเราอยากได้อาร์กิวเมนต์ที่อิมพลีเมนต์ traits ใดบ้าง
+
+
+    จากตัวอย่างนี้ type `T` ต้องอิมพลีเมนต์ ตาม trait `Foo`
+
+    ```rust
+
+    fn my_function<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+
+    ด้วยการใช้ generics ทำให้เราสามารถสร้าง static typed functions ได้ตอน compile time
+    เราจึงสามารถรู้ type และขนาดของมัน และสามารถทำ static dispatch และเก็บ
+    ขนาดของมันได้
+- title: Generic Function แบบย่อ
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: |
+    Rust ย่อรูปแบบการประกาศ generics ที่กำหนด trait ได้แบบนี้:
+
+    ```rust
+    fn my_function(foo: impl Foo) {
+        ...
+    }
+    ```
+
+    ซึ่งจะเหมือนกับการเขียแบบนี้:
+
+    ```rust
+    fn my_function<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
+  content_markdown: >
+    `Box` เป็นโครงสร้างข้อมูลที่ยอมให้เราย้ายข้อมูลจาก stack ไปไว้ใน heap ได้
+
+
+    `Box` คือโครงสร้างที่รู้จักกันในอีกชื่อว่า *smart pointer* เพราะว่ามันครอบครองพอยเตอร์
+    ที่ชี้ไปยังข้อมูลของเราใน heap
+
+
+    และด้วยเหตุที่ `Box` เป็น struct ที่เรารู้ขนาดแน่นอน (เพราะว่ามันแค่ถือครองพอยเตอร์)
+    มันจึงเป็นตัวเลือกที่ถูกนำมาใช้บ่อยๆ เพื่อเก็บการอ้างอิงไปยังของชิ้นอื่นใน struct
+    เมื่อต้องการขนาดของฟิลด์ที่แน่นอน
+
+
+    `Box` is so common it can be used from anywhere:
+    โดยปกติ `Box` สามารถใช้ได้จากทุกที่
+
+
+    ```rust
+
+    Box::new(Foo { ... })
+
+    ```
+- title: กลับมาหา Generic Structs อีกรอบ
+  content_markdown: >
+    Generic structs ก็สามารถมีพารามิเตอร์แบบระบุ traits ได้เช่นเดียวกัน
+
+
+    ```rust
+
+    struct MyStruct<T>
+
+    where
+        T: MyTrait
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+
+    Generic structs มีพารามิเตอร์นั้น ในบล็อกที่อิมพลีเมนต์ตัวมันด้วย:
+
+
+    ```rust
+
+    impl<T> MyStruct<T> {
+        ...
+    }
+
+    ```
+- title: บทที่ 7 - สรุป
+  content_markdown: >
+    ตอนนี้เราได้รู้จักคุณสมบัติของตัวภาษามากขึ้น พอให้เห็นแนวคิดของเราชัดเจนขึ้น
+    ในเชิงนามธรรมของ Rust นั้นเรียบง่ายแต่ก็ทรงพลังมากพอที่จะทำให้การเขียนโค้ดสนุกขึ้น
+
+    ในบททนี้เราได้ผ่านตาเรื่อง smart pointer จาก `Box` ไปบ้างแล้ว
+    ในบทต่อไป เราจะมาเรียนเกี่ยวกับ smart pointer ว่ามันจะมาช่วยอะไรเราได้
+    เมื่อต้องพบสถานการณ์พิเศษเกี่ยวกับหน่วยความจำ
+
+
+    แหล่งข้อมูล:
+
+    * [Video - Object-oriented Programming in 7
+    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Article - "The faster you unlearn OOP, the better for you and your
+    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)

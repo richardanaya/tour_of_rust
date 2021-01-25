@@ -1,0 +1,178 @@
+- title: Chapter 4 - Generic Types
+  content_markdown: >
+    Generic เป็น type ที่มีความสำคัญอย่างยิ่งใน Rust มันถูกนำมาใช้เป็นตัวแทนของค่าที่เป็น null ได้
+    (เช่น ตัวแปรที่อาจจะยังไม่มีค่าใดๆ) หรือการจัดการกับ error กับ กลุ่มของข้อมูลคอลเล็คชัน และอื่นๆ
+    ในตอนนี้ เราจะมาเรียนรู้เกี่ยวกับพื้นฐานของ generic types ที่คุณจะได้ใช้มันแทบจะตลอดเวลาเลยทีเดียว
+- title: Generic Types คืออะไร?
+  content_markdown: >
+    Generic types ช่วยให้เราสามารถ กำหนด `struct` หรือ `enum` เฉพาะบางส่วนได้
+    และยอมให้คอมไพเลอร์ สร้างส่วนที่เหลือให้เสร็จโดยอ้างอิงจากการใช้งานจริงในโค้ด
+
+
+    โดยปกติแล้ว Rust มีความสามารถในการ อนุมาน type ที่มันเป็นจริงๆได้ โดยดูจากค่าที่เราสร้างอินสแตนซ์นั้นขึ้นมา
+    แต่ถ้าเราอยากที่จะทำให้มันชัดเจนไปเลยก็ให้ใช้ตัวดำเนินการ `::<T>` ส่วนมากเราจะเรียกมันว่า `turbofish` (นี่เพื่อนรักของฉันเลยนะ!)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20by%20using%20generic%20types%20here%2C%20we%20create%20compile-time%20created%20types.%20%0A%20%20%20%20%2F%2F%20Turbofish%20lets%20us%20be%20explicit.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20can%20infer%20types%20for%20generics%20too!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20never%20put%20a%20bag%20of%20holding%20in%20a%20bag%20of%20holding%20in%20real%20life%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
+- title: ตัวแทนของความว่างเปล่า
+  content_markdown: >
+    ในภาษาโปรแกรมมิ่งอื่นจะใช้คีย์เวิร์ด `null` แทนการไม่มีค่า แต่นั่นก็สร้างความยุ่งยากให้เราอีก
+    ก็เพราะว่า มันเปิดโอกาสให้โปรแกรมเราล้มเหลวถ้าเราดันไปทำอะไรกับค่าพวกนี้เข้า
+
+
+    ดังนั้น Rust ก็เลยไม่มี `null` แต่ก็อย่าหาว่าเราละเลยความจำเป็นของการมีอยู่ของ ค่าความว่างเปล่า นะ
+    ลองดูสิ่งที่เรานำเสนอแบบซื่อๆในแบบของเราที่เคยเห็นกันมาแล้ว
+
+
+    เราเสนอการใช้ `None` สำหรับค่าที่มีทางเลือกอย่างน้อย 1 อย่างว่าจะออกมาเป็นอะไรกันแน่
+    ซึ่งเกิดขึ้นได้บ่อยๆใน Rust เพราะเราไม่มี `null` นั่นเอง Generic types จึงมีบทบาทในการช่วยแก้ไขปัญหาเหล่านี้ให้เรา
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20represents%20the%20absence%20of%20an%20item%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
+- title: Option
+  content_markdown: >
+    Rust มี generic enum ในตัว มีชื่อว่า `Option` มาช่วยเป็นตัวแทนให้ค่าที่อาจจะเป็น null ได้ โดยไม่ต้องใช้ `null`
+
+
+    ```
+
+    enum Option<T> {
+        None,
+        Some(T),
+    }
+
+    ```
+
+
+    enum นี้เป็นของส่วนรวม ทำให้อินสแตนซ์ของ enum ทุกตัว สามารถมีค่าเป็น `Some` และ `None` ได้เลย
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Our%20parameter%20type%20T%20can%20be%20handed%20to%20others%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20A%20bag%20for%20i32%2C%20holding%20nothing!%20We%20have%20to%20specify%20the%20type%0A%20%20%20%20%2F%2F%20because%20otherwise%20Rust%20would%20not%20know%20what%20type%20of%20bag%20it%20is.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20something%20in%20the%20bag!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22there's%20nothing%20in%20the%20bag!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22found%20%7B%7D%20in%20bag!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22found%20nothing%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Result
+  content_markdown: >
+    Rust มี generic enum ในตัว มีชื่อว่า `Result` มาช่วยให้เราสามารถคืนค่าที่มีความเป็นไปได้ที่จะล้มเหลว
+    นี่เป็นสำนวนทางภาษาของเรา ในการจัดการ error
+
+
+    ```
+
+    enum Result<T, E> {
+        Ok(T),
+        Err(E),
+    }
+
+    ```
+
+
+    สังเกตดูว่า generic type ของเรามี *parameterized types* อยู่หลายตัว และแต่ละตัวคั่นด้วยลูกน้ำ
+
+
+    enum นี้เป็นของส่วนรวม ทำให้อินสแตนซ์ของ enum ทุกตัว สามารถมีค่าเป็น `Ok` และ `Err` ได้เลย
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Result%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22Error%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Main ที่ผิดพลาดได้
+  content_markdown: |
+    `main` เองก็สามารถคืนค่า `Result` ได้เช่นกัน
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20returns%20no%20value%2C%20but%20could%20return%20an%20error!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22found%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20handle%20this%20error%20gracefully%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20a%20new%20error%20from%20main%20that%20said%20what%20happened!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22something%20went%20wrong%20in%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Notice%20we%20use%20a%20unit%20value%20inside%20a%20Result%20Ok%0A%20%20%20%20%2F%2F%20to%20represent%20everything%20is%20fine%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: การจัดการ Error แบบสวยงาม
+  content_markdown: >
+    อย่างที่รู้ว่า `Result` เป็นของกลางๆ Rust จึงมีตัวดำเนินการ `?` เอาไว้ใช้คู่กับมัน
+    ทำให้สองคำสั่งนี้ทำงานเหมือนกันเลย:
+
+
+    ```
+
+    do_something_that_might_fail()?
+
+    ```
+
+
+    ```
+
+    match do_something_that_might_fail() {
+        Ok(v) => v,
+        Err(e) => return Err(e),
+    }
+
+    ```
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Look%20at%20how%20much%20code%20we%20saved!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: การจัดการ Option/Result แบบขี้เหร่
+  content_markdown: >
+    บางทีการที่ต้องทำงานกับ `Option`/`Result` ก็แอบน่าเบื่ออยู่บ้าง เวลาที่เราเร่งเขียนโค้ดอยู่
+    ทีนี้เจ้า `Option` และ `Result` คู่นี้มันมีฟังก์ชันที่ชื่อว่า `unwrap` อยู่ด้วย
+    เพื่อดึงค่าออกมาแบบเร็วๆ ซึ่งไม่ควรทำ โดย `unwrap` จะทำดังนี้:
+
+    1. ดึงค่าใน Option/Result ออกมา
+
+    2. ถ้าเจอค่าใน enum เป็น None/Err จะ `panic!`
+
+
+    มาดูสองคำสั่งที่ทำงานเหมือนกันแต่เขียนคนละแบบ:
+
+
+    ```
+
+    my_option.unwrap()
+
+    ```
+
+
+    ```
+
+    match my_option {
+        Some(v) => v,
+        None => panic!("some error message generated by Rust!"),
+    }
+
+    ```
+
+
+    ในทำนองเดียวกัน:
+
+
+    ```
+
+    my_result.unwrap()
+
+    ```
+
+
+    ```
+
+    match my_result {
+        Ok(v) => v,
+        Err(e) => panic!("some error message generated by Rust!"),
+    }
+
+    ```
+
+
+    จงเป็น rustacean ที่ดี และใช้ `match` เถอะ
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concise%20but%20assumptive%20and%20gets%20ugly%20fast%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20will%20panic!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Vectors
+  content_markdown: >
+    generic type ที่มีประโยชน์ที่สุดประเภทหนึ่งคือพวกที่เป็นคอลเล็คชัน
+    vector คือหนึ่งในนั้น มันเป็นลิสต์ที่มีขนาดแปรผันได้ มาในรูปของ struct `Vec`
+
+
+    มาโคร `vec!` ใช้สร้าง vector แบบง่ายๆ แทนที่จะไปสร้างเองด้วยมือ
+
+
+    `Vec` มาพร้อมเมธอด `iter()` ใช้สร้างตัววนซ้ำเวลาเอาไปใส่ใน `for` ลูป
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * `Vec` เป็น struct แต่มันแค่ใช้เก็บการอ้างอิงไปยัง ลิสต์ตัวหนึ่งใน heap
+
+    * vector เริ่มต้นด้วยความจุขนาดหนึ่ง เมื่อมีการเพิ่มของจนล้นความจุนั้น มันจะไป
+      จัดสรรเนื้อที่ใหม่บน heap เพื่อเก็บลิสต์ใหม่ ด้วยความจุที่ใหญ่ขึ้น
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20can%20be%20explicit%20with%20type%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20But%20look%20how%20clever%20Rust%20is%20about%20determining%20the%20type%20automatically%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20That's%20a%20beautiful%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: บทที่ 4 - สรุป
+  content_markdown: >
+    ในเวลาเพียงบทเดียว เราก็ได้เรียนรู้ว่า generic type มอบพลังให้เรามากแค่ไหน
+    แต่อย่ากังวลว่าเรายังไม่รู้วิธีใช้มันทั้งหมด เราแค่รู้แนวคิดหลักๆก็เพียงพอแล้ว
+    และเดี๋ยวเราจะได้เจอกับมันอีกบ่อยๆในโค้ดแน่นอน
+
+    ยังมีเรื่องราวอีกเยอะ! ในบทต่อไปเราจะพูดถึงเรื่องแนวคิดที่สำคัญอย่างหนึ่งใน Rust: data ownership

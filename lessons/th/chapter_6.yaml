@@ -1,0 +1,178 @@
+- title: บทที่ 6 - ข้อความ
+  content_markdown: >
+    มาถึงตอนนี้เราก็ได้เข้าใจขึ้นมาบ้างแล้วว่า Rust คิดอย่างไรกับเรื่องหน่วยความจำ
+    เพื่อที่เราจะได้พร้อมจะมาคุยกันต่อในเรื่อง ข้อความ ให้ละเอียดมากขึ้น
+    Rust ใส่ใจมากในเรื่องของข้อความที่ใช้ได้ในระดับสากล และมีข้อกังวลลงไปถึงระดับไบต์
+    แบบที่คุณอาจจะไม่เคยเจอมาก่อนจากภาษาอื่น
+
+    นั่นแปลว่า Rust ได้เตรียมเครื่องไม่เครื่องมือที่ดีเยี่ยมเพื่อขจัดความกังวลเหล่านั้นให้แล้ว
+- title: การประกาศ String
+  content_markdown: >
+    String เป็น Unicode เสมอ
+
+
+    type ของ String ประกาศโดยใช้ `&'static str`:
+
+
+    * `&` หมายความว่านี่คือการอ้างถึงพื้นที่หนึ่งใรหน่วยความจำ และมันใช่ `&mut`
+    นั่นแปลว่าคอมไพเลอร์จะไม่ยอมให้แก้ไขข้อความนี้ได้
+
+    * `'static` แปลว่า ข้อความสตริงนี้จะคงอยู่ไปจนกว่าโปรแกรมจะสิ้นสุด(มันจะไม่โดน drop แน่นอน)
+
+    * `str` แปลว่า มันชี้ไปที่สายลำดับของไบต์ที่เป็น **utf-8** ที่ถูกต้องแน่นอน
+
+
+    รายละเอียดหน่วยความจำ:
+
+    * คอมไพเลอร์ของ Rust มีแนวโน้มที่จะวางสตริงของคุณไว้ในส่วนที่เป็นหน่วยความจำของตัวโปรแกรมของคุณเลย
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: utf-8 คืออะไร
+  content_markdown: "ด้วยเหตุที่ว่ามีการใช้ภาษาที่หลากหลายมากบทคอมพิวเตอร์ โลกนี้จำเป็นต้องมีอะไรสักอย่าง ที่สามารถแสดงอักขระที่เกินกว่าที่ ACSII เคยทำได้ (1ไบต์แสดงได้เพียง 256 อักขระ)\n\n**utf-8** จึงถูกนำมาใช้แทนด้วยขนาดที่แปรผันได้ 1-4ไบต์ ทำให้การแสดงอักขระมีความเป็นไปได้เพิ่มขึ้นอย่างมาก\n\nข้อได้เปรียบของขนาดอักขระที่แปรผันได้ก็คือเราจะไม่ต้องมีอักขระที่ไม่จำเป็น เกินมากแบบที่เคยพบใน ASCII (ใน utf-8 ยังมีบางตัวที่มีขนาด 1ไบต์อยู่ด้วย)\n\nแต่ข้อเสียของมันก็มี นั่นคือมันทำให้การค้นหาอักขระจะไม่เร็วเหมือนเดิม(O(1) เสมอ) ด้วยการบอก index ไปตรงๆ (ตัวอย่างเช่น `my_text[3]` เพื่อรับอักขระตัวที่ 4 ออกมา) เพราะมันอาจเป็นไปได้ว่าอักขระก่อนหน้าจะมีขนาดแปรผัน ทำให้อักขระตัวที่ 4 อาจะเปลี่ยนตำแหน่งไป\n\nนั่นทำให้เราจำเป็นต้องวนหาของตามลำดับไบต์ของ utf-8 เพื่อหาว่ามัน Unicode ตัวนั้นจริงๆเริ่มต้นที่ไหน (O(n) ในเชิงเส้น)\n\nFerris: \"ฉันมีความสุขมากที่เรามี **utf-8** เพราะมันแสดงอิโมจิของเหล่าเพื่อนใต้น้ำของฉันได้\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: Escaping Characters
+  content_markdown: >
+    มีอักขระหลายตัวที่ไม่สามารถเห็นได้ด้วยตา **escape codes** จึงเข้ามาช่วยในเรื่องนี้
+
+
+    Rust รับรอง escape codes ที่ภาษา C ใช้กันอยู่แล้ว:
+
+    * `\n` - newline
+
+    * `\r` - carriage return
+
+    * `\t` - tab
+
+    * `\\` - backslash
+
+    * `\0` - null
+
+    * `\'` - single-quote
+
+
+    ดูทั้งหมดได้
+    [ที่นี่](https://doc.rust-lang.org/reference/tokens.html).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+- title: Multi-line String Literals
+  content_markdown: |
+    สตริงใน Rust สามารถมีหลายบรรทัดมาตั้งแต่ต้น
+
+    และถ้าไม่ต้องการให้ขึ้นบรรทัดใหม่ สามารถใช้ `\` ปิดท้ายบรรทัดได้
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
+- title: Raw String Literals
+  content_markdown: >
+    Raw strings ทำให้เราเขียนลำดับอักขระแบบตรงตัวได้โดยให้ขึ้นต้นด้วย `r#"` และปิดท้ายด้วย `"#`
+    ทำแบบนี้ช่วยให้เราสามารถแทรกอักขระอาจทำให้สับสนว่า มันอยู่ในฐานะสตริง หรือควรเป็นข้อความ
+    (อย่างเช่นเครื่องหมายคำพูด และ แบ็กสแลช)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: String Literals From Files
+  content_markdown: >
+    หากคุณมีข้อความขนาดใหญ่มากให้ลองใช้มาโคร `include_str!`
+    เพื่อนำข้อความจากไฟล์ในเครื่อง เข้ามาในโปรแกรมของคุณ:
+
+
+    ```rust
+
+    let 00_html = include_str!("00_en.html");
+
+    ```
+- title: String Slice
+  content_markdown: >
+    string slice ใดก็ตามคือการอ้างถึง ไบต์กลุ่มหนึ่งในหน่วยความจำที่อยู่ในรูป utf-8 ที่ถูกต้องเสมอ
+
+
+    string slice (ส่วนย่อย) แต่ละชิ้นของ `str` ก็ต้องเป็น utf-8 ที่ถูกต้องแน่นอนเช่นกัน 
+
+
+    เมธอดที่ใช้โดยทั่วไปของ `&str` ได้แก่:
+
+    * `len` จะคือค่าความยาวของข้อความ string ในขนาดของไบต์ (ไม่ใช่ขนาดของตัวอักขระ)
+
+    * `starts_with`/`ends_with` ใช้ทดสอบแบบง่ายๆ
+
+    * `is_empty` คือค่า true ถ้าความยาวเป็นศูนย์
+
+    * `find` คืน `Option<usize>` ที่เป็นตำแหน่งแรกของคำที่ต้องการค้นหา
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+- title: Chars
+  content_markdown: >
+    การทำงานกับ Unicode นั้นค่อนข้างยุ่งยากมาก Rust จึงเสนอวิธีการดึงข้อมูล ไบต์ของ utf-8
+    ออกมาเป็นเวกเตอร์ของตัวแปรแบบ `char`
+
+
+    `char` แต่ละตัวจะยาว 4ไบต์เสมอ (ซึ่งจะช่วยให้การหาค่าแต่ละตัวทำได้อย่างมีประสิทธิภาพ)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: String
+  content_markdown: >
+    **String** ก็คือ struct ที่ครอบครองลำดับของ ไบต์ของ utf-8 ที่อยู่ใน heap
+
+
+    และเพราะว่ามันอยู่ใน heap มันจึงสามารถขยายขนาด แก้ไขค่า หรืออื่นๆ แบบที่
+    ข้อความสตริงปกติทำไม่ได้
+
+
+    เมธอดที่ใช้ทั่วไปได้แก่:
+
+
+    * `push_str` ใช้เพิ่ม utf-8 ต่อท้ายสตริง
+
+    * `replace` ใช้แทนลำดับคำในรูปแบบ utf-8 ด้วยค่าอื่น
+
+    * `to_lowercase`/`to_uppercase` ใช้เปลี่ยนลักษณะตัวพิมพ์เล็กหรือใหญ่
+
+    * `trim` ใช้ตัดแต่งช่องว่าง
+
+
+    เมื่อ String ถูก drop หน่วยความจำของมันที่อยู่ใน heap ก็จะ drop ตามไปด้วย
+
+
+    `String` มีตัวดำเนินการ `+` ไว้ใช้ต่อค่ากับ `&str` และคืนตัวมันเองมาให้
+    แต่มันอาจจะดูแปลกไปสักน้อยเวลาใช้งาน
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+- title: การส่งพารามิเตอร์ด้วยข้อความ
+  content_markdown: >
+    โดยปกติ ไม่ว่าจะเป็นข้อความของ String หรือ string ก็สามารถส่งเข้าไปให้ฟังก์ชัน
+    ในรูปแบบ slice ของ string ได้อยู่แล้ว ซึ่งมันช่วยให้ยืดหยุ่นกับทุกสถานการณ์
+    โดยไม่จำเป็นต้องส่งผ่านความเป็นเจ้าของเข้าไป
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+- title: การสร้าง Strings
+  content_markdown: |
+    `concat` และ `join` เป็นสองวิธีง่ายๆที่ดีมากในการสร้างสตริง
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
+- title: การจัดรูปแบบ Strings
+  content_markdown: >
+    มาโคร `format!` ช่วยให้เราสร้างสตริงด้วยการ กำหนดรูปแบบด้วยพารามิเตอร์
+    โดยยึดตำแหน่งที่จะนำค่ามาแทนที่เอาไว้(เข่น `{}`)
+
+
+    `format!` ใช้วิธีการกำหนดพารามิเตอร์แบบเดียวกับ `println!`
+
+
+    ความสามารถของมันค่อนข้างกว้างเกินกว่าขอบเขตที่ *Tour of Rust* จะอธิบายได้ทั้งหมด
+    แต่สามารถไปดูเพิ่มเติมได้ [ที่นี่](https://doc.rust-lang.org/std/fmt/).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+- title: การแปลงค่า Strings
+  content_markdown: |
+    มีหลาย type ที่สามารถแปลงมาเป็นสตริงได้ด้วยการใช้ `to_string`
+
+    มี generic ฟังก์ชันตัวนึงคือ `parse` นำมาใช้แปลงค่าสตริง หรือข้อความสตริง
+    ไปเป็น type อื่นได้ โดยมันจะคืนค่ามาเป็น `Result` เพราะว่ามันอาจเกิดข้อผิดพลาดได้
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: บทที่ 6 - สรุป
+  content_markdown: >
+    ตอนนี้คุณก็ได้รู้เกี่ยวกับเรื่องพื้นฐานของข้อความแล้ว และอย่างที่คุณเห็นว่า Unicode
+    ทำให้มันค่อนข้างยุ่งยากนิดหน่อยแต่ ไลบรารีมาตรฐานก็มีฟังก์ชันมากเพียงพอให้จัดการมันได้ง่ายขึ้น
+
+
+    จนถึงตอนนี้ เรายังมอง Rust ด้วยมุมมองในเชิง procedural paradigm (เช่นเรื่อง ฟังก์ชัน และข้อมูล) อยู่เลย
+    แต่ก็ถึงเวลาที่เราจะมาพูดเรื่อง traits และความสามารถอื่นที่ถูกปลดล็อก ด้วยการมองจากมุมของ
+    object oriented paradigm ของ Rust กันบ้างแล้ว
