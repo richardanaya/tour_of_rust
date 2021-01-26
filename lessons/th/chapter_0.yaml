@@ -8,6 +8,7 @@
     
     เลือกอ่านภาษาที่คุณถนัดได้เลย:
 
+    * [English](00_en.html)
     * [Deutsch](00_de.html)
     * [Español](00_es.html)
     * [Français](00_fr.html)
@@ -22,7 +23,6 @@
     * [한국어](00_ko.html)
     * [Türkçe](00_tr.html)
     * [Українська](00_ua.html)
-    * [ภาษาไทย](00_th.html)
 
     หากคุณมีข้อเสนอแนะเกี่ยวกับเนื้อหาหรือต้องการมีส่วนร่วมในการแปลโปรดดูที่ [github repository](https://github.com/richardanaya/tour_of_rust) ของ Tour of Rust
 
