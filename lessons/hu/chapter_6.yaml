@@ -86,7 +86,7 @@
     egy fájl szövegét egy-az-egyben be tudod másolni egy változóba.
 
     ```rust
-    let 00_html = include_str!("00_en.html");
+    let hello_html = include_str!("hello.html");
     ```
 - title: Szöveg szeletek
   content_markdown: |

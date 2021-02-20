@@ -98,7 +98,7 @@
     tu peux utiliser la macro `include_str!`:
 
     ```rust
-    let 00_html = include_str!("00_en.html");
+    let hello_html = include_str!("hello.html");
     ```
 - title: String Slice
   content_markdown: >
