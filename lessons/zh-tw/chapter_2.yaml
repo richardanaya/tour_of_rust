@@ -1,0 +1,87 @@
+- title: 第二章 - 基本流程控制
+  content_markdown: >
+    在這個章節，我們會探討 Rust 裡的基本流程控制。
+
+    如果你已經熟悉 C 相關語言，那你將會猶如處在自家廚房般，甚至偶爾會碰上一兩個驚喜呢！
+- title: if/else if/else
+  content_markdown: >
+    程式碼分支在 Rust 裡並不是什麼新奇的東西。
+
+
+    條件敘述沒有括號！我們真的需要它們嗎？我們的邏輯現在看起來漂亮且清晰。
+
+
+    所有你常用的關係式及邏輯運算符號仍然正常運作：`==`、`!=`、`<`、
+    `>`、`<=`、`>=`、`!`、`||`、`&&`。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+- title: loop
+  content_markdown: |
+    需要一個無窮迴圈嗎？
+
+    Rust 將它變得很簡單。
+
+    當你準備好時，`break` 會離開一個迴圈。
+
+    `loop` 有個秘密，我們很快就會談到它。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while
+  content_markdown: |
+    `while` 讓你輕鬆的加入一個條件到迴圈裡。
+
+    如果該條件的結果是 `false`，那迴圈將會中止。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: for
+  content_markdown: >
+    Rust 的 `for` 迴圈是個強大升級版。
+    它會迭代任何表達式的數值，並且將該數值放入迭代器 (iterator) 裡。
+    什麼是迭代器？迭代器是一個物件，你可以向這個物件詢問：「下一個物品是什麼？」，直到沒有下一個物品了。
+    
+
+    我們在後續章節會探討更多。同時，現在只需要知道 Rust 可以讓你輕鬆的建立一個產生整數數列的迭代器就好了。
+    
+
+    `..` 運算子產生一個迭代器，而這個迭代器產生一連串的數字，從起始數字開始，但不包含最後一個數字。
+
+
+    `..=` 運算子產生一個迭代器，而這個迭代器產生一連串的數字，從起始數字開始直到最後一個數字。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_markdown: >
+    懷念你的 switch 條件判斷式嗎？Rust 有一個神妙的關鍵字 (keyword) 可以匹配所有可能的條件結果，
+    一旦該結果為真就執行該區間的程式碼。
+    現在讓我們看看這些是怎麼在數字上運作。在後續章節我們會探討更多有關複雜資料的配對。我向你保證這是值得等待的。
+
+
+    `match` 會徹底的檢查，所以所有可能性都必需被掌控。
+
+
+    配對與解構 (destructuring) 一起使用，是你目前為止看到 Rust 最常使用的模式之一。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: 從迴圈回傳數值
+  content_markdown: |
+    `loop` 可以用 break 來回傳數值。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: 從區塊表達式回傳數值
+  content_markdown: >
+    在 Rust 裡，`if`、`match`、functions 及區塊範疇 (scope blocks) 都有一個獨特的方式用來回傳數值。
+
+
+    如果在 `if`、`match`、function 或是區塊範疇裡的最後一個敘述是一個表達式，而且它並沒有 `;` 結尾，
+    那 Rust 將會從該區塊回傳該數值。
+    這是一個很棒的方式用來產生一段簡結的邏輯，將回傳數值指定給一個新的變量。
+
+
+    要注意 Rust 同時也允許 `if` 敘述可以用來當作簡潔的三元運算。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: 第二章 - 總結
+  content_markdown: >
+    希望即使是最基本的語言特性，我也讓你一瞥 Rust 的力量。
+    我們將會更深入的探討 `for` 及 `match`，以取得更多相關知識進而利用它們的能力。
+    下一章節我們會進入 Rust 的基本資料結構 (data structures)。
