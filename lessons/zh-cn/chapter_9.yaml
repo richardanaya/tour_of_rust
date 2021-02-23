@@ -1,0 +1,141 @@
+- title: 第九章 - 项目的结构和管理
+  content_markdown: >
+    到目前为止，我们所有的代码示例都是单文件。现在让我们来讨论一下，如何更好地组织我们的代码，并与他人分享！
+- title: 模块
+  content_markdown: |
+    每个 Rust 程序或者库都叫 *crate*。
+
+    每个 crate 都是由*模块*的层次结构组成。
+
+    每个 crate 都有一个根模块。
+
+    模块里面可以有全局变量、全局函数、全局结构体、全局 Trait 甚至是全局模块！
+
+    在 Rust 中，文件与模块树的层次结构并不是一对一的映射关系。我们必须在我们的代码中手动构建模块树。
+- title: 编写程序
+  content_markdown: |
+    应用程序的根模块需要在一个叫 `main.rs` 的文件里面。
+- title: 编写库
+  content_markdown: |
+    库的根模块需要在一个叫 `lib.rs` 的文件里面。
+- title: 引用其他模块和 crate
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%BB%83%E4%B9%A0%E5%9C%BA%EF%BC%81%22)%3B%0A%20%20%20%20println!(%22%E6%88%91%E6%83%B3%E8%A6%81%E4%B8%80%E5%9D%97%20%7B%7D%EF%BC%81%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: >
+    你可以使用完整的模块路径路径引用模块中的项目：
+    `std::f64::consts::PI`。
+
+
+    更简单的方法是使用**use**关键字。此关键字可以让我们在代码中使用模块中的项目而无需指定完整路径。例如 `use
+    std::f64::consts::PI`
+
+    这样我在 main 函数中只需要写 `PI` 就可以了。
+
+
+    **std** 是 Rust 的**标准库**。这个库中包含了大量有用的数据结构和与操作系统交互的函数。
+
+
+    由社区创建的 crate 的搜索索引可以在这里找到：
+    [https://crates.io](https://crates.io/).
+- title: 引用多个项目
+  content_markdown: |
+    在同一个模块路径中可以引用多个项目，比如：
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris 不吃桃（TAU），它只吃派（PI）。
+- title: 创建模块
+  content_markdown: |
+    当我们想到项目时，我们通常会想象一个以目录组织的文件层次结构。Rust 允许您创建与您的文件结构密切相关的模块。
+
+    在 Rust 中，有两种方式来声明一个模块。例如，模块 `foo` 可以表示为： 
+
+      * 一个名为 `foo.rs` 的文件。
+      * 在名为 `foo` 的目录，里面有一个叫 `mod.rs` 文件。
+- title: 模块层次结构
+  content_markdown: >
+    模块可以互相依赖。要建立一个模块和其子模块之间的关系，你需要在父模块中这样写：
+
+
+    ```rust
+
+    mod foo;
+
+    ```
+
+
+    上面的声明将使编译器寻找一个名为 `foo.rs `或 `foo/mod.rs` 的文件，并将其内容插入这个作用域内名为 `foo` 的模块中。
+- title: 内联模块
+  content_markdown: >
+    一个子模块可以直接内联在一个模块的代码中。
+
+
+    内联模块最常见的用途是创建单元测试。
+    下面我们创建一个只有在使用 Rust 进行测试时才会存在的内联模块！
+
+
+    ```
+
+    // 当 Rust 不在测试模式时，这个宏会删除这个内联模块。
+
+    #[cfg(test)]
+
+    mod tests {
+        // 请注意，我们并不能立即获得对父模块的访问。我们必须显式地导入它们。
+        use super::*;
+
+        ... 单元测试写在这里 ...
+    }
+
+    ```
+- title: 模块内部引用
+  content_markdown: >
+    你可以在你的 `use` 路径中使用如下 Rust 关键字来获得你想要的模块：
+
+    * `crate` - 你的 crate 的根模块
+
+    * `super` - 当前模块的父模块
+
+    * `self` - 当前模块
+- title: 导出
+  content_markdown: >
+    默认情况下，*模块*的成员不能从模块外部访问（甚至它的子模块也不行！）。
+    我们可以使用 `pub` 关键字使一个模块的成员可以从外部访问。
+
+
+    默认情况下，*crate* 中的成员无法从当前 crate 之外访问。我们可以通过在根模块中 (`lib.rs` 或 `main.rs`)，
+    将成员标记为 `pub` 使它们可以访问。
+- title: 结构体可见性
+  content_markdown: >
+    就像函数一样，结构体可以使用 `pub` 声明它们想要在模块外暴露的东西。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20%E7%BB%93%E6%9E%84%E4%BD%93%E5%9C%A8%E6%88%91%E4%BB%AC%E7%9A%84%E6%A8%A1%E5%9D%97%E5%A4%96%E9%9D%A2%E4%B9%9F%E8%83%BD%E4%BD%BF%E7%94%A8%E4%BA%86%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E6%8A%8A%E6%AD%A6%E5%99%A8%E4%BF%A1%E6%81%AF%E4%BF%9D%E5%AF%86%E8%B5%B7%E6%9D%A5%E5%A5%BD%E4%BA%86%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Prelude
+  content_markdown: |
+    你可能很好奇，为什么我们在没用 `use` 导入 `Vec` 或 `Box` 的情况下却可以到处使用它们。
+    这是因为标准库中有一个叫 `prelude` 的模块。
+
+    要知道，在 Rust 标准库中，以 `std::prelude::*` 导出的任何东西都会自动提供给 Rust 的各个部分。
+    `Vec` 和 `Box` 便是如此，并且其他东西（Option、Copy 等）也是如此。
+- title: 你自己的 Prelude
+  content_markdown: >
+    你看，既然标准库里面有 prelude，那么你自己的库里面最好也要有一个 prelude 模块。
+    这个模块可以作为其他使用你的库的用户的起点：他们可以借此导入你的库里面所有常用的数据结构
+    (例如 `use my_library::prelude::*`)。
+
+    当然，这个模块就不会在用了你的库的程序或别的库里面自动启用了。不过使用这个惯例的话，大家会很轻松地知道从何开始的。
+
+
+    Ferris 说：“当个好 rustacean，帮助蟹友奏好序曲（prelude）！”
+- title: 第九章 - 总结
+  content_markdown: >
+    现在，你应该学会了如何创建并与世界分享你的 Rust 应用程序和库了。
+    不要担心现在记不住这些东西。等以后你的库发展了，用的人多了，你自己会清楚每个阶段应该做什么的。
+
+
+    其他资源（英文）：
+
+    - [Guidelines For Writing Rust
+    APIs](https://rust-lang.github.io/api-guidelines/)
