@@ -1,6 +1,6 @@
 - title: 第一章 - 基础知识
   content_markdown: |
-    在第一章中，我们将探讨函数、变量和最基本的类型等基本知识。欢迎入坑！
+    在第一章中，我们将探讨函数、变量和最基本的类型等基础知识。欢迎入坑！
 
     并且~以防你好奇这个跟你说话的螃蟹是谁，我叫 **Ferris**，一个非官方的 Rust 语言吉祥物。
     很高兴能认识你！
@@ -8,18 +8,18 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%BB%83%E4%B9%A0%E5%9C%BA%EF%BC%81%E4%BD%A0%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9%E8%BF%99%E5%84%BF%E7%9A%84%E4%BB%A3%E7%A0%81%E3%80%82%22)%3B%0A%7D%0A
   content_markdown: |
-    本教程使用一个来自 [Rust 练习场](https://play.rust-lang.org) 的交互代码工具。
+    本教程使用的是来自 [Rust 练习场](https://play.rust-lang.org) 的交互代码工具。
 
-    这是一个玩转 Rust 并且向别人展示你的创造和挑战的最好方式。
+    这是一个玩转 Rust 并且向别人展示你的创造和挑战的最好工具。
 - title: 变量
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20%E6%8E%A8%E6%96%AD%E5%87%BAx%E7%9A%84%E7%B1%BB%E5%9E%8B%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%E4%B9%9F%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E5%A3%B0%E6%98%8E%E7%B1%BB%E5%9E%8B%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20%E4%B9%9F%E6%94%AF%E6%8C%81%E5%85%88%E5%A3%B0%E6%98%8E%E5%90%8E%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E4%BD%86%E5%BE%88%E5%B0%91%E8%BF%99%E6%A0%B7%E5%81%9A%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   content_markdown: |
     变量使用 **let** 关键字来声明。
 
-    在赋值时，Rust 能够在 99% 的情况下推断变量类型。如果不能，你也可以将类型添加到变量声明中。
+    在赋值时，Rust 能够在 99% 的情况下自动推断其类型。如果不能，你也可以手动将类型添加到变量声明中。
 
-    注意我们如何多次分配相同的变量名的方式，这被称为变量隐藏，可以更改变量类型以实现对该变量名的后续使用。
+    你也许注意到了，我们可以对同一个变量名进行多次赋值。这就是所谓的变量隐藏，可以更改变量类型以实现对该变量名的后续使用。
 
     变量名总是遵循 `蛇形命名法` (snake_case)。
 - title: 修改变量
@@ -53,19 +53,19 @@
     文本可能比你在其他语言中学到的更复杂，因为 Rust 是一种系统编程语言，它关心的是你可能不太习惯的内存问题。
     我们之后将详细讨论这个问题。
 
-    可以通过将类型附加到数字的末尾来明确指定数字类型（如 `13u32` 和 `2u8`）
+    另外，你也可以通过将类型附加到数字的末尾来明确指定数字类型（如 `13u32` 和 `2u8`）
 - title: 基本类型转换
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
   content_markdown: |
-    当涉及到数字类型时，Rust 要求明确。一个人不能随心所欲地把“u8”用在“u32”上而不出错。
+    当涉及到数字类型时，Rust 要求明确。一个人不能想当然地把“u8”用在“u32”上而不出错。
 
     幸运的是，使用 **as** 关键字，Rust 使数字类型转换非常容易。
 - title: 常量
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: |
-    常量允许我们高效地指定一个在代码中会被多次使用的公共值。不同于像变量一样在使用的时候会被复制值，常量会在编译期间直接用它们的值来替换文本标识符，
+    常量允许我们高效地指定一个在代码中会被多次使用的公共值。不同于像变量一样在使用的时候会被复制，常量会在编译期间直接用它们的值来替换变量的文本标识符。
 
     不同于变量，常量必须始终具有显式的类型。
 
@@ -78,12 +78,12 @@
 
     一个*数组*的数据类型是 `[T;N]`，其中 T 是元素的类型，N 是编译时已知的固定长度。
 
-    可以使用 `[x]` 运算符检索单个元素，其中 *x* 是所需元素的 *usize* 索引（从 0 开始）。
+    可以使用 `[x]` 运算符提取单个元素，其中 *x* 是所需元素的 *usize* 索引（从 0 开始）。
 - title: 函数
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
   content_markdown: |
-    函数有 0 个或者多个参数。
+    函数可以有 0 个或者多个参数。
 
     在这个例子中，add 接受类型为 `i32`（32 位长度的整数）的两个参数。
 
@@ -96,8 +96,8 @@
 
     元组元素可以通过他们的索引来获取。
 
-    Rust 支持我们后续将看到的各种形式的解构，允许我们以符合人类工程学的方式提取数据结构的子片段。请时刻保持留意！
-- title: 返回空
+    Rust 允许我们将后续会看到的各种形式的解构，也允许我们以符合逻辑的方式提取数据结构的子片段。敬请期待后面的内容！
+- title: 返回空值
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E9%9A%90%E5%90%AB%E4%B8%BA%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E6%8C%87%E5%AE%9A%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%8C%E8%BF%99%E4%B8%AA%E5%87%BD%E6%95%B0%E5%B0%86%E4%BC%9A%E8%BF%94%E5%9B%9E%20()%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20%E6%89%93%E5%8D%B0a%E5%92%8Cb%E7%9A%84debug%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%BE%88%E9%9A%BE%E5%8E%BB%E6%89%93%E5%8D%B0%E7%A9%BA%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
   content_markdown: |
@@ -105,9 +105,19 @@
 
     一个空的元组用 `()` 表示。
 
-    对 `()` 的直接使用是不常见的，但它会经常出现（比如作为函数返回值），因此你最好了解到底发生了什么。
+    直接使用 `()` 的情况相当不常见。但它经常会出现（比如作为函数返回值），所以了解其来龙去脉非常重要。
 - title: 第一章总结
   content_markdown: |
-    到目前为止一切都进展顺利！ Rust 的基础知识还不赖，对吧？ 我们将窥探 Rust 编译器是如何思考的。
+    到目前为止一切都进展顺利！ Rust 的基础知识还不赖，对吧？ 我们一起窥探了 Rust 编译器是如何思考的。
     作为一种系统编程语言，它非常关心内存中值的大小，是否可以修改内容，并确保数值符合你的预期。
     接下来，我们将看一些老朋友：`if` 判断和 `for` 循环。
+
+    其他教学资源（英文）：
+
+    * [Youtube 视频：Rust Cast - 深入了解 Rust 的基础数字类型
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [网页：Rust 之书 2018 - 基本数据的深层描述
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [网页：Rust Cheat Sheet - 数据类型](https://cheats.rs/#basic-types)
