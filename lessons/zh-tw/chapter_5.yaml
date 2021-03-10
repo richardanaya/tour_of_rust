@@ -1,0 +1,177 @@
+- title: 第五章 - 擁有權 (ownership) 與借資料 (borrowing data)
+  content_markdown: >
+    與其他語言相比，Rust 有一套獨特的方式管理記憶體。我們將會逐一檢視這些行為以及編譯器的驗證，以免一下壓垮你。
+    有一點要特別記得的是，這些規則的最終目標都是為了幫助你的程式碼有較少錯誤，而不是讓你的人生更痛苦。
+- title: 擁有權 (ownership)
+  content_markdown: >
+    實體化一種型別並**綁**到一個變量時，會產生記憶體資源，而該記憶體資源的整個**生命週期**都會被 Rust 編譯器驗證過。
+    綁定的變量就稱作記憶體資源的**擁有者**。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20instantiate%20structs%20and%20bind%20to%20variables%0A%20%20%20%20%2F%2F%20to%20create%20memory%20resources%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20the%20owner%0A%7D%0A
+- title: 範圍 (scope-based) 資源管理
+  content_markdown: |
+    Rust 以範圍的邊界來解構及回收資源。
+    這類解構及回收的專有名詞稱作**徹下** (drop)。
+
+    記憶體細節：
+    * Rust 沒有垃圾回收 (garbage collection)
+    * 在 C++ 這被稱作資源取得即初始化 (resource aquisition is initialization)。
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%20%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%0A%7D%0A
+- title: 徹下是有階級的
+  content_markdown: >
+    當一備結構被徹下時，該結構本身會先被徹下，再來是它的子結構逐一被徹下。
+
+
+    記憶體細節：
+
+    * 當自動釋放記憶體時，Rust 會幫你確保有更少的記憶體洩漏 (memory leaks)
+
+    * 記憶體資源只能被徹下一次
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
+- title: 擁有權轉移
+  content_markdown: >
+    當一個擁有者被當作參數 (argument) 傳遞到函數時，擁有權則被轉移給該函式的參數 (parameter)。
+
+
+    在經過**轉移**後，在原本函數的變量就無法再被使用了。
+
+
+    記憶體細節：
+
+    * 在**轉移**的過程中，堆疊記憶體的擁有者將被複製到函數參數的堆疊記憶體。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20moved%20to%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20can%20no%20longer%20be%20used%0A%7D%0A
+- title: 擁有權歸還
+  content_markdown: |
+    擁有權可以從一個函式被歸還。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
+- title: 從參考 (references) 借擁有權
+  content_markdown: |
+    參考允許我們透過 `&` 運算子向一個資源借進入權。
+
+    參考與其他資源一樣會被徹下。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: 從參考借可變 (mutable) 的擁有權
+  content_markdown: >
+    我們可以透過 `&mut` 運算子向一個資源借可變的進入權。
+
+
+    在可變動的借出時，一個資源擁有者無法被轉移或修改。
+
+
+    記憶體細節：
+
+    * Rust 避免有兩種方式可以修改一個被他人擁有的數值，因為這使得資料競爭 (data race) 有機會發生。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20would%20fail%20because%0A%20%20%20%20%2F%2F%20foo%20cannot%20be%20moved%20while%20mutably%20borrowed%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20fail%20here%20because%0A%20%20%20%20%2F%2F%20foo%20is%20not%20modifiable%20while%20mutably%20borrowed%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%20because%20it's%20no%20longer%20used%20after%20this%20point%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20works%20now%20because%20all%20mutable%20references%20were%20dropped%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20foo's%20ownership%20to%20a%20function%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: 解參考 (dereferencing)
+  content_markdown: >
+    使用 `&mut` 參考時，你可以透過 `*` 運算子來設定擁有者的數值。
+
+
+    你也可以透過 `*` 運算子得到一份複製的數值 (如果該數值是可以被複製的話，我們將會在後續章節探討型別的可複製性)。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20get%20a%20copy%20of%20the%20owner's%20value%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%20the%20reference's%20owner's%20value%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: 傳遞借來的資料 (borrowed data)
+  content_markdown: >
+    對 Rust 的參考規則最好的總結可能是：
+    Rust's rules for references might best be summarized by:
+
+
+    * Rust 只允許一個可變的參考**或者**多個不可變的參考，**但不會同時發生**。
+
+    * 一個參考絕對不能**活得比它的擁有者還長**。
+
+
+    這並不會造成當你想傳遞參考到一個函式的困擾。
+
+
+    記憶體細節：
+
+    * 參考的第一條規則是為了避免資料競爭 (data race)。什麼是資料競爭？當你在讀取資料時，有機會因為其他寫入而拿到舊資料即是資料競爭。
+      這常常發生在多執行緒 (multi-threaded) 的程式裡。
+    * 第二條規則是為了避免誤用了參考到不存在的資料的參考 (在 C 裡稱作懸空指標 (dangling pointers))。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20because%20all%20mutable%20references%20are%20dropped%20within%0A%20%20%20%20%2F%2F%20the%20function%20do_something,%20we%20can%20create%20another.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: 參考的參考 (references of references)
+  content_markdown: |
+    參考甚至可以被用在其他參考上。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%20allow%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: 明確的生命週期
+  content_markdown: >
+    雖然 Rust 並不一定會把生命週期顯示在程式碼中，但編譯器會理解每個變量的生命週期，並試著驗證參考不會存在比它的擁有者還久。
+
+
+    函式可以透過參數化函式簽章幫助我們確認哪些參數及回傳值是共享相同的生命週期。
+
+
+    生命週期標示永遠都以 `'` 開頭 (例如：`'a`、`'b`、`'c`)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20the%20parameter%20foo%20and%20return%20value%20share%20the%20same%20lifetime%0Afn%20do_something%3C'a%3E(foo%3A%20%26'a%20Foo)%20-%3E%20%26'a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%2C%20allowing%20us%20to%20create%20a%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
+- title: 多個生命週期
+  content_markdown: >
+    在編譯器無法解析的特定場合裡，生命週期標示允許我們明確的分辨所有函式簽章的生命週期。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20and%20the%20return%20value%20share%20the%20same%20lifetime%0A%2F%2F%20foo_a%20has%20an%20unrelated%20lifetime%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%20because%20only%20foo_b's%20lifetime%20exist%20beyond%20here%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20x%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%0A%7D%0A
+- title: 靜態生命週期 (static lifetimes)
+  content_markdown: >
+    一個**靜態**變量是在編譯時間就被產生的記憶體資源，它從程式一開始就存在，直到結束。它們一定要明確的表示型別。
+
+
+    一個**靜態生命週期**為一塊記憶體資源，它永遠存在直到程式結束。要注意的是，根據這項定義，有些靜態生命週期可以在執行時間才被產生出來。
+
+
+    有著靜態生命週期的資源，會有一個特殊的標示 `'static'`。
+
+
+    `'static'` 資源永遠不會被**徹下** (drop)。
+
+
+    如果靜態生命週期資源包含了參考，那它們必須都得是 `'static'` (少了任何東西則將活得不夠久)。
+
+
+    記憶體細節：
+
+
+    * 修改靜態變量本質上就是危險的，因為任何人在任何地方都可以存取它們，而這有可能會造成資料競爭 (data race)。我們後續會再探討全域資料的問題。
+    
+    * Rust 允許使用 `unsafe { ... }` 區塊來操作一些編譯器無法確保的記憶體行為。[<span
+    style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/) 不應該輕易的被討論。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: 資料型別的生命週期
+  content_markdown: >
+    與函式類似，資料型別也可以透過參數對它的成員設定生命週期。
+
+
+    Rust 會驗證包含資料結構的參考永遠不會存活的比它的擁有者的參考還久。
+
+
+    我們無法讓一個結構有一個不指到任何地方的參考到處執行。
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: 第五章 - 總結
+  content_markdown: >
+    呼，恭喜撐過這章！我知道你有很多要消化，但你正以很棒的姿態成為一名 Rust 人。
+    希望你清楚的了解 Rust 以一門語言來說，是如何解決下列許多系統程式 (systems programming) 的共同問題：
+
+
+    * 無意的修改資源
+
+    * 忘記釋放資源
+
+    * 資源不小心被釋放了兩次
+
+    * 在資源被釋放後還使用它
+    
+    * 當有人正在讀取資料，而另外有人正在修改資料而引起的資料競爭
+
+    * 清楚的看到哪一段 code 是編譯器無法保證的
+
+
+    在下一章節裡，我們將會應用一些這裡的知識，來看看 Rust 怎麼處理文字。
