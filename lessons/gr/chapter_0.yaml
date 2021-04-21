@@ -1,0 +1,27 @@
+- title: >-
+    Γεια, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: |
+    Καλώς ήρθατε στην *Ξενάγηση στη Rust*. Αυτή σκοπεύει να είναι ένας βήμα-προς-βήμα οδηγός προς τις ικανότητες της προγραμματιστικής γλώσσας Rust. Η Rust θεωρείται συχνά μία γλώσσα με απότομη καμπύλη εκμάθησης, αλλά ελπίζω ότι μπορώ να σας πείσω ότι υπάρχουν πολλά πράγματα να εξερευνήσει κανείς προτού πάμε καν στα περίπλοκα τμήματα.
+    
+    Αυτός ο οδηγός υπάρχει επίσης και στις παρακάτω γλώσσες:
+    * [Deutsch](00_de.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Magyar](00_hu.html)
+    * [Polski](00_pl.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [简体中文](00_zh-cn.html)
+    * [繁體中文](00_zh-tw.html)
+    * [日本語](00_ja.html)
+    * [한국어](00_ko.html)
+    * [Türkçe](00_tr.html)
+    * [Українська](00_ua.html)
+    * [ภาษาไทย](00_th.html)
+    Αν έχετε να προτείνετε κάτι σχετικό με το περιεχόμενο ή θα θέλατε να βοηθήσετε με τις μεταφράσεις, μπορείτε να απευθυνθείτε στο [αποθετήριο του Οδηγού στο GitHub](https://github.com/richardanaya/tour_of_rust).
+    Μπορείτε να περιηγηθείτε στην ξενάγηση με τα βελάκια <span class="emoji">⬅️</span> και <span class="emoji">➡️</span> του πληκτρολογίου σας.
+    Σ' αυτό το κλασικό παράδειγμα δείχνουμε την υποστήριξη της Rust για συμβολοσειρές Unicode.
