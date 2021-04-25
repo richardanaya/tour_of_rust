@@ -20,7 +20,7 @@ Every time you finish the translation of a chapter update the table underneath.
 |tr    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |ua    | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |   |   |   |    |
 
-Legend: ✓ = done, x = not done, u = needs update
+Legend: ✓ = done, u = needs update
 
 ## English releases
 
