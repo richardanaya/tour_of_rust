@@ -1,342 +1,378 @@
-body {
-    background: #dfdfdf;
-}
-
-.page {
-    width: 50%;
-    display: inline-block;
-    float: left;
-    padding-bottom: 10px;
-}
-
 
 a {
- color: #555;   
- outline: none;
+  color: #555;
+  outline: none;
 }
 
 .title a {
-    text-decoration: none;
-    color: #120b12;
-    font-size: 34px;
-    line-height: 34px;
-    font-display: optional;
+  text-decoration: none;
+  color: #120b12;
+  font-size: 34px;
+  line-height: 34px;
+  font-display: optional;
 }
 
 .emoji {
-    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+  font-family: apple color emoji, segoe ui emoji, noto color emoji,
+    android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
+    segoe ui symbol;
 }
 
-h1, p, pre{
-    margin-left: 40px;
-    margin-right: 40px;
+h1,
+p,
+pre {
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
-.page p, .page pre {
-    font-size: 18px;
-    line-height: 26px;
-}
-
-.code {
-    width:50%;
-    display:inline-block;
+.page p,
+.page pre {
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .header {
-    background-color: #cecece;
-    height: 40px;
-    padding: 4px;
-    line-height: 40px;
-    font-size: 28px;
-    line-height: 28px;
-    font-weight: bold;
-    color: white;
-    padding-left: 30px;
+  height: 40px;
+  padding: 4px;
+  line-height: 40px;
+  font-size: 28px;
+  line-height: 28px;
+  font-weight: bold;
+  color: white;
+  padding-left: 30px;
+  background-color: #ff6801;
+  box-shadow: 0 2px 3px #cf3801;
+  grid-column: span 2;
 }
 
-html, body {
-    padding:0px;
-    margin: 0px;
-    font-family: 'Neuton', serif;
-    color: #333;
+.header a {
+  color: white !important;
 }
 
-.next a, .back a{
-    color: #120b12;
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Neuton", serif;
+  color: #333;
+}
+
+.tour {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.next a,
+.back a {
+  color: #120b12;
 }
 
 .nav {
-    float:right;
-    padding-right: 10px;
+  float: right;
+  padding-right: 10px;
 }
 
-.code iframe, .page {
-    height: calc(100% - 48px);
-    height: -webkit-cal(100% - 48px);
+iframe {
+  border-radius: 10px;
 }
 
 .page {
-    font-family: 'IBM Plex Serif', serif;
-    overflow-y: auto;
-    -webkit-animation: fadein .5s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein .5s; /* Firefox < 16 */
-        -ms-animation: fadein .5s; /* Internet Explorer */
-         -o-animation: fadein .5s; /* Opera < 12.1 */
-            animation: fadein .5s;
+  font-family: "IBM Plex Serif", serif;
+  overflow-y: auto;
+  -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 0.5s; /* Firefox < 16 */
+  -ms-animation: fadein 0.5s; /* Internet Explorer */
+  -o-animation: fadein 0.5s; /* Opera < 12.1 */
+  animation: fadein 0.5s;
 }
 
-
 code {
-    display: inline;
-    background: #444;
-    color: white;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-right: 3px;
-    
-    margin-left: 3px;
+  display: inline;
+  background: #444;
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-right: 3px;
+
+  margin-left: 3px;
 }
 
 li {
-    padding-top: 3px;
-    padding-bottom: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .nav span {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
-.toc a{
-    color: #120b12;
-} 
+.toc a {
+  color: #120b12;
+}
 
-
-ul, ol, h3 {
-    margin-left: 40px;
-    margin-right: 40px;
+ul,
+ol,
+h3 {
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .bottomnav {
-    padding-top: 20px;
-    text-align: center;
-    font-size: 42px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 42px;
 }
 
 .bottomnav a {
-    text-decoration: none;
-    color: #666;
-    font-weight: 100;
-    font-size: 20px;
+  text-decoration: none;
+  color: #666;
+  font-weight: 100;
+  font-size: 20px;
 }
 
 .bottomnav .back {
-    float:left;
-    padding-left: 40px;
+  float: left;
+  padding-left: 40px;
 }
 
 .bottomnav .next {
-    float:right;
-    padding-right: 40px;
+  float: right;
+  padding-right: 40px;
 }
 
-
-body.welcome-cover { 
-    background: url(cover.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    text-align: center;
+body.welcome-cover {
+  background: url(cover.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  text-align: center;
 }
 
 .welcome {
-    font-size: 40;
-    top: 50%;
-    width: 100%;
-    position: absolute;
-    text-shadow: 2px 2px black;
-    font-weight: bold;
-    color: white;
+  font-size: 40;
+  top: 50%;
+  width: 100%;
+  position: absolute;
+  text-shadow: 2px 2px black;
+  font-weight: bold;
+  color: white;
 
-    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 2s; /* Firefox < 16 */
-        -ms-animation: fadein 2s; /* Internet Explorer */
-         -o-animation: fadein 2s; /* Opera < 12.1 */
-            animation: fadein 2s;
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Firefox < 16 */
 @-moz-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Internet Explorer */
 @-ms-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Opera < 12.1 */
 @-o-keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-.welcome a{
-    font-size: 40px;
-    color: white;
-    text-shadow: 4px 2px black;
-    line-height: 80px;
-    font-weight: bold;
-    text-decoration: none;
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .welcome a {
-    font-size: 120;
+  font-size: 40px;
+  color: white;
+  text-shadow: 4px 2px black;
+  line-height: 80px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.welcome a {
+  font-size: 120;
 }
 
 .welcome-instruction {
-    text-shadow: 2px 1px black;
-    padding-top: 10px;
-    font-size: 30px;
-    text-decoration: underline;
+  text-shadow: 2px 1px black;
+  padding-top: 10px;
+  font-size: 30px;
+  text-decoration: underline;
 }
 
 ul {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .mobile-ferris {
-    display: none;
+  display: none;
 }
 
 .page h1 {
-    font-size: 22px;
+  font-size: 22px;
+}
+
+.code {
+  padding-top: 60px;
+  padding-right: 20px;
+}
+
+iframe {
+  position: sticky;
+  top: 20px;
+  height: 50%;
 }
 
 @media screen and (max-width: 600px) {
-    .code, .page {
-        width: 100%;
-        display: block;
-        height: auto;
-        padding-bottom: 40px;
-    }
+  .tour {
+    display: block;
+  }
 
-    .code {
-        margin-bottom: 40px;
-    }
+  .code {
+    font-size: 14px;
+    padding-right: 0;
+  }
 
-    .code iframe{
-        height: 100%;
-    }
+  .header {
+    font-size: 20px;
+    padding-left: 7px;
+    padding-right: 7px;
+    line-height: 40px;
+    grid-column: unset;
+  }
 
-    code {
-        font-size: 14px;
-    }
+  iframe {
+    position: unset;
+    top: unset;
+    height: 100%;
+    border-radius: 0;
+  }
 
-    .header {
-        font-size: 20px;
-        padding-left: 7PX;
-        padding-right: 7px;   
-        line-height: 40px; 
-    }
+  .title a {
+    font-size: 28px;
+    line-height: 40px;
+  }
 
-    .title a {
-        font-size: 28px;
-        line-height: 40px;
-    }
+  .page p,
+  h1,
+  pre {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
-    .page p, h1, pre {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
+  .page h1 {
+    font-size: 22px;
+  }
 
-    .page h1 {
-        font-size: 22px;
-    }
+  .page p,
+  .page pre {
+    font-size: 18px;
+    line-height: 26px;
+  }
 
-    .page p, .page pre {
-        font-size: 18px;
-        line-height: 26px;
-    }
+  ul,
+  ol,
+  h3 {
+    margin-left: 0px;
+    margin-right: 20px;
+  }
 
-    ul,ol, h3 {
-        margin-left: 0px;
-        margin-right: 20px;
-    }
+  .nav span {
+    padding-left: 5px;
+  }
 
-    .nav span {
-        padding-left: 5px;
-    }
+  .nav {
+    padding-right: 0px;
+    letter-spacing: -0.6px;
+  }
 
-    .nav {
-        padding-right: 0px;
-        letter-spacing: -.6px;
-    }
+  .bottomnav a {
+    font-size: 22px;
+  }
 
-    .bottomnav a {
-        font-size: 22px;
-    }
-    
-    .bottomnav .back {
-        padding-left: 20px;
-    }
-    
-    .bottomnav .next {
-        padding-right: 20px;
-    }
+  .bottomnav .back {
+    padding-left: 20px;
+  }
 
-    .welcome {
-        font-size: 24px;
-    }
+  .bottomnav .next {
+    padding-right: 20px;
+  }
 
-    .welcome a{
-        font-size: 40px;
-        line-height: 40px;
-    }
+  .welcome {
+    font-size: 24px;
+  }
 
-    .welcome a {
-        font-size: 50;
-        text-shadow: 2px 2px black;
-    }
+  .welcome a {
+    font-size: 40px;
+    line-height: 40px;
+  }
 
-    .welcome-instruction {
-        padding-top: 10px;
-        font-size: 30px;
-    }
+  .welcome a {
+    font-size: 50;
+    text-shadow: 2px 2px black;
+  }
 
-    .mobile-ferris {
-        display: block;
-        top: 20%;
-        left: 50%;
-        margin-left: -75px;
-        position: absolute;
-        width: 150px;
-        -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 2s; /* Firefox < 16 */
-        -ms-animation: fadein 2s; /* Internet Explorer */
-         -o-animation: fadein 2s; /* Opera < 12.1 */
-            animation: fadein 2s;
-    }
+  .welcome-instruction {
+    padding-top: 10px;
+    font-size: 30px;
+  }
+
+  .mobile-ferris {
+    display: block;
+    top: 20%;
+    left: 50%;
+    margin-left: -75px;
+    position: absolute;
+    width: 150px;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+    animation: fadein 2s;
+  }
 }
 
-b, h1 {
-    color: black;
+b,
+h1 {
+  color: black;
 }
 
-
-.header:fullscreen, .header:-webkit-full-screen, .header:moz-full-screen {
-    display:none;
+.header:fullscreen,
+.header:-webkit-full-screen,
+.header:moz-full-screen {
+  display: none;
 }
