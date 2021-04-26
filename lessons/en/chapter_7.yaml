@@ -22,7 +22,7 @@
     * Abstraction - Hiding data and function members to obfuscate implementation
     details of an object.
 
-    * Polymorphism - The ability to interacting with an object from different
+    * Polymorphism - The ability to interact with an object from different
     functional perspectives.
 
     * Inheritance - The ability to inherit data and behavior from other objects.
