@@ -1,4 +1,3 @@
-
 a {
   color: #555;
   outline: none;
@@ -257,6 +256,10 @@ iframe {
   height: 50%;
 }
 
+.page {
+  padding-bottom: 60px;
+}   
+
 @media screen and (max-width: 600px) {
   .tour {
     display: block;
@@ -303,6 +306,11 @@ iframe {
     font-size: 18px;
     line-height: 26px;
   }
+
+  .page {
+    padding-bottom: 0px;
+  }   
+  
 
   ul,
   ol,
