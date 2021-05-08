@@ -1,0 +1,8 @@
+- title: Kapitel 10 - Das Ende
+  content_markdown: >
+    Es war eine Freude, dich bei der Tour durch Rust dabei gehabt zu haben.
+    Ferris und das ,,Tour of Rust"-Team hoffen, dass es dir gefallen hat!
+    Falls du dich weiter mit Rust beschäftigen möchtest, empfehlen wir dir
+    diese Resource:
+
+    * [Das offizielle Rust Programming Book](https://doc.rust-lang.org/stable/book/)
