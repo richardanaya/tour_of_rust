@@ -38,19 +38,21 @@
     hätte. Der Datentyp darf sich dabei auch ändern.</p><p>Variablennamen werden
     ebenfalls in <code>snake_case</code> geschrieben.</p>
 - title: Variablenwerte ändern
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20hello%20%3D%20%22Hello%22%3B%0A%20%20%20%20let%20mut%20world%20%3D%20%22playground%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20hello%2C%20world)%3B%0A%20%20%20%20%0A%20%20%20%20world%20%3D%20%22world%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20hello%2C%20world)%3B%0A%7D
   content_markdown: >
     Rust sorgt sich sehr darum, welche Variablen verändert werden können
 
     und welche nicht. Daher gibt es die folgende Unterscheidung:
 
 
-    * **mutable** - der Speicherort der Variable kann beschrieben und gelesen
+    * **mutable** (_veränderlich_) - der Speicherort der Variable kann beschrieben und gelesen
     werden
 
-    * **immutable** - der Compiler lässt nur das Lesen des Speicherortes zu
+    * **immutable** (_unveränderlich_) - der Compiler lässt nur das Lesen des Speicherortes zu
 
 
-    Variablen, die verändert werden können, werden mit einem extra `mut`
+    Variablen, die verändert werden können, werden mit einem extra `mut` (Abkürzung für **mutable**)
 
     Schlüsselwort gekennzeichnet.
 
