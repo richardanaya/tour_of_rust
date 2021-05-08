@@ -71,6 +71,8 @@
 
     Rust has some powerful operators that allow us to do this.
 - title: The * Operator
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20i32%20%3D%2042%3B%0A%20%20%20%20let%20ref_ref_ref_a%3A%20%26%26%26i32%20%3D%20%26%26%26a%3B%0A%20%20%20%20let%20ref_a%3A%20%26i32%20%3D%20**ref_ref_ref_a%3B%0A%20%20%20%20let%20b%3A%20i32%20%3D%20*ref_a%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20b)%0A%7D
   content_markdown: >
     The `*` operator is an explicit way to dereference a reference. 
 
@@ -95,6 +97,8 @@
     the bytes of variable `a` on stack are copied into the bytes of variable
     `b`.
 - title: The . Operator
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20value%3A%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20f%20%3D%20Foo%20%7B%20value%3A%2042%20%7D%3B%0A%20%20%20%20let%20ref_ref_ref_f%20%3D%20%26%26%26f%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20ref_ref_ref_f.value)%3B%0A%7D
   content_markdown: >
     The `.` operator is used in accessing fields and methods of a reference. It
     works a bit more subtly.
