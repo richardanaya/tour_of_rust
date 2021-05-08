@@ -22,8 +22,8 @@
     * Abstraction - Hiding data and function members to obfuscate implementation
     details of an object.
 
-    * Polymorphism - The ability to interact with an object from different
-    functional perspectives.
+    * Polymorphism - The ability to interact with objects of different types through
+    one interface.
 
     * Inheritance - The ability to inherit data and behavior from other objects.
 - title: Rust Is Not OOP
