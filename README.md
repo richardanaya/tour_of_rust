@@ -26,7 +26,7 @@ This project also aims to provide this book in as many languages as possible.
 
 # Contributors
 
-* Deutsch - [Felix](https://github.com/jassler), [Ramin Azhdari](https://github.com/raminos), [Zerotask](https://github.com/zerotask)
+* Deutsch - [Felix](https://github.com/jassler), [Ramin Azhdari](https://github.com/raminos), [Patrick Hintermayer](https://github.com/zerotask)
 * English - [Richard Anaya](https://github.com/richardanaya)
 * Español - [Alba Martínez Martínez](https://github.com/albatraduce), (Tech review by [Alberto Moreta](https://github.com/AlbertoMoreta) and [Fran Torres](https://github.com/franute))
 * Français - [Mathieu Gemard](https://github.com/mgemard), [Vincent Foulon](https://github.com/VincentFoulon80)
