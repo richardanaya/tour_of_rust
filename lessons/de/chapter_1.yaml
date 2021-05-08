@@ -26,6 +26,8 @@
     gesetzt. Ändere Codeschnipsel, teste Funktionen, lass deiner Fantasie freien
     Lauf!
 - title: Variablen
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20hello_world%20%3D%20%22Hello%20world%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20hello_world)%3B%0A%20%20%20%20%0A%20%20%20%20let%20hello_world%20%3D%20%22Hello%20playground%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20hello_world)%3B%0A%7D
   content_html: >-
     <p>Variablen werden mit dem Schlüsselwort <code>let</code>
     deklariert.</p><p>Im Regelfall sollte man Rust die Entscheidung überlassen,
