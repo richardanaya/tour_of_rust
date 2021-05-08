@@ -6,7 +6,7 @@
     maybe
 
     enjoy a surprise or two.
-- title: if/else if/else
+- title: if/else
   content_markdown: >
     Code branching in Rust is not surprising.
 
