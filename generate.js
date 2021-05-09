@@ -80,7 +80,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-155199982-1');
+        gtag('config', 'UA-155199982-1', { 'anonymize_ip': true });
         </script>
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
