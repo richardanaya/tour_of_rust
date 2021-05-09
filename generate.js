@@ -2,18 +2,24 @@
 let showdown = require("showdown");
 const fs = require('fs')
 const yaml = require('js-yaml');
-const { exit } = require("process");
-
 const lessonSource = process.argv[2];
 const target_dir = process.argv[3];
 const generate_beta_content = process.argv.length >= 4 && process.argv[4]=="beta";
 
-const getDirectories = source =>
+/**
+ * @param {string} source 
+ * @returns {string[]}
+ */
+const getDirectories = (source) =>
   fs.readdirSync(source, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name)
 
-const getYaml = path => yaml.safeLoad(fs.readFileSync(path));
+/**
+ * @param {string} path 
+ * @returns {any}
+ */
+const getYaml = (path) => yaml.safeLoad(fs.readFileSync(path));
 
 const languages = getDirectories(lessonSource);
 const commonWords = {};
@@ -56,6 +62,12 @@ const lessons = {
 
 converter = new showdown.Converter();
 
+/**
+ * @param {string[]} words 
+ * @param {string} lang 
+ * @param {string} w 
+ * @returns {string}
+ */
 function getWord(words,lang,w){
     if(words[lang][w]){
         return words[lang][w];
@@ -63,13 +75,18 @@ function getWord(words,lang,w){
     return words["en"][w];
 }
 
-function titleClean(title){
-    title = title.replace("<span class=\"emoji\">","");
-    title = title.replace("</span>","");
-    title = title.replace("🦀","Rust");
-    return title;
-}
-
+/**
+ * @param {Array} lessons 
+ * @param {string} lang 
+ * @param {string} title 
+ * @param {string} code 
+ * @param {string} content 
+ * @param {number} index 
+ * @param {boolean} isLast 
+ * @param {string[]} words 
+ * @param {boolean} is_beta 
+ * @returns 
+ */
 function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
     return `<!DOCTYPE html>
     <html lang="${lang}">
@@ -123,16 +140,27 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
 </html>`
 }
 
-function pad(num, size) {
+/**
+ * @param {number} num 
+ * @returns {string}
+ */
+function pad(num) {
     var s = num+"";
     return s.padStart(2, '0')
 }
 
-function getFileName(lang,i,is_beta,chapter){
+/**
+ * @param {string} lang 
+ * @param {number} i 
+ * @param {boolean} is_beta currently unused
+ * @param {string} chapter 
+ * @returns {string}
+ */
+function getFileName(lang, i, is_beta, chapter){
     if(i == 0 && lang == "en"){
         return "index.html"
     }
-    let fileName = pad(i,2)+`_${lang}.html`;
+    let fileName = pad(i)+`_${lang}.html`;
     if(chapter !== undefined){
         fileName = `chapter_${chapter}_${lang}.html`
     }
@@ -195,7 +223,7 @@ for(var l in languages){
                 target_lang = lesson[lang].clone;
             }
             let fileName = getFileName(lang,i,true,lesson.chapter);
-       
+
             let lesson_title = "["+getWord(words,target_lang,"untranslated")+"] "+lesson["en"].title;
             let lesson_content = lesson["en"].content_markdown
             let lesson_code = lesson["en"].code 

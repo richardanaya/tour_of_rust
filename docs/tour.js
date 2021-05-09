@@ -4,10 +4,10 @@ function setupKeys(){
             return;
         }
         let link;
-        if(e.keyCode == 39){
+        if(e.key === 'Right' || e.key === 'ArrowRight'){
             link = document.querySelector(".next a");
         }
-        if(e.keyCode == 37){
+        if(e.key === 'Left' || e.key === 'ArrowLeft'){
             link = document.querySelector(".back a");
         }
         if(link){
