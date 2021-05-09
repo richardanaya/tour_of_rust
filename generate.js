@@ -71,7 +71,8 @@ function titleClean(title){
 }
 
 function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
-    return `<html lang="${lang}">
+    return `<!DOCTYPE html>
+    <html lang="${lang}">
     <head>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
@@ -114,7 +115,7 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
             </div>
             </div>
             ${code?`<div class="code">
-            <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+            <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground"></iframe>
             </div>`:`<div class="code"><center><br><br><br><br><br><img src="/ferris_lofi.png"><br><br><br><br><br></center></div>`}
         </div>
     </body>
