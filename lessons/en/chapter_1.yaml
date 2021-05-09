@@ -136,7 +136,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
   content_markdown: >
-    An *array* is a fixed length collection of data elements all of the same
+    An *array* is a **fixed length collection** of data elements all of the same
     type.
 
 
@@ -146,6 +146,10 @@
 
     Individual elements can be retrieved with the `[x]` operator where *x* is a
     *usize* index (starting at 0) of the element you want.
+
+
+    Collections with a dynamic length, often called dynamic or variable arrays, are
+    introduced in a later chapter about **Vectors**.
 - title: Functions
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%7D%0A
@@ -153,13 +157,15 @@
     A function has zero or more parameters.
 
 
-    In this example, add takes two arguments of type `i32` (signed integer of
-    32-bit
-
-    length).
+    In this example, the *add* function takes two arguments of type `i32` 
+    (signed integer of 32-bit length).
 
 
     Function names are always in `snake_case`.
+
+
+    Hint: if you define a function, the data it accepts are called parameters.
+    If you call that function and pass data to it, then it's called arguments.
 - title: Multiple Return Values
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
