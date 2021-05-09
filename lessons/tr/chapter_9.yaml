@@ -43,7 +43,7 @@
     use std::f64::consts::{PI,TAU}
     ```
 
-    Ferris TAU yiyemez, o sadece PI yemeyi tercih eder. 
+    Ferris TAU yiyemez, o sadece PI yemeyi tercih eder.
 - title: Modüller Oluşturmak
   content_markdown: |
     Bir programı hakkında düşündüğünüzde, çoğu zaman gözlerinizin önüne  dizinler halinde düzenlenmiş dosya hiyerarşisinden oluşan bir yapı geliyordur. 

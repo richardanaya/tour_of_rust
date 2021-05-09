@@ -8,7 +8,7 @@
 
     Neste capítulo exploraremos as estratégias usadas para o vai-e-vem dos dados.
 - title: Importando Funções
-  code: 'https://webassembly.studio/?embed&f=pp20eedhka'
+  code: "https://webassembly.studio/?embed&f=pp20eedhka"
   content_markdown: >
     Os módulos WebAssembly podem chamar apenas funçõesque foram importadas explicitamente.
 
@@ -87,7 +87,7 @@
     // Uint8Array(3) [72, 105, 33]
     ```
 - title: Logando Texto
-  code: 'https://webassembly.studio/?embed&f=1gxcr004p3x'
+  code: "https://webassembly.studio/?embed&f=1gxcr004p3x"
   content_markdown: >
     Vamos explorar um exemplo simples de logar um texto de um programa WebAssembly.
 
@@ -116,7 +116,7 @@
     }
     ```
 - title: Lendo Texto
-  code: 'https://webassembly.studio/?embed&f=ubmxmavgf2'
+  code: "https://webassembly.studio/?embed&f=ubmxmavgf2"
   content_markdown: >
     Vamos explorar a ideia oposta. Imagine que queremos passar um texto para um programa WebAssembly.
 

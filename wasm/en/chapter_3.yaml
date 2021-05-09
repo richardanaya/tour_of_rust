@@ -108,7 +108,7 @@
     You'll notice there is a problem with our JavaScript function though. It has
     the start and end of our utf-8 but not memory!
 - title: Context Of Dynamic Invocation
-  code: 'https://webassembly.studio/?embed&f=70lhg7nwda9'
+  code: "https://webassembly.studio/?embed&f=70lhg7nwda9"
   content_markdown: >
     When our dynamically invoked functions are called, the functions need to
     have access to the module's memory. We can place
@@ -164,7 +164,7 @@
         selector.len() as f64 );
     ```
 - title: Allocators
-  code: 'https://webassembly.studio/?embed&f=mz2gu9y29tn'
+  code: "https://webassembly.studio/?embed&f=mz2gu9y29tn"
   content_markdown: >
     As we can see to properly communicate objects, we need to have some kind of
     storage mechanism for objects:
@@ -216,7 +216,7 @@
 
     There are many issues for you to consider with your implementation.
 - title: Drawing To The Screen
-  code: 'https://webassembly.studio/?embed&f=bdhga9zwlem'
+  code: "https://webassembly.studio/?embed&f=bdhga9zwlem"
   content_markdown: >
     Let's put it all together with a an example by drawing a red square to the
     screen. Let's think about the functions we'll need

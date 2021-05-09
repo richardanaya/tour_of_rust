@@ -59,7 +59,7 @@
     module.instance.main();
     ```
 - title: 1+1
-  code: 'https://webassembly.studio/?embed&f=jg96xg1ovj'
+  code: "https://webassembly.studio/?embed&f=jg96xg1ovj"
   content_markdown: >
     Vamos juntar nossos conhecimentos e criar um módulo WebAssembly com uma única função `add` **exportada** para somar dois números e colocar o resultado em HTML.
 

@@ -4,14 +4,14 @@
 
 
     Επίσης! Σε περίπτωση που αναρωτιέστε ποιο είναι αυτό το αξιολάτρευτο καβουράκι που σας μιλάει: Είμαι ο **Ferris**, η ανεπίσημη μασκότ της προγραμματιστικής γλώσσας Rust. Χαίρω πολύ!
-- title: Η Παιδική Χαρά της Rust  
+- title: Η Παιδική Χαρά της Rust
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22%CE%9A%CE%B1%CE%BB%CF%8E%CF%82%20%CE%AE%CF%81%CE%B8%CE%B1%CF%84%CE%B5%20%CF%83%CF%84%CE%B7%CE%BD%20%CF%80%CE%B1%CE%B9%CE%B4%CE%B9%CE%BA%CE%AE%20%CF%87%CE%B1%CF%81%CE%AC!%20%CE%9C%CF%80%CE%BF%CF%81%CE%B5%CE%AF%CF%84%CE%B5%20%CE%BD%CE%B1%20%CE%B5%CF%80%CE%B5%CE%BE%CE%B5%CF%81%CE%B3%CE%B1%CF%83%CF%84%CE%B5%CE%AF%CF%84%CE%B5%20%CF%84%CE%BF%CE%BD%20%CE%BA%CF%8E%CE%B4%CE%B9%CE%BA%CE%B1%20%CE%B5%CE%B4%CF%8E%20%CE%BC%CE%AD%CF%83%CE%B1.%22)%3B%0A%7D%0A
   content_markdown: >
     Αυτή η ξενάγηση χρησιμοποιεί το διαδραστικό προγραμματιστικό εργαλείο από την [Παιδική Χαρά της Rust](https://play.rust-lang.org).
 
 
-    Είναι ένας εξαίρετος τρόπος να παίξετε με τη Rust και να δείξετε στους άλλους τη δημιουργικότητα και τις προκλήσεις σας! 
+    Είναι ένας εξαίρετος τρόπος να παίξετε με τη Rust και να δείξετε στους άλλους τη δημιουργικότητα και τις προκλήσεις σας!
 - title: Μεταβλητές
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%CE%97%20Rust%20%CF%83%CF%85%CE%BC%CF%80%CE%B5%CF%81%CE%B1%CE%AF%CE%BD%CE%B5%CE%B9%20%CF%84%CE%BF%CE%BD%20%CF%84%CF%8D%CF%80%CE%BF%20%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CF%89%CE%BD%20%CF%84%CE%BF%CF%85%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20%CE%9C%CF%80%CE%BF%CF%81%CE%BF%CF%8D%CE%BC%CE%B5%20%CE%B5%CF%80%CE%AF%CF%83%CE%B7%CF%82%20%CE%BD%CE%B1%20%CE%B4%CE%B7%CE%BB%CF%8E%CF%83%CE%BF%CF%85%CE%BC%CE%B5%20%CF%81%CE%B7%CF%84%CE%AC%20%CF%84%CE%BF%CE%BD%20%CF%84%CF%8D%CF%80%CE%BF%20%CF%84%CE%BF%CF%85%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20%CE%93%CE%AF%CE%BD%CE%B5%CF%84%CE%B1%CE%B9%20%CE%B5%CF%80%CE%AF%CF%83%CE%B7%CF%82%20%CE%BD%CE%B1%20%CE%B4%CE%B7%CE%BB%CF%8E%CF%83%CE%BF%CF%85%CE%BC%CE%B5%20%CF%83%CF%84%CE%B7%CE%BD%20%CE%B1%CF%81%CF%87%CE%AE%20%CE%BA%CE%B1%CE%B9%20%CE%BD%CE%B1%20%0A%20%20%20%20%2F%2F%20%CE%B1%CF%81%CF%87%CE%B9%CE%BA%CE%BF%CF%80%CE%BF%CE%B9%CE%AE%CF%83%CE%BF%CF%85%CE%BC%CE%B5%20%CE%B1%CF%81%CE%B3%CF%8C%CF%84%CE%B5%CF%81%CE%B1%2C%20%CE%B1%CE%BB%CE%BB%CE%AC%20%CE%B1%CF%85%CF%84%CF%8C%20%CF%83%CF%80%CE%AC%CE%BD%CE%B9%CE%B1%20%CE%B3%CE%AF%CE%BD%CE%B5%CF%84%CE%B1%CE%B9%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -44,7 +44,7 @@
     Θα αναφερθούμε εκτενέστερα σ' αυτήν την έννοια αργότερα, αλλά προς το παρόν έχετε το νου σας σ' αυτήν τη λέξη-κλειδί.
 - title: Βασικοί τύποι
   code: >-
-      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20%CE%95%CE%BA%20%CF%80%CF%81%CE%BF%CE%B5%CF%80%CE%B9%CE%BB%CE%BF%CE%B3%CE%AE%CF%82%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20%CE%95%CE%BA%20%CF%80%CF%81%CE%BF%CE%B5%CF%80%CE%B9%CE%BB%CE%BF%CE%B3%CE%AE%CF%82%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%BF%CF%85%20%CE%BA%CF%8C%CF%83%CE%BC%CE%B5!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20%CE%95%CE%BA%20%CF%80%CF%81%CE%BF%CE%B5%CF%80%CE%B9%CE%BB%CE%BF%CE%B3%CE%AE%CF%82%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20%CE%95%CE%BA%20%CF%80%CF%81%CE%BF%CE%B5%CF%80%CE%B9%CE%BB%CE%BF%CE%B3%CE%AE%CF%82%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%BF%CF%85%20%CE%BA%CF%8C%CF%83%CE%BC%CE%B5!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
     Η Rust έχει μία ποικιλία γνωστών τύπων:
 
@@ -85,11 +85,11 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%CE%97%20%CF%80%CE%B5%CF%81%CE%AF%CE%BC%CE%B5%CF%84%CF%81%CE%BF%CF%82%20%CE%B5%CE%BD%CF%8C%CF%82%20%CE%BA%CF%8D%CE%BA%CE%BB%CE%BF%CF%85%20%CE%B9%CF%83%CE%BF%CF%8D%CF%84%CE%B1%CE%B9%20%CE%BC%CE%B5%20%7B%7D%20%CF%86%CE%BF%CF%81%CE%AD%CF%82%20%CF%84%CE%B7%20%CE%B4%CE%B9%CE%AC%CE%BC%CE%B5%CF%84%CF%81%CF%8C%20%CF%84%CE%BF%CF%85.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
     Οι σταθερές μας επιτρέπουν να ορίσουμε μία συνήθη τιμή η οποία χρησιμοποιείται διαμέσω του κώδικά μας αποδοτικά. Αντί να αντιγράφονται τιμές όπως μεταβλητές εκεί όπου χρησιμοποιούνται, οι σταθερές αντικαθιστούν άμεσα το όνομα της μεταβλητής όπου χρησιμοποιούνται με την τιμή τους την ώρα της μετάφρασης.
-    
-    
+
+
     Σε αντίθεση με τις μεταβλητές, οι τύποι δεδομένων των σταθερών πρέπει πάντοτε να δηλώνονται ρητά.
-    
-    
+
+
     Τα ονόματα των σταθερών είναι πάντοτε γραμμένα με `ΦΙΔΟ_ΚΕΦΑΛΑΙΑ`.
 - title: Πίνακες
   code: >-

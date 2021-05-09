@@ -21,7 +21,7 @@
 
     Definicja struktur pozwala nam stworzyć pewnego rodzaju plan budowy który 
     zostanie później użyty przez kompilator w celu odpowiedniego ułożenia naszych
-    struktur i ich pól w pamięci w wydajny sposób. 
+    struktur i ich pól w pamięci w wydajny sposób.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20jest%20struktur%C4%85%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
 - title: Wywoływanie Metod
@@ -86,7 +86,7 @@
     zmieniony w trakcie trwania programu, co oznacza, że:
         * Stworzony zostaje obszar pamięci na stercie dla przechowania danych 
       reprezentujących modyfikowalny ciąg znaków
-        * Przechowuje się na stosie referencję do miejsca na stercie gdzie przechowywane są te dane 
+        * Przechowuje się na stosie referencję do miejsca na stercie gdzie przechowywane są te dane
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20ZyjatkoMorskie%20%7B%0A%20%20%20%20rodzaj%3A%20String%2C%0A%20%20%20%20imie%3A%20String%2C%0A%20%20%20%20ramiona%3A%20i32%2C%0A%20%20%20%20nogi%3A%20i32%2C%0A%20%20%20%20uzbrojenie%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20ta%20struktura%20jest%20przechowywana%20na%20stosie%0A%20%20%20%20let%20ferris%20%3D%20ZyjatkoMorskie%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20struktura%20String%20jest%20r%C3%B3wnie%C5%BC%20przechowywana%20na%20stosie%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20cho%C4%87%20trzyma%20ona%20te%C5%BC%20referencj%C4%99%20do%20danych%20na%20stercie%0A%20%20%20%20%20%20%20%20rodzaj%3A%20String%3A%3Afrom(%22krab%22)%2C%0A%20%20%20%20%20%20%20%20imie%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20ramiona%3A%202%2C%0A%20%20%20%20%20%20%20%20nogi%3A%204%2C%0A%20%20%20%20%20%20%20%20uzbrojenie%3A%20String%3A%3Afrom(%22szczypce%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sara%20%3D%20ZyjatkoMorskie%20%7B%0A%20%20%20%20%20%20%20%20rodzaj%3A%20String%3A%3Afrom(%22o%C5%9Bmiornica%22)%2C%0A%20%20%20%20%20%20%20%20imie%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20ramiona%3A%208%2C%0A%20%20%20%20%20%20%20%20nogi%3A%200%2C%0A%20%20%20%20%20%20%20%20uzbrojenie%3A%20String%3A%3Afrom(%22brak%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20to%20%7B%7D.%20Posiada%20%7B%7D%20ramion%2C%20%7B%7D%20n%C3%B3g%2C%20oraz%20jest%20uzbrojony%20w%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.imie%2C%20ferris.rodzaj%2C%20ferris.ramiona%2C%20ferris.nogi%2C%20ferris.uzbrojenie%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20to%20%7B%7D.%20Posiada%20%7B%7D%20ramion%20i%20%7B%7D%20n%C3%B3g.%20Nie%20posiada%20%C5%BCadnej%20broni..%22%2C%0A%20%20%20%20%20%20%20%20sarah.imie%2C%20sarah.rodzaj%2C%20sarah.ramiona%2C%20sarah.nogi%0A%20%20%20%20)%3B%0A%7D%0A
 - title: Struktury Krotkowe
@@ -110,7 +110,7 @@
   content_markdown: >
     Wyliczenia tworzone z użyciem słowa kluczowego `enum` pozwalają na tworzenie nowych
     typów których wartość może być równa jednemu z określonych w ramach takiego typu elementów.
-    
+
 
     Wyrażenie `match` pozwala nam na wyczerpujące dopasowanie każdego możliwego wariantu wyliczenia.
     Kombinacja wyliczeń i wyrażenia `match` to jedna z kluczowych metod tworzenia wysokiej jakości
@@ -142,7 +142,7 @@
 
     * Wyliczenia `enum` w Ruscie są czasem nazywane *tagowanymi uniami* (ang. *tagged unions*), ze względu na wspomnianą już
     unikalną charakterystykę pozwalającą na trzymanie danych wewnątrz elementów
-    
+
     * Mówi się, że Rust posiada *typy algebraiczne* (ang. *algebraic types*). Oznacza to mniej więcej tyle, że możliwe jest
     kombinowanie typów w celu stworzenia z nich pewnego nowego typu.
   code: >-
@@ -159,4 +159,4 @@
 
     W następnym rozdziale przyjrzymy się bardzo ciekawemu aspektowi języka, który 
     pozwoli nam programować w jeszcze bardziej elastyczny sposób.
-    Mowa oczywiście o notacji *generycznej*. 
+    Mowa oczywiście o notacji *generycznej*.

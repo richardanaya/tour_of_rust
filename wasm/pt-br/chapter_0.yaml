@@ -1,4 +1,4 @@
-- title: 'Olá, WebAssembly'
+- title: "Olá, WebAssembly"
   content_markdown: >
     Bem-vindo ao *Tour por WebAssembly*. Pretendemos ser uma introdução a esta tecnologia e de como o Rust pode ser usado para dar mais força à web. Se você é completamente novo no Rust pode apreciar o [Tour por Rust](https://tourofrust.com/)! A maioria dos nossos exemplos será fácil o suficiente para qualquer pessoa acompanhar. Este tour também está disponível para a linguagem C.
 

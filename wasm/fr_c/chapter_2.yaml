@@ -1,6 +1,6 @@
 - clone: fr
 - title: Import de Fonctions
-  code: 'https://webassembly.studio/?embed&f=24dhd9oyxo4'
+  code: "https://webassembly.studio/?embed&f=24dhd9oyxo4"
   content_markdown: >
     Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui
     ont été explicitement importées.
@@ -28,9 +28,9 @@
 - clone: fr
 - clone: fr
 - clone: fr
-  code: 'https://webassembly.studio/?embed&f=1k8ag8em8q9'
+  code: "https://webassembly.studio/?embed&f=1k8ag8em8q9"
 - clone: fr
-  code: 'https://webassembly.studio/?embed&f=etabmws7uru'
+  code: "https://webassembly.studio/?embed&f=etabmws7uru"
 - clone: fr
 - title: Chapitre 2 - Conclusion
   content_markdown: >

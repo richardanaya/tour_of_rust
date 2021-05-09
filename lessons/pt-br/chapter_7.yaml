@@ -147,8 +147,8 @@
     * `generics` - usando tipos parametrizados cria efetivamente tipos conhecidos de structs/funções e, portanto, tamanhos conhecidos.
 
     * `indirection` - colocando instâncias no heap fornece um contorno que permite que não nos preocupemos com o tamanho do tipo atual e apenas armazenar um ponteiro nele.
-    
-    
+
+
     Há outras maneiras também!
 - title: Funções genéricas
   code: >-

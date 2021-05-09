@@ -9,7 +9,7 @@
     In this chapter we will explore the strategies used to move data back and
     forth.
 - title: Importing Functions
-  code: 'https://webassembly.studio/?embed&f=pp20eedhka'
+  code: "https://webassembly.studio/?embed&f=pp20eedhka"
   content_markdown: >
     WebAssembly modules can only call functions that have been explicitly
     imported.
@@ -118,7 +118,7 @@
 
     ```
 - title: Logging Text
-  code: 'https://webassembly.studio/?embed&f=1gxcr004p3x'
+  code: "https://webassembly.studio/?embed&f=1gxcr004p3x"
   content_markdown: >
     Let's explore a simple example of logging some text from a WebAssembly
     program.
@@ -151,7 +151,7 @@
 
     ```
 - title: Reading Text
-  code: 'https://webassembly.studio/?embed&f=ubmxmavgf2'
+  code: "https://webassembly.studio/?embed&f=ubmxmavgf2"
   content_markdown: >
     Let's explore the opposite idea. Imagine we want to give some text to a
     WebAssembly program.

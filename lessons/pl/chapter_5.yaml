@@ -7,8 +7,8 @@
 
     W tym rozdziale przyjrzymy się reakcjom kompilatora sprawdzającego nasz kod.
     Bez obaw, zaczniemy powoli.
-    
-    
+
+
     Ważne żeby pamiętać, że zasady według których kompilator ocenia nasze
     wypociny nie istnieją po to by uprzykrzać nam życie. Są one raczej
     fundamentem na którym jesteśmy w stanie budować solidne i bezpieczne
@@ -18,7 +18,7 @@
     Tworząc nową instancję jakiegoś typu i **przypisując** ją do zmiennej
     sprawia, że stworzony zostaje pewien zasób pamięci który kompilator będzie
     próbował zweryfikować. 
-    
+
     Weryfikacja ta odbędzie się na podstawie czegoś co nazywamy **lifetime**,
     czyli *czasem życia* danego zasobu. Zmienna do której przypisaliśmy zasób
     jest tutaj nazywana **właścicielem** (ang. **owner**) zasobu.
@@ -33,7 +33,7 @@
     Termin opisujący ten proces dekonstrukcji i dealokacji zasobu to **drop**, czy
     **wypuszczanie**.
 
-    
+
     Kilka szczegółów:
     * W Ruscie nie ma *odśmiecania pamięci*.
     * Opisany wyżej model jest też nazywany "RAII" w środowisku C++. Jest to skrót
@@ -58,7 +58,7 @@
   content_markdown: >
     Kiedy zmienna zostaje wysłana jako argument do funkcji, własność zasobu tej zmiennej
     zostaje przeniesiona do odpowiedniego parametru w ramach tej funkcji.
-    
+
 
     Po takim **przeniesieniu** (ang. **move**) zmienna w jej oryginalnym wydaniu
     nie może zostać ponownie wykorzystana.
@@ -153,7 +153,7 @@
     referencji tak, aby żadna z nich nie istniała dłużej niż jej "właściciel",
     czyli oryginalny zasób na który wskazuje.
 
-    
+
     Aby zapewnić nam większą kontrolę nad domysłami kompilatora, Rust daje nam
     możliwość modyfikacji definicji funkcji w sposób, który wyraźnie oznaczy
     czas życia konkretnych zmiennych oraz  podobieństwa w czasie życia
@@ -171,7 +171,7 @@
     zamiarów w sytuacjach które mogą okazać się zbyt skomplikowane dla
     kompilatora.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20oraz%20warto%C5%9B%C4%87%20zwracana%20przez%20funkcj%C4%99%20dziel%C4%85%20ten%20sam%20czas%20%C5%BCycia%0A%2F%2F%20foo_a%20posiada%20zupe%C5%82nie%20inny%20czas%20%C5%BCycia%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20zostaje%20wypuszczone%20tutaj%20poniewa%C5%BC%20jedenym%20pozosta%C5%82ym%0A%20%20%20%20%2F%2F%20czasem%20%C5%BCycia%20jest%20ten%20przypisany%20do%20foo_b%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20x%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo_b%0A%7D%0A  
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20oraz%20warto%C5%9B%C4%87%20zwracana%20przez%20funkcj%C4%99%20dziel%C4%85%20ten%20sam%20czas%20%C5%BCycia%0A%2F%2F%20foo_a%20posiada%20zupe%C5%82nie%20inny%20czas%20%C5%BCycia%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20zostaje%20wypuszczone%20tutaj%20poniewa%C5%BC%20jedenym%20pozosta%C5%82ym%0A%20%20%20%20%2F%2F%20czasem%20%C5%BCycia%20jest%20ten%20przypisany%20do%20foo_b%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20wypuszczamy%20x%0A%20%20%20%20%2F%2F%20wypuszczamy%20foo_b%0A%7D%0A
 - title: Statyczne Czasy Życia
   content_markdown: >
     **Statyczna** zmienna to taki zasób w pamięci który istnieje przez
@@ -193,7 +193,7 @@
 
     Zasoby oznaczone jako `'static` nigdy, tj. dopóki nasz program jest
     wykonywany, nie zostaną wypuszczone z pamięci.
-    
+
 
     Jeśli zasób o czasie życia `'static` zawiera referencje, wszystkie one
     muszą być również oznaczone jako `'static` (cokolwiek innego będzie
@@ -234,7 +234,7 @@
     Uf, gratulacje, że udało Ci się przebrnąć przez ten rozdział! 
     Jesteś coraz bliżej zostania zawodowym rustowcem.
 
-    
+
     Mam nadzieję, że dobrze wyjaśniłem podstawy tego w jaki sposób
     Rust podchodzi do rozwiązania wielu fascynujących problemów
     stojących przed współczesnym światem programowania na poziomie 
@@ -246,7 +246,7 @@
     * Zapominania o dekonstrukcji zasobów
 
     * Przypadkowego dekonstruowania zasobów więcej niż jeden raz
-    
+
     * Prób korzystania z zasobów po tym jak zostały zdekonstruowane
 
     * Wyścigów do danych, powodowanych przez wypisywanie do zasobów

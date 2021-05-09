@@ -17,8 +17,8 @@ publish: clean
 	git push -f origin gh-pages || true
 	git checkout master
 lint:
-	#prettier --write lessons.yaml
-	#prettier --write wasm.yaml
+	#prettier --write lessons/*/*.yaml
+	#prettier --write wasm/*/*.yaml
 clean:
 	@rm docs/*.html 2> /dev/null || true
-	@rm docs/wasm/*.html 2> /dev/null || true
+	@rm docs/webassembly/*.html 2> /dev/null || true

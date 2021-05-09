@@ -24,7 +24,7 @@
   content_markdown: >
     Los elementos de los módulos se pueden referenciar con la ruta completa de su módulo
     `std::f64::consts::PI`.
-    
+
 
     Una forma más simple es con el uso de la palabra reservada **use**. Esta nos permite especificar 
     elementos particulares de los módulos que queremos usar en todo nuestro código sin una ruta completa. 
@@ -104,7 +104,7 @@
 - title: Exportar
   content_markdown: >
     Por defecto, los miembros de un *módulo* no son accesibles desde fuera del módulo (¡ni siquiera a sus módulos hijo!). Hacemos que los miembros de un módulo sean accesibles usando la palabra reservada `pub`.
-    
+
 
     Por defecto, no se puede acceder a los miembros de un *crate* fuera del mismo. Hacemos que los miembros de un crate sean accesibles marcándolos como `pub` en el *módulo raíz* de tu crate (`lib.rs` o `main.rs`).
 - title: Visibilidad de Estructuras

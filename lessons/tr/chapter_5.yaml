@@ -17,8 +17,8 @@
     Bu sonlandırma ve iade etme işlemine **drop** yani değişkenin düşürülmesi denir.
 
     Bellek ayrıntıları:
-    
-    
+
+
     * Rust'ta çöp toplama özelliği bulunmaz.
         
     * C++'tan aşina olduğumuz bu yaklaşım, *Resource Aquisition Is Initialization* (RAII) olarak da bilinir.
@@ -26,8 +26,8 @@
 - title: Düşürmek Hiyerarşiktir
   content_markdown: >
     Bir yapı düşürüldüğünde başta yapının kendisi, ardından alt yapısını oluşturan tüm parçaları peşi sıra düşürülür.
-    
-    
+
+
     Bellek ayrıntıları:
 
     * Rust, kaynakları otomatik olarak serbest bırakarak bellek sızıntılarının azaltılmasına yardımcı olur.
@@ -110,12 +110,12 @@
   content_markdown: >
     Her ne kadar bu durum açıkça gösterilmiyor olsa da, derleyici her değişkenin yaşam süresine denetleyerek, bir referansın kaynağın asıl sahibinden 
     hiçbir zaman daha fazla yaşatılmadığını doğrulamaya çalışır.
-    
+
 
     İşlev parametrelerinin yaşam sürelerini açıkça belirtebilirsiniz. Bu açık bildirim, işlev parametreleri ve dönüş değerlerinin, 
     aynı yaşam sürelerini paylaşmalarına olanak sağlar.
 
-    
+
     Yaşam süresi belirteçleri daima `'` ile başlar ve geleneksel olarak `'a` şeklinde belirtilir.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9950081a6cc782eb1a5cb981cbf059b9

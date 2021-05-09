@@ -7,7 +7,7 @@
 
     この章では、そんな中でも互いにデータをやり取りするための方法を探ります。
 - title: 関数のインポート
-  code: 'https://webassembly.studio/?embed&f=pp20eedhka'
+  code: "https://webassembly.studio/?embed&f=pp20eedhka"
   content_markdown: >
     WebAssemblyのモジュールでは、明示的にインポートされた関数しか呼ぶことができません。
 
@@ -100,7 +100,7 @@
 
     ```
 - title: テキストのロギング
-  code: 'https://webassembly.studio/?embed&f=1gxcr004p3x'
+  code: "https://webassembly.studio/?embed&f=1gxcr004p3x"
   content_markdown: >
     WebAssemblyのプログラムから、テキストをロギングする簡単な例を見てみましょう。
 
@@ -130,7 +130,7 @@
 
     ```
 - title: テキストの読み込み
-  code: 'https://webassembly.studio/?embed&f=ubmxmavgf2'
+  code: "https://webassembly.studio/?embed&f=ubmxmavgf2"
   content_markdown: >
     次は、その反対の考え方をしてみます。WebAssemblyのプログラムに、テキストを渡したい場合です。
 

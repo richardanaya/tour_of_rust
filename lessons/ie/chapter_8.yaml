@@ -15,7 +15,7 @@
     a scrir tui propri code por gerer memorie ye bass nivelles. It mey servir
     solmen por
 
-    conossentar te con quelc util utensiles e qualmen ili functiona!" 
+    conossentar te con quelc util utensiles e qualmen ili functiona!"
 - title: Denov pri Referenties
   content_markdown: >
     Li concepte de un referentie es quam seque: it es solmen un numeró quel 
@@ -177,7 +177,7 @@
     `unsafe { ... }`.
 
     Smart pointers *dereferentia puntatores crud* extensivmen, ma fa it tre
-    habilmen.  
+    habilmen.
 - title: Amics Bon Conosset
   content_markdown: >
     Ples considerar quelc inteligent puntatores ja videt quam `Vec<T>` e
@@ -315,7 +315,7 @@
     execution del programma
 
     con un nivelle de securitá tam secur quam ti durant li compilation.
-      
+
 - title: Capitul 8 - Conclusion
   content_markdown: >
     Puntatores inteligent es li idiotismes de programmation in Rust con queles

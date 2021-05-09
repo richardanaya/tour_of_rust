@@ -98,7 +98,7 @@
     しかしまだこのJavaScriptの関数には問題があることに気付いたでしょう。
     メモリではなく、UTF-8文字列の開始位置と終了位置が渡されています！
 - title: 動的実行のコンテキスト
-  code: 'https://webassembly.studio/?embed&f=70lhg7nwda9'
+  code: "https://webassembly.studio/?embed&f=70lhg7nwda9"
   content_markdown: >
     我々の動的実行関数が呼ばれるとき、WebAssemblyモジュールのメモリ領域にアクセスできる必要があります。
     そのためのコンテキストのオブジェクトを用意し、そこに重要なリソースを配置します。
@@ -158,7 +158,7 @@
 
     ```
 - title: アロケータ
-  code: 'https://webassembly.studio/?embed&f=mz2gu9y29tn'
+  code: "https://webassembly.studio/?embed&f=mz2gu9y29tn"
   content_markdown: >
     オブジェクトをやり取りできるよう、ストレージの仕組みが必要です。
 
@@ -202,7 +202,7 @@
 
     実装としては考慮すべき点が多くあります。
 - title: 画面への描画
-  code: 'https://webassembly.studio/?embed&f=bdhga9zwlem'
+  code: "https://webassembly.studio/?embed&f=bdhga9zwlem"
   content_markdown: >
     学んだ全てを組み合わせて、赤い四角を画面に描画する例を考えます。
 

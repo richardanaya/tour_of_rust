@@ -2,7 +2,7 @@
   content_markdown: >
     Rust'ta genel türler veri içermeyen null değerlerin temsilinde, hata işleme yöntemlerinde ve koleksiyonlar ile çalışırken sıklıkla karşımıza 
     çıktıklarından oldukça önemlidir. Rust hakkındaki bilgilerimiz derinleştikçe, kullanmayı daha çok tercih edeceğimiz genel türleri bu bölümde 
-    incelemeye başlıyoruz. 
+    incelemeye başlıyoruz.
 - title: Genel TürLer Nelerdir?
   content_markdown: >
     Bunlar, derleyicinin kısmen tanımladığımız bir yapı (`struct`) yahut numaralandırmayı (`enum`), kodun kullanım 
@@ -97,14 +97,14 @@
     1. Önce Option/Result içindeki değeri alın,
 
     2. Eğer enum türü None/Err türündeyse `panic!` üretmeyi düşünün. 
-    
-    
+
+
     *Panik üretildiğinde Rust programlarının işletilmeleri bir hata mesajı eşliğinde durdurulur.*
 
     Bu iki kod parçası birbirinin eşdeğeridir:
 
     ```
-    
+
     bir_option.unwrap()
 
     ```

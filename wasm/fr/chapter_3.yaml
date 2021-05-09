@@ -130,7 +130,7 @@
 
     contexte!
 - title: Contexte d'invocation dynamique
-  code: 'https://webassembly.studio/?f=8z21oi4ptfd'
+  code: "https://webassembly.studio/?f=8z21oi4ptfd"
   content_markdown: |
     Lorsque nos fonctions invoquées dynamiquement sont appelées, celles-ci
     doivent avoir accès à la mémoire du module. Pour cela, nous pouvons créer
@@ -178,7 +178,7 @@
         selector.len() as f64 );
     ```
 - title: Allocateurs
-  code: 'https://webassembly.studio/?f=kub72dua5e'
+  code: "https://webassembly.studio/?f=kub72dua5e"
   content_markdown: |
     Comme nous venons de le voir, pour retourner la référence d'un objet
     JavaScript, nous devons mettre en place un mécanisme de stockage pour
@@ -215,7 +215,7 @@
     Cela dit, cette implémentation simpliste présente de nombreux
     problèmes que nous n'arborderons pas ici.
 - title: Dessiner à l'écran
-  code: 'https://webassembly.studio/?f=e212pnspafj'
+  code: "https://webassembly.studio/?f=e212pnspafj"
   content_markdown: |
     Mettons en pratique tout ce que nous venons de voir avec un exemple où
     nous allons dessiner un carré rouge à l'écran. Voici les fonctions dont

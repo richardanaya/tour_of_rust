@@ -76,7 +76,7 @@
 
     Você notará que há um problema com nossa função JavaScript. Ele tem o início e o fim do nosso utf-8, mas não a memória!
 - title: Contexto da Invocação Dinâmica
-  code: 'https://webassembly.studio/?embed&f=70lhg7nwda9'
+  code: "https://webassembly.studio/?embed&f=70lhg7nwda9"
   content_markdown: >
     Quando nossas funções invocadas dinamicamente são chamadas, as funções precisam ter acesso à memória do módulo. Podemos colocar recursos importantes em um objeto de contexto para que nossa função tenha todas as ferramentas disponíveis para fazer seu trabalho.
 
@@ -118,7 +118,7 @@
         selector.len() as f64 );
     ```
 - title: Alocadores
-  code: 'https://webassembly.studio/?embed&f=mz2gu9y29tn'
+  code: "https://webassembly.studio/?embed&f=mz2gu9y29tn"
   content_markdown: >
     Como podemos ver para comunicar os objetos corretamente precisamos ter algum tipo de mecanismo de armazenamento para os objetos:
 
@@ -154,7 +154,7 @@
 
     Há muitas questões que você deve considerar na sua implementação.
 - title: Desenhando na Tela
-  code: 'https://webassembly.studio/?embed&f=bdhga9zwlem'
+  code: "https://webassembly.studio/?embed&f=bdhga9zwlem"
   content_markdown: >
     Vamos juntar tudo em um exemplo desenhando um quadrado vermelho na tela. Vamos pensar a respeito das funções que precisaremos registrar:
 

@@ -1,15 +1,17 @@
 - title: Chapter 1 - The Basics
   content_markdown: >
     In this first chapter we're going to be exploring the very basics
-
     with functions, variables, and the most primitive types. Glad to have you on
     board!
 
 
     Also! In case you are wondering who this adorable crab who is speaking to
     you is, I am **Ferris**,
-
     the unofficial mascot for the Rust programming language. Nice to meet you.
+
+
+    Once you get familiar with Rust, you can call yourself a **Rustacean**. That's
+    how people who use, contribute or are interested in Rust call themself.
 - title: The Rust Playground
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A

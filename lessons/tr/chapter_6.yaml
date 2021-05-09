@@ -59,7 +59,7 @@
 - title: Ham Dizgi Değişmezleri
   content_markdown: >
     Ham dizgiler, `r#"` ile başlayan ve `"#` ile biten karakter dizileri olduklarından, içlerinde yer alan normal dizgi değerlerine çift tırnak, 
-    eğik çizgi gibi karakterleri, değişmez değerler olarak ekleyebilmemize izin verirler. 
+    eğik çizgi gibi karakterleri, değişmez değerler olarak ekleyebilmemize izin verirler.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9cc3d31412400f5a8527941033cfd887
 - title: Dosyadan Edinilen Dizgi Değişmezleri
@@ -142,7 +142,7 @@
 - title: Dizgileri Biçimlendirmek
   content_markdown: >
     Karakter dizgelerini `format!` makrosu kullanarak, format!("buraya {} gelecek", deger); örneğindeki gibi biçimlendirebiliriz. 
-   
+
     Tıpkı println! makrosu gibi, format! makrosu da, parametreleştirilmiş dizgiler kullandığından, tanımı içinde belirli değerlerle değiştirilmek 
     üzere bulundurulan yer tutuculara sahiptir.
 
