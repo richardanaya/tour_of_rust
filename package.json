@@ -9,13 +9,11 @@
     "clean": "rimraf ./docs/*.html && rimraf ./docs/webassembly/*.html",
     "watch": "nodemon -w lessons/**/* -w wasm/**/* -e yaml --exec npm run serve"
   },
-  "dependencies": {
-    "js-yaml": "^3.14.0",
-    "showdown": "^1.9.1"
-  },
   "devDependencies": {
+    "js-yaml": "^3.14.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "showdown": "^1.9.1"
   }
 }

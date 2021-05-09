@@ -105,14 +105,12 @@ function template(lessons, lang, title, code, content, index, isLast, words, is_
         <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.7.2/build/styles/pojoaque.min.css" />
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="./site.webmanifest">
 
-        <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
         <script async src="./tour.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
@@ -134,8 +132,8 @@ function template(lessons, lang, title, code, content, index, isLast, words, is_
             <h1>${title}</h1>
             ${content}
             <div class="bottomnav">
-                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}">❮ ${getWord(words,lang,"previous")}</a></span>`:""}
-                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}">${getWord(words,lang,"next")} ❯</a></span>`}
+                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}" rel="prev">❮ ${getWord(words,lang,"previous")}</a></span>`:""}
+                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}" rel="next">${getWord(words,lang,"next")} ❯</a></span>`}
             </div>
             </div>
             ${code?`<div class="code">
