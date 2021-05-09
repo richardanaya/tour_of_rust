@@ -87,34 +87,41 @@ function getWord(words,lang,w){
  * @param {boolean} is_beta 
  * @returns 
  */
-function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
+function template(lessons, lang, title, code, content, index, isLast, words, is_beta){
     return `<!DOCTYPE html>
     <html lang="${lang}">
     <head>
+        <title>${getWord(words,lang,"tor")} - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.7.2/build/styles/pojoaque.min.css" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+        <script async src="./tour.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'UA-155199982-1', { 'anonymize_ip': true });
         </script>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <meta content="utf-8" http-equiv="encoding">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2"/>
-        <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2"/>
-        <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" rel="stylesheet">
-        <title>${getWord(words,lang,"tor")} - Let's go on an adventure!</title>
-        <link rel="stylesheet" href="tour.css">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
     </head>
     <body>
         <div class="tour">
@@ -133,10 +140,9 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
             </div>
             ${code?`<div class="code">
             <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground"></iframe>
-            </div>`:`<div class="code"><center><br><br><br><br><br><img src="/ferris_lofi.png"><br><br><br><br><br></center></div>`}
+            </div>`:`<div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>`}
         </div>
     </body>
-    <script src="/tour.js"></script>
 </html>`
 }
 
