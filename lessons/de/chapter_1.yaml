@@ -21,7 +21,7 @@
 
 
     Beispiele in Rust lassen sich so spielend leicht testen. Hierbei sind deiner
-    Kreativität auch keine Grenzen 
+    Kreativität auch keine Grenzen
 
     gesetzt. Ändere Codeschnipsel, teste Funktionen, lass deiner Fantasie freien
     Lauf!
@@ -75,7 +75,7 @@
 
     * signed integers - `i8` `i32` `i64` für vorzeichenbehaftete Ganzzahlen
 
-    * pointer sized integers - `uint` `isize` für Indizes und Größen im Speicher
+    * pointer sized integers - `usize` `isize` für Indizes und Größen im Speicher
 
     * floating point - `f32` `f64` für Dezimalzahlen
 
@@ -125,7 +125,7 @@
 - title: Konstanten
   content_markdown: >
     Konstanten (`const`) erlauben uns einen Wert in der Kompilierzeit zu setzen,
-    die in unserem Code eingesetzt 
+    die in unserem Code eingesetzt
 
     werden. Kompilierzeit ist hier das Stichwort: anstelle von Variablen sitzen
     dann an Orten, an denen
