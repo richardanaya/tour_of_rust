@@ -1,6 +1,6 @@
 - clone: en
 - title: Importing Functions
-  code: 'https://webassembly.studio/?embed&f=bah3p4wjere'
+  code: "https://webassembly.studio/?embed&f=bah3p4wjere"
   content_markdown: >
     WebAssembly modules can only call functions that have been explicitly
     imported.
@@ -27,9 +27,9 @@
 - clone: en
 - clone: en
 - clone: en
-  code: 'https://webassembly.studio/?embed&f=vh15t7nok4p'
+  code: "https://webassembly.studio/?embed&f=vh15t7nok4p"
 - clone: en
-  code: 'https://webassembly.studio/?embed&f=0wwbpbvt4kwk'
+  code: "https://webassembly.studio/?embed&f=0wwbpbvt4kwk"
 - clone: en
 - title: Chapter 2 Conclusion
   content_markdown: >

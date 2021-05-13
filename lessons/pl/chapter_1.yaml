@@ -8,7 +8,7 @@
     Aha! W razie gdyby nie było jasne kim jest ten przesłodki krab który właśnie
     do Ciebie mówi, możesz mi mówić **Ferris**.
 
-    
+
     Jestem nieoficjalną maskotką języka programowania Rust. Miło Cię poznać.
 - title: "Piaskownica Rusta"
   code: >-
@@ -161,7 +161,7 @@
 
 
     Jak przekonamy się w kolejnych rozdziałach, Rust dostarcza rozmaitych sposobów
-    ergonomicznego *rozkładania* struktur na czynniki pierwsze. 
+    ergonomicznego *rozkładania* struktur na czynniki pierwsze.
 - title: Zwracanie Niczego
   content_markdown: >
     W przypadku kiedy definicja funkcja nie obejmuje zwracanego typu, funkcja taka zwraca
@@ -184,7 +184,7 @@
     a także poprawność zapisanych przez nas działań matematycznych. W następnym 
     rozdziale przyjrzymy się kilku *starym znajomym*, mianowicie: kondycjom `if`
     oraz pętlom `for`.
-    
+
 
     Dowiedz się więcej:
 

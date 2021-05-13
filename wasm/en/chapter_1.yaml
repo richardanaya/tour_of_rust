@@ -80,7 +80,7 @@
 
     ```
 - title: 1+1
-  code: 'https://webassembly.studio/?embed&f=jg96xg1ovj'
+  code: "https://webassembly.studio/?embed&f=jg96xg1ovj"
   content_markdown: >
     Let's put our knowledge all together and make a WebAssembly
 

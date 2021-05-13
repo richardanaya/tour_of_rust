@@ -2,18 +2,24 @@
 let showdown = require("showdown");
 const fs = require('fs')
 const yaml = require('js-yaml');
-const { exit } = require("process");
-
 const lessonSource = process.argv[2];
 const target_dir = process.argv[3];
 const generate_beta_content = process.argv.length >= 4 && process.argv[4]=="beta";
 
-const getDirectories = source =>
+/**
+ * @param {string} source 
+ * @returns {string[]}
+ */
+const getDirectories = (source) =>
   fs.readdirSync(source, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name)
 
-const getYaml = path => yaml.safeLoad(fs.readFileSync(path));
+/**
+ * @param {string} path 
+ * @returns {any}
+ */
+const getYaml = (path) => yaml.safeLoad(fs.readFileSync(path));
 
 const languages = getDirectories(lessonSource);
 const commonWords = {};
@@ -56,6 +62,12 @@ const lessons = {
 
 converter = new showdown.Converter();
 
+/**
+ * @param {string[]} words 
+ * @param {string} lang 
+ * @param {string} w 
+ * @returns {string}
+ */
 function getWord(words,lang,w){
     if(words[lang][w]){
         return words[lang][w];
@@ -63,40 +75,51 @@ function getWord(words,lang,w){
     return words["en"][w];
 }
 
-function titleClean(title){
-    title = title.replace("<span class=\"emoji\">","");
-    title = title.replace("</span>","");
-    title = title.replace("🦀","Rust");
-    return title;
-}
-
-function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
-    return `<html lang="${lang}">
+/**
+ * @param {Array} lessons 
+ * @param {string} lang 
+ * @param {string} title 
+ * @param {string} code 
+ * @param {string} content 
+ * @param {number} index 
+ * @param {boolean} isLast 
+ * @param {string[]} words 
+ * @param {boolean} is_beta 
+ * @returns 
+ */
+function template(lessons, lang, title, code, content, index, isLast, words, is_beta){
+    return `<!DOCTYPE html>
+    <html lang="${lang}">
     <head>
+        <title>${getWord(words,lang,"tor")} - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script async src="./tour.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
-        gtag('config', 'UA-155199982-1');
+        gtag('config', 'UA-155199982-1', { 'anonymize_ip': true });
         </script>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <meta content="utf-8" http-equiv="encoding">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2"/>
-        <link rel="preload" as="font" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2"/>
-        <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" rel="stylesheet">
-        <title>${getWord(words,lang,"tor")} - Let's go on an adventure!</title>
-        <link rel="stylesheet" href="tour.css">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.0.3/build/styles/pojoaque.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
     </head>
     <body>
         <div class="tour">
@@ -109,29 +132,39 @@ function template(lessons,lang,title,code,content,index,isLast, words, is_beta){
             <h1>${title}</h1>
             ${content}
             <div class="bottomnav">
-                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}">❮ ${getWord(words,lang,"previous")}</a></span>`:""}
-                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}">${getWord(words,lang,"next")} ❯</a></span>`}
+                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}" rel="prev">❮ ${getWord(words,lang,"previous")}</a></span>`:""}
+                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}" rel="next">${getWord(words,lang,"next")} ❯</a></span>`}
             </div>
             </div>
             ${code?`<div class="code">
-            <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-            </div>`:`<div class="code"><center><br><br><br><br><br><img src="/ferris_lofi.png"><br><br><br><br><br></center></div>`}
+            <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground"></iframe>
+            </div>`:`<div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>`}
         </div>
     </body>
-    <script src="/tour.js"></script>
 </html>`
 }
 
-function pad(num, size) {
+/**
+ * @param {number} num 
+ * @returns {string}
+ */
+function pad(num) {
     var s = num+"";
     return s.padStart(2, '0')
 }
 
-function getFileName(lang,i,is_beta,chapter){
+/**
+ * @param {string} lang 
+ * @param {number} i 
+ * @param {boolean} is_beta currently unused
+ * @param {string} chapter 
+ * @returns {string}
+ */
+function getFileName(lang, i, is_beta, chapter){
     if(i == 0 && lang == "en"){
         return "index.html"
     }
-    let fileName = pad(i,2)+`_${lang}.html`;
+    let fileName = pad(i)+`_${lang}.html`;
     if(chapter !== undefined){
         fileName = `chapter_${chapter}_${lang}.html`
     }
@@ -194,7 +227,7 @@ for(var l in languages){
                 target_lang = lesson[lang].clone;
             }
             let fileName = getFileName(lang,i,true,lesson.chapter);
-       
+
             let lesson_title = "["+getWord(words,target_lang,"untranslated")+"] "+lesson["en"].title;
             let lesson_content = lesson["en"].content_markdown
             let lesson_code = lesson["en"].code 

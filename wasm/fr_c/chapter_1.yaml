@@ -4,7 +4,7 @@
 - clone: fr
 - clone: fr
 - title: 1+1
-  code: 'https://webassembly.studio/?embed&f=sxf9utkxgbo'
+  code: "https://webassembly.studio/?embed&f=sxf9utkxgbo"
   content_markdown: >
     Nous en savons suffisamment pour écrire notre premier module WebAssembly:
 

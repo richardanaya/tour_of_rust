@@ -69,9 +69,9 @@
     * `str`(字串片段 string slice) - 在運行時已知長度的字串
 
     在 Rust 裡面，文字處理可能比您在其他程式語言中所理解到的複雜
-    
+
     Rust 是一個系統程式語言 (system programming language)，所以它所關注的記憶體問題
-    
+
     對於您可能是前所未見。我們遲一點會深入了解。
 
     數字類型可以在後邊這樣明確標明它的類型： `13u32`, `2u8`
@@ -84,7 +84,7 @@
     您不可以把 `u32` 和 `u8` 混著來使用。
 
     幸運地 Rust 有 **as** 這個關鍵字來讓數字類型轉換變得容易。
-    
+
 - title: 常數 (Constant)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
@@ -93,7 +93,7 @@
 
     跟變數不同，常數的值不會在運行的時候把值複製到使用的地方。
     編譯器會在編譯時直接以字串取代的方法把值取代常數。
-    
+
     跟變數不同，常數的數據類型是必須指明的。
 
 

@@ -60,21 +60,21 @@
 
 
     * booleanos - `bool` para representar verdadero/falso.
-    
+
     * números enteros sin signo - `u8` `u32` `u64` `u128` para representar números enteros positivos.
-    
+
     * números enteros con signo - `i8` `i32` `i64` `i128` para representar números enteros positivos y negativos.
-    
+
     * números enteros de tamaño de puntero - `usize` `isize` se usan para representar índices y tamaños de elementos en memoria.
-    
+
     * números en coma flotante - `f32` `f64`.
-    
+
     * En relación a textos - `str` `char`.
-    
+
     * tuplas - `(valor,valor,...)` para pasar secuencias fijas de valores en la pila.
-    
+
     * slices - `&[T]` para referenciar “vistas” en secuencias de valores en la memoria.
-    
+
 
     Profundizaremos en algunos más adelante.
 
@@ -159,11 +159,11 @@
 - title: Capítulo 1 - Conclusión
   content_markdown: >
     ¡Buen trabajo! No ha sido tan complicado, ¿verdad? Esta ha sido una visión general de cómo trabaja el compilador de Rust. Como ya has comprobado, hay que tener muy en cuenta el tamaño de los valores en memoria, las cosas que se pueden modificar y las que no, y asegurarse de que tu código dé el resultado que esperas. Estos son pequeños avances de un principio de **seguridad** que prevalece a través de Rust. Este compilador pretende asegurarse de que tu código hace lo que esperas. A continuación echaremos un vistazo a algunos viejos conocidos: `if` y `for`.
-    
-    
+
+
     Más recursos (en inglés):
-    
-    
+
+
     * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
     types](https://www.youtube.com/watch?v=n5TRBkbystY)
 

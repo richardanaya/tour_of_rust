@@ -38,7 +38,7 @@
 
     * Rust'ın referansları, kullanım açısından C'nin işaretçilerine benzemekle birlikte, saklanma ve taşınma aşamalarında daha çok 
     derleme zamanı kısıtlaması içerirler.
-    
+
     * Rust'ın ham işaretçileri, C'nin işaretçilerine benzemekle beraber; kopyalanabilen, bir işleve bağımsız değişken olarak iletilebilen, 
     hatta tıpkı işaretçi aritmediğinde olduğu gibi, aritmetik işlemlerin yapılabileceği sayısal türe dönüştürülebilen bir sayıyı temsil eder.
 - title: Referansı Kaldırmak
@@ -47,9 +47,9 @@
     karşılığıyla **referansı kaldırmak** adı verilir.
 
     Referansları verilere erişmek veya verileri değiştirmek amacıyla kullanmanın iki sebebi vardır:
-    
+
     * Değişkenlerin atanması sırasında başvurulan verilere erişmek.
-    
+
     * Başvurulan verilerin alan veya metotlarına erişmek.
 
     Rust, bunları gerçekleştirebilmemiz için güçlü işleçler sunar.
@@ -223,7 +223,7 @@
 
 
     Referansların iş parçacığı açısından güvenli şekilde sayılması haricinde, `Rc` ile aynı özelliklere sahip `Arc` adında bir akıllı 
-    işaretçimiz daha vardır. Bu işaretçi genellikle aynı Mutex kilidine birden fazla referansla erişirken kullanılır. 
+    işaretçimiz daha vardır. Bu işaretçi genellikle aynı Mutex kilidine birden fazla referansla erişirken kullanılır.
 - title: Akıllı İşaretçileri Bir Araya Getirmek
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c90b8a42b1352703cfa329cad5f857fd
@@ -246,11 +246,11 @@
     * Bu kombinasyonların çoğu olasılıkla çok sayıda akıllı işaretçiye ait olan ve dahili verileri değiştirmek için değişmez bir veri türünü kullanan 
     tek bir modeli takip eder. Rust'ın "dahili değişkenlik" olarak adlandırdığı bu model, çalışma zamanında bellek kullanım kurallarını atlamamıza 
     izin verirken, Rust'un derleme zamanında bize verdiği güvenlik düzeyini de korumamıza yardımcı olur.
-      
+
 - title: Bölüm 8 - Sonuç
   content_markdown: >
     Aslında birer Rust programlama dili deyimi olan ve oldukça sık kullanılan akıllı işaretçiler, bizleri yaygın bellek kullanım modellerini yeniden 
     oluşturma zahmetinden kurtarmakla beraber, her türlü zorlukla yüzleşmeye hazır hale getirir. Artık Rust'un temellerini kavradığımıza göre daha 
     büyük projelere yelken açabiliriz.
-    
+
     Bir sonraki bölümde tek sayfalık kodlara veda edecek ve büyük projelerin nasıl oluşturulduğunu tartışacağız.

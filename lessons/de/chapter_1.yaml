@@ -1,22 +1,23 @@
 - title: Kapitel 1 - Die Basics
   content_markdown: >
     Im ersten Kapitel werden grundlegende Eigenschaften von Funktionen,
-
     Variablen und (fast) allen primitiven Datentypen präsentiert. Willkommen an
     Board!
 
 
     Ach ja! Falls du dich fragst, wer diese süße sprechende Krabbe ist, das ist
     **Ferris**,
-
     das inoffizielle Maskottchen der Programmiersprache Rust. Sag hallo!
+
+    Sobald du dich mit Rust vertraut gemacht hast, kannst du dich ein **Rustacean**.
+    nennen. Leute, die Rust benutzen, dazu beitragen oder generell daran interessiert sind,
+    nennen sich selbst Rustaceans.
 - title: Der Rust Playground
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Willkommen%20im%20Playground!%20Du%20kannst%20den%20Code%20hier%20drin%20modifizieren.%22)%3B%0A%7D
   content_markdown: >
     Diese Tour macht sich das interaktive Coding Tool vom [Rust
     Playground](https://play.rust-lang.org)
-
     zunutze.
 
 

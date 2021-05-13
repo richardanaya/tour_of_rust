@@ -44,7 +44,7 @@
     * Acceso a los campos o métodos de los datos indicados.
 
     Rust tiene algunos operadores eficaces que nos permiten hacerlo.
-- title: El operador * 
+- title: El operador *
   content_markdown: >
     El operador `*` es una forma explícita de indireccionar una referencia.
 
@@ -130,7 +130,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
   content_markdown: >
     Hay que tener en cuenta algunos punteros inteligentes que ya hemos visto, como `Vec<T>` y `String`.
-    
+
 
     `Vec<T>` es un puntero inteligente que sólo posee alguna región de memoria de bytes. El compilador 
     de Rust no tiene ni idea de lo que existe en estos bytes. El puntero inteligente interpreta lo que 
@@ -244,7 +244,7 @@
     Detalle de la memoria:
 
     * Muchas de estas combinaciones siguen un mismo patrón. El uso de un tipo de datos inmutables (posiblemente propiedad de múltiples punteros inteligentes) para modificar los datos internos. En Rust, esto se conoce como el patrón de "mutabilidad interior". Es un patrón que nos permite saltarnos las reglas de uso de la memoria en tiempo de ejecución con el mismo nivel de seguridad que las comprobaciones en tiempo de compilación de Rust.
-      
+
 - title: Capítulo 8 - Conclusión
   content_markdown: >
     Los punteros inteligentes son como los modismos de la programación Rust y no hace falta recrear los patrones más comunes de uso de la memoria. Concluido este capítulo, ya estás listo para afrontar los desafíos más difíciles. Ahora que ya tenemos conocimientos sobre los principios fundamentales de Rust, hablemos un poco de cómo llevar a cabo proyectos más complejos. En el capítulo 9 nos liberamos de las líneas de código de una sola página.

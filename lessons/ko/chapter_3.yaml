@@ -59,7 +59,7 @@
 
 
     `StructName { ... }`.
-    
+
 
     와 같이 안에 모든 field 값을 지정함으로써 instantiate 합니다.
 

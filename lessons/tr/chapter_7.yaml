@@ -3,10 +3,10 @@
     Onlarca yıldır kullanılan C Programlama dilinde olduğu gibi, fikirleri işlevlerle ifade etmek, veriler ve program davranışını 
     temsil etmenin kanıtlanmış bir yoludur. Ancak zaman içinde bilgisayar bilimi, veri toplama ve soyutlamaya izin veren başka 
     programlama paradigmalarından da yararlanmıştır.
-    
+
     Diğer programlama dillerinden geliyorsanız, bu programlama paradigmalarından biri olan nesne yönelimli programlamaya, yani **OOP**'a 
     aşina olabilirsiniz. 
-    
+
     Bu bölümde Rust programlama dilini, işlevlerin ötesinde bir programlama dili olarak yeniden keşfedeceğiz.
 - title: Nesne Yönelimli Programlama Nedir?
   content_markdown: >

@@ -3,12 +3,12 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
   content_markdown: |
-    <img src="/intro.png" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
+    <img src="/intro.png" alt="Welcome to the Tour of Rust" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
 
     **Happy 1 Year Anniversary 🎉**
 
     Welcome to the *Tour of Rust*. This is meant to be a step by step guide through the features of the Rust programming language.  Rust is often considered a language with a steep learning curve, but I hope I can convince you there's a lot to explore before we even get to complex parts.
-    
+
     You can also find this guide in these languages:
 
     * [Deutsch](00_de.html)

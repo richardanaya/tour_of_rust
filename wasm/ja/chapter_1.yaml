@@ -50,7 +50,7 @@
     module.instance.main();
     ```
 - title: 1+1
-  code: 'https://webassembly.studio/?embed&f=jg96xg1ovj'
+  code: "https://webassembly.studio/?embed&f=jg96xg1ovj"
   content_markdown: |
     今までに覚えたことを使って、WebAssemblyのモジュールを作ってみましょう。
     2つの数値を足し合わせてHTMLに表示するだけの関数を**export**してみます。

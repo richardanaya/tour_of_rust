@@ -90,7 +90,7 @@
     module.instance.main();
     ```
 - title: 1+1
-  code: 'https://webassembly.studio/?embed&f=ays6dkowzyk'
+  code: "https://webassembly.studio/?embed&f=ays6dkowzyk"
   content_markdown: |
     Nous en savons suffisamment pour écrire notre premier module WebAssembly:
     l'addition de deux nombre! Le résultat sera affiché dans l'html.

@@ -6,7 +6,7 @@
     Jeśli znasz choć trochę języki programowania oparte o C to jest dobra szansa, że
     poczujesz się jak w domu. 
 
-    
+
     Może z wyjątkiem kilku niewielkich różnic.
 - title: if/else if/else
   content_markdown: >
@@ -83,7 +83,7 @@
     W przyszłych rozdziałach dowiemy się o wiele więcej na temat bardziej skomplikowanych
     wzorów dopasowań na bardziej skomplikowanych typach danych. Wytrwałości!
 
-    
+
     Należy wspomnieć, że `match` musi zawsze wyczerpać wszystkie możliwe warunki, co oznacza
     że musimy stworzyć dopasowanie dla każdej możliwej wartości.
 
@@ -122,10 +122,10 @@
     Pomimo, że póki co nadal skupiamy się na podstawach mam nadzieję, że udało mi się
     przedstawić Tobie część wyjątkowych możliwości Rusta i jego silnych stron.
 
-    
+
     W miarę jak wejdziemy głębiej w arkana tego języka, będziemy powracać do przedstawionych
     w tym rozdziale wyrażeń `for` oraz `match`. Mają nam one bowiem znacznie więcej do zaoferowania
     niż zdążyliśmy sobie opowiedzieć do tej pory.
-    
 
-    W następnym rozdziale przyjrzymy się podstawowym strukturom w Ruscie. 
+
+    W następnym rozdziale przyjrzymy się podstawowym strukturom w Ruscie.

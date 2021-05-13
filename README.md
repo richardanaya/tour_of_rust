@@ -75,6 +75,7 @@ Run `yarn` to install javascript dependencies.
 
 After installing the dependencies use `make` to launch the site. You will need to restart the server every time
 to see the changes you've made.
+Windows users should use `make.bat` instead.
 
 # Releases
 

@@ -83,6 +83,7 @@ iframe {
   -ms-animation: fadein 0.5s; /* Internet Explorer */
   -o-animation: fadein 0.5s; /* Opera < 12.1 */
   animation: fadein 0.5s;
+  min-height: 50vh;
 }
 
 code {

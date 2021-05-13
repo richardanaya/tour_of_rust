@@ -250,7 +250,7 @@
     Ahora tenemos más características del lenguaje a mano para representar nuestras ideas. 
 
     Las técnicas de Rust pueden ser simples pero son lo suficientemente eficaces para hacer que sea un placer trabajar con el código.
-    
+
     En este capítulo, hemos visto algunos consejos prácticos con `Box`. En el próximo capítulo aprenderemos cómo los punteros inteligentes pueden ayudarnos con otras situaciones de memoria específicas.
 
 

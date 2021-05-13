@@ -20,7 +20,7 @@
 
 
     Το πρότυπο της συμπερίληψης μίας εναλλακτικής τιμής `Ουδέν` ανάμεσα σε μία ή περισσότερες άλλες εναλλακτικές πιθανότητες είναι πολύ σύνηθες στη Rust λόγω ακριβώς της έλλειψης της τιμής `null`. Οι γενικοί τύποι βοηθούν στην επίλυση αυτής της πρόκλησης.
-    
+
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20%CE%A4%CE%BF%20None%20%CE%B1%CE%BD%CE%B1%CF%80%CE%B1%CF%81%CE%B9%CF%83%CF%84%CE%AC%20%CF%84%CE%B7%CE%BD%20%CE%B1%CF%80%CE%BF%CF%85%CF%83%CE%AF%CE%B1%20%CE%BA%CE%AC%CF%80%CE%BF%CE%B9%CE%BF%CF%85%20%CF%80%CF%81%CE%AC%CE%B3%CE%BC%CE%B1%CF%84%CE%BF%CF%82%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
 - title: Option
@@ -87,9 +87,9 @@
     }
 
     ```
-    
+
     Ομοίως μπορεί να χρησιμοποιηθεί και για το `Option`.
-    
+
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%CE%94%CE%B5%CE%BD%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CE%B1%CF%85%CF%84%CF%8C%20%CF%84%CE%BF%20%CF%83%CF%89%CF%83%CF%84%CF%8C%20%CE%BD%CE%BF%CF%8D%CE%BC%CE%B5%CF%81%CE%BF!%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20%CE%94%CE%B5%CE%AF%CF%84%CE%B5%20%CF%80%CF%8C%CF%83%CE%BF%CE%BD%20%CE%BA%CF%8E%CE%B4%CE%B9%CE%BA%CE%B1%20%CE%B3%CE%BB%CE%B9%CF%84%CF%8E%CF%83%CE%B1%CE%BC%CE%B5!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22%CE%92%CF%81%CE%AD%CE%B8%CE%B7%CE%BA%CE%B5%20%7B%7D.%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
 - title: Τσαπατσούλικος χειρισμός των `Option` και `Result`
@@ -143,7 +143,7 @@
 
     Είναι πάντοτε πολύ προτιμότερο να χρησιμοποιεί κανείς τις δυνατότητες που επιτρέπουν τη συνέχιση της ροής του προγράμματος ακόμα κι αν έχει συμβεί σφάλμα, όπως το `match` και το `?`. Υπάρχουν και πιο εύχρηστες επιλογές βέβαια, όπως το `unwrap_or` ή το `map` και το `and_then`. Φροντίστε λοιπόν να χρησιμοποιείτε το `unwrap` όσο το δυνατόν σπανιότερα!
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%CE%94%CE%B5%CE%BD%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CE%B1%CF%85%CF%84%CF%8C%20%CF%84%CE%BF%20%CF%83%CF%89%CF%83%CF%84%CF%8C%20%CE%BD%CE%BF%CF%8D%CE%BC%CE%B5%CF%81%CE%BF!%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20%CE%A3%CF%8D%CE%BD%CF%84%CE%BF%CE%BC%CE%BF%20%CE%B1%CE%BB%CE%BB%CE%AC%20%CF%81%CE%B9%CF%88%CE%BF%CE%BA%CE%AF%CE%BD%CE%B4%CF%85%CE%BD%CE%BF%2C%20%CE%BA%CE%B1%CE%B9%20%CF%80%CE%B5%CF%81%CE%B9%CF%80%CE%BB%CE%AD%CE%BA%CE%B5%CF%84%CE%B1%CE%B9%20%CF%80%CE%BF%CE%BB%CF%8D%20%CE%B5%CF%8D%CE%BA%CE%BF%CE%BB%CE%B1%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22%CE%92%CF%81%CE%AD%CE%B8%CE%B7%CE%BA%CE%B5%20%7B%7D.%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%CE%91%CF%85%CF%84%CF%8C%20%CE%B8%CE%B1%20%CF%80%CE%B1%CE%BD%CE%B9%CE%BA%CE%BF%CE%B2%CE%BB%CE%B7%CE%B8%CE%B5%CE%AF!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22%CE%92%CF%81%CE%AD%CE%B8%CE%B7%CE%BA%CE%B5%20%7B%7D.%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A 
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%CE%94%CE%B5%CE%BD%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CE%B1%CF%85%CF%84%CF%8C%20%CF%84%CE%BF%20%CF%83%CF%89%CF%83%CF%84%CF%8C%20%CE%BD%CE%BF%CF%8D%CE%BC%CE%B5%CF%81%CE%BF!%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20%CE%A3%CF%8D%CE%BD%CF%84%CE%BF%CE%BC%CE%BF%20%CE%B1%CE%BB%CE%BB%CE%AC%20%CF%81%CE%B9%CF%88%CE%BF%CE%BA%CE%AF%CE%BD%CE%B4%CF%85%CE%BD%CE%BF%2C%20%CE%BA%CE%B1%CE%B9%20%CF%80%CE%B5%CF%81%CE%B9%CF%80%CE%BB%CE%AD%CE%BA%CE%B5%CF%84%CE%B1%CE%B9%20%CF%80%CE%BF%CE%BB%CF%8D%20%CE%B5%CF%8D%CE%BA%CE%BF%CE%BB%CE%B1%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22%CE%92%CF%81%CE%AD%CE%B8%CE%B7%CE%BA%CE%B5%20%7B%7D.%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%CE%91%CF%85%CF%84%CF%8C%20%CE%B8%CE%B1%20%CF%80%CE%B1%CE%BD%CE%B9%CE%BA%CE%BF%CE%B2%CE%BB%CE%B7%CE%B8%CE%B5%CE%AF!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22%CE%92%CF%81%CE%AD%CE%B8%CE%B7%CE%BA%CE%B5%20%7B%7D.%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
 - title: Ανύσματα (Vectors)
   content_markdown: >
     Κάποιοι απ' τους πιο χρήσιμους γενικούς τύπους είναι οι λεγόμενοι «τύποι συλλογών». Για παράδειγμα, ένα άνυσμα είναι μία αυθαιρέτου μήκους λίστα ομοειδών αντικειμένων που αντιπροσωπεύεται απ' τη δομή `Vec`.

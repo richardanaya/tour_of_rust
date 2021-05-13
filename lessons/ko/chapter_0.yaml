@@ -5,7 +5,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
   content_markdown: |
     *Tour of Rust*에 오신 것을 환영합니다. 이 가이드는 Rust 프로그래밍 언어의 기능들을 차근차근 배우기 위해 만들어졌습니다.  Rust는 종종 가파른 학습 곡선을 가진 언어로 여겨지곤 하지만, 복잡한 부분까지 가기 전에도 둘러볼 것은 많다는 것을 확신시켜 드릴 수 있으면 좋겠습니다.
-    
+
     이 가이드는 다음의 언어로도 보실 수 있습니다:
 
     * [독일어](00_de.html)
@@ -24,7 +24,7 @@
     * [Türkçe](00_tr.html)
     * [Українська](00_ua.html)
     * [ภาษาไทย](00_th.html)
-    
+
     내용에 대한 제안 사항이 있거나 번역에 기여하고 싶으신 경우, Tour of Rust의 [github 저장소](https://github.com/richardanaya/tour_of_rust)를 확인하세요.
 
     키보드의 <span class="emoji">⬅️</span> 키와 <span class="emoji">➡️</span> 키로 여행을 다닐 수 있습니다.

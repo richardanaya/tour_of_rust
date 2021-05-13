@@ -4,7 +4,7 @@
     do rzeczy takich jak reprezentacja pustych wartości (np. zmienne które
     nie mają jeszcze żadnej wartości), obsługa błędów, rozmaite kolekcje
     i wiele wiele więcej!
-    
+
 
     W tym rozdziale poznamy podstawy typów generycznych Rusta.
 - title: Czym Są Typy Generyczne?
@@ -40,7 +40,7 @@
     jednej lub więcej wartości, jest bardzo częstym widokiem w Ruscie.
     Powodem jest właśnie możliwość zastąpienia w ten sposów niewygodnego
     `null`. 
-    
+
     Typy generyczne pomogą nam definiować uniwersalne rozwiązania
     z wykorzystaniem `None` zamiast `null`.
   code: >-
@@ -131,12 +131,12 @@
 
     Zarówno `Option` jak i `Result` definiują funkcję o nazwie `unwrap`, służącą, jak nazwa
     wskazuje, do "odwijania" opakowanej przez taki typ wartości. 
-    
-    
+
+
     Takie "odwijanie" ma jednak jeden problem: jeśli nasz typ okaże się być wariantem `None`/`Err`
     to `unwrap` wywoła `panic!`, czyli bez ogródek zatrzyma działanie całego programu.
 
-    
+
     Następujące dwa przykłady są równoważne:
 
 

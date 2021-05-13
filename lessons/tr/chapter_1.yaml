@@ -38,9 +38,9 @@
     İki tür değişken vardır:
 
     * **mutable** - Derleyici bu tür değişkenlerin hem yazılmasına hem okunmasına izin verir.
-    
+
     * **immutable** - Derleyici bu tür değişkenlerin sadece okunmasına izin verir.
-    
+
     Değişebilir değerler **mut** anahtar sözcüğü ile belirtilir.
         
     İleride bu kavrama daha fazla değineceğiz. Ancak şu an için bu anahtar 
@@ -50,32 +50,32 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=4443a0deb58f4f3e9ab8c007a9834689
   content_markdown: >
     Rust'ta aşina olduğunuz pek çok tür yer almaktadır:
-    
-    
+
+
     * Mantıksal veri türü - `bool` sadece true/false olabilecek bir değeri temsil eder.
-    
+
     * İşaretsiz tam sayılar - `u8` `u32` `u64` `u128` bit boyutlu **(0/+)** tam sayı değerlerini temsil eder.
-    
+
     * İşaretli tam sayılar - `i8` `i32` `i64` `i128` bit boyutlu **(-/+)** işaretli tam sayı değerlerini temsil eder.
-    
+
     * İşaretçi boyutlu tam sayılar - `usize` `isize` işaretçi boyutunda işaretsiz ve işaretli tam sayı türlerini temsil eder.
-    
+
     * Kayan noktalı sayılar - `f32` `f64` 32 bit ve 64 bit boyutlarında kayan noktalı sayıları temsil eder.
-    
+
     * Çokuzlular - `(değer, değer, ...)` stack üzerinde depolanan aynı veya farklı tür öğelerin sabit boyutlu listesini tutar.
-    
+
     * Diziler - `[değer, değer, ...]` değerleri derleme zamanında bilinen aynı veri türündeki öğelerin sabit boyutlu listesini tutar.
-    
+
     * Dilimler - `&[1..4]` boyutu çalışma zamanında bilinen öğelerin listesini tutar.
-    
+
     * Dizge dilimleri - `str` boyutu çalışma zamanında bilinen metin parçalarını temsil eder.
-    
-    
+
+
     Metinlerle çalışmak size diğer dillerde alışık olduğunuzdan daha karmaşık gelebilir. 
     Rust bir sistem programlama dili olduğundan, aşina olmadığınız bellek sorunlarını önemser. 
     Daha sonra bu konuya ayrıntılarıyla değineceğiz.
-    
-    
+
+
     Sayısal türleri bildirirken tür bildirimini sayının hemen sonuna ekleyerek 13u32, 2u8 şeklinde açıkça belirtebilirsiniz.
 - title: Temel Türleri Dönüştürmek
   code: >-
@@ -83,8 +83,8 @@
   content_markdown: >
     Rust türlerle çalışırken katı olmayı seçtiğinden, sayısal türler söz konusu olduğunda bu dönüşümlerin açıkça yapılmasını bekler. 
     `u8` türündeki bir değeri `u32` türünden bir değerle tür dönüşümü yapmadan sorunsuzca toplayamazsınız.
-    
-    
+
+
     Neyse ki sayısal tür dönüşümleri `as` anahtar kelimesiyle oldukça kolaylaştırır.
 - title: Sabitler
   code: >-
@@ -95,8 +95,8 @@
     Derleme sırasında sabitlerin adları tuttukları değerle değiştirildiğinden, 
     bellekte kalıcı bir adresleri bulunmaz. 
     Bu nedenle aynı sabite yapılan farklı başvuruların aynı hafıza adresine erişeceği garanti edilmez.
-    
-    
+
+
     Değişkenlerin aksine sabitler tür açıklamaları yapılarak bildirilmeli ve 
     daima tüm harflerin büyük olarak yazıldığı `SCREAMING_SNAKE_CASE` biçiminde ifade edilmelidir.
 - title: Diziler
@@ -109,13 +109,13 @@
     **N** derleme zamanında bilinen sabit uzunluğunu ifade eder.
 
 
-    Dizinleri *usize* türünde ve 0'dan başlayan dizi öğelerine erişmek için `dizi[x]` söz dizimi kullanılır. 
+    Dizinleri *usize* türünde ve 0'dan başlayan dizi öğelerine erişmek için `dizi[x]` söz dizimi kullanılır.
 - title: İşlevler
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=7f3b5bd6b59e2d4de6e375e8d29d3a90
   content_markdown: >
     Bir işlev herhangi bir sayıda parametreye sahip olabilir.
-    
+
 
     Bu örnekte, **ekle** işlevi, `i32` yani 32 bit tam sayı türünde iki parametre kabul eder.
 
@@ -152,10 +152,10 @@
 
     Bu bölümde gördüklerimiz, Rust dilinin bütününü kapsayan **güvenliğin** belirmeye başladığının ilk işaretleridir.
     Bir sonraki bölümde başka dillerden aşina olduğumuz `if` ve `for` deyimleriyle ilgileneceğiz!
-    
-    
+
+
     Ek kaynaklar (İngilizce):
-    
+
     * [Youtube: Rust Cast - Rust'un temel sayı türlerine derinlemesine bakış](https://www.youtube.com/watch?v=n5TRBkbystY)
       
     * [Web sitesi: Rust Book 2018 - Temel veri türleri hakkında derinlikli açıklama](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)

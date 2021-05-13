@@ -107,7 +107,7 @@
     Par défaut, les membres d'une *crate* ne sont pas accessibles en dehors
     de la crate. De même, il faut utiliser le mot-clé `pub` dans le
     *module racine* de la crate (` lib.rs` ou `main.rs`) si l'on souhaite
-    rendre accesssible les membres d'une crate depuis l'extérieur. 
+    rendre accesssible les membres d'une crate depuis l'extérieur.
 - title: Visibilité des structures
   content_markdown: |
     Tout comme les fonctions, les structures peuvent déclarer quels champs

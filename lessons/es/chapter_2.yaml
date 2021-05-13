@@ -1,7 +1,7 @@
 - title: Capítulo 2 - Estructuras de Control Básicas
   content_markdown: >
     En este capítulo hablaremos de las estructuras de control básicas en Rust. 
-    
+
     Si estás familiarizado con lenguajes basados en C, te sentirás como en casa 
     y quizá te lleves alguna que otra sorpresa.
 - title: if/else if/else
@@ -32,13 +32,13 @@
 - title: for
   content_markdown: >
     El bucle `for` en Rust es una gran mejora, ya que itera sobre valores en cualquier expresión que se evalúe como un iterador. ¿Qué es un iterador? Un iterador es un objeto al que le puedes hacer la pregunta: "¿Cuál es el siguiente elemento?" hasta que ya no queden más elementos.
-    
+
 
     Nos centraremos más en esto en próximos capítulos, mientras tanto, sólo necesitas saber que en Rust es sencillo crear iteradores que generen secuencias de números enteros.
-    
+
 
     El operador `..` crea un iterador que genera números a partir de un número inicial pero sin incluir el número final.
-    
+
 
     El operador `..=` crea un iterador que genera números a partir de un número inicial, incluyendo el número final.
 - title: match

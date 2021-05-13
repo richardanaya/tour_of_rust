@@ -9,7 +9,7 @@
     Dans ce chapitre, nous explorerons les stratégies utilisées pour échanger
     les données entre JavaScript et WebAssembly.
 - title: Import de Fonctions
-  code: 'https://webassembly.studio/?embed&f=wy84hvb1mec'
+  code: "https://webassembly.studio/?embed&f=wy84hvb1mec"
   content_markdown: >
     Les modules WebAssembly ne peuvent appeler que des fonctions JavaScript qui
     ont été explicitement importées.
@@ -127,7 +127,7 @@
 
     ```
 - title: Affichage de texte depuis WebAssembly
-  code: 'https://webassembly.studio/?embed&f=o2u0e8p0lpi'
+  code: "https://webassembly.studio/?embed&f=o2u0e8p0lpi"
   content_markdown: >
     Explorons un exemple simple d'affichage de texte à partir d'un programme
     WebAssembly.
@@ -163,7 +163,7 @@
 
     ```
 - title: Envoi de Texte vers un Programme WebAssembly
-  code: 'https://webassembly.studio/?embed&f=rasfcwobpv'
+  code: "https://webassembly.studio/?embed&f=rasfcwobpv"
   content_markdown: >
     Explorons l'idée opposée. Imagine que nous voulons envoyer du texte vers
     notre

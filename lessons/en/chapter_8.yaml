@@ -350,7 +350,7 @@
     internal data. This 
       is referred to as the "interior mutability" pattern in Rust. It is a pattern that lets us bend the rules of memory usage at runtime with the same level of safety as Rust's
       compile-time checks.
-      
+
 - title: Chapter 8 - Conclusion
   content_markdown: >
     Smart pointers are the idioms of Rust programming and let us not have to

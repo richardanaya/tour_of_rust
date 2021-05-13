@@ -1,6 +1,19 @@
 {
-  "dependencies": {
+  "scripts": {
+    "lint:lessons": "prettier --write ./lessons/*/*.yaml",
+    "lint:webassembly": "prettier --write ./wasm/*/*.yaml",
+    "lint": "npm run lint:lessons && npm run lint:webassembly",
+    "prebuild": "npm run clean",
+    "build": "node generate.js lessons docs beta && node generate.js wasm docs/webassembly beta",
+    "serve": "npm run build && cd docs && python  -m http.server 8080",
+    "clean": "rimraf ./docs/*.html && rimraf ./docs/webassembly/*.html",
+    "watch": "nodemon -w lessons/**/* -w wasm/**/* -e yaml --exec npm run serve"
+  },
+  "devDependencies": {
     "js-yaml": "^3.14.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "showdown": "^1.9.1"
   }
 }
