@@ -385,3 +385,20 @@ h1 {
 .header:moz-full-screen {
   display: none;
 }
+
+.darkmode {
+  background-color: #000;
+  color: #fff;
+}
+
+.darkmode a, h1, h2, h3 {
+  color: #fff;
+}
+
+.darkmode .header {
+  background-color: #c55305;
+}
+
+.darkmode iframe body {
+  background-color: #2f0000;
+}
