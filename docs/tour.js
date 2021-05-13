@@ -1,4 +1,4 @@
-function setupKeys() {
+const setupKeys = () => {
   document.body.addEventListener('keyup', (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey || e.shiftKey) {
       return;
@@ -14,7 +14,7 @@ function setupKeys() {
       link.click();
     }
   });
-}
+};
 
 const iframeElement = document.querySelector('iframe');
 if (iframeElement) {

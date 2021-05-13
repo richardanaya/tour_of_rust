@@ -131,7 +131,7 @@ const getHead = (words, lang) => `<!DOCTYPE html>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="./site.webmanifest">
 
-        <script async src="./tour.js"></script>
+        <script src="./tour.js" defer></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
         <script>
@@ -191,7 +191,6 @@ languages.forEach((lang) => {
   const betaLessons = lessons.pages.filter(() => true);
 
   langLessons.forEach((lesson, i) => {
-    // const lesson = langLessons[i];
     let fileName = getFileName(lang, i, false, lesson?.chapter);
     if (i === 0 && lang === 'en') {
       fileName = 'index.html';
@@ -228,7 +227,6 @@ languages.forEach((lang) => {
   c = 0;
 
   betaLessons.forEach((lesson, i) => {
-    // const lesson = betaLessons[i];
     if (lesson[lang]) {
       let targetLang = lang;
       if (lesson[lang].clone) {
@@ -254,7 +252,8 @@ languages.forEach((lang) => {
   });
 
   const fileName = `TOC_${lang}.html`;
-  fs.writeFileSync(`${targetDir}/${fileName}`, `${getHead(words, lang)}
+  fs.writeFileSync(`${targetDir}/${fileName}`,
+    `${getHead(words, lang)}
     <body>
         <div class="tour">
             <div class="header">
@@ -280,6 +279,5 @@ languages.forEach((lang) => {
             </p>
         </div>
     </body>
-    <script src="/tour.js"></script>
     </html>`);
 });
