@@ -152,16 +152,25 @@
     Einzelne Elemente können mit dem `[x]` Operator abgerufen werden, in welchem
     *x* den *usize* Index (beginnend bei 0) des gesuchten Elementes darstellt.
 - title: Funktionen
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
   content_markdown: >
     Eine Funktion kann eine beliebige (nicht-negative) Anzahl an Argumenten bzw.
     Parametern aufnehmen.
 
 
-    In diesem Beispiel verlangt die Funktion `add` zwei Parameter vom Typ `i32`
+    In diesem Beispiel verlangt die Funktion *add* zwei Parameter vom Typ `i32`
     (32 Bit Ganzzahl).
+    Wenn du lediglich einen Ausdruck zurückgibst, kannst du das `return` Schlüsselwort
+    und das Semikolon am Ende weglassen, wie wir es bei der *subtract* Funktion getan haben.
 
 
     Funktionsnamen sollten im `snake_case` Format vergeben werden.
+
+
+    Hinweis: wenn man eine Funktion deklariert, dann sind spricht man bei den Daten,
+    die die Funktion aktzeptiert von Parametern. Ruft man die Funktion dann auf und
+    übergibt ihr Daten, dann spricht man von Argumenten.
 - title: Mehrere return-Variablen
   content_markdown: >
     Funktionen können mehrere Variablen auf einmal zurückgeben mittels eines
