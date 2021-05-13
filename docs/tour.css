@@ -41,7 +41,6 @@ pre {
   padding-left: 30px;
   background-color: #ff6801;
   box-shadow: 0 2px 3px #cf3801;
-  grid-column: span 2;
 }
 
 .header a {
@@ -56,7 +55,7 @@ body {
   color: #333;
 }
 
-.tour {
+main {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -261,9 +260,13 @@ iframe {
   padding-bottom: 60px;
 }   
 
-@media screen and (max-width: 600px) {
-  .tour {
+@media screen and (max-width: 767px) {
+  main {
     display: block;
+  }
+
+  main .page {
+    width: 100%
   }
 
   .code {
@@ -276,7 +279,6 @@ iframe {
     padding-left: 7px;
     padding-right: 7px;
     line-height: 40px;
-    grid-column: unset;
   }
 
   iframe {

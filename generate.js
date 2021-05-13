@@ -101,11 +101,13 @@ function template(lessons, lang, title, code, content, index, isLast, words, is_
         <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
 
         <link rel="stylesheet" href="tour.css">
+        <script src="https://unpkg.com/unpoly@1.0.0/dist/unpoly.min.js" integrity="sha384-ytJc9iP/TqsU3lNuDL7f9+s6s6okr3iD1TnXQBigaJIY9Ew3zACbVfa96VtkpMs+" crossorigin="anonymous" defer></script>
+<link rel="stylesheet" href="https://unpkg.com/unpoly@1.0.0/dist/unpoly.min.css" integrity="sha384-Au6LjS9fxDpwn3+26YmukmOumZUmryd8ONenkVIoH4eEPH1tACqLsVfqz9tBrvQy" crossorigin="anonymous">
         <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
         <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
-
+        
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -128,17 +130,19 @@ function template(lessons, lang, title, code, content, index, isLast, words, is_
                 <span class="nav">
                 <span class="toc"><a href="TOC_${lang}.html">${getWord(words,lang,"toc")}</a></span>
             </div>
-            <div class="page">
-            <h1>${title}</h1>
-            ${content}
-            <div class="bottomnav">
-                ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}" rel="prev">❮ ${getWord(words,lang,"previous")}</a></span>`:""}
-                ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}" rel="next">${getWord(words,lang,"next")} ❯</a></span>`}
-            </div>
+            <main>
+              <div class="page">
+              <h1>${title}</h1>
+              ${content}
+              <div class="bottomnav">
+                  ${index!=0?`<span class="back"><a href="${is_beta?"beta_":""}${getFileName(lang,index-1,is_beta,index!=0?lessons[index-1].chapter:undefined)}" rel="prev" up-transition="move-right" up-target="main">❮ ${getWord(words,lang,"previous")}</a></span>`:""}
+                  ${isLast?"":`<span class="next"><a href="${is_beta?"beta_":""}${getFileName(lang,index+1,is_beta,lessons[index+1].chapter)}" rel="next" up-transition="move-left" up-target="main">${getWord(words,lang,"next")} ❯</a></span>`}
+              </div>
             </div>
             ${code?`<div class="code">
-            <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground"></iframe>
+            <iframe width="100%" src="${code}" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
             </div>`:`<div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>`}
+            </main>
         </div>
     </body>
 </html>`
