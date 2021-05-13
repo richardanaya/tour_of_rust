@@ -2,7 +2,7 @@
   "scripts": {
     "lint:lessons": "prettier --write ./lessons/*/*.yaml",
     "lint:webassembly": "prettier --write ./wasm/*/*.yaml",
-    "lint": "npm run lint:lessons && npm run lint:webassembly",
+    "lint": "npm run lint:lessons && npm run lint:webassembly && eslint --fix generate.js docs/",
     "prebuild": "npm run clean",
     "build": "node generate.js lessons docs beta && node generate.js wasm docs/webassembly beta",
     "serve": "npm run build && cd docs && python  -m http.server 8080",
