@@ -118,7 +118,7 @@
     Os elementos da tupla podem ser referenciados pelo seu índice.
 
 
-    O Rust suporta vários modos de desestruturação que veremos em diferentes formas, permintindo extrair subconjuntos de dados de maneira prática.
+    O Rust suporta vários modos de desestruturação que veremos em diferentes formas, permitindo extrair subconjuntos de dados de maneira prática.
 - title: Retornando nada
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20faz_nada()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20o%20tipo%20de%20retorno%20%C3%A9%20implicitamente%20()%0Afn%20faz_nada2()%20%7B%0A%20%20%20%20%2F%2F%20esta%20fun%C3%A7%C3%A3o%20ir%C3%A1%20devolver%20()%20se%20nada%20for%20especificado%20para%20retornar%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20faz_nada()%3B%0A%20%20%20%20let%20b%20%3D%20faz_nada2()%3B%0A%0A%20%20%20%20%2F%2F%20Exibindo%20uma%20string%20de%20depura%C3%A7%C3%A3o%20para%20a%20e%20b%0A%20%20%20%20%2F%2F%20Porque%20%C3%A9%20dif%C3%ADcil%20n%C3%A3o%20mostrar%20nada%0A%20%20%20%20println!(%22O%20valor%20de%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22O%20valor%20de%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
