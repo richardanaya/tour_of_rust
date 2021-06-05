@@ -1,0 +1,36 @@
+- title: >-
+    Hello World!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Hello%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: |
+    <img src="/intro.png" alt="Benvenuto al Tour di Rust" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
+
+    **Felice primo anniversario! 🎉**
+
+    Benvenuto al *Tour di Rust*. Questa vuole essere una guida passo-passo attraverso le caratteristiche del linguaggio di programmazione Rust. Rust è spesso considerato un linguaggio con una curva di apprendimento ripida, ma spero che ti saprò guidare perchè c'è molto da esplorare prima di arrivare alle parti più complesse. 
+
+    Puoi trovare questa guida anche in altre lingue: 
+
+    * [English](00_en.html)
+    * [Deutsch](00_de.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Magyar](00_hu.html)
+    * [Polski](00_pl.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [简体中文](00_zh-cn.html)
+    * [繁體中文](00_zh-tw.html)
+    * [日本語](00_ja.html)
+    * [한국어](00_ko.html)
+    * [Türkçe](00_tr.html)
+    * [Ελληνικά](00_gr.html)
+    * [Українська](00_ua.html)
+    * [ภาษาไทย](00_th.html)
+
+    Se hai suggerimenti sul contenuto o vorresti contribuire alle traduzioni, visita il [repository github](https://github.com/richardanaya/tour_of_rust).
+
+    Puoi navigare nel tour usando anche i tasti della tastiera <span class="emoji">⬅️</span> e <span class="emoji">➡️</span>.
+
+    In questo classico esempio, mostriamo il supporto di Rust per le stringhe Unicode.

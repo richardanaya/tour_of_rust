@@ -42,6 +42,8 @@ This project also aims to provide this book in as many languages as possible.
 * ภาษาไทย - [pallat](https://github.com/pallat)
 * Türkçe - [Rust Dili](https://github.com/RustDili/), [mertataol](https://github.com/mertataol), [doganid](https://github.com/doganid), [mhmmdd](https://github.com/mhmmdd)
 * Ελληνικά - [DoubleHyphen](https://github.com/DoubleHyphen/)
+* Italian - [Andrea Manzini](https://github.com/ilmanzo/)
+
 
 # Looking for translators!
 

@@ -27,7 +27,8 @@
     * [Ελληνικά](00_gr.html)
     * [Українська](00_ua.html)
     * [ภาษาไทย](00_th.html)
-
+    * [Italian](00_it.html)
+    
     If you have suggestions on content or would like to contribute to translations, check out Tour of Rust's [github repository](https://github.com/richardanaya/tour_of_rust).
 
     You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>.
