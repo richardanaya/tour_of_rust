@@ -16,7 +16,7 @@ Every time you finish the translation of a chapter update the table underneath.
 |pt-br | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |ru    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |zh-cn | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   | ✓ | ✓  |
-|zh-tw | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |   |    |
+|zh-tw | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |    |
 |tr    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |ua    | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |   |   |   |    |
 
