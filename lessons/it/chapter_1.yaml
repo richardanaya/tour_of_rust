@@ -1,0 +1,196 @@
+- title: Capitolo 1 - Le Basi
+  content_markdown: >
+    In questo primo capitolo esploreremo i concetti basilari con le funzioni, variabili 
+    ed i tipi di dato primitivi. Felice di averti a bordo! 
+
+    Oh, nel caso ti stessi chiedendo chi sia quell'adorabile granchietto che ti sta parlando, 
+    io sono **Ferris**,
+    la mascotte semi-ufficiale del linguaggio di programmazione Rust, lieto di conoscerti!
+
+
+    Quando avrai preso familiarità con Rust, potrai considerarti un **Rustacean**. 
+    E' così che chi usa, contribuisce o è interessato a Rust, usa farsi chiamare nella comunità. 
+- title: Il Rust Playground
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+  content_markdown: >
+    Questo tour usa uno strumento interattivo di coding, il [Rust
+    Playground](https://play.rust-lang.org).
+
+
+    E' molto comodo per esplorare Rust e mostrare ad altri la tua creatività e le sfide che affronti, senza dover installare nulla !
+- title: Variabili
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Le variabili sono dichiarate usando la parola chiave **let** .
+
+
+    Quando assegni un valore, Rust riesce a capire il tipo della tua variabile nel 99% dei casi.
+    
+    Se non dovesse riuscire, puoi aggiungere esplicitamente il tipo alla dichiarazione della variabile.
+
+
+    Nota come possiamo assegnare lo stesso nome variabile più volte: questo viene chiamato *variable
+
+    shadowing* ed il tipo può anche cambiare da una assegnazione all'altra dello stesso nome, perchè ogni volta è una nuova variabile.
+
+
+    I nomi delle variabili sono sempre in formato `snake_case`.
+- title: Modificare le Variabili
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    In Rust c'è una attenzione molto alta su cosa può cambiare valore. Le variabili infatti
+
+    possono dividersi in due categorie:
+
+
+    * **mutabile** - il compilatore permette di leggere e scrivere il contenuto della variabile
+
+    * **immutabile** - il compilatore permette solo di leggere il contenuto della variabile.
+
+
+    I valori mutabili sono contraddistinti dalla parola chiave **mut** .
+
+
+    Approfondiremo questo concetto più avanti, ma per ora ricordati questa parola chiave.
+- title: Tipi di dato basilari
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Rust ha molti tipi familiari: 
+
+
+    * booleani - `bool` per rappresentare stati true/false
+
+    * interi senza segno - `u8` `u16` `u32` `u64` `u128` per rappresentare numeri interi positivi
+
+    * interi con segno - `i8` `i16` `i32` `i64` `i128` per rappresentare numeri interi 
+
+    * interi di dimensione puntatore - `usize` `isize` per rappresentare indici e dimensioni di cose in memoria 
+
+    * numeri a virgola mobile - `f32` `f64`
+
+    * tuple - `(valore, valore, ...)` per passare sequenze di valori sullo stack 
+
+    * array - `[valore, valore, ...]` un elenco a lunghezza fissa di elementi dello stesso tipo  
+
+    * slice - un elenco a lunghezza variabile di elementi dello stesso tipo 
+
+    * `str`(string slice) - stringa di testo con lunghezza conosciuta 
+
+
+    La gestione del testo potrebbe essere più complessa di quella in cui sei abituato in altri linguaggi;
+
+    dato che Rust è un linguaggio di programmazione di sistema, gestisce problemi di memoria a cui potresti 
+    
+    non essere abituato. Approfondiremo questo aspetto più avanti. 
+
+
+    Per i numeri, il tipo può essere esplicitato aggiungendo un suffisso al numero stesso, per esempio `13u32` o `2u8`.
+- title: Conversioni tra tipi di dato
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Rust richiede di essere esplicito nel gestire i tipi numerici. 
+    Ad esempio non puoi  
+
+    usare un `u8` al posto di `u32` a caso, senza incappare in errori del compilatore.
+
+    Fortunatamente, Rust rende molto facili le conversioni del tipi numerici grazie alla parola chiave **as** .
+- title: Costanti
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Le costanti ci permettono di specificare un valore comune che verrà usato in più 
+    parti del codice 
+
+    molte volte, in maniera efficiente, perchè il compilatore inserisce direttamente il valore della costante nel codice.
+
+
+    A differenza delle variabili, le costanti devono sempre avere il tipo esplicitato.
+
+    I nomi delle costanti sono sempre scritti nello stile `MAIUSCOLO_SNAKE_CASE`.
+- title: Array
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    Un *array* è una **lista di lunghezza fissa** di dati, tutti dello stesso tipo.
+
+
+    Il tipo dati per un *array* è `[T;N]` dove T è il tipo degli elementi, e N
+    è la lunghezza fissa, nota a tempo di compilazione.
+
+
+    Ogni elemento può essere recuperato con l'operatore `[x]` dove *x* è l'indice *usize* 
+    (partendo da 0) dell'elemento che ti serve.
+
+
+    Le collezioni a lunghezza dinamica, spesso chiamati array dinamici o array variabili, saranno introdotte
+    in un capitolo successivo quando parleremo dei **Vettori**
+
+- title: Funzioni
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    Una funzione può avere zero o più parametri.
+
+
+    In questo esempio, la funzione *add* richiede due argomenti di tipo `i32` 
+    (interi con segno di 32-bit).
+
+
+    Se vuoi solo ritornare una espressione, puoi tralasciare la parola chiave `return` 
+    e il punto-e-virgola alla fine, come abbiamo fatto nella funzione *subtract* .
+
+
+    I nomi delle funzioni sono sempre in `snake_case`.
+
+
+    Chiarimento: quando definisci una funzione, i dati che accetta si chiamano parametri. 
+    Quando chiami la funzione passandogli dei dati, allora li chiameremo argomenti. 
+- title: Valori di ritorno multipli
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Le funzioni possono ritornare più di un valore, semplicemente ritornando una **tupla** di valori.
+
+    Puoi referenziare gli elementi di una tupla con il loro numero indice.
+
+    Rust supporta vari tipi di destrutturazione che vedremo in varie forme, 
+
+    permettendoci di estrarre sottoinsiemi di dati in modo ergonomico. Guarda l'esempio!
+   
+- title: Ritornare il nulla
+  content_markdown: >
+    Se per una funzione non specifichi il tipo di ritorno, ritornerà una tupla vuota, conosciuta anche come *unit*.
+
+
+    La tupla vuota è rappresentata da `()`.
+
+
+    L'uso di `()` è poco comune, ma potresti vederlo ogni tanto quindi è giusto sapere cosa sta succedendo.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: Capitolo 1 - Conclusione
+  content_markdown: >
+    Bel lavoro! Le basi di Rust non sono così difficili, vero ? 
+
+    Stiamo iniziando a capire come "pensa" il compilatore Rust. Come linguaggio di sistema,
+
+    Rust considera molto importanti aspetti come la dimensione di oggetti in memoria, controllare se le cose possono essere modificate o no, e fare in modo che i calcoli sui numeri diano il risultato che ti aspetti. Prossimamente vedremo alcuni vecchi amici: 
+
+    le condizioni `if` e i cicli `for` .
+
+
+    Altre risorse:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
