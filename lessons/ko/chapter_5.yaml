@@ -23,7 +23,7 @@
 
     메모리 상세:
     * Rust에는 가비지 컬렉션이 없습니다.
-    * 이는 C++에서는 Resource Aquisition Is Initialization ( RAII ) 라고 부릅니다.
+    * 이는 C++에서는 Resource Acquisition Is Initialization ( RAII ) 라고 부릅니다.
   code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%EA%B0%80%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%2F%2F%20foo_a%EA%B0%80%20%EC%97%AC%EA%B8%B0%EC%84%9C%20drop%20%EB%90%A9%EB%8B%88%EB%8B%A4%0A%7D%0A
 - title: Dropping은 계층적이다
   content_markdown: >

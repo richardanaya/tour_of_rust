@@ -21,7 +21,7 @@
 
     * Rust'ta çöp toplama özelliği bulunmaz.
         
-    * C++'tan aşina olduğumuz bu yaklaşım, *Resource Aquisition Is Initialization* (RAII) olarak da bilinir.
+    * C++'tan aşina olduğumuz bu yaklaşım, *Resource Acquisition Is Initialization* (RAII) olarak da bilinir.
   code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=861c81bf9e474e5ecc35f9805d15eb83
 - title: Düşürmek Hiyerarşiktir
   content_markdown: >

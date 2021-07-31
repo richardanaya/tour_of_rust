@@ -19,7 +19,7 @@
     メモリの詳細:
 
     * Rust にはガベージコレクションがありません。
-    * C++ では Resource Aquisition Is Initialization (RAII)「リソース取得は初期化である」とも呼ばれています。
+    * C++ では Resource Acquisition Is Initialization (RAII)「リソース取得は初期化である」とも呼ばれています。
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20%E3%81%AF%E3%81%93%E3%81%93%E3%81%A7%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%0A%20%20%20%20%2F%2F%20foo_a%20%E3%81%AF%E3%81%93%E3%81%93%E3%81%A7%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%0A%7D%0A
 - title: ドロップは階層的
