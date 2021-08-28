@@ -6,6 +6,7 @@ Every time you finish the translation of a chapter update the table underneath.
 |------|---|---|---|---|---|---|---|---|---|---|----|
 |de    | ✓ | ✓ | ✓ | ✓ |   |   |   |   |   |   |    |
 |es    | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |   |   |   |    |
+|fi    | ✓ | ✓ |   |   |   |   |   |   |   |   |    |
 |fr    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |es    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |    |
 |hu    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
@@ -20,5 +21,5 @@ Every time you finish the translation of a chapter update the table underneath.
 |tr    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |ua    | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |   |   |   |    |
 
-Legend: ✓ = done, u = needs update
 
+Legend: ✓ = done, u = needs update
