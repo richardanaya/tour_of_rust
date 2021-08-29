@@ -7,9 +7,10 @@
 
     **Tervetuloa,**<img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom">
 
-    Tervetuloa *Rustin ympäriajoon*. Tämä on johdatus Rustin ominaisuuksiin askel askeleelta.
-    Rustin opettelun yleensä sanotaan kestävän jonkin aikaa,
-    Rustissa on paljon tutkittavaa jo ennen kuin pääsemme
+    Tervetuloa *Rustin ympäriajoon*. Tämä on johdatus Rustin ominaisuuksiin
+    askel askeleelta.
+    Rustin opettelun sanotaan kestävän jonkin aikaa,
+    ja Rustissa onkin paljon tutkittavaa jo ennen kuin pääsemme
     monimutkaisiin asioihin.
 
     Tämä opas on saatavilla myös näillä kielillä:
@@ -33,9 +34,10 @@
     * [Italiano](00_it.html)
     * [Suomi](00_fi.html)
 
-    Jos sinulla on ehdotuksia sisällön muuttamiseen tai haluat auttaa
-    käännöksissä, ohjeet löytyvät Tour of Rust -repositorysta [Githubista](https://github.com/richardanaya/tour_of_rust).
+    Jos haluat ehdottaa muutoksia sisältöön tai haluat auttaa
+    käännöksissä, ohjeet löytyvät Tour of Rust -repositorysta
+    [Githubista](https://github.com/richardanaya/tour_of_rust).
 
-    Ohjesivuilla voi liikkua näppäimillä <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>.
+    Ohjesivuilla voi liikkua näppäimillä <span class="emoji">⬅️</span> ja <span class="emoji">➡️</span>.
 
-    Tässä perinteisessä esimerkissä esittelemme Rustin tukea Unicode-merkkijonoille.
+    Oheisessa perinteisessä esimerkissä esittelemme Rustin tukea Unicode-merkkijonoille.

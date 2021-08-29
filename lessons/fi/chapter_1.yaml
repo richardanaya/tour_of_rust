@@ -42,182 +42,167 @@
 
     Muuttujan nimet kirjoitetaan aina "snake_case", pienillä kirjaimilla ja
     sanoja erottaa alaviiva.
-- title: Changing Variables
+- title: Muuttumattomat muuttujat
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   content_markdown: >
-    Rust cares a great deal about what variables are modifiable. Values
-
-    fall into two types:
-
-
-    * **mutable** - the compiler will allow the variable to be written to and
-    read from.
-
-    * **immutable** - the compiler will only allow the variable to be read from.
+    Rustissa on tärkeää tietää, mitkä muuttujat ovat muuttuvia. muuttujat
+    kuuluvat kahteen ryhmään:
 
 
-    Mutable values are denoted with a **mut** keyword.
+    * **mutable** - kääntäjä sallii muuttujaan kirjoittamisen ja lukemisen.
+
+    * **immutable** - kääntäjä saallii vain muuttujan arvon lukemisen.
 
 
-    We will have more to say on this concept later, but for now just keep an eye
-    out for this keyword.
-- title: Basic Types
+    Mutable-arvot merkitään **mut** -avainsanalla.
+
+
+    Kerromme tästä enemmän myöhemmin, mutta siihen asti pidä silmällä tätä
+    avainsanaa.
+- title: Perustietotyypit
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
-    Rust has a variety of familiar types:
+    Rustissa on paljon tuttuja tietotyyppejä:
 
 
-    * booleans - `bool` for representing true/false
+    * totuusarvot - `bool` joka edustaa tilaa totta/ei-totta, true/false
 
-    * unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing
-    nonnegative whole numbers
+    * etumerkittömät kokonaisluvut - `u8` `u16` `u32` `u64` `u128`, joihin
+    voi sijoittaa vain positiivisia kokonaislukuja
 
-    * signed integers - `i8` `i16` `i32` `i64` `i128` for representing whole numbers
+    * etumerkilliset kokonaisluvut - `i8` `i16` `i32` `i64` `i128`, joihin voi
+    voi sijoittaa myös negatiivisia kokonaislukuja
 
-    * pointer sized integers - `usize` `isize` for representing indexes
+    * osoittimen kokoiset kokonaisluvut - `usize` `isize`, joilla voi
+    osoittaa muistissa olevia yksiköitä tai säilöä suurimman mahdollisen
+    taulukon indeksin
 
-    and sizes of things in memory
+    * liukuluvut - `f32` `f64`
 
-    * floating point - `f32` `f64`
+    * tuple - `(value, value, ...)`, jolla voi välittää ryhmän arvoja pinossa
 
-    * tuple - `(value, value, ...)` for passing fixed sequences of values on the
-    stack
+    * taulukko - `[value, value, ...]` ryhmä samanlaisia elementtejä, joiden
+    tarkka koko on tunnettu käännösaikana
 
-    * arrays - `[value, value, ...]` a collection of similar elements with fixed
-    length known at compile time
+    * viipale - ryhmä samanlaisia elementtejä, joiden koko on tunnettu käännösaikana
 
-    * slices - a collection of similar elements with length known at runtime
-
-    * `str`(string slice) - text with a length known at runtime
-
-
-    Text might be more complex than you are used to in other languages;
-
-    since Rust is a system programming language, it cares about memory
-
-    issues you might not be used to. We will be going into this in detail later.
+    * `str`(merkkijonoviipale) - tekstiä, jonka pituus on tunnettu käännösaikana
 
 
-    Numeric types can be explicitly specified by appending the type to the end
-    of the number (e.g. `13u32`, `2u8`).
-- title: Basic Type Conversion
+    Merkkijonojen käsittely voi olla monimutkaisempaa kuin mihin olet tottunut
+    muissa ohjelmointikielissä;
+
+    Koska Rust on systeemiohjelmointikieli, se pitää huolta muistin käytöstä enemmän
+    kuin mihin olet ehkä tottunut. Palaamme tähän yksityiskohtaan myöhemmin.
+
+
+    Numeerinen tyyppi voidaan tarvittaessa tarkentaa lisäämällä tyyppi
+    numeron perään (esimerkiksi `13u32`, `2u8`).
+- title: Perustietotyypin muunnokset
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
   content_markdown: >
-    Rust requires explicitness when it comes to numeric types. One cannot
-
-    use a `u8` for a `u32` casually without
-
-    error.
+    Rust vaatii kaikkien muunnosten merkitsemistä, kun numeerisia tietotyyppejä
+    muunnetaan toiseksi. Tyyppiä `u8` ei voi käyttää tyypin `u32` sijaan
+    aiheuttamatta virheilmoitusta.
 
 
-    Luckily Rust makes numeric type conversions very easy with the **as**
-    keyword.
-- title: Constants
+    Onneksi Rust tekee muunnoksen numeerisista tyypeistä toiseksi hyvin
+    helpoksi avainsanalla **as**.
+- title: Vakiot
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
-    Constants allow us to specify a common value that's used throughout
-
-    our code many times efficiently.  Instead of copying values like variables
-
-    where they are used, constants directly replace the text identifier where
-    they
-
-    are used with their value at compile time.
+    Vakioilla voimme kuvata yhteisiä lukuja, joita käytetään
+    tehokkaasti monessa paikassa koodia.
+    Muuttujat varaavat tilaa suorituksen aikana, mutta vakiot
+    suoraan korvaavat vakion käytön vakion arvolla jo
+    käännösaikana.
 
 
-    Unlike variables, constants must always have explicit types.
+    Vakioiden tyyppi on aina annettava, päinvastoin kuin muuttujan tyyppi.
 
 
-    Constant names are always in `SCREAMING_SNAKE_CASE`.
-- title: Arrays
+    Vakioiden nimet ovat aina `SCREAMING_SNAKE_CASE`, kaikki kirjaimet isolla
+    ja sanat erotettuna alaviivalla.
+- title: Taulukot
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
   content_markdown: >
-    An *array* is a **fixed length collection** of data elements all of the same
-    type.
+    *Taulukko* on **kiinteän mittainen kokoelma** elementtejä, jotka ovat
+    kaikki samaa tyyppiä.
 
 
-    The data type for an *array* is `[T;N]` where T is the elements' type, and N
-    is the fixed length known at compile-time.
+    *Taulukon* tyyppi on `[T;N]` missä T on elementtien tyyppi, ja N
+    on taulukon kiinteä pituus, joka tiedetään käännösaikana.
 
 
-    Individual elements can be retrieved with the `[x]` operator where *x* is a
-    *usize* index (starting at 0) of the element you want.
+    Yksittäisiin elementteihin pääsee käsiksi operaattorilla `[x]`, missä x
+    on *usize*-tyyppinen indeksi taulukon haluttuun elementtiin (alkaen indeksistä 0).
 
 
-    Collections with a dynamic length, often called dynamic or variable arrays, are
-    introduced in a later chapter about **Vectors**.
-- title: Functions
+    Vaihtuvanmittaiset kokoelmat, dynaamisesti kasvavat
+    taulukot, esitellään myöhemmin kappaleessa **vektoreista**.
+- title: Funktiot
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
   content_markdown: >
-    A function has zero or more parameters.
+    Fuktiolla on nolla tai enemmän parametreja.
 
 
-    In this example, the *add* function takes two arguments of type `i32`
-    (signed integer of 32-bit length).
+    Tässä erimerkissä, funktio *add* saa kaksi parametriä, joiden tyyppi on `i32`
+    (etumerkillinen 32-bittinen kokonaisluku).
 
 
-    If you just want to return an expression, you can drop the `return` keyword
-    and the semicolon at the end, as we did in the *subtract* function.
+    Jos haluat palauttaa vain lausekkeen arvon funktion lopussa, voit jättää pois
+    `return`-avainsanan ja puolipisteen, kuten *subtract*-funktiossa.
 
 
-    Function names are always in `snake_case`.
+    Funktion nimet ovat aina `snake_case`.
 
 
-    Hint: if you define a function, the data it accepts are called parameters.
-    If you call that function and pass data to it, then it's called arguments.
-- title: Multiple Return Values
+    Huomaa: Kun määrittelet funktion, sen saamia tietoja sanotaan parametreiksi.
+    Kun kutsut funktiota ja annat sille tietoja, niitä sanotaan argumenteiksi.
+- title: Monta paluuarvoa
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
   content_markdown: >
-    Functions can return multiple values by returning a **tuple**
-
-    of values.
+    Funktiot voivat palauttaa useampia arvoja palauttamalla **tuplen**
 
 
-    Tuple elements can be referenced by their index number.
+    Tuplen elementteihin voi viitata niiden järjestysnumerolla.
 
 
-    Rust supports various kinds of destructuring that we will see in many forms,
-    allowing
-
-    us to extract sub-pieces of data structures in ergonomic ways. Be on the
-    lookout!
-- title: Returning Nothing
+    Rust tukee useita eri tapoja pilkkoa tietorakenteet osiinsa, mikä
+    mahdollistaa monia erginomisia keinoja päästä käsiksi muuttujien
+    alirakenteisiin. Odota vain hetki!
+- title: Tyhjän palauttaminen
   content_markdown: >
-    If no return type is specified for a function, it returns an empty tuple,
-    also known as a *unit*.
+    Jos funktiolle ei ole määritelty paluuarvoa, se palauttaa tyhjän
+    tuplen, jota myös kutsutaan nimellä unit.
 
 
-    An empty tuple is represented by `()`.
+    Tyhjä tuple merkitään `()`.
 
 
-    Using `()` is uncommon, but will come up often enough that it's good to know
-    whats happening.
+    Merkinnän `()` käyttö ei ole kovin tavallista, mutta sitä tarvitaan kuitenkin
+    niin usein, että on hyvä tietää, mitä se tarkoittaa.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
-- title: Chapter 1 - Conclusion
+- title: Kappaleen 1 yhteenveto
   content_markdown: >
-    Nice job so far! The basics of Rust aren't so bad, right?  We're
-
-    getting a peek into how the Rust compiler thinks.  As a system programming
-    language
-
-    it cares a lot about the size  of values in memory, whether things can be
-    modified or not,
-
-    and making sure your math is what you want it to be. Next up we'll be
-    looking at some old friends:
-
-    `if` tests and `for` loops.
+    Hyvää työtä tähän mennessä! Rustin perusteet eivät ole niin pahoja, vai mitä?
+    Pääsimme kurkistamaan kuinka Rust-kääntäjä ajattelee.
+    Systeemiohjelmointikielenä Rust on välittää hyvin paljon siitä,
+    kuinka paljon eri arvot kuluttavat muistia, voidaanko arvoja muuttaa, ja
+    varmistaa, että laskutoimitukset menevät juuri niin kuin niiden
+    kuvitteletkin menevän. Seuraavaksi tutustumme vanhoihin ystäviin:
+    if-testeihin ja for-silmukoihin.
 
 
-    More Resources:
+    Lisää tietoja:
 
 
     * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
