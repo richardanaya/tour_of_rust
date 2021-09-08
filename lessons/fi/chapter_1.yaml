@@ -1,0 +1,214 @@
+- title: Kappale 1 - Perusteet
+  content_markdown: >
+    Tässä ensimmäisessä kappaleessa käymme läpi Rustin perusteita:
+    funktioita, muuttujia ja yksinkertaisimpia tietotyyppejä.
+    Kiva, kun olet mukana!
+
+
+    Jos ihmettelet, mikä on tämä ihastuttava rapu, joka
+    puhuu sinulle, minä olen "Ferris", Rust ohjelmointikielen
+    epävirallinen maskotti. Mukava tavata.
+
+
+    Kun opit sujuvammaksi Rustin kanssa, voit kutsua itseäsi
+    nimellä **Rustacean**. Sillä nimellä Rustia kehittävät ja
+    kiinnostuneet ihmiset kutsuvat itseään.
+- title: Rust-leikkikenttä
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+  content_markdown: >
+    Tämä opas käyttää Rust-leikkikenttää [Rust
+    Playground](https://play.rust-lang.org) tapana ajaa suoraan Rust-ohjelmia.
+
+
+    Se on loistava työkalu testata Rustia, näyttää muille luovuutesi ja
+    vastata ohjelmointihaasteisiin.
+- title: Muuttujat
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Muuttujat esitellään **let** -avainsanalla.
+
+
+    Kun muuttujaan asetetaan arvo, Rust osaa päätellä 99% ajasta
+    muuttujan tyypin. Jos se ei kykene siihen, voit lisätä tyypin muuttujan
+    esittelyyn.
+
+
+    Huomaa, että vaimme sijoittaa samannimiseen muuttujaan monta kertaa.
+    Sitä kutsutaan muuttujan varjostamiseksi, ja muuttujan tyyppi voi muuttua
+    myöhemmillä viittauksilla samaan nimeen.
+
+
+    Muuttujan nimet kirjoitetaan aina "snake_case", pienillä kirjaimilla ja
+    sanoja erottaa alaviiva.
+- title: Muuttumattomat muuttujat
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Rustissa on tärkeää tietää, mitkä muuttujat ovat muuttuvia. muuttujat
+    kuuluvat kahteen ryhmään:
+
+
+    * **mutable** - kääntäjä sallii muuttujaan kirjoittamisen ja lukemisen.
+
+    * **immutable** - kääntäjä saallii vain muuttujan arvon lukemisen.
+
+
+    Mutable-arvot merkitään **mut** -avainsanalla.
+
+
+    Kerromme tästä enemmän myöhemmin, mutta siihen asti pidä silmällä tätä
+    avainsanaa.
+- title: Perustietotyypit
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Rustissa on paljon tuttuja tietotyyppejä:
+
+
+    * totuusarvot - `bool` joka edustaa tilaa totta/ei-totta, true/false
+
+    * etumerkittömät kokonaisluvut - `u8` `u16` `u32` `u64` `u128`, joihin
+    voi sijoittaa vain positiivisia kokonaislukuja
+
+    * etumerkilliset kokonaisluvut - `i8` `i16` `i32` `i64` `i128`, joihin voi
+    voi sijoittaa myös negatiivisia kokonaislukuja
+
+    * osoittimen kokoiset kokonaisluvut - `usize` `isize`, joilla voi
+    osoittaa muistissa olevia yksiköitä tai säilöä suurimman mahdollisen
+    taulukon indeksin
+
+    * liukuluvut - `f32` `f64`
+
+    * tuple - `(value, value, ...)`, jolla voi välittää ryhmän arvoja pinossa
+
+    * taulukko - `[value, value, ...]` ryhmä samanlaisia elementtejä, joiden
+    tarkka koko on tunnettu käännösaikana
+
+    * viipale - ryhmä samanlaisia elementtejä, joiden koko on tunnettu käännösaikana
+
+    * `str`(merkkijonoviipale) - tekstiä, jonka pituus on tunnettu käännösaikana
+
+
+    Merkkijonojen käsittely voi olla monimutkaisempaa kuin mihin olet tottunut
+    muissa ohjelmointikielissä;
+
+    Koska Rust on systeemiohjelmointikieli, se pitää huolta muistin käytöstä enemmän
+    kuin mihin olet ehkä tottunut. Palaamme tähän yksityiskohtaan myöhemmin.
+
+
+    Numeerinen tyyppi voidaan tarvittaessa tarkentaa lisäämällä tyyppi
+    numeron perään (esimerkiksi `13u32`, `2u8`).
+- title: Perustietotyypin muunnokset
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Rust vaatii kaikkien muunnosten merkitsemistä, kun numeerisia tietotyyppejä
+    muunnetaan toiseksi. Tyyppiä `u8` ei voi käyttää tyypin `u32` sijaan
+    aiheuttamatta virheilmoitusta.
+
+
+    Onneksi Rust tekee muunnoksen numeerisista tyypeistä toiseksi hyvin
+    helpoksi avainsanalla **as**.
+- title: Vakiot
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Vakioilla voimme kuvata yhteisiä lukuja, joita käytetään
+    tehokkaasti monessa paikassa koodia.
+    Muuttujat varaavat tilaa suorituksen aikana, mutta vakiot
+    suoraan korvaavat vakion käytön vakion arvolla jo
+    käännösaikana.
+
+
+    Vakioiden tyyppi on aina annettava, päinvastoin kuin muuttujan tyyppi.
+
+
+    Vakioiden nimet ovat aina `SCREAMING_SNAKE_CASE`, kaikki kirjaimet isolla
+    ja sanat erotettuna alaviivalla.
+- title: Taulukot
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    *Taulukko* on **kiinteän mittainen kokoelma** elementtejä, jotka ovat
+    kaikki samaa tyyppiä.
+
+
+    *Taulukon* tyyppi on `[T;N]` missä T on elementtien tyyppi, ja N
+    on taulukon kiinteä pituus, joka tiedetään käännösaikana.
+
+
+    Yksittäisiin elementteihin pääsee käsiksi operaattorilla `[x]`, missä x
+    on *usize*-tyyppinen indeksi taulukon haluttuun elementtiin (alkaen indeksistä 0).
+
+
+    Vaihtuvanmittaiset kokoelmat, dynaamisesti kasvavat
+    taulukot, esitellään myöhemmin kappaleessa **vektoreista**.
+- title: Funktiot
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    Fuktiolla on nolla tai enemmän parametreja.
+
+
+    Tässä erimerkissä, funktio *add* saa kaksi parametriä, joiden tyyppi on `i32`
+    (etumerkillinen 32-bittinen kokonaisluku).
+
+
+    Jos haluat palauttaa vain lausekkeen arvon funktion lopussa, voit jättää pois
+    `return`-avainsanan ja puolipisteen, kuten *subtract*-funktiossa.
+
+
+    Funktion nimet ovat aina `snake_case`.
+
+
+    Huomaa: Kun määrittelet funktion, sen saamia tietoja sanotaan parametreiksi.
+    Kun kutsut funktiota ja annat sille tietoja, niitä sanotaan argumenteiksi.
+- title: Monta paluuarvoa
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Funktiot voivat palauttaa useampia arvoja palauttamalla **tuplen**
+
+
+    Tuplen elementteihin voi viitata niiden järjestysnumerolla.
+
+
+    Rust tukee useita eri tapoja pilkkoa tietorakenteet osiinsa, mikä
+    mahdollistaa monia erginomisia keinoja päästä käsiksi muuttujien
+    alirakenteisiin. Odota vain hetki!
+- title: Tyhjän palauttaminen
+  content_markdown: >
+    Jos funktiolle ei ole määritelty paluuarvoa, se palauttaa tyhjän
+    tuplen, jota myös kutsutaan nimellä unit.
+
+
+    Tyhjä tuple merkitään `()`.
+
+
+    Merkinnän `()` käyttö ei ole kovin tavallista, mutta sitä tarvitaan kuitenkin
+    niin usein, että on hyvä tietää, mitä se tarkoittaa.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: Kappaleen 1 yhteenveto
+  content_markdown: >
+    Hyvää työtä tähän mennessä! Rustin perusteet eivät ole niin pahoja, vai mitä?
+    Pääsimme kurkistamaan kuinka Rust-kääntäjä ajattelee.
+    Systeemiohjelmointikielenä Rust on välittää hyvin paljon siitä,
+    kuinka paljon eri arvot kuluttavat muistia, voidaanko arvoja muuttaa, ja
+    varmistaa, että laskutoimitukset menevät juuri niin kuin niiden
+    kuvitteletkin menevän. Seuraavaksi tutustumme vanhoihin ystäviin:
+    if-testeihin ja for-silmukoihin.
+
+
+    Lisää tietoja:
+
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
