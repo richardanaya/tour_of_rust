@@ -3,10 +3,10 @@
     Dans ce chapitre, nous allons aborder les structures de contrôle basiques de
     Rust.
 
-    Si tu es déjà familer avec les languages de programmation inspirés du C
+    Si tu es déjà familier avec les langages de programmation inspirés du C
     alors
 
-    tu ne sera pas perdu et tu y découvrira même quelques bonnes surprises.
+    tu ne seras pas perdu et tu y découvriras même quelques bonnes surprises.
 - title: if/else if/else
   content_markdown: >
     L'embranchement de code en Rust n'est pas une surprise.
@@ -32,7 +32,7 @@
     `break` permet de sortir de la boucle à tout moment.
 
 
-    Quand à l'instruction `loop`, celle-ci possède un secret dont nous parlerons
+    Quant à l'instruction `loop`, celle-ci possède un secret dont nous parlerons
     plus tard.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -80,7 +80,7 @@
     extrêmement puissant pour comparer une valeur à un motif et permet de
     déclencher soit
 
-    une exécution conditionelle soit la récupération d'une valeur (le terme
+    une exécution conditionnelle soit la récupération d'une valeur (le terme
     anglais est
 
     pattern matching). Regardons un exemple pour les nombres. Nous aurons plus à
