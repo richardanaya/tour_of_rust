@@ -92,7 +92,7 @@
     Os nomes das constantes são sempre em `SCREAMING_SNAKE_CASE`.
 - title: Arrays
   content_markdown: >
-    Uma *array* é uma *coleção de tamanho fixo* de elementos, todos os seu valores são do mesmo tipo.
+    Uma *array* é uma *coleção de tamanho fixo* de elementos, cujos valores são todos do mesmo tipo.
 
 
     O tipo de dado para uma *array* é `[T;N]`, onde T é o tipo dos valores e N é o comprimento fixo conhecido em tempo de compilação.
