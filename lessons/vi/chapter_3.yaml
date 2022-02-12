@@ -1,0 +1,149 @@
+- title: Chương 3 - Các kiểu cấu trúc dữ liệu cơ bản
+  content_markdown: >
+    Đã đến lúc chúng ta khám phá thêm bên cạnh các loại dữ liệu cơ bản! Trong chương này, 
+    hãy cùng nhau xem xét các cấu trúc dữ liệu nguyên thủy nhất trong Rust, 
+    cùng với đó hãy để ý đến sự biểu diễn của chúng trong bộ nhớ. 
+    Tớ nghĩ bạn sẽ thích thú với việc khám phá xem mọi thứ diễn ra như thế nào.
+- title: Kiểu cấu trúc
+  content_markdown: >
+      Một `Struct` là một tập hợp các thuộc tính(*field*, hoặc có thể gọi là các *trường*).
+
+
+      Một *field* chỉ đơn giản là một giá trị dữ liệu được liên kết với một cấu trúc dữ liệu. 
+      Giá trị của nó
+      có thể là một kiểu nguyên thủy hoặc cũng là một cấu trúc dữ liệu.
+
+
+      Định nghĩa của nó giống như một bản thiết kế 
+      cho một trình biên dịch về cách bố trí các trường trong bộ nhớ gần nhau.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20l%C3%A0%20m%E1%BB%99t%20struct%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+- title: Gọi phương thức(Method)
+  content_markdown: >
+    Không giống như các hàm, các phương thức là các hàm được liên kết với một kiểu dữ liệu cụ thể.
+
+    **static method** - các phương thức thuộc về một kiểu được gọi bằng cách sử dụng toán tử `::`.
+
+
+    **instance methods** - các phương thức thuộc về một thể hiện(instance) của một kiểu được gọi bằng cách sử dụng toán tử `.`.
+
+
+    Chúng ta sẽ nói nhiều hơn về việc tạo ra các phương thức của riêng bạn trong các chương sau.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20D%C3%B9ng%20m%E1%BB%99t%20static%20method%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20m%E1%BB%99t%20instance%20c%E1%BB%A7a%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20S%E1%BB%AD%20d%E1%BB%A5ng%20m%E1%BB%99t%20method%20tr%C3%AAn%20instance%0A%20%20%20%20println!(%22%7B%7D%20is%20%7B%7D%20characters%20long.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
+- title: Bộ nhớ(Memory)
+  content_markdown: >
+    Các chương trình Rust có 3 vùng bộ nhớ nơi dữ liệu được lưu trữ:
+
+    * **data memory**(bộ nhớ dữ liệu) - Dành cho dữ liệu có kích thước cố định và **tĩnh** 
+    (tức là luôn có sẵn trong suốt vòng đời của chương trình). 
+      Ví dụ như một đoạn text trong chương trình của bạn (ví dụ: "Hello World!"): 
+      Các byte của đoạn text này chỉ được đọc từ một vị trí và do đó 
+      có thể được lưu trữ trong khu vực này. Các trình biên dịch thực hiện 
+      rất nhiều sự tối ưu hóa với loại dữ liệu này và 
+      chúng thường được coi là sử dụng rất nhanh vì các vị trí đã được xác định và cố định.
+    * **stack memory**(bộ nhớ ngăn xếp) - Đối với dữ liệu được khai báo dưới dạng 
+    các biến trong một hàm.
+      Vị trí của bộ nhớ này không bao giờ thay đổi trong suốt thời gian của một lệnh gọi hàm; bởi vì 
+      trình biên dịch này có thể tối ưu hóa phần code nên dữ liệu ngăn xếp được truy cập rất nhanh. 
+    * **heap memory**(bộ nhớ heap) - Đối với dữ liệu được tạo trong khi ứng dụng
+    đang chạy.
+      Dữ liệu trong khu vực này có thể được thêm, di chuyển, xóa, thay đổi kích thước, v.v. 
+      Do tính chất động của nó, nó thường được coi là sử dụng chậm hơn, 
+      nhưng nó cho phép sử dụng bộ nhớ sáng tạo hơn nhiều. Khi dữ liệu được thêm vào vùng này, chúng tôi 
+      gọi nó là **phân bổ**(allocation). Khi dữ liệu bị xóa khỏi phần này, 
+      chúng tôi gọi nó là **thu hồi**(deallocation).
+- title: Tạo dữ liệu trong bộ nhớ
+  content_markdown: >
+   Khi chúng ta **khởi tạo** một **struct**, 
+   chương trình của chúng ta sẽ tạo dữ liệu trường liên kết cạnh nhau trong bộ nhớ.
+
+
+    Chúng ta khởi tạo bằng cách chỉ định tất cả các giá trị trường bên trong 
+
+
+    `StructName { ... }`.
+
+
+    Các trường cấu trúc được truy cập bằng toán tử dấu chấm `.`.
+
+
+    Chi tiết về bộ nhớ trong phần ví dụ:
+
+    * Văn bản bên trong dấu ngoặc kép là dữ liệu chỉ đọc (ví dụ: "Ferris"), 
+    do đó nó được đặt trong *vùng bộ nhớ dữ liệu*(data memory region).
+    * Lệnh gọi hàm `String :: from` tạo ra một struct `String` 
+      được đặt cạnh nhau với các trường của SeaCreature trong *stack*. 
+      Một String đại diện cho đoạn text có thể được thay đổi và thực hiện điều này bằng cách:
+      1. Tạo bộ nhớ trên *heap* cho đoạn text nơi nó có thể được sửa đổi
+      2. Lưu trữ một tham chiếu đến vị trí bộ nhớ đó trên *heap* và lưu trữ nó trong struct `String` 
+      (Điều này sẽ được làm rõ hơn trong những phần sau) 
+    * Cuối cùng thì hai người bạn *Ferris* và *Sarah* của chúng ta 
+    có cấu trúc dữ liệu mà sẽ luôn có vị trí cố định 
+    trong chương trình, vì vậy chúng được đặt trên *stack*.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20d%E1%BB%AF%20li%E1%BB%87u%20c%E1%BB%A7a%20SeaCreature%20n%E1%BA%B1m%20%E1%BB%9F%20tr%C3%AAn%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20c%C5%A9ng%20%E1%BB%9F%20tr%C3%AAn%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20nh%C6%B0ng%20gi%E1%BB%AF%20m%E1%BB%99t%20tham%20chi%E1%BA%BFu%20%C4%91%E1%BA%BFn%20d%E1%BB%AF%20li%E1%BB%87u%20tr%C3%AAn%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22con%20cua%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22m%C3%B3ng%20vu%E1%BB%91t%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22con%20b%E1%BA%A1ch%20tu%E1%BB%99c%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22n%C3%A3o%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20%7B%7D.%20Ch%C3%BAng%20c%C3%B3%20%7B%7D%20tay%2C%20%7B%7D%20ch%C3%A2n%2C%20v%C3%A0%20c%C3%B3%20c%E1%BA%A3%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20%7B%7D.%20Ch%C3%BAng%20c%C3%B3%20%7B%7D%20tay%2C%20v%C3%A0%20%7B%7D%20legs.%20V%C3%A0%20ch%C3%BAng%20kh%C3%B4ng%20c%C3%B3%20v%C5%A9%20kh%C3%AD...%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A
+- title: Cấu trúc giống như là Tuple
+  content_markdown: |
+    Ngắn gọn thì là, bạn có thể tự tạo các cấu trúc được sử dụng giống như là một tuple.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20N%C3%B3%20v%E1%BA%ABn%20l%C3%A0%20m%E1%BB%99t%20stuct%20tr%C3%AAn%20m%E1%BB%99t%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+- title: Cấu trúc giống như là Unit
+  content_markdown: >
+    Cấu trúc không nhất thiết phải có bất kỳ trường nào.
+
+
+    Như đã đề cập trong Chương 1, a *unit* là một từ khác để chỉ bộ giá trị rỗng `()`.
+    Đây là lý do tại sao loại cấu trúc này được gọi là *Unit-like*(Như là một unit).
+
+
+    Cái này hiếm khi được dùng.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Marker%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_m%20%3D%20Marker%3B%0A%7D%0A
+- title: Kiểu dữ liệu liệt kê(Enumerations)
+  content_markdown: >
+    Phép liệt kê cho phép bạn tạo một kiểu mới có thể có giá 
+    trị của một số phần tử được gắn thẻ bằng cách sử dụng từ khóa `enum`.
+
+
+    `match` giúp đảm bảo xử lý toàn diện tất cả các giá trị enum có thể làm cho nó 
+    trở thành một công cụ mạnh mẽ trong việc đảm bảo chất lượng của code.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20this%20line%20prevents%20compiler%20warnings%0Aenum%20Species%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Octopus%2C%0A%20%20%20%20Fish%2C%0A%20%20%20%20Clam%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20con%20cua%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AOctopus%20%3D%3E%20println!(%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20con%20b%E1%BA%A1ch%20tu%E1%BB%99c%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AFish%20%3D%3E%20println!(%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20con%20c%C3%A1%22%2Cferris.name)%2C%0A%20%20%20%20%20%20%20%20Species%3A%3AClam%20%3D%3E%20println!(%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20con%20h%E1%BA%BFn%22%2Cferris.name)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Liệt kê với dữ liệu
+  content_markdown: >
+    Các phần tử `enum` cũng có thể có một 
+    hoặc nhiều kiểu dữ liệu cho phép chúng hoạt động 
+    giống như [ *union* ](https://en.wikipedia.org/wiki/Union_type) từ C.
+
+
+    Khi một mẫu `enum` được so khớp bằng cách sử dụng `match`, 
+    bạn có thể liên kết một tên biến với mỗi giá trị dữ liệu.
+
+
+    Chi tiết bộ nhớ của `enum`:
+
+    * Một giá trị dữ liệu enum sẽ có kích thước bộ nhớ bằng phần tử lớn nhất của nó.
+    Điều này cho phép tất cả các giá trị tiềm năng nằm trong cùng một không gian bộ nhớ.
+
+    * Ngoài các kiểu dữ liệu phần tử (nếu có), 
+    mỗi phần tử còn có một giá trị số thể hiện đó là thẻ nào.
+
+
+    Những chi tiết khác:
+
+    * `Enum` của Rust là một thứ còn được gọi là *tagged union*.
+    
+    * Khi nói rằng Rust có *algebraic types*(các kiểu đại số), đó là việc kết hợp các kiểu để tạo ra một kiểu mới.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20d%C3%B2ng%20n%C3%A0y%20ng%C4%83n%20c%E1%BA%A3nh%20b%C3%A1o%20tr%C3%ACnh%20bi%C3%AAn%20d%E1%BB%8Bch%0A%0Aenum%20Species%20%7B%20Crab%2C%20Octopus%2C%20Fish%2C%20Clam%20%7D%0Aenum%20PoisonType%20%7B%20Acidic%2C%20Painful%2C%20Lethal%20%7D%0Aenum%20Size%20%7B%20Big%2C%20Small%20%7D%0Aenum%20Weapon%20%7B%0A%20%20%20%20Claw(i32%2C%20Size)%2C%0A%20%20%20%20Poison(PoisonType)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20species%3A%20Species%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20Weapon%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20d%E1%BB%AF%20li%E1%BB%87u%20c%E1%BB%A7a%20SeaCreature%20l%C3%A0%20tr%C3%AAn%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20C%E1%BA%A5u%20tr%C3%BAc%20chu%E1%BB%97i%20c%C5%A9ng%20n%E1%BA%B1m%20tr%C3%AAn%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20nh%C6%B0ng%20gi%E1%BB%AF%20m%E1%BB%99t%20tham%20chi%E1%BA%BFu%20%C4%91%E1%BA%BFn%20d%E1%BB%AF%20li%E1%BB%87u%20tr%C3%AAn%20heap%0A%20%20%20%20%20%20%20%20species%3A%20Species%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20Weapon%3A%3AClaw(2%2C%20Size%3A%3ASmall)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.species%20%7B%0A%20%20%20%20%20%20%20%20Species%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.weapon%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Weapon%3A%3AClaw(num_claws%2Csize)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20size_description%20%3D%20match%20size%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ABig%20%3D%3E%20%22to%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Size%3A%3ASmall%20%3D%3E%20%22nh%E1%BB%8F%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20l%C3%A0%20m%E1%BB%99t%20ch%C3%BA%20cua%20v%E1%BB%9Bi%20%7B%7D%20%7B%7D%20m%C3%B3ng%20vu%E1%BB%91t%22%2C%20num_claws%2C%20size_description)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20l%C3%A0%20m%E1%BB%99t%20ch%C3%BA%20cua%20v%E1%BB%9Bi%20m%E1%BB%99t%20v%C3%A0i%20v%C5%A9%20kh%C3%AD%20kh%C3%A1c%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20l%C3%A0%20m%E1%BB%99t%20lo%C3%A0i%20%C4%91%E1%BB%99ng%20v%E1%BA%ADt%20kh%C3%A1c%22)%2C%0A%20%20%20%20%7D%0A%7D
+- title: Chapter 3 - Tổng kết
+  content_markdown: >
+    Thật thú vị! Giờ đây, chúng ta có những công cụ cơ bản nhất 
+    để thể hiện dạng ý tưởng của chúng ta. 
+    Hy vọng rằng, bây giờ chúng ta có thể thấy một chút về 
+    cách các hoạt động cơ bản của Rust hoạt động một cách hài hòa 
+    và ngắn gọn với các loại của nó. 
+    Tiếp theo, chúng ta sẽ nói về một khái niệm cung 
+    cấp cho các kiểu dữ liệu của chúng ta khả năng biểu diễn linh hoạt hơn:
+    *generics*.

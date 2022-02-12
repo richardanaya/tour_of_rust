@@ -32,6 +32,6 @@
     
     Nếu bạn có đề xuất nội dung hoặc muốn đóng góp vào bản dịch, hãy truy cập vào [repository github](https://github.com/richardanaya/tour_of_rust) của Tour of Rust.
 
-    Bạn có thể điều hướng bằng bàn phím <span class="emoji">⬅️</span> và <span class="emoji">➡️</span>.
+    Bạn có thể điều hướng qua bàn phím bằng nút <span class="emoji">⬅️</span> và nút <span class="emoji">➡️</span>.
 
     Trong ví dụ đơn giản này, chúng ta hãy xem sự hỗ trợ của Rust cho các chuỗi Unicode.
