@@ -87,7 +87,7 @@
   content_markdown: |
     Ngắn gọn thì là, bạn có thể tự tạo các cấu trúc được sử dụng giống như là một tuple.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20N%C3%B3%20v%E1%BA%ABn%20l%C3%A0%20m%E1%BB%99t%20stuct%20tr%C3%AAn%20m%E1%BB%99t%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20N%C3%B3%20v%E1%BA%ABn%20l%C3%A0%20m%E1%BB%99t%20struct%20tr%C3%AAn%20m%E1%BB%99t%20stack%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
 - title: Cấu trúc giống như là Unit
   content_markdown: >
     Cấu trúc không nhất thiết phải có bất kỳ trường nào.

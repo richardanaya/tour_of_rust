@@ -1,0 +1,197 @@
+- title: Chương 4 - Generic Type
+  content_markdown: >
+    Generic type là cực kỳ quan trọng trong Rust. 
+    Chúng được sử dụng để biểu diễn các giá trị nullable (tức là các biến có thể chưa có giá trị), 
+    xử lý lỗi, tập hợp và hơn thế nữa! 
+    Trong phần này, chúng ta sẽ tìm hiểu về Generic type cơ bản mà bạn có thể sẽ sử dụng mọi lúc.
+- title: Generic type là gì?
+  content_markdown: >
+    Các kiểu chung cho phép chúng ta xác định một phần một `struct` hoặc một `enum`, 
+    cho phép trình biên dịch tạo một phiên bản được 
+    xác định đầy đủ tại thời điểm biên dịch(compile-time) dựa trên việc sử dụng code của chúng ta.
+
+
+    Rust thường có thể suy ra kiểu cuối cùng bằng cách nhìn vào phần khởi tạo của chúng ta, 
+    nhưng nếu nó cần giúp đỡ, bạn luôn luôn có thể sử dụng toán tử `:: <T>` để làm cho nó mọi thứ rõ ràng hơn.
+    Nó còn có tên khác đó là `turbofish` (anh ấy là một người bạn tốt đấy!).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20A%20partially%20defined%20struct%20type%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Note%3A%20by%20using%20generic%20types%20here%2C%20we%20create%20compile-time%20created%20types.%20%0A%20%20%20%20%2F%2F%20Turbofish%20lets%20us%20be%20explicit.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20can%20infer%20types%20for%20generics%20too!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Note%3A%20never%20put%20a%20bag%20of%20holding%20in%20a%20bag%20of%20holding%20in%20real%20life%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
+- title: Đại diện cho "Nothing"
+  content_markdown: >
+    Trong các ngôn ngữ khác, từ khóa `null` được 
+    sử dụng để biểu thị sự vắng mặt của một giá trị. 
+    Nó tạo ra khó khăn trong các ngôn ngữ lập trình 
+    vì nó tạo ra khả năng chương trình của chúng ta 
+    có thể bị lỗi khi tương tác với một biến/trường.
+
+
+    Rust không có `null`, 
+    nhưng nó không phải là không biết tầm quan trọng của việc đại diện cho "Nothing"!
+    Hãy xem xét một sự biểu diễn ngây thơ bằng cách 
+    sử dụng một công cụ mà chúng ta đã biết. 
+    Kiểu cung cấp sự đại diện thay thế `None` cho 
+    một hoặc nhiều giá trị thay thế này rất phổ 
+    biến trong Rust vì nó thiếu giá trị `null`.
+
+    Generic type giúp giải quyết thách thức này.
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%20%C4%91%E1%BA%A1i%20di%E1%BB%87n%20cho%20s%E1%BB%B1%20v%E1%BA%AFng%20m%E1%BA%B7t%20c%E1%BB%A7a%20m%E1%BB%99t%20ph%E1%BA%A7n%20t%E1%BB%AD%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A
+- title: Option
+  content_markdown: >
+    Rust có một enum chung được tích hợp sẵn gọi là `Option` 
+    cho phép chúng tôi biểu diễn các giá trị có thể null mà không cần sử dụng `null`.
+
+
+    ```
+
+    enum Option<T> {
+        None,
+        Some(T),
+    }
+
+    ```
+
+
+    Enum này rất phổ biến, 
+    các trường hợp của enum có thể được tạo ở bất kỳ đâu với các biến thể enum là `Some` và` None`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20M%E1%BB%99t%20ki%E1%BB%83u%20stuct%20%C4%91%C6%B0%E1%BB%A3c%20x%C3%A1c%20%C4%91%E1%BB%8Bnh%20m%E1%BB%99t%20ph%E1%BA%A7n%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Ki%E1%BB%83u%20tham%20s%E1%BB%91%20T%20c%E1%BB%A7a%20ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20chuy%E1%BB%83n%20cho%20nh%E1%BB%AFng%20c%C3%A1i%20kh%C3%A1c%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20L%C6%B0u%20%C3%BD%3A%20M%E1%BB%99t%20bag(t%C3%BAi)%20d%C3%A0nh%20cho%20i32%2C%20kh%C3%B4ng%20%C4%91%E1%BB%B1ng%20%C4%91%C6%B0%E1%BB%A3c%20g%C3%AC!%20Ch%C3%BAng%20ta%20ph%E1%BA%A3i%20ch%E1%BB%89%20%C4%91%E1%BB%8Bnh%20lo%E1%BA%A1i%0A%20%20%20%20%20%2F%2F%20b%E1%BB%9Fi%20v%C3%AC%20n%E1%BA%BFu%20kh%C3%B4ng%2C%20Rust%20s%E1%BA%BD%20kh%C3%B4ng%20bi%E1%BA%BFt%20n%C3%B3%20l%C3%A0%20lo%E1%BA%A1i%20t%C3%BAi%20g%C3%AC.%0Alet%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Ch%E1%BA%B3ng%20c%C3%B3%20g%C3%AC%20trong%20t%C3%BAi%20c%E1%BA%A3!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Trong%20t%C3%BAi%20c%C3%B3%20g%C3%AC%20%C4%91%C3%B3%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Trong%20t%C3%BAi%20c%C3%B3%20g%C3%AC%20%C4%91%C3%B3%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Ch%E1%BA%B3ng%20c%C3%B3%20g%C3%AC%20trong%20t%C3%BAi%20c%E1%BA%A3!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22T%C3%ACm%20th%E1%BA%A5y%20%7B%7D%20trong%20t%C3%BAi!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22Kh%C3%B4ng%20t%C3%ACm%20th%E1%BA%A5y%20g%C3%AC%20c%E1%BA%A3%22)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Result
+  content_markdown: >
+    Rust có một enum chung được tích hợp sẵn có tên là `Result` cho phép chúng ta trả 
+    về một giá trị có khả năng bị lỗi. Đó là một cách đặc trung mà ngôn ngữ xử lý lỗi.
+
+
+    ```
+
+    enum Result<T, E> {
+        Ok(T),
+        Err(E),
+    }
+
+    ```
+
+
+    Lưu ý rằng Generic type của chúng ta có nhiều *loại được tham số hóa* được phân tách bằng dấu phẩy.
+
+
+    Enum này rất phổ biến, 
+    các phiên bản của enum có thể được tạo ở bất 
+    kỳ đâu với các biến thể enum là `Ok` và `Err`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3Ai32)%20-%3E%20Result%3Cf32%2CString%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%C4%90%C3%A2y%20kh%C3%B4ng%20ph%E1%BA%A3i%20l%C3%A0%20con%20s%E1%BB%91%20ch%C3%ADnh%20x%C3%A1c%22))%20%20%20%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%2F%2F%20match%20cho%20ph%C3%A9p%20ch%C3%BAng%20ta%20gi%E1%BA%A3i%20m%C3%A3%20Result%20m%E1%BB%99t%20c%C3%A1ch%20tinh%20t%E1%BA%BF%20v%C3%A0%20%C4%91%E1%BA%A3m%20b%E1%BA%A3o%20ch%C3%BAng%20ta%20x%E1%BB%AD%20l%C3%BD%20t%E1%BA%A5t%20c%E1%BA%A3%20c%C3%A1c%20tr%C6%B0%E1%BB%9Dng%20h%E1%BB%A3p!%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%C4%90%C3%A3%20t%C3%ACm%20th%E1%BA%A5y%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(e)%20%3D%3E%20println!(%22L%E1%BB%97i%3A%20%7B%7D%22%2Ce)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Main lo được!
+  content_markdown: |
+    `main` có khả năng trả về một `Result`!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%C4%90%C3%A2y%20kh%C3%B4ng%20ph%E1%BA%A3i%20l%C3%A0%20con%20s%E1%BB%91%20ch%C3%ADnh%20x%C3%A1c%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20Main%20kh%C3%B4ng%20tr%E1%BA%A3%20v%E1%BB%81%20m%E1%BB%99t%20gi%C3%A1%20tr%E1%BB%8B%2C%20nh%C6%B0ng%20c%C3%B3%20th%E1%BB%83%20tr%E1%BA%A3%20v%E1%BB%81%20m%E1%BB%99t%20l%E1%BB%97i%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22%C4%90%C3%A3%20t%C3%ACm%20th%E1%BA%A5y%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20handle%20this%20error%20gracefully%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20return%20a%20new%20error%20from%20main%20that%20said%20what%20happened!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22C%C3%B3%20l%E1%BB%97i%20g%C3%AC%20%C4%91%C3%B3%20trong%20main%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%2F%2F%20L%C6%B0u%20%C3%BD%20r%E1%BA%B1ng%20ch%C3%BAng%20ta%20s%E1%BB%AD%20d%E1%BB%A5ng%20m%E1%BB%99t%20gi%C3%A1%20tr%E1%BB%8B%20%C4%91%C6%A1n%20v%E1%BB%8B%20b%C3%AAn%20trong%20Result%20Ok%20%C4%91%E1%BB%83%20th%E1%BB%83%20hi%E1%BB%87n%20r%E1%BA%B1ng%20m%E1%BB%8Di%20th%E1%BB%A9%20%C4%91%E1%BB%81u%20%E1%BB%95n%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Xử lý lỗi một cách duyên dáng
+  content_markdown: >
+    `Result` phổ biến đến nỗi Rust có một toán tử mạnh mẽ là `?` 
+    để làm việc với nó. Hai lệnh này tương đương nhau:
+
+
+    ```
+
+    do_something_that_might_fail()?
+
+    ```
+
+
+    ```
+
+    match do_something_that_might_fail() {
+        Ok(v) => v,
+        Err(e) => return Err(e),
+    }
+
+    ```
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%C4%90%C3%A2y%20kh%C3%B4ng%20ph%E1%BA%A3i%20l%C3%A0%20con%20s%E1%BB%91%20ch%C3%ADnh%20x%C3%A1c%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Nh%C3%ACn%20xem%20ph%E1%BA%A7n%20code%20c%E1%BB%A7a%20ch%C3%BAng%20ta%20ng%E1%BA%AFn%20g%E1%BB%8Dn%20th%E1%BA%BF%20n%C3%A0o%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42)%3F%3B%0A%20%20%20%20println!(%22%C4%90%C3%A3%20t%C3%ACm%20th%E1%BA%A5y%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Xử lý Option/Result xấu
+  content_markdown: >
+    Làm việc với `Option` / `Result` có thể tẻ 
+    nhạt khi bạn chỉ cố gắng viết một số code nhanh. Cả `Option` và `Result` đều có một chức năng gọi 
+    là `unwrap` có thể hữu ích để nhận một giá trị một cách nhanh chóng và dễ dàng. 
+    `unwrap` sẽ:
+     
+    1. Nhận giá trị bên trong Option/Result
+
+    2. Nếu enum thuộc loại None/Err, `panic!`
+
+
+    Hai đoạn mã này tương đương nhau:
+
+
+    ```
+
+    my_option.unwrap()
+
+    ```
+
+
+    ```
+
+    match my_option {
+        Some(v) => v,
+        None => panic!("some error message generated by Rust!"),
+    }
+
+    ```
+
+
+    Tương tự:
+
+
+    ```
+
+    my_result.unwrap()
+
+    ```
+
+
+    ```
+
+    match my_result {
+        Ok(v) => v,
+        Err(e) => panic!("some error message generated by Rust!"),
+    }
+
+    ```
+
+
+    Hãy là một rustacean giỏi và sử dụng đúng cách `match` khi bạn có thể!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%C4%90%C3%A2y%20kh%C3%B4ng%20ph%E1%BA%A3i%20l%C3%A0%20con%20s%E1%BB%91%20%C4%91%C3%BAng%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2Fconcise%20but%20assumptive%20and%20gets%20ugly%20fast%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22%C4%90%C3%A3%20t%C3%ACm%20th%E1%BA%A5y%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20n%C3%B3%20s%E1%BA%BD%20panic!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22%C4%90%C3%A3%20t%C3%ACm%20th%E1%BA%A5y%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Vector
+  content_markdown: >
+    Một số Generic type hữu ích nhất là kiểu tập hợp. 
+    Một vector là một danh sách các mục có kích thước thay đổi được đại diện bởi struct `Vec`.
+
+
+    Macro `vec!` cho phép chúng ta dễ dàng tạo một vectơ hơn là tạo một vectơ theo cách thủ công.
+
+
+    `Vec` có phương thức `iter ()`
+    tạo một trình vòng lặp từ một vectơ, cho phép chúng ta dễ dàng đưa một vectơ vào vòng lặp `for`.
+
+
+    Chi tiết bộ nhớ:
+
+    * `Vec` là một struct, 
+    nhưng bên trong nó chứa một tham chiếu đến một danh sách cố định các phần tử của nó trên heap.
+
+    * Một vectơ bắt đầu với một dung lượng mặc định;
+    khi nhiều mục được thêm vào hơn khả năng của nó,
+    nó sẽ phân bổ lại dữ liệu của nó trên heap để có một danh sách cố định mới với dung lượng lớn.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20l%C3%A0m%20r%C3%B5%20r%C3%A0ng%20t%E1%BB%ABng%20lo%E1%BA%A1i%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20Nh%C6%B0ng%20h%C3%A3y%20xem%20Rust%20th%C3%B4ng%20minh%20nh%C6%B0%20th%E1%BA%BF%20n%C3%A0o%20trong%20vi%E1%BB%87c%20x%C3%A1c%20%C4%91%E1%BB%8Bnh%20lo%E1%BA%A1i%20t%E1%BB%B1%20%C4%91%E1%BB%99ng%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20%C4%90%C3%B3%20l%C3%A0%20m%E1%BB%99t%20macro%20tuy%E1%BB%87t%20%C4%91%E1%BA%B9p!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Chapter 4 - Tổng kết
+  content_markdown: >
+    Trong chương này, chúng ta thấy rằng Generic Type thật mạnh mẽ và cung cấp cho chúng ta nhiều thứ!
+    Đừng lo lắng nếu bạn không biết cách sử dụng mọi thứ một cách đầy đủ,
+    ngay bây giờ bạn chỉ cần nhận thức được những ý tưởng chính mà bạn sẽ 
+    thấy lặp đi lặp lại trong code.
+    Các chức năng của chúng ta đang trở nên khá dài dòng! Trong chương tiếp theo,
+    chúng ta sẽ nói về một khái niệm quan trọng trong Rust: quyền sở hữu dữ liệu.
