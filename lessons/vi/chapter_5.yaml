@@ -1,0 +1,201 @@
+- title: Chương 5 - Quyền sở hữu và mượn dữ liệu
+  content_markdown: >
+    Rust có một mô hình độc nhất để quản lý bộ nhớ so với các ngôn ngữ lập trình khác.
+    Chúng ta sẽ xem xét từng hành vi và xác nhận của trình biên dịch để không bạn không bị quá tải. 
+    Điều quan trọng cần nhớ là cuối cùng các quy tắc được đưa ra 
+    không tồn tại để làm khó bạn, mà là để giúp bạn làm cho code của mình ít bị lỗi hơn!
+- title: Quyền sỡ hữu
+  content_markdown: >
+    Việc khởi tạo một kiểu và **binding**(ràng buộc) nó với một tên biến sẽ tạo ra một tài nguyên 
+    bộ nhớ mà trình biên dịch Rust sẽ xác thực thông qua toàn bộ **lifetime**(thời gian tồn tại) của nó. 
+    Biến bị ràng buộc được gọi là **owner**(chủ sở hữu) của tài nguyên.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Ch%C3%BAng%20ta%20kh%E1%BB%9Fi%20t%E1%BA%A1o%20struct%20v%C3%A0%20li%C3%AAn%20k%E1%BA%BFt%20v%E1%BB%9Bi%20c%C3%A1c%20bi%E1%BA%BFn%20%C4%91%E1%BB%83%20t%E1%BA%A1o%20t%C3%A0i%20nguy%C3%AAn%20b%E1%BB%99%20nh%E1%BB%9B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20l%C3%A0%20ch%E1%BB%A7%20s%E1%BB%9F%20h%E1%BB%AFu%0A%7D%0A
+- title: Quản lý tài nguyên dựa trên phạm vi(Scope-Based)
+  content_markdown: |
+    Rust sử dụng phần cuối của scope(phạm vi) làm nơi để giải cấu trúc(deconstruct) 
+    và thu hồi(deallocate) tài nguyên.
+
+    Thuật ngữ để giải cấu trúc và thu hồi giao dịch này được gọi là **drop**.
+
+    Chi tiết bộ nhớ:
+    * Rust không có bộ sưu tập rác.
+    * Đây còn được gọi là Khởi tạo Tài nguyên (Resource Acquisition Is Initialization - RAII) trong C ++.
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%20%0A%20%20%20%20%2F%2F%20foo_a%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A
+- title: Việc Drop là có thứ bậc
+  content_markdown: >
+    Khi một cấu trúc bị drop, bản thân cấu trúc đó sẽ bị drop trước tiên, 
+    sau đó các phần tử con của nó bị drop riêng lẻ, v.v.
+
+    Chi tiết bộ nhớ:
+
+    * Bằng cách tự động giải phóng bộ nhớ, Rust giúp đảm bảo rằng có ít bộ nhớ bị rò rỉ hơn.
+
+    * Tài nguyên bộ nhớ chỉ có thể bị drop một lần.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20b%E1%BB%8B%20drop%20tr%C6%B0%E1%BB%9Bc%0A%20%20%20%20%2F%2F%20sau%20%C4%91%C3%B3%20l%C3%A0%20foo.bar%20b%E1%BB%8B%20drop%20%0A%7D%0A
+- title: Chuyển quyền sở hữu
+  content_markdown: >
+    Khi một chủ sở hữu được chuyển làm đối số cho một hàm, quyền sở hữu sẽ được chuyển đến tham số của hàm đó.
+
+    Sau khi *move*(di chuyển), biến trong hàm ban đầu không thể được sử dụng nữa.
+
+    Chi tiết bộ nhớ:
+
+    * Trong một **move** bộ nhớ ngăn xếp của giá trị của chủ sở hữu được sao chép vào bộ nhớ 
+    ngăn xếp tham số của lệnh gọi hàm.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%C4%91%C6%B0%E1%BB%A3c%20move%20t%E1%BB%9Bi%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20kh%C3%B4ng%20c%C3%B2n%20c%C3%B3%20th%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20s%E1%BB%AD%20d%E1%BB%A5ng%0A%7D%0A
+- title: Hoàn trả quyền sở hữu
+  content_markdown: |
+    Quyền sở hữu cũng có thể được trả lại từ một hàm.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20quy%E1%BB%81n%20s%E1%BB%9F%20h%E1%BB%AFu%20%C4%91%C6%B0%E1%BB%A3c%20move%20ra%20ngo%C3%A0i%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20tr%E1%BB%9F%20th%C3%A0nh%20ch%E1%BB%A7%20s%E1%BB%9F%20h%E1%BB%AFu%0A%20%20%20%20%2F%2F%20v%C3%AC%20%E1%BB%9F%20cu%E1%BB%91i%20function%20scope%20n%C3%AAn%20foo%20b%E1%BB%8B%20drop%0A%7D%0A
+- title: Mượn quyền sở hữu với Tham chiếu
+  content_markdown: |
+    Tham chiếu cho phép chúng tôi mượn quyền truy cập vào tài nguyên với toán tử `&`.
+
+    Tham chiếu cũng bị loại bỏ giống như các tài nguyên khác.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%20%20%20%20%2F%2F%20foo%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A
+- title: Mượn quyền sở hữu có thể thay đổi(Mutable Ownership) với tham chiếu
+  content_markdown: >
+    Chúng ta cũng có thể mượn quyền truy cập có thể thay đổi vào tài nguyên bằng toán tử `&mut`.
+
+
+    Không thể di chuyển hoặc sửa đổi chủ sở hữu tài nguyên trong khi mượn lẫn nhau.
+
+
+    Chi tiết bộ nhớ:
+
+    * Rust ngăn cản việc có hai cách để thay đổi một giá 
+    trị đã bị sở hữu bởi vì nó dẫn đến khả năng xảy ra một cuộc chạy đua dữ liệu.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20s%E1%BA%BD%20b%E1%BB%8B%20l%E1%BB%97i%20v%C3%AC%0A%20%20%20%20%2F%2F%20foo%20kh%C3%B4ng%20th%E1%BB%83%20b%E1%BB%8B%20di%20chuy%E1%BB%83n%20trong%20khi%20m%C6%B0%E1%BB%A3n%20l%E1%BA%ABn%20nhau%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20s%E1%BA%BD%20b%E1%BB%8B%20l%E1%BB%97i%20v%C3%AC%0A%20%20%20%20%2F%2F%20foo%20kh%C3%B4ng%20th%E1%BB%83%20b%E1%BB%8B%20thay%20%C4%91%E1%BB%95i%20trong%20khi%20m%C6%B0%E1%BB%A3n%20l%E1%BA%ABn%20nhau%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%20b%E1%BB%9Fi%20v%C3%AC%20sau%20th%E1%BB%9Di%20%C4%91i%E1%BB%83m%20n%C3%A0y%20c%C3%B3%20kh%C3%B4ng%20c%C3%B2n%20%C4%91%C6%B0%E1%BB%A3c%20s%E1%BB%AD%20d%E1%BB%A5ng%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%C4%91i%E1%BB%81u%20n%C3%A0y%20hi%E1%BB%87n%20ho%E1%BA%A1t%20%C4%91%E1%BB%99ng%20v%C3%AC%20t%E1%BA%A5t%20c%E1%BA%A3%20c%C3%A1c%20tham%20chi%E1%BA%BFu%20c%C3%B3%20th%E1%BB%83%20thay%20%C4%91%E1%BB%95i%20%C4%91%C3%A3%20b%E1%BB%8B%20drop%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20chuy%E1%BB%83n%20quy%E1%BB%81n%20s%E1%BB%9F%20h%E1%BB%AFu%20c%E1%BB%A7a%20foo%20t%E1%BB%9Bi%20m%E1%BB%99t%20h%C3%A0m%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: Dereferencing
+  content_markdown: >
+    Sử dụng tham chiếu `&mut`, bạn có thể đặt giá trị của chủ sở hữu bằng toán tử `*`.
+
+
+    Bạn cũng có thể nhận được một bản sao của một giá trị 
+    được sở hữu bằng cách sử dụng toán tử `*` 
+    (nếu giá trị có thể được sao chép - chúng ta sẽ thảo luận về các loại có thể 
+    sao chép trong các chương sau).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20nh%E1%BA%ADn%20m%E1%BB%99t%20b%E1%BA%A3n%20sao%20c%E1%BB%A7a%20quy%E1%BB%81n%20s%E1%BB%9F%20h%E1%BB%AFu
+- title: Truyền xung quanh dữ liệu đã mượn
+  content_markdown: >
+    Các quy tắc tham chiếu của Rust tốt nhất có thể được tóm tắt bằng:
+
+
+    * Rust chỉ cho phép có một tham chiếu có thể thay đổi **hoặc** nhiều tham 
+    chiếu không thể thay đổi **chứ không phải cả hai**.
+
+    * Tham chiếu không bao giờ được **tồn tại lâu hơn** so với chủ sở hữu của nó.
+
+
+    Điều này không có xu hướng là một vấn đề khi chuyển xung quanh các tham chiếu đến các hàm.
+
+
+    Chi tiết bộ nhớ:
+
+    * Quy tắc tham chiếu đầu tiên ngăn chặn các cuộc chạy đua dữ liệu(data race). 
+    Cuộc đua dữ liệu là gì? 
+    Một cuộc chạy đua dữ liệu khi đọc từ dữ liệu có khả năng không đồng bộ do sự tồn tại 
+    của người ghi vào dữ liệu cùng một lúc. Điều này xảy ra thường xuyên trong lập trình đa luồng.
+
+    * Quy tắc thứ hai về tham chiếu ngăn chặn việc lạm dụng 
+    tham chiếu tham chiếu đến dữ liệu không tồn tại (được gọi là con trỏ treo-dangling pointer trong C).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20b%E1%BB%9Fi%20v%C3%AC%20t%E1%BA%A5t%20c%E1%BA%A3%20c%C3%A1c%20tham%20chi%E1%BA%BFu%20c%C3%B3%20th%E1%BB%83%20thay%20%C4%91%E1%BB%95i%20trong%20h%C3%A0m%20do_something%20%C4%91%E1%BB%81u%20%C4%91%C3%A3%20b%E1%BB%8B%20drop%2C%20%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20t%E1%BA%A1o%20m%E1%BB%99t%20tham%20chi%E1%BA%BFu%20kh%C3%A1c.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A
+- title: Tham chiếu của tham chiếu
+  content_markdown: |
+    Tham chiếu thậm chí còn có thể được sử dụng trên các phần của tham chiếu.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%20cho%20ph%C3%A9p%20ch%C3%BAng%20ta%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%20%20%20%20%2F%2F%20foo%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A
+- title: Thời gian tồn tại minh bạch(Explicit Lifetimes)
+  content_markdown: >
+    Mặc dù Rust không phải lúc nào cũng hiển thị nó trong code, 
+    trình biên dịch hiểu thời gian tồn tại của mọi biến 
+    và sẽ cố gắng xác thực rằng một tham chiếu không bao giờ tồn tại lâu hơn chủ sở hữu của nó.
+
+    Các hàm có thể minh bạch bằng cách tham số hóa chữ ký 
+    hàm bằng các ký hiệu giúp xác định các tham số và giá trị trả về có cùng thời gian tồn tại.
+
+    Các từ chỉ định thời gian tồn tại luôn bắt đầu bằng dấu `'` (ví dụ:  `'a`, `'b`, `'c`)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20tham%20s%E1%BB%91%20foo%20v%C3%A0%20gi%C3%A1%20tr%E1%BB%8B%20tr%E1%BA%A3%20v%E1%BB%81%20c%C3%B3%20c%C3%B9ng%20th%E1%BB%9Di%20gian%20t%E1%BB%93n%20t%E1%BA%A1i%0Afn%20do_something%3C%27a%3E(foo%3A%20%26%27a%20Foo)%20-%3E%20%26%27a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%2C%20cho%20ph%C3%A9p%20ch%C3%BAng%20ta%20t%E1%BA%A1o%20ra%20m%E1%BB%99t%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%20%20%20%20%2F%2F%20foo%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A
+- title: Đa thời gian tồn tại(Multiple Lifetimes)
+  content_markdown: >
+    Các chỉ định thời gian tồn tại cho phép chúng ta 
+    rõ ràng với các tình huống nhất định mà trình biên dịch không thể tự giải quyết 
+    bằng cách phân biệt tất cả các vòng đời của thành phần chữ ký hàm(signature component).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20v%C3%A0%20gi%C3%A1%20tr%E1%BB%8B%20tr%E1%BA%A3%20v%E1%BB%81%20c%C3%B3%20c%C3%B9ng%20th%E1%BB%9Di%20gian%20t%E1%BB%93n%20t%E1%BA%A1i%0A%2F%2F%20foo_a%20c%C3%B3%20th%E1%BB%9Di%20gian%20t%E1%BB%93n%20t%E1%BA%A1i%20kh%C3%B4ng%20li%C3%AAn%20quan%0Afn%20do_something%3C%27a%2C%20%27b%3E(foo_a%3A%20%26%27a%20Foo%2C%20foo_b%3A%20%26%27b%20Foo)%20-%3E%20%26%27b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20foo_a%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%20v%C3%AC%20ch%E1%BB%89%20c%C3%B3%20th%E1%BB%9Di%20gian%20t%E1%BB%93n%20t%E1%BA%A1i%20c%E1%BB%A7a%20foo_b%20v%C6%B0%E1%BB%A3t%20qua%20%C4%91i%E1%BB%83m%20n%C3%A0y%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20x%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%20%20%20%20%2F%2F%20foo_b%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A
+- title: Thời gian tồn tại tĩnh(Static Lifetimes)
+  content_markdown: >
+    Biến **static**(tĩnh) là tài nguyên bộ nhớ được tạo tại thời điểm biên dịch, 
+    tồn tại thông qua một chương trình từ đầu đến cuối. 
+    Loại của nó phải được chỉ định rõ ràng.
+
+
+    **Thời gian tồn tại tĩnh** là tài nguyên bộ nhớ tồn tại vô thời hạn cho đến cuối chương trình. 
+    Lưu ý rằng theo định nghĩa này, một số tài nguyên lâu dài tĩnh có thể được tạo trong thời gian chạy.
+
+
+    Các tài nguyên có vòng đời tĩnh có một chỉ định thời gian tồn tại đặc biệt là `'static`(tĩnh).
+
+
+    Tài nguyên `'static` sẽ không bao giờ bị **drop**.
+
+
+    Nếu tài nguyên thời gian tồn tại tĩnh chứa các tham chiếu thì tất cả chúng phải là `'static` 
+    (bất kỳ thứ gì ít hơn sẽ không tồn tại đủ lâu).
+
+
+    Chi tiết bộ nhớ:
+
+
+    * Việc sửa đổi các biến tĩnh vốn đã rất nguy hiểm vì chúng có thể truy cập toàn cầu 
+    để được đọc bởi bất kỳ ai có khả năng xảy ra một cuộc chạy đua dữ liệu. 
+    Chúng ta sẽ nói về những thách thức của dữ liệu toàn cầu ở phần sau.
+    * Rust cho phép sử dụng những khối `unsafe { ... }` 
+    để thực hiện một số hoạt động mà trình biên dịch không thể đảm bảo bộ nhớ về nó. 
+    Và không nến nói về [<span
+    style="color:red; font-weight:
+    bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+    một cách tùy tiện.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20C%C3%A1c%20bi%E1%BA%BFn%20t%C4%A9nh%20c%C5%A9ng%20c%C3%B3%20th%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20x%C3%A1c%20%C4%91%E1%BB%8Bnh%20ph%E1%BA%A1m%20vi%20th%C3%A0nh%20m%E1%BB%99t%20h%C3%A0m%0A%20%20%20%20static%20mut%20SECRET%3A%20%26%27static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20c%C3%B3%20th%E1%BB%9Di%20gian%20t%E1%BB%93n%20t%E1%BA%A1i%20t%C4%A9nh-%27static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26%27static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26%27static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20B%E1%BA%A1n%20c%C3%B3%20th%E1%BB%83%20ph%C3%A1%20v%E1%BB%A1%20m%E1%BB%99t%20s%E1%BB%91%20quy%20t%E1%BA%AFc%2C%20nh%C6%B0ng%20b%E1%BA%A1n%20ph%E1%BA%A3i%20r%C3%B5%20r%C3%A0ng%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20%C4%91%E1%BA%B7t%20SECRET%20th%C3%A0nh%20m%E1%BB%99t%20chu%E1%BB%97i%20k%C3%BD%20t%E1%BB%B1%20v%C3%AC%20n%C3%B3%20c%C5%A9ng%20l%C3%A0%20t%C4%A9nh-%27static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Thời gian tồn tại trong các loại dữ liệu
+  content_markdown: >
+    Tương tự như các hàm, các kiểu dữ liệu có thể được tham số hóa với các 
+    chỉ định thời gian tồn tại của các thành viên của chúng.
+
+    Rust xác nhận rằng phần chứa cấu trúc dữ liệu của 
+    các tham chiếu không bao giờ tồn tại lâu hơn chủ sở hữu mà các tham chiếu của nó trỏ tới.
+
+    Chúng ta không thể có cấu trúc chạy xung quanh với các tham chiếu trỏ đến hư vô!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C%27a%3E%20%7B%0A%20%20%20%20i%3A%26%27a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: Chương 5 - Tổng kết
+  content_markdown: >
+    Chà chà, chúc mừng vì đã vượt qua được! Tôi biết còn rất 
+    nhiều thứ làm, nhưng bạn đang tiến hành rất tốt để trở thành một Rustacean. 
+    Hy vọng rằng, rõ ràng Rust với tư cách là một ngôn ngữ nhằm giải quyết nhiều 
+    thách thức phổ biến trong lập trình hệ thống như thế nào:
+      * Sửa đổi tài nguyên không chủ ý
+
+      * Quên giải mã tài nguyên
+
+      * Tài nguyên vô tình bị giải cấu trúc hai lần
+
+      * Sử dụng tài nguyên sau khi chúng đã được giải cấu trúc
+
+      * Dữ liệu chạy đua gây ra bởi việc ghi vào tài nguyên trong 
+        khi những người khác đang đọc từ tài nguyên
+
+      * Nhìn rõ các vùng mã mà trình biên dịch không thể đảm bảo
+
+    Trong chương tiếp theo, 
+    chúng ta sẽ áp dụng một số kiến thức này khi chúng ta xem xét cách Rust xử lý văn bản.
