@@ -1,0 +1,178 @@
+- title: Chương 6 - Văn bản
+  content_markdown: >
+    Chúng ta đã hiểu một chút về cách Rust nghĩ về bộ nhớ, vì thế
+    bây giờ là lúc để nói về văn bản một cách chi tiết hơn.
+
+    Rust quan tâm rất nhiều đến văn bản quốc tế và các mối quan tâm ở cấp độ 
+    byte mà bạn có thể không quen thuộc với các ngôn ngữ khác. 
+    Điều đó nói rằng, Rust có nhiều công cụ tuyệt vời để quản lý những mối quan tâm đó.
+- title: Chuỗi ký tự(String Literal)
+  content_markdown: >
+    Chuỗi ký tự luôn là Unicode.
+
+
+    Loại của chuỗi ký tự là `&'static str`:
+
+
+    * `&` nghĩa là nó đề cập đến một vị trí trong bộ nhớ, và nó thiếu một
+    `&mut` nghĩa là trình biên dịch sẽ không cho phép sửa đổi
+
+    * `'static`có nghĩa là dữ liệu chuỗi sẽ có sẵn cho đến khi 
+    kết thúc chương trình của chúng ta (nó không bao giờ drop)
+
+    * `str` có nghĩa là nó trỏ đến một chuỗi các byte luôn hợp lệ
+    **utf-8**
+
+
+    Chi tiết bộ nhớ:
+
+    * Trình biên dịch Rust có thể sẽ đưa chuỗi của bạn vào phân đoạn dữ liệu của bộ nhớ chương trình của bạn.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22xin%20ch%C3%A0o%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: utf-8 là gì?
+  content_markdown: 
+    "Khi nhiều ngôn ngữ được sử dụng trên máy tính, thế giới cần phải biểu diễn nhiều ký tự văn bản hơn ASCII cho phép (1 byte chỉ cho phép 256 ký tự). \n\n
+    **utf-8** đã được giới thiệu với độ dài byte thay đổi từ 1-4 byte làm tăng đáng kể phạm vi ký tự có thể có.\n\n
+    Một lợi thế của các ký tự có kích thước thay đổi là văn bản không có các byte không cần thiết cho những mã ASCII rất phổ biến (chỉ yêu cầu 1 byte vẫn ở trong **utf-8**).\n\n
+    Nhược điểm của các ký tự có kích thước thay đổi là việc tra cứu ký tự không còn được thực hiện nhanh chóng. \n
+    (**O(1)** thời gian không đổi) với một lập chỉ mục đơn giản (ví dụ: `my_text[3]` để lấy ký tự thứ 4). 
+    Việc các ký tự trước đó có thể có độ rộng thay đổi là khả thi, thay đổi vị trí của ký tự thứ 4 thực sự bắt đầu trong chuỗi byte.\n\n
+    Thay vào đó, chúng ta phải lặp qua chuỗi byte **utf-8** để hiểu vị trí các ký tự Unicode thực sự bắt đầu (**O(n)** thời gian tuyến tính).\n\n
+    Ferris: \"Tớ rất vui vẻ với **utf-8**, tớ có các emoji thú vị để đại diện cho những người bạn dưới nước của tớ.\"\n\n
+    <span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: Ký tự thoát(Escaping Characters)
+  content_markdown: >
+    Thật khó để thể hiện một cách trực quan các ký tự nhất định, 
+    vì vậy ** mã thoát ** cho phép chúng ta đặt một biểu tượng vào vị trí của chúng.
+
+    Rust hỗ trợ các mã thoát phổ biến từ các ngôn ngữ dựa trên C:
+
+    * `\n` - xuống dòng mới
+
+    * `\r` - di chuyển con trỏ về đầu dòng
+
+    * `\t` - tab
+
+    * `\\` - In ký tự \
+
+    * `\0` - NULL có mã ASII là 0
+
+    * `\'` - In ký tự '
+
+
+    Danh sách hoàn chỉnh
+    [ở đây](https://doc.rust-lang.org/reference/tokens.html).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20n%C3%B3i%3A%5Ct%5C%22xin%20ch%C3%A0o%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+- title: Chuỗi ký tự nhiều dòng
+  content_markdown: |
+    Theo mặc định, các chuỗi của Rust là đa dòng(nhiều dòng).
+
+    Hãy dùng dấu `\` ở cuối dòng nếu bạn không muốn ngắt dòng.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
+- title: Chuỗi thô(Raw String Literals)
+  content_markdown: >
+    Chuỗi thô cho phép chúng ta viết một chuỗi ký tự nguyên văn bằng cách bắt đầu bằng `r#" `và kết thúc bằng `"#`. 
+    Nó cho phép chúng ta chèn các ký tự có thể gây nhầm lẫn cho một chuỗi bình thường là các ký tự (như dấu ngoặc kép và dấu gạch chéo ngược).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Chu%E1%BB%97i%20th%C3%B4%20h%E1%BB%AFu%20%C3%ADch%20trong%20m%E1%BB%99t%20v%C3%A0i%20tr%C6%B0%E1%BB%9Dng%20h%E1%BB%A3p%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: Chuỗi ký tự từ File
+  content_markdown: >
+    Nếu bạn có một số văn bản rất lớn, hãy xem xét sử dụng macro `include_str!` để bao gồm văn bản từ các tệp cục bộ trong chương trình của bạn:
+
+    ```rust
+
+    let hello_html = include_str!("hello.html");
+
+    ```
+- title: Lát cắt chuỗi (String Slice)
+  content_markdown: >
+    Một lát cắt chuỗi là một tham chiếu đến một chuỗi byte trong bộ nhớ mà phải luôn có giá trị utf-8.
+
+    Một lát chuỗi (một lát con) của một lát `str`- một `str` slice, cũng phải là utf-8 hợp lệ.
+
+    Các phương thức phổ biến của `&str`:
+
+    * `len` nhận độ dài của chuỗi theo nghĩa đen tính bằng byte (không phải số ký tự).
+
+    *  `starts_with`/`ends_with` để thử nghiệm cơ bản.
+
+    * `is_empty` trả về true nếu độ dài bằng không.
+
+    * `find` trả về một `Option<usize>` của vị trí đầu tiên của một số văn bản.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22ch%C3%A0o%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20L%E1%BB%97i%0A%20%20%20%20%2F%2F%20Rust%20kh%C3%B4ng%20ch%E1%BA%A5p%20nh%E1%BA%ADn%20c%C3%A1c%20%C4%91o%E1%BA%A1n%20k%C3%BD%20t%E1%BB%B1%20unicode%20kh%C3%B4ng%20h%E1%BB%A3p%20l%E1%BB%87%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+- title: Ký tự (Chars)
+  content_markdown: >
+    Với rất nhiều khó khăn khi làm việc với Unicode, Rust đưa ra một cách để lấy một chuỗi utf-8 byte dưới dạng vectơ gồm các ký tự kiểu `char`.
+
+
+    Một `char` luôn dài 4 byte (cho phép tra cứu hiệu quả các ký tự riêng lẻ).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20thu%20th%E1%BA%ADp%20c%C3%A1c%20k%C3%BD%20t%E1%BB%B1%20d%C6%B0%E1%BB%9Bi%20d%E1%BA%A1ng%20m%E1%BB%99t%20vector%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20v%C3%AC%20c%C3%A1c%20k%C3%BD%20t%E1%BB%B1%20l%C3%A0%204%20byte%20n%C3%AAn%20ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20chuy%E1%BB%83n%20%C4%91%E1%BB%95i%20th%C3%A0nh%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: Chuỗi(String)
+  content_markdown: >
+    Một **String** là một cấu trúc sở hữu một chuỗi utf-8 byte trong bộ nhớ heap.
+
+
+    Bởi vì bộ nhớ của nó nằm trên heap, nó có thể được mở rộng, sửa đổi, v.v. theo những cách mà các ký tự chuỗi không thể.
+
+
+    Các phương pháp phổ biến:
+
+
+    * `push_str` để thêm các byte utf-8 vào cuối chuỗi.
+
+    * `replace` để thay thế chuỗi utf-8 byte bằng các chuỗi khác.
+
+    * `to_lowercase`/`to_uppercase` để viết thường hoặc viết hoa.
+
+    * `trim` để xoá các khoảng trắng ở đầu và cuối chuỗi.
+
+
+    Khi một chuỗi bị drop, bộ nhớ heap của nó cũng drop.
+
+
+    `String` có một toán tử `+` mà có thể mở rộng chuỗi bằng dấu `&str` và trả về chính nó, nhưng nó có thể không tiện dụng như bạn mong đợi.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+- title: Văn bản dưới dạng tham số hàm
+  content_markdown: >
+    Các ký tự chuỗi và chuỗi thường được chuyển xung quanh như một lát chuỗi(string slice) cho các hàm. 
+    Điều này cung cấp rất nhiều tính linh hoạt cho hầu hết các trường hợp mà bạn không thực sự phải chuyển quyền sở hữu.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20c%C3%B3%20th%E1%BB%83%20m%C6%B0%E1%BB%A3n%20%26%27static%20str%20nh%C6%B0%20l%C3%A0%20m%E1%BB%99t%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20c%C5%A9ng%20c%C3%B3%20th%E1%BB%83%20m%C6%B0%E1%BB%A3n%20String%20nh%C6%B0%20l%C3%A0%20m%E1%BB%99t%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+- title: Xây dựng chuỗi
+  content_markdown: |
+    `concat` và `join` là hai cách đơn giản nhưng mạnh mẽ để xây dựng chuỗi.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D
+- title: Định dạng chuỗi
+  content_markdown: >
+    The `format!` cho phép chúng tôi tạo một chuỗi bằng cách xác định một chuỗi được tham số hóa 
+    với các trình giữ chỗ cho vị trí và cách các giá trị nên được đặt (ví dụ: `{}`).
+
+
+    `format!` sử dụng các chuỗi được tham số hóa giống như `println!`
+
+
+    Các khả năng của chức năng này có phạm vi quá lớn đối với *Tour of Rust*;
+    Bạn có thể đọc thêm tài liệu [ở đây](https://doc.rust-lang.org/std/fmt/).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22B%C3%AD%20m%E1%BA%ADt%20b%E1%BA%ADt%20m%C3%AD%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+- title: Chuyển đổi chuỗi
+  content_markdown: |
+    Nhiều loại có thể được chuyển đổi thành một chuỗi bằng cách sử dụng `to_string`.
+
+    Hàm generic `parse` có thể được sử dụng để chuyển đổi chuỗi hoặc ký tự chuỗi thành một giá trị đã nhập. Hàm này trả về một `Result` vì nó có thể bị lỗi.
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Chương 6 - Tổng kết
+  content_markdown: >
+    Bây giờ bạn đã biết những điều cơ bản về văn bản! Như bạn đã thấy, Unicode làm việc với văn bản hơi phức tạp, 
+    nhưng thư viện tiêu chuẩn có nhiều chức năng giúp bạn dễ dàng quản lý.
+
+    Cho đến nay, chúng ta hầu như chỉ nhìn Rust từ lăng kính của một mô hình thủ tục (tức là chỉ các chức năng và dữ liệu), 
+    nhưng bây giờ đã đến lúc chúng ta nói về các đặc điểm và các khả năng được mở khóa bởi mô hình hướng đối tượng của Rust.
