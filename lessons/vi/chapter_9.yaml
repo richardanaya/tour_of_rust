@@ -1,0 +1,144 @@
+- title: Chương 9 - Tổ chức và cấu trúc dự án
+  content_markdown: >
+    Cho đến nay tất cả các code ví dụ của chúng ta đều là một tệp duy nhất. 
+    Hãy thảo luận về cách code của chúng ta có thể được tổ chức và chia sẻ tốt hơn bởi những người khác!
+- title: Mô-đun(Module)
+  content_markdown: |
+    Mọi chương trình hoặc thư viện Rust đều là một *crate*.
+
+    Mỗi crate đều được tạo thành từ hệ thống phân cấp của *mô-đun*.
+
+    Mỗi crate đều có một mô-đun gốc.
+
+    Một mô-đun có thể chứa các biến toàn cục, hàm, struct, trait hoặc thậm chí các mô-đun khác!
+
+    Trong Rust, không có ánh xạ từ 1 đến 1 của các tệp với cấu trúc phân cấp cây mô-đun. Chúng ta phải xây dựng cây mô-đun một cách rõ ràng bằng tay trong code của chúng ta.
+- title: Viết chương trình
+  content_markdown: |
+    Một chương trình có một mô-đun gốc trong một tệp có tên là `main.rs`.
+- title: Viết thư viện
+  content_markdown: |
+    Một thư viện có một mô-đun gốc trong một tệp có tên là `lib.rs`.
+- title: Tham chiếu các mô-đun và crate khác
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Ch%C3%A0o%20m%E1%BB%ABng%20t%E1%BB%9Bi%20s%C3%A2n%20ch%C6%A1i%20n%C3%A0y!%22)%3B%0A%20%20%20%20println!(%22T%C3%B4i%20mu%E1%BB%91n%20m%E1%BB%99t%20mi%E1%BA%BFng%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: >
+    Các mục trong mô-đun có thể được tham chiếu với đường dẫn mô-đun đầy đủ của chúng
+    `std::f64::consts::PI`.
+
+
+    Một cách đơn giản hơn là từ khóa **use**. Nó cho phép chúng ta chỉ định các mục cụ thể từ các mô-đun mà chúng ta muốn sử dụng trong toàn bộ code 
+    của mình mà không có đường dẫn đầy đủ. 
+    Ví dụ `use std::f64::consts::PI`  cho phép ta chỉ sử dụng từ định danh `PI` trong hàm main của mình.
+
+
+    **std** là crate của **standard library**(thư viện tiêu chuẩn) của Rust chứa đầy các cấu trúc và chức năng dữ liệu hữu ích để tương tác với hệ điều hành của bạn.
+
+
+    Có thể tìm thấy thư mục crate do cộng đồng tạo ra tại
+    [https://crates.io](https://crates.io/).
+- title: Tham chiếu nhiều mục
+  content_markdown: |
+    Nhiều mục có thể được tham chiếu trong một đường dẫn mô-đun duy nhất như sau:
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris không ăn TAU, anh ấy chỉ ăn PI.
+- title: Tạo Mô-đun
+  content_markdown: |
+    Khi chúng ta nghĩ về code, 
+    chúng ta thường tưởng tượng một hệ thống phân cấp của các file được tổ chức trong các thư mục. Rust cho phép bạn tạo các mô-đun liên quan chặt chẽ đến cấu trúc file của bạn.
+
+    Có hai cách trong Rust để khai báo một mô-đun. Ví dụ, một mô-đun `foo` có thể được biểu diễn như sau:
+      * một file có tên `foo.rs`
+      * một thư mục có tên là `foo` với tệp `mod.rs` bên trong
+- title: Cấu trúc phân cấp mô-đun
+  content_markdown: >
+    Một mô-đun có thể phụ thuộc vào một mô-đun khác. Để thiết lập mối quan hệ giữa mô-đun và mô-đun con của nó, bạn phải viết trong mô-đun mẹ:
+
+
+    ```rust
+
+    mod foo;
+
+    ```
+
+
+    Khai báo ở trên sẽ tìm kiếm một tệp có tên là `foo.rs` hoặc `foo/mod.rs` và sẽ chèn nội dung của nó vào bên trong một mô-đun có tên là `foo` trong scope này.
+- title: Mô-đun nội tuyến
+  content_markdown: >
+    Một mô-đun con có thể được nội tuyến trực tiếp trong code của mô-đun.
+
+
+    Một cách sử dụng rất phổ biến cho các mô-đun nội tuyến là tạo các bài kiểm tra đơn vị. Chúng tôi tạo một mô-đun nội tuyến chỉ tồn tại khi Rust được sử dụng để thử nghiệm!
+
+
+    ```
+
+    // Macro này loại bỏ mô-đun nội tuyến này 
+    // khi Rust không ở chế độ thử nghiệm 
+
+
+    #[cfg(test)]
+
+    mod tests {
+        // Lưu ý rằng 
+        // chúng tôi không có quyền truy cập ngay lập tức 
+        // vào mô-đun mẹ. 
+        // Chúng ta phải rõ ràng. 
+        use super::*;
+
+        ... kiểm tra ở đây ...
+    }
+
+    ```
+- title: Tham chiếu mô-đun nội bộ
+  content_markdown: >
+    Rust có một số từ khóa bạn có thể sử dụng trong đường dẫn `use` của mình để nhanh chóng có được mô-đun bạn muốn:
+      
+    * `crate` - mô-đun gốc của crate của bạn
+
+    * `super` - mô-đun mẹ của mô-đun hiện tại của bạn
+
+    * `self` - mô-đun hiện tại
+- title: Xuất(Exporting)
+  content_markdown: >
+    Theo mặc định, các thành viên của một *mô-đun* không thể truy cập từ bên ngoài mô-đun (thậm chí không truy cập được vào các mô-đun con của nó!). 
+    Chúng ta làm cho các thành viên của một mô-đun có thể truy cập được bằng cách sử dụng từ khóa `pub`.
+
+
+    Theo mặc định, các thành viên của *crate* không thể truy cập được bên ngoài crate. 
+    Chúng ta giúp các thành viên của crate có thể truy cập được bằng cách đánh dấu họ là `pub` trong *mô-đun gốc* của crate của bạn (`lib.rs` hoặc `main.rs`).
+- title: Khả năng hiển thị cấu trúc
+  content_markdown: >
+    Cũng giống như các hàm, các cấu trúc có thể khai báo những gì chúng muốn hiển thị bên ngoài mô-đun của chúng bằng cách sử dụng `pub`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20s%E1%BA%BD%20c%C3%B3%20th%E1%BB%83%20s%E1%BB%AD%20d%E1%BB%A5ng%20%C4%91%C6%B0%E1%BB%A3c%20b%C3%AAn%20ngo%C3%A0i%20m%C3%B4-%C4%91un%20c%E1%BB%A7a%20b%E1%BA%A1n%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20gi%E1%BB%AF%20weapon%20%E1%BB%9F%20ch%E1%BA%BF%20%C4%91%E1%BB%99%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Phần dạo đầu(Prelude)
+  content_markdown: |
+    Bạn có thể tự hỏi làm thế nào chúng ta có thể truy cập vào `Vec` hoặc` Box` ở mọi nơi mà không có `use` để nhập chúng. 
+    Đó là vì mô-đun `prelude` trong thư viện tiêu chuẩn.
+
+    Biết rằng trong thư viện tiêu chuẩn Rust, bất kỳ thứ gì được xuất trong `std::prelude::*` 
+    đều tự động có sẵn cho mọi phần của Rust. Đó là trường hợp của `Vec` và` Box` nhưng những thứ khác cũng vậy (Option, Copy, v.v.)..
+- title: Phần dạo đầu của riêng bạn
+  content_markdown: >
+    Do phần prelude của thư viện tiêu chuẩn, thư viện của bạn thường có mô-đun dạo đầu(prelude module) riêng 
+    làm điểm khởi đầu để người dùng nhập tất cả các cấu trúc dữ liệu phổ biến nhất để sử dụng thư viện của bạn (ví dụ: `use my_library::prelude::*`).
+
+    Nó không tự động được sử dụng trong các chương trình/thư viện sử dụng crate của bạn, nhưng đó là một quy ước tốt để tuân theo để mọi người biết bắt đầu từ đâu.
+
+
+    Ferris nói rằng, "Hãy là một rustacean tốt và giúp đỡ đồng loại với phần dạo đầu tốt!"
+- title: Chương 9 - Tổng kết
+  content_markdown: >
+    Bây giờ bạn đã có một vài thủ thuật khi nói đến việc tạo các ứng dụng và thư viện Rust. Bạn đã sẵn sàng để bước ra thế giới rồi đấy! Đừng
+    lo lắng về việc nhớ tất cả. Khi thư viện của bạn phát triển và được người khác sử dụng, bạn sẽ tìm thấy những gì hoạt động tốt nhất ở mỗi cột mốc.
+
+
+    Nguồn:
+
+    - [Guidelines For Writing Rust
+    APIs](https://rust-lang.github.io/api-guidelines/)
