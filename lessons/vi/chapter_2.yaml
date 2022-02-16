@@ -11,8 +11,10 @@
     content_markdown: >
       Việc phân nhánh mã trong Rust không có gì đáng ngạc nhiên.
 
+
       Điều kiện không có dấu ngoặc đơn! Có bao giờ chúng ta thực sự cần chúng
       không?  Logic của chúng ta bây giờ trông thật "nice" và "clean".
+
 
       Tất cả các toán tử quan hệ và logic thông thường vẫn hoạt động: `==`, `!=`,
       `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
@@ -50,12 +52,16 @@
       Một iterator là một đối tượng mà bạn có thể đặt câu hỏi "Phần tử tiếp theo bạn có là gì?" 
       cho đến khi không còn phần tử nào nữa.
 
+
       Chúng ta sẽ khám phá điều này nhiều hơn trong những chương tiếp theo. Bây giờ thì chỉ cần
       ghi nhớ rằng Rust giúp bạn dễ dàng tạo iterator mà tạo ra một chuỗi các số nguyên.
 
+
       Toán tử `..` tạo ra một iterator khởi tạo một chuỗi số không bao gồm số cuối cùng.
 
+
       Toán tử `..=` tạo ra một iterator khởi tạo một chuỗi số bao gồm cả số cuối cùng.
+
 
       Hãy cùng xem qua ví dụ nhé.
     code: >-
@@ -75,6 +81,7 @@
 
       `match` là toàn diện nên tất cả các trường hợp phải được xử lý.
 
+
       Đối sánh kết hợp với hủy cấu trúc cho đến nay là một trong những mô hình 
       phổ biến nhất mà bạn sẽ thấy trong Rust.
 
@@ -89,10 +96,12 @@
     content_markdown: >
       `if`, `match`, hàm, và các scope block(khối phạm vi) đều có một cách trả về giá trị duy nhất trong Rust.
 
+
       Nếu lệnh cuối cùng trong `if`, `match`, hàm, hoặc scope block is là 
       một lệnh không có `;`, Rust sẽ trả về nó dưới dạng một giá trị từ khối.
       
       Đây là một cách tuyệt vời để tạo ra một logic ngắn gọn trả về một giá trị có thể được đưa vào một biến mới.
+
 
       Lưu ý rằng nó cũng cho phép một câu lệnh `if` hoạt động giống như một ternary expression(biểu thức bậc ba, biểu thức ba ngôi) ngắn gọn.
 

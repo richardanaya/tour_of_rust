@@ -27,6 +27,7 @@
     Khi một cấu trúc bị drop, bản thân cấu trúc đó sẽ bị drop trước tiên, 
     sau đó các phần tử con của nó bị drop riêng lẻ, v.v.
 
+
     Chi tiết bộ nhớ:
 
     * Bằng cách tự động giải phóng bộ nhớ, Rust giúp đảm bảo rằng có ít bộ nhớ bị rò rỉ hơn.
@@ -38,7 +39,9 @@
   content_markdown: >
     Khi một chủ sở hữu được chuyển làm đối số cho một hàm, quyền sở hữu sẽ được chuyển đến tham số của hàm đó.
 
+
     Sau khi *move*(di chuyển), biến trong hàm ban đầu không thể được sử dụng nữa.
+
 
     Chi tiết bộ nhớ:
 
@@ -119,8 +122,10 @@
     trình biên dịch hiểu thời gian tồn tại của mọi biến 
     và sẽ cố gắng xác thực rằng một tham chiếu không bao giờ tồn tại lâu hơn chủ sở hữu của nó.
 
+
     Các hàm có thể minh bạch bằng cách tham số hóa chữ ký 
     hàm bằng các ký hiệu giúp xác định các tham số và giá trị trả về có cùng thời gian tồn tại.
+
 
     Các từ chỉ định thời gian tồn tại luôn bắt đầu bằng dấu `'` (ví dụ:  `'a`, `'b`, `'c`)
   code: >-
@@ -172,8 +177,10 @@
     Tương tự như các hàm, các kiểu dữ liệu có thể được tham số hóa với các 
     chỉ định thời gian tồn tại của các thành viên của chúng.
 
+
     Rust xác nhận rằng phần chứa cấu trúc dữ liệu của 
     các tham chiếu không bao giờ tồn tại lâu hơn chủ sở hữu mà các tham chiếu của nó trỏ tới.
+
 
     Chúng ta không thể có cấu trúc chạy xung quanh với các tham chiếu trỏ đến hư vô!
   code: >-
@@ -184,6 +191,8 @@
     nhiều thứ làm, nhưng bạn đang tiến hành rất tốt để trở thành một Rustacean. 
     Hy vọng rằng, rõ ràng Rust với tư cách là một ngôn ngữ nhằm giải quyết nhiều 
     thách thức phổ biến trong lập trình hệ thống như thế nào:
+
+    
       * Sửa đổi tài nguyên không chủ ý
 
       * Quên giải mã tài nguyên

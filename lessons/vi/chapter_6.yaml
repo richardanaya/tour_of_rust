@@ -90,7 +90,9 @@
   content_markdown: >
     Một lát cắt chuỗi là một tham chiếu đến một chuỗi byte trong bộ nhớ mà phải luôn có giá trị utf-8.
 
+
     Một lát chuỗi (một lát con) của một lát `str`- một `str` slice, cũng phải là utf-8 hợp lệ.
+
 
     Các phương thức phổ biến của `&str`:
 
@@ -173,6 +175,7 @@
   content_markdown: >
     Bây giờ bạn đã biết những điều cơ bản về văn bản! Như bạn đã thấy, Unicode làm việc với văn bản hơi phức tạp, 
     nhưng thư viện tiêu chuẩn có nhiều chức năng giúp bạn dễ dàng quản lý.
+
 
     Cho đến nay, chúng ta hầu như chỉ nhìn Rust từ lăng kính của một mô hình thủ tục (tức là chỉ các chức năng và dữ liệu), 
     nhưng bây giờ đã đến lúc chúng ta nói về các đặc điểm và các khả năng được mở khóa bởi mô hình hướng đối tượng của Rust.

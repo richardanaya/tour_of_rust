@@ -8,6 +8,7 @@
   content_markdown: >
     Lập trình hướng đối tượng đề cập đến các ngôn ngữ lập trình có một số tính năng mang tính biểu tượng:
 
+
     * Đóng gói - Liên kết dữ liệu và chức năng thành đơn vị khái niệm của một kiểu duy nhất được gọi là đối tượng (*object*).
 
     * Trừu tượng - Ẩn dữ liệu và các thành viên hàm để làm xáo trộn các chi tiết triển khai của một đối tượng.

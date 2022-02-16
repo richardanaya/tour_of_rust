@@ -3,9 +3,11 @@
     Trong chương đầu tiên, chúng ta sẽ khám phá những điều cơ bản nhất về hàm,
     biến và những kiểu biến đơn giản nhất. Rất vui khi bạn có mặt ở đây.
 
+
     À! Một điều nữa đó là nếu bạn đang thắc mắc rằng chú cua đáng yêu đang trò
     chuyện với bạn là ai, thì tớ tên là **Ferris** đó!!! Tớ là linh vật không
     chính thức của ngôn ngữ lập trình Rust. Rất vui được gặp bạn. 
+
 
     Một khi bạn đã quen thuộc với Rust, bạn có thể gọi bạn là một **Rustacean**.
     Đó là cách những người sử dụng, đóng góp hoặc quan tâm đến Rust gọi chính
@@ -17,6 +19,7 @@
     Bài học của chúng ta sử dụng một công cụ mã hóa tương tác từ
     [RustPlayground](https://play.rust-lang.org).
 
+
     Đó là một cách tuyệt vời để chơi với Rust và cho người khác thấy sự sáng
     tạo  và thách thức của bạn!
 - title: Biến
@@ -25,9 +28,11 @@
   content_markdown: >
     Các biến được khai báo bằng từ khóa **let**.
 
+
     Khi gán vào biến một giá trị, Rust sẽ có thể suy ra kiểu của biến biến trong
     hầu hết các trường hợp.  Nếu không, bạn có thể thêm kiểu vào khai báo biến
     của mình.
+
 
     Lưu ý rằng đây là cách mà chúng ta gán giá trị vào cùng một tên biến nhiều
     lần. Điều này được gọi là đổ bóng biến và kiểu có thể được thay đổi cho các
@@ -52,6 +57,7 @@
 
 
     Các giá trị có thể thay đổi được biểu thị bằng từ khóa **mut**.
+
 
     Còn nhiều điều để nói về vấn đề này lắm đấy, tuy nhiên trước tiên thì hãy để
     ý tới những từ khóa này đã.
@@ -117,7 +123,9 @@
     định danh nơi chúng được sử dụng bằng giá trị của chúng tại thời điểm biên
     dịch.
 
+
     Không như biến, hằng số phải được khai báo kiểu một cách rõ ràng.
+
 
     Khi khai báo hằng, chúng ta nên đặt tên chúng viết HOA tất cả các kí tự.
 - title: Mảng
@@ -144,13 +152,17 @@
   content_markdown: >
     Một hàm có thể không có hoặc có nhiều tham số.
 
+
     Trong ví dụ này, hàm *add* nhận hai đối số kiểu `i32` (số nguyên có dấu có
     độ dài 32 bit).
+
 
     Nếu bạn chỉ muốn trả về một biểu thức, bạn có thể bỏ từ khóa `return` và dấu
     chấm phẩy ở cuối, như chúng ta đã làm trong hàm *subtract*.
 
+
     Tên hàm luôn ở dạng `snake_case`..
+
 
     Mẹo: nếu bạn định nghĩa một hàm, dữ liệu mà nó chấp nhận được gọi là tham
     số. Nếu bạn gọi hàm đó và truyền dữ liệu cho nó, thì nó được gọi là các đối
@@ -161,6 +173,7 @@
   content_markdown: >
     Các hàm có thể trả về nhiều giá trị bằng cách trả về một **tuple**(bộ giá
     trị).
+
 
     Các phần tử  trong một Tuple có thể được tham chiếu bằng số chỉ mục của
     chúng.
@@ -189,7 +202,9 @@
     bộ nhớ, liệu mọi thứ có thể được sửa đổi hay không, và đảm bảo rằng các phép
     toán của bạn hoạt động như bạn muốn.
 
+
     Phần tiếp theo, chúng ta sẽ khám phá phép thử `if` và vòng lặp` for`
+
 
     Tham khảo thêm:
 

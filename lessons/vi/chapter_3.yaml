@@ -22,6 +22,7 @@
   content_markdown: >
     Không giống như các hàm, các phương thức là các hàm được liên kết với một kiểu dữ liệu cụ thể.
 
+
     **static method** - các phương thức thuộc về một kiểu được gọi bằng cách sử dụng toán tử `::`.
 
 
