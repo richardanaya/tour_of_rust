@@ -1,0 +1,118 @@
+  - title: Chapter 2 - Luồng điều khiển cơ bản
+    content_markdown: >
+      Trong chương này, hãy nói về những phương pháp luồng điều khiển cơ bản trong
+      Rust.
+
+      Nếu bạn đã quen thuộc với những ngôn ngữ dựa trên C, bạn sẽ cảm thấy dễ chịu
+      và biết đâu đấy 
+
+      tận hưởng một vài điều bất ngờ.
+  - title: Điều kiện if/else
+    content_markdown: >
+      Việc phân nhánh mã trong Rust không có gì đáng ngạc nhiên.
+
+
+      Điều kiện không có dấu ngoặc đơn! Có bao giờ chúng ta thực sự cần chúng
+      không?  Logic của chúng ta bây giờ trông thật "nice" và "clean".
+
+
+      Tất cả các toán tử quan hệ và logic thông thường vẫn hoạt động: `==`, `!=`,
+      `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
+    code: >-
+      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22nh%E1%BB%8F%20h%C6%A1n%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22x%20l%C3%A0%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22l%E1%BB%9Bn%20h%C6%A1n%2042%22)%3B%0A%20%20%20%20%7D%0A%7D   
+  - title: loop(vòng lặp)
+    content_markdown: |
+
+      Bạn cần một vòng lặp vô hạn?
+
+      Rust khiến cho điều đó trở nên dễ dàng.
+
+      `break` giúp bạn thoát ra khỏi một vòng lặp khi bạn muốn.
+
+      `vòng lặp` có một bí mật sẽ được bật mí sau.
+    code: >-
+      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  - title: while
+    content_markdown: |
+      `while` giúp bạn dễ dàng thêm một điều kiện vào một vòng lặp.
+
+      Khi mà điều kiện trả về `false` (là nó bị sai á 😜), vòng lặp sẽ kết thúc.
+    code: >-
+      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22x%20is%20%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  - title: for
+    content_markdown: >
+
+      Vòng lặp `for` của Rust là một nâng cấp mạnh mẽ.
+      Rust's `for` loop is a powerful upgrade.
+
+      Nó lặp lại các giá trị từ bất kỳ biểu thức nào được đánh giá thành một trình *iterator*.
+
+      Vậy *iterator* là gì?
+      
+      Một iterator là một đối tượng mà bạn có thể đặt câu hỏi "Phần tử tiếp theo bạn có là gì?" 
+      cho đến khi không còn phần tử nào nữa.
+
+
+      Chúng ta sẽ khám phá điều này nhiều hơn trong những chương tiếp theo. Bây giờ thì chỉ cần
+      ghi nhớ rằng Rust giúp bạn dễ dàng tạo iterator mà tạo ra một chuỗi các số nguyên.
+
+
+      Toán tử `..` tạo ra một iterator khởi tạo một chuỗi số không bao gồm số cuối cùng.
+
+
+      Toán tử `..=` tạo ra một iterator khởi tạo một chuỗi số bao gồm cả số cuối cùng.
+
+
+      Hãy cùng xem qua ví dụ nhé.
+    code: >-
+      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+  - title: match
+    content_markdown: >
+
+      Bạn nghĩ rằng tiếp theo sẽ là câu lệnh switch? Không không, Rust có một từ khóa cực kỳ tiện dụng. 
+      Nó giúp bạn để so khớp tất cả các điều kiện 
+      có thể có của một giá trị và thực thi một công việc nào đó nếu kết quả khớp là đúng.
+
+      Hãy xem làm thế nào nó hoạt động với những con số. 
+      Chúng ta sẽ có nhiều điều để nói trong các chương sau 
+      về mô hình khớp với dữ liệu phức tạp hơn.
+      Tớ hứa với bạn là nó đáng để chờ đợi đấy.
+
+
+      `match` là toàn diện nên tất cả các trường hợp phải được xử lý.
+
+
+      Đối sánh kết hợp với hủy cấu trúc cho đến nay là một trong những mô hình 
+      phổ biến nhất mà bạn sẽ thấy trong Rust.
+
+    code: >-
+      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2069%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22th%E1%BA%A5y%20s%E1%BB%91%20kh%C3%B4ng%20r%E1%BB%93i%20n%C3%A8%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22l%C3%A0%201%20ho%E1%BA%B7c%20l%C3%A0%202%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22s%E1%BB%91%20n%C3%A0y%20n%E1%BA%B1m%20trong%20kho%E1%BA%A3ng%20t%E1%BB%AB%203%20t%E1%BB%9Bi%209%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22%7B%7D%20n%E1%BA%B1m%20trong%20kho%E1%BA%A3ng%20t%E1%BB%AB%2010%20t%E1%BB%9Bi%20100%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22c%C3%A1i%20g%C3%AC%20th%E1%BA%BF%20nh%E1%BB%9D%3F%3F%3F%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+  - title: Trả lại giá trị từ vòng lặp
+    content_markdown: |
+      `vòng lặp` có thể được ngắt để trả về giá trị.
+    code: >-
+      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22th%E1%BA%A5y%20s%E1%BB%91%2013%20r%E1%BB%93i%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22t%E1%BB%AB%20v%C3%B2ng%20l%E1%BA%B7p%20th%E1%BB%A9%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+  - title: Trả về giá trị từ những Block Expression
+    content_markdown: >
+      `if`, `match`, hàm, và các scope block(khối phạm vi) đều có một cách trả về giá trị duy nhất trong Rust.
+
+
+      Nếu lệnh cuối cùng trong `if`, `match`, hàm, hoặc scope block is là 
+      một lệnh không có `;`, Rust sẽ trả về nó dưới dạng một giá trị từ khối.
+      
+      Đây là một cách tuyệt vời để tạo ra một logic ngắn gọn trả về một giá trị có thể được đưa vào một biến mới.
+
+
+      Lưu ý rằng nó cũng cho phép một câu lệnh `if` hoạt động giống như một ternary expression(biểu thức bậc ba, biểu thức ba ngôi) ngắn gọn.
+
+    code: >-
+      https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1a0c42335f801e92f444a308837eff6f
+  - title: Chapter 2 - Tổng kết
+    content_markdown: >
+      Hy vọng rằng tớ đã cho bạn thấy một cái nhìn sơ lược về sức mạnh của Rust 
+      ngay cả trong các tính năng ngôn ngữ cơ bản nhất.
+
+      Chúng ta sẽ nói sâu hơn về `for` và` match` khi chúng ta có thêm kiến thức để
+      có thể sử dụng khả năng của của các lệnh này.
+
+      Lần tới chúng ta sẽ đi sâu vào cấu trúc dữ liệu cơ bản của Rust.

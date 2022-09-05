@@ -148,7 +148,7 @@
     etc.).
 - title: Your Own Prelude
   content_markdown: >
-    Because of standard library's prelude, it's common for your libary to have
+    Because of standard library's prelude, it's common for your library to have
     its own prelude module as a starting point for 
 
     where users should import all of the most common data structures for using

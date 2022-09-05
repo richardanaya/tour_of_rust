@@ -1,0 +1,262 @@
+- title: Chương 8 - Con trỏ thông minh(Smart Pointers)
+  content_markdown: >
+    Trong chương này, chúng ta sẽ làm sáng tỏ con trỏ thông minh. 
+    Hãy cùng khám phá những cấu trúc dữ liệu cho phép chúng ta tương tác với mức bộ nhớ thấp nhất.
+
+
+    Ferris nói: "Đừng cảm thấy choáng ngợp bởi chương này nếu bạn 
+    không cảm thấy mình có thể viết mã quản lý bộ nhớ cấp thấp của riêng mình trong một lần đọc ngắn. 
+    Chương này chủ yếu là để giới thiệu cho bạn một số công cụ hữu ích và giới thiệu sơ lược về cách chúng hoạt động! "
+- title: Tham chiếu đã duyệt lại
+  content_markdown: >
+    Một tham chiếu về cơ bản chỉ là một số mà số đó là vị trí bắt đầu của một số byte trong bộ nhớ. 
+    Mục đích duy nhất của nó là đại diện cho khái niệm về nơi dữ liệu của một loại cụ thể tồn tại. 
+    Điều làm cho một tham chiếu khác với một số bình thường 
+    là Rust sẽ xác thực thời gian tồn tại của các tham chiếu không kéo dài hơn những gì nó đề cập đến (nếu không chúng ta sẽ gặp lỗi khi sử dụng nó!).
+- title: Con trỏ thô(Raw Pointer)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20%E1%BB%9F%20%C4%91%C3%A2y%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: >
+    Các tham chiếu có thể được chuyển đổi thành một kiểu nguyên thủy hơn được gọi là *raw pointer*(con trỏ thô). 
+    Giống như một số, nó có thể được sao chép và di chuyển xung quanh mà 
+    không bị hạn chế nhiều. Rust không đảm bảo tính hợp lệ của vị trí bộ nhớ mà nó trỏ tới.
+
+
+    Tồn tại hai loại con trỏ thô:
+
+
+    * `*const T` - Một con trỏ thô tới dữ liệu kiểu T mà không bao giờ thay đổi.
+
+    * `*mut T` - Một con trỏ thô tới dữ liệu kiểu T mà có thể thay đổi.
+
+
+    Con trỏ thô có thể được chuyển đổi thành số và từ số (ví dụ: `usize`).
+
+
+    Con trỏ thô có thể truy cập dữ liệu bằng code *không an toàn* (sẽ tìm hiểu thêm về điều này sau).
+
+
+    Chi tiết bộ nhớ:
+
+    * Một tham chiếu trong Rust rất giống với một con trỏ trong C về cách sử dụng, 
+    nhưng với nhiều hạn chế về thời gian biên dịch hơn về cách nó có thể được lưu trữ và di chuyển sang các chức năng khác.
+
+
+    * Một con trỏ thô trong Rust tương tự như một con trỏ trong C ở chỗ nó đại diện cho một số có thể được sao chép hoặc chuyển xung quanh, 
+    và thậm chí được chuyển thành các kiểu số nơi nó có thể được sửa đổi thành một số để thực hiện phép toán con trỏ.
+- title: Dereferencing
+  content_markdown: |
+    Quá trình truy cập/thao tác dữ liệu đang được tham chiếu bởi một *tham chiếu* (ví dụ `&i32`) được gọi là *Dereferencing*.
+
+    Tham chiếu được sử dụng để truy cập/thao tác dữ liệu theo hai cách:
+    * Truy cập vào dữ liệu được gọi trong quá trình gán các biến.
+    * Truy cập vào các trường hoặc phương thức của dữ liệu được gọi.
+
+    Rust có một số toán tử mạnh mẽ cho phép chúng ta làm điều này.
+- title: Toán tử *
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20i32%20%3D%2042%3B%0A%20%20%20%20let%20ref_ref_ref_a%3A%20%26%26%26i32%20%3D%20%26%26%26a%3B%0A%20%20%20%20let%20ref_a%3A%20%26i32%20%3D%20**ref_ref_ref_a%3B%0A%20%20%20%20let%20b%3A%20i32%20%3D%20*ref_a%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20b)%0A%7D
+  content_markdown: >
+    Toán tử `*` là một cách rõ ràng để dereference một tham chiếu. 
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    Chi tiết bộ nhớ:
+
+    - Vì i32 là kiểu nguyên thủy thực hiện đặc điểm `Copy`, các byte của biến `a` trên stack được sao chép vào các byte của biến `b`.
+- title: Toán tử .
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20value%3A%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20f%20%3D%20Foo%20%7B%20value%3A%2042%20%7D%3B%0A%20%20%20%20let%20ref_ref_ref_f%20%3D%20%26%26%26f%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20ref_ref_ref_f.value)%3B%0A%7D
+  content_markdown: >
+    Toán tử `.`  được sử dụng để truy cập các trường và phương thức của một tham chiếu. 
+    Nó hoạt động tinh tế hơn một chút.
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+
+    Wow wow, tại sao chúng ta không cần thêm `***` trước `ref_ref_ref_f`? 
+    Điều này là do toán tử `.` tự động dereference đến một chuỗi các tham chiếu. 
+    Dòng cuối cùng đó được trình biên dịch tự động chuyển thành dòng sau.
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: Con trỏ thông minh
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20%C4%91%C3%A3%20%C4%91%C6%B0%E1%BB%A3c%20d%C3%B9ng!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20xu%E1%BA%A5t%20hi%E1%BB%87n%20%E1%BB%9F%20%C4%91%C3%A2y%20ngay%20sau%20khi%20foo%20%C4%91%C6%B0%E1%BB%A3c%20t%E1%BB%B1%20%C4%91%E1%BB%99ng%20tham%20chi%E1%BA%BFu%20cho%20h%C3%A0m%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    Ngoài khả năng tạo tham chiếu đến dữ liệu đã nhập hiện có bằng toán tử `&`, 
+    Rust cho chúng ta khả năng tạo các struct *giống như tham chiếu* được gọi là **smart pointers**(Con trỏ thông minh).
+
+
+    Chúng ta có thể coi các tham chiếu ở cấp độ cao là một loại cho phép chúng ta truy cập vào một loại khác. 
+    Con trỏ thông minh khác về hành vi của chúng so với các tham chiếu thông thường ở chỗ chúng hoạt động dựa trên logic bên trong mà một lập trình viên viết ra. 
+    Bạn - lập trình viên - là phần *thông minh*.
+
+
+    Thông thường, các con trỏ thông minh triển khai các đặc điểm `Deref`, `DerefMut`, và `Drop`
+    để chỉ định logic về những gì sẽ xảy ra khi struct được tham chiếu bằng các toán tử `*`và `.`.
+- title: Code không an toàn thông minh(Smart Unsafe Code)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20%C4%91%C3%A2y%20l%C3%A0%20m%E1%BB%99t%20con%20tr%E1%BB%8F%20th%C3%B4.%20L%E1%BA%A5y%20%C4%91%E1%BB%8Ba%20ch%E1%BB%89%20b%E1%BB%99%20nh%E1%BB%9B%20c%E1%BB%A7a%20m%E1%BB%99t%20th%E1%BB%A9%20g%C3%AC%20%C4%91%C3%B3%20d%C6%B0%E1%BB%9Bi%20d%E1%BA%A1ng%20s%E1%BB%91%20ho%C3%A0n%20to%C3%A0n%20an%20to%C3%A0n%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%2F%2F%20Bi%E1%BA%BFn%20s%E1%BB%91%20c%E1%BB%A7a%20ch%C3%BAng%20ta%20th%C3%A0nh%20m%E1%BB%99t%20con%20tr%E1%BB%8F%20th%C3%B4%20tr%E1%BB%9F%20t%E1%BB%9Bi%20f32%20c%C5%A9ng%20c%C3%B3%20th%E1%BB%83%20an%20to%C3%A0n.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%2F%2F%20%C4%90i%E1%BB%81u%20n%C3%A0y%20kh%C3%B4ng%20an%20to%C3%A0n%20v%C3%AC%20ch%C3%BAng%20ta%20%C4%91ang%20y%C3%AAu%20c%E1%BA%A7u%20tr%C3%ACnh%20bi%C3%AAn%20d%E1%BB%8Bch%20gi%E1%BA%A3%20s%E1%BB%AD%20con%20tr%E1%BB%8F%20c%E1%BB%A7a%20ch%C3%BAng%20ta%20%0A%20%20%20%20%20%20%20%2F%2F%20l%C3%A0%20m%E1%BB%99t%20f32%20h%E1%BB%A3p%20l%E1%BB%87%20v%C3%A0%20dereference%20gi%C3%A1%20tr%E1%BB%8B%20c%E1%BB%A7a%20n%C3%B3%20v%C3%A0o%20bi%E1%BA%BFn%20b.%20%0A%20%20%20%20%20%20%20%2F%2F%20Rust%20kh%C3%B4ng%20c%C3%B3%20c%C3%A1ch%20n%C3%A0o%20%C4%91%E1%BB%83%20x%C3%A1c%20minh%20gi%E1%BA%A3%20%C4%91%E1%BB%8Bnh%20n%C3%A0y%20l%C3%A0%20%C4%91%C3%BAng.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Con trỏ thông minh có xu hướng sử dụng code *không an toàn* khá thường xuyên. 
+    Như đã đề cập trước đó, chúng là công cụ phổ biến để tương tác với các mức bộ nhớ thấp nhất trong Rust.
+
+
+    Code không an toàn là gì? Code không an toàn hoạt động giống như Rust bình thường ngoại trừ một vài khả năng mà trình biên dịch Rust không thể đảm bảo.
+
+
+    Khả năng chính của code không an toàn là *dereferencing đến một con trỏ thô*. Điều đó có nghĩa là đưa một *con trỏ thô* 
+    đến một vị trí trong bộ nhớ và tuyên bố "một cấu trúc dữ liệu tồn tại ở đây!" 
+    và biến nó thành một biểu diễn dữ liệu mà bạn có thể sử dụng (tức là `*const u8` thành `u8`).
+
+    Rust không có cách nào để theo dõi ý nghĩa của từng byte được ghi vào bộ nhớ. 
+    Bởi vì Rust không thể đảm bảo về những gì tồn tại ở một số tùy ý được sử dụng như một *con trỏ thô*, nó đặt tham chiếu vào một `unsafe { ... }` block. 
+
+
+    Con trỏ thông minh *dereference con trỏ thô* một cách rộng rãi, nhưng chúng đã được chứng minh rõ ràng trong những gì chúng làm.
+- title: Những người bạn quen thuộc
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%2F%2F%20let%27s%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20c%E1%BA%A5p%20ph%C3%A1t%20v%C3%A0%20l%C6%B0u%20v%E1%BB%8B%20tr%C3%AD%20b%E1%BB%99%20nh%E1%BB%9B%20d%C6%B0%E1%BB%9Bi%20d%E1%BA%A1ng%20s%E1%BB%91%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20s%E1%BB%AD%20d%E1%BB%A5ng%20to%C3%A1n%20h%E1%BB%8Dc%20con%20tr%E1%BB%8F%20v%C3%A0%20vi%E1%BA%BFt%20m%E1%BB%99t%20v%C3%A0i%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20gi%C3%A1%20tr%E1%BB%8B%20u8%20v%C3%A0o%20b%E1%BB%99%20nh%E1%BB%9B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20gi%E1%BA%A3i%20th%C3%ADch%20con%20tr%E1%BB%8F%20secret_recipe%20d%C6%B0%E1%BB%9Bi%20d%E1%BA%A1ng%20con%20tr%E1%BB%8F%20th%C3%B4%20f32%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20n%C3%B3%20th%C3%A0nh%20gi%C3%A1%20tr%E1%BB%8B%20tr%E1%BA%A3%20v%E1%BB%81%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20b%E1%BA%B1ng%20c%C3%A1ch%20dereferencing%20%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20th%C3%A0nh%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    Hãy xem xét một số con trỏ thông minh mà chúng ta đã thấy như `Vec<T>` và `String`.
+
+
+    `Vec<T>` là một con trỏ thông minh chỉ sở hữu một số vùng nhớ byte. 
+    Trình biên dịch Rust không biết những gì tồn tại trong những byte này. 
+    Con trỏ thông minh giải thích ý nghĩa của việc lấy các mục từ vùng bộ nhớ mà nó quản lý, theo dõi vị trí các cấu trúc dữ liệu trong các byte đó bắt đầu và kết thúc, 
+    sau đó cuối cùng tham chiếu một con trỏ thô vào các cấu trúc dữ liệu thành một giao diện đẹp để chúng ta sử dụng
+    (ví dụ: `my_vec[3]`).
+
+
+    Tương tự, `String` theo dõi vùng nhớ byte và lập trình hạn 
+    chế nội dung được ghi vào vùng nhớ đó để luôn có giá trị `utf-8` và giúp dereference vùng nhớ đó thành kiểu `&str`.
+
+
+    Cả hai cấu trúc dữ liệu này đều sử dụng dereferencing không an toàn của các con trỏ thô để thực hiện công việc của chúng.
+
+
+    Chi tiết bộ nhớ:
+
+    * Rust có một cái tương đương với `malloc` của C bằng cách sử dụng
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) và
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) để
+    nhận được các vùng bộ nhớ của riêng bạn để quản lý.
+- title: Bộ nhớ được phân bổ Heap
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: >
+    `Box` là một con trỏ thông minh cho phép chúng ta di chuyển dữ liệu từ stack vào heap.
+
+
+    Dereference nó cho phép chúng ta sử dụng dữ liệu được phân bổ theo heap một cách thuận tiện như thể nó là kiểu gốc.
+- title: Failable Main Revisited
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20core%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C'_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+    Code Rust có thể có rất nhiều sự biểu diễn của lỗi, nhưng thư viện chuẩn có một trait chung `std::error::Error` để mô tả lỗi.
+
+
+    Bằng cách sử dụng con trỏ thông minh `Box`, chúng ta có thể sử dụng kiểu `Box<dyn std::error::Error>` như một kiểu phổ biến để trả về lỗi vì nó cho phép 
+    chúng ta tạo ra một lỗi trên heap và tương tác với nó tại một cấp độ cao mà không cần phải biết một loại cụ thể.
+
+
+    Trước đây trong Tour of Rust, chúng ta đã biết rằng `main` có thể trả về một lỗi. Bây giờ chúng ta có thể trả về một kiểu có khả năng mô tả 
+    hầu hết mọi loại lỗi có thể xảy ra trong chương trình của bạn, miễn là cấu trúc dữ liệu của lỗi thực hiện trait chung `Error` của Rust.
+
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: Đếm tham chiếu
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20t%E1%BA%A5t%20c%E1%BA%A3%20c%C3%A1c%20con%20tr%E1%BB%8F%20th%C3%B4ng%20minh%20v%E1%BB%81%20s%E1%BB%91%20l%C6%B0%E1%BB%A3ng%20tham%20chi%E1%BA%BFu%20b%E1%BB%8B%20drop%20b%C3%A2y%20gi%E1%BB%9D%2C%20Pie%20d%E1%BB%AF%20li%E1%BB%87u%20heap%20cu%E1%BB%91i%20c%C3%B9ng%20%C4%91%C3%A3%20%C4%91%C6%B0%E1%BB%A3c%20deallocate%0A%7D%0A
+  content_markdown: >
+    `Rc` là một con trỏ thông minh di chuyển dữ liệu từ stack lên heap. 
+    Nó cho phép chúng ta sao chép các con trỏ thông minh `Rc` khác mà tất cả đều có khả năng mượn dữ liệu được đặt trên heap một cách bất biến.
+
+
+    Chỉ khi con trỏ thông minh cuối cùng bị drop thì dữ liệu trên heap mới được deallocate.
+- title: Chia sẻ quyền truy cập
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20kh%C3%B4ng%20ph%E1%BA%A3i%20l%C3%A0%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20b%E1%BB%8B%20drop%20%E1%BB%9F%20cu%E1%BB%91i%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20b%C3%A2y%20gi%E1%BB%9D%20ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20m%C6%B0%E1%BB%A3n%20b%E1%BA%A5t%20bi%E1%BA%BFn%20khi%20tham%20chi%E1%BA%BFu%20c%C3%B3%20th%E1%BB%83%20thay%20%C4%91%E1%BB%95i%20c%E1%BB%A7a%20ch%C3%BAng%20ta%20drop%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell` là một cấu trúc dữ liệu vùng chứa thường được giữ bởi các con trỏ thông minh mà sẽ lấy dữ liệu và cho phép chúng ta mượn các 
+    tham chiếu bất biến và khả biến cho những gì bên trong. 
+    Nó ngăn không cho việc vay mượn bị lạm dụng bằng cách thực thi các quy tắc an toàn bộ nhớ của Rust trong thời gian chạy khi bạn yêu cầu mượn dữ liệu trong:
+
+
+    **Chỉ một tham chiếu khả biến HOẶC nhiều tham chiếu bất biến, nhưng không phải cả hai!**
+
+
+    Nếu bạn vi phạm các quy tắc này `RefCell` sẽ hoảng hốt.
+- title: Chia sẻ qua các luồng
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20h%C3%A3y%20m%C6%B0%E1%BB%A3n%20m%E1%BB%99t%20tham%20chi%E1%BA%BFu%20b%E1%BA%A5t%20bi%E1%BA%BFn%20c%C3%B3%20kh%C3%B3a%20v%E1%BB%81%20pie%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20ph%E1%BA%A3i%20m%E1%BB%9F%20k%E1%BA%BFt%20qu%E1%BA%A3%20c%E1%BB%A7a%20m%E1%BB%99t%20kh%C3%B3a%0A%20%20%20%20%2F%2F%20v%C3%AC%20n%C3%B3%20c%C3%B3%20th%E1%BB%83%20th%E1%BA%A5t%20b%E1%BA%A1i%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20tham%20chi%E1%BA%BFu%20b%E1%BB%8B%20kh%C3%B3a%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%20v%C3%A0%20gi%C3%A1%20tr%E1%BB%8B%20%C4%91%C6%B0%E1%BB%A3c%20b%E1%BA%A3o%20v%E1%BB%87%20b%E1%BA%B1ng%20mutex%20c%C3%B3%20th%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20ng%C6%B0%E1%BB%9Di%20kh%C3%A1c%20s%E1%BB%AD%20d%E1%BB%A5ng%0A%7D%0A
+  content_markdown: >
+    `Mutex` là một cấu trúc dữ liệu vùng chứa thường được giữ bởi các con trỏ thông minh lấy dữ liệu và cho phép 
+    chúng ta mượn các tham chiếu có thể thay đổi và bất biến đến dữ liệu bên trong. 
+    Điều này ngăn không cho việc vay mượn bị lạm dụng bằng cách hệ điều hành chỉ hạn chế một luồng CPU 
+    tại một thời điểm để có quyền truy cập vào dữ liệu, chặn các luồng khác cho đến khi luồng gốc đó được thực hiện với phần mượn bị khóa của nó.
+
+
+    Đa luồng nằm ngoài phạm vi của Tour of Rust, nhưng `Mutex` là một phần cơ bản của việc sắp xếp nhiều luồng CPU truy cập vào cùng một dữ liệu.
+
+
+    Có một con trỏ thông minh đặc biệt `Arc` giống hệt với` Rc` ngoại trừ việc sử dụng cách tăng số lượng tham chiếu một cách an toàn cho luồng. 
+
+
+    Nó thường được sử dụng để có nhiều tham chiếu đến cùng một `Mutex`.
+- title: Kết hợp nhiều con trỏ thông minh
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: >
+    Con trỏ thông minh có vẻ hạn chế, nhưng chúng có thể tạo ra một số kết hợp rất mạnh mẽ.
+
+
+    `Rc<Vec<Foo>>` - Cho phép sao chép nhiều con trỏ thông minh có thể mượn cùng một vectơ của cấu trúc dữ liệu bất biến trên heap.
+
+
+    `Rc<RefCell<Foo>>` - Cho phép nhiều con trỏ thông minh khả năng mượn có thể thay đổi/không thay đổi cùng một struct `Foo`
+
+
+    `Arc<Mutex<Foo>>` - Cho phép nhiều con trỏ thông minh có khả năng khóa việc mượn tạm thời có thể thay đổi/ không thể thay đổi theo cách thức độc quyền của luồng CPU.
+
+
+    Chi tiết bộ nhớ:
+
+    * Bạn sẽ nhận thấy một chủ đề với nhiều sự kết hợp này. 
+    Việc sử dụng kiểu dữ liệu bất biến (có thể thuộc sở hữu của nhiều con trỏ thông minh) để sửa đổi dữ liệu nội bộ. Đây được gọi là mô hình "interior mutability" trong Rust. 
+    Đây là một mô hình cho phép chúng ta bẻ cong các quy tắc sử dụng bộ nhớ trong thời gian chạy với mức độ an toàn tương tự như kiểm tra thời gian biên dịch của Rust.
+
+- title: Chương 8 - Tổng kết
+  content_markdown: >
+    Con trỏ thông minh là điểm đặc trưng của lập trình Rust và chúng ta không cần phải tạo lại các mô hình sử dụng bộ nhớ rất phổ biến. 
+    Với nó, bạn đã sẵn sàng để đối phó với những thử thách khó khăn nhất! 
+    Bây giờ chúng ta đã có nền tảng của Rust, hãy nói một chút về cách chúng ta thực hiện các dự án lớn hơn. 
+    Trong chương 9, chúng ta sẽ tách ra khỏi các dòng code đơn.

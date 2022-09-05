@@ -1,0 +1,217 @@
+- title: Chapter 1 - Những điều cơ bản
+  content_markdown: >
+    Trong chương đầu tiên, chúng ta sẽ khám phá những điều cơ bản nhất về hàm,
+    biến và những kiểu biến đơn giản nhất. Rất vui khi bạn có mặt ở đây.
+
+
+    À! Một điều nữa đó là nếu bạn đang thắc mắc rằng chú cua đáng yêu đang trò
+    chuyện với bạn là ai, thì tớ tên là **Ferris** đó!!! Tớ là linh vật không
+    chính thức của ngôn ngữ lập trình Rust. Rất vui được gặp bạn. 
+
+
+    Một khi bạn đã quen thuộc với Rust, bạn có thể gọi bạn là một **Rustacean**.
+    Đó là cách những người sử dụng, đóng góp hoặc quan tâm đến Rust gọi chính
+    họ.
+- title: Sân chơi của bạn
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22S%C3%A2n%20ch%C6%A1i%20n%C3%A0y%20l%C3%A0%20c%E1%BB%A7a%20b%E1%BA%A1n%2C%20thay%20%C4%91%E1%BB%95i%20m%E1%BB%99t%20ch%C3%BAt%20%E1%BB%9F%20%C4%91%C3%A2y%20%C4%91i%20n%C3%A0o!!!%22)%3B%0A%7D
+  content_markdown: >
+    Bài học của chúng ta sử dụng một công cụ mã hóa tương tác từ
+    [RustPlayground](https://play.rust-lang.org).
+
+
+    Đó là một cách tuyệt vời để chơi với Rust và cho người khác thấy sự sáng
+    tạo  và thách thức của bạn!
+- title: Biến
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20t%E1%BB%B1%20x%C3%A1c%20%C4%91%E1%BB%8Bnh%20ki%E1%BB%83u%20bi%E1%BA%BFn%20cho%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20c%C5%A9ng%20c%C3%B3%20th%E1%BB%83%20ch%E1%BB%89%20%C4%91%E1%BB%8Bnh%20ki%E1%BB%83u%20cho%20bi%E1%BA%BFn%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20c%C5%A9ng%20c%C3%B3%20th%E1%BB%83%20khai%20b%C3%A1o%20v%C3%A0%20kh%E1%BB%9Fi%20t%E1%BA%A1o%20sau%20%C4%91%C3%B3%2C%20nh%C6%B0ng%20%C4%91i%E1%BB%81u%20n%C3%A0y%20hi%E1%BA%BFm%20khi%20%C4%91%C6%B0%E1%BB%A3c%20th%E1%BB%B1c%20hi%E1%BB%87n%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D
+  content_markdown: >
+    Các biến được khai báo bằng từ khóa **let**.
+
+
+    Khi gán vào biến một giá trị, Rust sẽ có thể suy ra kiểu của biến biến trong
+    hầu hết các trường hợp.  Nếu không, bạn có thể thêm kiểu vào khai báo biến
+    của mình.
+
+
+    Lưu ý rằng đây là cách mà chúng ta gán giá trị vào cùng một tên biến nhiều
+    lần. Điều này được gọi là đổ bóng biến và kiểu có thể được thay đổi cho các
+    lần tham chiếu tiếp theo đến tên biến đó.
+
+
+    Tên biến luôn tuân theo
+    [`snake_case`](https://vi.wikipedia.org/wiki/Quy_t%E1%BA%AFc_con_r%E1%BA%AFn).
+- title: Thay đổi biến
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Rust để ý rất kỹ tới khi nào biến có thể thay đổi giá trị được. Chúng ta có
+    hai trường hợp sau:
+
+
+    * **mutable**(có thể thay đổi được) - trình biên dịch sẽ cho phép biến được
+    ghi vào và đọc từ đó.
+
+    * **immutable**(không thể thay đổi được) - trình biên dịch sẽ chỉ cho phép
+    biến được đọc từ đó.
+
+
+    Các giá trị có thể thay đổi được biểu thị bằng từ khóa **mut**.
+
+
+    Còn nhiều điều để nói về vấn đề này lắm đấy, tuy nhiên trước tiên thì hãy để
+    ý tới những từ khóa này đã.
+- title: Những kiểu biến cơ bản
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20m%E1%BA%B7c%20%C4%91%E1%BB%8Bnh%20%C4%91%C3%A2y%20l%C3%A0%20ki%E1%BB%83u%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20m%E1%BA%B7c%20%C4%91%E1%BB%8Bnh%20%C4%91%C3%A2y%20l%C3%A0%20ki%E1%BB%83u%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D
+  content_markdown: >
+    Rust có rất nhiều kiểu biến thông dụng:
+
+
+    * booleans - `bool` để biểu diễn true/false
+
+    * unsigned integers - `u8` `u16` `u32` `u64` `u128` để biểu diễn các số
+    nguyên không âm
+
+    * signed integers - `i8` `i16` `i32` `i64` `i128` để biểu diễn các số nguyên
+
+    * pointer sized integers - `usize` `isize` để biểu diễn các chỉ mục và kích
+    thước của mọi thứ trong bộ nhớ
+
+    * floating point(Số dấy phẩy động, dấu chấm động) - `f32` `f64`
+
+    * tuple - `(value, value, ...)` for passing fixed sequences of values on the
+    stack
+
+    * arrays (mảng)- `[value, value, ...]` tập hợp các phần tử tương tự có độ
+    dài cố định được biết đến tại thời điểm biên dịch
+
+    * slices - tập hợp các phần tử tương tự với độ dài đã biết trong thời gian
+    chạy
+
+    * `str`(string slice) - một chuỗi có độ dài đã biết trong thời gian chạy
+
+
+    Text có thể phức tạp hơn so với những ngôn ngữ khác bạn quen dùng,
+
+    vì Rust là một ngôn ngữ lập trình hệ thống, nó quan tâm đến bộ nhớ
+
+    những vấn đề bạn có thể không quen. Chúng ta sẽ đi vào chi tiết điều này
+    sau.
+
+
+    Các loại số học có thể được chỉ định rõ ràng bằng cách thêm loại vào cuối
+    (ví dụ: `13u32`,` 2u8`).
+- title: Chuyển đổi loại cơ bản
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Rust yêu cầu sự rõ ràng khi nói đến các kiểu số. Chúng ta không thể sử dụng
+    `u8` cho` u32` một cách ngẫu nhiên mà không phát sinh lỗi.
+
+
+     May mắn thay, Rust làm cho việc chuyển đổi kiểu số trở nên rất dễ dàng với từ khóa **as**.
+- title: Hằng
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%C4%90%E1%BB%83%20t%E1%BA%A1o%20ra%20m%E1%BB%99t%20qu%E1%BA%A3%20t%C3%A1o%20t%E1%BB%AB%20%C4%91%E1%BA%A7u%20%7B%7D%2C%20tr%C6%B0%E1%BB%9Bc%20ti%C3%AAn%20b%E1%BA%A1n%20ph%E1%BA%A3i%20t%E1%BA%A1o%20ra%20m%E1%BB%99t%20v%C5%A9%20tr%E1%BB%A5%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+
+    Kiểu hằng(hay hằng số) cho phép chúng ta chỉ định một giá trị chung được sử dụng nhiều
+    lần trong code của chúng ta một cách hiệu quả.  
+    Thay vì phải sao chép các
+    giá trị tới những nơi chúng ta muốn nhiều lần, hằng số thay thế trực tiếp mã
+    định danh nơi chúng được sử dụng bằng giá trị của chúng tại thời điểm biên
+    dịch.
+
+
+    Không như biến, hằng số phải được khai báo kiểu một cách rõ ràng.
+
+
+    Khi khai báo hằng, chúng ta nên đặt tên chúng viết HOA tất cả các kí tự.
+- title: Mảng
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+
+    Một *Mảng* là một tập hợp **độ dài cố định** của tất cả các phần tử dữ liệu
+    cùng kiểu.
+
+
+    Kiểu dữ liệu cho một *mảng* là `[T; N]` trong đó T là kiểu của các phần tử
+    và N là độ dài cố định đã biết tại thời điểm biên dịch.
+
+
+    Các phần tử riêng lẻ có thể được truy xuất bằng toán tử `[x]` trong đó *x*
+    là chỉ số *usize* (bắt đầu từ 0) của phần tử bạn muốn.
+
+
+     Các tập hợp có độ dài động, thường được gọi là mảng động hoặc mảng biến, được giới thiệu trong chương sau về *Vectơ*.
+- title: Hàm
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    Một hàm có thể không có hoặc có nhiều tham số.
+
+
+    Trong ví dụ này, hàm *add* nhận hai đối số kiểu `i32` (số nguyên có dấu có
+    độ dài 32 bit).
+
+
+    Nếu bạn chỉ muốn trả về một biểu thức, bạn có thể bỏ từ khóa `return` và dấu
+    chấm phẩy ở cuối, như chúng ta đã làm trong hàm *subtract*.
+
+
+    Tên hàm luôn ở dạng `snake_case`..
+
+
+    Mẹo: nếu bạn định nghĩa một hàm, dữ liệu mà nó chấp nhận được gọi là tham
+    số. Nếu bạn gọi hàm đó và truyền dữ liệu cho nó, thì nó được gọi là các đối
+    số.
+- title: Trả lại nhiều giá trị
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20tr%E1%BA%A3%20v%E1%BB%81%20m%E1%BB%99t%20b%E1%BB%99(tuple%20gi%C3%A1%20tr%E1%BB%8B)%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2Fh%E1%BB%A7y%20c%E1%BA%A5u%20tr%C3%BAc%20c%E1%BB%A7a%20tuple%20th%C3%A0nh%20hai%20t%C3%AAn%20bi%E1%BA%BFn%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    Các hàm có thể trả về nhiều giá trị bằng cách trả về một **tuple**(bộ giá
+    trị).
+
+
+    Các phần tử  trong một Tuple có thể được tham chiếu bằng số chỉ mục của
+    chúng.
+
+
+    Rust hỗ trợ các loại cấu trúc hủy khác nhau mà chúng ta sẽ thấy ở nhiều
+    dạng, cho phép chúng tôi trích xuất các phần con của cấu trúc dữ liệu theo
+    những cách tiện dụng. Cẩn thận nhé!
+- title: Không trả về gì cả
+  content_markdown: >
+    Nếu không có kiểu trả về nào được chỉ định cho một hàm, nó sẽ trả về một bộ
+    giá trị trống, còn được gọi là *unit*(đơn vị).
+
+
+     Một bộ giá trị trống được đại diện bởi `()`.
+
+
+     Việc sử dụng `()` là không phổ biến, nhưng sẽ xuất hiện thường xuyên để bạn có thể biết được điều gì đang xảy ra.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20ki%E1%BB%83u%20tr%E1%BA%A3%20v%E1%BB%81%20%C4%91%C6%B0%E1%BB%A3c%20ng%E1%BB%A5%20%C3%BD%20l%C3%A0%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20h%C3%A0m%20n%C3%A0y%20s%E1%BA%BD%20tr%E1%BA%A3%20v%E1%BB%81%20()%20n%E1%BA%BFu%20kh%C3%B4ng%20c%C3%B3%20g%C3%AC%20%C4%91%C6%B0%E1%BB%A3c%20ch%E1%BB%89%20%C4%91%E1%BB%8Bnh%20%C4%91%E1%BB%83%20tr%E1%BA%A3%20v%E1%BB%81%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20In%20m%E1%BB%99t%20chu%E1%BB%97i%20debug%20cho%20a%20v%C3%A0%20b%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D
+- title: Chương 1 - Tổng kết
+  content_markdown: >
+    Tốt lắm! Những điều cơ bản của Rust không quá tệ, phải không? Chúng ta đang
+    xem xét cách thức suy nghĩ của trình biên dịch Rust. Là một ngôn ngữ lập
+    trình hệ thống, nó quan tâm rất nhiều đến kích thước của các giá trị trong
+    bộ nhớ, liệu mọi thứ có thể được sửa đổi hay không, và đảm bảo rằng các phép
+    toán của bạn hoạt động như bạn muốn.
+
+
+    Phần tiếp theo, chúng ta sẽ khám phá phép thử `if` và vòng lặp` for`
+
+
+    Tham khảo thêm:
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)

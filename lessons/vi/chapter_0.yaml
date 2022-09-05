@@ -1,0 +1,37 @@
+- title: >-
+    Hello World!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=d2b3cbbda18e1d51eda7cf8246bf5d88
+  content_markdown: |
+    <img src="/intro.png" alt="Welcome to the Tour of Rust" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
+
+    **Chúc mừng sinh nhật 1 tuổi 🎉**
+
+    Chào mừng tới với *Tour of Rust*. Đây là hướng dẫn từng bước về các tính năng của ngôn ngữ lập trình Rust. Rust thường được coi là một ngôn ngữ có đường cong học tập khó khăn, nhưng tôi hy vọng tôi có thể thuyết phục bạn có rằng rất nhiều điều để khám phá trước khi chúng ta đi đến những phần phức tạp.
+
+    Bạn cũng có thể đọc bài hướng dẫn này bằng những ngôn ngữ sau:
+
+    * [Deutsch](00_de.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Magyar](00_hu.html)
+    * [Polski](00_pl.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [简体中文](00_zh-cn.html)
+    * [繁體中文](00_zh-tw.html)
+    * [日本語](00_ja.html)
+    * [한국어](00_ko.html)
+    * [Türkçe](00_tr.html)
+    * [Ελληνικά](00_gr.html)
+    * [Українська](00_ua.html)
+    * [ภาษาไทย](00_th.html)
+    * [Italian](00_it.html)
+    * [Tiếng Việt](00_vi.html)
+    
+    Nếu bạn có đề xuất nội dung hoặc muốn đóng góp vào bản dịch, hãy truy cập vào [repository github](https://github.com/richardanaya/tour_of_rust) của Tour of Rust.
+
+    Bạn có thể điều hướng qua bàn phím bằng nút <span class="emoji">⬅️</span> và nút <span class="emoji">➡️</span>.
+
+    Trong ví dụ đơn giản này, chúng ta hãy xem sự hỗ trợ của Rust cho các chuỗi Unicode.

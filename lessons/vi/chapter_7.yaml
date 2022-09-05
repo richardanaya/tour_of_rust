@@ -1,0 +1,280 @@
+- title: Chương 7 - Lập trình hướng đối tượng(Object-oriented programming-OOP)
+  content_markdown: >
+    Thể hiện ý tưởng bằng các hàm là một cách đã được chứng minh để biểu thị hành vi và dữ liệu (ngôn ngữ C đã làm điều đó trong nhiều thập kỷ!). 
+    Về mặt lịch sử, khoa học máy tính đã tìm thấy những thứ có thể biểu diễn hữu ích khác và các khái niệm trừu tượng khác cho dữ liệu.
+    Bạn có thể quen với lập trình hướng đối tượng (OOP) như một cách như vậy. 
+    Trong chương này, chúng ta sẽ khám phá ngôn ngữ lập trình Rust vượt ra ngoài các function.
+- title: OOP là gì?
+  content_markdown: >
+    Lập trình hướng đối tượng đề cập đến các ngôn ngữ lập trình có một số tính năng mang tính biểu tượng:
+
+
+    * Đóng gói - Liên kết dữ liệu và chức năng thành đơn vị khái niệm của một kiểu duy nhất được gọi là đối tượng (*object*).
+
+    * Trừu tượng - Ẩn dữ liệu và các thành viên hàm để làm xáo trộn các chi tiết triển khai của một đối tượng.
+
+    * Tính đa hình - Khả năng tương tác với các đối tượng thuộc các loại khác nhau thông qua một giao diện.
+
+    * Tính kế thừa - Khả năng kế thừa dữ liệu và hành vi từ các đối tượng khác.
+- title: Rust không phải là OOP
+  content_markdown: >
+    Rust thiếu tính kế thừa của dữ liệu và hành vi theo bất kỳ cách nào có ý nghĩa.
+
+
+      * Struct không thể kế thừa các trường từ struct mẹ.
+
+      * Struct không thể kế thừa các chức năng từ struct mẹ.
+
+    Điều đó nói rằng, Rust thực hiện nhiều tính năng của ngôn ngữ lập trình, vì vậy bạn có thể không bận tâm về điều này.
+- title: Đóng gói với các phương thức
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    Rust hỗ trợ khái niệm về một *object*(đối tượng) là một struct được liên kết với một số hàm (còn được gọi là *method* hay các phương thức).
+
+
+    Tham số đầu tiên của bất kỳ phương thức nào phải là một tham chiếu đến 
+    cá thể được liên kết với lời gọi phương thức (ví dụ: `instanceOfObj.foo()`). Rust sử dụng:
+
+    * `&self` - Tham chiếu bất biến đến cá thể.
+
+    * `&mut self` - Tham chiếu khả biến đến cá thể.
+
+
+    Các phương thức được định nghĩa trong một khối triển khai với từ khóa `impl`:
+
+    ```rust
+
+    impl MyStruct { 
+        ...
+        fn foo(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Trừu tượng hóa với sự tiếp xúc có chọn lọc
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+  content_markdown: >
+    Rust có thể che giấu hoạt động bên trong của các đối tượng.
+
+
+    Theo mặc định, các trường và phương thức chỉ có thể truy cập được đối với mô-đun mà chúng thuộc về.
+
+
+    Từ khóa `pub` hiển thị các trường và phương thức cấu trúc bên ngoài mô-đun.
+- title: Tính đa hình với các đặc điểm
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
+  content_markdown: >
+    Rust hỗ trợ tính đa hình với các đặc điểm(trait). Các đặc điểm cho phép chúng 
+    ta liên kết một tập hợp các phương thức với một kiểu cấu trúc.
+
+
+    Đầu tiên chúng ta xác định các dấu hiệu của các phương thức của một đặc điểm trong:
+
+
+    ```
+
+    trait MyTrait {
+        fn foo(&self);
+        ...
+    }
+
+    ```
+
+
+    Khi một struct triển khai một đặc điểm, nó sẽ thiết lập một hợp đồng 
+    cho phép chúng ta tương tác gián tiếp với struct thông qua loại đặc điểm (ví dụ: `&dyn MyTrait`) mà không cần biết loại thực sự.
+
+
+    Các đặc điểm của struct được xác định trong một khối thực hiện(implementation block):
+
+
+    ```rust
+
+    impl MyTrait for MyStruct { 
+        fn foo(&self) {
+            ...
+        }
+        ... 
+    }
+
+    ```
+- title: Các phương thức được triển khai trên các đặc điểm
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: >
+    Các đặc điểm có thể thực hiện các phương thức.
+
+
+    Các hàm không có quyền truy cập trực tiếp vào 
+    các trường bên trong của struct, nhưng nó có thể hữu ích cho việc chia sẻ hành vi giữa nhiều đặc tính.
+- title: Thừa kế đặc điểm
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+  content_markdown: |
+    Các đặc điểm có thể kế thừa phương thức từ các đặc điểm khác.
+- title: Điều phối động vs điều phối tĩnh
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20bi%E1%BA%BFt%20lo%E1%BA%A1i%20th%E1%BB%B1c%20s%E1%BB%B1%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20kh%C3%B4ng%20bi%E1%BA%BFt%20lo%E1%BA%A1i%20th%E1%BB%B1c%20s%E1%BB%B1%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Các phương thức được thực thi theo hai cách:
+
+    * static dispatch(điều phối tĩnh) - Khi kiểu thể hiện được biết, chúng ta biết trực tiếp về hàm nào sẽ gọi.
+
+    * dynamic dispatch(điều phối động) - Khi một kiểu thể hiện không được biết, chúng ta phải tìm ra một số cách gọi hàm chính xác.
+
+
+    Các kiểu đặc điểm `&dyn MyTrait` cho chúng ta khả năng làm việc với các trường hợp của đối tượng một cách gián tiếp bằng cách sử dụng điều phối động.
+
+
+    Khi sử dụng điều phối động, Rust sẽ khuyến khích bạn đặt `dyn` trước loại đặc điểm của bạn để mọi người nhận biết.
+
+
+    Chi tiết bộ nhớ:
+
+    * Điều phối động hơi chậm hơn do con trỏ đuổi theo để tìm lệnh gọi hàm thực.
+- title: Đối tượng đặc điểm(trait object)
+  content_markdown: >
+    Khi chúng ta truyền một thể hiện(một instance) của một đối tượng cho một tham số kiểu `&dyn MyTrait`, chúng ta truyền cái được gọi là *trait object*.
+
+
+    Một đối trait object là thứ cho phép chúng ta gián tiếp gọi các phương thức chính xác của một instance.
+
+    
+    Một đối trait object là một cấu trúc chứa con trỏ của instance của chúng ta với một danh sách các **con trỏ hàm**(function pointer) 
+    đến các phương thức của instance của chúng ta.
+
+
+    Chi tiết bộ nhớ:
+
+    * Danh sách các hàm này được biết đến trong C ++ dưới dạng một *vtable*.
+- title: Xử lý dữ liệu unsized
+  content_markdown: >
+    Các đặc điểm giới thiệu một thách thức thú vị khi chúng ta muốn lưu trữ chúng trong một struct khác. 
+    Các đặc điểm làm xáo trộn struct ban đầu do đó nó cũng làm xáo trộn kích thước ban đầu. 
+    Các giá trị chưa được kích thước(Unsized values) đang được lưu trữ trong struct được xử lý theo hai cách trong Rust:
+
+
+    * `generics` - Sử dụng các kiểu tham số hóa một cách hiệu quả sẽ tạo ra các kiểu struct/function đã biết và do đó kích thước đã biết.
+
+    * `indirection` - Việc đặt các instance trên heap cung cấp cho chúng ta một mức độ định hướng mà
+    cho phép chúng ta không phải lo lắng về kích thước của kiểu thực tế và chỉ cần lưu trữ một con trỏ tới nó. Và thực tế là vẫn còn các cách khác!
+- title: Hàm Generic
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20bi%E1%BA%BFt%20ki%E1%BB%83u%20th%E1%BB%B1c%20s%E1%BB%B1%20t%E1%BA%A1i%20th%E1%BB%9Di%20%C4%91i%E1%BB%83m%20bi%C3%AAn%20d%E1%BB%8Bch%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: >
+    Generics trong Rust có tác dụng với các đặc điểm. 
+    Khi chúng ta mô tả một kiểu tham số hóa `T`, chúng ta có thể hạn chế những kiểu nào có thể được sử dụng làm đối số 
+    bằng cách liệt kê những đặc điểm bắt buộc mà đối số phải triển khai.
+
+
+    Trong ví dụ này, kiểu `T` phải triển khai đặc điểm` Foo`:
+
+    ```rust
+
+    fn my_function<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+
+    Bằng cách sử dụng generic, chúng ta tạo ra các hàm được định kiểu 
+    tĩnh tại thời điểm biên dịch mà sẽ có các loại và kích thước đã biết, 
+    cho phép chúng ta thực hiện điều phối tĩnh và lưu trữ dưới dạng giá trị có kích thước(sized value).
+- title: Tốc ký hàm generic
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20bi%E1%BA%BFt%20ki%E1%BB%83u%20th%E1%BB%B1c%20s%E1%BB%B1%20t%E1%BA%A1i%20th%E1%BB%9Di%20%C4%91i%E1%BB%83m%20bi%C3%AAn%20d%E1%BB%8Bch%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
+  content_markdown: |
+    Rust có một cách viết tắt để diễn đạt các số liệu generic bị hạn chế bởi một đặc điểm:
+
+    ```rust
+    fn my_function(foo: impl Foo) {
+        ...
+    }
+    ```
+
+    Điều này tương đương với việc viết:
+
+    ```rust
+    fn my_function<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
+  content_markdown: >
+    `Box` là một cấu trúc dữ liệu cho phép chúng ta di chuyển dữ liệu của mình từ stack sang heap.
+
+
+    `Box` là một struct được gọi là *smart pointer*(con trỏ thông minh) mà sẽ giữ con trỏ tới dữ liệu của chúng ta trên heap.
+
+
+    Bởi vì `Box` là một struct với kích thước đã biết (vì nó chỉ chứa một con trỏ), 
+    nó thường được sử dụng như một cách để lưu trữ một tham chiếu đến một cái gì đó 
+    trong một cấu trúc mà phải biết kích thước các trường của nó.
+
+
+    `Box` rất phổ biến, nó có thể được sử dụng ở mọi nơi:
+
+
+    ```rust
+
+    Box::new(Foo { ... })
+
+    ```
+- title: Các cấu trúc generic đã được duyệt lại(Generic Structs Revisited)
+  content_markdown: >
+    Cấu trúc generic cũng có thể có các kiểu tham số bị ràng buộc bởi các đặc điểm.
+
+
+    ```rust
+
+    struct MyStruct<T>
+
+    where
+        T: MyTrait
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+
+    Cấu trúc generic có kiểu được tham số hóa trong các khối triển khai(implementation block) của chúng:
+
+
+    ```rust
+
+    impl<T> MyStruct<T> {
+        ...
+    }
+
+    ```
+- title: Chương 7 - Tổng kết
+  content_markdown: >
+    Giờ đây, chúng ta có nhiều tính năng ngôn ngữ hơn để thể hiện ý tưởng của chúng ta một cách rõ ràng! 
+    Các bản tóm tắt của Rust có thể đơn giản nhưng chúng đủ mạnh để làm cho việc làm việc với code trở thành một niềm vui. 
+    Trong chương này, chúng ta đã tìm hiểu sơ qua về các con trỏ thông minh(*smart pointer*) với `Box`. 
+    Trong chương tiếp theo, chúng ta sẽ tìm hiểu về cách con trỏ thông minh có thể giúp chúng ta trong các tình huống ghi nhớ chuyên biệt khác.
+
+
+    Nguồn:
+
+    * [Video - Object-oriented Programming in 7
+    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Article - "The faster you unlearn OOP, the better for you and your
+    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)

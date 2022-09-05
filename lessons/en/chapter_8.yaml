@@ -58,7 +58,7 @@
     but with much more compile time restrictions on
       how it can be stored and moved around to other functions.
     * A raw pointer in Rust is similar to a pointer in C that it represents a number that can be
-      copied or passed around, and even turned into numerical types where it can be modifed as a
+      copied or passed around, and even turned into numerical types where it can be modified as a
       number to do pointer math.
 - title: Dereferencing
   content_markdown: |
@@ -136,7 +136,7 @@
     to create *reference-like* structs called **smart pointers**. 
 
 
-    We can think of references at a high level as a type that give us access to
+    We can think of references at a high level as a type that gives us access to
     another type.  Smart pointers are different in their 
 
     behavior from normal references in that they operate based on internal logic
@@ -160,7 +160,7 @@
     Rust.
 
 
-    What is unsafe code? Unsafe code behaves exactly like normal Rust with the
+    What is an unsafe code? Unsafe code behaves exactly like normal Rust with the
     exception of a few abilities that
 
     the Rust compiler is unable to make guarantees about.
@@ -345,7 +345,7 @@
 
     Memory detail:
 
-    * You'll notice a theme with many of these combinations. The use of a
+    * You'll notice a theme with many of these combinations. The use of an
     immutable data type (possibly owned by multiple smart pointers) to modify
     internal data. This 
       is referred to as the "interior mutability" pattern in Rust. It is a pattern that lets us bend the rules of memory usage at runtime with the same level of safety as Rust's

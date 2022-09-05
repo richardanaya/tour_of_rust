@@ -20,6 +20,7 @@ Every time you finish the translation of a chapter update the table underneath.
 |zh-tw | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |    |
 |tr    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |ua    | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |   |   |   |    |
+|vi    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 
 
 Legend: ✓ = done, u = needs update
