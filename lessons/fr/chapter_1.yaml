@@ -8,7 +8,7 @@
     Et si tu te demandes qui est cet adorable crabe qui te parle, sache que je
     m'appelle **Ferris**,
 
-    la mascotte non officielle du language de programmation Rust. Heureux de te
+    la mascotte non officielle du langage de programmation Rust. Heureux de te
     renconter!
 - title: Le terrain de jeu de Rust
   code: >-
@@ -102,12 +102,12 @@
 
 
     Les chaînes de caractères peuvent être plus complexes comparées aux autres
-    languages de programmation,
+    langages de programmation,
 
-    étant donné que Rust est un language de programmation système, il est
+    étant donné que Rust est un langage de programmation système, il est
     sensible aux problèmes
 
-    de mémoire que tu n'es peu-être pas habitué à traiter. Nous reviendrons sur
+    de mémoire que tu n'es peut-être pas habitué à traiter. Nous reviendrons sur
     ce sujet un peu plus tard.
 
 
@@ -208,13 +208,13 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20le%20type%20de%20retour%20est%20implicitement%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20cette%20fonction%20retournera%20()%0A%20%20%20%20%2F%2F%20si%20rien%20n'est%20sp%C3%A9cifi%C3%A9%20en%20retour%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20le%20symbole%20%3A%3F%20signifie%20qu'on%20souhaite%20utiliser%0A%20%20%20%20%2F%2F%20un%20formatage%20sp%C3%A9cial%20de%20debug%20qui%20affichera%0A%20%20%20%20%2F%2F%20notamment%20le%20type%20des%20variables%20a%20et%20b%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
 - title: Chapitre 1 - Conclusion
   content_markdown: >
-    Bon travail! Les fondamentaux de rust ne sont pas si dûr que ça, n'est-ce
+    Bon travail! Les fondamentaux de rust ne sont pas si dur que ça, n'est-ce
     pas? Nous avons
 
-    commençé à voir comment le compilateur de Rust fonctionne. Celui-ci fait
+    commencé à voir comment le compilateur de Rust fonctionne. Celui-ci fait
     attention à la taille
 
-    des éléments en mémoires, s'assure si les choses peuvent êtres modifiées ou
+    des éléments en mémoire, s'assure si les choses peuvent être modifiées ou
     non, et fait en sorte
 
     qu'on ne se mélange pas les pinceaux dans les types de variables. Par la
