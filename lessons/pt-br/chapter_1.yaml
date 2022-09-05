@@ -4,7 +4,7 @@
 
 
     E se por acaso você está se perguntando quem é este adorável caranguejo falante, eu me chamo **Ferris** e sou o mascote não oficial da linguagem de programação Rust. Prazer em conhecê-lo.
-- title: O Playgroung do Rust
+- title: O Playground do Rust
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Bem-vindo%20%C3%A0%20%C3%A1rea%20de%20testes!%20Voc%C3%AA%20pode%20modificar%20seu%20c%C3%B3digo%20aqui.%22)%3B%0A%7D%0A
   content_markdown: >
@@ -69,33 +69,33 @@
     * `str` (string slice) - texto com comprimento conhecido em tempo de execução
 
 
-    Textos podem ser mais complexos do que você está acostumado com outras linguagens. Uma vez que o Rust é uma linguagem de programação de sistemas, ele cuida do gerenciamento de memória de uma maneira que pode não estar familiarizado. Entraremos em detalhes mais adiante.
+    Formatos de texto podem ser mais complexos do que você está acostumado com outras linguagens. Uma vez que o Rust é uma linguagem de programação de sistemas, ele cuida do gerenciamento de memória de uma maneira que pode não estar familiarizado. Entraremos em detalhes mais adiante.
 
 
     Tipos numéricos podem ser especificados explicitamente adicionando o tipo ao final do número (por exemplo: `13u32`, `2u8`)
 - title: Conversão de tipos básica
   content_markdown: >
-    O Rust requer que sejamos explícitos quando se trata de tipos numéricos. Não podemos usar um `u8` quando precisamos usar um `u32` sem que se produza um erro.
+    O Rust requer que sejamos explícitos quando se trata de tipos numéricos. Não podemos usar um `u8` como um `u32` sem que se produza um erro.
 
 
-    Por sorte o Rust faz com que as conversões de tipos numéricos sejam muito simples usando a plavra-chave **as**.
+    Por sorte, o Rust faz com que as conversões de tipos numéricos sejam muito simples usando a plavra-chave **as**.
 - title: Constantes
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Para%20fazer%20uma%20%7B%7Dzza%2C%20voc%C3%AA%20deve%20primeiro%20criar%20o%20Universo.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
-    As constantes nos permitem especificar um valor comum que pode ser usado muitas vezes por todos o nosso código de maneira eficiente. Ao invés de copiar os valores como variáveis onde serão utilizadas, as constantes substituirão o identificador de texto pelo seu valor onde quer que estejam sendo usadas em tempo de compilação.
+    As constantes nos permitem especificar um valor comum que pode ser usado muitas vezes por todo o nosso código de maneira eficiente. Ao invés de copiar os valores como variáveis onde serão utilizadas, as constantes substituirão o identificador de texto pelo seu valor onde quer que estejam sendo usadas em tempo de compilação.
 
 
-    Diferentemente das variáveis, o tipo das constantes devem ter sempre declarados.
+    Diferentemente das variáveis, o tipo das constantes devem ser sempre declarados.
 
 
     Os nomes das constantes são sempre em `SCREAMING_SNAKE_CASE`.
-- title: Matrizes
+- title: Arrays
   content_markdown: >
-    Uma *matriz* é uma coleção de elementos de tamanho fixo todos os seu valores do mesmo tipo.
+    Uma *array* é uma *coleção de tamanho fixo* de elementos, cujos valores são todos do mesmo tipo.
 
 
-    O tipo de dado para uma *matriz* é `[T;N]`, onde T é o tipo dos valores e N é o comprimento fixo conhecido em tempo de compilação.
+    O tipo de dado para uma *array* é `[T;N]`, onde T é o tipo dos valores e N é o comprimento fixo conhecido em tempo de compilação.
 
 
     Os elementos podem ser recuperados individualmente com o operador `[x]`, onde *x* é o índice do tipo *usize* (começando de 0) do elemento que deseja recuperar.
