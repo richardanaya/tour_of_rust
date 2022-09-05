@@ -261,8 +261,8 @@ languages.forEach((lang) => {
                 <span class="nav">
                 </span>
             </div>
+            <div>
             <h1>${getWord(words, lang, 'lessons')}</h1>
-            <p>
             <ul>
         ${langLessons.map((x, i) => {
     let targetLang = lang;
@@ -275,8 +275,8 @@ languages.forEach((lang) => {
     }
     return s;
   }).join('\n')}
-            <ul>
-            </p>
+            </ul>
+            </div>
         </div>
     </body>
     </html>`);
