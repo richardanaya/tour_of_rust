@@ -168,7 +168,7 @@
     Funktionsnamen sollten im `snake_case` Format vergeben werden.
 
 
-    Hinweis: wenn man eine Funktion deklariert, dann spricht man bei den Daten,
+    Hinweis: Wenn man eine Funktion deklariert, dann spricht man bei den Daten,
     die die Funktion aktzeptiert, von Parametern. Ruft man die Funktion dann auf und
     übergibt ihr Daten, dann spricht man von Argumenten.
 - title: Mehrere return-Variablen
