@@ -1,0 +1,43 @@
+- title: >-
+    Salut, <img src="/favicon-32x32.png" style="display:inline;
+    vertical-align:bottom">
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Salut%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
+  content_markdown: |
+    Bun venit la *Turul limbajului Rust*. Acesta a fost conceput pentru a fi un 
+    ghid pas cu pas al caracteristicilor limbajului Rust.
+    Rust este deseori considerat un limbaj greu de învățat, dar eu sper că până
+    ajungem la părțile dificile te voi putea convinge că sunt multe lucruri de 
+    explorat.
+
+    De asemenea, poți citi acest ghid și în următoarele limbi:
+
+    * [Deutsch](00_de.html)
+    * [English](index.html)
+    * [Español](00_es.html)
+    * [Français](00_fr.html)
+    * [Interlingue](00_ie.html)
+    * [Magyar](00_hu.html)
+    * [Polski](00_pl.html)
+    * [Português Brasileiro](00_pt-br.html)
+    * [Русский](00_ru.html)
+    * [简体中文](00_zh-cn.html)
+    * [繁體中文](00_zh-tw.html)
+    * [日本語](00_ja.html)
+    * [한국어](00_ko.html)
+    * [Türkçe](00_tr.html)
+    * [Ελληνικά](00_gr.html)
+    * [Українська](00_ua.html)
+    * [ภาษาไทย](00_th.html)
+    * [Italian](00_it.html)
+    * [Tiếng Việt](00_vi.html)
+    
+    Dacă ai sugestii în legătură cu conținutul sau vrei să contribui la 
+    traduceri, intră pe 
+    [repository-ul github](https://github.com/richardanaya/tour_of_rust) al 
+    Turului.
+
+    Poți naviga prin tur folosind tastele <span class="emoji">⬅️</span> și 
+    <span class="emoji">➡️</span>.
+
+    În acest exemplu clasic arătăm că Rust suportă caractere Unicode.
