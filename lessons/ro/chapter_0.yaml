@@ -6,11 +6,11 @@
   content_markdown: |
     Bun venit la *Turul limbajului Rust*. Acesta a fost conceput pentru a fi un 
     ghid pas cu pas al caracteristicilor limbajului Rust.
-    Rust este deseori considerat un limbaj greu de învățat, dar eu sper că până
-    ajungem la părțile dificile te voi putea convinge că sunt multe lucruri de 
+    Rust este deseori considerat un limbaj greu de învățat, dar noi sperăm că până
+    ajungem la părțile dificile vă vom putea convinge că sunt multe lucruri de 
     explorat.
 
-    De asemenea, poți citi acest ghid și în următoarele limbi:
+    De asemenea, puteți citi acest ghid și în următoarele limbi:
 
     * [Deutsch](00_de.html)
     * [English](index.html)
@@ -32,12 +32,12 @@
     * [Italian](00_it.html)
     * [Tiếng Việt](00_vi.html)
     
-    Dacă ai sugestii în legătură cu conținutul sau vrei să contribui la 
-    traduceri, intră pe 
+    Dacă aveți sugestii în legătură cu conținutul sau doriți să contribuiți la 
+    traducere, puteți intra pe 
     [repository-ul github](https://github.com/richardanaya/tour_of_rust) al 
     Turului.
 
-    Poți naviga prin tur folosind tastele <span class="emoji">⬅️</span> și 
+    Puteți naviga prin tur folosind tastele <span class="emoji">⬅️</span> și 
     <span class="emoji">➡️</span>.
 
     În acest exemplu clasic arătăm că Rust suportă caractere Unicode.
