@@ -2,10 +2,10 @@
   content_markdown: >
     În acest capitol vom vorbi despre metodele de control basic al flow-ului în Rust.
 
-    Dacă ești familiar cu limbaje bazate pe C, o să te simți ca acasă și
+    Dacă sunteți familiar cu limbaje bazate pe C, o să vă simțiți ca acasă și
     poate
 
-    te vei bucura de o surpriză sau două.
+    vă veți bucura de o surpriză sau două.
 - title: if/else
   content_markdown: >
     Ramificarea codului în Rust nu este surprinzătoare.
@@ -18,25 +18,25 @@
     În rest, toți operatorii relaționali și logici funcționează la fel: `==`, `!=`, `<`,
     `>`, `<=`, `>=`, `!`, `||`, `&&`.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
-- title: bucle
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22mai%20pu%C8%9Bin%20de%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22egal%20cu%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22mare%20mare%20de%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+- title: Bucle
   content_markdown: |
-    Ai nevoie de o buclă infinită?
+    Aveți nevoie de o buclă infinită?
 
     Rust face asta într-un mod foarte simplu.
 
-    `break` te va arunca în afara buclei când ești pregătit.
+    `break` vă va arunca în afara buclei când sunteți pregătit.
 
     `loop` are un secret despre care vom vorbi curând.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
 - title: while
   content_markdown: |
-    `while` te lasă să adaugi o condiție logică unei bucle.
+    `while` vă lasă să adăugați o condiție logică unei bucle.
 
     Dacă condiția impusă buclei devine falsă, bucla se va termina.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22x%20is%20%7B%7D%22%2C%20x)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22x%20este%20%7B%7D%22%2C%20x)%3B%0A%7D%0A
 - title: for
   content_markdown: >
     Bucla `for` din Rust e o îmbunătățire importantă. Ea
@@ -44,13 +44,12 @@
     iterează prin valorile oricărei expresii care poate fi transformată într-un iterator.
     Ce este
 
-    un iterator? Un iterator este un obiect pe care îl poți întreba "Care este
-    the
+    un iterator, vă întrebați? Un iterator este un obiect pe care îl puteți întreba "Care este
 
     următorul element pe care îl ai?" până când acesta nu mai are elemente.
 
 
-    Vom explora acest lucru într-un capitol viitor. Între timp, ține minte că Rust
+    Vom explora acest lucru într-un capitol viitor. Între timp, țineți minte că Rust
     poate 
 
     creea ușor iteratori care generează o secvență de numere întregi.
@@ -62,7 +61,7 @@
     alt număr, fără să îl includă pe cel din urmă.
 
 
-    Operatorul `..=` creează un iterator care generează numere de la un număr
+    Operatorul `..=` creează un iterator care generează numere de la un
     număr pâna la 
 
     alt număr, inclusiv cel din urmă.
@@ -70,7 +69,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: match
   content_markdown: >
-    Îți lipsește switch-ul din C? Rust are un cuvânt cheie incredibil de folositor
+    Vă lipsește switch-ul din C? Rust are un cuvânt cheie incredibil de folositor
 
     pentru îndeplinirea tuturor posibilităților unei valori și executarea unei bucăți de cod dacă
     o anumită
@@ -78,7 +77,7 @@
     posibilitate este adevărată. Hai să vedem cum merge asta pentru numere. Avem de discutat mai
     multe
 
-    în capitolele viitoare despre pattern matching pentru date mai complexe. Îți promit că
+    în capitolele viitoare despre pattern matching pentru date mai complexe. Vă promit că
     o să
 
     merite așteptarea.
@@ -91,15 +90,15 @@
 
     Matching combinat cu destructurarea datelor este de departe unul din
 
-    cele mai întâlnite pattern-uri pe care le vei vedea în Rust.
+    cele mai întâlnite pattern-uri pe care le veți vedea în Rust.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20face%20un%20caz%20pentru%20mai%20multe%20valori%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%201%20sau%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20face%20un%20caz%20pentru%20o%20mul%C8%9Bime%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20un%20num%C4%83r%20%C3%AEntre%203%20%C8%99i%209%20inclusiv%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20pune%20num%C4%83rul%20care%20respect%C4%83%20cazul%20%C3%AEntr-o%20variabil%C4%83%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20num%C4%83rul%20%7B%7D%20%C3%AEntre%2010%20%C8%99i%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20acesta%20este%20cazul%20default%20care%20trebuie%20s%C4%83%20existe%20dac%C4%83%0A%20%20%20%20%20%20%20%20%2F%2F%20nu%20sunt%20abordate%20toate%20cazurile%20posibile%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20alt%20num%C4%83r!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
 - title: Returnarea unor valori dintr-o bucla
   content_markdown: |
     `loop` poate fi oprit pentru a returna o valoare.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
-- title: Returnarea unor valori din expresii block
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22am%20g%C4%83sit%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22din%20bucl%C4%83%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Returnarea unor valori din expresii bloc
   content_markdown: >
     `if`-urile, `match`-urile, funcțiile și scope block-urile au un mod unic de
     a returna valori în Rust.
@@ -108,7 +107,7 @@
     Dacă ultima instrucțiune din interiorul unui/unei `if`, `match`, funcții sau scope block este o
     expresie fără
 
-    `;`, Rust o va returna sub forma unei valori din acel block. Acesta
+    `;`, Rust o va returna sub forma unei valori din acel bloc. Acesta
 
     este un mod foarte bun de a creea logică concisă care returnează o valoare care poate fi pusă
     într-o
@@ -116,12 +115,12 @@
     variabilă nouă.
 
 
-    Observăm cum acest lucru permite unui `if` să opereze ca o expresie ternară concisă.
+    Observăm cum acest lucru permite unui `if` să funcționeze ca operatorul ternar concis.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20operatorul%20ternar%20din%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22din%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22este%20un%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20observa%C8%9Bi%20c%C4%83%20acoladele%20sunt%20op%C8%9Bionale%20c%C3%A2nd%20exist%C4%83%0A%20%20%20%20%20%20%20%20%2F%2F%20o%20expresie%20simpl%C4%83%20de%20returnare%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22nu%20este%20un%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22tipul%20de%20m%C3%A2ncare%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Acest%20scope%20block%20ne%20permite%20s%C4%83%20nu%20polu%C4%83m%20spa%C8%9Biul%20func%C8%9Biilor%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22din%20bloc%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Modul%20idiomatic%20de%20a%20returna%20o%20valoare%20%C3%AEn%20Rust%20la%20sf%C3%A2%C8%99itul%20unei%20func%C8%9Bii%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22din%20func%C8%9Bie%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
 - title: Capitolul 2 - Incheiere
   content_markdown: >
-    Sper că ți-am arătat o părticică din puterea Rust-ului chiar și prin cele mai
+    Sper că v-am arătat o părticică din puterea Rust-ului chiar și prin cele mai
 
     simple caracteristici ale unui limbaj de programare. Vom vorbi despre `for` și
 

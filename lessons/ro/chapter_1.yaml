@@ -2,26 +2,26 @@
   content_markdown: >
     În acest prim capitol vom explora ideile și conceptele de bază despre
     funcții, variabile și cele mai primitive tipuri de date. Ne bucurăm că
-    ne ești alături!
+    ne sunteți alături!
 
 
-    De asemenea, în cazul în care te întrebai cine este crabul adorabil care
-    îți vorbește, mă numesc **Ferris**,
+    De asemenea, în cazul în care vă întrebați cine este crabul adorabil care
+    vă vorbește, mă numesc **Ferris**,
     mascota neoficială a limbajului Rust. Încântat de cunoștință!
 
 
-    Odată ce te vei familiariza cu Rust, poți să te declari un **Rustaceu**. Așa
+    Odată ce vă veți familiariza cu Rust, puteți să vă declarați un **Rustaceu**. Așa
     se numesc toți oamenii care folosesc, contribuie sau sunt interesați de Rust.
 - title: The Rust Playground
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Bun%20venit%20în%20locul%20de%20joacă!%20Puteți%20modifica%20codul%20aici.%22)%3B%0A%7D%0A
   content_markdown: >
-    În acest curs veți utiliza un coding tool interactiv [Rust
+    În acest curs veți folosi un utilitar interactiv pentru scrierea codului [Rust
     Playground](https://play.rust-lang.org).
 
 
-    E o modalitate bună de a te juca cu Rust și a arăta altora 
-    creativitatea și provocările tale!
+    E o modalitate bună de a vă juca cu Rust și a arăta altora 
+    creativitatea și provocările dumneavoastră!
 - title: Variabile
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -32,7 +32,7 @@
     Atunci când dai unei variabile o valoare, Rust este capabil să deducă tipul acesteia
     în 99%
 
-    din cazuri. Dacă acesta nu poate, poți adăuga tipul de date la declarare variabilei.
+    din cazuri. Dacă acesta nu poate, puteți adăuga tipul de date la declararea variabilei.
 
 
     Observați cum putem să dăm valori aceluiași nume de variabilă de mai multe ori. Acest
@@ -42,7 +42,7 @@
     la acel nume de variabilă.
 
 
-    Numele de variabile sunt mereu scrisă sub formă `snake_case` (ex: my_first_variable).
+    Numele de variabile sunt mereu scrise sub formă `snake_case` (ex: my_first_variable).
 - title: Modificarea variabilelor
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -62,12 +62,12 @@
 
 
     O să revenim pentru a vorbi mai multe despre acest concept, dar deocamdată doar fiți
-    atenți la acest cuvânt cheie.
+    atent la acest cuvânt cheie.
 - title: Tipuri de date de bază
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
-    Rust are o varietate de tipuri de date familiare ție:
+    Rust are o varietate de tipuri de date familiare dumneavoastră:
 
 
     * booleans - `bool` pentru a reprezenta adevărat și fals
@@ -88,16 +88,16 @@
     * arrays - `[value, value, ...]` o colecție cu dimensiune fixă de elemente similare
     cunoscută la momentul compilării
 
-    * slices - o colecție de elemente similare cu dimensiune cunoscută în timpul rulării
+    * slices - o colecție cu dimensiune cunoscută în timpul rulării de elemente similare
 
     * `str`(string slice) - text de lungime cunoscută în timpul rulării
 
 
-    Text s-ar putea să fie mai complex în Rust față de alte limbaje de programare cu care ești obșnuit;
+    Sintaxa s-ar putea să fie mai complexă în Rust față de alte limbaje de programare cu care sunteți obișnuit;
 
-    având în vedere că Rust este un limbaj de programare a sistemului, îi pasă de probleme legate 
+    având în vedere că Rust este un limbaj de programare pentru sisteme, îi pasă de probleme legate 
 
-    de memorie cu care s-ar putea să nu fi obișnuit. O să aprofundăm aceste lucruri mai târziu.
+    de memorie cu care s-ar putea să nu fiți obișnuit. O să aprofundăm aceste lucruri mai târziu.
 
 
     Tipurile numerice pot fi impuse prin adăugarea la finalul unui număr (ex: `13u32`, `2u8`).
@@ -105,14 +105,14 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
   content_markdown: >
-    Rust are nevoie de explicitate când vine vorba de tipurile numerice. Nu poți
+    Rust are nevoie de explicitate când vine vorba de tipurile numerice. Nu puteți
 
     folosi un `u8` pentru un `u32` în mod neglijent fără
 
     apariția unei erori.
 
 
-    Din fericire Rust poate face conversia de la un tip numeric la altul foarte ușor
+    Din fericire, Rust poate face conversia de la un tip numeric la altul foarte ușor
     folosind cuvântul cheie **as**.
 - title: Constante
   code: >-
@@ -120,7 +120,7 @@
   content_markdown: >
     Constantele ne permit să specificăm o valoare folosită uzual de-a lungul
 
-    codului nostru în mod eficient.  În loc să copiem valori folosind variabile
+    codului nostru în mod eficient. În loc să copiem valori folosind variabile 
 
     acolo unde sunt folosite, constantele înlocuiesc direct numele lor cu
     valoarea
@@ -148,7 +148,7 @@
     index *usize* (începând cu 0) al elementului pe care dorești să îl accesezi.
 
 
-    Colecțiile cu dimensiune dinamică, deseori numite array-uri dinamice sau variabile, îți
+    Colecțiile cu dimensiune dinamică, deseori numite array-uri dinamice sau variabile, vă
     vor fi prezentate într-un capitol viitor numit **Vectori**.
 - title: Funcții
   code: >-
@@ -161,20 +161,20 @@
     (signed integer cu dimensiune de 32 de biți).
 
 
-    Dacă vrei să returnezi o valoare sau expresie, poți folosi cuvântul cheie `return`
+    Dacă vreți să returnați o valoare sau expresie, puteți folosi cuvântul cheie `return`
     și punct și virgula la final, așa cum am făcut în funcția *subtract*.
 
 
     Numele funcțiilor sunt mereu scrise în format `snake_case`.
 
 
-    Hint: dacă definești o funcție, datele pe care le admite se numesc parametrii.
-    Dacă folosești o funcție și îi transmiți niște date, atunci ele se numesc argumente.
+    Hint: dacă definiți o funcție, datele pe care le admite se numesc parametrii.
+    Dacă folosiți o funcție și îi transmiteți niște date, atunci ele se numesc argumente.
 - title: Returnarea mai multor valori
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
   content_markdown: >
-    Funcțiile pot returna mai multe valori prin returnarea unui **tuple** (tuplu)
+    Funcțiile pot returna mai multe valori prin returnarea unui **tuplu** (tuple)
 
     de valori.
 
@@ -185,17 +185,17 @@
     Rust suportă diferite tipuri de destructurări pe care le vom vedea în multe contexte,
     permințându-ne
 
-    să extragem fracțiuni ale unor structuri de date în moduri ingenioase. Fii pe fază!
+    să extragem fracțiuni ale unor structuri de date în moduri ingenioase. Fiți pe fază!
 - title: Returnarea
   content_markdown: >
     Dacă pentru o funcție nu se specifică ce tip returnează, aceasta va returna un tuplu gol,
-    cunoscut și sub numele de *unit* (unitate).
+    cunoscut și sub numele de *unitate* (unit).
 
 
     Un tuplu gol este reprezentat de `()`.
 
 
-    Folosirea unui `()` nu este des întâlnită, dar va apărea de suficiente ori, deci este bine să știi
+    Folosirea unui `()` nu este des întâlnită, dar va apărea de suficiente ori, deci este bine să știți
     ce se întâmplă.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
@@ -204,12 +204,12 @@
     Până acu', e bine! Bazele Rust-ului nu sunt așa de rele, nu-i așa?  Am
 
     aruncat o privire modului în care gândește compilatorul de Rust. Fiind un limbaj de programare
-    a sistemului
+    pentru sisteme
 
     acesta ține mult la dimensiunea valorilor în memorie, fie că pot fi
     modificate sau nu, 
 
-    și la faptul că matematica pe care o aplici este cea corectă. În cele ce urmează, ne vom
+    și la corectitudinea matematicii pe care o aplicați. În cele ce urmează, ne vom
     întâlni cu niște vechi prieteni:
 
     teste `if` și bucle `for`.
