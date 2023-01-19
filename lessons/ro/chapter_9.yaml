@@ -1,0 +1,177 @@
+- title: Capitolul 9 - Organizarea și Structura Proiectului
+  content_markdown: >
+    Până acum, toate exemplele noastre de cod au fost un singur fișier. Haideți să discutăm cum
+    codul nostru poate fi mai bine organizat și partajat de alții!
+- title: Module
+  content_markdown: |
+    Fiecare program sau bibliotecă Rust este o *cutie*.
+
+    Fiecare cutie este alcătuit dintr-o ierarhie de *module*.
+
+    Fiecare cutie are un modul rădăcină.
+
+    Un modul poate conține variabile globale, funcții, structuri, trăsături sau chiar alte module!
+
+    În Rust nu există o corespondență 1 la 1 între fișiere și ierarhia de module. Trebuie să construim arborele de module în mod explicit și manual în codul nostru.
+- title: Scrierea unui Program
+  content_markdown: |
+    Un program are un modul rădăcină într-un fișier numit `main.rs`.
+- title: Scrierea unei Biblioteci
+  content_markdown: |
+    O bibliotecă are un modul rădăcină într-un fișier numit `lib.rs`.
+- title: Referințierea la alte Module și Cutii
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: >
+    Elementele din module pot fi refererențiate cu calea completă a acestora.
+    `std::f64::consts::PI`.
+
+
+    O modalitate mai simplă este cuvântul cheie **use**. Acesta ne permite să specificăm
+    anumite elemente din modulele pe care dorim să le
+
+    să folosim în tot codul nostru fără o cale completă. Spre exemplu `use
+    std::f64::consts::PI`
+
+    îmi permite să folosesc doar identificatorul `PI` în funcția mea principală.
+
+
+    **std** este o cutie a **bibliotecii standard** din Rust, care este plină de
+    date utile
+
+    structuri și funcții utile pentru interacțiunea cu sistemul de operare.
+
+
+    Un repertoriu de căutare a cutiilor create de comunitate poate fi găsit la adresa
+    [https://crates.io](https://crates.io/).
+- title: Referința la mai multe elemente
+  content_markdown: |
+    Mai multe elemente pot fi menționate într-o singură cale de modul, astfel:
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris doesn't eat TAU, he only eats PI.
+- title: Crearea de Module
+  content_markdown: |
+    Când ne gândim la cod, ne imaginăm de obicei o ierarhie de fișiere organizate
+    în directoare. Rust vă permite să creați module strâns legate de fișierul dvs.
+    structura fișierelor.
+
+    În Rust există două moduri de a declara un modul. De exemplu, un modul
+    `foo` poate fi reprezentat ca:
+      * un fișier numit `foo.rs`
+      * un director numit `foo` cu un fișier `mod.rs` în interior
+- title: Ierarhia Modulelor
+  content_markdown: >
+    Un modul poate depinde de un alt modul. Pentru a stabili o relație
+
+    între un modul și submodulul său, trebuie să scrieți în modulul părinte:
+
+
+    ```rust
+
+    mod foo;
+
+    ```
+
+
+    Declarația de mai sus va căuta un fișier numit `foo.rs` sau `foo/mod.rs`.
+    și
+
+    va insera conținutul acestuia în interiorul unui modul numit `foo` în acest domeniu de aplicare.
+- title: Inline Module
+  content_markdown: >
+    Un submodul poate fi inclus direct în codul unui modul.
+
+
+    O utilizare foarte frecventă a modulelor inline este crearea de teste unitare.
+    Creăm un modul inline care există doar atunci când Rust este utilizat pentru testare!
+
+
+    ```
+
+    // Aceast macro elimină acest modul inline atunci când Rust
+
+    // nu se află în modul de testare
+
+    #[cfg(test)]
+
+    mod tests {
+        // Observați că nu obținem imediat acces la
+        // modulul părinte. Trebuie să fim expliciți.
+        use super::*;
+
+        ... tests go here ...
+    }
+
+    ```
+- title: Referențierea Modulelor Interne
+  content_markdown: >
+    Rust are câteva cuvinte cheie pe care le puteți folosi în calea `use` pentru a obține rapid
+    rapid modulul pe care îl doriți:
+
+    * `crate` - modulul rădăcină al cutiei dvs.
+
+    * `super` - modulul părinte al modulului curent
+
+    * `self` - modulul curent
+- title: Exportarea
+  content_markdown: >
+    În mod implicit, membrii unui *modul* nu sunt accesibili din exteriorul
+    modulului (nici măcar pentru modulele sale inferioare!). Facem ca membrii
+
+    unui modul sa fie accesibili cu ajutorul cuvântului cheie `pub`.
+
+
+    În mod implicit, membrii unui *crate* nu sunt accesibili din afara cutiei. Noi
+    facem membrii unei
+
+    cutii accesibilă prin marcarea lor ca `pub` în *root module* al
+    cutiei dvs. (`lib.rs` sau `main.rs`).
+- title: Vizibilitatea Structurilor
+  content_markdown: >
+    La fel ca și funcțiile, structurile pot declara ceea ce doresc să fie expus
+    în afara modulului lor folosind `pub`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Preludiu
+  content_markdown: |
+    Poate vă întrebați cum de avem acces la `Vec` sau `Box`.
+    peste tot, fără un `use` pentru a le importa. Acest lucru se datorează modulului
+    `prelude` din biblioteca standard.
+
+    În biblioteca standard Rust orice este exportat în
+    `std::prelude::*` este automat disponibil pentru fiecare parte a Rust.
+    Acesta este cazul pentru `Vec` și `Box`, dar și pentru altele (Option, Copy,
+    etc.).
+- title: Preludiul Propriu
+  content_markdown: >
+    Datorită preludiului bibliotecii standard, este normal ca biblioteca dvs. să aibă
+    propriul său modul preludiu. Aceasta poate fi un punct de plecare pentru
+
+    utilizatorii care doresc să importe cele mai comune structuri de date pentru utilizarea
+    bibliotecii dumneavoastră (de exemplu, `use my_library::prelude::*`).
+
+    Acesta nu este utilizat automat în programele/bibliotecile care utilizează biblioteca dvs,
+    dar este o convenție bună de urmat pentru ca oamenii
+
+    să știe de unde să înceapă.
+
+
+    Ferris spune: "Fiți un rustacean bun și ajutați alți crabi cu un
+    preludiu bun!"
+- title: Capitolul 9 - Concluzii
+  content_markdown: >
+    Acum aveți câteva trucuri în mânecă atunci când vine vorba de crearea de aplicații Rust
+    pregătite pentru lume. Nu
+
+    vă faceți griji să le țineți minte pe toate. Pe măsură ce biblioteca dvs. crește și este utilizată de alte
+    persoane, veți descoperi ce funcționează cel mai bine la fiecare etapă.
+
+
+    Resurse:
+
+    - [Orientări pentru scrierea de
+    API-uri în Rust](https://rust-lang.github.io/api-guidelines/)
