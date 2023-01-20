@@ -125,7 +125,7 @@
     unui modul sa fie accesibili cu ajutorul cuvântului cheie `pub`.
 
 
-    În mod implicit, membrii unui *crate* nu sunt accesibili din afara cutiei. Noi
+    În mod implicit, membrii unei cutii nu sunt accesibili din afara cutiei. Noi
     facem membrii unei
 
     cutii accesibilă prin marcarea lor ca `pub` în *root module* al
