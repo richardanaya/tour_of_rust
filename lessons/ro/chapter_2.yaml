@@ -1,6 +1,6 @@
 - title: Capitolul 2 - Controlul Basic al Flow-ului
   content_markdown: >
-    În acest capitol vom vorbi despre metodele de control basic al flow-ului în Rust.
+    În acest capitol vom vorbi despre metodele de control de bază ale fluxului în Rust.
 
     Dacă sunteți familiar cu limbaje bazate pe C, o să vă simțiți ca acasă și
     poate
@@ -69,7 +69,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: match
   content_markdown: >
-    Vă lipsește switch-ul din C? Rust are un cuvânt cheie incredibil de folositor
+    Vă lipsește `switch`-ul din C? Rust are un cuvânt cheie incredibil de folositor
 
     pentru îndeplinirea tuturor posibilităților unei valori și executarea unei bucăți de cod dacă
     o anumită
@@ -77,7 +77,7 @@
     posibilitate este adevărată. Hai să vedem cum merge asta pentru numere. Avem de discutat mai
     multe
 
-    în capitolele viitoare despre pattern matching pentru date mai complexe. Vă promit că
+    în capitolele viitoare despre potrivirea șabloanelor (*pattern matching*) pentru date mai complexe. Vă promit că
     o să
 
     merite așteptarea.
@@ -90,7 +90,7 @@
 
     Matching combinat cu destructurarea datelor este de departe unul din
 
-    cele mai întâlnite pattern-uri pe care le veți vedea în Rust.
+    cele mai întâlnite șabloane de programare pe care le veți vedea în Rust.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20face%20un%20caz%20pentru%20mai%20multe%20valori%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%201%20sau%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20face%20un%20caz%20pentru%20o%20mul%C8%9Bime%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20un%20num%C4%83r%20%C3%AEntre%203%20%C8%99i%209%20inclusiv%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20pune%20num%C4%83rul%20care%20respect%C4%83%20cazul%20%C3%AEntr-o%20variabil%C4%83%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20num%C4%83rul%20%7B%7D%20%C3%AEntre%2010%20%C8%99i%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20acesta%20este%20cazul%20default%20care%20trebuie%20s%C4%83%20existe%20dac%C4%83%0A%20%20%20%20%20%20%20%20%2F%2F%20nu%20sunt%20abordate%20toate%20cazurile%20posibile%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20alt%20num%C4%83r!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
 - title: Returnarea unor valori dintr-o bucla
@@ -100,11 +100,11 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22am%20g%C4%83sit%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22din%20bucl%C4%83%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
 - title: Returnarea unor valori din expresii bloc
   content_markdown: >
-    `if`-urile, `match`-urile, funcțiile și scope block-urile au un mod unic de
+    `if`-urile, `match`-urile, funcțiile și domeniile bloc au un mod unic de
     a returna valori în Rust.
 
 
-    Dacă ultima instrucțiune din interiorul unui/unei `if`, `match`, funcții sau scope block este o
+    Dacă ultima instrucțiune din interiorul unui/unei `if`, `match`, funcții sau domeniu bloc este o
     expresie fără
 
     `;`, Rust o va returna sub forma unei valori din acel bloc. Acesta

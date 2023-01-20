@@ -1,7 +1,7 @@
 - title: Capitolul 1 - The Basics
   content_markdown: >
     În acest prim capitol vom explora ideile și conceptele de bază despre
-    funcții, variabile și cele mai primitive tipuri de date. Ne bucurăm că
+    funcții, variabile și tipurile primitive de date. Ne bucurăm că
     ne sunteți alături!
 
 
@@ -52,10 +52,10 @@
     fac parte din două categorii:
 
 
-    * **mutable** (mutabile) - compilatorul va lăsa utilizatorul să modifice șî
+    * **mutabile** (mutable) - compilatorul va lăsa utilizatorul să modifice șî
     să citească valoarea acestui tip de variabile.
 
-    * **immutable** (imutabile) - compilatorul va lăsa utilizatorul doar să citească valoarea acestei variabile.
+    * **imutabile** (immutable) - compilatorul va lăsa utilizatorul doar să citească valoarea acestei variabile.
 
 
     Valorile mutabile sunt declarate cu ajutorul cuvântului cheie **mut**.
