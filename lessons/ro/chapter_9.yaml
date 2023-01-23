@@ -50,7 +50,7 @@
     use std::f64::consts::{PI,TAU}
     ```
 
-    Ferris nu mănâncă TAU, mănâncă doar PI.
+     **TAU**r și **PI**sces sunt semnele zodiacale cele mai compatibile cu Ferris.
 - title: Crearea de Module
   content_markdown: |
     Când ne gândim la cod, ne imaginăm de obicei o ierarhie de fișiere organizate
