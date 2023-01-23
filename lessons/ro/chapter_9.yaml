@@ -21,7 +21,7 @@
     O bibliotecă are un modul rădăcină într-un fișier numit `lib.rs`.
 - title: Referințierea de către alte module și cutii
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Bun%20venit%20la%20locul%20de%20joac%C4%83!%22)%3B%0A%20%20%20%20println!(%22PI%20este%20echivalent%20cu%20%7B%7D%22%2C%20PI)%3B%0A%7D%0A
   content_markdown: >
     Elementele din module pot fi refererențiate cu calea completă a acestora.
     `std::f64::consts::PI`.
@@ -37,9 +37,7 @@
 
 
     **std** este o cutie a **bibliotecii standard** din Rust, care este plină de
-    date utile
-
-    structuri și funcții utile pentru interacțiunea cu sistemul de operare.
+    structuri de date și funcții utile pentru interacțiunea cu sistemul de operare.
 
 
     Un repertoriu de căutare a cutiilor (în denumite engleza *crate*) create de comunitate poate fi găsit la adresa
@@ -52,12 +50,12 @@
     use std::f64::consts::{PI,TAU}
     ```
 
-    Ferris doesn't eat TAU, he only eats PI.
+    Ferris nu mănâncă TAU, mănâncă doar PI.
 - title: Crearea de Module
   content_markdown: |
     Când ne gândim la cod, ne imaginăm de obicei o ierarhie de fișiere organizate
-    în directoare. Rust vă permite să creați module strâns legate de fișierul dvs.
-    structura fișierelor.
+    în directoare. Rust vă permite să creați module organizate într-un mod similar
+    cu structura dumneavoastră de fișiere.
 
     În Rust există două moduri de a declara un modul. De exemplu, un modul
     `foo` poate fi reprezentat ca:
@@ -80,7 +78,7 @@
     Declarația de mai sus va căuta un fișier numit `foo.rs` sau `foo/mod.rs`.
     și
 
-    va insera conținutul acestuia în interiorul unui modul numit `foo` în acest domeniu de aplicare.
+    va insera conținutul acestuia în interiorul unui modul numit `foo`, în scope-ul acestuia.
 - title: Modul *Inline*
   content_markdown: >
     Un submodul poate fi inclus direct în codul unui modul.
