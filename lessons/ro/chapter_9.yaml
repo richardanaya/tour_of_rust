@@ -78,7 +78,7 @@
     Declarația de mai sus va căuta un fișier numit `foo.rs` sau `foo/mod.rs`.
     și
 
-    va insera conținutul acestuia în interiorul unui modul numit `foo`, în scope-ul acestuia.
+    va insera conținutul acestuia în interiorul unui modul numit `foo`, în domeniul de vizibilitate al acestuia.
 - title: Modul *Inline*
   content_markdown: >
     Un submodul poate fi inclus direct în codul unui modul.
