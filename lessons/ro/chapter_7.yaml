@@ -105,8 +105,8 @@
   content_markdown: >
     Trăsăturile pot avea metode implementate.
 
-    Funcțiile nu au acces direct asupra câmpurilor interioare ale unei structuri, dar acestea pot fi
-    folositoare în distribuirea comportamentelor între mai mulți implementarori ai trăsăturilor.
+    Funcțiile nu au acces direct asupra câmpurilor interioare ale unei structuri, dar aceste metode implementate
+    trasaturilor pot fi folositoare în distribuirea comportamentelor între mai mulți implementarori ai trăsăturilor.
 - title: Moștenirea Trăsăturilor
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Atrait%20FacatorDeZgomotGalagios%3A%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_mult_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomotGalagios%20for%20CreaturaMaritima%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creatura.fa_mult_zgomot()%3B%0A%7D%0A
