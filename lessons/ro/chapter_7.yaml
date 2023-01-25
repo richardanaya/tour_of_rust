@@ -127,8 +127,7 @@
     Tipurile trăsăturilor `&dyn TrasaturaMea` ne dau abilitatea de a lucra cu instanțe ale obiectelor
     în mod indirect, folosind expedierea dinamică.
 
-    Când expedierea dinamică este folosită, Rust va va încuraja să puneți `dyn` înaintea trăsăturii pentru
-    a înștiința lumea cu privire la acest lucru.
+    Când expedierea dinamică este folosită, este necesar să puneți `dyn` înaintea trăsăturii.
 
     Detalii cu privire la memorie:
 
