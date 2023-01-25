@@ -1,0 +1,272 @@
+- title: Capitolul 7 - Programare Orientata pe Obiecte
+  content_markdown: >
+    Exprimarea ideilor cu ajutorul functiilor este o metoda dovedita de a reprezenta
+    comportamente si date (Limbajul C o face de decenii!). 
+    
+    Din punct de vedere istoric, stiinta calculatoarelor a gasit alte agregatii si abstractii
+    expresive folositoare pentru date.
+    
+    Ati putea fi familiarizati cu programarea orientata pe obiecte (POO) ca fiind
+    una dintre acestea. In acest capitol vom explora limbajul Rust dincolo de functii.
+- title: Ce este POO?
+  content_markdown: >
+    Programarea orientata pe obiecte se refera, in linii mari, la limbajele de programare ce 
+    prezinta anumite caracteristici reprezentative:
+
+    * Incapsularea - Asocierea datelor si functiilor intr-o unitate conceptuala de un singur tip
+    numita *obiect*.
+
+    * Abstractizarea - Ascunderea datelor si functiilor pentru a acoperi detaliile 
+    implementarii unui obiect
+
+    * Polimorfismul - Abilitatea de a interactiona cu obiecte de tipuri diferite prin intermediul unei interfete.
+
+    * Mostenirea - Abilitatea de a mosteni date si comportamente de la alte obiecte.
+- title: Rust Nu Este POO
+  content_markdown: >
+    Rust nu dispune de o metoda semnificativa de mostenire a datelor si comportamentelor.
+
+    * Structurile nu pot mosteni campuri de la o structura parinte.
+
+    * Structurile nu pot mosteni functii de la o structura parinte.
+
+    Acestea fiind spuse, Rust implementeaza o multime de caracteristici ale unui limbaj de programare,
+    deci probabail nu va vor deranja aceste lipsuri.
+- title: Incapsulare prin matode
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=cfca759d42182509a46f65236bdfbf61
+  content_markdown: >
+    Rust suporta conceptul de *obiect* ce reprezinta o structura asociata unor functii (cunoscute si ca *metode*).
+
+    Primul parametru al oricarei metode trebuie sa fie o referinta la instanta asociata apelului de metoda
+    (exemplu: `instantaObiectului.foo()`). Rust foloseste:
+
+    * `&self` - Referinta imutabila la instanta.
+
+    * `&mut self` - Referinta mutabila la instanta.
+
+    Metodele sunt definite in cadrul unui bloc de implementare prin cuvantul cheie `impl`:
+
+    ```rust
+
+    impl StructuraMea { 
+        ...
+        fn foo(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Abstractie prin Expunere Selectiva
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=859b684d23c45987c00ab1ad47584193
+  content_markdown: >
+    Rust poate ascude implementarile interioare ale obiectelor.
+
+    In mod implicit, campurile si metodele sunt accesibile doar modulului de care apartin.
+
+    Cuvantul cheie `pub` expune campurile si metodele structurii in afara modulului.
+- title: Polimorfismul prin Trasaturi
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=93c3841112810ceb5014298d1ee12ac7
+  content_markdown: >
+    Rust suporta polimorfismul prin trasaturi (traits). Trasaturile ne permit associerea unui set
+    de metode cu o structura.
+
+    Prima data definim semnaturile metodelor unei trasaturi in:
+
+     ```
+
+    trait TrasaturaMea {
+        fn foo(&self);
+        ...
+    }
+
+    ```
+    Cand o structura implementeaza o trasatura, este stabilit un contract ce permite interactiunea noastra 
+    indirecta cu structura, prin tipul trasaturii (exemplu: `&dyn TrasaturaMea` ), fara a fi nevoie
+    sa cunoastem tipul real al structurii.
+
+    Metodele trasaturii implementate de structura sunt definite in cadrul unui bloc de implementare:
+
+    ```rust
+
+    impl TrasaturaMea for StructuraMea { 
+        fn foo(&self) {
+            ...
+        }
+        ... 
+    }
+
+    ```
+- title: Metode Implementate Trasaturilor
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=e7f8bf360fc76c991ac68ce65de812c9
+  content_markdown: >
+    Trasaturile pot avea metode implementate.
+
+    Functiile nu au acces direct asupra campurilor interioare ale unei structuri, dar acestea pot fi
+    folositoare in distribuirea comportamentelor intre mai multi implementarori ai trasaturilor.
+- title: Mostenirea Trasaturilor
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=dd80df8f0822ffff6e11baf008bbcbf4
+  content_markdown: |
+    Trasaturile pot mosteni metode de la alte trasaturi.
+- title: Expediere Dinamica vs Statica
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f4953ea4a3b10093cacb2bdcf7c6445a
+  content_markdown: >
+    Metodele sunt executate in doua moduri:
+
+    * expediere statica (static dispatch)- Cand tipul instantei este cunoscut,
+    stim in mod direct ce functie sa apelam.
+
+    * expediere dinamica (dynamic dispatch)- Cand tipul instantei nu este cunoscut trebuie
+    sa gasim o modalitate de a apela functia corecta.
+
+    Tipurile trasaturilor `&dyn TrasaturaMea` ne dau abilitatea de a lucra cu instante ale obiectelor
+    in mod indirect, folosind expedierea dinamica.
+
+    Cand expedierea dinamica este folosita, Rust va va incuraja sa puneti `dyn` inaintea trasaturii pentru
+    a instiinta lumea cu privire la acest lucru.
+
+    Detalii cu privire la memorie:
+
+    * Expedierea dinamica este putin mai lenta, din cauza urmaririi prin pointeri pentru a determina
+    apelul de functie real.
+- title: Trait Objects
+  content_markdown: >
+    Cand pasam o instanta a unui obiect ca parametru de tipul `&dyn TrasaturaMea`, 
+    pasam ceea ce se numeste `trait object` (obiect-trasatura)
+
+    Acestea sunt ceea ce ne permite sa apelam in mod indirect metodele corecte ale unei instante. 
+
+    Un `trait object` este o structura ce contine un pointer al instantei noastre, alaturi de o lista
+    de pointeri la functii catre metodele acesteia.
+
+    Detalii:
+
+    * Aceasta lista de functii este cunoscuta in C++ sub denumirea de *vtable*.
+- title: Manevrarea Datelor Fara Dimensiune
+  content_markdown: >
+    Trasaturile introduc o provocare interesanta cand dorim sa le stocam in interiorul altei structuri.
+
+    Trasaturile ascund structura originala, astfel ascunzand si dimensiunea originala. Valorile fara dimensiune
+    sunt manevrate in doua moduri in Rust:
+
+    * generice - Folosind tipuri parametrizate cream structuri/functii cu tipuri si dimensiuni cunoscute
+
+    * indirectie - Punerea instantelor pe heap ne ofera un nivel de indirectie ce ne permite a nu ne ingrijora
+    cu privire la dimensiunea tipului real, ci doar sa stocam un pointer catre acesta.
+    
+    Mai exista si alte modalitati!
+- title: Functii Generice
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=ec6b3ad6669b083079acb3f70a4a0719
+  content_markdown: >
+    Genericele in Rust functioneaza mana in mana cu trasaturile. Cand descriem un tip parametrizat `T`, putem
+    constrange ce tipuri pot fi folosite ca argumente,
+    
+    listand trasaturile necesare pe care argumentul trebuie sa le implementeze.
+
+    In acest exemplu, tipul `T` trebuie sa implementeze trasatura `Foo`:
+
+    ```rust
+
+    fn functia_mea<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+    Folosind generice, cream functii tipizate static la momentul compilarii, ce vor avea tipuri si marimi
+    cunoscute, permitandu-ne sa utilizam expedierea statica si sa stocam sub forma unei valori cu dimensiune.
+- title: Prescurtare a Functiilor Generice
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=388669dcf7488bedfd64fa217a4dc0e2
+  content_markdown: >
+    Rust are o prescurtare pentru exprimarea genericelor constranse de o trasatura:
+
+    ```rust
+    fn functia_mea(foo: impl Foo) {
+        ...
+    }
+    ```
+
+    Este echivalent cu a scrie:
+
+    ```rust
+    fn functia_mea<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f4d50e0f275d5dad3bdcd6bdf724b1aa
+  content_markdown: >
+    `Box` este o structura de date ce ne permite sa mutam date de pe stiva in heap.
+
+    `Box` este o structura cunoscuta sub denumirea de *smart pointer*, ce contine pointerul catre
+    datele noastre in heap.
+
+    Deoarece `Box` este o structura de dimensiune cunoscuta (doar tine un pointer), este adesea folosita
+    ca modalitate de a stoca o referinta catre ceva
+    
+    in interiorul unei structuri ce trebuie sa cunoasca dimensiunea campurilor sale. 
+    
+    `Box` este atat de comun incat poate fi utilizat de oriunde:
+
+    ```rust
+
+    Box::new(Foo { ... })
+
+    ```
+- title: Structuri Generice Revizuite
+  content_markdown: >
+    Structurile generice pot de asemenea sa-si aiba tipurile parametrizate constranse de trasaturi:
+
+    ```rust
+
+    struct StructuraMea<T>
+
+    where
+        T: StructuraMea
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+    Structurile generice isi au tipurile parametrizate in blocul lor de implementare
+
+    ```rust
+
+    impl<T> StructuraMea<T> {
+        ...
+    }
+
+    ```
+- title: Capitolul 7 - Concluzie
+  content_markdown: >
+    Acum avem mai multe particularitati ale limbajului prin care sa ne exprimam ideile intr-un mod clar!
+
+    Abstractiile Rust-ului pot fi simple, insa sunt suficient de puternice pentru a face lucrul cu codul o bucurie.
+
+    In acest capitol am aruncat o privire asupra smart pointerilor prin `Box`. In urmatorul capitol vom invata
+    despre cum acestia ne pot ajuta in alte situatii de memorie specializate.
+
+    Resurse:
+    
+    * [Video - Object-oriented Programming in 7
+    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Articol - "The faster you unlearn OOP, the better for you and your
+    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
