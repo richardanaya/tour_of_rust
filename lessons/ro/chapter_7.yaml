@@ -106,7 +106,7 @@
     Trăsăturile pot avea metode implementate.
 
     Funcțiile nu au acces direct asupra câmpurilor interioare ale unei structuri, dar aceste metode implementate
-    trasaturilor pot fi folositoare în distribuirea comportamentelor între mai mulți implementarori ai trăsăturilor.
+    trăsăturilor pot fi folositoare în distribuirea comportamentelor între mai mulți implementarori ai trăsăturilor.
 - title: Moștenirea Trăsăturilor
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Atrait%20FacatorDeZgomotGalagios%3A%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_mult_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomotGalagios%20for%20CreaturaMaritima%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creatura.fa_mult_zgomot()%3B%0A%7D%0A
@@ -146,17 +146,19 @@
     Detalii:
 
     * Această lista de funcții este cunoscută în C++ sub denumirea de *vtable*.
-- title: Manevrarea Datelor Fără Dimensiune
+- title: Manevrarea Tipurilor de Date Fără Dimensiune Fixă
   content_markdown: >
     Trăsăturile introduc o provocare interesantă când dorim să le stocăm în interiorul altei structuri.
 
-    Trăsăturile ascund structura originală, astfel ascunzând și dimensiunea originală. Valorile fără dimensiune
-    sunt manevrate în două moduri în Rust:
+    Trăsăturile ascund structura originală, astfel ascunzând și dimensiunea originală. Tipurile de date fără
+    dimensiune fixa sunt manevrate în două moduri în Rust:
 
     * tipuri generice - Folosind tipuri parametrizate creăm structuri/funcții cu tipuri și dimensiuni cunoscute
 
-    * indirectie - Punerea instanțelor pe heap ne oferă un nivel de indirectie ce ne permite a nu ne îngrijora
-    cu privire la dimensiunea tipului real, ci doar să stocăm un pointer către acesta.
+    * indirecție - Punerea instanțelor pe heap ne oferă avantajul de a nu fi necesar să cunoaștem dimensiunea
+    tipului de date la compilare, aceasta fiind folosita doar în momentul rulării. Accesarea valorii efective 
+
+    se realizează printr-un pointer (presupune o indirectie), iar acest lucru poate fi considerat un dezavantaj.
     
     Mai există și alte modalități!
 - title: Funcții Generice
@@ -182,8 +184,8 @@
 
     ```
 
-    Folosind tipurile generice, creăm funcții tipizate static la momentul compilării, ce vor avea tipuri și mărimi
-    cunoscute, permițându-ne să utilizăm expedierea statică și să stocăm sub forma unei valori cu dimensiune.
+    Folosind tipurile generice, creăm șabloane de funcții care au tipuri de date ce vor fi înlocuite la momentul
+    compilării cu tipuri de date cunoscute, permițându-ne să utilizăm apelarea statică.
 - title: Prescurtare a Funcțiilor Generice
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_fa_zgomot(creatura%3A%20%26impl%20FacatorDeZgomot)%0A%7B%0A%20%20%20%20%2F%2F%20cunoastem%20tipul%20real%20in%20momentul%20compilarii%0A%20%20%20%20creatura.fa_zgomot()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_fa_zgomot(%26creatura)%3B%0A%7D%0A
@@ -215,11 +217,11 @@
     `Box` este o structura cunoscută sub denumirea de *smart pointer*, ce conține pointerul către
     datele noastre în heap.
 
-    Deoarece `Box` este o structură de dimensiune cunoscută (doar ține un pointer), este adesea folosită
-    ca modalitate de a stoca o referință către ceva
-    
-    în interiorul unei structuri ce trebuie să cunoască dimensiunea câmpurilor sale. 
-    
+    Deoarece `Box` este o structură de dimensiune cunoscută (conține doar un pointer), este adesea folosit
+    atunci când o structură trebuie să cunoască dimensiunea câmpurilor sale. Astfel, în interiorul structurii,
+
+    vom stoca o referință prin intermediul lui `Box`.
+
     `Box` este atât de comun încât poate fi utilizat de oriunde:
 
     ```rust
@@ -229,7 +231,7 @@
     ```
 - title: Structuri Generice Revizuite
   content_markdown: >
-    Structurile generice pot de asemenea să-și aibă tipurile parametrizate constrânse de trăsături:
+    Structurile generice pot, de asemenea, să-și aibă tipurile parametrizate constrânse de trăsături:
 
     ```rust
 
@@ -244,7 +246,7 @@
 
     ```
 
-    Structurile generice își au tipurile parametrizate în blocul lor de implementare
+    Structurile generice își au tipurile parametrizate în blocul lor de implementare:
 
     ```rust
 
