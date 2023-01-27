@@ -153,12 +153,16 @@
     Trăsăturile ascund structura originală, astfel ascunzând și dimensiunea originală. Tipurile de date fără
     dimensiune fixa sunt manevrate în două moduri în Rust:
 
-    * tipuri generice - Folosind tipuri parametrizate creăm structuri/funcții cu tipuri și dimensiuni cunoscute
+    * tipuri generice - Folosind tipuri parametrizate creăm structuri/funcții cu tipuri de date generice,
+    a căror dimensiune va fi cunoscută în momentul folosirii lor, când programatorul va specifica un tip de date
+    
+    efectiv, care va avea și dimensiuni cunoscute.
 
     * indirecție - Punerea instanțelor pe heap ne oferă avantajul de a nu fi necesar să cunoaștem dimensiunea
-    tipului de date la compilare, aceasta fiind folosita doar în momentul rulării. Accesarea valorii efective 
-
-    se realizează printr-un pointer (presupune o indirectie), iar acest lucru poate fi considerat un dezavantaj.
+    tipului de date la compilare, aceasta fiind folosita doar în momentul rulării, când programatorul poate
+    
+    folosi orice tip de date care se portivește. Accesarea valorii efective se realizează printr-un pointer
+    (presupune o indirectie), iar acest lucru poate fi considerat un dezavantaj.
     
     Mai există și alte modalități!
 - title: Funcții Generice
