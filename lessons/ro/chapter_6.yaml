@@ -1,15 +1,16 @@
 - title: Capitolul 6 - Text
   content_markdown: >
-    Acum că înțelegem puțin cum Rust gestionează memoria, suntem pregătiti să discutăm
-    mai detaliat despre text.
+    Acum că înțelegem puțin modul în care Rust gestionează memoria, suntem pregătiti să discutăm
+    mai detaliat despre folosirea textelor.
 
-    Limbajului Rust îi pasă foarte mult de textul internațional și de lucruri ce țin de nivelul de bytes
-    cu care s-ar putea să nu fiți familiarizați din alte limbaje.
+    Limbajul Rust acorda multă importanță folosirii textelor în diverse limbi și modului în care sunt reprezentate
+    acestea la  nivel de octeți, lucruri cu care s-ar putea să nu fiți familiarizați din alte limbaje.
 
     Acestea fiind spuse, Rust dispune de numeroase unelte pentru gestionarea lor.
 - title: Șiruri de caractere literale
   content_markdown: >
-    Șirurile de caractere literale (string literals) sunt întotdeauna Unicode.
+    Șirurile de caractere literale (în engleză *string literals*) sunt întotdeauna reprezentate
+    folosind codificarea **utf-8** al setului de caracatere Unicode.
 
 
     Șirurile de caractere literale sunt de tipul `&'static str`:
@@ -20,8 +21,7 @@
     * `'static` înseamnă că datele șirului vor fi disponibile până la sfârșitul
     programului (nu se dă `drop` niciodată).
 
-    * `str` înseamnă că pointeaza către o secvență de bytes ce sunt întotdeauna valizi **utf-8**
-
+    * `str` înseamnă o secvență de octeți ce formează întotdeauna un text valid in formatul **utf-8**
 
     Detalii legate de memorie:
 
@@ -30,7 +30,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
 - title: Ce este utf-8
-  content_markdown: "Pe măsură ce tot mai multe limbi au fost folosite pe calculatoare, lumea avea nevoie să reprezinte mai multe caractere de text\ndecat ASCII permitea (1 byte permitea numai 256 de caractere). \n\n**utf-8** a fost introdus cu o lungime variabila de bytes (1-4 bytes), crescand considerabil gama de caractere posibile.\n\nUn avantaj al caracterelor de dimensiuni variabile este că textul nu mai are octeți inutili pentru caractere ASCII foarte comune (necesitând doar 1 octet în **utf-8**).\n\nUn dezavantaj al caracterelor de dimensiuni variabile este că căutarea caracterelor nu se mai poate face rapid \n(** timp constant O(1)**) cu o simplă indexare (exemplu: `my_text[3]` pentru a obține al patrulea caracter). Este posibil ca\ncaracterele anterioare să aibă lățimi variabile, modificând locul în care începe de fapt al 4-lea caracter în secvența de octeți.\n\nTrebuie în schimb să parcurgem o secvență **utf-8** de octeți pentru a înțelege unde încep de fapt caracterele Unicode (** timp liniar **O(n)**).\n\nFerris: \"În mare parte, doar mă bucur că am **utf-8** pentru a reprezenta emoticoane cu prietenii mei subacvatici.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+  content_markdown: "Pe măsură ce tot mai multe limbi au început a fi folosite pe calculatoare, lumea a avut nevoie de modalități de reprezentare a mai multor caractere de text\ndecat ASCII permitea (1 byte permitea numai 256 de caractere). \n\nA fost introdus **utf-8**, având o lungime variabilă de bytes (1-4 bytes), lucru ce a crescut considerabil gama de caractere posibile.\n\nUn avantaj al caracterelor de dimensiuni variabile este că textul nu mai are octeți inutili pentru caractere ASCII foarte comune (necesitând doar 1 octet în **utf-8**).\n\nUn dezavantaj al caracterelor de dimensiuni variabile este faptul că căutarea caracterelor nu se mai poate face rapid \n(** timp constant O(1)**) cu o simplă indexare (exemplu: `my_text[3]` pentru a obține al patrulea caracter). Este posibil ca\ncaracterele anterioare să aibă lățimi variabile, modificând locul în care începe de fapt al 4-lea caracter în secvența de octeți.\n\nTrebuie în schimb să parcurgem o secvență **utf-8** de octeți pentru a înțelege unde încep de fapt caracterele Unicode (** timp liniar **O(n)**).\n\nFerris: \"În mare parte, doar mă bucur că am **utf-8** pentru a reprezenta emoticoane cu prietenii mei subacvatici.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
 - title: Secvențe Escape
   content_markdown: >
     Este o provocare să reprezinți vizual anumite caractere, așa că secvențele escape (în engleză *escape codes*)
@@ -102,7 +102,7 @@
     * `find` returnează un `Option<usize>` al primei poziții dintr-un text.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22salut%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20primul_cuvant%20%3D%20%26a%5B0..5%5D%3B%0A%20%20%20%20let%20al_doilea_cuvant%20%3D%20%26a%5B6..10%5D%3B%0A%20%20%20%20%2F%2F%20let%20jumatate_de_crab%20%3D%20%26a%5B6..8%5D%3B%20E%C8%98UEAZ%C4%82%0A%20%20%20%20%2F%2F%20Rust%20nu%20accepta%20subsiruri%20formate%20din%20caractere%20Unicode%20invalide%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20primul_cuvant%2C%20al_doilea_cuvant)%3B%0A%7D%0A
-- title: Tipul Char
+- title: Tipul `char`
   content_markdown: >
     Cu atâtea dificultăți în lucrul cu Unicode, Rust oferă o modalitate de a
     prelua o secvență de octeți utf-8 ca un vector de caractere de tip `char`.
@@ -135,7 +135,8 @@
     Atunci când un șir de caractere este eliminat (drop), este eliminată și memoria heap a acestuia.
 
 
-    Șirile de caractere au un operator `+` care extinde șirul cu un `&str` și  se returnează pe sine,
+    Șirile de caractere au un operator `+` care extinde șirul cu un `&str`. (Șirul din stânga este `consumat`, iar buffer-ul lui
+    este refolosit pentru a stoca valoarea finală. Șirul din dreapta este doar împrumutat pentru a efectua concatenarea.)
     dar s-ar putea să nu fie atât de ergonomic pe cât sperați.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20salutarelume%20%3D%20String%3A%3Afrom(%22salutare%22)%3B%0A%20%20%20%20salutarelume.push_str(%22%20lume%22)%3B%0A%20%20%20%20salutarelume%20%3D%20salutarelume%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20salutarelume)%3B%0A%7D%0A
