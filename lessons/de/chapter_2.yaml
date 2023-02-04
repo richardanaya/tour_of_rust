@@ -65,7 +65,7 @@
     * `x..=y` erstellt einen Iterator, der bei `x` anfängt und `y` mit
     einschließt
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20print!(%220..5%20%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20print!(%22%5Cn0..5%3D%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20print!(%220..5%20%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20print!(%22%5Cn0..%3D5%20%3A%22)%3B%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20print!(%22%20%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: match
   content_markdown: >
     Du vermisst dein Switch Statement? Rust lässt dich nicht im Stich!
