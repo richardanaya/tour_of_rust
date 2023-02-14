@@ -21,6 +21,6 @@ Every time you finish the translation of a chapter update the table underneath.
 |tr    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
 |ua    | ✓ | ✓ | ✓ | ✓ | ✓ |   |   |   |   |   |    |
 |vi    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓  |
-
+|ro    | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |   | ✓ |   | ✓ |   |
 
 Legend: ✓ = done, u = needs update
