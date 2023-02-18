@@ -104,7 +104,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E6%96%87%E5%AD%97%E3%82%92char%E3%81%AE%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%A8%E3%81%97%E3%81%A6%E9%9B%86%E3%82%81%E3%82%8B%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20chars%20%E3%81%AF%204%20%E3%83%90%E3%82%A4%E3%83%88%E3%81%AA%E3%81%AE%E3%81%A7%E3%80%81u32%20%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
 - title: String
   content_markdown: >
-    A **String** はヒープにutf-8バイト列をもつ構造体です。
+    **String** はヒープにutf-8バイト列をもつ構造体です。
 
 
     そのメモリはヒープ上にあるため、文字列リテラルでは出来ないような、拡張や修正などが可能です。
