@@ -1,0 +1,155 @@
+- title: Capitolul 3 - Tipuri de structuri de date de bază
+  content_markdown: >
+    Este timpul să explorăm tipuri de date dincolo de cele de bază! În acest capitol o să aruncăm o privire peste
+    structurile de date
+
+    primare din Rust, punând accent pe reprezentarea lor în
+    memorie. Cred
+
+    c-o să vă placă cum Rust ascunde foarte puține despre cum funcționează lucrurile.
+- title: Structuri
+  content_markdown: >
+    Un `struct` este o colecție de câmpuri (field-uri).
+
+
+    *Câmpurile* sunt pe scurt date asociate unei structuri. Valorile lor
+    pot fi de tip primar sau o structură de date.
+
+
+    Definiția structurii este ca o matriță pentru compilator pentru a ști cum să aranjeze
+    câmpurile în memorie într-un mod compact.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20%2F%2F%20String%20este%20o%20structur%C4%83%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D
+- title: Apelarea metodelor
+  content_markdown: >
+    Spre deosebire de funcții, metodele sunt funcții asociate unui tip specific
+    de date.
+
+
+    **metode statice** — metode care aparțin unui tip de date și sunt apelate folosind
+    operatorul `::`.
+
+
+    **metode ale instanței** — metode care aparțin unei instanțe a unui tip de date și sunt
+    apelate folosind operatorul `.`.
+
+
+    Vom dezvolta acest concept, cu implementarea propriilor metode, în capitolele următoare.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Folosim%20o%20metod%C4%83%20static%C4%83%20ca%20s%C4%83%20creem%20o%20instan%C8%9B%C4%83%20String%0A%20%20%20%20let%20s%20%3D%20String%3A%3Afrom(%22Hello%20world!%22)%3B%0A%20%20%20%20%2F%2F%20Folosim%20o%20metod%C4%83%20a%20instan%C8%9Bei%0A%20%20%20%20println!(%22%7B%7D%20are%20%7B%7D%20de%20caractere.%22%2C%20s%2C%20s.len())%3B%0A%7D%0A
+- title: Memorie
+  content_markdown: >
+    Aplicațiile scrise în Rust au 3 zone de memorie unde este stocată informație:
+
+    * **memoria pentru date** - pentru date care sunt de dimensiune fixă și sunt **statice** (adică
+    mereu disponibile pe toată durata rulării aplicației). 
+      Considerați textul din programul dumneavoastră (ex: "Hello World!"): memoria ocupată (bytes) de acest text este citită dintr-un singur loc în cod
+      deci poate fi stocat în această zonă de memorie. Compilatoarele fac foarte multe optimizări 
+      pentru acest tip de date și folosirea lor în general este considerată foarte rapidă, pentru că
+      locația lor este cunoscută și fixă.
+    * **memoria pentru stivă (stack)** - pentru date declarate ca variabile în interiorul unei
+    funcții (variabile locale). 
+      Locația în memorie a acestor date nu se schimbă pe durata apelului funcției; datorită acestui lucru compilatoarele 
+      pot optimiza codul astfel încât datele din stivă se accesează foarte rapid.
+    * **memoria pentru alocare dinamică (heap)** - pentru date care sunt create în timpul rulării 
+    aplicației. 
+      Datele în această zonă de memorie pot fi adăugate, mutate, șterse, redimensionate, etc. Din cauza 
+      naturii sale dinamice, este în general considerată mai lentă, dar această zonă permite 
+      utilizări mult mai creative ale memoriei. Când adăugăm date în această zonă de memorie, 
+      numim această operație **alocare (de memorie)**. Când stergem date din această zonă de memorie, numim această operație 
+      **dealocare (de memorie)**.
+- title: Crearea datelor în Memorie
+  content_markdown: >
+    Când **instanțiem** o **structură** în codul nostru, aplicația creează
+    câmpurile de date unul lângă altul în memorie.
+
+
+    Instanțiem o structură specificând toate valorile câmpurilor în interiorul 
+
+
+    structurii, dată prin numele său.
+
+
+    Câmpurile unei structuri sunt accesate folosind operatorul `.`.
+
+
+    Detalii despre memorie în exemplul nostru:
+
+    * Textul din interiorul ghilimelelor este o dată care poate fi numai citită (ex: "Ferris"), deci acesta
+    este 
+      pus în zona *memoriei pentru date*.
+    * Apelul funcției `String::from` creează o structură de tip `String` ale cărei câmpuri sunt depuse, 
+    unul lângă altul, lângă câmpurile structurii, pe *stivă*. Un String reprezintă text care poate fi modificat 
+      în următoarele moduri:
+      1. Se alocă memorie pe *heap* pentru text și acolo va putea fi modificat
+      2. Stochează o referință la acea locație de pe *heap* în structura `String` 
+      (Mai multe despre acest concept în următoarele lecții) 
+    * Așadar, cei doi prieteni ai noștri, *Ferris* și *Sarah*, sunt structuri de date care
+    vor avea mereu
+      locații fixe în aplicația noastră, deci vor fi puși în *stivă*.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20tip_animal%3A%20String%2C%0A%20%20%20%20nume%3A%20String%2C%0A%20%20%20%20nr_m%C3%A2ini%3A%20i32%2C%0A%20%20%20%20nr_picioare%3A%20i32%2C%0A%20%20%20%20arm%C4%83%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20datele%20din%20Creatur%C4%83Marin%C4%83%20sunt%20pe%20stiv%C4%83%0A%20%20%20%20let%20ferris%20%3D%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Struct-ul%20String%20este%20de%20asemenea%20pe%20stiv%C4%83%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20dar%20%C8%9Bine%20o%20referin%C8%9B%C4%83%20a%20informa%C8%9Biei%20pe%20heap%0A%20%20%20%20%20%20%20%20tip_animal%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20nr_m%C3%A2ini%3A%202%2C%0A%20%20%20%20%20%20%20%20nr_picioare%3A%204%2C%0A%20%20%20%20%20%20%20%20arm%C4%83%3A%20String%3A%3Afrom(%22ghiar%C4%83%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20%20%20%20%20tip_animal%3A%20String%3A%3Afrom(%22caracati%C8%9B%C4%83%22)%2C%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20nr_m%C3%A2ini%3A%208%2C%0A%20%20%20%20%20%20%20%20nr_picioare%3A%200%2C%0A%20%20%20%20%20%20%20%20arm%C4%83%3A%20String%3A%3Afrom(%22creier%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20este%20%7B%7D.%20Are%20%7B%7D%20m%C3%A2ini%2C%20%7B%7D%20picioare%2C%20%C8%99i%20%7B%7D%20pe%20post%20de%20arm%C4%83%22%2C%0A%20%20%20%20%20%20%20%20ferris.nume%2C%20ferris.tip_animal%2C%20ferris.nr_m%C3%A2ini%2C%20ferris.nr_picioare%2C%20ferris.arm%C4%83%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20este%20%7B%7D.%20Are%20%7B%7D%20m%C3%A2ini%2C%20%7B%7D%20picioare.%20Nu%20are%20nicio%20arm%C4%83..%22%2C%0A%20%20%20%20%20%20%20%20sarah.nume%2C%20sarah.tip_animal%2C%20sarah.nr_m%C3%A2ini%2C%20sarah.nr_picioare%0A%20%20%20%20)%3B%0A%7D%0A
+- title: Structuri de tip tuplu
+  content_markdown: |
+    Pentru a fi conciși, puteți creea structuri care sunt folosite ca un tuplu.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Location(i32%2C%20i32)%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Acesta%20este%20tot%20o%20structur%C4%83%20pe%20stiv%C4%83%0A%20%20%20%20let%20loc%20%3D%20Location(42%2C%2032)%3B%0A%20%20%20%20println!(%22%7B%7D%2C%20%7B%7D%22%2C%20loc.0%2C%20loc.1)%3B%0A%7D%0A
+- title: Structuri de tip unitate
+  content_markdown: >
+    Structurile nu trebuie neapărat să aibă câmpuri.
+
+
+    După cum am menționat în Capitolul 1, *unitate* este o altă denumire pentru un tuplu gol, `()`.
+    De aceea, acest tip de structuri se numește *Unit-like*.
+
+
+    Acest tip de structuri este folosit rar.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Marcaj%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20_m%20%3D%20Marcaj%3B%0A%7D%0A
+- title: Enumerări
+  content_markdown: >
+    Enumerările vă permit să creați un tip nou de date care poate avea o valoare dintr-o
+    mulțime de elemente prestabilite folosind cuvântul cheie `enum`.
+
+
+    `match` ne ajută să abordăm toate valorile posibile ale unei enumerări, făcând din acest tip
+    un instrument puternic pentru asigurarea calității codului.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20aceast%C4%83%20linie%20opre%C8%99te%20avertiz%C4%83rile%20compilatorului%0A%0Aenum%20Specii%20%7B%0A%20%20%20%20Crab%2C%0A%20%20%20%20Caracati%C8%9B%C4%83%2C%0A%20%20%20%20Pe%C8%99te%2C%0A%20%20%20%20Scoic%C4%83%0A%7D%0A%0Astruct%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20Specii%3A%20Specii%2C%0A%20%20%20%20nume%3A%20String%2C%0A%20%20%20%20nr_m%C3%A2ini%3A%20i32%2C%0A%20%20%20%20nr_picioare%3A%20i32%2C%0A%20%20%20%20arm%C4%83%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20%20%20%20%20Specii%3A%20Specii%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20nr_m%C3%A2ini%3A%202%2C%0A%20%20%20%20%20%20%20%20nr_picioare%3A%204%2C%0A%20%20%20%20%20%20%20%20arm%C4%83%3A%20String%3A%3Afrom(%22ghiar%C4%83%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.Specii%20%7B%0A%20%20%20%20%20%20%20%20Specii%3A%3ACrab%20%3D%3E%20println!(%22%7B%7D%20este%20crab%22%2Cferris.nume)%2C%0A%20%20%20%20%20%20%20%20Specii%3A%3ACaracati%C8%9B%C4%83%20%3D%3E%20println!(%22%7B%7D%20este%20caracati%C8%9B%C4%83%22%2Cferris.nume)%2C%0A%20%20%20%20%20%20%20%20Specii%3A%3APe%C8%99te%20%3D%3E%20println!(%22%7B%7D%20este%20pe%C8%99te%22%2Cferris.nume)%2C%0A%20%20%20%20%20%20%20%20Specii%3A%3AScoic%C4%83%20%3D%3E%20println!(%22%7B%7D%20este%20scoic%C4%83%22%2Cferris.nume)%2C%0A%20%20%20%20%7D%0A%7D%0A
+- title: Enumerările care conțin tipuri de Date
+  content_markdown: >
+    Elementele unui `enum` pot avea de asemenea unul sau mai multe tipuri de date, permițându-i acestuia să se comporte
+    ca un *union* din limbajul C.
+
+
+    Atunci când un `enum` este utilizat într-un `match`, puteți atașa un nume de variabilă
+    fiecărei valori din `enum`.
+
+
+    Detalii despre memorie pentru un `enum`:
+
+    * Spațiul de memorie alocat unei variabile de tip enumerare va fi egal cu spațiul de memorie necesar pentru stocarea celui mai mare element al enumerării. 
+    Acest lucru asigură faptul că orice valoare posibilă a enumerării va încăpea în același spațiu din memorie.
+
+    * Pe lângă tipul de date al unui element (dacă acesta are un tip), fiecare element are de asemenea asociată
+    o valoare numerică care reprezintă indexul acestuia în enumerare.
+
+
+    Alte detalii:
+
+    * `enum`-ul din Rust este cunoscut și ca *uniune etichetată* (tagged union).
+
+    * Combinarea mai multor tipuri de date pentru a creea unul nou este ceea ce îi face pe oameni
+    să afirme faptul că Rust are *tipuri algebrice*.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%23!%5Ballow(dead_code)%5D%20%2F%2F%20aceast%C4%83%20linie%20opre%C8%99te%20avertiz%C4%83rile%20compilatorului%0A%0Aenum%20Specii%20%7B%20Crab%2C%20Caracati%C8%9B%C4%83%2C%20Pe%C8%99te%2C%20Scoic%C4%83%20%7D%0Aenum%20TipOtrav%C4%83%20%7B%20Acid%2C%20Dureros%2C%20Letal%20%7D%0Aenum%20M%C4%83rime%20%7B%20Mare%2C%20Mic%20%7D%0Aenum%20Arm%C4%83%20%7B%0A%20%20%20%20Ghiar%C4%83(i32%2C%20M%C4%83rime)%2C%0A%20%20%20%20Otrav%C4%83(TipOtrav%C4%83)%2C%0A%20%20%20%20None%0A%7D%0A%0Astruct%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20Specii%3A%20Specii%2C%0A%20%20%20%20nume%3A%20String%2C%0A%20%20%20%20nr_m%C3%A2ini%3A%20i32%2C%0A%20%20%20%20nr_picioare%3A%20i32%2C%0A%20%20%20%20Arm%C4%83%3A%20Arm%C4%83%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20datele%20din%20Creatur%C4%83Marin%C4%83%20sunt%20pe%20stiv%C4%83%0A%20%20%20%20let%20ferris%20%3D%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Struct-ul%20String%20este%20de%20asemenea%20pe%20stiv%C4%83%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20dar%20%C8%9Bine%20o%20referin%C8%9B%C4%83%20a%20informa%C8%9Biei%20pe%20heap%0A%20%20%20%20%20%20%20%20Specii%3A%20Specii%3A%3ACrab%2C%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20nr_m%C3%A2ini%3A%202%2C%0A%20%20%20%20%20%20%20%20nr_picioare%3A%204%2C%0A%20%20%20%20%20%20%20%20Arm%C4%83%3A%20Arm%C4%83%3A%3AGhiar%C4%83(2%2C%20M%C4%83rime%3A%3AMic)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.Specii%20%7B%0A%20%20%20%20%20%20%20%20Specii%3A%3ACrab%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.Arm%C4%83%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Arm%C4%83%3A%3AGhiar%C4%83(nr_ghiare%2C%20M%C4%83rime)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20m%C4%83rime_descriere%20%3D%20match%20M%C4%83rime%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20M%C4%83rime%3A%3AMare%20%3D%3E%20%22mari%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20M%C4%83rime%3A%3AMic%20%3D%3E%20%22mici%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20este%20un%20crab%20cu%20%7B%7D%20ghiare%20%7B%7D%22%2C%20nr_ghiare%2C%20m%C4%83rime_descriere)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20este%20un%20crab%20cu%20alte%20arme%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20este%20alt%20animal%22)%2C%0A%20%20%20%20%7D%0A%7D
+- title: Capitolul 3 - Concluzie
+  content_markdown: >
+    Ce palpitant! Acum avem în sfârșit toate uneltele de bază pentru a reprezenta
+    ideile noastre în cod. Sper că acum 
+
+    putem vedea puțin din felul în care operațiile fundamentale din Rust funcționează armonios și în mod
+    concis cu tipurile sale de date. În cele ce urmează o să vorbim despre 
+
+    un concept care atribuie tipurilor noastre de date și mai multă flexibilitate în reprezentare:
+    *genericitate* (generics).
