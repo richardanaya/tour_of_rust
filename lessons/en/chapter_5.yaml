@@ -177,7 +177,7 @@
 
 
     * Modifying static variables is inherently dangerous because they are
-    globally accessable to be read from by anyone
+    globally accessible to be read from by anyone
       introducing the possibility of a data race. We'll talk about the challenges of global data later.
     * Rust allows the use of `unsafe { ... }` blocks to perform some operations
     that the compiler cannot make memory guarantees about. The [<span
