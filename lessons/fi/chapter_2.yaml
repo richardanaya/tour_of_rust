@@ -1,0 +1,127 @@
+- title: Kapple 2 - Perusohjausvirta
+  content_markdown: >
+    Tässä luvussa käsitellään ohjausrakenteiden perusmetodeja Rust-ohjelmointikielessä.
+
+    Jos olet perehtynyt C-pohjaisiin ohjelmointikieliin, tulet tuntemaan olosi kotoisaksi 
+
+    ja matkan varrella saatat saada muutaman yllätyksen.
+- title: if/else
+  content_markdown: >
+    Koodin haaroitus Rust-ohjelmoinnissa ei ole yllättävää.
+
+
+    Ehtolausekkeissa ei ole sulkeita! Tarvitsimmeko niitä koskaan? Nyt logiikkamme
+    näyttää kauniilta ja selkeältä.
+
+
+    Kaikki tavalliset suhteelliset ja loogiset operaattorit toimivat edelleen:  `==`, `!=`, `<`,
+    `>`, `<=`, `>=`, `!`, `||`, `&&`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+- title: loop
+  content_markdown: |
+    Tarvitsetko ääretöntä silmukkaa?
+
+    Rust tekee sen helpoksi.
+
+    `break` keskeyttää silmukan, kun olet valmis.
+
+    `loop` puolestaan kätkee sisäänsä salaisuuden, josta puhumme pian.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while
+  content_markdown: |
+    `while` antaa sinulle mahdollisuuden helposti lisätä ehtolausekkeen silmukkaan.
+
+    Jos ehtolauseke on `false`, silmukka poistuu.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22x%20is%20%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: for
+  content_markdown: >
+    Rustin `for` silmukka on tehokas päivitys. Se
+
+    Iteroi arvojen yli mistä tahansa lausekkeesta, joka arvioituu iteraattoriksi.
+    Mikä
+
+    on iteraattori? Iteraattori on objekti, jolta voi kysyä "Mikä
+    on
+
+    seuraava sinulla oleva asia?" kunnes ei enää ole asioita.
+
+
+    Tarkastelemme tätä tarkemmin tulevassa kappaleessa. Sillä välin tiedä, että Rust
+    tekee
+
+    helpoksi iteraattoreiden luomisen, jotka generoivat sarjan kokonaislukuja.
+
+
+    `..` -operaattori luo iteraattorin, joka generoi numeroita aloitusnumerosta
+    lähtien,
+
+    mutta ei sisällytä lopetusnumeroa.
+
+
+    `..=`-operaattori luo iteraattorin, joka generoi numeroita annetusta aloitusnumerosta
+
+    aina lopetusnumeroon asti.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_markdown: >
+    Kaipaatko switch-lausetta? Rust-kielessä on uskomattoman hyödyllinen avainsana
+
+    kaikkien mahdollisten ehtojen vastaamiseen ja koodipolun suorittamiseen, jos ehto
+
+    on tosi.  Katsotaanpa, miten tämä toimii luvuille. Meillä on enemmän
+    sanottavaa
+
+    tulevissa kappaleissa monimutkaisempien tietojen käsittelystä. Lupaan, että se
+
+    on odotuksen arvoista.
+
+
+    `match` on täydellinen, joten kaikki tapaukset (cases) 
+
+    täytyy käsitellä.
+
+
+    Matchaaminen yhdistettynä purkamiseen on selvästi yksi
+
+    yleisimmistä kaavoista, joita näet Rustissa.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: Paluuarvon palauttaminen loopista
+  content_markdown: |
+    `loop`:illa voidaan keskeyttää ja palauttaa arvo `break`-lauseella.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Palautetaan Arvoja Blokkilausekkeesta
+  content_markdown: >
+    `if`, `match`, funktiot ja lohkokirjoitukset (scope blocks) kaikki tarjoavat
+    oman tavan palauttaa arvoja Rustissa.
+
+
+    Jos viimeinen lauseke `if`, `match`, funktiossa tai lohkokomentorivistä on
+    lauseke ilman 
+
+    `;`, Rust palauttaa sen arvon lohkosta. Tämä
+
+    on loistava tapa luoda tiivis logiikka, joka palauttaa arvon, joka voidaan
+    sijoittaa
+
+    uuteen muuttujaan.
+
+
+    Huomaa, että se mahdollistaa myös if-lauseen toimimisen tiiviinä
+    ternäärisenä lausekkeena.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: Kappale 2 - Päätelmä
+  content_markdown: >
+    Toivottavasti olen osoittanut Rustin voiman jo
+
+    peruskielen ominaisuuksissa. Puhumme `for`:sta ja 
+
+    `match`:sta vielä syvällisemmin, kun saamme lisää tietoa, joka
+
+    voi hyödyntää niiden ominaisuuksia. Seuraavaksi käsittelemme Rustin perustietorakenteita.
