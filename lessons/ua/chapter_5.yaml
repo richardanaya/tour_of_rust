@@ -26,7 +26,7 @@
 
     Термін для такої деконструкції та вивільнення називається **drop (скидання)**.
 
-    Пару цікавинок:
+    Деталі роботи за памяттю:
     * У Rust не передбачено збирання сміття через і без того гарний менеджмент
     пам'яті.
     * У C++ це також називається "Отримання ресурсу є ініціалізацією"
@@ -38,7 +38,7 @@
     а потім дочірні елементи, потім дочірні дочірніх. Тобто зверху вниз.
 
 
-    Пару цікавинок:
+    Деталі роботи за памяттю:
 
     * При автоматичному вивільненні пам'яті, Rust зробить все, щоб
     не відбулося витоків пам'яті.
@@ -56,49 +56,51 @@
     використовувати не можна, через те що володіння передано іншому власнику.
 
 
-    Memory details:
+    Деталі роботи за памяттю:
 
-    * During a **move** the stack memory of the owners value is copied to the
-    function call's parameter stack memory.
+    * Під час **переміщення** пам'ять власника копіюється до пам'яті параметра
+    у пам'ять параметрів виклику функції.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20moved%20to%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20can%20no%20longer%20be%20used%0A%7D%0A
-- title: Returning Ownership
+- title: Повернення володіння
   content_markdown: |
-    Ownership can also be returned from a function.
+    При поверненнф значення з функції, повертається також і володіння.
+    Тому володіння даними отримує той, хто прийме повернуті значення,
+    будь то змінна, чи параметр іншої функції.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20ownership%20is%20moved%20out%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20becomes%20the%20owner%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20because%20of%20end%20of%20function%20scope%0A%7D%0A
-- title: Borrowing Ownership with References
+- title: Отримання володіння через посилання
   content_markdown: |
-    References allow us borrow access to a resource with the `&` operator.
+    Володіння також можна передати за допомогою посилання, для цього треба перед змінною
+    поставити оператор `&`.
 
-    References are also dropped like other resources.
+    Посилання видаляються з пам'яті так само як і будь-які інші ресурси даних.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20here%0A%7D%0A
-- title: Borrowing Mutable Ownership with References
+- title: Отримання володіння через мутабельні посилання
   content_markdown: >
-    We can also borrow mutable access to a resource with the `&mut` operator.
+    Якщо ви хочете отримати володіння у мутабельному посиланні, то замість
+    оператора `&` треба писати `&mut`.
 
 
-    A resource owner cannot be moved or modified while mutably borrowed.
+    Ресурс не можна змінювати чи переміщувати, поки на нього вказує мутабельне посилання.
 
 
-    Memory detail:
+    Деталі роботи за памяттю:
 
-    * Rust prevents having two ways to mutate an owned value because it
-    introduces the possibility of a data race.
+    * Rust не дає можливості мати декілька мутабельних посилань, задля забезпечення цілістності даних.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20do_something(foo)%20would%20fail%20because%0A%20%20%20%20%2F%2F%20foo%20cannot%20be%20moved%20while%20mutably%20borrowed%0A%0A%20%20%20%20%2F%2F%20FAILURE%3A%20foo.x%20%3D%2013%3B%20would%20fail%20here%20because%0A%20%20%20%20%2F%2F%20foo%20is%20not%20modifiable%20while%20mutably%20borrowed%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%20because%20it's%20no%20longer%20used%20after%20this%20point%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20works%20now%20because%20all%20mutable%20references%20were%20dropped%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20move%20foo's%20ownership%20to%20a%20function%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
-- title: Dereferencing
+- title: Розіменування посиланнь
   content_markdown: >
-    Using `&mut` references, you can set the owner's value using the `*`
-    operator.
+    Використовуючи `&mut` ви можете встановити значення ресурсу на котрий посилаються
+    за допомогою оператора`*`.
 
-
-    You can also get a copy of an owned value using the `*` operator (if the value
-    can be copied - we will discuss copyable types in later chapters).
+    Щоб зкопіювати значення з ресурсу через посилання також можна використати оператор `*`
+    (про копіювання данних різних типів ми поговоримо пізніше).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20get%20a%20copy%20of%20the%20owner's%20value%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%20the%20reference's%20owner's%20value%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
-- title: Passing Around Borrowed Data
+- title: Передача запозичених даних
   content_markdown: >
     Rust's rules for references might best be summarized by:
 
