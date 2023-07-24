@@ -1,0 +1,196 @@
+- title: Chapter 6 - Text
+  content_markdown: >
+    Now that we understand a bit how Rust thinks of memory, we are prepared to
+    talk about text in more detail.
+
+    Rust cares a great deal about international text and byte level concerns you
+    might not be familiar with
+
+    from other languages. That said, Rust has many great tools for managing
+    those concerns.
+- title: String Literals
+  content_markdown: >
+    String literals are always Unicode.
+
+
+    String literals type are `&'static str`:
+
+
+    * `&` meaning that it's referring to a place in memory, and it lacks a
+    `&mut` meaning that the compiler will not allow modification
+
+    * `'static` meaning the string data will be available till the end of our
+    program (it never drops)
+
+    * `str` means that it points to a sequence of bytes that are always valid
+    **utf-8**
+
+
+    Memory details:
+
+    * The Rust compiler will likely put your string in the data segment of your
+    program memory
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: What is utf-8
+  content_markdown: "As more languages were used on computers, the world needed to represent more text characters\nthan ASCII allowed (1 byte only allowed 256 characters). \n\n**utf-8** was introduced with a variable byte length of 1-4 bytes greatly increasing the range of possible characters.\n\nAn advantage of variable sized characters is text did not have unnecessary bytes for very common ASCII (only requiring 1 byte still in **utf-8**).\n\nA downside of variable sized characters is that character lookup can no longer be done quickly \n(**O(1)** constant time) with a simple indexing (e.g. `my_text[3]` to get the 4th character). It's possible that the \npreceding characters could have variable widths, altering where the 4th character actually begins in the sequence of bytes.\n\nInstead we must iterate through a **utf-8** byte sequence to understand where the Unicode characters actually begin (**O(n)** linear time).\n\nFerris: \"I'm mostly just happy to have **utf-8** for representing emojis of my underwater friends.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: Escaping Characters
+  content_markdown: >
+    It's challenging to visually represent certain characters, so **escape
+    codes** allow us to put a symbol in their place.
+
+
+    Rust supports the common escape codes from C-based languages:
+
+    * `\n` - newline
+
+    * `\r` - carriage return
+
+    * `\t` - tab
+
+    * `\\` - backslash
+
+    * `\0` - null
+
+    * `\'` - single-quote
+
+
+    The complete list exists
+    [here](https://doc.rust-lang.org/reference/tokens.html).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+- title: Multi-line String Literals
+  content_markdown: |
+    Rust strings are multiline by default.
+
+    Use a `\` at the end of a line if you don't want a line break.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
+- title: Raw String Literals
+  content_markdown: >
+    Raw strings allow us to write a sequence of characters verbatim by starting
+    with `r#"` and ending with `"#`. It lets us insert
+
+    characters that might otherwise confuse a normal string as literals (like
+    double quotes and backslashes).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: String Literals From Files
+  content_markdown: >
+    If you have some very large text, consider using the macro `include_str!` to
+    include text from local files in your program:
+
+
+    ```rust
+
+    let hello_html = include_str!("hello.html");
+
+    ```
+- title: String Slice
+  content_markdown: >
+    A string slice is a reference to a sequence of bytes in memory that must
+    always be valid utf-8.
+
+
+    A string slice (a sub-slice) of a `str` slice, must also be valid utf-8.
+
+
+    Common methods of `&str`:
+
+    * `len` gets the length of the string literal in bytes (not number of
+    characters).
+
+    *  `starts_with`/`ends_with` for basic testing.
+
+    * `is_empty` returns true if zero length.
+
+    * `find` returns an `Option<usize>` of the first position of some text.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+- title: Chars
+  content_markdown: >
+    With so much difficulty in working with Unicode, Rust offers a way to
+    retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
+
+
+    A `char` is always 4 bytes long (allowing for efficient lookup of individual
+    characters).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: String
+  content_markdown: >
+    A **String** is a struct that owns a sequence of utf-8 bytes in heap memory.
+
+
+    Because its memory is on the heap, it can be extended, modified, etc. in
+    ways string literals cannot.
+
+
+    Common methods:
+
+
+    * `push_str` to add more utf-8 bytes to the end of a string.
+
+    * `replace` to replace sequences of utf-8 bytes with others.
+
+    * `to_lowercase`/`to_uppercase` for case changes.
+
+    * `trim` for trimming space
+
+
+    When a String is dropped, its heap memory is also dropped.
+
+
+    `String` has a `+` operator that extends the string with a `&str` and
+    returns itself, but it might not be as ergonomic as you hope for.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+- title: Text As Function Parameters
+  content_markdown: >
+    String literals and strings are generally passed around as a string slice to
+    functions. This offers a lot of flexibility for
+
+    most scenarios where you don't actually have to pass ownership.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+- title: Building Strings
+  content_markdown: |
+    `concat` and `join` are two simple but powerful ways for building strings.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
+- title: Formatting Strings
+  content_markdown: >
+    The `format!` macro allows us to create a string by defining a parameterized
+    string with placeholders for where and how values should be placed (e.g.
+    `{}`).
+
+
+    `format!` uses the same parameterized strings as `println!`
+
+
+    The capabilities of this function are too large of scope for *Tour of Rust*;
+    check out the documentation [here](https://doc.rust-lang.org/std/fmt/).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+- title: Converting Strings
+  content_markdown: |
+    Many types can be converted to a string using `to_string`.
+
+    The generic function `parse` can be used to convert strings 
+    or string literals into a typed value. This function returns 
+    a `Result` because it could fail.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: Chapter 6 - Conclusion
+  content_markdown: >
+    Now you know the basics of text!  As you have seen, Unicode makes working
+    with text a bit tricky, but the standard library 
+
+    has plenty of functionality to make it easy to manage.  
+
+
+    Up to now, we've mostly looked at Rust from the lens of a procedural
+    paradigm (i.e. just functions and data),
+
+    but it's time we now talk about traits and the capabilities unlocked by
+    Rust's object oriented paradigm.
