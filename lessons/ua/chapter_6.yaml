@@ -1,72 +1,72 @@
-- title: Chapter 6 - Text
+- title: Розділ 6 - Текст
   content_markdown: >
-    Now that we understand a bit how Rust thinks of memory, we are prepared to
-    talk about text in more detail.
+    Зараз, коли ми вже трошки розуміємо, як Rust взаємодіє з пам'яттю, ми 
+    готові детальніше поговорити про текст.
 
-    Rust cares a great deal about international text and byte level concerns you
-    might not be familiar with
-
-    from other languages. That said, Rust has many great tools for managing
-    those concerns.
-- title: String Literals
+    Rust звертає особливу увагу на проблеми з кількістю байтів, які
+    використовуються для представлення тексту різними мовами. Ви можете бути не
+    
+    знайомі з подібними проблемами у інших мовах. Тим не менш, Rust має багато
+    чудових інструментів для їх вирішення. 
+- title: Рядкові літерали
   content_markdown: >
-    String literals are always Unicode.
+    Рядкові літерали завжди представлені у Unicode.  
 
 
-    String literals type are `&'static str`:
+    Тип рядкових літералів - `&'static str`:
 
 
-    * `&` meaning that it's referring to a place in memory, and it lacks a
-    `&mut` meaning that the compiler will not allow modification
+    * `&` значить, що він посилається на певне місце у пам'яті, відсутність 
+    `&mut` значить, що компілятор не дозволить робити зміни
 
-    * `'static` meaning the string data will be available till the end of our
-    program (it never drops)
+    * `'static` значить, що цей рядок даних буде доступним до самого кінця 
+    виконання нашої програми (він ніколи не видалиться)
 
-    * `str` means that it points to a sequence of bytes that are always valid
-    **utf-8**
+    * `str` означає, що він вказує на послідовність байтів, які завжди будуть 
+    дійсні у **utf-8**
 
 
-    Memory details:
+    Деталі роботи з пам'яттю:
 
-    * The Rust compiler will likely put your string in the data segment of your
-    program memory
+    * Компілятор Rust найімовірніше покладе ваш рядок у сегмент пам'яті, де 
+    зберігаються дані вашої  програми
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
-- title: What is utf-8
-  content_markdown: "As more languages were used on computers, the world needed to represent more text characters\nthan ASCII allowed (1 byte only allowed 256 characters). \n\n**utf-8** was introduced with a variable byte length of 1-4 bytes greatly increasing the range of possible characters.\n\nAn advantage of variable sized characters is text did not have unnecessary bytes for very common ASCII (only requiring 1 byte still in **utf-8**).\n\nA downside of variable sized characters is that character lookup can no longer be done quickly \n(**O(1)** constant time) with a simple indexing (e.g. `my_text[3]` to get the 4th character). It's possible that the \npreceding characters could have variable widths, altering where the 4th character actually begins in the sequence of bytes.\n\nInstead we must iterate through a **utf-8** byte sequence to understand where the Unicode characters actually begin (**O(n)** linear time).\n\nFerris: \"I'm mostly just happy to have **utf-8** for representing emojis of my underwater friends.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
-- title: Escaping Characters
+- title: Що таке utf-8
+  content_markdown: "Чим більше мов використовувалось при роботі з комп'ютером, тим потрібніше світу було мати змогу\nвідображати більше символів ніж дозволяв ASCII( 1 байт міг передавати тільки 256 різних символів)\n\n**utf-8** була представлена зі змінною кількістю у 1-4 байтів. Це сильно збільшило діапазон доступних символів.\n\nПеревага змінного розміру символів це те, що текст не містить зайвих байтів для простих символів з  ASCII( у **utf-8** вони так само потребують 1 байт).\n\nЗворотньою стороною змінного розміру символів є те, що пошук символів більше не може бути швидким\n(**O(1)** константний час) за допомогю простого індексування (наприклад `my_text[3]` для отримання 4 символу). Цілком\nможливо, що попередні символи можуть мати змінну ширину, змінюючи місце фактичного початку 4 символу в послідовності байтів.\n\nНатомість ми повинні пройти через послідовність байтів utf-8, щоб зрозуміти, де насправді починаються символи Unicode (O(n) лінійний час).\n\nФерріс: \"Я просто щасливий, що маю utf-8 для використання емодзі, що зображують моїх підводних друзів.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n" 
+- title: Екранування символів
   content_markdown: >
-    It's challenging to visually represent certain characters, so **escape
-    codes** allow us to put a symbol in their place.
+    Візуально представити певні символи складно, тому екранування дозволяє
+    нам розмістити символ у потрібному місці.
 
 
-    Rust supports the common escape codes from C-based languages:
+    Rust підтримує типові екрановані символи з С-подібних мов:
 
-    * `\n` - newline
+    * `\n` - перехід на новий рядок
 
-    * `\r` - carriage return
+    * `\r` - повернення каретки
 
-    * `\t` - tab
+    * `\t` - табуляція
 
-    * `\\` - backslash
+    * `\\` - зворотній слеш
 
-    * `\0` - null
+    * `\0` - нуль
 
-    * `\'` - single-quote
+    * `\'` - одинарні лапки
 
 
-    The complete list exists
-    [here](https://doc.rust-lang.org/reference/tokens.html).
+    Повний список знаходиться
+    [тут](https://doc.rust-lang.org/reference/tokens.html).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
-- title: Multi-line String Literals
+- title: Багаторядкові рядкові літерали
   content_markdown: |
-    Rust strings are multiline by default.
+    Текст у Rust є багаторядковим за замовчуванням.
 
-    Use a `\` at the end of a line if you don't want a line break.
+    Ви можете використовувати `\` у кінці рядка, якщо ви не хочете щоб він був перенесений на інший.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
-- title: Raw String Literals
+- title: Необроблені рядкові літерали
   content_markdown: >
     Raw strings allow us to write a sequence of characters verbatim by starting
     with `r#"` and ending with `"#`. It lets us insert
