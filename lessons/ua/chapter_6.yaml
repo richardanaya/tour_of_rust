@@ -63,89 +63,87 @@
   content_markdown: |
     Текст у Rust є багаторядковим за замовчуванням.
 
-    Ви можете використовувати `\` у кінці рядка, якщо ви не хочете щоб він був перенесений на інший.
+    Ви можете використовувати `\` у кінці рядка, якщо ви не хочете
+    щоб він був перенесений на інший.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
 - title: Необроблені рядкові літерали
   content_markdown: >
-    Raw strings allow us to write a sequence of characters verbatim by starting
-    with `r#"` and ending with `"#`. It lets us insert
+    Необроблені рядки дозволяють нам записати послідовність символів дослівно, починаючи
+    з `r#"` і закінчуючи`"#`. Це дає нам можливість вставляти
 
-    characters that might otherwise confuse a normal string as literals (like
-    double quotes and backslashes).
+    символи, які інакше можуть сплутати звичайний рядок із літералами (наприклад
+    подвійні лапки та зворотні слеші).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
-- title: String Literals From Files
+- title: Рядкові літерали з файлів
   content_markdown: >
-    If you have some very large text, consider using the macro `include_str!` to
-    include text from local files in your program:
-
+    Якщо у вас є дуже великий текст, спробуйте використати для нього макрос `include_str!`,
+    щоб включити текст із локальних файлів у вашу програму:
 
     ```rust
 
     let hello_html = include_str!("hello.html");
 
     ```
-- title: String Slice
+- title: Рядкові зрізи (String Slice)
   content_markdown: >
-    A string slice is a reference to a sequence of bytes in memory that must
-    always be valid utf-8.
+    Зріз рядка — це посилання на послідовність байтів у пам’яті, яка завжди 
+    має бути дійсною у utf-8.
 
 
-    A string slice (a sub-slice) of a `str` slice, must also be valid utf-8.
+    Фрагмент рядка (підфрагмент) фрагмента `str` також має бути дійсним у utf-8.
 
+    Розповсюдженеі методи `&str`:
 
-    Common methods of `&str`:
+    * `len` бере довжину рядка у байтах (не у кількості символів).
 
-    * `len` gets the length of the string literal in bytes (not number of
-    characters).
+    *  `starts_with`/`ends_with` для базового тестування.
 
-    *  `starts_with`/`ends_with` for basic testing.
+    * `is_empty` повертає true, якщо рядок порожній.
 
-    * `is_empty` returns true if zero length.
-
-    * `find` returns an `Option<usize>` of the first position of some text.
+    * `find` повертає `Option<usize>` першої позиції певного тексту.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
-- title: Chars
+- title: Тип Char
   content_markdown: >
-    With so much difficulty in working with Unicode, Rust offers a way to
-    retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
+    З такими труднощами в роботі з Unicode, Rust пропонує спосіб
+    отримати послідовність байтів utf-8 як вектор символів типу `char`.
 
 
-    A `char` is always 4 bytes long (allowing for efficient lookup of individual
-    characters).
+    `char` завжди має довжину 4 байти (що дозволяє ефективно шукати окремі
+    символи).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
-- title: String
+- title: Структура String
   content_markdown: >
-    A **String** is a struct that owns a sequence of utf-8 bytes in heap memory.
+    **String**— це структура, яка зберігає у собі послідовність байтів utf-8 
+    у купі (heap memory).
+
+    Оскільки його пам’ять знаходиться в купі, його можна розширювати, змінювати
+    тощо так, як це неможливо зробити з рядковими літералами.
 
 
-    Because its memory is on the heap, it can be extended, modified, etc. in
-    ways string literals cannot.
+    Розповсюдженні методи:
 
 
-    Common methods:
+    * `push_str` для додавання нових utf-8 байтів у кінець рядка.
+
+    * `replace` для зміни однієї послідовності utf-8 байтів іншою.
+
+    * `to_lowercase`/`to_uppercase` для зміни регістру.
+
+    * `trim` для підрізання простору у пам'яті
 
 
-    * `push_str` to add more utf-8 bytes to the end of a string.
-
-    * `replace` to replace sequences of utf-8 bytes with others.
-
-    * `to_lowercase`/`to_uppercase` for case changes.
-
-    * `trim` for trimming space
+    Якщо String видалити, тоді його пам'ять у купі також видалиться.
 
 
-    When a String is dropped, its heap memory is also dropped.
-
-
-    `String` has a `+` operator that extends the string with a `&str` and
-    returns itself, but it might not be as ergonomic as you hope for.
+    `String` має `+` оператор, який розширює рядок за дорпомогою `&str` і
+    повертає її, але це може бути не настільки зручним, як ви сподіваєтесь.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
-- title: Text As Function Parameters
+- title: Текст,як параметр функції
   content_markdown: >
     String literals and strings are generally passed around as a string slice to
     functions. This offers a lot of flexibility for
