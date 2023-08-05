@@ -1,10 +1,10 @@
-- title: Chapter 10 - The End
+- title: Розділ 10 - Заключне слово
   content_markdown: >
-    It's been a joy to have you on the Tour of Rust. Ferris and the Tour of Rust
-    team sincerely hope you enjoy the journey ahead! If you 
+    Нам було приємно бачити вас на Тур по Rust. Ферріс і команда Тур по Rust щиро 
+    сподіваються, що вам сподобається подальша подорож! Якщо ви 
 
-    have felt comfortable this far, we strongly recommend diving deeper with
-    these resources:
+    почувалися комфортно досі, ми наполегливо рекомендуємо зануритися глибше за 
+    допомогою цих ресурсів:
 
-    * [The Official Rust Programming
-    Book](https://doc.rust-lang.org/stable/book/)
+    * [Офіційний підручник з програмування на
+    Rust](https://doc.rust-lang.org/stable/book/)
