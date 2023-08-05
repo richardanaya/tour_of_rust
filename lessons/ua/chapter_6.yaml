@@ -145,50 +145,49 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
 - title: Текст,як параметр функції
   content_markdown: >
-    String literals and strings are generally passed around as a string slice to
-    functions. This offers a lot of flexibility for
+    Рядкові літерали та рядки зазвичай передаються функціям як рядкові зрізи.
+    Це забезпечує велику гнучкість для більшості 
 
-    most scenarios where you don't actually have to pass ownership.
+    сценаріїв, коли вам фактично не потрібно передавати право володіння.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
-- title: Building Strings
+- title: Побудова рядків
   content_markdown: |
-    `concat` and `join` are two simple but powerful ways for building strings.
+    `concat` і `join` - два прості, але потужні способи створення рядків.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
-- title: Formatting Strings
+- title: Форматування рядків
   content_markdown: >
-    The `format!` macro allows us to create a string by defining a parameterized
-    string with placeholders for where and how values should be placed (e.g.
-    `{}`).
+    Макрос `format!` дозволяє нам створювати параметризовані рядки з 
+    пропусками і даними, якими їх потрібно заповнити (наприклад `{}`).
 
 
-    `format!` uses the same parameterized strings as `println!`
+    `format!` використовує такі саме параметризовані рядки, як і `println!`
 
 
-    The capabilities of this function are too large of scope for *Tour of Rust*;
-    check out the documentation [here](https://doc.rust-lang.org/std/fmt/).
+    Можливості цієї функції занадто великі для Tour of Rust; перегляньте
+    документацію [тут](https://doc.rust-lang.org/std/fmt/).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
-- title: Converting Strings
+- title: Конвертація рядків
   content_markdown: |
-    Many types can be converted to a string using `to_string`.
+    Багато типів можна конвертувати у string використовуючи `to_string`.
 
-    The generic function `parse` can be used to convert strings 
-    or string literals into a typed value. This function returns 
-    a `Result` because it could fail.
+    Загальна функція `parse` можна використовувати для конвертування рядків
+    або рядкові літерали у введене значення. Ця функція повертає 
+    `Result` тому, що воно може не виконатися.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
-- title: Chapter 6 - Conclusion
+- title: Розділ 6 - Висновки
   content_markdown: >
-    Now you know the basics of text!  As you have seen, Unicode makes working
-    with text a bit tricky, but the standard library 
+    Тепер ви знаєте основи роботи з текстом! Як ви побачили, Unicode робить
+    роботу з текстом трошки складною, але стандартна бібліотека
+     
+    має багато функціональних можливостей, що полегшує управління ним.  
 
-    has plenty of functionality to make it easy to manage.  
 
+    Дотепер ми здебільшого дивилися на Rust через призму парадигми
+    процедурного програмування (тобто лише функції та дані),
 
-    Up to now, we've mostly looked at Rust from the lens of a procedural
-    paradigm (i.e. just functions and data),
-
-    but it's time we now talk about traits and the capabilities unlocked by
-    Rust's object oriented paradigm.
+    але настав час поговорити про характеристики та можливості, які відкриває
+    Об'єктно-орієнтоване програмування Rust.
