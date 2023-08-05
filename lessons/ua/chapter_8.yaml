@@ -1,19 +1,19 @@
-- title: Chapter 8 - Smart Pointers
+- title: Розділ 8 - Розумні покажчики (Smart Pointers)
   content_markdown: >
-    In this chapter we will demystify smart pointers. Let's explore into
+    У цьому розділі ми демістифікуємо розумні покажчики. Давайте 
+    
+    досліджувати ці структури даних, які дозволяють нам взаємодіяти 
+    
+    з найнижчим рівнем пам'яті.
 
-    these data structures that let us interact with the lowest level of 
 
-    memory.
+    Ферріс каже: «Не бентежтеся через цей розділ, якщо ви не відчуваєте, що
 
+    написати власний низькорівневий код керування пам’яттю за одне коротке
+    читання. Цей розділ 
 
-    Ferris says: "Don't feel overwhelmed by this chapter if you don't feel 
-
-    you can write your own low level memory management code in one short read.
-    This chapter 
-
-    is mostly to introduce you to some useful tools and give a glimpse at how
-    they work!"
+     здебільшого познайомити вас із деякими корисними інструментами та дати 
+     уявлення про те, як вони працюють!"
 - title: References Revisited
   content_markdown: >
     A reference is fundamentally just a number that is the start position
