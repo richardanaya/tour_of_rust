@@ -1,92 +1,88 @@
-- title: Chapter 7 - Object Oriented Programming
+- title: Розділ 7 - Об'єктно Орієнтоване Програмування
   content_markdown: >
-    Expressing ideas with functions is a proven way of representing behavior and
-    data (C 
+    Вираження ідей за допомогою функцій є перевіреним способом представлення поведінки та
+    даних (C
 
-    has been doing it for decades!). Historically, computer science has found
-    other
+    робить це вже десятки років!). Історично склалося так, що інформатика знайшла
+    інші
 
-    useful expressive aggregations and abstractions for data. You may be
-    familiar with object oriented programming (OOP) as one
+    корисні виразні агрегації та абстракції для даних. Ви можете бути
+    знайомі з об'єктно-орієнтованим програмуванням (ООП) як одним
 
-    such way. In this chapter we'll explore the Rust programming language beyond
-    functions.
-- title: What Is OOP?
+    з таких способів. У цій главі ми розглянемо мову програмування Rust за межами
+    функцій.
+- title: Що таке ООП?
   content_markdown: >
-    Object oriented programming roughly refers to programming languages that
-    have a number of iconic features:
+    Об'єктно-орієнтоване програмування має наступні принципи:
 
-    * Encapsulation - Associating data and functions into the conceptual unit of
-    a single type called an *object*.
+    * Інкапсуляція - об'єднання даних і функцій у концептуальну одиницю,
+    єдиний тип, який називається *об'єкт*.
 
-    * Abstraction - Hiding data and function members to obfuscate implementation
-    details of an object.
+    * Абстрагування - приховування даних і членів функцій для того, щоб приховати деталі реалізації об'єкта.
 
-    * Polymorphism - The ability to interact with objects of different types through
-    one interface.
+    * Поліморфізм - здатність взаємодіяти з об'єктами різних типів через один інтерфейс.
 
-    * Inheritance - The ability to inherit data and behavior from other objects.
-- title: Rust Is Not OOP
+    * Спадкування - можливість успадковувати дані та поведінку від інших об'єктів.
+- title: Rust не є ООП-орієнтованим
   content_markdown: >
-    Rust lacks inheritance of data and behavior in any meaningful way.
+    У Rust відсутнє успадкування даних.
 
 
-    * Structs cannot inherit fields from a parent struct.
+    * Структури не можуть успадковувати поля від батьківської структури.
 
-    * Structs cannot inherit functions from a parent struct.
+    * Структури не можуть успадковувати функції від батьківської структури.
 
 
-    That said, Rust implements many programming language features, so that you
-    might not mind this lacking.
-- title: Encapsulation With Methods
+    Тим не менш, у Rust є багато інших реалізацій, так що ви
+    ви можете не звертати уваги на цей недолік.
+- title: Інкапсуляція в методах
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
   content_markdown: >
-    Rust supports the concept of an *object* that is a struct associated with
-    some functions (also known as *methods*).
+    Rust підтримує концепцію *об'єкта*, який є структурою, пов'язаною з
+    деякими функціями (також відомими як *методи*).
 
 
-    The first parameter of any method must be a reference to the instance
-    associated with the method call (e.g. `instanceOfObj.foo()`). Rust uses:
+    Першим параметром будь-якого методу має бути посилання на екземпляр
+    пов'язаний з викликом методу (наприклад, `instanceOfObj.foo()`). Rust використовує:
 
-    * `&self` - Immutable reference to the instance.
+    * `&self` - незмінне посилання на екземпляр.
 
-    * `&mut self` - Mutable reference to the instance.
+    * `&mut self` - змінне посилання на екземпляр.
 
 
-    Methods are defined within an implementation block with keyword `impl`:
+    Методи визначаються в блоці реалізації з ключовим словом `impl`:
 
     ```rust
 
-    impl MyStruct { 
+    impl MyStruct {
         ...
-        fn foo(&self) {
+        fn foo(&self) { ...
             ...
         }
     }
 
     ```
-- title: Abstraction With Selective Exposure
+- title: Абстракція з вибірковою експозицією
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
   content_markdown: >
-    Rust can hide the inner workings of objects.
+    Rust може приховувати внутрішню роботу об'єктів.
 
 
-    By default fields and methods are accessible only to the module they belong
-    to.
+    За замовчуванням поля і методи доступні лише для модуля, до якого вони належать.
 
 
-    The `pub` keyword exposes struct fields and methods outside of the module.
-- title: Polymorphism With Traits
+    Ключове слово `pub` відкриває поля і методи структур за межами модуля.
+- title: Поліморфізм у Traits
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
   content_markdown: >
-    Rust supports polymorphism with traits. Traits allow us to associate a set
-    of methods with a struct type. 
+    Rust підтримує поліморфізм за допомогою *ознак (Traits)*. Властивості дозволяють нам пов'язати набір
+    методів зі структурним типом.
 
 
-    We first define the signatures of methods of a trait within:
+    Спочатку ми визначаємо сигнатури методів, що входять до складу ознаки (Trait):
 
 
     ```
@@ -99,110 +95,105 @@
     ```
 
 
-    When a struct implements a trait, it establishes a contract that allows us
-    to indirectly interact with the struct 
+    Коли структура реалізує трейт, вона встановлює контракт, який дозволяє нам
+    опосередковано взаємодіяти зі структурою
 
-    through the trait type (e.g. `&dyn MyTrait`) without having to know the real
-    type.
+    через тип риси (наприклад, `&dyn MyTrait`) без необхідності знати реальний
+    тип.
 
 
-    A struct's implemented traits methods are defined within an implementation
-    block:
+    Реалізовані методи трейтів структури визначаються в межах реалізації
+    блоку реалізації:
 
 
     ```rust
 
-    impl MyTrait for MyStruct { 
+    impl MyTrait for MyStruct {
         fn foo(&self) {
             ...
         }
-        ... 
+        ...
     }
 
     ```
-- title: Implemented Methods On Traits
+- title: Імплементація методів у Traits
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
   content_markdown: >
-    Traits can have implemented methods.
+    Трейт може мати імплементовані методи.
 
 
-    The functions have no direct access to the inner fields of a struct, but it
-    can 
-
-    be useful for sharing behavior between many trait implementors.
-- title: Trait Inheritance
+    Функції не мають прямого доступу до внутрішніх полів структури, але вони
+    можуть бути корисним для спільного використання поведінки між багатьма реалізаторами трейтів.
+- title: Наслідування у Traits
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
   content_markdown: |
-    Traits can inherit methods from other traits.
-- title: Dynamic vs Static Dispatch
+    Трейти можуть наслідувати методи з інших трейтів.
+- title: Динамічна та статична диспетчеризації.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: >
-    Methods are executed in two ways:
+    Методи виконуються двома способами:
 
-    * static dispatch - When the instance type is known, we have direct
-    knowledge of what function to call.
+    * статична диспетчеризація - коли відомий тип екземпляра, і ми знаємо
+    яку функцію викликати.
 
-    * dynamic dispatch - When an instance type is not known, we must find out
-    some way of calling the correct function.
-
-
-    Trait types `&dyn MyTrait` give us the ability to work with instances of
-    objects indirectly using dynamic dispatch.
+    * динамічна диспетчеризація - коли тип екземпляра невідомий, і ми повинні з'ясувати
+    якийсь спосіб виклику правильної функції.
 
 
-    When dynamic dispatch is used, Rust will encourage you to put `dyn` before
-    your trait type so people are aware.
+    Типи трейтів `&dyn MyTrait` дають нам можливість працювати з екземплярами
+    об'єктів опосередковано, використовуючи динамічну диспетчеризацію.
 
 
-    Memory details:
+    Коли використовується динамічна диспетчеризація, Rust рекомендуватиме вам поставити `dyn` перед
+    вашим типом ознаки, щоб інші знали про це.
 
-    * Dynamic dispatch is slightly slower because of the pointer chasing to find
-    the real function call.
-- title: Trait Objects
+
+    Деталі роботи за памяттю:
+
+    * Динамічна диспетчеризація працює дещо повільніше через покажчик, котрий займається
+    пошуком функції, і її виконанням.
+- title: Об'єкти в Traits
   content_markdown: >
-    When we pass an instance of an object to a parameter of type `&dyn MyTrait`
-    we pass what is called a *trait object*. 
+    Коли ми передаємо екземпляр об'єкту в параметр типу `&dyn MyTrait'
+    ми передаємо те, що називається *об'єкт-трайтер*.
 
 
-    A trait object is what allows us to indirectly call the correct methods of
-    an instance. A trait object is a struct that holds the pointer of 
+    Об'єкт-трейт - це те, що дозволяє нам опосередковано викликати коректні методи екземпляру.
+    Об'єкт трейту - це структура, яка містить вказівник на на наш екземпляр зі списком вказівників
+    функцій на методи нашого екземпляру.
 
-    our instance with a list of function pointers to our instance's methods.
 
+    Деталі роботи за памяттю:
 
-    Memory details:
-
-    * This list of functions is known in C++ as a *vtable*.
-- title: Handling Unsized Data
+    * Цей список функцій відомий у C++ як *vtable*.
+- title: Обробка нерозмірних даних
   content_markdown: >
-    Traits introduce an interesting challenge when we want to store them within
-    another struct. Traits obfuscate the original
+    Трейти створюють цікавий виклик, коли ми хочемо зберігати їх у
+    в іншій структурі. Трейти затушовують оригінальну структуру,
 
-    struct thus it also obfuscates the original size. Unsized values being
-    stored in structs are handled in two ways in Rust:
+    таким чином, вони також приховують оригінальний розмір. Безрозмірні значення, що зберігаються
+    у структурах, у Rust можна обробляти двома способами:
 
 
-    * `generics` - Using parameterized types effectively create struct/functions
-    known types and thus known sizes.
+    * "узагальнення" - використання параметризованих типів для ефективного створення структур/функцій
+    з відомими типами і, відповідно, відомими розмірами.
 
-    * `indirection` - Putting instances on the heap gives us a level of
-    indirection that allow us to not have to worry about the size of the actual
-    type and just store a pointer to it. There are other ways as well!
-- title: Generic Functions
+    * "непрямий" - Розміщення екземплярів на купі дає нам рівень непрямої
+    непрямості, що дозволяє нам не турбуватися про розмір фактичного
+    типу і просто зберігати вказівник на нього. Існують і інші способи!
+- title: Узагальнені функції
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: >
-    Generics in Rust work hand in hand with traits. When we describe a
-    parameterized type `T` we can constrain what types 
-
-    can be used as an argument by listing what required traits the argument must
-    implement.
+    Узагальнені типи (generics) у Rust працюють пліч-о-пліч із трейтами.
+    Коли ми описуємо узагальнений тип `T`, ми можемо обмежити, які типи можна використовувати як аргумент,
+    перераховуючи які обов'язкові трейти повинні реалізовувати даний узагальнений аргумент.
 
 
-    In this example type `T` must implement trait `Foo`:
+    У цьому прикладі тип `T` має реалізовувати трейт `Foo`:
 
     ```rust
 
@@ -217,15 +208,14 @@
     ```
 
 
-    By using generics we create static typed functions at compile time that will
-    have known types and sizes, allowing us to
-
-    perform static dispatch and store as a sized value.
-- title: Generic Function Shorthand
+    Використовуючи узагальнений тип (generics), ми створюємо статичні типізовані функції під час компіляції,
+    які матимуть відомі типи та розмір, що дозволяє нам виконувати статичну диспетчеризацію виклику
+    і зберігати (функцію) у вигляді значення відомого розміру.
+- title: Скорочення в узагальнених функціях
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: |
-    Rust has a shorthand for expressing generics constrained by a trait:
+    У Rust є скорочення для запису факту того, що узагальнений тип обмежений якимось трейтом:
 
     ```rust
     fn my_function(foo: impl Foo) {
@@ -233,7 +223,7 @@
     }
     ```
 
-    This is equivalent to writing:
+    Що еквівалентно запису:
 
     ```rust
     fn my_function<T>(foo: T)
@@ -247,24 +237,19 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
   content_markdown: >
-    `Box` is a data structure that allows us to move our data from the stack to
-    the heap.
+    `Box` - це структура даних, яка дозволяє нам розміщувати, переміщати наші дані зі стека в купу.
 
 
-    `Box` is a struct known as a *smart pointer* that holds the pointer to our
-    data on the heap.
+    `Box` - це структура, відома як *smart pointer* (розумний покажчик), який містить покажчик на наші дані
+    що зберігаються в купі.
 
 
-    Because `Box` is a struct with a known size (because it just holds a
-    pointer), it is 
-
-    often used as a way to store a reference to something in a struct that must
-    know the size 
-
-    of its fields.
+    Оскільки `Box` є структурою з відомим розміром (оскільки він просто містить покажчик),
+    то він часто використовується як спосіб зберігання посилання на щось у структурі, яка повинна мати
+    відомі розміри її полів.
 
 
-    `Box` is so common it can be used from anywhere:
+    Тип `Box` є настільки загальним, що може використовуватися майже в будь-якому місці:
 
 
     ```rust
@@ -272,10 +257,9 @@
     Box::new(Foo { ... })
 
     ```
-- title: Generic Structs Revisited
+- title: Узагальнені структури
   content_markdown: >
-    Generic structs can also have their parameterized types constrained by
-    traits.
+    Узагальнені структури також можуть мати свої узагальнені, параметризовані типи, обмежені трейтами.
 
 
     ```rust
@@ -292,8 +276,7 @@
     ```
 
 
-    Generic structs have their parameterized type in their implementation
-    blocks:
+    Узагальнена структура має узагальнений, параметризований тип у блоці реалізації:
 
 
     ```rust
@@ -303,25 +286,24 @@
     }
 
     ```
-- title: Chapter 7 - Conclusion
+- title: Розділ 7 - Висновки
   content_markdown: >
-    We now have more language features at hand to represent our ideas clearly! 
+    Тепер у нас під рукою більше мовних можливостей для чіткого представлення наших ідей!
 
-    Rust abstractions might be simple but they are powerful enough to make
+    Абстракції Rust можуть бути простими, але вони досить потужні, щоб зробити
 
-    working with code a joy. In this chapter, we caught a glimpse of smart
-    pointers
+    роботу з кодом в радість. У цій главі ми побіжно познайомилися з розумними вказівниками
 
-    with `Box`. In the next chapter we'll learn about how smart pointers can
-    help us with other
+    за допомогою `Box`. У наступній главі ми дізнаємося про те, як смарт-покажчики можуть
+    допомогти нам в інших
 
-    specialized memory situations.
+    спеціалізованих ситуаціях з пам'яттю.
 
 
-    Resources:
+    Ресурси:
 
-    * [Video - Object-oriented Programming in 7
-    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+    * [Відео - Об'єктно-орієнтоване програмування за 7
+    хвилин] (https://www.youtube.com/watch?v=pTB0EiLXUC8)
 
-    * [Article - "The faster you unlearn OOP, the better for you and your
-    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
+    * [Стаття - "Чим швидше ви розучите ООП, тим краще для вас і вашого
+    програмного забезпечення"] (https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
