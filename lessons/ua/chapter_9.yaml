@@ -1,73 +1,75 @@
-- title: Chapter 9 - Project Organization and Structure
+- title: Розділ 9 - Організація проекту, та його структура
   content_markdown: >
-    So far all of our code examples have been a single file. Let's discuss how
-    our code can be better organized and shared by others!
-- title: Modules
+    Ну що ж. До цього в усіх прикладах ви бачили код котрий був розташований
+    лише в одному файлі. Зараз настав час, коли ми почнемо говорити про те
+    як краще організувати свій код для того, щоб він став краще, і його було
+    легше зрозуміти іншим!
+- title: Модулі
   content_markdown: |
-    Every Rust program or library is a *crate*.
+    Будь яка програма чи бібліотека на Rust є *crate* (це такі пакети в rust).
 
-    Every crate is made of a hierarchy of *modules*.
+    Кожен crate створює ієрархію *модулів*.
 
-    Every crate has a root module.
+    Кожен crate є головним модулем.
 
-    A module can hold global variables, functions, structs, traits or even other modules!
+    Модулі можуть мати в собі як глобальні змінні, так і структури, функції, трейти, і т.д.!
 
-    In Rust there is not a 1 to 1 mapping of files to the module tree hierarchy. We must build the module tree explicitly by hand in our code.
-- title: Writing a Program
+    У Rust немає відображення файлів до ієрархії дерева модулів 1 до 1. Ми повинні будувати дерево модулів явно вручну в нашому коді.
+- title: Написання програм
   content_markdown: |
-    A program has a root module in a file called `main.rs`.
-- title: Writing a Library
+    Ваша програма є головним модулем у файлі під назвою `main.rs`.
+- title: Написання бібліотеки
   content_markdown: |
-    A library has a root module in a file called `lib.rs`.
-- title: Referencing Other Modules and Crates
+    Ваша бібліотека є головним модулем у файлі під назвою `lib.rs`.
+- title: Зсилання на crate та модулі
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
   content_markdown: >
-    Items in modules can be referenced with their full module path
+    Елемент із модуля доступний лише при вказування повного шляху до самого модуля
     `std::f64::consts::PI`.
 
 
-    A simpler way is the **use** keyword. It allows us to specify particular
-    items from modules we want
+    Але це можна спростити з використанням **use**. Це надасть вам можливість
+    зробити код візуально краще, і ви зможете вказувати лише потрібну частину шляху
 
-    to use throughout our code without a full path. For instance `use
+    без необхідності вказувати повний шлях. Наприклад `use
     std::f64::consts::PI`
 
-    allows me to just use the identifier `PI` in my main function.
+    дозволить використовувати мені `PI` у моїх функціях.
 
 
-    **std** is the crate of the **standard library** of Rust which is full of
-    useful data
+    **std** це crate **стандартної бібліотеки** Rust, котра надає вам повну
+    необхідну інформацію
 
-    structures and functions for interacting with your operating system.
+    структури і функції для роботи з вашою операційною системою.
 
 
-    A searchable directory of crates created by the community can be found at
+    А тут ви зможете знайти будь-який потрібний вам crate -
     [https://crates.io](https://crates.io/).
-- title: Referencing Multiple Items
+- title: Посилання на декілька елементів
   content_markdown: |
-    Multiple items can be referenced in a single module path as so:
+    Ви можете посилатися на декілька елементів одного і того самого модуля:
 
     ```rust
     use std::f64::consts::{PI,TAU}
     ```
 
-    Ferris doesn't eat TAU, he only eats PI.
-- title: Creating Modules
+    Якщо-що, то Ферріс їсть тільки PI, від TAU його нудить.
+- title: Створення модулів
   content_markdown: |
-    When we think of code, we usually imagine a hierarchy of files organized
-    in directories. Rust lets you create modules closely related to your file
-    structure.
+    Коли ми думаємо про код, то зазвичай уявляємо собі ієрархію файлів, організованих
+    у каталогах. Rust дозволяє створювати модулі, тісно пов'язані з вашою файловою
+    структурою вашого файлу.
 
-    There are two ways in Rust to declare a module. For example, a module
-    `foo` can be represented as:
-      * a file named `foo.rs`
-      * a directory named `foo` with a file `mod.rs` inside
-- title: Module Hierarchy
+    У Rust є два способи оголошення модуля. Наприклад, модуль
+    `foo` може бути представлений як:
+      * файлу з іменем `foo.rs`.
+      * директорія з іменем `foo` з файлом `mod.rs` всередині.
+- title: Ієрархія модулів
   content_markdown: >
-    A module can depend on another one. In order to establish a relationship
+    Один модуль може залежати від іншого. Для того, щоб встановити зв'язок
 
-    between a module and its sub-module, you must write in the parent module:
+    між модулем та його підмодулем, ви повинні написати у батьківському модулі
 
 
     ```rust
@@ -77,101 +79,92 @@
     ```
 
 
-    The declaration above  will look for a file named `foo.rs` or `foo/mod.rs`
-    and
+    Наведений вище оголошення шукатиме файл з іменем `foo.rs` або `foo/mod.rs`.
+    і
 
-    will insert its contents inside a module named `foo` under this scope.
-- title: Inline Module
+    вставить його вміст у модуль з іменем `foo` у цій області видимості.
+- title: Вбудований модуль
   content_markdown: >
-    A sub-module can be directly inlined within a module's code.
+    Підмодуль може бути безпосередньо вбудований у код модуля.
 
 
-    One very common use for inline modules is creating unit tests. We create an
-    inline module that only exists when Rust is used for testing!
+    Одне з найпоширеніших застосувань вбудованих модулів - створення модульних тестів. Ми створюємо
+    вбудований модуль, який існує лише тоді, коли для тестування використовується Rust!
 
 
     ```
 
-    // This macro removes this inline module when Rust 
+    // Цей макрос видаляє цей вбудований модуль, коли Rust
 
-    // is not in test mode.
+    // не знаходиться в режимі тестування.
 
     #[cfg(test)]
 
     mod tests {
-        // Notice that we don't immediately get access to the 
-        // parent module. We must be explicit.
-        use super::*;
+        // Зверніть увагу, що ми не одразу отримуємо доступ до
+        // батьківського модуля. Ми повинні бути явними.
+        використовуйте super::*;
 
-        ... tests go here ...
+        ... тести йдуть сюди ...
     }
 
     ```
-- title: Internal Module Referencing
+- title: Внутрішнє посилання на модулі
   content_markdown: >
-    Rust has several keywords you can use in your `use` path to quickly get
-    ahold of the module you want:
+    У Rust є кілька ключових слів, які ви можете використовувати у шляху `use`, щоб швидко отримати доступ
+    до потрібного вам модуля:
       
-    * `crate` - the root module of your crate
+    * `crate` - Головний модуль вашого проекту.
 
-    * `super` - the parent module of your current module
+    * `super` - батьківський модуль вашого модуля, тобто той що вище по ієрархії.
 
-    * `self` - the current module
-- title: Exporting
+    * `self` - поточний модуль.
+- title: Експорт
   content_markdown: >
-    By default members of a *module* are not accessible from outside of the
-    module (not even to its child modules!). We make members 
+    За замовчуванням члени *модуля* недоступні ззовні
+    модуля (навіть з його дочірніх модулів!). Ми робимо члени
 
-    of a module accessible using the `pub` keyword.
+    модуля доступними за допомогою ключового слова `pub`.
 
 
-    By default members of a *crate* are not accessible outside of the crate. We
-    make members of
+    За замовчуванням члени *crate* недоступні ззовні цього crate. Ми
+    робимо члени
 
-    a crate accessible by marking them as `pub` in the *root module* of your
-    crate (`lib.rs` or `main.rs`).
-- title: Structure Visibility
+    доступними, позначивши їх як `pub` у *кореневому модулі* вашого
+    (`lib.rs` або `main.rs`).
+- title: Видимість структури
   content_markdown: >
-    Just like functions, structures can declare what they want exposed outside
-    of their module using `pub`.
+    Так само як і функції, структури можуть оголошувати те, що вони хочуть виходити за межі
+    модуля за допомогою `pub`.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
-- title: Prelude
+- title: Прелюдія
   content_markdown: |
-    You might be wondering how we have access to `Vec` or `Box`
-    everywhere without a `use` to import them. It is because of the module
-    `prelude` in the standard library.
+    Вам може бути цікаво, як ми маємо доступ до `Vec` або `Box`
+    скрізь без використання `use` для їх імпорту. Це завдяки модулю
+    `prelude` у стандартній бібліотеці.
 
-    Know that in the Rust standard library anything that is exported in
-    `std::prelude::*` is automatically available to every part of Rust.
-    That is the case for `Vec` and `Box` but others as well (Option, Copy,
-    etc.).
-- title: Your Own Prelude
+    Знайте, що у стандартній бібліотеці Rust все, що експортується у
+    `std::prelude::*`, автоматично стає доступним для кожної частини Rust.
+    Це стосується як `Vec` і `Box`, так і інших (Option, Copy,
+    тощо).
+- title: Ваша особиста прелюдія
   content_markdown: >
-    Because of standard library's prelude, it's common for your library to have
-    its own prelude module as a starting point for 
+    Оскільки прелюдія є стандартним компонентом бібліотеки, у вашій бібліотеці, як правило, є
+    власний модуль прелюдії як відправна точка з котрої
 
-    where users should import all of the most common data structures for using
-    your library (e.g `use my_library::prelude::*`).
+    користувачі мають імпортувати усі найпоширеніші структури даних для використання
+    вашої бібліотеки (наприклад, `use my_library::prelude::*`).
 
-    It doesn't automatically get used in programs/libraries that use your crate,
-    but it's a good convention to follow so people
-
-    know where to start.
-
-
-    Ferris says, "Be a good rustacean and help a fellow crab out with a good
-    prelude!"
-- title: Chapter 9 - Conclusion
+    Ферріс: "Будь добрим ракоподібним і допоможи крабу з гарною прелюдією!"
+- title: Розділ 9 - Висновки
   content_markdown: >
-    You now have a few tricks up your sleeve when it comes to creating Rust
-    applications and libraries ready for the world. Don't
-
-    worry about remembering it all. As your library grows and is used by other
-    people, you'll find what works best at each milestone.
+    Тепер у вас є кілька хитрощів у рукаві, коли справа доходить до створення Rust-додатків і бібліотек
+    , готових до публікації. Не турбуйтеся про те, щоб запам'ятати все це. У міру того, як ваша бібліотека
+    зростатиме і нею користуватимуться інші ви зрозумієте, що найкраще працює на кожному етапі.
 
 
-    Resources:
+    Ресурси:
 
-    - [Guidelines For Writing Rust
-    APIs](https://rust-lang.github.io/api-guidelines/)
+    - [Настанови з написання Rust
+    API] (https://rust-lang.github.io/api-guidelines/)
