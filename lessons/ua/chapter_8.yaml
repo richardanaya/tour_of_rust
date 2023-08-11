@@ -323,45 +323,35 @@
     uses thread-safe incrementing of reference counts. 
 
     It's often used to have many references to the same `Mutex`.
-- title: Combining Smart Pointers
+- title: Поєднання розумних покажчиків
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
   content_markdown: >
-    Smart pointers might seem limited, but they can make some very powerful
-    combinations.
+    Розумні покажчики можуть здатися обмеженими, але вони можуть створювати дуже потужні
+    комбінації.
 
 
-    `Rc<Vec<Foo>>` - Allow the cloning of multiple smart pointers that can
-    borrow the same vector of immutable data structures on the heap.
+    `Rc<Vec<Foo>>` - Дозволяє клонування декількох смарт-покажчиків, які можуть
+    позичати один і той самий вектор незмінних структур даних на купі.
 
 
-    `Rc<RefCell<Foo>>` - Allow multiple smart pointers the ability to borrow
-    mutably/immutably the same struct `Foo`
+    `Rc<RefCell<Foo>>` - Дозволити декільком смарт-покажчикам запозичувати
+    взаємно/незмінно одну й ту саму структуру `Foo`.
 
 
-    `Arc<Mutex<Foo>>` - Allow multiple smart pointers the ability to lock
-    temporary mutable/immutable borrows in a CPU thread exclusive manner.
+    `Arc<Mutex<Foo>>` - Дозволяє декільком смарт-покажчикам блокувати
+    тимчасові змінювані/незмінні запозичення виключно для потоку процесора.
 
 
-    Memory detail:
+    Деталі роботи за памяттю:
 
-    * You'll notice a theme with many of these combinations. The use of an
-    immutable data type (possibly owned by multiple smart pointers) to modify
-    internal data. This 
-      is referred to as the "interior mutability" pattern in Rust. It is a pattern that lets us bend the rules of memory usage at runtime with the same level of safety as Rust's
-      compile-time checks.
+    * Використання незмінного типу даних (який може належати декільком смарт-покажчикам) для модифікації
+    внутрішніх даних у Rust називається патерном "внутрішня змінюваність". Це патерн, який дозволяє нам змінювати правила використання пам'яті під час виконання з тим же рівнем безпеки, що і перевірки Rust під час компіляції.
 
-- title: Chapter 8 - Conclusion
+- title: Розділ 8 - Висновок
   content_markdown: >
-    Smart pointers are the idioms of Rust programming and let us not have to
-    re-create the 
+    Розумні покажчики - це ідіома програмування на Rust, і нам не доведеться
+    повторно створювати дуже поширені патерни використання пам'яті.
 
-    very common patterns of memory usage. With them you are ready to tackle the
-    toughest of
-
-    challenges! Now that we have the foundations of Rust, let's talk a bit about
-    how we make 
-
-    larger projects. In chapter 9 we break free of single page
-
-    lines of code.
+    Тепер, коли ми ознайомилися з основами Rust, давайте трохи поговоримо про те
+    як створювати більші проекти. У главі 9 ми перестанемо писати код у одному файлі.
