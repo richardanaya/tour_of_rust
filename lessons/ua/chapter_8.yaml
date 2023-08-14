@@ -41,26 +41,25 @@
     Існує 2 види необроблених покажчиків:
 
 
-    * `*const T` - A raw pointer to data of type T that should never change.
+    * `*const T` - необроблений покажчик на дані типу T, які ніколи не зміняться.
 
-    * `*mut T` - A raw pointer to data of type T that can change.
-
-
-    Raw pointers can be converted to and from numbers (e.g. `usize`).
+    * `*mut T` - необроблений покажчик на дані типу T, які можуть змінюватися.
 
 
-    Raw pointers can access data with *unsafe* code (more on this later).
+    Необроблені покажчики можна перетворювати на числа та з них (наприклад, `usize`).
 
+    Необроблені покажчики можуть отримати доступ до даних за допомогою коду *unsafe*
+    (детальніше про це пізніше).
 
-    Memory Details:
+    Деталі про роботу з пам'яттю:
 
-    * A reference in Rust is very similar to a pointer in C in terms of usage,
-    but with much more compile time restrictions on
-      how it can be stored and moved around to other functions.
-    * A raw pointer in Rust is similar to a pointer in C that it represents a number that can be
-      copied or passed around, and even turned into numerical types where it can be modified as a
+    * Посилання в Rust дуже схоже на покажчик у C з точки зору використання, 
+    але з набагато більшими обмеженнями часу компіляції по тому, 
+      як його можна зберігати та переміщувати до інших функцій.
+    * Необроблений вказівник у Rust схожий на вказівник у C, оскільки він представляє число, яке 
+      можна копіювати або передавати, і навіть перетворювати на числові типи, де його можна модифікувати як число для виконання математики вказівника.
       number to do pointer math.
-- title: Dereferencing
+- title: Розіменування
   content_markdown: |
     The process of accessing/manipulating data that is being referred to
     by a *reference* (i.e. `&i32`) is called *dereferencing*. 
@@ -70,7 +69,7 @@
     * Access to fields or methods of the referred data.
 
     Rust has some powerful operators that allow us to do this.
-- title: The * Operator
+- title: Оператор *
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20i32%20%3D%2042%3B%0A%20%20%20%20let%20ref_ref_ref_a%3A%20%26%26%26i32%20%3D%20%26%26%26a%3B%0A%20%20%20%20let%20ref_a%3A%20%26i32%20%3D%20**ref_ref_ref_a%3B%0A%20%20%20%20let%20b%3A%20i32%20%3D%20*ref_a%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20b)%0A%7D
   content_markdown: >
@@ -96,7 +95,7 @@
 
     the bytes of variable `a` on stack are copied into the bytes of variable
     `b`.
-- title: The . Operator
+- title: Оператор .
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20value%3A%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20f%20%3D%20Foo%20%7B%20value%3A%2042%20%7D%3B%0A%20%20%20%20let%20ref_ref_ref_f%20%3D%20%26%26%26f%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20ref_ref_ref_f.value)%3B%0A%7D
   content_markdown: >
