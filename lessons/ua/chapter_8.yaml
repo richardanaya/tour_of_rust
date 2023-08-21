@@ -56,25 +56,24 @@
     * Посилання в Rust дуже схоже на покажчик у C з точки зору використання, 
     але з набагато більшими обмеженнями часу компіляції по тому, 
       як його можна зберігати та переміщувати до інших функцій.
-    * Необроблений вказівник у Rust схожий на вказівник у C, оскільки він представляє число, яке 
-      можна копіювати або передавати, і навіть перетворювати на числові типи, де його можна модифікувати як число для виконання математики вказівника.
-      number to do pointer math.
+    * Необроблений вказівник у Rust схожий на вказівник у C, оскільки він представляє число,
+      яке можна копіювати або передавати, і навіть перетворювати на числові типи, де його 
+      можна модифікувати як число для виконання математики вказівника.
 - title: Розіменування
   content_markdown: |
-    The process of accessing/manipulating data that is being referred to
-    by a *reference* (i.e. `&i32`) is called *dereferencing*. 
+    Процес доступу/управління даними, на які посилаються
+    за *посиланням* (тобто `&i32`) називається *розіменуванням*.
 
-    References are used to access/manipulate data in two ways:
-    * Access to the referred data during assignment of variables.
-    * Access to fields or methods of the referred data.
-
-    Rust has some powerful operators that allow us to do this.
+    Посилання використовуються для доступу/управління даними двома способами:
+    * Доступ до зазначених даних під час призначення змінних.
+    * Доступ до полів або методів зазначених даних.
+    
+    У Rust є кілька потужних операторів, які дозволяють нам це робити.
 - title: Оператор *
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20i32%20%3D%2042%3B%0A%20%20%20%20let%20ref_ref_ref_a%3A%20%26%26%26i32%20%3D%20%26%26%26a%3B%0A%20%20%20%20let%20ref_a%3A%20%26i32%20%3D%20**ref_ref_ref_a%3B%0A%20%20%20%20let%20b%3A%20i32%20%3D%20*ref_a%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20b)%0A%7D
   content_markdown: >
-    The `*` operator is an explicit way to dereference a reference. 
-
+    Оператор * є явним способом для розіменування посилання.
 
     ```rust
 
@@ -89,18 +88,18 @@
     ```
 
 
-    Memory detail:
+    Деталі про роботу з пам'яттю:
 
-    - Because i32 is a primitive type that implements the `Copy` trait, 
+    - Оскільки i32 є примітивним типом, який реалізує властивість `Copy`,
 
-    the bytes of variable `a` on stack are copied into the bytes of variable
+    байти змінної `a` у стеку копіюються в байти змінної
     `b`.
 - title: Оператор .
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20value%3A%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20f%20%3D%20Foo%20%7B%20value%3A%2042%20%7D%3B%0A%20%20%20%20let%20ref_ref_ref_f%20%3D%20%26%26%26f%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20ref_ref_ref_f.value)%3B%0A%7D
   content_markdown: >
-    The `.` operator is used in accessing fields and methods of a reference. It
-    works a bit more subtly.
+    Оператор `.` використовується для доступу до полів і методів посилання. Це
+    працює дещо тонше.
 
 
     ```rust
