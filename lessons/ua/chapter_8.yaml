@@ -48,8 +48,8 @@
 
     Необроблені покажчики можна перетворювати на числа та з них (наприклад, `usize`).
 
-    Необроблені покажчики можуть отримати доступ до даних за допомогою коду *unsafe*
-    (детальніше про це пізніше).
+    Необроблені покажчики можуть отримати доступ до даних за допомогою *небезпечного* 
+    коду (детальніше про це пізніше).
 
     Деталі про роботу з пам'яттю:
 
@@ -112,11 +112,11 @@
 
     ```
 
-    Whoa, why didn't we need to add `***` before `ref_ref_ref_f`? This is
-    because the `.` operator automatically dereferences 
+    Ого, а чому ми не додали `***` перед `ref_ref_ref_f`? Це тому, що
+    оператор `.` автоматично роздиференціює 
 
-    a sequence of references. That last line is turned into the following by the
-    compiler automatically.
+    послідовність посилань. Останній рядок автоматично перетворюється 
+    компілятором.
 
 
     ```rust
@@ -124,29 +124,29 @@
     println!("{}", (***ref_ref_ref_f).value);
 
     ```
-- title: Smart Pointers
+- title: Розумні вказівники (Smart Pointers)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
   content_markdown: >
-    In addition to the ability to create references to existing typed data using
-    the `&` operator, Rust gives us the ability
+    На додаток до можливості створювати посилання на існуючі типізовані дані за допомогою
+    оператора `&`, Rust надає нам можливість
 
-    to create *reference-like* structs called **smart pointers**. 
-
-
-    We can think of references at a high level as a type that gives us access to
-    another type.  Smart pointers are different in their 
-
-    behavior from normal references in that they operate based on internal logic
-    that a programmer writes. You — the programmer —
-
-    are the *smart* part.
+    створювати *посилання-подібні* структури, які називаються **розумні вказівники**. 
 
 
-    Typically smart pointers implement `Deref`, `DerefMut`, and `Drop` traits to
-    specify the logic of what should happen when
+    Ми можемо думати про посилання на високому рівні як про тип, який надає нам доступ до
+    іншого типу. Розумні покажчики відрізняються за своєю 
 
-    the structure is dereferenced with `*` and `.` operators.
+    поведінкою від звичайних посилань тим, що вони працюють на основі внутрішньої логіки
+    яку пише програміст. Ви - програміст -
+
+    є *розумною* частиною.
+
+
+    Зазвичай, розумні покажчики реалізують ознаки `Deref`, `DerefMut` та `Drop` для
+    визначення логіки того, що має відбуватись, коли
+
+    структуру розіменовують операторами `*` та `.`.
 - title: Smart Unsafe Code
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
