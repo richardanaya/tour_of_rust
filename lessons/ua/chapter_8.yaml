@@ -147,76 +147,76 @@
     визначення логіки того, що має відбуватись, коли
 
     структуру розіменовують операторами `*` та `.`.
-- title: Smart Unsafe Code
+- title: Розумний небезпечний код (Smart Unsafe Code)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
   content_markdown: >
-    Smart pointers tend to use *unsafe* code fairly often. As mentioned
-    earlier, 
+    Розумні вказівники досить часто використовують *небезпечний* код. Як згадувалося
+    раніше, 
 
-    they are common tools for interacting with the lowest levels of memory in
+    вони є поширеним інструментом для взаємодії з найнижчими рівнями пам'яті у
     Rust.
 
 
-    What is an unsafe code? Unsafe code behaves exactly like normal Rust with the
-    exception of a few abilities that
+    Що таке небезпечний код? Небезпечний код поводиться так само, як і звичайний код у Rust, за
+    за винятком декількох можливостей,
 
-    the Rust compiler is unable to make guarantees about.
+    щодо яких компілятор Rust не може надати гарантій.
 
 
-    A primary ability of unsafe code is *dereferencing a raw pointer*. That
-    means taking a *raw pointer* 
+    Основною можливістю небезпечного коду є *розіменування необроблених вказівник*. Це
+    означає розміщення *необробленого вказівника* 
 
-    to a position in memory and declaring "a data structure exists here!" and
-    turning it into a representation of data you can use (i.e. `*const u8` into
+    в пам'яті та оголошення "тут існує структура даних!" і перетворення її на 
+    дані, яке ви можете використовувати (наприклад, `*const u8` на
     `u8`). 
 
-    Rust has no way to keep track of the meaning of every byte that gets written
-    to memory. Because Rust can't make 
+    Rust не має можливості відстежувати значення кожного байта, який записується
+    до пам'яті. Оскільки, Rust не може надати 
 
-    guarantees about what exists at an arbitrary number used as a *raw pointer*,
-    it puts the dereference in an `unsafe { ... }` block. 
+    гарантій щодо того, чи існує щось за довільним номером, який використовується як *неороблений вказівник*,
+    він поміщає розіменування у `unsafe { ... }` блок. 
 
 
-    Smart pointers *dereference raw pointers* extensively, but they are well
-    proven in what they do.
-- title: Familiar Friends
+    Розумні вказівники широко використовуються для *розіменування сирі вказівники*, і вони добре
+    зарекомендували себе у тому, що вони роблять.
+- title: Наші старі друзі
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
   content_markdown: >
-    Consider some smart pointers we've already seen like `Vec<T>` and `String`.
+    Розглянемо деякі розумні покажчики, які ми вже бачили, такі як `Vec<T>` та `String`.
 
 
-    `Vec<T>` is a smart pointer that just owns some memory region of bytes. The
-    Rust compiler has no idea what 
+    `Vec<T>` - це розумний покажчик, який просто володіє деякою областю пам'яті у байтах.
+    Компілятор Rust не має жодного уявлення про те, що 
 
-    exists in these bytes. The smart pointer interprets what it means to grab
-    items from the region of memory it manages,
+    знаходиться у цих байтах. Розумний вказівник інтерпретує, тобто захоплює
+    елементи з області пам'яті, якою він керує,
 
-    keeps track of where data structures within those bytes begin and end, and
-    then finally dereferences a raw pointer
+    відстежує, де починаються і де закінчуються структури даних у цих байтах, і
+    потім нарешті розіменовує необроблений вказівник
 
-    into data structures into a nice clean ergonomic interface for us to use
-    (e.g. `my_vec[3]`).
+    на структури даних з гарним чистим і лаконічним інтерфейсом, якими ми можемо користуватися
+    (наприклад, `my_vec[3]`).
 
 
-    Similarly, `String` keeps track of a memory region of bytes, and
-    programmatically restricts content written to it to always
+    Аналогічно, `String` відстежує область пам'яті у байтах, і
+    програмно обмежує вміст, що записується до неї, щоб завжди
 
-    be valid `utf-8` and helps dereference that memory region into a type
+    бути коректною у кодуванні `utf-8` і допомагає розіменовувати цю ділянку пам'яті до типу
     `&str`.
 
 
-    Both these datastructures use unsafe dereferencing of raw pointers to do
-    their job.
+    Обидві ці структури даних використовують небезпечне розіменування необроблених вказівників для виконання
+    вказівників для виконання своєї роботи.
 
 
-    Memory details:
+    Подробиці про роботу з пам'ятю:
 
-    * Rust has an equivalent of C's `malloc` using
-    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) and
-    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) for
-    getting ahold of your own memory regions to manage.
+    * У Rust є еквівалент функції `malloc` у C за допомогою
+    [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) та
+    [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html ) для
+    отримання доступу до ваших власних областей пам'яті для подальшого керування.
 - title: Heap Allocated Memory
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
