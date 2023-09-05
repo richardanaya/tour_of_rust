@@ -111,7 +111,7 @@ const getHead = (words, lang) => {
     let rtl_langs = ['ar'];
     let lang_dir = (rtl_langs.includes(lang))?"rtl":"ltr";
     return `<!DOCTYPE html>
-    <html lang="${lang}">
+    <html lang="${lang}" dir="${lang_dir}">
     <head>
         <title>${getWord(words, lang, 'tor')} - Let's go on an adventure!</title>
 
