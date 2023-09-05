@@ -1,0 +1,134 @@
+- title: Chapter 2 - Basic Control Flow
+  content_markdown: >
+    In this chapter let's talk about basic control flow methods in Rust.
+
+    If you are familiar with C based languages you'll feel right at home and
+    maybe
+
+    enjoy a surprise or two.
+- title: if/else
+  content_markdown: >
+    Code branching in Rust is not surprising.
+
+
+    Conditions don't have parentheses! Did we ever really need them? Our logic
+    now looks nice and clean.
+
+
+    All your usual relational and logical operators still work: `==`, `!=`, `<`,
+    `>`, `<=`, `>=`, `!`, `||`, `&&`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22less%20than%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22is%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22greater%20than%2042%22)%3B%0A%20%20%20%20%7D%0A%7D
+- title: loop
+  content_markdown: |
+    Need an infinite loop?
+
+    Rust makes it easy.
+
+    `break` will escape a loop when you are ready.
+
+    `loop` has a secret we'll talk about soon.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: while
+  content_markdown: |
+    `while` lets you easily add a condition to a loop.
+
+    If the condition evaluates to `false`, the loop will exit.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22x%20is%20%7B%7D%22%2C%20x)%3B%0A%7D%0A
+- title: for
+  content_markdown: >
+    Rust's `for` loop is a powerful upgrade. It
+
+    iterates over values from any expression that evaluates into an iterator.
+    What's
+
+    an iterator? An iterator is an object that you can ask the question "What's
+    the
+
+    next item you have?" until there are no more items.
+
+
+    We'll explore this more in a future chapter. In the meantime, just know Rust
+    makes 
+
+    it easy to create iterators that generate a sequence of integer numbers.
+
+
+    The `..` operator creates an iterator that generates numbers from a start
+    number up to
+
+    but not including an end number.
+
+
+    The `..=` operator creates an iterator that generates numbers from a start
+    number up to 
+
+    and including an end number.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: match
+  content_markdown: >
+    Miss your switch statement? Rust has an incredibly useful keyword
+
+    for matching all possible conditions of a value and executing a code path if
+    the
+
+    match is true. Let's see how this works for numbers. We will have more to
+    say
+
+    in future chapters on pattern matching more complex data. I promise you it
+    will
+
+    be worth the wait.
+
+
+    `match` is exhaustive so all cases
+
+    must be handled.
+
+
+    Matching combined with destructuring is by far one of the
+
+    most common patterns you will see in all of Rust.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+- title: Returning Values From loop
+  content_markdown: |
+    `loop` can break to return a value.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22found%20the%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A
+- title: Returning Values From Block Expressions
+  content_markdown: >
+    `if`, `match`, functions, and scope blocks all have a unique way of
+    returning values in Rust.
+
+
+    If the last statement in an `if`, `match`, function, or scope block is an
+    expression without
+
+    a `;`, Rust will return it as a value from the block. This
+
+    is a great way to create concise logic that returns a value that can be put
+    into
+
+    a new variable.
+
+
+    Notice that it also allows an `if` statement to operate like a concise
+    ternary expression.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20Rust's%20ternary%20expression%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22from%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22is%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20notice%20the%20braces%20are%20optional%20when%20its%20just%20a%20single%20return%20expression%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22is%20not%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22identifying%20food%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20scope%20block%20lets%20us%20get%20a%20result%20without%20polluting%20function%20scope%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22from%20block%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20The%20idiomatic%20way%20to%20return%20a%20value%20in%20rust%20from%20a%20function%20at%20the%20end%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22from%20function%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
+- title: Chapter 2 - Conclusion
+  content_markdown: >
+    Hopefully I've shown a glimpse of Rust's power even in the most
+
+    basic language features. We'll be talking about `for` and
+
+    `match` even more in depth as we gain more knowledge that
+
+    can utilize their capabilities. Next time we'll get into Rust's foundational
+    data
+
+    structures.
