@@ -130,14 +130,24 @@ h3 {
   font-size: 20px;
 }
 
-.bottomnav .back {
+[dir="ltr"] .bottomnav .back {
   float: left;
   padding-left: 40px;
 }
 
-.bottomnav .next {
+[dir="ltr"] .bottomnav .next {
   float: right;
   padding-right: 40px;
+}
+
+[dir="rtl"] .bottomnav .back {
+  float: right;
+  padding-right: 40px;
+}
+
+[dir="rtl"] .bottomnav .next {
+  float: left;
+  padding-left: 40px;
 }
 
 body.welcome-cover {
