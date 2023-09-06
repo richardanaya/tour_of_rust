@@ -1,230 +1,194 @@
-- title: Chapter 1 - The Basics
+- title: الفصل 1 - الأساسيات
   content_markdown: >
-    In this first chapter we're going to be exploring the very basics
-    with functions, variables, and the most primitive types. Glad to have you on
-    board!
+    سنستكشف في هذا الفصل الأول الأساسيات المتعلقة بالدوال، المتغيرات والأنواع الأكثر بدائية. سعيد بوجودك بهذه الدورة!
 
 
-    Also! In case you are wondering who this adorable crab who is speaking to
-    you is, I am **Ferris**,
-    the unofficial mascot for the Rust programming language. Nice to meet you.
+    أيضًا! إذا كنت تتساءل من هذا السلطعون الرائع الذي يتحدث إليك، فأنا **فيريس**،
+    التميمة غير الرسمية للغة البرمجة Rust. سعيد بلقائك.
 
 
-    Once you get familiar with Rust, you can call yourself a **Rustacean**. That's
-    how people who use, contribute or are interested in Rust call themself.
-- title: The Rust Playground
+    بمجرد أن تصبح متعود على Rust، يمكنك أن تلقب نفسك بـ **Rustacean**. تلك هي العبارة التي يطلق الأشخاص الذين يستخدمون Rust أو يساهمون فيه أو يهتمون به على أنفسهم.
+
+- title: أداة أرضية تشغيل رست (The Rust Playground)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
   content_markdown: >
-    This tour uses an interactive coding tool from [Rust
+    سيتم إستخدام في هذه الدروة أداة تفاعلية من [Rust
     Playground](https://play.rust-lang.org).
 
 
-    It's a great way to play around with Rust and show others your creativity
-    and challenges!
-- title: Variables
+    إنها طريقة رائعة لتشغيل وتطبيق Rust وإظهار إبداعاتك وتحدياتك للآخرين!
+    
+- title: المتغيرات
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   content_markdown: >
-    Variables are declared using the **let** keyword.
+    يتم التعريف بمتغير جديد بإستعمال الكلمة المفتاحية **let**.
+    
+    
+    عندما يتم تعيين قيمة للمتغير، فإن رست (Rust) يمكنها أن تستنتج نوع المتغير بنسة 99%.
 
 
-    When assigning a value, Rust will be able to infer the type of your variable
-    99% of
-
-    the time. If it cannot you may add the type to your variable declaration.
+    أما إذا لم تتمكن اللغة من إستنتاج نوع المتغير فإنه يتوجب عليك حينها إضافة نوع المتغبر الذي قمت بتعريفه به.
 
 
-    Notice how we can assign to the same variable name multiple times. This is
-    called variable
+    لاحظ في المثال المقابل كيف يمكنك تعريف نفس اسم المتغير عدة مرات. وهذا ما يسمى بتظليل المتغير (variable shadowing) - من الظل -، والنوع يمكن تغييره في المراجع اللاحقة (subsequent references) لذلك الاسم.
+    
+    
+    أسماء معرفات المتغيرات دائما تكون بطريقة الثعبان `snake_case`.
 
-    shadowing and the type can be changed for subsequent references to that
-    name.
-
-
-    Variable names are always in `snake_case`.
-- title: Changing Variables
+- title: تغيير قيم المتغيرات
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
   content_markdown: >
-    Rust cares a great deal about what variables are modifiable. Values
+    يهتم رست (Rust) كثيرا بكيفية تعديل قيم المتغيرات. وهنا تنقسم القيم الى صنفين:
+    
 
-    fall into two types:
-
-
-    * **mutable** - the compiler will allow the variable to be written to and
-    read from.
-
-    * **immutable** - the compiler will only allow the variable to be read from.
+    * **قيم قابلة للتغيير (mutable)** - في هذه الحالة يسمح المترجم (compiler) بأن يكون المتغير قابل للكتابة (أي التعديل) والقراءة منه.
 
 
-    Mutable values are denoted with a **mut** keyword.
+    * **قيم غير قابلة للتغيير (immutable)** - وهنا المترجم (compiler) يسمح فقط بأن يكون المتغير قابل للقراءة فقط.
+    
+    
+    ويتم الإشارة إلى أن القيم قابلة للتغيير بالكلمة المفتاحية **mut** تضاف أثناء تعريف المتغير.
+    
 
-
-    We will have more to say on this concept later, but for now just keep an eye
-    out for this keyword.
-- title: Basic Types
+    سيكون لدينا المزيد لنقوله حول هذا المفهوم لاحقًا، ولكن في الوقت الحالي ألق نظرة فقط على هذه الكلمة المفتاحية.
+- title: الأنواع البدائية
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
-    Rust has a variety of familiar types:
+    رست (Rust) لديها مجموعة متنوعة من الأنواع المألوفة:
 
 
-    * booleans - `bool` for representing true/false
+    * القيم المنطقية (booleans) - `bool` من أجل تمثيل قيمة صحيح أو خطأ
+    
+    * الأعداد الصحيحة بدون إشارة (unsigned integers) - يرمز لها بـ `u8` `u16` `u32` `u64` `u128` وتمثل كل الأعداد الغير سالبة (الأعداد الموجبة).
+    
+    * الأعداد الصحيحة بإشارة (signed integers) - يرمز لها بـ `i8` `i16` `i32` `i64` `i128` وتمثل كل الأعداد.
 
-    * unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing
-    nonnegative whole numbers
+    * الأعداد الصحيحة بحجم المؤشر (pointer-sized integers) - يرمز لها بـ `isize` `usize`  وهي لتمثيل الفهارس وأحجام الأشياء في الذاكرة، وللفهم أكثر فإن size هنا تتغير عند ترجمة البرنامج (compiling) حسب بنية النظام فهي تأخذ قيمة  32 بت (usize = u32) في البرامج الموجه للحواسب x86 و تأخذ قيمة 64 بت (usize = u64) في البرامج الموجهة للحواسب x86_64، إذن usize تضمن حجز الحجم الكافي في الذاكرة لأي مؤشر حسب بنية البيانات.
 
-    * signed integers - `i8` `i16` `i32` `i64` `i128` for representing whole numbers
+    * الأعداد العشرية (floating point) - يرمز لها بـ `f32` `f64` تمثل كل الأعداد التي تملك قسمًا عشريًا إضافةً إلى القسم الصحيح.
 
-    * pointer sized integers - `usize` `isize` for representing indexes
+    * الصفوف (tuples) - تكتب بهذا الشكل `(value, value, ...)` هي مجموعة متسلسة ثابة من القيم بأنواع مختلفة والتي تمرر الى المكدس (Stack).
+    
+    * المصفوفات (arrays) - تكتب بهذا الشكل `[value, value, ...]` هي مجموعة متسلسة من العناصر متشابهة الأنواع وبطول ثابت ومعلوم أثناء الترجمة (compile time).
 
-    and sizes of things in memory
-
-    * floating point - `f32` `f64`
-
-    * tuple - `(value, value, ...)` for passing fixed sequences of values on the
-    stack
-
-    * arrays - `[value, value, ...]` a collection of similar elements with fixed
-    length known at compile time
-
-    * slices - a collection of similar elements with length known at runtime
-
-    * `str`(string slice) - text with a length known at runtime
+    * الشرائح (slices) - هو مفهوم يعبر عن مجموعة متسلسة من العناصر متشابهة الأنواع وبطول ثابت ومعلوم أثناء تشغيل البرنامج (runtime).
+    
+    * الشرائح النصية (string slice) - يرمز لها بـ `str` وهي نص (كل حرف يمثل شريحة) بطول معلوم أثناء تشغيل البرنامج (runtime).
 
 
-    Text might be more complex than you are used to in other languages;
-
-    since Rust is a system programming language, it cares about memory 
-
-    issues you might not be used to. We will be going into this in detail later.
+    قد يكون النص في لغة رست (Rust) أكثر تعقيدًا مما اعتدت عليه في اللغات الأخرى؛ نظرا لأن رست (Rust) هي لغة برمجة أنظمة، فهو يهتم بمشاكل الذاكرة التي قد لا تكون معتادًا عليها. وسنتناول هذا بالتفصيل لاحقًا.
 
 
-    Numeric types can be explicitly specified by appending the type to the end
-    of the number (e.g. `13u32`, `2u8`).
-- title: Basic Type Conversion
+    وكمعلومة إضافية فإنه بالإمكان تحديد نوع المتغير عندما يكون من الانواع الرقمية (Numeric types) عن طريق إضافة النوع في نهاية قيمة العدد (مثال: `13u32`, `2u8`).
+    
+    
+    معلومات أخرى:
+
+
+    * [ويكيبيديا: المكدس (Stack)](https://ar.wikipedia.org/wiki/%D9%85%D9%83%D8%AF%D8%B3_(%D8%A8%D9%86%D9%8A%D8%A9_%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA))
+
+- title: تحويل الأنواع البداية
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
   content_markdown: >
-    Rust requires explicitness when it comes to numeric types. One cannot
-
-    use a `u8` for a `u32` casually without
-
-    error.
+    يطلب رست (Rust) منك أن تكون واضحا عندما تتعامل مع الأنواع الرقمية. بحيث لا يمكنك إستخدام نوع `u8` لمتغير من نوع `u32` بدون ظهور أخطاء.
 
 
-    Luckily Rust makes numeric type conversions very easy with the **as**
-    keyword.
-- title: Constants
+    طبعا من حسن الحظ، فإن رست (Rust) يبسط جدا تحويل الأنواع الرقمية عن طريق الكلمة المفتاحية **as**.
+
+- title: الثوابت (Constants)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22To%20make%20an%20apple%20%7B%7D%20from%20scratch%2C%20you%20must%20first%20create%20a%20universe.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
   content_markdown: >
-    Constants allow us to specify a common value that's used throughout
-
-    our code many times efficiently.  Instead of copying values like variables
-
-    where they are used, constants directly replace the text identifier where
-    they
-
-    are used with their value at compile time.
+    تسمح لنا الثوابت بتعيين قيمة مشتركة ثابتة يتم استخدامها في الكود الخاص بنا عدة مرات بكفاءة. وذلك عوض نسخ القيم لما يتم استخدام المتغيرات، بحيث تحدث عملية استبدال للمعرف النصي للثابت بقيمته أثناء الترحمة (compile time) مباشرة. 
+    
+    
+    على عكس المتغيرات، فإنه يجب إضافة نوع الثابت دائمًا عند تعريفه.
 
 
-    Unlike variables, constants must always have explicit types.
+    أسماء معرفات الثوابت دائما تكون بطريقة الثعبان كبيرة الأحرف `SCREAMING_SNAKE_CASE`.
 
-
-    Constant names are always in `SCREAMING_SNAKE_CASE`.
-- title: Arrays
+- title: المصفوفات (Arrays)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
   content_markdown: >
-    An *array* is a **fixed length collection** of data elements all of the same
-    type.
+    *المصفوفة (array)* هي **مجموعة ثابتة الطول** من عناصر البيانات كلها لها نفس النوع.
 
 
-    The data type for an *array* is `[T;N]` where T is the elements' type, and N
-    is the fixed length known at compile-time.
+    نوع البيانات للـ *مصفوفة (array)* يكتب بهذا الشكل `[T;N]` حيث T هو نوع العناصر و N يمثل الطول الثابت والمعلوم أثناء ترجمة البرنامج (compile-time).
 
 
-    Individual elements can be retrieved with the `[x]` operator where *x* is a
-    *usize* index (starting at 0) of the element you want.
+    يمكن إستخراج عناصر بشكل فردي عن طريق كتابة عامل بهذا الشكل `[x]` وتمثل *x* عدد من نوع *usize* (عدد صحيح موجب) يشير إلى ترتيب العنصر في فهرس (index) المصفوفة ويبدأ من 0.
 
 
-    Collections with a dynamic length, often called dynamic or variable arrays, are
-    introduced in a later chapter about **Vectors**.
-- title: Functions
+    أما بالنسبة للمجموعات ذات الأطوال المتغيرة فتسمى غالبا بالمصفوفات المتغير (variable arrays) أو الديناميكية (dynamic arrays)،  سيتم التطرق إليها لاحقا في فصل يتحدث حول **Vectors**.  
+- title: الدوال (Functions)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
   content_markdown: >
-    A function has zero or more parameters.
+    تُعرَّف الدوال باستخدام الكلمة المفتاحية `fn` ويمكن أن تحمل صفر أو عدة معلمات (parameters) وهي التي تكون محاطة بالأقواس.
 
 
-    In this example, the *add* function takes two arguments of type `i32` 
-    (signed integer of 32-bit length).
+    في هذا المثال،  الدالة *add* تأخذ وسيطتين (arguments) من نوع `i32` (عدد صحيح بإشارة ذو طول 32 بت).
 
 
-    If you just want to return an expression, you can drop the `return` keyword
-    and the semicolon at the end, as we did in the *subtract* function.
+    إذا اردت إرجاع عبارة (expression)، يمكنك الإستغناء عن الكلمة المفتاحية `return` و الفاصلة المنقوطة (semicolon) في آخر السطر،  كما هو مبين في المثال مع الدالة *subtract*.
 
 
-    Function names are always in `snake_case`.
+    أسماء معرفات الدوال دائما تكون بطريقة الثعبان `snake_case`.
 
 
-    Hint: if you define a function, the data it accepts are called parameters.
-    If you call that function and pass data to it, then it's called arguments.
-- title: Multiple Return Values
+    تلميح: إذا قمت بتعريف دالة، فإن البيانات التي تقبلها تدعى بـالمعلمات(parameters). وإذا قمت بإستدعاءالدالة ومررت لها بيانات فإنها حينئذ تدعى بالوسيطات (arguments). إذا المعلمة هي المتغير المدرج داخل الأقواس في تعريف الدالة. أما الوسيطة هي القيمة التي يتم إرسالها إلى الدالة عند استدعائها.
+
+- title: إرجاع قيم عديدة
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20return%20a%20tuple%20of%20return%20values%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructure%20the%20tuple%20into%20two%20variables%20names%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
   content_markdown: >
-    Functions can return multiple values by returning a **tuple**
-
-    of values.
+    يمكن أن ترجع الدوال عدد من القيم على شكل **صف (tuple)** من القيم.
 
 
-    Tuple elements can be referenced by their index number.
+    ويمكن الوصول إلى عناصر الصف (tuple) عن طريق رقم ترتيبها في الفهرس (index).  
 
 
-    Rust supports various kinds of destructuring that we will see in many forms,
-    allowing
-
-    us to extract sub-pieces of data structures in ergonomic ways. Be on the
-    lookout!
-- title: Returning Nothing
+    يدعم رست (Rust) أنواعًا مختلفة من التفكيك (destructuring) والتي نراها في أشكال عديدة، تسمح لنا باستخراج أجزاء فرعية من هياكل البيانات بطرق مريحة. أرجو أن تكون متنبهاً لها! 
+- title: إرجاع لاشء
   content_markdown: >
-    If no return type is specified for a function, it returns an empty tuple,
-    also known as a *unit*.
+    إذا لم يتم تحديد نوع الإرجاع للدالة (function)، فإنها تُرجع صفًا (tuple) فارغًا، يُعرف أيضًا باسم *الوحدة (unit)*.
 
 
-    An empty tuple is represented by `()`.
+    يرمز للصف (tuple) الفارغ بـ `()`.
 
 
-    Using `()` is uncommon, but will come up often enough that it's good to know
-    whats happening.
+    إن إستخدام الرمز `()` غير شائع، ولكنه قد يصادفك أحيانا وهو جيد لتوضيح ما يحدث فعليا في الدالة.
+
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
-- title: Chapter 1 - Conclusion
+- title: الفصل 1 - الخلاصة
   content_markdown: >
-    Nice job so far! The basics of Rust aren't so bad, right?  We're
-
-    getting a peek into how the Rust compiler thinks.  As a system programming
-    language 
-
-    it cares a lot about the size  of values in memory, whether things can be
-    modified or not, 
-
-    and making sure your math is what you want it to be. Next up we'll be
-    looking at some old friends:
-
-    `if` tests and `for` loops.
+    عمل جميل حتى الآن! أساسيات رست (Rust) ليست صعبة للغاية، أليس كذلك؟ لقد ألقينا نظرة خاطفة على كيفية تفكير مترجم رست (Rust compiler). باعتبارها لغة برمجة نظام، فرست (Rust) تهتم كثيرًا بحجم القيم في الذاكرة، وما إذا كان يمكن تعديل الأشياء أم لا، والتأكد من أن حساباتك هي ما تريد أن تكون عليه.
+    
+    
+     بعد ذلك سنلقي نظرة على بعض الأصدقاء القدامى:
+     
+     
+     اختبارات (tests) `if` وحلقات (loops) `for`.
 
 
-    More Resources:
+     المزيد من الموارد:
 
 
-    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    * [يوتيوب: Rust Cast - A deeper dive on Rust's primitive number
     types](https://www.youtube.com/watch?v=n5TRBkbystY)
 
-    * [Website: Rust Book 2018 - A deeper description on basic data
+    * [موقع ويب: Rust Book 2018 - A deeper description on basic data
     types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
 
-    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
+    * [موقع ويب: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
+    
+    
+    
+    
