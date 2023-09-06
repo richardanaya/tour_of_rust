@@ -1,10 +1,5 @@
-- title: Chapter 10 - The End
+- title: الفصل 10 - النهاية
   content_markdown: >
-    It's been a joy to have you on the Tour of Rust. Ferris and the Tour of Rust
-    team sincerely hope you enjoy the journey ahead! If you 
+    لقد كان من دواعي سروري أن نكون معك في دورة تعلم رست (Rust). فيريس (Ferris) وفريق دورة تعلم رست (the Tour of Rust team) يأملون جدا بأن تستمتع برحلتك المقبلة في تعلم رست (Rust)! إذا شعرت بالإرتياح لما تعلمت حتى الآن، فإننا نوصيك بالتعمق أكثر في اللغة من خلال هذه الموارد:
 
-    have felt comfortable this far, we strongly recommend diving deeper with
-    these resources:
-
-    * [The Official Rust Programming
-    Book](https://doc.rust-lang.org/stable/book/)
+    * [الكتاب الرسمي للغة رست (Rust)](https://doc.rust-lang.org/stable/book/)
