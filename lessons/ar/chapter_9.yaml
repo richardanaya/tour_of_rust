@@ -1,73 +1,79 @@
-- title: Chapter 9 - Project Organization and Structure
+- title: الفصل 9 - تنظيم وهيكلة المشروع 
   content_markdown: >
-    So far all of our code examples have been a single file. Let's discuss how
-    our code can be better organized and shared by others!
-- title: Modules
+    حتى الآن، كانت جميع أمثلة التعليمات البرمجية الخاصة بنا عبارة عن ملف واحد. دعنا نناقش كيف يمكن تنظيم التعليمات البرمجية الخاص بنا ومشاركتها بشكل أفضل مع الآخرين!
+- title: الوحدات (Modules)
   content_markdown: |
-    Every Rust program or library is a *crate*.
-
-    Every crate is made of a hierarchy of *modules*.
-
-    Every crate has a root module.
-
-    A module can hold global variables, functions, structs, traits or even other modules!
-
-    In Rust there is not a 1 to 1 mapping of files to the module tree hierarchy. We must build the module tree explicitly by hand in our code.
-- title: Writing a Program
+    كل برنامج أو مكتبة في رست (Rust) هي *صندوق (crate)*
+    
+    يتكون كل صندوق (crate) من تسلسل هرمي (hierarchy) من *الوحدات (modules)*.
+    
+     يحتوي كل صندوق (crate) على وحدة جذر (root module).
+     
+     يمكن للوحدة أن تحتوي على متغيرات عامة (global variables) أو دوال أو هياكل (structs) أو سمات (traits) أو حتى وحدات (modules) أخرى!
+     
+     في رست (Rust) لا يوجد 1 لـ 1 في خريطة الملفات الخاصة بالتسلسل الهرمي لشجرة الوحدة (module tree hierarchy). يجب أن نبني شجرة الوحدة (module tree) بشكل واضح يدويًا في التعليمات البرمجية الخاصة بنا.  
+- title: كتابة برنامج (Writing a Program)
   content_markdown: |
-    A program has a root module in a file called `main.rs`.
-- title: Writing a Library
+    البرنامج (Program) يملك وحدة جذر (root module) في ملف يسمى بـ `main.rs`.
+- title: كتابة مكتبة (Writing a Library)
   content_markdown: |
-    A library has a root module in a file called `lib.rs`.
-- title: Referencing Other Modules and Crates
+    المكتبة (library) تملك وحدة جذر (root module) في ملف يدعى بـ `lib.rs`.
+- title: الإشارة إلى وحدات وصناديق أخرى (Referencing Other Modules and Crates)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
   content_markdown: >
-    Items in modules can be referenced with their full module path
-    `std::f64::consts::PI`.
+    يمكن الإشارة إلى العناصر الموجودة في الوحدات الأخرى عن طريق المسار الكامل للوحدة كما يلي 
+    
+    
+    ```rust
+    
+    std::f64::consts::* 
+    
+    ``` 
 
 
-    A simpler way is the **use** keyword. It allows us to specify particular
-    items from modules we want
+    والطريقة الأسهل هي استعمال الكلمة المفتاحية **use**. فهي تتيح لنا تحديد عناصر معينة من الوحدات والتي نرغب في استخدامها في التعليمات البرمجية الخاصة بنا ودون استخدام المسار الكامل. على سبيل المثال، 
+    
+    
+    ```rust
+    
+    std::f64::consts::PI 
+    
+    ``` 
+    
 
-    to use throughout our code without a full path. For instance `use
-    std::f64::consts::PI`
-
-    allows me to just use the identifier `PI` in my main function.
-
-
-    **std** is the crate of the **standard library** of Rust which is full of
-    useful data
-
-    structures and functions for interacting with your operating system.
+    هنا يسمح لي فقط باستخدام المعرف `PI` في دالتي الرئيسية.
+    
+    
+    **std** هي الصندوق الخاص بـ **المكتبة القياسية (standard library)** لرست (Rust) والتي تحوي هياكل بيانات ودوال مساعدة في التفاعل مع نظام التشغيل الخاص بك.  
 
 
-    A searchable directory of crates created by the community can be found at
-    [https://crates.io](https://crates.io/).
-- title: Referencing Multiple Items
+
+    يمكنك العثور على دليل الصناديق (crates) الذي أنشأه مجتمع رست (Rust) ويمكنك البحث فيه عبر الموقع [https://crates.io](https://crates.io/).
+
+- title: الإشارة لعدة عناصر (Referencing Multiple Items)
   content_markdown: |
-    Multiple items can be referenced in a single module path as so:
+    يمكن الإشارة لعدة عناصر في مسار وحدة واحدة (single module path) على النحو التالي:
+
 
     ```rust
     use std::f64::consts::{PI,TAU}
     ```
 
-    Ferris doesn't eat TAU, he only eats PI.
-- title: Creating Modules
+    فيريس لا يأكل TAU، بل يأكل PI فقط.
+- title: إنشاء وحدات (Creating Modules)
   content_markdown: |
-    When we think of code, we usually imagine a hierarchy of files organized
-    in directories. Rust lets you create modules closely related to your file
-    structure.
+    عندما نفكر في التعليمات البرمجية، فإننا عادة نتخيل تسلسلًا هرميًا (hierarchy) للملفات المنظمة في مجلدات أو أدلة. يتيح لك رست (Rust) إنشاء وحدات (modules) وثيقة الصلة ببنية ملفك.
 
-    There are two ways in Rust to declare a module. For example, a module
-    `foo` can be represented as:
-      * a file named `foo.rs`
-      * a directory named `foo` with a file `mod.rs` inside
-- title: Module Hierarchy
+
+     هناك طريقتان في رست (Rust) للتصريح عن وحدة (module). على سبيل المثال، يمكن تمثيل الوحدة `foo` على النحو التالي:
+     
+     * إما بملف اسمه `foo.rs`.
+     * أو عن طريق دليل اسمه "foo" وبداخله ملف "mod.rs".
+
+- title: التسلسل الهرمي للوحدة (Module Hierarchy)
   content_markdown: >
-    A module can depend on another one. In order to establish a relationship
-
-    between a module and its sub-module, you must write in the parent module:
+    يمكن أن تعتمد الوحدة (module) على وحدة أخرى. من أجل إنشاء علاقة بينها وبين وحدتها الفرعية (sub-module)، ولهذا يجب عليك أن تكتب في الوحدة الأصلية ما يلي:
 
 
     ```rust
@@ -77,101 +83,79 @@
     ```
 
 
-    The declaration above  will look for a file named `foo.rs` or `foo/mod.rs`
-    and
+    التصريح المبين في الأعلى سوف يبحث عن ملف باسم `foo.rs` أو `foo/mod.rs` ثم سوف يدرج محتواه داخل وحدة تسمى `foo` ضمن ذلك النطاق. 
 
-    will insert its contents inside a module named `foo` under this scope.
-- title: Inline Module
+- title: الوحدة المضمنة (Inline Module)
   content_markdown: >
-    A sub-module can be directly inlined within a module's code.
-
-
-    One very common use for inline modules is creating unit tests. We create an
-    inline module that only exists when Rust is used for testing!
+    يمكن تضمين الوحدة الفرعية (sub-module) مباشرةً ضمن التعليمات البرمجية للوحدة.    
+    
+    
+    أحد الاستخدامات الشائعة جدًا للوحدات المضمنة (inline modules) هو إنشاء وحدة اختبارات (unit tests). نقوم بإنشاء وحدة مضمنة لا توجد إلا عند استخدام رست (Rust) للاختبار (testing)!
+    
 
 
     ```
 
-    // This macro removes this inline module when Rust 
+    // يقوم هذا الماكرو بإزالة هذه الوحدة المضمنة عند ما يكون رست
 
-    // is not in test mode.
+    // ليس في وضع إختبار
 
     #[cfg(test)]
 
     mod tests {
-        // Notice that we don't immediately get access to the 
-        // parent module. We must be explicit.
+        // لاحظ أننا لا نستطيع الوصول على الفور إلى 
+        // الوحدة الأب. يجب أن نكون صريحين.
         use super::*;
 
         ... tests go here ...
     }
 
     ```
-- title: Internal Module Referencing
+- title: الإشارة إلى وحدة داخلية (Internal Module Referencing)
   content_markdown: >
-    Rust has several keywords you can use in your `use` path to quickly get
-    ahold of the module you want:
-      
-    * `crate` - the root module of your crate
+    يحتوي رست (Rust) على العديد من الكلمات المفتاحية التي يمكنك استخدامها في مسار `use` الخاص بك للوصول بسرعة إلى الوحدة التي تريدها:
+    
+    
+    * الصندوق (`crate`) - وحدة الجذر لصندوقك
+    
+    * علوي (`super`) - الوحدة الأب لوحدتك الحالية
+    
+    * الذات (`self`) - الوحدة الحالية
 
-    * `super` - the parent module of your current module
-
-    * `self` - the current module
-- title: Exporting
+- title: التصدير (Exporting)
   content_markdown: >
-    By default members of a *module* are not accessible from outside of the
-    module (not even to its child modules!). We make members 
-
-    of a module accessible using the `pub` keyword.
+    بشكل افتراضي، لا يمكن الوصول إلى أعضاء (members) *الوحدة (module)* من خارجها (ولا حتى من الوحدات الفرعية الخاصة بها!). ولنجعل أعضاء الوحدة يمكن الوصول إليهم نستخدم الكلمة الفتاحية `pub`.
 
 
-    By default members of a *crate* are not accessible outside of the crate. We
-    make members of
+    وكذلك، افتراضيا لا يمكن الوصول إلى أعضاء *الصندوق (crate)* خارجه. ولتجعل أعضاء الصندوق قابلين للوصول ضع عليهم `pub` في *الوحدة الجذرية (root module)* لصندوقك (`lib.rs` أو `main.rs`).
 
-    a crate accessible by marking them as `pub` in the *root module* of your
-    crate (`lib.rs` or `main.rs`).
-- title: Structure Visibility
+- title: كشف الهيكل (Structure Visibility)
   content_markdown: >
-    Just like functions, structures can declare what they want exposed outside
-    of their module using `pub`.
+    تمامًا مثل الدوال، يمكن التصريح للهيكل (structures) ما تريد أن يكشف منه خارج الوحدة النمطية باستخدام الكلمة المفتاحية `pub`.
+
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
-- title: Prelude
+- title: التمهيد (Prelude)
   content_markdown: |
-    You might be wondering how we have access to `Vec` or `Box`
-    everywhere without a `use` to import them. It is because of the module
-    `prelude` in the standard library.
+    ربما تتساءل كيف يمكننا الوصول إلى `Vec` أو `Box` في كل مكان من دون `use` لاستيرادهما. هذا بسبب وحدة التمهيد `prelude` في المكتبة القياسية (standard library).
+    
+    اعلم أنه في مكتبة رست (Rust) القياسية، أي شيء يتم تصديره في `std::prelude::*` متاح تلقائيًا لكل جزء من رست (Rust). هذا هو الحال بالنسبة لـ `Vec` و`Box` وبالنسبة للآخرين أيضًا (Option، Copy،
+     إلخ.).
 
-    Know that in the Rust standard library anything that is exported in
-    `std::prelude::*` is automatically available to every part of Rust.
-    That is the case for `Vec` and `Box` but others as well (Option, Copy,
-    etc.).
-- title: Your Own Prelude
+- title: تمهيدك الخاص (Your Own Prelude)
   content_markdown: >
-    Because of standard library's prelude, it's common for your library to have
-    its own prelude module as a starting point for 
+    بالنظر لتمهيد (prelude) المكتبة القياسية (standard library)، فمن الشائع أن يكون لمكتبتك (library) وحدة تمهيدية (prelude module) خاصة بها كنقطة بداية حيث يجب على المستخدمين استيراد جميع هياكل البيانات الأكثر شيوعًا لاستخدام مكتبتك (على سبيل المثال، استخدم `use my_library::prelude::*`) .
+    
+     هو لا يتم استخدامه تلقائيًا في البرامج/المكتبات التي تستخدم الصندوق الخاص بك، ولكنه تقليد جيد يجب اتباعه حتى يعرف الأشخاص من أين يبدأون.
+     
+     
+     يقول فيريس (Ferris): "كن رستاسيًا (rustacean) جيدًا وساعد سلطعونا زميلًا لك للخروج بتمهيد جيد!"
 
-    where users should import all of the most common data structures for using
-    your library (e.g `use my_library::prelude::*`).
-
-    It doesn't automatically get used in programs/libraries that use your crate,
-    but it's a good convention to follow so people
-
-    know where to start.
-
-
-    Ferris says, "Be a good rustacean and help a fellow crab out with a good
-    prelude!"
-- title: Chapter 9 - Conclusion
+- title: الفصل 9 - الخلاصة
   content_markdown: >
-    You now have a few tricks up your sleeve when it comes to creating Rust
-    applications and libraries ready for the world. Don't
-
-    worry about remembering it all. As your library grows and is used by other
-    people, you'll find what works best at each milestone.
+    لديك الآن بعض الحيل في جعبتك عندما يتعلق الأمر بإنشاء تطبيقات ومكتبات في رست(Rust) وتكون جاهزة للعالم. لا تقلق بشأن تذكر كل شيء. مع نمو مكتبتك واستخدامها من قبل أشخاص آخرين، ستجد ما هو الأفضل في كل مرحلة.
 
 
-    Resources:
-
-    - [Guidelines For Writing Rust
-    APIs](https://rust-lang.github.io/api-guidelines/)
+    المصادر:
+    
+      - [إرشادات لكتابة واجهة مبرمج التطبيقات (APIs) في رست (Rust)](https://rust-lang.github.io/api-guidelines/)
