@@ -1,60 +1,46 @@
-- title: Chapter 7 - Object Oriented Programming
+- title: الفصل 7 - البرمجة كائنية التوجه (Object Oriented Programming)
   content_markdown: >
-    Expressing ideas with functions is a proven way of representing behavior and
-    data (C 
+    يعد التعبير عن الأفكار باستخدام الدوال طريقة مجربة لتمثيل السلوك والبيانات (تقوم لغة البرمجة C بذلك منذ عقود!). تاريخيًا، وجدت علوم الكمبيوتر تعبيرات أخرى مفيدة مجمعة ومجردة للبيانات. وكإحدى هذه الأساليب التي قد تكون على دراية بها وهي البرمجة كائنية التوجه (إختصار تكتب OOP). في هذا الفصل سوف نستكشف لغة برمجة رست (Rust)خارج نطاق الدوال.
 
-    has been doing it for decades!). Historically, computer science has found
-    other
-
-    useful expressive aggregations and abstractions for data. You may be
-    familiar with object oriented programming (OOP) as one
-
-    such way. In this chapter we'll explore the Rust programming language beyond
-    functions.
-- title: What Is OOP?
+- title: ماهي البرمجة كائنية التوجه (OOP)؟
   content_markdown: >
-    Object oriented programming roughly refers to programming languages that
-    have a number of iconic features:
+    تشير البرمجة كائنية التوجه (Object oriented programming) تقريبًا إلى لغة البرمجة التي تحتوي على عدد من الميزات البارزة منها:
 
-    * Encapsulation - Associating data and functions into the conceptual unit of
-    a single type called an *object*.
 
-    * Abstraction - Hiding data and function members to obfuscate implementation
-    details of an object.
-
-    * Polymorphism - The ability to interact with objects of different types through
-    one interface.
-
-    * Inheritance - The ability to inherit data and behavior from other objects.
-- title: Rust Is Not OOP
+    * التغليف (Encapsulation) - ربط البيانات والدوال في وحدة تصورية من نوع واحد يسمى *الكائن (object)*.
+   
+    * التجريد (Abstraction) - إخفاء أعضاء من بيانات و دوال للتعتيم (obfuscate) على تفاصيل تنفيذ (implementation) الكائن.
+   
+    * تعدد الأشكال (Polymorphism) - القدرة على التفاعل مع كائنات (objects) من أنواع مختلفة من خلال واجهة واحدة.
+   
+    * الوراثة (Inheritance) - القدرة على وراثة البيانات والسلوك (behavior) من كائنات أخرى.
+- title: رست (Rust) ليست OOP
   content_markdown: >
-    Rust lacks inheritance of data and behavior in any meaningful way.
+    يفتقر رست (Rust) إلى وراثة البيانات والسلوك في نفس الوقت.
+    
+    
+    * لا يمكن للهياكل أن ترث الحقول من الهيكل الأب.
+    
+    * لا يمكن للهياكل أن ترث دوال من الهيكل الأب.
 
 
-    * Structs cannot inherit fields from a parent struct.
-
-    * Structs cannot inherit functions from a parent struct.
-
-
-    That said, Rust implements many programming language features, so that you
-    might not mind this lacking.
-- title: Encapsulation With Methods
+    ومع ذلك، تنفذ رست (Rust) العديد من ميزات لغة البرمجة كائنية التوجه، لذلك قد لا يهمك نقصها.
+- title: التغليف بالتوابع (Encapsulation With Methods)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
   content_markdown: >
-    Rust supports the concept of an *object* that is a struct associated with
-    some functions (also known as *methods*).
+    يدعم رست (Rust) مفهوم *الكائن (object)* وهو عبارة عن هيكل (struct) مرتبط ببعض الدوال (المعروفة أيضًا باسم *التوابع (methods)*).
 
 
-    The first parameter of any method must be a reference to the instance
-    associated with the method call (e.g. `instanceOfObj.foo()`). Rust uses:
+    يجب أن تكون المعلمة (parameter) الأولى لأي تابعة (method) مرجعًا (reference) للمثيل (instance) المرتبط باستدعاء التابعة (على سبيل المثال، <span dir="ltr">`instanceOfObj.foo()`</span>). استخدامات رست:
+    
+    
+    * <span dir="ltr">`&self`</span> - مرجع للمثيل غير قابل للتغيير.
+    
+    * <span dir="ltr">`&mut self`</span> - مرجع للمثيل قابل للتغيير.
 
-    * `&self` - Immutable reference to the instance.
 
-    * `&mut self` - Mutable reference to the instance.
-
-
-    Methods are defined within an implementation block with keyword `impl`:
+    يتم تعريف التوابع (Methods) ضمن كتلة التنفيذ (implementation block) عن طريق الكلمة المفتاحية `impl`:
 
     ```rust
 
@@ -66,27 +52,25 @@
     }
 
     ```
-- title: Abstraction With Selective Exposure
+- title: التجريد بالعرض الإنتقائي (Abstraction With Selective Exposure)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
   content_markdown: >
-    Rust can hide the inner workings of objects.
+    رست (Rust) يمكن أن يخفي الأعمال الداخلية للكائنات.
 
 
-    By default fields and methods are accessible only to the module they belong
-    to.
+     بشكل افتراضي، لا يمكن الوصول إلى الحقول والتوابع إلا من خلال الوحدة (module) التي تنتمي إليها.
 
 
-    The `pub` keyword exposes struct fields and methods outside of the module.
-- title: Polymorphism With Traits
+     تكشف الكلمة المفتاحية `pub` عن حقول وتوابع الهيكل خارج الوحدة (module).
+- title: تعدد الأشكال باستخدام السمات (Polymorphism With Traits)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
   content_markdown: >
-    Rust supports polymorphism with traits. Traits allow us to associate a set
-    of methods with a struct type. 
+    رست (Rust) يدعم تعدد الأشكال (Polymorphism) باستخدام السمات (Traits). تسمح لنا السمات (Traits) بربط مجموعة من التوابع (methods) بنوع هيكل (struct).
 
 
-    We first define the signatures of methods of a trait within:
+    نحدد أولاً تواقيع (signatures) توابع السمة كما يلي:
 
 
     ```
@@ -99,15 +83,10 @@
     ```
 
 
-    When a struct implements a trait, it establishes a contract that allows us
-    to indirectly interact with the struct 
-
-    through the trait type (e.g. `&dyn MyTrait`) without having to know the real
-    type.
+    عندما ينفذ الهيكل (struct) سمة (trait) ما، فإنه ينشئ عقدًا يسمح لنا بالتفاعل بشكل غير مباشر مع الهيكل من خلال نوع سمة - trait type - (على سبيل المثال <span dir="ltr">`&dyn MyTrait`</span>) دون الحاجة إلى معرفة النوع الحقيقي.
 
 
-    A struct's implemented traits methods are defined within an implementation
-    block:
+    يتم تعريف توابع السمة (traits methods) المراد تنفيذها في الهيكل ضمن كتلة التنفيذ (implementation block):
 
 
     ```rust
@@ -120,89 +99,66 @@
     }
 
     ```
-- title: Implemented Methods On Traits
+- title: التوابع المنفذة في السمات (Implemented Methods On Traits)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
   content_markdown: >
-    Traits can have implemented methods.
-
-
-    The functions have no direct access to the inner fields of a struct, but it
-    can 
-
-    be useful for sharing behavior between many trait implementors.
-- title: Trait Inheritance
+    يمكن أن يكون للسمات (Traits) توابع منفذة (implemented methods). ويمكن تسميتها بالتوابع الإفتراضية.
+    
+    
+    لا تتمتع هذه التوابع بإمكانية الوصول المباشر إلى الحقول الداخلية للهيكل، ولكنها قد تكون مفيدة لمشاركة السلوك بين العديد من منفذي السمات (trait implementors).
+- title: وراثة السمات (Trait Inheritance)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
   content_markdown: |
-    Traits can inherit methods from other traits.
-- title: Dynamic vs Static Dispatch
+    يمكن أن ترث السمات (Traits) توبع من سمات أخرى.
+- title: الإرسال الحيوي والساكن (Dynamic vs Static Dispatch)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_make_noise(creature%3A%20%26SeaCreature)%20%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20dynamic_make_noise(noise_maker%3A%20%26dyn%20NoiseMaker)%20%7B%0A%20%20%20%20%2F%2F%20we%20don't%20know%20the%20real%20type%0A%20%20%20%20noise_maker.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20static_make_noise(%26creature)%3B%0A%20%20%20%20dynamic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: >
-    Methods are executed in two ways:
-
-    * static dispatch - When the instance type is known, we have direct
-    knowledge of what function to call.
-
-    * dynamic dispatch - When an instance type is not known, we must find out
-    some way of calling the correct function.
+    التوابع تنفذ بطريقتين:
+    
+    * الإرسال الساكن (static dispatch) - عندما يكون نوع المثيل (instance) معروفًا، تكون لدينا معرفة مباشرة بالدلة التي يجب استدعاؤها.
+    
+    * الإرسال الحيوي (dynamic dispatch) - عندما لا يكون نوع المثيل (instance) معروفًا، يجب علينا اكتشاف طريقة ما لاستدعاء الدالة الصحيحة.
 
 
-    Trait types `&dyn MyTrait` give us the ability to work with instances of
-    objects indirectly using dynamic dispatch.
+    أنواع السمات (Trait types) أي <span dir="ltr">`&dyn MyTrait`</span> القدرة على العمل مع مثلاء الكائنات (instances of objects) بشكل غير مباشر باستخدام الإرسال الحيوي أو الديناميكي.
 
 
-    When dynamic dispatch is used, Rust will encourage you to put `dyn` before
-    your trait type so people are aware.
+    عند استخدام الإرسال الحيوي (dynamic dispatch)، سيشجعك رست (Rust) على وضع `dyn` قبل نوع السمة الخاصة بك حتى يكون الناس على علم بذلك.
 
 
-    Memory details:
+    تفاصيل الذاكرة:
 
-    * Dynamic dispatch is slightly slower because of the pointer chasing to find
-    the real function call.
-- title: Trait Objects
+    * الإرسال الحيوي (dynamic dispatch) أبطأ قليلاً بسبب تعقب المؤشر (pointer) من أجل العثور على استدعاء الدلية الحقيقية.
+
+- title: كائنات السمة (Trait Objects)
   content_markdown: >
-    When we pass an instance of an object to a parameter of type `&dyn MyTrait`
-    we pass what is called a *trait object*. 
+    عندما نقوم بتمرير مثيل (instance) الكائن إلى معلمة (parameter) من النوع <span dir="ltr">`&dyn MyTrait`</span>، فإننا نمرر ما يسمى بـ *كائن السمة (trait object)*.
 
 
-    A trait object is what allows us to indirectly call the correct methods of
-    an instance. A trait object is a struct that holds the pointer of 
-
-    our instance with a list of function pointers to our instance's methods.
+    كائن السمة (trait object) هو ما يسمح لنا باستدعاء غير مباشر للتوابع الصحيحة للمثيل (instance). كائن السمة عبارة عن هيكل يحمل مؤشر (pointer) المثيل الخاص بنا مع قائمة مؤشرات الدوال (function pointers) لتوابعه.
 
 
-    Memory details:
-
-    * This list of functions is known in C++ as a *vtable*.
-- title: Handling Unsized Data
+    تفاصيل الذاكرة:
+    
+    * تُعرف قائمة الدوال هذه في لغة ++C باسم *vtable*.
+- title: التعامل مع البيانات غير المحجمة (Handling Unsized Data)
   content_markdown: >
-    Traits introduce an interesting challenge when we want to store them within
-    another struct. Traits obfuscate the original
-
-    struct thus it also obfuscates the original size. Unsized values being
-    stored in structs are handled in two ways in Rust:
-
-
-    * `generics` - Using parameterized types effectively create struct/functions
-    known types and thus known sizes.
-
-    * `indirection` - Putting instances on the heap gives us a level of
-    indirection that allow us to not have to worry about the size of the actual
-    type and just store a pointer to it. There are other ways as well!
-- title: Generic Functions
+    تقدم السمات (Traits) تحديًا مثيرًا للاهتمام عندما نريد تخزينها ضمن هيكل آخر. بحيث تعمل السمات على تشويش الهيكل الأصلي وبالتالي تشوه الحجم الأصلي أيضًا. تتم معالجة القيم غير المحجمة (Unsized values) المخزنة في الهياكل (structs) بطريقتين في رست (Rust):
+    
+    * التعميم `generics` - يؤدي استخدام الأنواع عن طريق معلمات إلى إنشاء هياكل/دوال معروفة النوع  وبالتالي أحجام معروفة.
+    
+    * المراوغة `indirection` - يمنحنا وضع المثلاء (instances) في الكومة (heap) مستوى من المراوغة الذي يسمح لنا بعدم القلق بشأن حجم النوع الحالي والإكتفاء بتخزين مؤشر (pointer) له فقط. توجد طرق أخرى أيضا!
+- title: الدوال المعممة (Generic Functions)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise%3CT%3E(creature%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20NoiseMaker%2C%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: >
-    Generics in Rust work hand in hand with traits. When we describe a
-    parameterized type `T` we can constrain what types 
-
-    can be used as an argument by listing what required traits the argument must
-    implement.
+    التعميم (generics) في رست (Rust) يعمل جنبًا إلى جنب مع السمات (Traits). عندما نصف نوعًا عن طريق معلمة `T`، يمكننا تقييد الأنواع التي يمكن استخدامها كوسيطة (argument) من خلال سرد السمات المطلوبة التي يجب على الوسيطة تنفيذها.
 
 
-    In this example type `T` must implement trait `Foo`:
+    في هذا المثال، يجب على النوع `T` تنفيذ السمة `Foo`:
 
     ```rust
 
@@ -217,15 +173,14 @@
     ```
 
 
-    By using generics we create static typed functions at compile time that will
-    have known types and sizes, allowing us to
+    باستخدام التعميم(generics)، نقوم بإنشاء دوال مكتوبة ساكنة (static typed functions) في وقت الترجمة (compile time) والتي سيكون لها أنواع وأحجام معروفة، مما يسمح لنا بإجراء إرسال ساكن (static dispatch) والتخزين كقيمة ذات حجم.
 
-    perform static dispatch and store as a sized value.
-- title: Generic Function Shorthand
+- title: دالة معممة مختصرة (Generic Function Shorthand)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_make_noise(creature%3A%20%26impl%20NoiseMaker)%0A%7B%0A%20%20%20%20%2F%2F%20we%20know%20the%20real%20type%20at%20compile-time%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_make_noise(%26creature)%3B%0A%7D%0A
   content_markdown: |
-    Rust has a shorthand for expressing generics constrained by a trait:
+    يحتوي رست (Rust) على اختصار للتعبير عن التعميم المقيد بسمة ما:
+    
 
     ```rust
     fn my_function(foo: impl Foo) {
@@ -233,7 +188,7 @@
     }
     ```
 
-    This is equivalent to writing:
+    وهذا يعادل الكتابة كما يلي:
 
     ```rust
     fn my_function<T>(foo: T)
@@ -243,28 +198,20 @@
         ...
     }
     ```
-- title: Box
+- title: العلبة (Box)
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
   content_markdown: >
-    `Box` is a data structure that allows us to move our data from the stack to
-    the heap.
+    `Box` عبارة عن هيكل بيانات (data structure) يسمح لنا بنقل بياناتنا من المكدس (stack) إلى الكومة (heap).
 
 
-    `Box` is a struct known as a *smart pointer* that holds the pointer to our
-    data on the heap.
+    `Box` عبارة عن هيكل (struct) يعرف باسم *المؤشر الذكي (smart pointer)* الذي يحمل مؤشر (pointer) إلى بياناتنا الموجودة في الكومة (heap).
 
 
-    Because `Box` is a struct with a known size (because it just holds a
-    pointer), it is 
-
-    often used as a way to store a reference to something in a struct that must
-    know the size 
-
-    of its fields.
-
-
-    `Box` is so common it can be used from anywhere:
+     نظرًا لأن `Box` عبارة عن هيكل (struct) ذو حجم معروف (لأنه يحتوي فقط على مؤشر pointer)، فغالبًا ما يتم استخدامه كطريقة لتخزين مرجع (reference) إلى شيء ما في هيكل يجب أن تكون حقوله معروفة الحجم.
+     
+     
+     يعد `Box` شائعًا جدًا ويمكن استخدامه من أي مكان:
 
 
     ```rust
@@ -272,10 +219,9 @@
     Box::new(Foo { ... })
 
     ```
-- title: Generic Structs Revisited
+- title: مراجعة للهياكل المعممة (Generic Structs Revisited)
   content_markdown: >
-    Generic structs can also have their parameterized types constrained by
-    traits.
+    الهياكل المعممة يمكنها أيضًا أن تملك أنواع عن طريق معلمات (parameterized types) مقيدة بسمات.
 
 
     ```rust
@@ -292,8 +238,7 @@
     ```
 
 
-    Generic structs have their parameterized type in their implementation
-    blocks:
+     الهياكل المعممة لها نوع عن طريق معلمات خاص بها في كتلة التنفيذها (implementation blocks):
 
 
     ```rust
@@ -303,25 +248,13 @@
     }
 
     ```
-- title: Chapter 7 - Conclusion
+- title: الفصل 7 - الخلاصة
   content_markdown: >
-    We now have more language features at hand to represent our ideas clearly! 
-
-    Rust abstractions might be simple but they are powerful enough to make
-
-    working with code a joy. In this chapter, we caught a glimpse of smart
-    pointers
-
-    with `Box`. In the next chapter we'll learn about how smart pointers can
-    help us with other
-
-    specialized memory situations.
+    لدينا الآن المزيد من ميزات اللغة في متناول اليد لتمثيل أفكارنا بوضوح! قد تكون التجريدات (abstractions) في رست (Rust) بسيطة لكنها قوية بما يكفي لجعل العمل مع التعليمات البرمجية أمرًا ممتعًا. في هذا الفصل، ألقينا نظرة على المؤشرات الذكية (smart pointers) باستخدام `Box`. في الفصل التالي سنتعرف على كيف يمكن للمؤشرات الذكية أن تساعدنا في وضعيات خاصة أخرى للذاكرة.
 
 
-    Resources:
+    موارد:
 
-    * [Video - Object-oriented Programming in 7
-    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
-
-    * [Article - "The faster you unlearn OOP, the better for you and your
-    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
+    * [فيديو - البرمجة كائنية التوجه في 7 دقائق](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+    
+    * [مقال - "كلما تعلمت OOP بشكل أسرع، كان ذلك أفضل لك ولبرنامجك"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
