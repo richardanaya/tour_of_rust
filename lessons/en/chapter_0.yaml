@@ -5,7 +5,7 @@
   content_markdown: |
     <img src="/intro.png" alt="Welcome to the Tour of Rust" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
 
-    **Happy 1 Year Anniversary 🎉**
+    **Happy 3 Year Anniversary 🎉**
 
     Welcome to the *Tour of Rust*. This is meant to be a step by step guide through the features of the Rust programming language.  Rust is often considered a language with a steep learning curve, but I hope I can convince you there's a lot to explore before we even get to complex parts.
 
@@ -31,7 +31,7 @@
     * [Italian](00_it.html)
     * [Tiếng Việt](00_vi.html)
     * [العربية](00_ar.html)
-    
+
     If you have suggestions on content or would like to contribute to translations, check out Tour of Rust's [github repository](https://github.com/richardanaya/tour_of_rust).
 
     You can navigate through the tour with keyboard <span class="emoji">⬅️</span> and <span class="emoji">➡️</span>.
