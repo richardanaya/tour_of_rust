@@ -65,7 +65,7 @@
 
     On usa un `\` al fine de un linea si on ne vole que li linea mey rupter se.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku_angl%C3%A9s%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22salute%20%5C%0A%20%20%20%20munde%22)%20%2F%2F%20n.b.%20li%20spacie%20avan%20m%20es%20ignorat%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku_angl%C3%A9s%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Tachibana%20Hokushi%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22salute%20%5C%0A%20%20%20%20munde%22)%20%2F%2F%20n.b.%20li%20spacie%20avan%20m%20es%20ignorat%0A%7D%0A
 - title: String Literals Crud
   content_markdown: >
     Con raw strings (crud catenes de caracteres) noi posse scrir un sequentie de

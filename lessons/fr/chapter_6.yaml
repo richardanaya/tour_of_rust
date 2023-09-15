@@ -79,7 +79,7 @@
 
     Utilise `\` à la fin d'une ligne si tu ne veux pas de retour à la ligne.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20J%27%C3%A9cris%2C%20efface%2C%20r%C3%A9%C3%A9cris%0A%20%20%20%20%20%20%20%20Effacez%20%C3%A0%20nouveau%2C%20puis%0A%20%20%20%20%20%20%20%20Un%20coquelicot%20fleurit%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20l%27espace%20devant%20le%20%27w%27%20est%20ignor%C3%A9%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26%27static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20J%27%C3%A9cris%2C%20efface%2C%20r%C3%A9%C3%A9cris%0A%20%20%20%20%20%20%20%20Effacez%20%C3%A0%20nouveau%2C%20puis%0A%20%20%20%20%20%20%20%20Un%20coquelicot%20fleurit%0A%20%20%20%20%20%20%20%20-%20Tachibana%20Hokushi%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20l%27espace%20devant%20le%20%27w%27%20est%20ignor%C3%A9%0A%7D%0A
 - title: Chaînes de caractères bruts
   content_markdown: >
     Les chaînes de caractères bruts (en anglais raw string literals) permettent
