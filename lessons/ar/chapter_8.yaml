@@ -1,0 +1,236 @@
+- title: الفصل 8 - المؤشرات الذكية (Smart Pointers)
+  content_markdown: >
+    في هذا الفصل سنقوم بإزالة الغموض عن المؤشرات الذكية (Smart Pointers). دعونا نستكشف هياكل البيانات (data structures) هذه والتي تتيح لنا التفاعل مع أدنى مستوى من الذاكرة.
+
+
+     يقول فيريس: "لا تشعر بالإرهاق من هذا الفصل في حال شعرت أنه ليس بإمكانك كتابة تعليمات برمجية الخاص بك لإدارة الذاكرة منخفضة المستوى (low level memory management) في وقت قصير.
+     
+     
+     يهدف هذا الفصل في الغالب إلى تعريفك ببعض الأدوات المفيدة وإلقاء نظرة على كيفية عملها!"
+- title: مراجعة لمفهوم المراجع (References Revisited)
+  content_markdown: >
+    المرجع (reference) هو في الأساس مجرد رقم يمثل موضع البداية لبعض البايتات في الذاكرة. الغرض الوحيد منه هو تمثيل مفهوم مكان وجود بيانات من نوع معين. ما يجعل المرجع مختلفًا عن مجرد رقم هو أن رست (Rust) سيتحقق من أن عمر (lifetime) المراجع لا يدوم لفترة أطول مما يشير إليه (وإلا فسنحصل على خطأ عندما نستخدمه!).
+- title: المؤشرات الخام (Raw Pointers)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: >
+    يمكن تحويل المراجع (References) إلى نوع أكثر بدائية (primitive type) يسمى *المؤشر الخام (Raw Pointer)* ويطلق عليه المؤشر الأولي. وكما هو الحال مع الأرقام، يمكن نسخها (copy) وتحريكها (move) دون قيود تذكر. ولا يقدم رست (Rust) أي ضمانات بشأن صحة موقع الذاكرة الذي يشير إليه.
+
+
+    يوجد نوعان من المؤشرات الخام:
+
+
+    * <span dir="ltr">`*const T`</span> - مؤشر خام لبيانات من نوع T لا يمكن تغييرها
+
+    * <span dir="ltr">`*mut T`</span> - مؤشر خام لبيانات من نوع T لا يمكن تغييرها
+
+
+    يمكن تحويل المؤشرات الخام من وإلى الأرقام (على سبيل المثال، `usize`).
+
+
+    يمكن للمؤشرات الخام الوصول إلى البيانات باستخدام التعليمة البرمجية *غير آمن (unsafe)* (المزيد حول هذا لاحقًا).
+
+
+    تفاصيل الذاكرة:
+
+    * المرجع (reference) في رست (Rust) يشبه إلى حد كبير المؤشر (pointer) في لغة C من حيث الاستخدام، ولكن مع المزيد من القيود وقت الترجمة (compile time) متعلقة بكيفية تخزينه ونقله إلى دوال أخرى.
+    
+    * المؤشر الخام (raw pointer) في رست (Rust) يشبه المؤشر (pointer) في لغة C وهو يمثل رقمًا يمكن نسخه أو تمريره، بل وتحويله إلى أنواع رقمية وأين يمكن تعديله كرقم لإجراء عمليات حسابية للمؤشر.
+
+- title: الوصول لمحتويات المؤشر (Dereferencing)
+  content_markdown: |
+    تسمى عملية الوصول إلى/معالجة البيانات التي تتم الإشارة إليها بواسطة *مرجع (reference)* (على سبيل المثال <span dir="ltr">`&i32`</span>) *إلغاء الإشارة (dereferencing)*.
+
+    يتم استخدام المراجع للوصول إلى/معالجة البيانات بطريقتين:
+
+
+    * الوصول إلى البيانات المشار إليها أثناء تعيين المتغيرات.
+    * الوصول إلى حقول (fields) أو توابع (methods) البيانات المشار إليها.
+
+
+    لدى رست (Rust) بعض العوامل القوية التي تسمح لنا بالقيام بذلك.
+- title: العامل *
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20i32%20%3D%2042%3B%0A%20%20%20%20let%20ref_ref_ref_a%3A%20%26%26%26i32%20%3D%20%26%26%26a%3B%0A%20%20%20%20let%20ref_a%3A%20%26i32%20%3D%20**ref_ref_ref_a%3B%0A%20%20%20%20let%20b%3A%20i32%20%3D%20*ref_a%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20b)%0A%7D
+  content_markdown: >
+    يعد العامل `*` طريقة واضحة لإلغاء الإشارة.
+
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    تفاصيل الذاكرة:
+
+
+    - نظرًا لأن i32 هو نوع بدائي (primitive type) ينفذ السمة (trait) `Copy`، فسيتم نسخ بايتات المتغير `a` الموجود على المكدس (stack) إلى بايتات المتغير `b`.
+
+- title: العامل .
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20value%3A%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20f%20%3D%20Foo%20%7B%20value%3A%2042%20%7D%3B%0A%20%20%20%20let%20ref_ref_ref_f%20%3D%20%26%26%26f%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20ref_ref_ref_f.value)%3B%0A%7D
+  content_markdown: >
+    يُستخدم العامل `.` في الوصول إلى حقول (fields) وتوابع (methods) المرجع. إنه يعمل بدقة أكبر قليلاً.
+
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+    
+    حسنًا، لماذا لم نكن بحاجة إلى إضافة `***` قبل `ref_ref_ref_f`؟ وذلك لأن العامل `.` يقوم تلقائيًا بإلغاء الإشارة (dereferences) إلى سلسلة من المراجع (sequence of references). يتم تحويل ذلك السطر الأخير إلى ما يلي بواسطة المترجم (compiler) تلقائيًا.
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: المؤشرات الذكية (Smart Pointers)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    بالإضافة إلى القدرة على إنشاء مراجع (references) للبيانات المكتوبة (typed data) الموجودة باستخدام العامل `&`، يمنحنا رست (Rust) القدرة على إنشاء هياكل (structs) *تشبه المرجع (reference-like)* تسمى **المؤشرات الذكية (smart pointers)**.
+    
+    
+    يمكننا أن نفكر في المراجع (references) على مستوى عالٍ كنوع يتيح لنا الوصول إلى نوع آخر. تختلف المؤشرات الذكية (smart pointers) في سلوكها عن المراجع العادية من حيث أنها تعمل بناءً على المنطق الداخلي الذي يكتبه المبرمج. أنت – المبرمج – هو الجزء *الذكي*.
+    
+    
+    عادةً ما تنفذ المؤشرات الذكية السمات (traits) `Deref` و`DerefMut` و`Drop` لتحديد منطق ما يجب أن يحدث عند إلغاء الإشارة (dereferenced) الخاصة بالهيكل باستخدام العامل `*` و`.`.
+- title: التعليمة البرمجية الذكية غير آمن (Smart Unsafe Code)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    تميل المؤشرات الذكية (Smart pointers) إلى استخدام التعليمة البرمجية *غير آمن (unsafe)* كثيرًا. كما ذكرنا سابقًا، فهي أداة شائعة للتفاعل مع أدنى مستويات الذاكرة في رست (Rust).
+    
+    
+    ما هي التعليمة البرمجية غير آمن (unsafe)؟ تتصرف التعليمات البرمجية غير الآمنة تمامًا مثل رست (Rust) العادي باستثناء بعض القدرات التي لا يستطيع مترجم رست (Rust) تقديم ضمانات بشأنها.
+    
+    
+    القدرة الأساسية للتعليمات البرمجية غير آمن (unsafe) هي *الوصول لمحتويات المؤشر الخام (dereferencing a raw pointer)*. وهذا يعني أخذ *مؤشر الخام* إلى موضع في الذاكرة والإعلان عن "يوجد هيكل بيانات هنا!" ثم تحويلها إلى تمثيل للبيانات التي يمكنك استخدامها (على سبيل المثال، <span dir="ltr">`*const u8`</span> إلى <span dir="ltr">`u8`</span>).
+    
+    
+    ليس لدى رست (Rust) طريقة لتتبع معنى كل بايت يتم كتابته في الذاكرة. نظرًا لأن رست (Rust) لا يمكنه تقديم ضمانات حول ما هو موجود عندما يكون هناك رقم عشوائي مستخدم كـ *مؤشر الخام*، فإنه يضع إلغاء المرجعية في كتلة <span dir="ltr">`unsafe { ... }`</span>.
+    
+    المؤشرات الذكية (Smart pointers) *تصل لمحتويات المؤشر الخام* على نطاق واسع، لكنها متأكدة جيدًا في ما تفعله.
+
+- title: أصدقاء مألوفون
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    خذ بعين الاعتبار بعض المؤشرات الذكية (smart pointers) التي رأيناها بالفعل مثل <span dir="ltr">`Vec<T>`</span> و`String`.
+    
+    
+    <span dir="ltr">`Vec<T>`</span> هو مؤشر ذكي يمتلك فقط بايتات في منطقة معينة من الذاكرة. ليس لدى مترجم رست (Rust) أي فكرة عما هو موجود في هذه البايتات. يفسر المؤشر الذكي ما يعنيه لإحضار العناصر من منطقة الذاكرة التي يديرها، ويتتبع من أين تبدأ وتنتهي هياكل البيانات داخل تلك البايتات، ثم في النهاية يقوم بالوصول إلى محتوى المؤشر الخام ويضعها في هياكل البيانات ليكون في النهاية كواجهة مريحة ونظيفة ولطيفة بالنسبة لنا عند استخدمه (على سبيل المثال `my_vec[3]`).
+    
+    
+    وبنفس الكيفية، تقوم `String` بتتبع البايتات في منطقة من الذاكرة، وتقيد المحتوى المكتوب فيها برمجيًا ليكون دائمًا بترميز `utf-8` صالح، وتساعد على الوصول إلى محتوى تلك المنطقة الذاكرة كنوع <span dir="ltr">`&str`</span>.
+    
+    
+    تستخدم كل من هياكل البيانات المذكورة إلغاء مرجعية غير آمنة للمؤشرات الخام للقيام بعملها.
+    
+    
+    تفاصيل الذاكرة:
+    
+    * يحتوي رست (Rust) على ما يعادل `malloc` في لغة C باستخدام [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) و[Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html) للحصول على مناطق الذاكرة الخاصة بك لإدارتها.
+    
+- title: ذاكرة الكومة المخصصة (Heap Allocated Memory)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: >
+    `Box` هو مؤشر ذكي (smart pointer) يتيح لنا نقل البيانات من المكدس (stack) إلى الكومة (heap).
+
+
+    يتيح لنا إلغاء المرجعية (Dereferencing) استخدام بيانات الكومة المخصصة بشكل مريح كما لو كانت أصلية في النوع.
+
+- title: مراجعة الدالة الرئيسية القابلة للفشل (Failable Main Revisited)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C%27_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+    قد تحتوي التعليمات البرمجية في رست (Rust)على عدد كبير من تمثيلات الأخطاء (errors)، لكن المكتبة القياسية (standard library) لها سمة عالمية (universal trait) `std::error::Error` لوصف الأخطاء.
+    
+    
+    باستخدام المؤشر الذكي `Box` يمكننا استخدام النوع <span dir="ltr">`Box<dyn std::error::Error>`</span> كنوع شائع لإرجاع الأخطاء لأنه يسمح لنا بنشر خطأ في الكومة (heap) والتفاعل معه بسرعة مستوى عال دون الحاجة إلى معرفة نوع معين.
+    
+    
+    علمنا سابقا في دورة تعلم رست، أن `main` يمكنها إرجاع خطأ. والآن يمكننا إرجاع نوع قادر على وصف أي نوع من الأخطاء التي قد تحدث في برنامجنا تقريبًا طالما أن هيكل بيانات الخطأ (error's data structure) ينفذ سمة (trait) `Error` الشائعة في رست (Rust).
+
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error:Error>>
+
+    ```
+- title: عد المراجع (Referencing Counting)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20all%20reference%20count%20smart%20pointers%20are%20dropped%20now%0A%20%20%20%20%2F%2F%20the%20heap%20data%20Pie%20finally%20deallocates%0A%7D%0A
+  content_markdown: >
+    `Rc` هو مؤشر ذكي (smart pointer) ينقل البيانات من المكدس (stack) إلى الكومة (heap). فهو يسمح لنا باستنساخ (clone) مؤشرات ذكية أخرى من نوع `Rc` تتمتع جميعها بالقدرة على استعارة غير قابلة للتغيير للبيانات التي تم وضعها في الكومة.
+
+
+    فقط عندما يتم إسقاط (drop) المؤشر الذكي (smart pointer) الأخير، فإنه يتم إلغاء تخصيص (deallocated) البيانات الموجودة في الكومة (heap).
+
+- title: مشاركة الوصول (Sharing Access)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell` عبارة عن هيكل بيانات في شكل حاوية (container data structure) يتم الاحتفاظ به عادةً بواسطة مؤشرات ذكية التي تستوعب البيانات وتتيح لنا استعارة مراجع قابلة للتغيير وغير قابلة للتغيير (mutable and immutable references) إلى ما بداخلها. وهو يمنع إساءة استخدام الاستعارة (borrowing) من خلال فرض قواعد أمان ذاكرة (memory safety rules) الخاصة برست (Rust) في وقت التشغيل (runtime) عندما تطلب استعارة البيانات عن طريق:
+    
+    
+    **مرجع واحد فقط قابل للتغيير أو عدة مراجع غير قابلة للتغيير، ولكن ليس كليهما!**
+    
+    
+    إذا انتهكت هذه القواعد، فسوف يصدر `RefCell` رسالة ذعر (panic).
+- title: المشاركة عبر الخيوط (Sharing Across Threads)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20let's%20borrow%20a%20locked%20immutable%20reference%20of%20pie%0A%20%20%20%20%2F%2F%20we%20have%20to%20unwrap%20the%20result%20of%20a%20lock%0A%20%20%20%20%2F%2F%20because%20it%20might%20fail%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20locked%20reference%20drops%20here%2C%20and%20mutex%20protected%20value%20can%20be%20used%20by%20someone%20else%0A%7D%0A
+  content_markdown: >
+    `Mutex` عبارة عن هيكل بيانات في شكل حاوية (container data structure) يتم الاحتفاظ به عادةً بواسطة مؤشرات ذكية تستوعب البيانات وتتيح لنا استعارة مراجع قابلة للتغيير وغير قابلة للتغيير (mutable and immutable references) للبيانات الموجودة بداخلها. وهو يمنع إساءة استخدام الاستعارة (borrowing) من خلال جعل نظام التشغيل يقيد حق الوصول للبيانات إلا لخيط وحدة معالجة مركزية (one CPU thread) واحد ، مما يؤدي إلى منع الخيوط (threads) الأخرى من الوصول إلى تلك البيانات حتى ينتهي الخيط الأصلي ذو الإستعارة المقفلة (locked borrow).
+    
+    
+    بالرغم من أن موضوع تعدد الخيوط (Multithreading) خارج مواضيع دورة تعلم راست هذه، ولكن `Mutex` هو جزء أساسي في تنسيق الخيوط العديدة لوحدة المعالجة المركزية التي تصل إلى نفس البيانات.
+    
+    
+    يوجد مؤشر ذكي خاص `Arc` وهو مطابق لـ `Rc` باستثناء أنه يستخدم زيادة عن طريق خيط آمن (thread-safe) عند عد المراجع. غالبًا ما يتم استخدامه للحصول على العديد من المراجع إلى نفس `Mutex`.
+- title: الجمع بين المؤشرات الذكية (Combining Smart Pointers)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: >
+    قد تبدو المؤشرات الذكية محدودة، لكنها يمكن أن تشكل توليفات قوية جدًا.
+
+
+    <span dir="ltr">`Rc<Vec<Foo>>`</span> - تسمح باستنساخ (clone) عدة مؤشرات ذكية يمكنها استعارة نفس المتجهة (vector) الخاصة بهياكل البيانات غير القابلة للتغيير في الكومة (heap).
+
+
+    <span dir="ltr">`Rc<RefCell<Foo>>`</span> - تسمح لعدة مؤشرات ذكية باستعارة نفس الهيكل (struct) `Foo` بشكل قابل للتغيير/غير قابل للتغيير
+
+
+    <span dir="ltr">`Arc<Mutex<Foo>>`</span> - تسمح لعدة مؤشرات ذكية بالقدرة على الاستعارة المفقلة بشكل مؤقت وتكون قابلة للتغيير/غير قابلة للتغيير بطريقة حصرية لخيط وحدة المعالجة المركزية (CPU thread).
+
+
+    تفاصيل الذاكرة:
+    
+
+    * ستلاحظ مبحثا يحتوي على العديد من هذه التوليفات. استخدام نوع بيانات غير قابل للتغيير (من المحتمل أن يكون مملوكًا لعدة مؤشرات ذكية) لتعديل البيانات الداخلية. يُشار إلى هذا في رست (Rust) باسم نمط "التغير الداخلي (interior mutability)". إنه نمط يتيح لنا إخضاع قواعد استخدام الذاكرة في وقت التشغيل (runtime) بنفس مستوى الأمان الذي توفره عمليات التحقق أثناء وقت الترجمة (compile-time) في رست (Rust).
+
+
+- title: الفصل 8 - الخلاصة
+  content_markdown: >
+
+    المؤشرات الذكية (Smart pointers) هي العبارات الإصطلاحيه في برمجة رست (Rust) والتي تسمح لنا بعدم إعادة إنشاء الأنماط الشائعة جدًا لاستخدام الذاكرة. بإستخدامهم أنت على استعداد لمواجهة أصعب التحديات! 
+    
+    
+    الآن بعد أن أصبح لدينا أساسيات رست (Rust)، دعونا نتحدث قليلاً عن كيفية إنشاء مشاريع أكبر. في الفصل التاسع، سوف نتحرر من التعليمات البرمجية ذات الصفحة الواحدة.

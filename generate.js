@@ -107,8 +107,11 @@ function getWord(words, lang, w) {
  * @param {string} lang
  * @returns {string}
  */
-const getHead = (words, lang) => `<!DOCTYPE html>
-    <html lang="${lang}">
+const getHead = (words, lang) => {
+    let rtl_langs = ['ar'];
+    let lang_dir = (rtl_langs.includes(lang))?"rtl":"ltr";
+    return `<!DOCTYPE html>
+    <html lang="${lang}" dir="${lang_dir}">
     <head>
         <title>${getWord(words, lang, 'tor')} - Let's go on an adventure!</title>
 
@@ -141,6 +144,7 @@ const getHead = (words, lang) => `<!DOCTYPE html>
         gtag('config', 'UA-155199982-1', { 'anonymize_ip': true });
         </script>
     </head>`;
+};
 
 /**
  * @param {Array} lessons

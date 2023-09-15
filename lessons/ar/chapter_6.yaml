@@ -1,0 +1,175 @@
+- title: الفصل 6 - النص
+  content_markdown: >
+    الآن بعد أن فهمنا قليلًا عن أفكار رست (Rust) في إدارة الذاكرة، أصبحنا مستعدين للحديث عن النص بمزيد من التفصيل.
+
+
+    يولي رست (Rust) أهمية كبيرة للنص العالمي (international text) و هُمُوم مستوى البايت (byte level) التي قد لا تكون معتاد عليها في اللغات الأخرى.
+    
+    ومع ذلك، لدى رست (Rust) العديد من الأدوات الرائعة لإدارة هذه الهُمُوم.
+
+- title: السلاسل النصية الحرفية (String Literals)
+  content_markdown: >
+    تكون السلاسل النصية الحرفية دائنا يونيكود (Unicode).
+    
+    
+    نوع السلاسل النصية الحرفية هو <span dir="ltr">`&'static str`</span>
+
+
+    * الرمز `&` يعني أنه يشير إلى مكان في الذاكرة، وبما أنه ليس <span dir="ltr">`&mut`</span> فهذا يعني أن المترجم (compiler) لن يسمح بالتعديل.
+
+    * الرمز <span dir="ltr">`'static`</span> يعني أنه بيانات السلسلة النصية تبقى متاحة حتى نهاية البرنامج (لا تسقط أبدا).
+    
+    * الرمز `str` يعني أنها تشير إلى تسلسل من البايتات وهي دائما بترميز **utf-8** صالح.
+
+
+    تفاصيل الذاكرة:
+    
+    * المرجح هو أن يقوم مترجم (compiler) رست (Rust) بوضع السلسلة النصية الخاصة بك في مقطع البيانات (ذاكرة البيانات) الخاص بذاكرة البرنامج
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+- title: ماهو utf-8
+  content_markdown: "نظرًا لاستخدام المزيد من اللغات على أجهزة الكمبيوتر، كان العالم بحاجة إلى تمثيل عدد أكبر من الأحرف النصية\nأكثر مما يسمح به ASCII (يسمح البايت الواحد بـ 256 حرفًا فقط). \n\n**utf-8** تم تقديمه مع طول بايت متغير يتراوح من 1 إلى 4 بايت مما أدى إلى زيادة نطاق الأحرف الممكنة بشكل كبير.\n\nمن مميزات الأحرف ذات الحجم المتغير أن النص لا يحتوي على بايتات غير ضرورية للأحرف الشائعة جدًا في ASCII (يتطلب بايت واحد فقط في **utf-8**).\n\nالجانب السلبي للأحرف ذات الحجم المتغير هو أنه لم يعد من الممكن إجراء البحث عن الأحرف بسرعة \n(**O(1)** وقت ثابت) باستخدام فهرسة بسيطة (على سبيل المثال، `my_text[3]` للحصول على الحرف الرابع). وأنه من الممكن أن يكون للأحرف السابقة \nعرض متغير، مما يؤدي إلى تغيير المكان الذي يبدأ فيه الحرف الرابع فعليًا في تسلسل البايتات.\n\nبدلاً من ذلك كله، فإنه يجب علينا عمل تكرار عبر تسلسل بايت **utf-8** لمعرفة من أين تبدأ أماكان أحرف Unicode فعليًا (**O(n)** الزمن الخطي).\n\nفيريس: \"أنا سعيد في الغالب بوجود **utf-8** لتمثيل الرموز التعبيرية لأصدقائي تحت الماء.\"\n\n <span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+  
+  
+- title: أحرف الهروب (Escaping Characters)
+  content_markdown: >
+
+    من الصعب تمثيل أحرف معينة بصريًا، لذا تسمح لنا **رموز الهروب (escape codes)** بوضع رمز في مكانها.
+
+
+    يدعم رست (Rust) رموز الهروب الشائعة في اللغات المستندة إلى لغة C:
+
+    * <span dir="ltr">`\n`</span> - سطر جديد
+
+    * <span dir="ltr">`\r`</span> - الرجوع إلى أول السطر
+
+    * <span dir="ltr">`\t`</span> - تبويبة (tab)
+
+    * <span dir="ltr">`\\`</span> - شرطة مائلة عكسية (backslash)
+
+    * <span dir="ltr">`\0`</span> - اللاشَيْء (null)
+
+    * <span dir="ltr">`\'`</span> - علامة إقتباس أحادية (single-quote)
+
+
+    القائمة الكاملة موجودة
+    [هنا](https://doc.rust-lang.org/reference/tokens.html).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26%27static%20str%20%3D%20%22Ferris%20says%3A%5Ct%5C%22hello%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+- title: السلاسل النصية الحرفية متعددة الأسطر (Multi-line String Literals)
+  content_markdown: |
+    تكون السلاسل النصية في رست (Rust) متعددة الأسطر بشكل افتراضي.
+    
+    
+    استخدم `\` في نهاية السطر إذا كنت لا تريد فاصل الأسطر.
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22hello%20%5C%0A%20%20%20%20world%22)%20%2F%2F%20notice%20that%20the%20spacing%20before%20w%20is%20ignored%0A%7D%0A
+- title: السلاسل النصية الحرفية الخام (Raw String Literals)
+  content_markdown: >
+    تسمح لنا السلاسل النصية الخام (Raw strings) بكتابة سلسلة من الأحرف اللفظية (characters verbatim) تبدأ بـ  <span dir="ltr">`r#"`</span> وتنتهي بـ <span dir="ltr">`"#`</span>. وهي تتيح لنا إدراج أحرف قد تخلط السلسلة النصية العادية عادية كونها حرفية (مثل علامات الاقتباس المزدوجة - double quotes - والخطوط المائلة العكسية - backslashes -).
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22advice%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Raw%20strings%20are%20useful%20for%20some%20situations.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
+- title: السلاسل النصية الحرفية من ملفات (String Literals From Files)
+  content_markdown: >
+    إذا كان لديك نص كبير جدًا، فكر في استخدام الماكرو <span dir="ltr">`include_str!`</span> لتضمين نص من الملفات المحلية في برنامجك:
+
+
+    ```rust
+
+    let hello_html = include_str!("hello.html");
+
+    ```
+- title: شريحة سلسلة نصية (String Slice)
+  content_markdown: >
+    شريحة سلسلة نصية (string slice) هي مرجع (reference) لسلسلة من البايتات (sequence of bytes) في الذاكرة والتي يجب أن تكون دائمًا رموز utf-8 صالحة.
+
+
+    يجب أن تكون شريحة السلسلة النصية (شريحة فرعية (sub-slice)) من شريحة `str` أيضًا رموز  utf-8 صالحة. 
+
+
+    
+    توابع شائعة لـ <span dir="ltr">`&str`</span> :
+
+    * <span dir="ltr">`len`</span> ينتج طول السلسلة النصية الحرفية (string literal) بالبايت (ليس عدد الأحرف).
+
+    * <span dir="ltr">`starts_with`/`ends_with`</span> للاختبار الأساسي.
+
+    * <span dir="ltr">`is_empty`</span> يرجع صحيح (true) إذا كان الطول صفرا.
+
+    * <span dir="ltr">`find`</span> ترجع <span dir="ltr">`Option<usize>`</span> للموضع الأول لبعض النص (some text).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20FAILS%0A%20%20%20%20%2F%2F%20Rust%20does%20not%20accept%20slices%20of%20invalid%20unicode%20characters%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A
+- title: الحرف (Chars)
+  content_markdown: >
+    نظرا لوجود صعوبة كبيرة في العمل مع Unicode، يقدم رست (Rust) طريقة لجلب تسلسل من بايتات utf-8 كمتجهة (vector) من الأحرف ذات النوع `char`.
+
+
+    يبلغ طول الحرف (`char`) دائمًا 4 بايت (مما يسمح بالبحث الفعال عن الأحرف الفردية).
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20collect%20the%20characters%20as%20a%20vector%20of%20char%0A%20%20%20%20let%20chars%20%3D%20%22hi%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20should%20be%204%0A%20%20%20%20%2F%2F%20since%20chars%20are%204%20bytes%20we%20can%20convert%20to%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+- title: السلسلة النصية (String)
+  content_markdown: >
+    **السلسلة النصية (String)** عبارة عن هيكل (struct) يمتلك سلسلة من بايتات utf-8 في ذاكرة الكومة (heap memory).
+
+
+    نظرًا لأن ذاكرتها موجودة في الكومة (heap)، فيمكن توسيعها وتعديلها وما إلى ذلك بطرق لا يمكن للسلسلة النصية الحرفية (string literals) أن تفعلها.
+
+
+    توابع شائعة:
+
+
+    * <span dir="ltr">`push_str`</span>  لإضافة المزيد من بايتات utf-8 في نهاية السلسلة.
+
+    * <span dir="ltr">`replace`</span> لاستبدال سلسلة بايت utf-8 بأخرى.
+
+    * <span dir="ltr">`to_lowercase`/`to_uppercase`</span> لتغيير حالة الأحرف.
+
+    * <span dir="ltr">`trim`</span> لتقليم المساحة الفارغة
+
+
+     
+    عندما يتم إسقاط (drop) سلسلة نصية (String)، يتم أيضًا إسقاط ذاكرة الكومة الخاصة بها.
+    
+    
+    تحتوي `String` على عامل `+` يقوم بتمديد السلسلة النصية بإضافة شريحة سلسلة نصية <span dir="ltr">`&str`</span> ويرجع نفسه، ولكنه قد لا يكون مريحًا كما تأمل.
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20helloworld%20%3D%20String%3A%3Afrom(%22hello%22)%3B%0A%20%20%20%20helloworld.push_str(%22%20world%22)%3B%0A%20%20%20%20helloworld%20%3D%20helloworld%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%7D%0A
+- title: النص كمعلمات دالة (Text As Function Parameters)
+  content_markdown: >
+    يتم بشكل عام تمرير السلاسل النصية والسلاسل النصية الحرفية كشريحة سلسلة نصية إلى الدوال. يوفر هذا قدرًا كبيرًا من المرونة لمعظم السيناريوهات التي لا يتعين عليك فيها تمرير الملكية فعليًا.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20say_it_loud(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20borrow%20%26%27static%20str%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%22hello%22)%3B%0A%20%20%20%20%2F%2F%20say_it_loud%20can%20also%20borrow%20String%20as%20a%20%26str%0A%20%20%20%20say_it_loud(%26String%3A%3Afrom(%22goodbye%22))%3B%0A%7D%0A
+- title: بناء السلاسل النصية (Building Strings)
+  content_markdown: |
+    `concat` و`join` هما طريقتان بسيطتان ولكنهما فعالتان لبناء السلاسل النصية (building strings).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20helloworld%20%3D%20%5B%22hello%22%2C%20%22%20%22%2C%20%22world%22%2C%20%22!%22%5D.concat()%3B%0A%20%20%20%20let%20abc%20%3D%20%5B%22a%22%2C%20%22b%22%2C%20%22c%22%5D.join(%22%2C%22)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20helloworld)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cabc)%3B%0A%7D%0A
+- title: تنسيق السلاسل النصية (Formatting Strings)
+  content_markdown: >
+    يتيح لنا الماكرو <span dir="ltr">`format!`</span> إنشاء سلسلة نصية (string) عن طريق تعريف سلسلة تحتوي على معلمات (parameters) في عناصر نائبة (placeholders) للتوضيح مكان وكيفية وضع القيم (على سبيل المثال، `{}`).
+
+
+     يستخدم <span dir="ltr">`format!`</span> نفس السلاسل النصية التي تحتوي على معلمات مثل <span dir="ltr">`println!`</span>
+
+
+    إمكانيات هذا الماكرو واسعة جدًا بالنسبة لنطاق *جولة في رست*؛ للمزيد تحقق من الوثائق [هنا](https://doc.rust-lang.org/std/fmt/).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secret%20to%20life%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+- title: تحويل السلاسل النصية (Converting Strings)
+  content_markdown: |
+    يمكن تحويل العديد من الأنواع إلى سلسلة نصية (string) باستخدام `to_string`.
+
+    يمكن استخدام الدالة المعممة `parse` لتحويل السلاسل النصية أو السلاسل النصية الحرفية إلى قيمة مكتوبة. ترجع هذه الدالة `Result` لأنها قد تفشل.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20-%3E%20Result%3C()%2C%20std%3A%3Anum%3A%3AParseIntError%3E%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20a_string%20%3D%20a.to_string()%3B%0A%20%20%20%20let%20b%20%3D%20a_string.parse%3A%3A%3Ci32%3E()%3F%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: الفصل 6 - الخلاصة
+  content_markdown: >
+    الآن أنت تعرف أساسيات النص! كما رأيت، يجعل Unicode العمل مع النص أمرًا صعبًا بعض الشيء، لكن المكتبة القياسية لديها الكثير من الوظائف لتسهيل إدارة النصوص.
+    
+    
+     حتى الآن، إطلعنا عموما إلى رست (Rust) من منظور النموذج الإجرائي -  procedural paradigm - (أي الوظائف والبيانات فقط)، ولكن حان الوقت الآن لنتحدث عن السمات (traits) والقدرات التي فتحها رست (Rust) من خلال نموذج كائنية التوجه (object oriented paradigm).

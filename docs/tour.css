@@ -38,10 +38,18 @@ pre {
   line-height: 28px;
   font-weight: bold;
   color: white;
-  padding-left: 30px;
+  
   background-color: #ff6801;
   box-shadow: 0 2px 3px #cf3801;
   grid-column: span 2;
+}
+
+[dir="ltr"] .header  {
+  padding-left: 30px;
+}
+
+[dir="rtl"] .header  {
+  padding-right: 30px;
 }
 
 .header a {
@@ -66,9 +74,14 @@ body {
   color: #120b12;
 }
 
-.nav {
+[dir="ltr"] .nav {
   float: right;
   padding-right: 10px;
+}
+
+[dir="rtl"] .nav {
+  float: left;
+  padding-left: 10px;
 }
 
 iframe {
@@ -87,7 +100,7 @@ iframe {
 }
 
 code {
-  display: inline;
+  display:inline;
   background: #444;
   color: white;
   padding-left: 5px;
@@ -95,6 +108,18 @@ code {
   padding-bottom: 3px;
   margin-right: 3px;
   margin-left: 3px;
+}
+
+[dir="ltr"] .page pre code  {
+  display:block !important;
+  text-align: left !important;
+  direction: ltr !important;
+}
+
+[dir="rtl"] .page pre code  {
+  display:block !important;
+  text-align: left !important;
+  direction: ltr !important;
 }
 
 li {
@@ -121,6 +146,10 @@ h3 {
   padding-top: 20px;
   text-align: center;
   font-size: 42px;
+  /*display: flex;
+flex-direction: row;
+justify-content: space-between;*/
+
 }
 
 .bottomnav a {
@@ -130,15 +159,28 @@ h3 {
   font-size: 20px;
 }
 
-.bottomnav .back {
+/* ************************* HERE ************************* */
+[dir="ltr"] .bottomnav .back {
   float: left;
   padding-left: 40px;
 }
 
-.bottomnav .next {
+[dir="ltr"] .bottomnav .next {
   float: right;
   padding-right: 40px;
 }
+
+[dir="rtl"] .bottomnav .back {
+  float: right;
+  padding-right: 40px;
+}
+
+[dir="rtl"] .bottomnav .next {
+  float: left;
+  padding-left: 40px;
+}
+
+/* ************************* TO HERE ************************* */
 
 body.welcome-cover {
   background: url(cover.jpg) no-repeat center center fixed;
@@ -246,9 +288,14 @@ ul {
   font-size: 22px;
 }
 
-.code {
+[dir="ltr"] .code {
   padding-top: 60px;
   padding-right: 20px;
+}
+
+[dir="rtl"] .code  {
+  padding-top: 60px;
+  padding-left: 20px;
 }
 
 iframe {
@@ -308,6 +355,7 @@ iframe {
     line-height: 26px;
   }
 
+
   .page {
     padding-bottom: 0px;
   }   
@@ -324,8 +372,13 @@ iframe {
     padding-left: 5px;
   }
 
-  .nav {
+  [dir="ltr"] .nav {
     padding-right: 0px;
+    letter-spacing: -0.6px;
+  }
+  
+  [dir="rtl"] .nav {
+    padding-left: 0px;
     letter-spacing: -0.6px;
   }
 
