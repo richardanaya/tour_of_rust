@@ -31,7 +31,7 @@
     * Structurile nu pot moșteni funcții de la o structura părinte.
 
     Acestea fiind spuse, Rust implementează o mulțime de caracteristici ale unui limbaj de programare,
-    deci probabail nu vă vor deranja aceste lipsuri.
+    deci probabil nu vă vor deranja aceste lipsuri.
 - title: Încapsulare prin matode
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creatura.luare_zgomot())%3B%0A%7D%0A
