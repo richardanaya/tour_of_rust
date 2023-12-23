@@ -1,0 +1,102 @@
+- title: Capitolul 1 - Ce este WebAssembly?
+  content_markdown: >
+    WebAssembly este o formă binară de a reprezenta cod executabil izolat. 
+    A fost dezvoltat pentru browser
+
+    ca alternativă pentru JavaScript, având niște avantaje speciale:
+
+
+    * Deoarece este un low level bytecode, este capabil să facă operații matematice
+    rapid și să gestioneze memorie mai concis.
+
+    * WebAssembly a fost construit având în vedere compilatoare existente,
+    ceea ce permite limbajelor native precum C/C++ și Rust să compileze cod pentru
+    acesta.
+
+    * Are în vedere și izolarea, permițând controlul fin al accesului.
+
+    * WebAssembly a fost proiectat pentru a fi "host agnostic", permițând unor oameni
+    să folosească WebAssembly și [în afara browserelor](https://wasmer.io/)!
+
+
+    WebAssembly este adesea numit **WASM**
+- title: În interiorul unui modul
+  content_markdown: >
+    Când compilați pentru WebAssembly, compilatorul ar trebui să creeze un fișier
+    cu extensia `.wasm` numit **modul**.
+
+
+    Modulul este un [format
+    binar](https://webassembly.github.io/spec/core/index.html) plin de informații
+    despre cum un
+
+    program wasm și memoria acestuia ar trebui să fie configurate și
+    să interacționeze cu:
+
+    * o listă de funcții
+
+    * ce funcții ar trebui exportate/importate
+
+    * ce date ar trebui să fie inițial în memoria modulului wasm
+- title: Încărcarea unui modul
+  content_markdown: >
+    Deoarece un modul WebAssembly este doar un fișier de octeți, mai întâi trebuie
+    să încărcăm acei octeți în browser.
+
+
+    ```
+
+    let file = await fetch('my_file.wasm');
+
+    let bytes = await file.arrayBuffer();
+
+    ```
+- title: Crearea unui modul
+  content_markdown: >
+    Modulele sunt create din octeți.
+
+
+    ```
+
+    let module = await WebAssembly.instantiate(bytes);
+
+    ```
+
+    În această fază, putem **importa** funcții JavaScript la care dorim ca modulul
+    nostru să aibă acces.
+
+    Vă vom oferi un exemplu în următorul capitol.
+- title: Utilizarea unui modul
+  content_markdown: >
+    Un modul WebAssembly va avea una sau mai multe funcții **export** care sunt
+    accesibile JavaScript-ului. De obicei
+
+    există o funcție export care poate fi apelată pentru a începe un program wasm (de
+    exemplu `main`, `start`).
+
+
+    ```
+
+    module.instance.main();
+
+    ```
+- title: 1+1
+  code: "https://webassembly.studio/?embed&f=jg96xg1ovj"
+  content_markdown: >
+    Haideți să punem cunoștințele noastre laolaltă și să facem un modul
+    
+    WebAssembly cu o singură funcție **export** `add`, care să adune două numere
+
+    și să punem rezultatul acesteia în HTML.
+
+
+    `#[no_mangle]` spune compilatorului nostru să păstreze numele funcției
+    într-un format "human readable".
+- title: Concluzia capitolului 1
+  content_markdown: >
+    Sperăm că este clar că WebAssembly nu este chiar atât de complex la bază! În următorul
+    capitol vom
+
+    începe să ne uităm în detaliu la modul cum JavaScript și WebAssembly pot comunica
+    despre aceleași date.
+
