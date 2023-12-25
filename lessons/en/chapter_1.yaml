@@ -12,6 +12,24 @@
 
     Once you get familiar with Rust, you can call yourself a **Rustacean**. That's
     how people who use, contribute or are interested in Rust call themself.
+- title: What is Rust?
+  content_markdown: >
+    Rust is a systems programming language that is known for its emphasis on
+    safety, performance and concurrency.
+    Rust is designed to provide low-level control over system resources
+    without sacrificing high-level abstractions.
+
+    What does Rust have different from other programming languages.
+    - ownership and borrowing
+    - lifetime
+    - pattern matching
+    - concurrency without data races
+    - traits
+    - no null or garbage collection
+    - macros
+    - cargo
+    - community and ecosystem
+    - UTF-8 and Unicode text
 - title: The Rust Playground
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%20You%20can%20modify%20the%20code%20in%20here.%22)%3B%0A%7D%0A
@@ -19,9 +37,37 @@
     This tour uses an interactive coding tool from [Rust
     Playground](https://play.rust-lang.org).
 
-
     It's a great way to play around with Rust and show others your creativity
     and challenges!
+
+- title: What is println!?
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%29%3B%0A++++print%21%28%22There+is+an+empty+line+above+this.+%22%29%3B%0A++++print%21%28%22Isn%27t+it+great%3F%22%29%3B%0A++++println%21%28%29%3B+++++%2F%2F+new+line+at+the+end+of+stdout%0A%7D%0A
+  content_markdown: >
+          Unlike other programming languages, where there is a function for
+          writting text in `stdout` (standard output), Rust uses the `macros` **println!** and **print!**.
+          We'll talk about `macros` later.
+          
+          > `println!` will display using a new line character `\n` at the end of the string 
+          > `print!` will not use the `\n` at the end of the text
+- title: How to compile?
+  content_markdown: >
+    On Linux / MacOS systems:
+    ```
+    $ rustc main.rs
+    $ ./main
+    ```
+  
+    On Windows systems?
+    ```
+    > rustc main.rs
+    > .\main.exe
+    ```
+  
+    | Operating System (OS) | terminal commands                 |
+    | --------------------- | --------------------------------- |
+    | Linux / MacOS         | $ rustc main.rs <br> $ ./main     |
+    | Windows               | > rustc main.rs <br> > ./main.exe |
 - title: Variables
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20infers%20the%20type%20of%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20be%20explicit%20about%20the%20type%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20can%20also%20declare%20and%20initialize%20later%2C%20but%20this%20is%20rarely%20done%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -65,44 +111,51 @@
     out for this keyword.
 - title: Basic Types
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a+%3D+13u8%3B%0A++++let+b+%3D+7u32%3B%0A++++let+c+%3D+a+as+u32+%2B+b%3B%0A++++println%21%28%22%7B%7D%22%2C+c%29%3B%0A%0A++++let+t+%3D+true%3B%0A++++println%21%28%22%7B%7D%22%2C+t+as+u8%29%3B%0A%0A++++%0A++++let+d%3A+u32+%3D+12%3B%0A++++%2F%2F+let+e%3A+u32+%3D+-12%3B++%2F%2F+unsinged+nubers+include+only+positive+numbers%0A++++let+e%3A+i32+%3D+12%3B%0A++++let+f%3A+i32+%3D+-12%3B%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++++++++++d%2C+-%28d+as+i32%29%2C+e%2C+f%29%3B%0A%7D%0A%0A
   content_markdown: >
+    Basic data types:
+      - bool
+      - u8
+      - u16
+      - u32
+      - u64
+      - u128
+      - i8
+      - i16
+      - i32
+      - i64
+      - i128
+      - usize
+      - isize
+      - f32
+      - f64
+      
+      | u/i |  sign            | sign                               | sign|
+      | --- | ---------------- | ---------------------------------- | --- |
+      | `u` | unsigned numbers | positive numbers only              |  +  |
+      | `i` |  signed numbers  | both negative and positive numbers |  ±  |
+    
+    
     Rust has a variety of familiar types:
-
-
-    * booleans - `bool` for representing true/false
-
-    * unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing
-    nonnegative whole numbers
-
-    * signed integers - `i8` `i16` `i32` `i64` `i128` for representing whole numbers
-
-    * pointer sized integers - `usize` `isize` for representing indexes
-
-    and sizes of things in memory
-
-    * floating point - `f32` `f64`
-
-    * tuple - `(value, value, ...)` for passing fixed sequences of values on the
-    stack
-
-    * arrays - `[value, value, ...]` a collection of similar elements with fixed
-    length known at compile time
-
-    * slices - a collection of similar elements with length known at runtime
-
-    * `str`(string slice) - text with a length known at runtime
-
-
-    Text might be more complex than you are used to in other languages;
-
-    since Rust is a system programming language, it cares about memory 
-
-    issues you might not be used to. We will be going into this in detail later.
-
-
-    Numeric types can be explicitly specified by appending the type to the end
-    of the number (e.g. `13u32`, `2u8`).
+    
+      - `booleans` - bool for representing true/false
+      - unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing nonnegative whole numbers
+      - signed integers - i8 i16 i32 i64 i128 for representing whole numbers
+      pointer sized integers - usize isize for representing indexes and sizes of things in memory
+    - floating point - `f32` `f64`
+    - tuple - `(value, value, ...)` for passing fixed sequences of values on the stack
+    - arrays - `[value, value, ...]` a collection of similar elements with fixed length known at compile time
+    - slices - a collection of similar elements with length known at runtime
+    - `str` (string slice) - text with a length known at runtime
+      
+      Text might be more complex than you are used to in other languages; since
+      Rust is a system programming language, it cares about memory issues you
+      might not be used to. We will be going into this in detail later.
+      
+      Numeric types can be explicitly specified by appending the type to the end
+      of the number (e.g. `13u32`, `2u8`).
+      
+      > cannot apply unary operator '-' on `u8`, `u16`, `u32`, `u64`, `u128`
 - title: Basic Type Conversion
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -134,9 +187,50 @@
 
 
     Constant names are always in `SCREAMING_SNAKE_CASE`.
+- title: Collections
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Ause+std%3A%3Acollections%3A%3AHashSet%3B%0A%0Afn+main%28%29+%7B%0A%0A++++%2F%2F+array%0A++++let+array%3A+%5Bi32%3B+3%5D+%3D+%5B1%2C+2%2C+3%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+array%29%3B%0A++++%0A++++%2F%2F+vector%0A++++let+vector%3A+Vec%3Ci32%3E+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+vector%29%3B%0A%0A++++%2F%2F+slice+%28from+other+collection%29%0A++++let+slice+%3D+%26array%5B1..3%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+slice%29%3B%0A++++%0A++++%2F%2F+string%0A++++let+string%3A+String+%3D+String%3A%3Afrom%28%22Hello%2C+Rust%21%22%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+string%29%3B%0A++++%0A++++%2F%2F+tuple%0A++++let+tuple%3A+%28i32%2C+f64%2C+u8%29+%3D+%2842%2C+3.14%2C+5%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+tuple%29%3B%0A%0A++++%2F%2F+map%0A++++let+mut+map+%3D+HashMap%3A%3Anew%28%29%3B%0A++++map.insert%28%22one%22%2C+1%29%3B%0A++++map.insert%28%22two%22%2C+2%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+map%29%3B%0A++++%0A++++%2F%2F+set%0A++++let+mut+set+%3D+HashSet%3A%3Anew%28%29%3B%0A++++set.insert%281%29%3B%0A++++set.insert%282%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+set%29%3B%0A%7D%0A
+  content_markdown: >
+    Rust provides a variety of collection types that allow you to store and
+    manipulate data.
+
+    The main collections in Rust:
+    - Arrays
+    - Vectors
+    - Slices
+    - Strings
+    - Tuple
+    - Hash Maps
+    - Hash Sets
+
+    We will discuss each of them latter on.
+- title: Printing with `{:?}`
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++let+my_vector+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+my_vector%29%3B+++%2F%2F+will+generate+an+error%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+my_vector%29%3B%0A++++println%21%28%22%7B%3A%23%3F%7D%22%2C+my_vector%29%3B+++%2F%2F+debug+mode%0A++++%0A++++let+x%3A+i32+%3D+-12%3B%0A++++println%21%28%22%7B%7D%22%2C+x%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+x%29%3B%0A++++println%21%28%22%7B%3A%23%3F%7D%22%2C+x%29%3B%09%0A%7D%0A
+  content_markdown: >
+    Notice that when displaying a collection, `println!("{}", collection);` 
+    doesn't work.
+
+    In Rust, the `:?` is a format specifier used with the `Debug` trait when 
+    printing values / collections of values.
+    When you use `println!("{:?}", x);`, the Rust compiler formats the variable
+    accordingly.
+
+    This is particularly useful for `collections` like vectors, arrays, structs 
+    and enums.
+
+    `{:#?}` will print them in a way that is designed to be informative during
+    debugging.
+
+
+    | function              | basic type | collection |
+    | --------------------- | ---------- | ---------- |
+    | println!("{}", x);    |     ✅     |     ❌     |
+    | println!("{:?}", x);  |     ✅     |     ✅     |
+    | println!("{:#?}", x); |     ✅     |     ✅     |
 - title: Arrays
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+nums%3A+%5Bi32%3B+5%5D+%3D+%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+nums%5B1%5D%29%3B%0A%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+nums%29%3B+++++%2F%2F+%3A%3F+for+displaying+collections%0A++++println%21%28%22%7B%3A%23%3F%7D%22%2C+nums%29%3B++++%2F%2F+%3A%23%3F+displaying+a+collection+in+debug+mode%0A++++%0A++++for+el+in+nums+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++for+i+in+0..%3D%28nums.len%28%29+-+1%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+nums%5Bi%5D%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++for+i+in+0..nums.len%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+nums%5Bi%5D%29%3B%0A++++%7D%0A++++println%21%28%22%22%29%3B%0A%7D%0A
   content_markdown: >
     An *array* is a **fixed length collection** of data elements all of the same
     type.
@@ -152,9 +246,42 @@
 
     Collections with a dynamic length, often called dynamic or variable arrays, are
     introduced in a later chapter about **Vectors**.
+- title: Vectors
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%2F%2F+vec%21%5B%5D+is+a+macro%0A++++let+v1+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+v1%29%3B%0A++++%0A++++let+mut+v2+%3D+Vec%3A%3Anew%28%29%3B%0A++++v2.push%281%29%3B%0A++++v2.push%282%29%3B%0A++++v2.push%283%29%3B%0A++++%0A++++%2F%2F+Using+a+for+loop%0A++++for+el+in+%26v1+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++%2F%2F+Using+iter%28%29+method%0A++++for+el+in+v1.iter%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++for+i+in+0..v1.len%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+v1%5Bi%5D%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++%0A++++%2F%2F+we%27ll+talk+about+Some+and+Result+later%0A++++if+let+Some%28element%29+%3D+v1.get%281%29+%7B%0A++++++++println%21%28%22Second+element%3A+%7B%7D%22%2C+element%29%3B%0A++++%7D+else+%7B%0A++++++++println%21%28%22Index+out+of+bounds.%22%29%3B%0A++++%7D%0A++++%0A%7D%0A
+  content_markdown: >
+    Vectors are on of the most flexible and commonly used collection types in Rust.
+
+    They represent a dynamic, growable array, and they are part of the standard
+
+    Rust library (`std::vec::Vec`). No need to `use` it. :)
+- title: Strings
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+str1+%3D+%22Hello%2C+world%22%3B+%2F%2F+%26str+Type%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+str1%29%3B%0A++++%0A++++let+mut+s1%3A+String+%3D+String%3A%3Afrom%28%22%22%29%3B%0A++++s1.push_str%28%22Hello%22%29%3B%0A++++s1.push_str%28%22%2C+world%21%22%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+s1%29%3B%0A++++%0A++++let+s2%3A+String+%3D+String%3A%3Afrom%28%22Rust%22%29%3B%0A++++let+s3%3A+String+%3D+s1+%2B+%26s2%3B++%2F%2F+s1+will+be+moved+to+s3%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+s3%29%3B%0A++++%2F%2F+println%21%28%22%7B%3A%3F%7D%22%2C+s1%29%3B++++%2F%2F+doesn%27t+work+%3A+s1+is+borrowed+by+s3%0A++++%0A++++let+s4%3A+String+%3D+s3.clone%28%29%3B%0A++++for+ch+in+s4.chars%28%29+%7B%0A++++++++print%21%28%22%7B%7D%22%2C+ch%29%3B%0A++++%7D%0A++++%0A%7D%0A
+  content_markdown: >
+    In Rust strings are UTF-8 encoded sequence of Unicode characters.
+    
+    The String type, which is part of the standard library 
+    (`std::string::String`), is the most commonly used string type in Rust.
+    
+    Rust also has a primitive string type, `&str`, which represents a string slice.
+    
+    We'll later discuss in detail about Strings.
+- title: Tuple
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%2F%2F+Create+a+tuple%0A++++let+my_tuple+%3D+%2811%2C+%22Hello%2C+Rust%21%22%2C+3.14%29%3B%0A%0A++++%2F%2F+Access+elements+using+indexing%0A++++let+first_element+%3D+my_tuple.0%3B%0A++++let+second_element+%3D+my_tuple.1%3B%0A++++let+third_element+%3D+my_tuple.2%3B%0A%0A++++%2F%2F+Print+the+elements%0A++++println%21%28%22First%3A+%7B%7D%22%2C+first_element%29%3B%0A++++println%21%28%22Second%3A+%7B%7D%22%2C+second_element%29%3B%0A++++println%21%28%22Third%3A+%7B%7D%22%2C+third_element%29%3B%0A%7D%0A
+  content_markdown: >
+    `Tuple` represents an **immutable** collections of elements, that can have
+    different data types.
+    
+    Since it's **immutable**, it cannot be modified after its creation.
+    
+    The elements of a tuple can be accessed by index (indexing starts from 0),
+    using the `.` operator.
+
 - title: Functions
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+add%28x%3A+i32%2C+y%3A+i32%29+-%3E+i32+%7B%0A++++return+x+%2B+y%3B%0A%7D%0A%0Afn+subtract%28x%3A+i32%2C+y%3A+i32%29+-%3E+i32+%7B%0A++++x+-+y%0A%7D%0A%0Afn+last_digit%28mut+x%3A+i32%29+-%3E+u8+%7B%0A++++%0A++++if+x+%3C+0+%7B%0A++++++++while+x+%3C+-9+%7B%0A++++++++++++x+%3D+x+%2F+10%3B%0A++++++++%7D%0A++++++++return+%28-x%29+as+u8%3B%0A++++%0A++++%7D+else+%7B%0A++++++++while+x+%3E+9+%7B%0A++++++++++++x+%3D+x+%2F+10%3B%0A++++++++%7D%0A++++++++return+x+as+u8%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++println%21%28%2242+%2B+13+%3D+%7B%7D%22%2C+add%2842%2C+13%29%29%3B%0A++++println%21%28%2242+-+13+%3D+%7B%7D%22%2C+subtract%2842%2C+13%29%29%3B%0A++++%0A++++let+mut+nr+%3D+612129%3B%0A++++println%21%28%22last+digit+of+%7B%7D+%3D+%7B%7D%22%2C+nr%2C+last_digit%28nr%29%29%3B%0A%0A++++nr+%3D+-31324%3B%0A++++println%21%28%22last+digit+of+%7B%7D+%3D+%7B%7D%22%2C+nr%2C+last_digit%28nr%29%29%3B%0A%7D%0A
   content_markdown: >
     A function has zero or more parameters.
 
@@ -202,6 +329,28 @@
     whats happening.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20the%20return%20type%20is%20implied%20as%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20this%20function%20will%20return%20()%20if%20nothing%20is%20specified%20to%20return%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printing%20a%20debug%20string%20for%20a%20and%20b%0A%20%20%20%20%2F%2F%20Because%20it's%20hard%20to%20print%20nothingness%0A%20%20%20%20println!(%22The%20value%20of%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22The%20value%20of%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: Macros
+  content_markdown: >
+    A `macro` is an abstraction from another code, that allows developers to
+    define reusable patterns and reduce duplicate code.
+
+    In Rust, there are two types of `macros`:
+    - declarative
+    - procedural
+- title: Declarative macros
+  content_markdown: >
+    Declarative macros, such as **print!**, **format!** or **todo!**
+    are invoked using the syntax `macro_name!(....)`.
+
+    The `!` indicates that it's a macro invocation
+    rather than a regular function call.
+- title: Procedural macros
+  content_markdown: >
+    Procedural macros operate on the abstract syntax tree (AST) of Rust code and 
+    generate or modify code accordingly. They are more powerful and flexible 
+    than declarative macros but are also more complex.
+    
+    Examples: `#[derive(Debug)]`, `#[test]`, `#[derive(Serialize)]`
 - title: Chapter 1 - Conclusion
   content_markdown: >
     Nice job so far! The basics of Rust aren't so bad, right?  We're
