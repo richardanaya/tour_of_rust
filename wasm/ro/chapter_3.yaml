@@ -1,0 +1,263 @@
+- title: Capitolul 3 - Invocare dinamică
+  content_markdown: >
+    În acest capitol vom discuta despre cum putem crea propriile funcții
+    dinamice la runtime pentru a le apela din WebAssembly.
+- title: De ce invocare dinamică?
+  content_markdown: >
+    Am văzut în primele capitole că putem foarte ușpr să scriem manual propriile
+    funcții JavaScript în fișierele noaste `.js`. Așa că
+
+    de ce am crea funcții dinamice?
+
+
+    * Majoritatea oamenilor aleg WebAssembly pentru a scăpa de JavaScript. Crearea
+    funcțiilor JavaScript dinamice ne permite să folosim
+      biblioteci în limbajul nativ, care să se ocupe de partea dificilă de a crea
+      dinamic legăturile fără să reinventeze roata.
+    
+    * Simplifică sconfigurarea și lansarea modulelor WebAssembly la un minim absolut.
+    Avem nevoie doar de capacitatea de a înregistra funcții noi
+    și de a le apela în loc să specificăm o serie de funcții JavaScript scrise manual.
+
+    * Este dificil pentru JavaScript să știe ce dependențe are modulul său,
+    permițând programului WebAssembly să-și creeze propriile funcții care să facă
+    exact ceea ce este nevoie.
+- title: Recapitularea înregistrării
+  content_markdown: >
+    În primul capitol am scris manual funcțiile noastre de log pentru a efectua înregistrarea
+    cu `console.log`. Să vedem cum am putea face acest lucru dinamic.
+
+
+    * Avem nevoie de o modalitate de a înregistra o funcție la runtime.
+
+    * Avem nevoie de o modalitate de a apela acea funcție.
+
+    * Avem nevoie ca acea funcție dinamică să aibă acces la memorie (de exemplu,
+    pentru a extrage octeți utf-8).
+- title: Înregistrarea funcțiilor
+  content_markdown: >
+    Pentru a înregistra o funcție avem nevoie de două lucruri:
+
+
+    * trebuie să pasăm corpul funcției pe care dorim să o creăm în JavaScript
+    drept șir de caractere
+
+    * trebuie să primim înapoi un identificator pentru a putea apela acea funcție
+    mai târziu cu parametrii
+
+
+    ```rust
+
+    register_function(js:&str) -> usize
+
+    ```
+
+
+    De vreme ce WebAssembly poate să trimită înainte și înapoi doar numere, iar
+    toate numerele din JavaScript sunt numere reale pe 64 de biți,
+
+    în cele din urmă, lucrurile vor arăta ca o funcție importată:
+
+
+    ```
+
+    register_function(js_start:f64,js_len:f64) -> f64
+
+    ```
+
+
+    În spatele cortinei profităm de funcția `eval` din JavaScript pentru a face
+    aceste funcții să fie reale.
+- title: Apelarea funcțiilor
+  content_markdown: >
+    Când mai târziu dorim să apelăm funcția noastră dinamică, vom avea nevoie de
+    o funcție de invocare care să poată lua
+
+    identificatorul funcției și argumentele.
+
+
+    Din nou, de vreme ce WebAssembly poate să trimită înainte și înapoi doar numere,
+    iar toate numerele din JavaScript sunt numere reale pe 64 de biți,
+
+    în cele din urmă, lucrurile vor arăta ca o funcție importată:
+
+    ```
+
+    js_invoke_with_2_params(fn_handle:f64, a:f64, b:f64) -> f64
+
+    ```
+
+
+    Punând totul laolaltă avem:
+
+
+    ```rust
+
+    let log_handle = register_function("
+      (param_a, param_b) => {
+        // apelează cumva console_log  
+      }");
+
+    let msg = "hello world";
+
+
+    js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
+        msg.len() as f64 );
+    ```
+
+
+    Veți observa că există o problemă cu funcția noastră JavaScript. Are
+    începutul și sfârșitul șirului utf-8, dar nu și memoria acestuia!
+- title: Contextul invocării dinamice
+  code: "https://webassembly.studio/?embed&f=70lhg7nwda9"
+  content_markdown: >
+    Când funcțiile noastre invocate dinamic sunt apelate, acestea trebuie să
+    aibă acces la memoria modulului. Putem plasa
+    
+    resurse importante unui obiect de context astfel încât funcția noastră să
+    aibă toate instrumentele disponibile pentru a face ceea ce trebuie.
+
+
+    ```rust
+
+    let log_handle = register_function("
+      (context, msgStart, msgEnd) => {
+        let msg = context.getUtf8FromMemory(msgStart,msgEnd);
+        console.log(msg); 
+      }");
+
+    let msg = "hello world";
+
+
+    js_invoke_with_2_params( log_handle,msg.as_ptr() as f64, 
+      msg.len() as f64);
+    ```
+
+
+    Studiați exemplul pentru implementarea completă.
+- title: Returnarea referințelor
+  content_markdown: >
+    Când vrem să returnăm o referință la un obiect, întâlnim o problemă la funcțiile
+    dinamice. WebAssembly poate să trimită înainte și înapoi doar numere!
+
+    Pentru e trece peste acest obstacol, trebuie să stabilim o convenție de a folosi
+    un identificator numeric pentru a reprezenta
+
+    o referință către obiectul nostru în JavaScript.
+
+
+    ```rust
+
+    let query_selector_handle = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart,selectorEnd);
+        let domEl = document.querySelector(selector);
+        let objHandle = context.storeObject(domEl);
+        return objHandle;
+      }");
+
+    let selector = "#fancy-button";
+
+
+    let dom_element_handle = js_invoke_with_2_params(
+        log_handle,selector.as_ptr() as f64, 
+        selector.len() as f64 );
+    ```
+- title: Alocatoare
+  code: "https://webassembly.studio/?embed&f=mz2gu9y29tn"
+  content_markdown: >
+    După cum putem vedea, pentrz a comunica corect obiecte, avem nevoie de un fel de
+    mecanism de stocare pentru obiecte:
+
+
+    * `storeObject(object) -> f64` - Stochează un obiect și returnează un identificator
+      numeric.
+
+    * `getObject(f64) -> object` - Obține o referință la un obiect prin identificatorul
+      său numeric.
+
+    * `releaseObject(f64) -> object` - Eliberează o referință la un obiect din
+      spațiul de stocare, permițând eliberarea memoriei sale.
+
+    
+    Implementarea unei astfel de funcționalități se numește *alocator*. Acesta este
+    dincolo de sfera acestui tutorial. Ne-am putea imagina o implementae foarte simplă a
+
+    acestuia și anume un vector în creștere continuă astfel încât
+
+    un obiect este stocat în vector și indexul său este returnat ca
+    identificator.
+
+
+    ```
+
+      let storage = [];
+
+
+      function storeObject(obj){
+        let index = storage.length;
+        storage.push(obj);
+        return index;
+      }
+
+
+      function getObject(handle){
+        return storage[handle];
+      }
+
+
+      function releaseObject(handle){
+        return storage[handle] = null;
+      }
+
+      ```
+
+
+    Sunt multe aspecte pe care trebuie să le luăm în considerare
+    în implementarea noastră.
+- title: Desenarea pe ecran
+  code: "https://webassembly.studio/?embed&f=bdhga9zwlem"
+  content_markdown: >
+    Să punem toate informațiile laolaltă pentru a crea un exemplu, desenând
+    un pătrat roșu pe ecran. Să ne gândim la funcțiile
+
+    pe care trebuie să le înregistrăm:
+
+
+    ```rust
+
+    let get_2d_context = register_function("
+      (context, selectorStart, selectorEnd) => {
+        let selector = context.getUtf8FromMemory(
+          selectorStart,selectorEnd);
+        let domEl = document.querySelector(selector);
+        let ctx = domEl.getContext("2d");
+        let objHandle = context.storeObject(ctx);
+        return objHandle;
+      }");
+
+    let set_context_color = register_function("
+      (context, ctxHandle, colorStart, colorEnd) => {
+        let color = context.getUtf8FromMemory(
+          colorStart,colorEnd);
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillStyle = color;
+      }");
+
+    let draw_rect = register_function("
+      (context, ctxHandle, x, y, width, height) => {
+        let ctx = context.getObject(ctxHandle);
+        ctx.fillRect(x,y,width,height);
+      }");
+    ```
+- title: Concluzia capitolului 3
+  content_markdown: >
+    Acum avem capacitatea de a invoca orice fel de funcție JavaScript! Cât de tare
+    e asta? Folosirea funției `eval` evident că nu este chiar ideală,
+
+    dar WebAssembly este o tehnologie în evoluție, care va avea într-o zi
+    modalități mai bune de a accesa orice
+
+    aspect al browserului. Până atunci, facem tot ce ne stă în putință!
+    Următorul capitol este despre programarea asincronă!
