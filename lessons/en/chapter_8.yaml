@@ -72,7 +72,7 @@
     Rust automatically `dereferences` them when using the `{}` format specifier in a `println!` `macro`. This means that the `values` themselves are
     printed, not their `addresses`.
     
-    [![pointer](https://i.redd.it/swszegbgpbr71.jpg)
+    [![Pointer](https://i.redd.it/swszegbgpbr71.jpg)
     This is for `C`.
     For Rust, think that `int` is `u128`, and `*` is Rust's `&`.
 - title: Raw Pointers
