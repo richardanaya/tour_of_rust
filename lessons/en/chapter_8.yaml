@@ -57,8 +57,11 @@
     |      a        |    i32    |  0x100  |      12         |
     |    b = &a     |   &i32    |  0x132  |  0x100 (addr)   |
     |    c = &b     |  &&i32    |  0x2a1  |  0x132 (addr)   |
-    |    d = &c     | &&&i32    |  0x712  |  0x201 (addr)   |
+    |    d = &c     | &&&i32    |  0x712  |  0x2a1 (addr)   |
 
+    > The CPU chooses the address of a variable at runtime
+    > Do not expect to have the same address at different executions
+    
     All variables `i32`, `&i32`, `&&i32`, `&&&i32` are 32-bit variable.
 
     `i32`      -> stores a concrete value
@@ -68,6 +71,10 @@
     However, when you try to print references (like `&i32`, `&&i32`, `&&&i32`),
     Rust automatically `dereferences` them when using the `{}` format specifier in a `println!` `macro`. This means that the `values` themselves are
     printed, not their `addresses`.
+    
+    [![pointer](https://i.redd.it/swszegbgpbr71.jpg)
+    This is for `C`.
+    For Rust, think that `int` is `u128`, and `*` is Rust's `&`.
 - title: Raw Pointers
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
