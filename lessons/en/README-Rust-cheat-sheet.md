@@ -17,15 +17,15 @@ What does Rust have different from other programmig languages.
 
 
 # Chapter 1 - The Basics
-In this first chapter we're going to be exploring the very basics with 
-functions, variables, and the most primitive types. Glad to have you on 
+In this first chapter we're going to be exploring the very basics with
+functions, variables, and the most primitive types. Glad to have you on
 board!
 
-Also! In case you are wondering who this adorable crab who is speaking to you 
-is, I am **Ferris**, the unofficial mascot for the Rust programming language. 
+Also! In case you are wondering who this adorable crab who is speaking to you
+is, I am **Ferris**, the unofficial mascot for the Rust programming language.
 Nice to meet you.
 
-Once you get familiar with Rust, you can call yourself a **Rustacean**. 
+Once you get familiar with Rust, you can call yourself a **Rustacean**.
 That's how people who use, contribute or are interested in Rust call themself.
 
 ## The Rust Playground
@@ -35,7 +35,7 @@ It's a great way to play around with Rust and show others your creativity and ch
 
 ```rust
 fn main() {
-    println!("Welcome to the playground! You can modify the code in here.");
+	println!("Welcome to the playground! You can modify the code in here.");
 }
 ```
 
@@ -45,23 +45,23 @@ Unlike other programming languages, where there is a function for
 writting text in `stdout` (standard output), Rust uses the `macros` **println!** and **print!**.
 We'll talk about `macros` later.
 
-> `println!` will display using a new line character `\n` at the end of the string 
+> `println!` will display using a new line character `\n` at the end of the string
 > `print!` will not use the `\n` at the end of the text
 
 
 ```rust
 fn main() {
-    println!();
-    print!("There is an empty line above this. ");
-    print!("Isn't it great?");
-    println!();     // new line at the end of stdout
+	println!();
+	print!("There is an empty line above this. ");
+	print!("Isn't it great?");
+	println!();     // new line at the end of stdout
 }
 
 ```
 
 ## How to compile?
 On Linux / MacOS systems:
-```
+```bash
 $ rustc main.rs
 $ ./main
 ```
@@ -91,7 +91,6 @@ Variable names are always in `snake_case`.
 
 
 ```rust
-
 fn main() {
     // rust infers the type of x
     let x = 13;
@@ -106,6 +105,7 @@ fn main() {
     x = 0;
     println!("{}", x);
 }
+
 ```
 
 
@@ -123,13 +123,13 @@ We will have more to say on this concept later, but for now just keep an eye out
 
 
 ```rust
-
 fn main() {
     let mut x = 42;
     println!("{}", x);
     x = 13;
     println!("{}", x);
 }
+
 ```
 
 
@@ -162,18 +162,18 @@ Rust has a variety of familiar types:
 - `booleans` - bool for representing true/false
 - unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing nonnegative whole numbers
 - signed integers - i8 i16 i32 i64 i128 for representing whole numbers
-pointer sized integers - usize isize for representing indexes and sizes of things in memory
+  pointer sized integers - usize isize for representing indexes and sizes of things in memory
 - floating point - `f32` `f64`
 - tuple - `(value, value, ...)` for passing fixed sequences of values on the stack
 - arrays - `[value, value, ...]` a collection of similar elements with fixed length known at compile time
 - slices - a collection of similar elements with length known at runtime
 - `str` (string slice) - text with a length known at runtime
 
-Text might be more complex than you are used to in other languages; since 
-Rust is a system programming language, it cares about memory issues you 
+Text might be more complex than you are used to in other languages; since
+Rust is a system programming language, it cares about memory issues you
 might not be used to. We will be going into this in detail later.
 
-Numeric types can be explicitly specified by appending the type to the end 
+Numeric types can be explicitly specified by appending the type to the end
 of the number (e.g. `13u32`, `2u8`).
 
 > cannot apply unary operator '-' on `u8`, `u16`, `u32`, `u64`, `u128`
@@ -202,12 +202,12 @@ fn main() {
 
 
 ## Basic Type Conversion
-Rust requires explicitness when it comes to numeric types. One cannot use a 
+Rust requires explicitness when it comes to numeric types. One cannot use a
 `u8` for a `u32` casually without error.
 
 Luckily Rust makes numeric type conversions very easy with the `as` keyword.
 
-``` rust
+```rust
 fn main() {
     let a = 13u8;
     let b = 7u32;
@@ -222,9 +222,9 @@ fn main() {
 
 
 ## Constants
-Constants allow us to specify a common value that's used throughout our code 
-many times efficiently. Instead of copying values like variables where they 
-are used, constants directly replace the text identifier where they are used 
+Constants allow us to specify a common value that's used throughout our code
+many times efficiently. Instead of copying values like variables where they
+are used, constants directly replace the text identifier where they are used
 with their value at compile time.
 
 Unlike variables, constants must always have explicit types.
@@ -232,7 +232,7 @@ Unlike variables, constants must always have explicit types.
 Constant names are always in `SCREAMING_SNAKE_CASE`.
 
 
-``` rust
+```rust
 const PI: f32 = 3.14159;
 
 fn main() {
@@ -303,15 +303,15 @@ fn main() {
 ```
 
 ## Printing with `{:?}`
-Notice that when displaying a collection, `println!("{}", collection);` 
+Notice that when displaying a collection, `println!("{}", collection);`
 doesn't work.
 
-In Rust, the `:?` is a format specifier used with the `Debug` trait when 
+In Rust, the `:?` is a format specifier used with the `Debug` trait when
 printing values / collections of values.
 When you use `println!("{:?}", x);`, the Rust compiler formats the variable
 accordingly.
 
-This is particularly useful for `collections` like vectors, arrays, structs 
+This is particularly useful for `collections` like vectors, arrays, structs
 and enums.
 
 `{:#?}` will print them in a way that is designed to be informative during
@@ -345,13 +345,13 @@ fn main() {
 ## Arrays
 An *array* is a **fixed length** collection of data elements all of the same type.
 
-The data type for an *array* is `[T;N]` where T is the elements' type, and N 
+The data type for an *array* is `[T;N]` where T is the elements' type, and N
 is the fixed length known at compile-time.
 
-Individual elements can be retrieved with the `[x]` operator where x is a 
+Individual elements can be retrieved with the `[x]` operator where x is a
 usize index (starting at `0`) of the element you want.
 
-Collections with a dynamic length, often called dynamic or variable arrays, 
+Collections with a dynamic length, often called dynamic or variable arrays,
 are introduced in a later chapter about **Vectors**.
 
 ```rust
@@ -432,7 +432,7 @@ fn main() {
 ## Strings
 In Rust strings are UTF-8 encoded sequence of Unicode characters.
 
-The String type, which is part of the standard library 
+The String type, which is part of the standard library
 (`std::string::String`), is the most commonly used string type in Rust.
 
 Rust also has a primitive string type, `&str`, which represents a string slice.
@@ -465,7 +465,7 @@ fn main() {
 
 
 ## Tuple
-`Tuple` represents an **immutable** collections of elements, that can have 
+`Tuple` represents an **immutable** collections of elements, that can have
 differente data types.
 Since it's **immutable**, it cannot be modified after its creation.
 The elements of a tuple can be accessed by index (indexing starts from 0),
@@ -499,7 +499,7 @@ A function has zero or more parameters.
 In this example, the add function takes two arguments of type `i32`
 (signed integer of 32-bit length).
 
-If you just want to `return` an expression, you can drop the return keyword 
+If you just want to `return` an expression, you can drop the return keyword
 and the semicolon at the end, as we did in the subtract function.
 
 Function names are always in `snake_case`.
@@ -551,8 +551,8 @@ Functions can return multiple values by returning a *tuple* of values.
 
 Tuple elements can be referenced by their index number.
 
-Rust supports various kinds of destructuring that we will see in many forms, 
-allowing us to extract sub-pieces of data structures in ergonomic ways. Be 
+Rust supports various kinds of destructuring that we will see in many forms,
+allowing us to extract sub-pieces of data structures in ergonomic ways. Be
 on the lookout!
 
 
@@ -575,12 +575,12 @@ fn main() {
 
 
 ## Returning Nothing
-If no return type is specified for a function, it returns an empty tuple, 
+If no return type is specified for a function, it returns an empty tuple,
 also known as a *unit*.
 
 An empty tuple is represented by `()`.
 
-Using `()` is uncommon, but will come up often enough that it's good to know 
+Using `()` is uncommon, but will come up often enough that it's good to know
 whats happening.
 
 ```rust
@@ -621,17 +621,17 @@ The `!` indicates that it's a macro invocation
 rather than a regular function call.
 
 ## Procedural macros
-Procedural macros operate on the abstract syntax tree (AST) of Rust code and 
-generate or modify code accordingly. They are more powerful and flexible 
+Procedural macros operate on the abstract syntax tree (AST) of Rust code and
+generate or modify code accordingly. They are more powerful and flexible
 than declarative macros but are also more complex.
 Examples: `#[derive(Debug)]`, `#[test]`, `#[derive(Serialize)]`
 
 
 # Chapter 1 - Conclusion
-Nice job so far! The basics of Rust aren't so bad, right? We're getting a 
-peek into how the Rust compiler thinks. As a system programming language it 
-cares a lot about the size of values in memory, whether things can be 
-modified or not, and making sure your math is what you want it to be. Next 
+Nice job so far! The basics of Rust aren't so bad, right? We're getting a
+peek into how the Rust compiler thinks. As a system programming language it
+cares a lot about the size of values in memory, whether things can be
+modified or not, and making sure your math is what you want it to be. Next
 up we'll be looking at some old friends: `if` tests and for `loops`.
 
 More Resources:
@@ -643,8 +643,8 @@ More Resources:
 
 
 # Chapter 2 - Basic Control Flow
-In this chapter let's talk about basic control flow methods in Rust. If you 
-are familiar with C based languages you'll feel right at home and maybe 
+In this chapter let's talk about basic control flow methods in Rust. If you
+are familiar with C based languages you'll feel right at home and maybe
 enjoy a surprise or two.
 
 
@@ -652,7 +652,7 @@ enjoy a surprise or two.
 ## if/else
 Code branching in Rust is not surprising.
 
-Conditions don't have parentheses! Did we ever really need them? Our logic 
+Conditions don't have parentheses! Did we ever really need them? Our logic
 now looks nice and clean.
 
 All your usual relational and logical operators still work: `==`, `!=`, `<`, `>`, `<=`, `>=`, `!`, `||`, `&&`.
@@ -711,19 +711,19 @@ fn main() {
 
 
 ## for
-Rust's `for` loop is a powerful upgrade. It iterates over values from any 
-expression that evaluates into an iterator. What's an iterator? An iterator 
-is an object that you can ask the question "What's the next item you have?" 
+Rust's `for` loop is a powerful upgrade. It iterates over values from any
+expression that evaluates into an iterator. What's an iterator? An iterator
+is an object that you can ask the question "What's the next item you have?"
 until there are no more items.
 
-We'll explore this more in a future chapter. In the meantime, just know Rust 
-makes it easy to create iterators that generate a sequence of integer 
+We'll explore this more in a future chapter. In the meantime, just know Rust
+makes it easy to create iterators that generate a sequence of integer
 numbers.
 
-The `..` operator creates an iterator that generates numbers from a start 
+The `..` operator creates an iterator that generates numbers from a start
 number up to but not including an end number.
 
-The `..=` operator creates an iterator that generates numbers from a start 
+The `..=` operator creates an iterator that generates numbers from a start
 number up to and including an end number.
 
 ```rust
@@ -759,10 +759,10 @@ fn main() {
 
 ## match
 
-Miss your switch statement? Rust has an incredibly useful keyword for 
-matching all possible conditions of a value and executing a code path if the 
-match is true. Let's see how this works for numbers. We will have more to 
-say in future chapters on pattern matching more complex data. I promise you 
+Miss your switch statement? Rust has an incredibly useful keyword for
+matching all possible conditions of a value and executing a code path if the
+match is true. Let's see how this works for numbers. We will have more to
+say in future chapters on pattern matching more complex data. I promise you
 it will be worth the wait.
 
 
@@ -863,18 +863,18 @@ fn main() {
 
 
 # Chapter 2 - Conclusion
-Hopefully I've shown a glimpse of Rust's power even in the most basic 
-language features. We'll be talking about `for` and match even more in depth 
-as we gain more knowledge that can utilize their capabilities. Next time 
+Hopefully I've shown a glimpse of Rust's power even in the most basic
+language features. We'll be talking about `for` and match even more in depth
+as we gain more knowledge that can utilize their capabilities. Next time
 we'll get into Rust's foundational data structures.
 
 
 
 
 ## Chapter 3 - Basic Data Structure Types
-It's time we explore beyond basic types! In this chapter we will look at the 
-most primitive data structures in Rust, paying close attention to their 
-representations in memory. I think you will enjoy how little Rust hides from 
+It's time we explore beyond basic types! In this chapter we will look at the
+most primitive data structures in Rust, paying close attention to their
+representations in memory. I think you will enjoy how little Rust hides from
 you how things work.
 
 
@@ -923,14 +923,14 @@ fn main() {
 ## Memory
 Rust programs have 3 memory regions where data is stored:
 
-- **data memory** - For data that is fixed in size and **static** (i.e. 
-always available through life of program). Consider the text in your program 
-(e.g. "Hello World!"): This text's bytes are only ever read from one place 
-and therefore can be stored in this region. Compilers make lots of 
-optimizations with this kind of data, and they are generally considered very 
-fast to use since locations are known and fixed.
-- **stack memory** - For data that is declared as variables within a 
-function. The location of this memory never changes for the duration of a function call; because of this compilers can optimize code so stack data is very fast to access.
+- **data memory** - For data that is fixed in size and **static** (i.e.
+  always available through life of program). Consider the text in your program
+  (e.g. "Hello World!"): This text's bytes are only ever read from one place
+  and therefore can be stored in this region. Compilers make lots of
+  optimizations with this kind of data, and they are generally considered very
+  fast to use since locations are known and fixed.
+- **stack memory** - For data that is declared as variables within a
+  function. The location of this memory never changes for the duration of a function call; because of this compilers can optimize code so stack data is very fast to access.
 - **heap memory** - For data that is created while the application is running. Data in this region may be added, moved, removed, resized, etc. Because of its dynamic nature it's generally considered slower to use, but it allows for much more creative usages of memory. When data is added to this region we call it an **allocation**. When data is removed from this section we call it a **deallocation**.
 
 
@@ -947,9 +947,9 @@ Struct fields are accessed using a dot operator `.`.
 Memory details of our example:
 
 - The text inside the quotes is read only data (e.g. "Ferris"), therefore it is placed in the *data memory region*.
-- The function call `String::from` creates a struct `String` that is placed 
-side by side with the fields of SeaCreature in the stack. A String 
-represents text that can be changed and does this by:
+- The function call `String::from` creates a struct `String` that is placed
+  side by side with the fields of SeaCreature in the stack. A String
+  represents text that can be changed and does this by:
 	1. Creating memory on the *heap* for the text where it can be modified
 	2. Storing a reference to that memory location on the *heap* and storing it in `String` struct (More on this in future lessons)
 - Finally our two friends *Ferris* and *Sarah* have data structures that will always have fixed locations in our program, so they are placed on the *stack*.
@@ -1033,7 +1033,7 @@ fn main() {
 
 
 ## Enumerations
-Enumerations allow you to create a new type that can have a value of 
+Enumerations allow you to create a new type that can have a value of
 several tagged elements using the `enum` keyword.
 
 `match` helps ensure exhaustive handling of all possible enum values making it a powerful tool in ensuring quality code.
@@ -1151,19 +1151,19 @@ fn main() {
 
 
 # Chapter 3 - Conclusion
-How exciting! We now have the most basic tools for representing the form of 
-our ideas in code. Hopefully now we can see a glimmer of how Rust's 
-fundamental operations work in harmony and conciseness with its types. Next 
-up we will talk about a concept that gives our data types even more 
+How exciting! We now have the most basic tools for representing the form of
+our ideas in code. Hopefully now we can see a glimmer of how Rust's
+fundamental operations work in harmony and conciseness with its types. Next
+up we will talk about a concept that gives our data types even more
 flexibility of representation: *generics*.
 
 
 
 # Chapter 4 - Generic Types
-Generic types are incredibly important in Rust. They are used in the 
-representation of nullable values (i.e. variables which might not have a 
-value yet), error handling, collections, and more! In this section we will 
-be learning about the foundational generic types you will likely be using 
+Generic types are incredibly important in Rust. They are used in the
+representation of nullable values (i.e. variables which might not have a
+value yet), error handling, collections, and more! In this section we will
+be learning about the foundational generic types you will likely be using
 all the time.
 
 
@@ -1172,8 +1172,8 @@ all the time.
 ## What Are Generic Types?
 Generic types allow us to partially define a `struct` or `enum`, enabling a compiler to create a fully defined version at compile-time based off our code usage.
 
-Rust generally can infer the final type by looking at our instantiation, 
-but if it needs help you can always be explicit using the `::<T>` operator, 
+Rust generally can infer the final type by looking at our instantiation,
+but if it needs help you can always be explicit using the `::<T>` operator,
 also known by the name `turbofish` (he's a good friend of mine!).
 
 
@@ -1208,13 +1208,13 @@ fn main() {
 
 
 ## Representing Nothing
-In other languages, the keyword `null` is used to represent an absence of a 
-value. It creates difficulty in programming languages because it creates 
-the possibility that our program might fail when interacting with a 
+In other languages, the keyword `null` is used to represent an absence of a
+value. It creates difficulty in programming languages because it creates
+the possibility that our program might fail when interacting with a
 variable/field.
 
-Rust does not have `null`, but it is not ignorant of the importance of 
-representing nothing! Consider a naive representation using a tool we 
+Rust does not have `null`, but it is not ignorant of the importance of
+representing nothing! Consider a naive representation using a tool we
 already know.
 
 This pattern of providing a `None` alternative representation for one or many alternate values is so common in Rust because of its lack of a `null` value. Generic types help solve this challenge.
@@ -1235,7 +1235,7 @@ struct BagOfHolding {
 
 
 ## Option
-Rust has a built in generic enum called `Option` that allows us to 
+Rust has a built in generic enum called `Option` that allows us to
 represent nullable values without using `null`.
 
 ```rust
@@ -1245,7 +1245,7 @@ enum Option<T> {
 }
 ```
 
-This enum is so common, instances of the enum can be created anywhere with 
+This enum is so common, instances of the enum can be created anywhere with
 the enum variants `Some` and `None`.
 
 
@@ -1288,8 +1288,8 @@ fn main() {
 
 
 ## Result
-Rust has a built in generic enum called `Result` that allows us to return a 
-value that has the possibility of failing. It is the idiomatic way in which 
+Rust has a built in generic enum called `Result` that allows us to return a
+value that has the possibility of failing. It is the idiomatic way in which
 the language does error handling.
 
 ```rust
@@ -1302,7 +1302,7 @@ enum Result<T, E> {
 Note that our generics type has multiple *parameterized types*
 separated by a comma.
 
-This enum is so common, instances of the enum can be created anywhere with 
+This enum is so common, instances of the enum can be created anywhere with
 the enum variants `Ok` and `Err`.
 
 
@@ -1364,13 +1364,13 @@ fn main() -> Result<(), String> {
 
 
 ## Graceful Error Handling
-`Result` is so common that Rust has a powerful operator `?` for working 
+`Result` is so common that Rust has a powerful operator `?` for working
 with them. These two statements are equivalent:
 
-```
+```rust
 do_something_that_might_fail()?
 ```
-```
+```rust
 match do_something_that_might_fail() {
     Ok(v) => v,
     Err(e) => return Err(e),
@@ -1400,7 +1400,7 @@ fn main() -> Result<(), String> {
 
 
 ## Ugly Option/Result Handling
-Working with `Option`/`Result` can be tedious when you are just trying to 
+Working with `Option`/`Result` can be tedious when you are just trying to
 write some quick code. Both `Option` and `Result` have a function called `unwrap` that can be useful for getting a value in a quick and dirty manner.
 
 `unwrap` will:
@@ -1409,10 +1409,10 @@ write some quick code. Both `Option` and `Result` have a function called `unwrap
 
 These two pieces of code are equivalent:
 
-```
+```rust
 my_option.unwrap()
 ```
-```
+```rust
 match my_option {
     Some(v) => v,
     None => panic!("some error message generated by Rust!"),
@@ -1421,10 +1421,10 @@ match my_option {
 
 
 Similarly:
-```
+```rust
 my_result.unwrap()
 ```
-```
+```rust
 match my_result {
     Ok(v) => v,
     Err(e) => panic!("some error message generated by Rust!"),
@@ -1487,7 +1487,7 @@ fn main() {
 Some of the most useful generic types are collection types.
 A vector is a variably sized list of items represented by the struct `Vec`.
 
-The macro `vec!` lets us easily create a vector rather than manually 
+The macro `vec!` lets us easily create a vector rather than manually
 constructing one.
 
 `Vec` has the method `iter()` which creates an iterator from a vector, allowing us to easily put a vector into a `for` loop.
@@ -1523,26 +1523,26 @@ fn main() {
 
 
 # Chapter 4 - Conclusion
-In one chapter we've learned how much power generic types give us! Don't 
-worry if you don't know fully how to use everything, right now it's just 
-good to be aware of the major ideas you will see again and again in code. 
-Our functions are getting quite lengthy! In our next chapter we will spend 
+In one chapter we've learned how much power generic types give us! Don't
+worry if you don't know fully how to use everything, right now it's just
+good to be aware of the major ideas you will see again and again in code.
+Our functions are getting quite lengthy! In our next chapter we will spend
 talk about an important concept in Rust: data ownership.
 
 
 
 # Chapter 5 - Ownership & Borrowing Data
-Rust has a unique paradigm for managing memory compared to other 
-programming languages. We're going to look at the behaviors and validations 
-of the compiler one by one so it's not overwhelming. It's important to 
-remember that ultimately the rules we show don't exist to make your life 
+Rust has a unique paradigm for managing memory compared to other
+programming languages. We're going to look at the behaviors and validations
+of the compiler one by one so it's not overwhelming. It's important to
+remember that ultimately the rules we show don't exist to make your life
 hard, but to help you make your code less error-prone!
 
 
 
 ## Ownership
-Instantiating a type and **binding** it to a variable name creates a memory 
-resource that the Rust compiler will validate through its whole **lifetime**. 
+Instantiating a type and **binding** it to a variable name creates a memory
+resource that the Rust compiler will validate through its whole **lifetime**.
 The bound variable is called the resource's **owner**.
 
 
@@ -1591,7 +1591,7 @@ fn main() {
 
 
 ## Dropping is Hierarchical
-When a struct is dropped, the struct itself is dropped first, then its 
+When a struct is dropped, the struct itself is dropped first, then its
 children are dropped individually, and so on.
 
 Memory Details:
@@ -1839,12 +1839,12 @@ fn main() {
 
 
 ## Explicit Lifetimes
-Even though Rust doesn't always show it in code, the compiler understands 
-the lifetime of every variable and will attempt to validate that a 
+Even though Rust doesn't always show it in code, the compiler understands
+the lifetime of every variable and will attempt to validate that a
 reference never exists longer than its owner.
 
-Functions can be explicit by parameterizing the function signature with 
-symbols that help identify which parameters and return values share the 
+Functions can be explicit by parameterizing the function signature with
+symbols that help identify which parameters and return values share the
 same lifetime.
 
 Lifetime specifiers always start with a ' (e.g. `'a`, `'b`, `'c`)
@@ -1876,8 +1876,8 @@ fn main() {
 
 
 ## Multiple Lifetimes
-Lifetime specifiers allow us to be explicit with certain scenarios the 
-compiler cannot resolve itself by distinguishing all of a function 
+Lifetime specifiers allow us to be explicit with certain scenarios the
+compiler cannot resolve itself by distinguishing all of a function
 signature component's lifetimes.
 
 
@@ -1911,19 +1911,19 @@ fn main() {
 
 
 ## Static Lifetimes
-A **static** variable is a memory resource created at compile-time that 
-exists through a program start to finish. They must have their types 
+A **static** variable is a memory resource created at compile-time that
+exists through a program start to finish. They must have their types
 explicitly specified.
 
-A **static lifetime** is a memory resource that lasts indefinitely to the 
-end of a program. Note that by this definition some static lifetime 
+A **static lifetime** is a memory resource that lasts indefinitely to the
+end of a program. Note that by this definition some static lifetime
 resources can be created at runtime.
 
 Resources with static lifetimes have a special lifetime specifier `'static`.
 
 `'static` resources will never drop.
 
-If static lifetime resources contain references they must all be `'static` 
+If static lifetime resources contain references they must all be `'static`
 (anything less would not live long enough).
 
 Memory detail:
@@ -1957,13 +1957,13 @@ fn main() {
 
 
 ## Lifetimes In Data Types
-Similarly to functions, data types can be parameterized with lifetime 
+Similarly to functions, data types can be parameterized with lifetime
 specifiers of its members.
 
-Rust validates that the containing data structure of the references never 
+Rust validates that the containing data structure of the references never
 lasts longer than the owners its references point to.
 
-We can't have structs running around with references pointing to 
+We can't have structs running around with references pointing to
 nothingness!
 
 ```rust
@@ -1985,9 +1985,9 @@ fn main() {
 
 
 # Chapter 5 - Conclusion
-Whew, congrats for making it through! I know it's a lot to take in, but you 
-are well under way to becoming a Rustacean. Hopefully it's clear how Rust 
-as a language aims to solve many of these common challenges in systems 
+Whew, congrats for making it through! I know it's a lot to take in, but you
+are well under way to becoming a Rustacean. Hopefully it's clear how Rust
+as a language aims to solve many of these common challenges in systems
 programming:
 
 - Unintentional modification of resources
@@ -2001,9 +2001,9 @@ In the next chapter we'll apply some of this knowledge as we look at how Rust ha
 
 
 # Chapter 6 - Text
-Now that we understand a bit how Rust thinks of memory, we are prepared to 
-talk about text in more detail. Rust cares a great deal about international 
-text and byte level concerns you might not be familiar with from other 
+Now that we understand a bit how Rust thinks of memory, we are prepared to
+talk about text in more detail. Rust cares a great deal about international
+text and byte level concerns you might not be familiar with from other
 languages. That said, Rust has many great tools for managing those concerns.
 
 
@@ -2032,26 +2032,26 @@ fn main() {
 
 
 ## What is utf-8
-As more languages were used on computers, the world needed to represent 
-more text characters than ASCII allowed (1 byte only allowed 256 
+As more languages were used on computers, the world needed to represent
+more text characters than ASCII allowed (1 byte only allowed 256
 characters).
 
-**utf-8** was introduced with a variable byte length of 1-4 bytes greatly 
+**utf-8** was introduced with a variable byte length of 1-4 bytes greatly
 increasing the range of possible characters.
 
-An advantage of variable sized characters is text did not have unnecessary 
+An advantage of variable sized characters is text did not have unnecessary
 bytes for very common ASCII (only requiring 1 byte still in **utf-8**).
 
-A downside of variable sized characters is that character lookup can no 
-longer be done quickly (**O(1)** constant time) with a simple indexing 
-(e.g. `my_text[3]` to get the 4th character). It's possible that the 
-preceding characters could have variable widths, altering where the 4th 
+A downside of variable sized characters is that character lookup can no
+longer be done quickly (**O(1)** constant time) with a simple indexing
+(e.g. `my_text[3]` to get the 4th character). It's possible that the
+preceding characters could have variable widths, altering where the 4th
 character actually begins in the sequence of bytes.
 
-Instead we must iterate through a **utf-8** byte sequence to understand 
+Instead we must iterate through a **utf-8** byte sequence to understand
 where the Unicode characters actually begin (**O(n)** linear time).
 
-Ferris: "I'm mostly just happy to have **utf-8** for representing emojis of 
+Ferris: "I'm mostly just happy to have **utf-8** for representing emojis of
 my underwater friends."
 
 🐠🐙🐟🐬🐋
@@ -2103,8 +2103,8 @@ fn main() {
 
 
 ## Raw String Literals
-Raw strings allow us to write a sequence of characters verbatim by starting with `r#"` and ending with `"#`. It lets us insert characters that might 
-otherwise confuse a normal string as literals (like double quotes and 
+Raw strings allow us to write a sequence of characters verbatim by starting with `r#"` and ending with `"#`. It lets us insert characters that might
+otherwise confuse a normal string as literals (like double quotes and
 backslashes).
 
 ```rust
@@ -2121,16 +2121,16 @@ fn main() {
 
 
 ## String Literals From Files
-If you have some very large text, consider using the macro `include_str!` 
+If you have some very large text, consider using the macro `include_str!`
 to include text from local files in your program:
 
-```
+```rust
 let hello_html = include_str!("hello.html");
 ```
 
 
 ## String Slice
-A string slice is a reference to a sequence of bytes in memory that must 
+A string slice is a reference to a sequence of bytes in memory that must
 always be valid **utf-8**.
 
 A string slice (a sub-slice) of a `str` slice, must also be valid utf-8.
@@ -2157,7 +2157,7 @@ fn main() {
 
 
 ## Chars
-With so much difficulty in working with Unicode, Rust offers a way to 
+With so much difficulty in working with Unicode, Rust offers a way to
 retrieve a sequence of utf-8 bytes as a vector of characters of type `char`.
 
 A `char is always 4 bytes long (allowing for efficient lookup of individual characters).
@@ -2203,8 +2203,8 @@ fn main() {
 
 
 ## Text As Function Parameters
-String literals and strings are generally passed around as a string slice 
-to functions. This offers a lot of flexibility for most scenarios where you 
+String literals and strings are generally passed around as a string slice
+to functions. This offers a lot of flexibility for most scenarios where you
 don't actually have to pass ownership.
 
 
@@ -2239,8 +2239,8 @@ fn main() {
 
 
 ## Formatting Strings
-The `format!` macro allows us to create a string by defining a 
-parameterized string with placeholders for where and how values should be 
+The `format!` macro allows us to create a string by defining a
+parameterized string with placeholders for where and how values should be
 placed (e.g. `{}`).
 
 `format!` uses the same parameterized strings as `println!`.
@@ -2262,7 +2262,7 @@ fn main() {
 ## Converting Strings
 Many types can be converted to a string using `to_string`.
 
-The generic function `parse` can be used to convert strings or string 
+The generic function `parse` can be used to convert strings or string
 literals into a typed value. This function returns a `Result` because it could fail.
 
 
@@ -2280,27 +2280,27 @@ fn main() -> Result<(), std::num::ParseIntError> {
 
 
 # Chapter 6 - Conclusion
-Now you know the basics of text! As you have seen, Unicode makes working 
-with text a bit tricky, but the standard library has plenty of 
+Now you know the basics of text! As you have seen, Unicode makes working
+with text a bit tricky, but the standard library has plenty of
 functionality to make it easy to manage.
 
-Up to now, we've mostly looked at Rust from the lens of a procedural 
-paradigm (i.e. just functions and data), but it's time we now talk about 
+Up to now, we've mostly looked at Rust from the lens of a procedural
+paradigm (i.e. just functions and data), but it's time we now talk about
 traits and the capabilities unlocked by Rust's object oriented paradigm.
 
 
 
 # Chapter 7 - Object Oriented Programming
-Expressing ideas with functions is a proven way of representing behavior 
-and data (C has been doing it for decades!). Historically, computer science 
-has found other useful expressive aggregations and abstractions for data. 
-You may be familiar with object oriented programming (OOP) as one such way. 
-In this chapter we'll explore the Rust programming language beyond 
+Expressing ideas with functions is a proven way of representing behavior
+and data (C has been doing it for decades!). Historically, computer science
+has found other useful expressive aggregations and abstractions for data.
+You may be familiar with object oriented programming (OOP) as one such way.
+In this chapter we'll explore the Rust programming language beyond
 functions.
 
 
 ## What Is OOP?
-Object oriented programming roughly refers to programming languages that 
+Object oriented programming roughly refers to programming languages that
 have a number of iconic features:
 - `Encapsulation` - Associating data and functions into the conceptual unit of a single type called an object.
 - `Abstraction` - Hiding data and function members to obfuscate implementation details of an object.
@@ -2314,12 +2314,12 @@ Rust lacks inheritance of data and behavior in any meaningful way.
 - Structs cannot inherit fields from a parent struct.
 - Structs cannot inherit functions from a parent struct.
 
-That said, Rust implements many programming language features, so that you 
+That said, Rust implements many programming language features, so that you
 might not mind this lacking.
 
 
 ## Encapsulation With Methods
-Rust supports the concept of an object that is a struct associated with 
+Rust supports the concept of an object that is a struct associated with
 some functions (also known as *methods*).
 
 The first parameter of any method must be a reference to the instance associated with the method call (e.g. `instanceOfObj.foo()`). Rust uses:
@@ -2327,7 +2327,7 @@ The first parameter of any method must be a reference to the instance associated
 - `&mut self` - Mutable reference to the instance.
 
 Methods are defined within an implementation block with keyword impl:
-```
+```rust
 impl MyStruct { 
     ...
     fn foo(&self) {
@@ -2374,7 +2374,7 @@ borrowing system. Both of them are used in `impl` and `trait` blocks.
 `Self`:
 - refers to **return type** of the method
 - has the same data type as the `struct` that is implemented in a `impl` block
-- can be used for static method using the operator `::` (static method do not depend on a instance of a struct and a static method does not contain `self` as parameter) 
+- can be used for static method using the operator `::` (static method do not depend on a instance of a struct and a static method does not contain `self` as parameter)
 
 
 ```rust
@@ -2424,17 +2424,17 @@ fn main() {
 ## Defining a macro
 We talked before that we can use `macros` to simplify abstractions of our code.
 
-Let us define a `macro` that has the functionality of a copy constructor 
+Let us define a `macro` that has the functionality of a copy constructor
 for a struct.
 
 Notice that we group the macro's parameters using either `()` or `[]`.
 
-The choice between using `()` and `[]` for `macro` invocations in Rust 
+The choice between using `()` and `[]` for `macro` invocations in Rust
 often depends on the expected syntax and visual aesthetics. While `()` is more commonly associated with function calls and grouping expressions, `[]` is often associated with array indexing or indexing-like operations.
 
 
 
-```
+```rust
 struct Coordinates {
     x: i32,
     y: i32,
@@ -2516,26 +2516,26 @@ fn main() {
 
 
 ## Polymorphism With Traits
-Rust supports polymorphism with traits. Traits allow us to associate a set 
+Rust supports polymorphism with traits. Traits allow us to associate a set
 of methods with a struct type.
 
 We first define the signatures of methods of a trait within:
 
 
-```
+```rust
 trait MyTrait {
     fn foo(&self);
     ...
 }
 ```
 
-When a struct implements a trait, it establishes a contract that allows us 
+When a struct implements a trait, it establishes a contract that allows us
 to indirectly interact with the struct through the trait type
 (e.g. `&dyn MyTrait`) without having to know the real type.
 
 A struct's implemented traits methods are defined within an implementation block:
 
-```
+```rust
 impl MyTrait for MyStruct { 
     fn foo(&self) {
         ...
@@ -2582,7 +2582,7 @@ fn main() {
 ## Implemented Methods On Traits
 Traits can have implemented methods.
 
-The functions have no direct access to the inner fields of a struct, but it 
+The functions have no direct access to the inner fields of a struct, but it
 can be useful for sharing behavior between many trait implementors.
 
 
@@ -2678,10 +2678,10 @@ Methods are executed in two ways:
 - static dispatch - When the instance type is known, we have direct knowledge of what function to call.
 - dynamic dispatch - When an instance type is not known, we must find out some way of calling the correct function.
 
-Trait types `&dyn MyTrait` give us the ability to work with instances of 
+Trait types `&dyn MyTrait` give us the ability to work with instances of
 objects indirectly using dynamic dispatch.
 
-When dynamic dispatch is used, Rust will encourage you to put `dyn` before 
+When dynamic dispatch is used, Rust will encourage you to put `dyn` before
 your trait type so people are aware.
 
 Memory details:
@@ -2733,11 +2733,11 @@ fn main() {
 
 
 ## Trait Objects
-When we pass an instance of an object to a parameter of type `&dyn MyTrait` 
+When we pass an instance of an object to a parameter of type `&dyn MyTrait`
 we pass what is called a *trait object*.
 
-A trait object is what allows us to indirectly call the correct methods of 
-an instance. A trait object is a struct that holds the pointer of our 
+A trait object is what allows us to indirectly call the correct methods of
+an instance. A trait object is a struct that holds the pointer of our
 instance with a list of function pointers to our instance's methods.
 
 Memory details:
@@ -2745,21 +2745,21 @@ Memory details:
 
 
 ## Handling Unsized Data
-Traits introduce an interesting challenge when we want to store them within 
-another struct. Traits obfuscate the original struct thus it also 
-obfuscates the original size. Unsized values being stored in structs are 
+Traits introduce an interesting challenge when we want to store them within
+another struct. Traits obfuscate the original struct thus it also
+obfuscates the original size. Unsized values being stored in structs are
 handled in two ways in Rust:
 - `generics` - Using parameterized types effectively create struct/functions known types and thus known sizes.
 - `indirection` - Putting instances on the heap gives us a level of indirection that allow us to not have to worry about the size of the actual type and just store a pointer to it. There are other ways as well!
 
 
 ## Generic Functions
-Generics in Rust work hand in hand with traits. When we describe a 
+Generics in Rust work hand in hand with traits. When we describe a
 parameterized type `T` we can constrain what types can be used as an argument by listing what required traits the argument must implement.
 
 In this example type `T` must implement trait `Foo`:
 
-```
+```rust
 fn my_function<T>(foo: T)
 where
     T:Foo
@@ -2768,8 +2768,8 @@ where
 }
 ```
 
-By using generics we create static typed functions at compile time that 
-will have known types and sizes, allowing us to perform static dispatch and 
+By using generics we create static typed functions at compile time that
+will have known types and sizes, allowing us to perform static dispatch and
 store as a sized value.
 
 
@@ -2817,7 +2817,7 @@ fn main() {
 ## Generic Function Shorthand
 Rust has a shorthand for expressing generics constrained by a trait:
 
-```
+```rust
 fn my_function(foo: impl Foo) {
     ...
 }
@@ -2825,7 +2825,7 @@ fn my_function(foo: impl Foo) {
 
 This is equivalent to writing:
 
-```
+```rust
 fn my_function<T>(foo: T)
 where
     T:Foo
@@ -2885,7 +2885,7 @@ Because `Box` is a struct with a known size (because it just holds a pointer), i
 
 `Box` is so common it can be used from anywhere:
 
-```
+```rust
 Box::new(Foo { ... })
 ```
 
@@ -2940,7 +2940,7 @@ fn main() {
 ## Generic Structs Revisited
 Generic structs can also have their parameterized types constrained by traits.
 
-```
+```rust
 struct MyStruct<T>
 where
     T: MyTrait
@@ -2951,7 +2951,7 @@ where
 ```
 
 Generic structs have their parameterized type in their implementation blocks:
-```
+```rust
 impl<T> MyStruct<T> {
     ...
 }
@@ -2972,17 +2972,17 @@ Resources:
 # Chapter 8 - Smart Pointers
 In this chapter we will demystify smart pointers. Let's explore into these data structures that let us interact with the lowest level of memory.
 
-Ferris says: "Don't feel overwhelmed by this chapter if you don't feel you 
-can write your own low level memory management code in one short read. This 
-chapter is mostly to introduce you to some useful tools and give a glimpse 
+Ferris says: "Don't feel overwhelmed by this chapter if you don't feel you
+can write your own low level memory management code in one short read. This
+chapter is mostly to introduce you to some useful tools and give a glimpse
 at how they work!"
 
 
 # References Revisited
-A reference is fundamentally just a number that is the start position of 
-some bytes in memory. Its only purpose is to represent the concept of where 
-data of a specific type exists. What makes a reference different from just 
-a number is that Rust will validate the lifetime of references doesn't last 
+A reference is fundamentally just a number that is the start position of
+some bytes in memory. Its only purpose is to represent the concept of where
+data of a specific type exists. What makes a reference different from just
+a number is that Rust will validate the lifetime of references doesn't last
 longer than what it refers to (otherwise we'd get an error when we used it!).
 
 
@@ -2997,15 +2997,15 @@ Each variable:
 
 Why do use data types?
 
-By using data types, we basically tell the CPU how much memory to 
-allocate for the variables we declare. For instance, the compiler 
+By using data types, we basically tell the CPU how much memory to
+allocate for the variables we declare. For instance, the compiler
 allocates 8 bytes for each `i8` and `u8` variable. Without pointers, a variables stores a `value`.
 
 You've seen `u16`, `f64`, `usize`. These are data types.
 So are `&i32`, `&&i32` `&&&i32` and so on.
 
-The same logic applies to pointers. A pointer is a data type itself and 
-when we use pointer, the variables stores the `address` of the variable 
+The same logic applies to pointers. A pointer is a data type itself and
+when we use pointer, the variables stores the `address` of the variable
 instead of `value`. For pointer, the stored `value` is an `address`.
 
 
@@ -3022,8 +3022,8 @@ All variables `i32`, `&i32`, `&&i32`, `&&&i32` are 32-bit variable.
 `&...&i32` -> stores an address
 
 
-However, when you try to print references (like `&i32`, `&&i32`, `&&&i32`), 
-Rust automatically `dereferences` them when using the `{}` format specifier in a `println!` `macro`. This means that the `values` themselves are 
+However, when you try to print references (like `&i32`, `&&i32`, `&&&i32`),
+Rust automatically `dereferences` them when using the `{}` format specifier in a `println!` `macro`. This means that the `values` themselves are
 printed, not their `addresses`.
 
 
@@ -3069,7 +3069,7 @@ fn main() {
 
 
 ## Dereferencing
-The process of accessing/manipulating data that is being referred to by a 
+The process of accessing/manipulating data that is being referred to by a
 reference (i.e. `&i32`) is called *dereferencing*.
 
 References are used to access/manipulate data in two ways:
@@ -3081,7 +3081,7 @@ Rust has some powerful operators that allow us to do this.
 ## The * Operator
 The * operator is an explicit way to dereference a reference.
 
-```
+```rust
 let a: i32 = 42;
 let ref_ref_ref_a: &&&i32 = &&&a;
 let ref_a: &i32 = **ref_ref_ref_a;
@@ -3096,7 +3096,7 @@ Memory detail:
 The `.` operator is used in accessing fields and methods of a reference.
 It works a bit more subtly.
 
-```
+```rust
 let f = Foo { value: 42 };
 let ref_ref_ref_f = &&&f;
 println!("{}", ref_ref_ref_f.value);
@@ -3106,7 +3106,7 @@ Whoa, why didn't we need to add `***` before `ref_ref_ref_f`?
 This is because the `.` operator automatically dereferences a sequence of references.
 That last line is turned into the following by the compiler automatically.
 
-```
+```rust
 println!("{}", (***ref_ref_ref_f).value);
 ```
 
@@ -3127,13 +3127,13 @@ fn main() {
 
 
 ## Smart Pointers
-In addition to the ability to create references to existing typed data 
+In addition to the ability to create references to existing typed data
 using the `&` operator, Rust gives us the ability to create
 *reference-like* structs called **smart pointers**.
 
-We can think of references at a high level as a type that gives us access 
-to another type. Smart pointers are different in their behavior from normal 
-references in that they operate based on internal logic that a programmer 
+We can think of references at a high level as a type that gives us access
+to another type. Smart pointers are different in their behavior from normal
+references in that they operate based on internal logic that a programmer
 writes. You — the programmer — are the *smart* part.
 
 Typically smart pointers implement `Deref`, `DerefMut`, and `Drop`
@@ -3168,22 +3168,22 @@ fn main() {
 
 
 ## Smart Unsafe Code
-Smart pointers tend to use *unsafe* code fairly often. As mentioned 
-earlier, they are common tools for interacting with the lowest levels of 
+Smart pointers tend to use *unsafe* code fairly often. As mentioned
+earlier, they are common tools for interacting with the lowest levels of
 memory in Rust.
 
-What is an unsafe code? Unsafe code behaves exactly like normal Rust with 
-the exception of a few abilities that the Rust compiler is unable to make 
+What is an unsafe code? Unsafe code behaves exactly like normal Rust with
+the exception of a few abilities that the Rust compiler is unable to make
 guarantees about.
 
 A primary ability of unsafe code is *dereferencing a raw pointer*.
-That means taking a *raw pointer* to a position in memory and declaring "a 
-data structure exists here!" and turning it into a representation of data 
-you can use (i.e. `*const u8` into `u8`). Rust has no way to keep track of 
-the meaning of every byte that gets written to memory. Because Rust can't 
+That means taking a *raw pointer* to a position in memory and declaring "a
+data structure exists here!" and turning it into a representation of data
+you can use (i.e. `*const u8` into `u8`). Rust has no way to keep track of
+the meaning of every byte that gets written to memory. Because Rust can't
 make guarantees about what exists at an arbitrary number used as a raw pointer, it puts the dereference in an `unsafe { ... }` block.
 
-Smart pointers *dereference raw pointers* extensively, but they are well 
+Smart pointers *dereference raw pointers* extensively, but they are well
 proven in what they do.
 
 
@@ -3214,15 +3214,15 @@ fn main() {
 ## Familiar Friends
 Consider some smart pointers we've already seen like `Vec<T>` and `String`.
 
-`Vec<T>` is a smart pointer that just owns some memory region of bytes. The 
-Rust compiler has no idea what exists in these bytes. The smart pointer 
-interprets what it means to grab items from the region of memory it 
-manages, keeps track of where data structures within those bytes begin and 
-end, and then finally dereferences a raw pointer into data structures into 
+`Vec<T>` is a smart pointer that just owns some memory region of bytes. The
+Rust compiler has no idea what exists in these bytes. The smart pointer
+interprets what it means to grab items from the region of memory it
+manages, keeps track of where data structures within those bytes begin and
+end, and then finally dereferences a raw pointer into data structures into
 a nice clean ergonomic interface for us to use (e.g. `my_vec[3]`).
 
-Similarly, `String` keeps track of a memory region of bytes, and 
-programmatically restricts content written to it to always be valid `utf-8` 
+Similarly, `String` keeps track of a memory region of bytes, and
+programmatically restricts content written to it to always be valid `utf-8`
 and helps dereference that memory region into a type `&str`.
 
 Both these datastructures use unsafe dereferencing of raw pointers to do their job.
@@ -3283,7 +3283,7 @@ fn main() {
 ## Heap Allocated Memory
 `Box` is a smart pointer that lets us move data from the stack to the heap.
 
-Dereferencing it lets us use the heap allocated data ergonomically as if it 
+Dereferencing it lets us use the heap allocated data ergonomically as if it
 were the original type.
 
 
@@ -3306,23 +3306,23 @@ fn main() {
 
 
 ## Failable Main Revisited
-Rust code may have a plethora of representations of errors, but the 
+Rust code may have a plethora of representations of errors, but the
 standard library has a universal trait `std::error::Error`
 for describing errors.
 
 Using a smart pointer `Box` we can use the type
-`Box<dyn std::error::Error>` as a common type for returning errors because 
-it allows us to propagate up an error on the heap and interact with it at a 
+`Box<dyn std::error::Error>` as a common type for returning errors because
+it allows us to propagate up an error on the heap and interact with it at a
 high level without having to know a specific type.
 
-Early in Tour of Rust we learned that `main` can return an error. We can 
-now return a type capable of describing almost any kind of error that might 
+Early in Tour of Rust we learned that `main` can return an error. We can
+now return a type capable of describing almost any kind of error that might
 occur in our program so long as the error's data structure implements Rust's common `Error` trait.
 
 
 
-```
-fn main() -> Result<(), Box<dyn std::error:Error>>
+```rust
+fn main() -> Result<(), Box<dyn std::error:Error>
 ```
 
 
@@ -3361,11 +3361,11 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 
 ## Referencing Counting
-`Rc` is a smart pointer that moves data from the stack onto the heap. It 
-allows us to clone other `Rc` smart pointers that all have the ability to 
+`Rc` is a smart pointer that moves data from the stack onto the heap. It
+allows us to clone other `Rc` smart pointers that all have the ability to
 immutably borrow the data that was put on the heap.
 
-Only when the last smart pointer is dropped does the data on the heap 
+Only when the last smart pointer is dropped does the data on the heap
 become deallocated.
 
 
@@ -3399,9 +3399,9 @@ fn main() {
 
 
 ## Sharing Access
-`RefCell` is a container data structure commonly held by smart pointers 
-that takes in data and lets us borrow mutable and immutable references to 
-what's inside. It prevents borrowing from being abused by enforcing Rust's 
+`RefCell` is a container data structure commonly held by smart pointers
+that takes in data and lets us borrow mutable and immutable references to
+what's inside. It prevents borrowing from being abused by enforcing Rust's
 memory safety rules at runtime when you ask to borrow the data within:
 
 **Only one mutable reference OR multiple immutable references, but not both!**
@@ -3448,18 +3448,18 @@ fn main() {
 
 
 ## Sharing Across Threads
-`Mutex` is a container data structure commonly held by smart pointers that 
-takes in data and lets us borrow mutable and immutable references to the 
-data within. This prevents borrowing from being abused by having the 
-operating system restrict only one CPU thread at time to have access to the 
-data, blocking other threads until that original thread is done with its 
+`Mutex` is a container data structure commonly held by smart pointers that
+takes in data and lets us borrow mutable and immutable references to the
+data within. This prevents borrowing from being abused by having the
+operating system restrict only one CPU thread at time to have access to the
+data, blocking other threads until that original thread is done with its
 locked borrow.
 
-Multithreading is beyond the scope of Tour of Rust, but `Mutex` is a 
-fundamental part of orchestrating multiple CPU threads accessing the same 
+Multithreading is beyond the scope of Tour of Rust, but `Mutex` is a
+fundamental part of orchestrating multiple CPU threads accessing the same
 data.
 
-There is a special smart pointer `Arc` which is identical to `Rc` except 
+There is a special smart pointer `Arc` which is identical to `Rc` except
 uses thread-safe incrementing of reference counts. It's often used to have many references to the same `Mutex`.
 
 
@@ -3493,13 +3493,13 @@ fn main() {
 ## Combining Smart Pointers
 Smart pointers might seem limited, but they can make some very powerful combinations.
 
-`Rc<Vec<Foo>>` - Allow the cloning of multiple smart pointers that can 
+`Rc<Vec<Foo>>` - Allow the cloning of multiple smart pointers that can
 borrow the same vector of immutable data structures on the heap.
 
-`Rc<RefCell<Foo>>` - Allow multiple smart pointers the ability to borrow 
+`Rc<RefCell<Foo>>` - Allow multiple smart pointers the ability to borrow
 mutably/immutably the same struct Foo
 
-`Arc<Mutex<Foo>>` - Allow multiple smart pointers the ability to lock 
+`Arc<Mutex<Foo>>` - Allow multiple smart pointers the ability to lock
 temporary mutable/immutable borrows in a CPU thread exclusive manner.
 
 Memory detail:
@@ -3558,15 +3558,15 @@ fn main() {
 
 
 # Chapter 8 - Conclusion
-Smart pointers are the idioms of Rust programming and let us not have to 
-re-create the very common patterns of memory usage. With them you are ready 
-to tackle the toughest of challenges! Now that we have the foundations of 
-Rust, let's talk a bit about how we make larger projects. In chapter 9 we 
+Smart pointers are the idioms of Rust programming and let us not have to
+re-create the very common patterns of memory usage. With them you are ready
+to tackle the toughest of challenges! Now that we have the foundations of
+Rust, let's talk a bit about how we make larger projects. In chapter 9 we
 break free of single page lines of code.
 
 
 # Chapter 9 - Project Organization and Structure
-So far all of our code examples have been a single file. Let's discuss how 
+So far all of our code examples have been a single file. Let's discuss how
 our code can be better organized and shared by others!
 
 
@@ -3576,8 +3576,8 @@ our code can be better organized and shared by others!
 It helps us organise code in more than one file.
 
 Rust programs may contain a `binary crate` (an executable,
-for instance `./main`) or a `library crate` (a collection of functions, 
-data types, structs, trait and so on). You've already used a library in 
+for instance `./main`) or a `library crate` (a collection of functions,
+data types, structs, trait and so on). You've already used a library in
 writing code, which is `std` (the standard Rust library).
 
 
@@ -3598,11 +3598,11 @@ A program has a root module in a file called `main.rs`.
 
 ## Binary Crate
 For a `binary crate`, `cargo` has the following terminal commands:
-```
+```bash
 $ cargo new my-first-binary-crates	# creates a binary create
 $ cd my-first-binary-crates/
-$ cargo build				# equivalent of `rustc main.rs`
-$ cargo run				# equivalent of `./main`
+$ cargo build				        # equivalent of `rustc main.rs`
+$ cargo run				            # equivalent of `./main`
 ```
 
 If you inspect the file hierarchy system, you'll notice that `cargo`
@@ -3621,11 +3621,11 @@ A library has a root module in a file called `lib.rs`.
 
 ## Library Crate
 `cargo` has the following terminal commands for a `library crate` :
-```
+```bash
 $ cargo new --lib my-first-library	# creates a library crate
 $ cd my-first-library/
-$ cargo build				# links the dependencies between files (modules)
-$ cargo test				# checks the unit tests
+$ cargo build				        # links the dependencies between files (modules)
+$ cargo test				        # checks the unit tests
 ```
 
 Unlike other Rust executable files you've written before,
@@ -3638,7 +3638,7 @@ to functions, variables and even more. That's what a library is meant for.
 
 
 ## Testing My Library
-Rust libraries have a `lib.rs`, where you can test functionality of your 
+Rust libraries have a `lib.rs`, where you can test functionality of your
 library.
 
 When creating one, `cargo` helps you by creating some code:
@@ -3667,7 +3667,7 @@ Use this macro only once, since it exits the function once it is executed.
 
 `lib.rs`:
 
-```
+```rust
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
@@ -3696,7 +3696,7 @@ mod tests {
 
 Test everything you create.
 You can find [here](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html)
-more about [testing](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html). 
+more about [testing](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html).
 
 
 ## Modules
@@ -3706,10 +3706,10 @@ Every crate is made of a hierarchy of *modules*.
 
 Every crate has a root module.
 
-A module can hold global variables, functions, structs, traits or even 
+A module can hold global variables, functions, structs, traits or even
 other modules!
 
-In Rust there is not a 1 to 1 mapping of files to the module tree 
+In Rust there is not a 1 to 1 mapping of files to the module tree
 hierarchy. We must build the module tree explicitly by hand in our code.
 
 
@@ -3720,15 +3720,15 @@ can be found [here](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/sh
 
 
 ## Referencing Other Modules and Crates
-Items in modules can be referenced with their full module path 
+Items in modules can be referenced with their full module path
 `std::f64::consts::PI`.
 
-A simpler way is the **use** keyword. It allows us to specify particular 
-items from modules we want to use throughout our code without a full path. 
-For instance `use std::f64::consts::PI` allows me to just use the 
+A simpler way is the **use** keyword. It allows us to specify particular
+items from modules we want to use throughout our code without a full path.
+For instance `use std::f64::consts::PI` allows me to just use the
 identifier `PI` in my main function.
 
-**std** is the crate of the **standard library** of Rust which is full of 
+**std** is the crate of the **standard library** of Rust which is full of
 useful data structures and functions for interacting with your operating system.
 
 A searchable directory of crates created by the community can be found at [https://crates.io](https://crates.io/).
@@ -3749,7 +3749,7 @@ fn main() {
 
 ## Referencing Multiple Items
 Multiple items can be referenced in a single module path as so:
-```
+```rust
 use std::f64::consts::{PI,TAU}
 ```
 Ferris doesn't eat TAU, he only eats PI.
@@ -3757,7 +3757,7 @@ Ferris doesn't eat TAU, he only eats PI.
 
 
 ## Creating Modules
-When we think of code, we usually imagine a hierarchy of files organized in 
+When we think of code, we usually imagine a hierarchy of files organized in
 directories. Rust lets you create modules closely related to your file structure.
 
 There are two ways in Rust to declare a module.
@@ -3769,10 +3769,10 @@ For example, a module `foo` can be represented as:
 ## Inline Module
 A sub-module can be directly inlined within a module's code.
 
-One very common use for inline modules is creating unit tests. We create an 
+One very common use for inline modules is creating unit tests. We create an
 inline module that only exists when Rust is used for testing!
 
-```
+```rust
 // This macro removes this inline module when Rust 
 // is not in test mode.
 #[cfg(test)]
@@ -3787,7 +3787,7 @@ mod tests {
 
 
 ## Internal Module Referencing
-Rust has several keywords you can use in your use path to quickly get ahold 
+Rust has several keywords you can use in your use path to quickly get ahold
 of the module you want:
 - `crate` - the root module of your crate
 - `super` - the parent module of your current module
@@ -3795,10 +3795,10 @@ of the module you want:
 
 
 ## Exporting
-By default members of a *module* are not accessible from outside of the 
+By default members of a *module* are not accessible from outside of the
 module (not even to its child modules!). We make members of a module accessible using the `pub` keyword.
 
-By default members of a crate are not accessible outside of the crate. We 
+By default members of a crate are not accessible outside of the crate. We
 make members of a crate accessible by marking them as `pub` in the
 *root module* of your crate (`lib.rs` or `main.rs`).
 
@@ -3824,42 +3824,283 @@ pub struct SeaCreature {
 
 
 ## Prelude
-You might be wondering how we have access to `Vec` or `Box` everywhere 
-without a `use` to import them. It is because of the module `prelude` in 
+You might be wondering how we have access to `Vec` or `Box` everywhere
+without a `use` to import them. It is because of the module `prelude` in
 the standard library.
 
-Know that in the Rust standard library anything that is exported in 
+Know that in the Rust standard library anything that is exported in
 `std::prelude::*` is automatically available to every part of Rust.
 That is the case for `Vec` and `Box`
 but others as well (Option, Copy, etc.).
 
 
 ## Your Own Prelude
-Because of standard library's prelude, it's common for your library to have 
-its own prelude module as a starting point for where users should import 
+Because of standard library's prelude, it's common for your library to have
+its own prelude module as a starting point for where users should import
 all of the most common data structures for using your library
-(e.g `use my_library::prelude::*`). It doesn't automatically get used in 
-programs/libraries that use your crate, but it's a good convention to 
+(e.g `use my_library::prelude::*`). It doesn't automatically get used in
+programs/libraries that use your crate, but it's a good convention to
 follow so people know where to start.
 
 Ferris says, "Be a good rustacean and help a fellow crab out with a good prelude!"
 
 
 # Chapter 9 - Conclusion
-You now have a few tricks up your sleeve when it comes to creating Rust 
-applications and libraries ready for the world. Don't worry about 
-remembering it all. As your library grows and is used by other people, 
+You now have a few tricks up your sleeve when it comes to creating Rust
+applications and libraries ready for the world. Don't worry about
+remembering it all. As your library grows and is used by other people,
 you'll find what works best at each milestone.
 
 Resources:
 - [Guidelines For Writing Rust APIs](https://rust-lang.github.io/api-guidelines/)
 
 
-# Chapter 10 - The End
-It's been a joy to have you on the Tour of Rust. Ferris and the Tour of 
-Rust team sincerely hope you enjoy the journey ahead! If you have felt 
+# Chapter 10 - I/O
+In computing, `I/O` is an abbrevition for `Input/Output` opperation.
+The `input` is that the computer and tha algorithm recieve and
+the `output` represents the result generated based on the `input`.
+
+Thing about `I/O` as a stream of information
+
+A compute system without output is nearly useless.
+It will always run the same code on the same data and, thus, produce the same result.
+
+
+# Do it locally
+In this chapter, the Playground will be just a code support for you :(.
+
+Since most of the `I/O` programs are designed to compile on a local machine
+(yours :) ), consider setting up a Rust environment on your personal computer and
+familiarise yourself with the terminal.
+
+Also, consider using a `IDE`, such as `VS Code` or `RustRover`
+and familiarise yourself with the [terminal](https://www.youtube.com/watch?v=lZ7Kix9bjPI).
+
+
+## Standard Input (stdin)
+`Standard Input` refers to the data provided by the user in order for the algorithm
+to make something with it.
+
+Thus, the `input` represents what a program is being given.
+Mostly, in terms of `input`, you'll work with `String` and `files`.
+
+The Rust library `std::io` has the necessary components to interact with `I/O`
+channels, such as the keyboard or any other input source.
+
+
+```rust
+use std::io;
+
+fn main() {
+    let mut input = String::new();
+
+    // the read will be stopped by `\n` character
+    if let Ok(_) = io::stdin().read_line(&mut input) {
+        println!("Input text : {}", input);
+    }
+}
+
+```
+
+
+
+## Standard Output (stdout)
+Remember the first lesson? Can you notice something relevant to `I/O`?
+
+Of course that `println!` is does an output operation,
+in fact it directs (outputs) text to `stdout` (stdout)
+and it will be displayed on the screen.
+
+If you don't want to print a new line character `\n` for you, use `print!`
+
+
+```rust
+fn main() {
+    println!("I realised this is an I/O operation.");
+}
+
+```
+
+## Standard Error (stdout)
+In order to separate error reporting from common printing, you can use `eprint!` and
+`eprintln!` macros that will display text in the standard error (`stderr`) channel,
+instead of `stdout`. Use this macro with an informative message.
+
+In UNIX-like systems, such as macOS or LINUX, you can separate the two types of
+output by using redirections:
+- `./main > output.txt`
+- `./main >> output.txt`
+- `./main 2> output.txt`
+- `./main 2>> output.txt`
+
+
+> The commands with `2` with copy only the errors generated by the program, and the ones without `2` will discards all error.
+
+> THe command with `>>` will add text at the end of the file, while the operator `>` will override the file.
+
+
+```rust
+fn main() {
+    let x: i32 = 12;
+    let y: i32 = 0;
+
+    if y == 0 {
+        eprintln!("cannot perform division by zero");
+    } else {
+        println!("{} / {} = {}", x, y, x / y);
+    }
+
+    return;
+}
+
+```
+
+
+
+
+## File Descriptors
+Now that we know what are the basic `I/O` operations, we dive even deeper.
+
+You've already seen before: `stdin` (standard input), `stdout` (standard output) and `stderr` (stand error).
+For each of them it is associated a positive integer number, a unique identifier
+for an `I/O` channel (example: file), known as a `file descriptor (fd)`.
+
+Therefore:
+- `stdin`: 0
+- `stdout`: 1
+- `stderr`: 2
+- files
+
+[![file descriptors](https://cs-pub-ro.github.io/operating-systems/assets/images/file-descriptors-d19424f0a417ecd1c032f98a1969ad75.svg)
+
+
+Working with files plays an important role in the `I/O` operations.
+
+You've already learned to open a text file and read its content.
+
+But how about writing data in it, as an `I/O` channel.
+
+
+```rust
+use std::fs::{self, File};      // file system
+use std::io::{self, Write};     // input output
+
+fn main() -> io::Result<()> {
+    let file_name = "output.txt";
+
+    // creates the file if it doesn't already exists
+    let mut file = File::create(file_name)?;
+
+    let text_to_write = "Hello, World!\n\
+                            This is a line of text.\n";
+    file.write_all(text_to_write.as_bytes())?;
+
+    let absolute_path = fs::canonicalize(file_name)?;
+    println!("Text has been written to: {:?}", absolute_path);
+
+    return Ok(());
+}
+
+```
+
+
+
+## System Arguments
+A Rust program is able to receive `input` from the in-line arguments.
+
+In order to do so, open a [terminal](https://www.youtube.com/watch?v=lZ7Kix9bjPI), compile it and pass the arguments to the executable in the command promt.
+
+These arguments might be relevant files, flags and so on.
+The developer must document their purpose.
+
+If you are using LINUX or macOS, bear in mind these commands:
+```bash
+$ touch main.rs
+$ rustc main.rs
+$ ./main.rs 2 3 4 5 
+```
+
+Otherwise, for Windows environment, on a PowerShell and paste them
+```PowerShell
+> echo. > main.rs
+> rustc main.rs
+> .\main.exe 2 3 4 5
+```
+
+
+> Notice that the first argument is the executable itself
+
+
+
+```rust
+use std::env;       // env stands for environment
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    println!("number of arguments = {}", args.len());
+    println!("the inline arguments are : {:?}", args);
+}
+
+```
+
+## Environment Variables
+You've seen that the Rust standard library grants access to the system.
+
+Using the `std::env` module, you can do in Rust some task that might require
+a UNIX terminal, such as:
+- command line arguments
+- printing the current working directory
+- current executable path
+- working with environmental variables
+- working with files and directories
+
+
+
+```rust
+use std::env;   // for interacting with the system's environment
+
+fn main() {
+
+    if let Ok(current_dir) = env::current_dir() {
+        if let Some(pwd) = current_dir.to_str() {
+            println!("The current working directory = {}", pwd);
+        }
+    }
+
+    // $ echo $PWD      # environment variable
+    // if you don't want to see Seme(...), you have to pattern match on Ok()
+    println!("The current working directory = {:?}", env::var("PWD").ok());
+
+    // $ echo $PWD      # environment variable
+    if let Ok(pwd) = env::var("PWD") {
+        println!("The current working directory = {}", pwd);
+    }
+
+    // $ echo $USER     # environment variable
+    if let Ok(user) = env::var("USER") {
+        println!("The current user is: {}", user);
+    }
+
+
+    // $ echo $IDK      # I suppose you didn't set this variable :)
+    if let Err(err) = env::var("IDK") {
+        eprintln!("IDK : {}", err);
+        env::set_var("IDK", "= I don't know");
+        println!("IDK = {:?}", env::var("IDK").ok());
+        env::remove_var("IDK");
+    }
+}
+
+```
+
+
+
+# Chapter 10 - Conclusion
+
+
+# Chapter 11 - The End
+It's been a joy to have you on the Tour of Rust. Ferris and the Tour of
+Rust team sincerely hope you enjoy the journey ahead! If you have felt
 comfortable this far, we strongly recommend diving deeper with these resources:
 - [The Official Rust Programming Book](https://doc.rust-lang.org/stable/book/)
-
-
 
