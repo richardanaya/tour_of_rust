@@ -2,11 +2,10 @@
   content_markdown: >
     WebAssembly este o formă binară de a reprezenta cod executabil izolat. 
     A fost dezvoltat pentru browser
-
     ca alternativă pentru JavaScript, având niște avantaje speciale:
 
 
-    * Deoarece este un low level bytecode, este capabil să facă operații matematice
+    * Deoarece este un cod binar apropiat de hardware, este capabil să facă operații matematice
     rapid și să gestioneze memorie mai concis.
 
     * WebAssembly a fost construit având în vedere compilatoare existente,
@@ -15,8 +14,8 @@
 
     * Are în vedere și izolarea, permițând controlul fin al accesului.
 
-    * WebAssembly a fost proiectat pentru a fi "host agnostic", permițând unor oameni
-    să folosească WebAssembly și [în afara browserelor](https://wasmer.io/)!
+    * WebAssembly a fost proiectat pentru a fi independent de platformă, permițând
+    folosirea sa și [în afara browserelor](https://wasmer.io/)!
 
 
     WebAssembly este adesea numit **WASM**

@@ -15,7 +15,7 @@
       biblioteci în limbajul nativ, care să se ocupe de partea dificilă de a crea
       dinamic legăturile fără să reinventeze roata.
     
-    * Simplifică sconfigurarea și lansarea modulelor WebAssembly la un minim absolut.
+    * Simplifică configurarea și lansarea modulelor WebAssembly la un minim absolut.
     Avem nevoie doar de capacitatea de a înregistra funcții noi
     și de a le apela în loc să specificăm o serie de funcții JavaScript scrise manual.
 
