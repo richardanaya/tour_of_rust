@@ -250,7 +250,7 @@
     ce este capabil să descrie aproape orice fel de eroare pe care o putem întâlni
     într-un program
 
-    atâta timp cat structura de date a erorii implementează trait-ul `Error`.
+    atât timp cât structura de date a erorii implementează trait-ul `Error`.
 
 
     ```rust
