@@ -217,7 +217,7 @@
     care declară terminarea unui text ca o valoare nulă prin caracterul `\0`.
 
 
-    Nu doriți să pasați peste tot o structură de date "învelită" ca octeți?
+    Nu doriți să transmiteți peste tot o structură de date reprezentată sub formă de octeți?
     Luați în considerare utilizarea json în loc.
 
 
