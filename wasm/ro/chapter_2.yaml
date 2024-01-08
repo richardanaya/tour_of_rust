@@ -103,7 +103,7 @@
 
     const utf8dec = new TextDecoder("utf-8");
 
-    // sub array ia indexul de început și de sfârșit
+    // sub array ia indicele de început și de sfârșit
 
     let text = utf8dec.decode(data.subarray(0,str_len));
 
