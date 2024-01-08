@@ -181,11 +181,26 @@
     Be a good rustacean and properly use `match` when you can!
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concise%20but%20assumptive%20and%20gets%20ugly%20fast%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20will%20panic!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: if let
+  content_markdown: >
+    A much easier way to handle error propagation in Rust
+    is to use the `if let` block. It basically handles just
+    the only `match` branch that we are interested to get.
+
+    For instance, if we want to get the **error**,
+    `if let Err(..) = ..` will be used.
+
+    Otherwise, `if let Ok(..) = ..` will be chosen
+    to handle the **success** case.
+
+    `if let` can be used only for `Result` and `Option` data tyes.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+x+%3D+42%3B%0A%0A++++match+x+%25+2+%3D%3D+0+%7B%0A++++++++true+%3D%3E+println%21%28%22%7B%7D+is+an+even+number%22%2C+x%29%2C%0A++++++++false+%3D%3E+println%21%28%22%7B%7D+is+an+odd+number%22%2C+x%29%2C%0A++++%7D%0A%0A++++match+x+%7B%0A++++++++0+%3D%3E+%7B%0A++++++++++++println%21%28%22found+zero%22%29%3B%0A++++++++%7D%0A++++++++%2F%2F+we+can+match+against+multiple+values%0A++++++++1+%7C+2+%3D%3E+%7B%0A++++++++++++println%21%28%22found+1+or+2%21%22%29%3B%0A++++++++%7D%0A++++++++%2F%2F+we+can+match+against+ranges%0A++++++++3..%3D9+%3D%3E+%7B%0A++++++++++++println%21%28%22found+a+number+3+to+9+inclusively%22%29%3B%0A++++++++%7D%0A++++++++%2F%2F+we+can+bind+the+matched+number+to+a+variable%0A++++++++matched_num+%40+10..%3D100+%3D%3E+%7B%0A++++++++++++println%21%28%22found+%7B%7D+number+between+10+to+100%21%22%2C+matched_num%29%3B%0A++++++++%7D%0A++++++++%2F%2F+do+nothing+if+x+equals+101%0A++++++++101+%3D%3E+%28%29%2C%0A++++++++%2F%2F+this+is+the+default+match+that+must+exist+if+not+all+cases+are+handled%0A++++++++_+%3D%3E+%7B%0A++++++++++++println%21%28%22found+something+else%21%22%29%3B%0A++++++++%7D%0A++++%7D%0A%7D%0A
 - title: About panic!
   content_markdown: >
     In Rust, `panic!` is a macro used to stop the execution of the program
     without a recoverable error. When a panic occurs, the program immediately
-    stop, unwinding the stack and cleaning up resources along the way.
+    stops, unwinding the stack and cleaning up resources along the way.
 
     Moreover, the code instructions written after `panic!` will no longer be executed.
 

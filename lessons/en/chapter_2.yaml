@@ -70,30 +70,46 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++for+x+in+0..5+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+x%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%0A++++for+x+in+0..%3D5+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+x%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%0A++++let+nums+%3A+%5Bi32%3B+5%5D+%3D+%5B10%2C+-1%2C+9%2C+-80%2C+1%5D%3B%0A++++%0A++++print%21%28%22%7B%7D+%3A+%22%2C+stringify%21%28nums%29%29%3B%0A++++for+el+in+nums+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%0A++++print%21%28%22%7B%7D+%3A+%22%2C+stringify%21%28nums%29%29%3B%0A++++for+idx+in+0+..+nums.len%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+nums%5Bidx%5D%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%7D%0A
 - title: match
   content_markdown: >
-    Miss your switch statement? Rust has an incredibly useful keyword
-
-    for matching all possible conditions of a value and executing a code path if
-    the
-
-    match is true. Let's see how this works for numbers. We will have more to
-    say
-
-    in future chapters on pattern matching more complex data. I promise you it
-    will
-
-    be worth the wait.
-
-
-    `match` is exhaustive so all cases
-
-    must be handled.
+    Miss your switch statement?
+    
+    Rust has an incredibly useful keyword for
+    matching all possible conditions of a value
+    and executing a code path if the match is true. 
+    
+    Let's see how this works for numbers. We will have more to
+    say in future chapters on pattern matching more complex data. I promise you
+    it will be worth the wait.
+    
+    
+    `match` is exhaustive so all cases must be handled.
+    
+    If the branches do not cover all the possible cases,
+    we'll use the underscore `_`, that will take place for the rest of them,
+    
+    Matching combined with destructuring is by far one of the most common patterns you will see in all of Rust.
 
 
     Matching combined with destructuring is by far one of the
-
     most common patterns you will see in all of Rust.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20multiple%20values%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%201%20or%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20match%20against%20ranges%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20a%20number%203%20to%209%20inclusively%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20bind%20the%20matched%20number%20to%20a%20variable%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20%7B%7D%20number%20between%2010%20to%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20this%20is%20the%20default%20match%20that%20must%20exist%20if%20not%20all%20cases%20are%20handled%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22found%20something%20else!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+x+%3D+42%3B%0A%0A++++match+x+%25+2+%3D%3D+0+%7B%0A++++++++true+%3D%3E+println%21%28%22%7B%7D+is+an+even+number%22%2C+x%29%2C%0A++++++++false+%3D%3E+println%21%28%22%7B%7D+is+an+odd+number%22%2C+x%29%2C%0A++++%7D%0A%0A++++match+x+%7B%0A++++++++0+%3D%3E+%7B%0A++++++++++++println%21%28%22found+zero%22%29%3B%0A++++++++%7D%0A++++++++%2F%2F+we+can+match+against+multiple+values%0A++++++++1+%7C+2+%3D%3E+%7B%0A++++++++++++println%21%28%22found+1+or+2%21%22%29%3B%0A++++++++%7D%0A++++++++%2F%2F+we+can+match+against+ranges%0A++++++++3..%3D9+%3D%3E+%7B%0A++++++++++++println%21%28%22found+a+number+3+to+9+inclusively%22%29%3B%0A++++++++%7D%0A++++++++%2F%2F+we+can+bind+the+matched+number+to+a+variable%0A++++++++matched_num+%40+10..%3D100+%3D%3E+%7B%0A++++++++++++println%21%28%22found+%7B%7D+number+between+10+to+100%21%22%2C+matched_num%29%3B%0A++++++++%7D%0A++++++++%2F%2F+do+nothing+if+x+equals+101%0A++++++++101+%3D%3E+%28%29%2C%0A++++++++%2F%2F+this+is+the+default+match+that+must+exist+if+not+all+cases+are+handled%0A++++++++_+%3D%3E+%7B%0A++++++++++++println%21%28%22found+something+else%21%22%29%3B%0A++++++++%7D%0A++++%7D%0A%7D%0A
+- title: matching multiple parameters
+  content_markdown: >
+    The `match` statements expects a tuple.
+
+    Notice that, unlike the `if` statement,
+    the code will compile just fine if you try
+    to place the evaluation elements in parenthesis `()`.
+
+    But why?...🤔
+
+    Because the element is seen as a `tuple`
+    (a collection of elements that are able to have different types).
+
+    `tuples` are really powerful to use if you want
+    to match multiple elements together.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+x+%3D+42%3B%0A++++let+y+%3D+-101%3B%0A+%0A++++%2F%2F+the+program+compiles%0A++++%2F%2F+but+the+parantheses+are+unnecessary+for+just+an+element%0A++++match+%28x+%25+2+%3D%3D+0%29+%7B%0A++++++++%28true%29+%3D%3E+println%21%28%22%7B%7D+is+an+even+number%22%2C+x%29%2C%0A++++++++false+%3D%3E+println%21%28%22%7B%7D+is+an+odd+number%22%2C+x%29%2C%0A++++%7D%0A%0A+%0A++++match+%28x+%3E%3D+0%2C+y+%3E%3D+0%29+%7B%0A++++++++%28true%2C+true%29+%3D%3E+println%21%28%22Both+numbers+%7B%7D+%7B%7D+are+positive%22%2C+x%2C+y%29%2C%0A++++++++%28true%2C+false%29+%3D%3E+println%21%28%22Only+%7B%7D+is+a+positive+number%22%2C+x%29%2C%0A++++++++%28false%2C+true%29+%3D%3E+println%21%28%22Only+%7B%7D+is+a+negative+number%22%2C+y%29%2C%0A++++++++%28false%2C+false%29+%3D%3E+println%21%28%22Both+numbers+%7B%7D+%7B%7D+are+negative%22%2C+x+%2Cy%29%2C%0A++++%7D%0A%7D%0A
 - title: Returning Values From loop
   content_markdown: |
     `loop` can break to return a value.

@@ -269,7 +269,7 @@
   content_markdown: >
     The `extern crate` directive was used in older versions of Rust (before the 2018 edition).
     
-    Now, is no longer required to use `extern crate` in code.
+    Now, it is no longer required to use `extern crate` in code.
     
     Instead, we specify the dependence on external crates in the `Cargo.toml` file
   code: >-
