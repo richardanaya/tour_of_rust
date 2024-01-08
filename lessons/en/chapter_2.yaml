@@ -67,7 +67,7 @@
 
     and including an end number.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++for+x+in+0..5+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+x%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%0A++++for+x+in+0..%3D5+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+x%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%0A++++let+nums+%3A+%5Bi32%3B+5%5D+%3D+%5B10%2C+-1%2C+9%2C+-80%2C+1%5D%3B%0A++++%0A++++print%21%28%22%7B%7D+%3A+%22%2C+stringify%21%28nums%29%29%3B%0A++++for+el+in+nums+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%0A++++print%21%28%22%7B%7D+%3A+%22%2C+stringify%21%28nums%29%29%3B%0A++++for+idx+in+0+..+nums.len%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+nums%5Bidx%5D%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: match
   content_markdown: >
     Miss your switch statement? Rust has an incredibly useful keyword

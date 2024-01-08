@@ -2,27 +2,6 @@
   content_markdown: >
     So far all of our code examples have been a single file. Let's discuss how
     our code can be better organized and shared by others!
-- title: Cargo
-  content_markdown: >
-    `Cargo` is the official Rust package management tool for `crates`.
-    It helps us organise code in more than one file.
-
-    Rust programs may contain a `binary crate` (an executable,
-    for instance `./main`) or a `library crate` (a collection of functions, 
-    data types, structs, trait and so on). You've already used a library in 
-    writing code, which is `std` (the standard Rust library).
-
-
-    Therefore, there are two type of crates in Rust:
-    - `binary crates`  : contain a `main.rs` file
-    - `library crates` : contain a `lib.rs` file
-
-    A `crate` cannot have both `main.rs` and `lib.rs`.
-
-    ![crates](https://raw.githubusercontent.com/kannans89/RustRepo/master/Images/movie_lib.jpg)
-
-    Resources:
-    - [https://youtu.be/969j0qnJGi8](https://youtu.be/969j0qnJGi8)
 - title: Modules
   content_markdown: |
     Every Rust program or library is a *crate*.
@@ -34,115 +13,12 @@
     A module can hold global variables, functions, structs, traits or even other modules!
 
     In Rust there is not a 1 to 1 mapping of files to the module tree hierarchy. We must build the module tree explicitly by hand in our code.
-
-    
-    More information about how to split you code in different files / moduels
-    can be found [here](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/crates-and-modules.html).
 - title: Writing a Program
   content_markdown: |
     A program has a root module in a file called `main.rs`.
-- title: Binary Crate
-  content_markdown: |
-    For a `binary crate`, `cargo` has the following terminal commands:
-    
-    ```
-    $ cargo new my-first-binary-crates	# creates a binary create
-    $ cd my-first-binary-crates/
-    $ cargo build				# equivalent of `rustc main.rs`
-    $ cargo run				# equivalent of `./main`
-    ```
-
-    If you inspect the file hierarchy system, you'll notice that `cargo`
-    automatically creates some files and folders, and also writes some code.
-    Cool!
-
-    A `binary crate` will depend on the `main.rs`.
-    Btw, do not try to create a `lib.rs` here.
-    Our friend `cargo` will be confused.
-
 - title: Writing a Library
   content_markdown: |
     A library has a root module in a file called `lib.rs`.
-- title: Library Crate
-  content_markdown: |
-    `cargo` has the following terminal commands for a `library crate` :
-
-    ```
-    $ cargo new --lib my-first-library	# creates a library crate
-    $ cd my-first-library/
-    $ cargo build				# links the dependencies between files (modules)
-    $ cargo test				# checks the unit tests
-    ```
-
-    Unlike other Rust executable files you've written before,
-    a `library` contains functions and data types that are meant to be `used`
-    in other programs, in order to simplify some abstractions.
-
-    Think about the C `#include <stdio.h>`. It is a library: it offers access
-    to functions, variables and even more. That's what a library is meant for.
-- title: Testing My Library
-  content_markdown: >
-    Rust libraries have a `lib.rs`, where you can test functionality of your 
-    library.
-
-    When creating one, `cargo` helps you by creating some code:
-    ```rust
-    pub fn add(left: usize, right: usize) -> usize {
-        left + right
-    }
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn it_works() {
-            let result = add(2, 2);
-            assert_eq!(result, 4);
-        }
-    }
-
-    ```
-
-
-    If you need more tests, create functions annotated with `#[test]`.
-    Each function should use the macro `assert_eq!` or `assert!`.
-    Use this macro only once, since it exits the function once it is executed.
-
-    `lib.rs`:
-
-    ```
-    pub fn add(left: usize, right: usize) -> usize {
-        left + right
-    }
-
-    #[cfg(test)]
-    mod tests {
-        use super::*;
-
-        #[test]
-        fn it_works() {
-            let result = add(2, 2);
-            assert_eq!(result, 4);
-        }
-
-        #[test]
-        fn add_zero() {
-            // Test if adding 0 to any number returns the same number
-            let result = add(5, 0);
-            assert_eq!(result, 5);
-            assert_eq!(result, 10);		// this line will not be executed :)
-        }
-    }
-
-    ```
-    
-    
-    Test everything you create.
-    
-    
-    You can find [here](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html)
-    more about [testing](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html).
 - title: Referencing Other Modules and Crates
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
@@ -235,7 +111,7 @@
   content_markdown: >
     Rust has several keywords you can use in your `use` path to quickly get
     ahold of the module you want:
-      
+    
     * `crate` - the root module of your crate
 
     * `super` - the parent module of your current module
@@ -254,26 +130,6 @@
 
     a crate accessible by marking them as `pub` in the *root module* of your
     crate (`lib.rs` or `main.rs`).
-- title: use
-  content_markdown: >
-    The `use` keyword has the purpose of bringing symbols into scope.
-    
-    It allows you to use functions, structs or traits from a `module`
-    without using the full path each time.
-    
-    The Rust `use` is equivalent to Python's `import` if we are to make
-    a comparison between these two programming languages.
-  code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=%2F%2F+Bringing+the+%60println%60+function+into+scope%0Ause+std%3A%3Aio%3A%3Aprintln%3B%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+World%21%22%29%3B%0A%7D%0A
-- title: extern crate
-  content_markdown: >
-    The `extern crate` directive was used in older versions of Rust (before the 2018 edition).
-    
-    Now, is no longer required to use `extern crate` in code.
-    
-    Instead, we specify the dependence on external crates in the `Cargo.toml` file
-  code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=extern+crate+rand%3B%0A%0Afn+main%28%29+%7B%0A++++let+random_number+%3D+rand%3A%3Arandom%3A%3A%3Cu32%3E%28%29%3B%0A++++println%21%28%22Random+number%3A+%7B%7D%22%2C+random_number%29%3B%0A%7D%0A
 - title: Structure Visibility
   content_markdown: >
     Just like functions, structures can declare what they want exposed outside
