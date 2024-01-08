@@ -1,7 +1,7 @@
 - title: Chapter 10 - I/O
   content_markdown: >
     In computing, `I/O` is an abbreviation for `Input/Output` operation.
-    
+  
     The `input` is that the computer and tha algorithm receive and
     the `output` represents the result generated based on the `input`.
   
@@ -24,8 +24,7 @@
 
 - title: Standard Input (stdin)
   content_markdown: >
-    `Standard Input` refers to the data provided by the user in order for the algorithm
-    to make something with it.
+    `Standard Input` refers to the data provided by the user for the algorithm to process.
 
     
     Thus, the `input` represents what a program is being given.
@@ -137,10 +136,10 @@
 
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Aenv%3B+++%2F%2F+for+interacting+with+the+system%27s+environment%0A%0Afn+main%28%29+%7B%0A%0A++++if+let+Ok%28current_dir%29+%3D+env%3A%3Acurrent_dir%28%29+%7B%0A++++++++if+let+Some%28pwd%29+%3D+current_dir.to_str%28%29+%7B%0A++++++++++++println%21%28%22The+current+working+directory+%3D+%7B%7D%22%2C+pwd%29%3B%0A++++++++%7D%0A++++%7D%0A%0A++++%2F%2F+%24+echo+%24PWD++++++%23+environment+variable%0A++++%2F%2F+if+you+don%27t+want+to+see+Seme%28...%29%2C+you+have+to+pattern+match+on+Ok%28%29%0A++++println%21%28%22The+current+working+directory+%3D+%7B%3A%3F%7D%22%2C+env%3A%3Avar%28%22PWD%22%29.ok%28%29%29%3B%0A%0A++++%2F%2F+%24+echo+%24PWD++++++%23+environment+variable%0A++++if+let+Ok%28pwd%29+%3D+env%3A%3Avar%28%22PWD%22%29+%7B%0A++++++++println%21%28%22The+current+working+directory+%3D+%7B%7D%22%2C+pwd%29%3B%0A++++%7D%0A%0A++++%2F%2F+%24+echo+%24USER+++++%23+environment+variable%0A++++if+let+Ok%28user%29+%3D+env%3A%3Avar%28%22USER%22%29+%7B%0A++++++++println%21%28%22The+current+user+is%3A+%7B%7D%22%2C+user%29%3B%0A++++%7D%0A%0A%0A++++%2F%2F+%24+echo+%24IDK++++++%23+I+suppose+you+didn%27t+set+this+variable+%3A%29%0A++++if+let+Err%28err%29+%3D+env%3A%3Avar%28%22IDK%22%29+%7B%0A++++++++eprintln%21%28%22IDK+%3A+%7B%7D%22%2C+err%29%3B%0A++++++++env%3A%3Aset_var%28%22IDK%22%2C+%22%3D+I+don%27t+know%22%29%3B%0A++++++++println%21%28%22IDK+%3D+%7B%3A%3F%7D%22%2C+env%3A%3Avar%28%22IDK%22%29.ok%28%29%29%3B%0A++++++++env%3A%3Aremove_var%28%22IDK%22%29%3B%0A++++%7D%0A%7D%0A
-- title: Chapter 11 - Conclusion
+- title: Chapter 10 - Conclusion
   content_markdown: >
     Now that you know the basic of Input/Output operations, you used just two
-    Rust libraries along the way, and they are standard, btw: `std::env` and `std::fs`.
+    Rust libraries along the way, and they are standard, by the way: `std::env` and `std::fs`.
     
     Now, you can build your own file managing system, Web App or even API.
     
