@@ -49,8 +49,8 @@
       - refers to an **instance of struct**
       - reference to itself
       - is the first parameter of the method
-      - method conataining the `self` parameter are called using the name of the instance, the operator `.` and the name of the method
-      
+      - methods containing the `self` parameter are called using the name of the instance, the operator `.` and the name of the method
+    
       
       `Self`:
       - refers to **return type** of the method
