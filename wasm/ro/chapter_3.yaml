@@ -140,7 +140,7 @@
     Când vrem să returnăm o referință la un obiect, întâlnim o problemă la funcțiile
     dinamice. WebAssembly poate să trimită înainte și înapoi doar numere!
 
-    Pentru e trece peste acest obstacol, trebuie să stabilim o convenție de a folosi
+    Pentru a trece peste acest obstacol, trebuie să stabilim o convenție de a folosi
     un identificator numeric pentru a reprezenta
 
     o referință către obiectul nostru în JavaScript.
