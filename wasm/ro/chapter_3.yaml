@@ -39,7 +39,7 @@
     Pentru a înregistra o funcție avem nevoie de două lucruri:
 
 
-    * trebuie să pasăm corpul funcției pe care dorim să o creăm în JavaScript
+    * trebuie să transmitem corpul funcției pe care dorim să o creăm în JavaScript
     drept șir de caractere
 
     * trebuie să primim înapoi un identificator pentru a putea apela acea funcție
