@@ -167,7 +167,7 @@
 - title: Alocatoare
   code: "https://webassembly.studio/?embed&f=mz2gu9y29tn"
   content_markdown: >
-    După cum putem vedea, pentrz a comunica corect obiecte, avem nevoie de un fel de
+    După cum putem vedea, pentru a comunica corect obiecte, avem nevoie de un fel de
     mecanism de stocare pentru obiecte:
 
 
