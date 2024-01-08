@@ -182,7 +182,7 @@
 
     
     Implementarea unei astfel de funcționalități se numește *alocator*. Acesta este
-    dincolo de sfera acestui tutorial. Ne-am putea imagina o implementae foarte simplă a
+    dincolo de sfera acestui tutorial. Ne-am putea imagina o implementare foarte simplă a
 
     acestuia și anume un vector în creștere continuă astfel încât
 
