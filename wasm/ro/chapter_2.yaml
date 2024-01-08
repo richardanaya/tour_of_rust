@@ -226,7 +226,7 @@
     dumneavoastră de utilizare!
 - title: Concluzia capitolului 2
   content_markdown: >
-    Trecerea graniței între gazdă și WebAssembly este o anevoioasă,
+    Trecerea graniței între gazdă și WebAssembly este anevoioasă,
     însă poate aduce performanțe mari.
 
     Este important să ne amintim că WebAssembly este un cod executabil low-level,
