@@ -27,7 +27,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
   content_markdown: >
-    Referințele pot fi transformate într-un tip de dată mai simplu, 
+    Referințele pot fi transformate într-un tip de date mai simplu, 
     
     numit *pointer simplu*. La fel ca un număr, acesta poate fi copiat si mutat
     
@@ -47,7 +47,7 @@
     Pointerii simpli pot fi convertiți în și din numere (ex `usize`).
 
 
-    Pointerii simpli pot accesa date din cod *nesigur* (mai multe pe acest subiect mai târziu).
+    Pointerii simpli pot accesa date din cod *nesigur* (mai multe despre acest subiect mai târziu).
 
 
     Detalii despre memorie:
@@ -60,7 +60,7 @@
       pentru a face aritmetică pe pointeri.
 - title: Dereferențierea
   content_markdown: |
-    Procesul prin care se accesează/utiliza datele care sunt referențiate 
+    Procesul prin care se accesează/utilizează datele care sunt referențiate 
     de către o *referință* (adică `&i32`) se numește *dereferențiere*. 
 
     Referințele sunt folosite pentru a accesa/utiliza datele în doua feluri:
@@ -92,7 +92,7 @@
 
     - Deoarece i32 este un tip primitiv ce implementează trait-ul `Copy`,
 
-    byții variabilei `a` sunt copiați de pe stiva în byții variabilei 
+    byții variabilei `a` sunt copiați de pe stiva în octeții variabilei 
     `b`.
 - title: Operatorul `.`
   code: >-
@@ -131,14 +131,14 @@
     Pe lângă abilitatea de a crea referințe la tipuri de date existente
     folosind operatorul `&`, limbajul Rust ne oferă posibilitatea
     
-    de a crea structuri *asemănătoare cu referinșele*  numite **pointeri inteligenți**. 
+    de a crea structuri *asemănătoare cu referințele*  numite **pointeri inteligenți**. 
 
 
-    Ne putem imagina la referințe de nivel înalt ca la un tip ce ne oferă
+    Ne putem gândi la referințe de nivel înalt ca la un tip ce ne oferă
     acces la alt tip.  Pointerii inteligenți se comportă diferit față de 
 
     referințele normale, operând după o logică internă, 
-    scrisă de programator. Tu — proggramatorul —
+    scrisă de programator. Tu — programatorul —
 
     reprezinți partea *inteligentă*.
 
@@ -166,7 +166,7 @@
 
 
     O trăsătură de bază a codului nesigur este *dereferențierea unui pointer simplu*. 
-    Asta înseammă că poate lua un *pointer simplu* 
+    Asta înseamă că poate lua un *pointer simplu* 
 
     și să îl ducă la o locație din memorie, declarând "aici există o structură de date!" și
     transformând-o într-o reprezentare de date pe care o poți folosi (adică transformă `*const u8` în
@@ -191,7 +191,7 @@
     `Vec<T>` este un pointer inteligent ce deține o regiune din memorie. Compilatorul
     de Rust nu știe ce se află
     
-    în acei byți. Pointerul inteligent interpretează ce înseamnă să ia un element
+    în acei octeți. Pointerul inteligent interpretează ce înseamnă să ia un element
     din regiunea de memorie pe care o gestionează,
 
     ține socoteala unde încep și unde se termină structurile de date ale acelor byți,
@@ -201,7 +201,7 @@
     (ex `my_vec[3]`).
 
 
-    Asemănătpr, `String` ține socoteala regiunilor de memorie are byților, și 
+    Asemănător, `String` ține socoteala regiunilor de memorie are byților, și 
     restricționează conținutul scris în acestea să fie mereu în formatul 
 
     `utf-8` și ajută la dereferențierea acelei regiuni de memorie în tipul
@@ -280,7 +280,7 @@
     `RefCell` este o structură de date de tip container, întâlnită de obicei la pointerii
     inteligenți, ce ia date și ne permite să împrumutăm referințe mutabile și
     
-    imutabile a ce se alfă în acesta. Previne abuzul împrumutului
+    imutabile a ce se află în acesta. Previne abuzul împrumutului
 
     prin consolidarea regulilor de siguranță ale limbajului Rust atunci când la 
     rulare ceri să împrumuți:
@@ -349,7 +349,7 @@
     unor pattern-uri des întâlnite în lucrul cu memoria. Cu acestea poți face față celor
     mai grele
     
-    provocări! Acum că am pus fundația limbajului Rust, haide să discutăm puțin despre
+    provocări! Acum că am pus bazele limbajului Rust, haide să discutăm puțin despre
     cum să facem
     
     proiecte mai mari. În capitolul 9 vom scăpa de codatul într-un 
