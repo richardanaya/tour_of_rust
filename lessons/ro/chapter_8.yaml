@@ -39,7 +39,7 @@
     Există două feluri de pointeri simpli:
 
 
-    * `*const T` - Un pointer simplu către un tip de dată T care nu va fi modificată.
+    * `*const T` - Un pointer simplu către un tip de date T care nu va fi modificat.
 
     * `*mut T` - Un pointer simplu către un tip de date T ce poate fi modificat.
 
