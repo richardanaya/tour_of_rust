@@ -233,8 +233,8 @@
     care se preocupă de structuri de memorie
     
     care sunt mult mai fin definite decât în Javascript. Verificați
-    suportul bibliotecilor limbajului dumneavoastră de programare pentru
-    a găsi un mod mai ușor de a rezolva sarcina!
+    dacă limbajul dumneavoastră de programare oferă funcționalități care să vă
+    ajute la rezolvarea problemei!
 
     Pentru Rust, [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)
     este o opțiune populară.
