@@ -1,10 +1,321 @@
-- title: Chapter 10 - The End
+- title: Chapter 9 - Project Organization and Structure
   content_markdown: >
-    It's been a joy to have you on the Tour of Rust. Ferris and the Tour of Rust
-    team sincerely hope you enjoy the journey ahead! If you 
+    So far all of our code examples have been a single file. Let's discuss how
+    our code can be better organized and shared by others!
+- title: Cargo
+  content_markdown: >
+    `Cargo` is the official Rust package management tool for `crates`.
+    It helps us organise code in more than one file.
 
-    have felt comfortable this far, we strongly recommend diving deeper with
-    these resources:
+    Rust programs may contain a `binary crate` (an executable,
+    for instance `./main`) or a `library crate` (a collection of functions, 
+    data types, structs, trait and so on). You've already used a library in 
+    writing code, which is `std` (the standard Rust library).
 
-    * [The Official Rust Programming
-    Book](https://doc.rust-lang.org/stable/book/)
+
+    Therefore, there are two type of crates in Rust:
+    - `binary crates`  : contain a `main.rs` file
+    - `library crates` : contain a `lib.rs` file
+
+    A `crate` cannot have both `main.rs` and `lib.rs`.
+
+    ![crates](https://raw.githubusercontent.com/kannans89/RustRepo/master/Images/movie_lib.jpg)
+
+    Resources:
+    - [https://youtu.be/969j0qnJGi8](https://youtu.be/969j0qnJGi8)
+- title: Modules
+  content_markdown: |
+    Every Rust program or library is a *crate*.
+
+    Every crate is made of a hierarchy of *modules*.
+
+    Every crate has a root module.
+
+    A module can hold global variables, functions, structs, traits or even other modules!
+
+    In Rust there is not a 1 to 1 mapping of files to the module tree hierarchy. We must build the module tree explicitly by hand in our code.
+    
+    
+    More information about how to split you code in different files / moduels
+    can be found [here](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/crates-and-modules.html).
+- title: Writing a Program
+  content_markdown: |
+    A program has a root module in a file called `main.rs`.
+- title: Binary Crate
+  content_markdown: |
+    For a `binary crate`, `cargo` has the following terminal commands:
+    
+    ```
+    $ cargo new my-first-binary-crates	# creates a binary create
+    $ cd my-first-binary-crates/
+    $ cargo build				# equivalent of `rustc main.rs`
+    $ cargo run				# equivalent of `./main`
+    ```
+
+    If you inspect the file hierarchy system, you'll notice that `cargo`
+    automatically creates some files and folders, and also writes some code.
+    Cool!
+
+    A `binary crate` will depend on the `main.rs`.
+    Btw, do not try to create a `lib.rs` here.
+    Our friend `cargo` will be confused.
+
+- title: Writing a Library
+  content_markdown: |
+    A library has a root module in a file called `lib.rs`.
+- title: Library Crate
+  content_markdown: |
+    `cargo` has the following terminal commands for a `library crate` :
+
+    ```
+    $ cargo new --lib my-first-library	# creates a library crate
+    $ cd my-first-library/
+    $ cargo build				# links the dependencies between files (modules)
+    $ cargo test				# checks the unit tests
+    ```
+
+    Unlike other Rust executable files you've written before,
+    a `library` contains functions and data types that are meant to be `used`
+    in other programs, in order to simplify some abstractions.
+
+    Think about the C `#include <stdio.h>`. It is a library: it offers access
+    to functions, variables and even more. That's what a library is meant for.
+- title: Testing My Library
+  content_markdown: >
+    Rust libraries have a `lib.rs`, where you can test functionality of your 
+    library.
+
+    When creating one, `cargo` helps you by creating some code:
+    ```rust
+    pub fn add(left: usize, right: usize) -> usize {
+        left + right
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn it_works() {
+            let result = add(2, 2);
+            assert_eq!(result, 4);
+        }
+    }
+
+    ```
+
+
+    If you need more tests, create functions annotated with `#[test]`.
+    Each function should use the macro `assert_eq!` or `assert!`.
+    Use this macro only once, since it exits the function once it is executed.
+
+    `lib.rs`:
+
+    ```
+    pub fn add(left: usize, right: usize) -> usize {
+        left + right
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn it_works() {
+            let result = add(2, 2);
+            assert_eq!(result, 4);
+        }
+
+        #[test]
+        fn add_zero() {
+            // Test if adding 0 to any number returns the same number
+            let result = add(5, 0);
+            assert_eq!(result, 5);
+            assert_eq!(result, 10);		// this line will not be executed :)
+        }
+    }
+
+    ```
+    
+    
+    Test everything you create.
+    
+    
+    You can find [here](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html)
+    more about [testing](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html).
+- title: Referencing Other Modules and Crates
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Welcome%20to%20the%20playground!%22)%3B%0A%20%20%20%20println!(%22I%20would%20love%20a%20slice%20of%20%7B%7D!%22%2C%20PI)%3B%0A%7D%0A
+  content_markdown: >
+    Items in modules can be referenced with their full module path
+    `std::f64::consts::PI`.
+
+
+    A simpler way is the **use** keyword. It allows us to specify particular
+    items from modules we want
+
+    to use throughout our code without a full path. For instance `use
+    std::f64::consts::PI`
+
+    allows me to just use the identifier `PI` in my main function.
+
+
+    **std** is the crate of the **standard library** of Rust which is full of
+    useful data
+
+    structures and functions for interacting with your operating system.
+
+
+    A searchable directory of crates created by the community can be found at
+    [https://crates.io](https://crates.io/).
+- title: Referencing Multiple Items
+  content_markdown: |
+    Multiple items can be referenced in a single module path as so:
+
+    ```rust
+    use std::f64::consts::{PI,TAU}
+    ```
+
+    Ferris doesn't eat TAU, he only eats PI.
+- title: Creating Modules
+  content_markdown: |
+    When we think of code, we usually imagine a hierarchy of files organized
+    in directories. Rust lets you create modules closely related to your file
+    structure.
+
+    There are two ways in Rust to declare a module. For example, a module
+    `foo` can be represented as:
+      * a file named `foo.rs`
+      * a directory named `foo` with a file `mod.rs` inside
+- title: Module Hierarchy
+  content_markdown: >
+    A module can depend on another one. In order to establish a relationship
+
+    between a module and its sub-module, you must write in the parent module:
+
+
+    ```rust
+
+    mod foo;
+
+    ```
+
+
+    The declaration above  will look for a file named `foo.rs` or `foo/mod.rs`
+    and
+
+    will insert its contents inside a module named `foo` under this scope.
+- title: Inline Module
+  content_markdown: >
+    A sub-module can be directly inlined within a module's code.
+
+
+    One very common use for inline modules is creating unit tests. We create an
+    inline module that only exists when Rust is used for testing!
+
+
+    ```
+
+    // This macro removes this inline module when Rust 
+
+    // is not in test mode.
+
+    #[cfg(test)]
+
+    mod tests {
+        // Notice that we don't immediately get access to the 
+        // parent module. We must be explicit.
+        use super::*;
+
+        ... tests go here ...
+    }
+
+    ```
+- title: Internal Module Referencing
+  content_markdown: >
+    Rust has several keywords you can use in your `use` path to quickly get
+    ahold of the module you want:
+    
+    * `crate` - the root module of your crate
+
+    * `super` - the parent module of your current module
+
+    * `self` - the current module
+- title: Exporting
+  content_markdown: >
+    By default members of a *module* are not accessible from outside of the
+    module (not even to its child modules!). We make members 
+
+    of a module accessible using the `pub` keyword.
+
+
+    By default members of a *crate* are not accessible outside of the crate. We
+    make members of
+
+    a crate accessible by marking them as `pub` in the *root module* of your
+    crate (`lib.rs` or `main.rs`).
+- title: use
+  content_markdown: >
+    The `use` keyword has the purpose of bringing symbols into scope.
+    
+    It allows you to use functions, structs or traits from a `module`
+    without using the full path each time.
+    
+    The Rust `use` is equivalent to Python's `import` if we are to make
+    a comparison between these two programming languages.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=%2F%2F+Bringing+the+%60println%60+function+into+scope%0Ause+std%3A%3Aio%3A%3Aprintln%3B%0A%0Afn+main%28%29+%7B%0A++++println%21%28%22Hello%2C+World%21%22%29%3B%0A%7D%0A
+- title: extern crate
+  content_markdown: >
+    The `extern crate` directive was used in older versions of Rust (before the 2018 edition).
+    
+    Now, it is no longer required to use `extern crate` in code.
+    
+    Instead, we specify the dependence on external crates in the `Cargo.toml` file
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=extern+crate+rand%3B%0A%0Afn+main%28%29+%7B%0A++++let+random_number+%3D+rand%3A%3Arandom%3A%3A%3Cu32%3E%28%29%3B%0A++++println%21%28%22Random+number%3A+%7B%7D%22%2C+random_number%29%3B%0A%7D%0A
+- title: Structure Visibility
+  content_markdown: >
+    Just like functions, structures can declare what they want exposed outside
+    of their module using `pub`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20SeaCreature%20struct%20will%20be%20usable%20outside%20of%20our%20module%0Apub%20struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20animal_type%3A%20String%2C%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20pub%20arms%3A%20i32%2C%0A%20%20%20%20pub%20legs%3A%20i32%2C%0A%20%20%20%20%2F%2F%20let's%20keep%20our%20weapon%20private%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A
+- title: Prelude
+  content_markdown: |
+    You might be wondering how we have access to `Vec` or `Box`
+    everywhere without a `use` to import them. It is because of the module
+    `prelude` in the standard library.
+
+    Know that in the Rust standard library anything that is exported in
+    `std::prelude::*` is automatically available to every part of Rust.
+    That is the case for `Vec` and `Box` but others as well (Option, Copy,
+    etc.).
+- title: Your Own Prelude
+  content_markdown: >
+    Because of standard library's prelude, it's common for your library to have
+    its own prelude module as a starting point for 
+
+    where users should import all of the most common data structures for using
+    your library (e.g `use my_library::prelude::*`).
+
+    It doesn't automatically get used in programs/libraries that use your crate,
+    but it's a good convention to follow so people
+
+    know where to start.
+
+
+    Ferris says, "Be a good rustacean and help a fellow crab out with a good
+    prelude!"
+- title: Chapter 9 - Conclusion
+  content_markdown: >
+    You now have a few tricks up your sleeve when it comes to creating Rust
+    applications and libraries ready for the world. Don't
+
+    worry about remembering it all. As your library grows and is used by other
+    people, you'll find what works best at each milestone.
+
+
+    Resources:
+
+    - [Guidelines For Writing Rust
+    APIs](https://rust-lang.github.io/api-guidelines/)

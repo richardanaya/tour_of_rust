@@ -45,7 +45,7 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%29%3B%0A++++print%21%28%22There+is+an+empty+line+above+this.+%22%29%3B%0A++++print%21%28%22Isn%27t+it+great%3F%22%29%3B%0A++++println%21%28%29%3B+++++%2F%2F+new+line+at+the+end+of+stdout%0A%7D%0A
   content_markdown: >
           Unlike other programming languages, where there is a function for
-          writting text in `stdout` (standard output), Rust uses the `macros` **println!** and **print!**.
+          writing text in `stdout` (standard output), Rust uses the `macros` **println!** and **print!**.
           We'll talk about `macros` later.
           
           > `println!` will display using a new line character `\n` at the end of the string 
