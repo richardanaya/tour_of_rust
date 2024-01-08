@@ -41,7 +41,7 @@
 
     * `*const T` - Un pointer simplu către un tip de dată T care nu va fi modificată.
 
-    * `*mut T` - Un pointer simplu către un tip de dată T ce poate fi modificată.
+    * `*mut T` - Un pointer simplu către un tip de date T ce poate fi modificat.
 
 
     Pointerii simpli pot fi convertiți în și din numere (ex `usize`).
