@@ -175,7 +175,7 @@
 
     ```JavaScript
     
-    // Transformă "Ferris" în bytes
+    // Transformă "Ferris" în octeți
 
     const utf8enc = new TextEncoder("utf-8");
 
