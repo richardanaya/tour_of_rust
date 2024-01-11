@@ -1,0 +1,145 @@
+- title: Capitolul 10 - I/o
+  content_markdown: >
+    În informatică, `I/O` este o abreviere pentru operația de `Input/Output`.
+
+    `Input-ul` reprezintă datele primite de calculator și algoritm,
+    iar `output-ul` reprezintă rezultatul generat pe baza `input-ului`.
+
+    Gândește-te la `I/O` ca la un flux de informații.
+
+    Un sistem de calcul fără output este aproape inutil.
+    Va rula întotdeauna același cod pe aceleași date și, astfel, va produce același rezultat.
+
+- title: Rulează local
+  content_markdown: >
+    În acest capitol, Playground-ul va fi doar un suport de cod pentru tine :(.
+
+    Deoarece majoritatea programelor `I/O` sunt proiectate pentru a compila pe o mașină locală
+    (calculatorul tău :) ), ia în considerare configurarea unui mediu Rust pe computerul personal și
+    familiarizează-te cu terminalul.
+
+    De asemenea, consideră utilizarea unui `IDE`, cum ar fi `VS Code` sau `RustRover`
+    și familiarizați-vă cu [terminalul](https://www.youtube.com/watch?v=lZ7Kix9bjPI).
+
+- title: Intrarea Standard (stdin)
+  content_markdown: >
+    `Intrarea Standard` se referă la datele furnizate de utilizator pentru a fi procesate de algoritm.
+
+    Astfel, `input-ul` reprezintă ceea ce un program primește.
+    În mare parte, în ceea ce privește `input-ul`, vei lucra cu String și fișiere.
+
+    Biblioteca Rust `std::io` are componentele necesare pentru a interacționa cu canalele de `I/O`,
+    cum ar fi tastatura sau orice altă sursă de intrare.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Aio%3B%0A%0Afn+main%28%29+%7B%0A++++let+mut+input+%3D+String%3A%3Anew%28%29%3B%0A%0A++++%2F%2F+citirea+va+fi+oprita+la+apri%C8%9Bia+caracterului+%60%5Cn%60%0A++++if+let+Ok%28_%29+%3D+io%3A%3Astdin%28%29.read_line%28%26mut+input%29+%7B%0A++++++++println%21%28%22Textul+de+intrare+%3A+%7B%7D%22%2C+input%29%3B%0A++++%7D%0A%7D%0A
+
+- title: Ieșirea Standard (stdout)
+  content_markdown: >
+    Îți amintești de prima lecție? Poți observa ceva relevant legat de `I/O`?
+
+    Desigur, ceea ce face `println!` este o operațiune de output,
+    de fapt, direcționează (afișează) textul către `stdout`
+    și acesta va fi afișat pe ecran.
+
+    Dacă nu dorești să afișezi caracter de linie nouă `\n`, folosește `print!`.
+    code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Aio%3B%0A%0Afn+main%28%29+%7B%0A++++let+mut+input+%3D+String%3A%3Anew%28%29%3B%0A%0A++++%2F%2F+citirea+va+fi+oprita+la+apri%C8%9Bia+caracterului+%60%5Cn%60%0A++++if+let+Ok%28_%29+%3D+io%3A%3Astdin%28%29.read_line%28%26mut+input%29+%7B%0A++++++++println%21%28%22Textul+de+intrare+%3A+%7B%7D%22%2C+input%29%3B%0A++++%7D%0A%7D%0A
+
+- title: Eroarea Standard (stdout)
+  content_markdown: >
+    Pentru a separa raportarea erorilor de tipărirea obișnuită,
+    poți utiliza macro-urile `eprint!` și `eprintln!` care vor
+    afișa text pe canalul de eroare standard (`stderr`),
+    în loc de `stdout`.
+    Utilizați aceast macro cu un mesaj informativ.
+
+    În sisteme asemănătoare UNIX, cum ar fi macOS sau LINUX,
+    poți separa cele două tipuri de ieșire prin utilizarea redirecționărilor:
+    - `./main > output.txt`
+    - `./main >> output.txt`
+    - `./main 2> output.txt`
+    - `./main 2>> output.txt`
+    
+    > Comenzile cu `2` vor copia doar erorile generate de program, iar cele fără `2` vor elimina toate erorile.
+
+    > Comanda cu `>>` va adăuga text la sfârșitul fișierului, în timp ce operatorul `>` va suprascrie fișierul.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Aio%3B%0A%0Afn+main%28%29+%7B%0A++++let+mut+input+%3D+String%3A%3Anew%28%29%3B%0A%0A++++%2F%2F+citirea+va+fi+oprita+la+apri%C8%9Bia+caracterului+%60%5Cn%60%0A++++if+let+Ok%28_%29+%3D+io%3A%3Astdin%28%29.read_line%28%26mut+input%29+%7B%0A++++++++println%21%28%22Textul+de+intrare+%3A+%7B%7D%22%2C+input%29%3B%0A++++%7D%0A%7D%0A
+
+- tile: Descriptori de Fișiere
+  content_markdown: >
+    Acum că știm care sunt operațiunile de bază `I/O`, intrăm mai în detaliu.
+
+    Ai mai văzut deja: `stdin` (intrare standard), `stdout` (ieșire standard) și `stderr` (eroare standard).
+    Pentru fiecare dintre ele i se asociază un număr întreg pozitiv, un identificator unic
+    pentru un canal `I/O` (de exemplu: fișier), cunoscut sub numele de `descriptor de fișier (fd)`.
+
+    Prin urmare:
+    - `stdin`: 0
+    - `stdout`: 1
+    - `stderr`: 2
+    - fișiere
+
+    [![file descriptors](https://cs-pub-ro.github.io/operating-systems/assets/images/file-descriptors-d19424f0a417ecd1c032f98a1969ad75.svg)
+
+    Lucrul cu fișiere joacă un rol important în operațiunile `I/O`.
+
+    Ați învățat deja să deschideți un fișier text și să citiți conținutul acestuia.
+
+    Dar ce zici de a scrie date în el, ca un canal `I/O`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Afs%3A%3A%7Bself%2C+File%7D%3B++++++%2F%2F+sistemul+de+fi%C5%9Fiere%0Ause+std%3A%3Aio%3A%3A%7Bself%2C+Write%7D%3B+++++%2F%2F+input+output%0A%0Afn+main%28%29+-%3E+io%3A%3AResult%3C%28%29%3E+%7B%0A++++let+nume_fi%C5%9Fier+%3D+%22output.txt%22%3B%0A%0A++++%2F%2F+creaz%C4%83+un+fi%C5%9Fier+dac%C4%83+nu+exist%C4%83+deja%0A++++let+mut+fi%C5%9Fier+%3D+File%3A%3Acreate%28nume_fi%C5%9Fier%29%3F%3B%0A%0A++++let+text_to_write+%3D+%22Buna%2C+lume%21%5Cn%5C%0A++++++++++++++++++++++++++++Aceasta+este+o+linie+de+text.%5Cn%22%3B%0A++++fi%C5%9Fier.write_all%28text_to_write.as_bytes%28%29%29%3F%3B%0A%0A++++let+absolute_path+%3D+fs%3A%3Acanonicalize%28nume_fi%C5%9Fier%29%3F%3B%0A++++println%21%28%22Textul+a+fost+scris+%C3%AE+fi%C5%9Fierul%3A+%7B%3A%3F%7D%22%2C+absolute_path%29%3B%0A%0A++++return+Ok%28%28%29%29%3B%0A%7D%0A
+- title: Argumentele din Linia de Comandă
+  content_markdown: >
+    Un program Rust este capabil să primească „input” din argumentele în linie.
+
+    Pentru a face acest lucru, deschideți un [terminal](https://www.youtube.com/watch?v=lZ7Kix9bjPI),
+    compilați-l și transmiteți argumentele executabilului din promptul de comandă.
+
+    Aceste argumente pot fi fișiere relevante, steaguri și așa mai departe.
+    Dezvoltatorul trebuie să documenteze scopul lor.
+
+    Dacă ca sistem de operare LINUX sau macOS, ține minte aceste comenzi:
+    ```bash
+    $ touch main.rs
+    $ rustc main.rs
+    $ ./main.rs 2 3 4 5 
+    ```
+
+    Altfel, pentru Windows, copiază următoarele comenzi într-un PowerShell
+    ```PowerShell
+    > echo. > main.rs
+    > rustc main.rs
+    > .\main.exe 2 3 4 5
+    ```
+    
+    > Observi că primul argument este numele executabilului?
+
+  -code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Aenv%3B+++++++%2F%2F+env+stands+for+environment%0A%0Afn+main%28%29+%7B%0A++++let+args%3A+Vec%3CString%3E+%3D+env%3A%3Aargs%28%29.collect%28%29%3B%0A++++println%21%28%22Num%C4%83rul+de+argumente+din+linia+de+comand%C4%83+%3D+%7B%7D%22%2C+args.len%28%29%29%3B%0A++++println%21%28%22Argumentele+din+lini%C4%83+de+comanda+%3A+%7B%3A%3F%7D%22%2C+args%29%3B%0A%7D%0A
+
+- title: Variabilele de Mediu
+  content_markdown: >
+    Ai remarcat că biblioteca standard Rust oferă acces la sistem.
+
+    Folosind modulul `std::env`, poți face în Rust unele sarcini
+    care ar putea necesita un terminal UNIX, cum ar fi:
+    - argumentele liniei de comandă
+    - imprimarea directorului de lucru curent
+    - calea executabilă curentă
+    - lucrul cu variabile de mediu
+    - lucrul cu fișiere și directoare
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Aenv%3B+++%2F%2F+pentru+a+interactiona+cu+sistemul+%C5%9Fi+variabilele+de+mediu%0A%0Afn+main%28%29+%7B%0A%0A++++if+let+Ok%28director_curent%29+%3D+env%3A%3Acurrent_dir%28%29+%7B%0A++++++++if+let+Some%28pwd%29+%3D+director_curent.to_str%28%29+%7B%0A++++++++++++println%21%28%22Directorul+curent+este+%3D+%7B%7D%22%2C+pwd%29%3B%0A++++++++%7D%0A++++%7D%0A%0A++++%2F%2F+%24+echo+%24PWD++++++%23+variabila+de+mediu%0A++++%2F%2F+dac%C4%83+nu+folose%C5%9Fti+Some%28...%29%2C+trebuie+s%C4%83+faci+pattern-match-ing+pe+Ok%28%29%0A++++println%21%28%22Directorul+curent+este+%3D+%7B%3A%3F%7D%22%2C+env%3A%3Avar%28%22PWD%22%29.ok%28%29%29%3B%0A%0A++++%2F%2F+%24+echo+%24PWD++++++%23+variabila+de+mediu%0A++++if+let+Ok%28pwd%29+%3D+env%3A%3Avar%28%22PWD%22%29+%7B%0A++++++++println%21%28%22Directorul+curent+este+%3D+%7B%7D%22%2C+pwd%29%3B%0A++++%7D%0A%0A++++%2F%2F+%24+echo+%24USER+++++%23+variabila+de+mediu%0A++++if+let+Ok%28user%29+%3D+env%3A%3Avar%28%22USER%22%29+%7B%0A++++++++println%21%28%22Directorul+curent+este+%3A+%7B%7D%22%2C+user%29%3B%0A++++%7D%0A%0A%0A++++%2F%2F+%24+echo+%24IDK++++++%23+presupun+c%C4%83+nu+ai+setat+aceast%C4%83+variabila%C4%83%3A%29%0A++++if+let+Err%28err%29+%3D+env%3A%3Avar%28%22IDK%22%29+%7B%0A++++++++eprintln%21%28%22IDK+%3A+%7B%7D%22%2C+err%29%3B%0A++++++++env%3A%3Aset_var%28%22IDK%22%2C+%22%3D+Nu+%C5%9Ftiu%22%29%3B%0A++++++++println%21%28%22IDK+%3D+%7B%3A%3F%7D%22%2C+env%3A%3Avar%28%22IDK%22%29.ok%28%29%29%3B%0A++++++++env%3A%3Aremove_var%28%22IDK%22%29%3B%0A++++%7D%0A%7D%0A
+
+- title: Capitolul 10 - Concluzii
+  content_markdown: >
+    Acum că ști elementele de bază ale operațiunilor de Intrare/Ieșire, ai folosit doar două
+    Rust biblioteci pe parcurs și sunt standard, apropo: `std::env` și `std::fs`.
+
+    Acum, poți construi propriul sistem de gestionare a fișierelor, aplicație web sau chiar API.
+    
+    Aruncă un ochi peste aceste resurse.
+    - [Environment Variables](https://youtu.be/npsMN-tZNVs)
+    - [Rust API](https://youtu.be/_ccDqRTx-JU)
