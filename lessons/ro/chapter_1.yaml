@@ -13,6 +13,26 @@
 
     Odată ce vă veți familiariza cu Rust, puteți să vă declarați un **Rustaceu**. Așa
     se numesc toți oamenii care folosesc, contribuie sau sunt interesați de Rust.
+
+- title: What is Rust?
+  content_markdown: >
+    Rust este un limbaj de programare al sistemelor care este cunoscut pentru accentul pe care îl pune
+    siguranță, performanță și concurență.
+    
+    Rust este conceput pentru a oferi un control la nivel scăzut asupra resurselor sistemului
+    fără a sacrifica abstracţiile de nivel înalt.
+    
+    Ce are Rust diferit de alte limbaje de programare.
+    - proprietate și împrumut
+    - durata de viață
+    - potrivire de model
+    - concurență fără curse de date (rivalitate de date)
+    - trasaturi
+    - nu nul sau colectarea gunoiului
+    - macro-uri
+    - marfa
+    - comunitate și ecosistem
+    - UTF-8 și text Unicode
 - title: Rust Playground
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Bun%20venit%20în%20locul%20de%20joacă!%20Puteți%20modifica%20codul%20aici.%22)%3B%0A%7D%0A
@@ -23,6 +43,37 @@
 
     E o modalitate bună de a vă juca cu Rust și a arăta altora 
     creativitatea și provocările dumneavoastră!
+
+- title: What is println! ?
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%29%3B%0A++++print%21%28%22Este+o+linie+deasupra.+%22%29%3B%0A++++print%21%28%22Ce+tare%2C+nu%3F%22%29%3B%0A++++println%21%28%29%3B+++++%2F%2F+linie+nou%C4%83+la+finalul+consolei%0A%7D%0A
+  content_markdown: >
+    Spre deosebire de alte limbaje de programare, unde există o funcție pentru
+    afişarea în `stdout` (consola), Rust folosește `macro-urile` **println!** și **print!**.
+    Vom vorbi despre `macro-uri` mai târziu.
+
+    > `println!` va afișa un nou caracter de linie nouă `\n` la sfârșitul șirului
+    > `print!` nu va folosi `\n` de la sfârșitul textului
+
+- title: Cum să compilezi?
+  content_markdown: >
+    Pe Linux / MacOS:
+    ```
+    $ rustc main.rs
+    $ ./main
+    ```
+
+    Pe sistemele Windows?
+    ```
+    > rustc main.rs
+    > .\main.exe
+    ```
+
+    | System de Operare (OS) | comenzi de rulat în terminal      |
+    | ---------------------- | --------------------------------- |
+    | Linux / MacOS          | $ rustc main.rs <br> $ ./main     |
+    | Windows                | > rustc main.rs <br> > ./main.exe |
+
 - title: Variabile
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20intuie%C8%99te%20tipul%20de%20date%20pentru%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20poate%20fi%20%C8%99i%20explicit%20atunci%20c%C3%A2nd%20stabile%C8%99te%20tipul%20de%20date%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20poate%20declara%20o%20variabil%C4%83%20%C8%99i%20s%C4%83%20o%20ini%C8%9Bializeze%20mai%20t%C3%A2rziu%2C%0A%20%20%20%20%2F%2F%20dar%20acest%20lucru%20nu%20se%20face%20des%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -64,12 +115,34 @@
 
     O să revenim pentru a vorbi mai multe despre acest concept, dar deocamdată doar fiți
     atenți la acest cuvânt cheie.
+
 - title: Tipuri de date de bază
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20acesta%20este%20un%20i32%20%C3%AEn%20mod%20implicit%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20acesta%20este%20un%20f64%20%C3%AEn%20mod%20implicit%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a+%3D+13u8%3B%0A++++let+b+%3D+7u32%3B%0A++++let+c+%3D+a+as+u32+%2B+b%3B%0A++++println%21%28%22%7B%7D%22%2C+c%29%3B%0A%0A++++let+t+%3D+true%3B%0A++++println%21%28%22%7B%7D%22%2C+t+as+u8%29%3B%0A%0A++++%0A++++let+d%3A+u32+%3D+12%3B%0A++++%2F%2F+let+e%3A+u32+%3D+-12%3B++%2F%2F+numerele+%60unsigned%60+%28fara+semn%29+includ+doar+nunmerele+pozitive%0A++++let+e%3A+i32+%3D+12%3B%0A++++let+f%3A+i32+%3D+-12%3B%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++++++++++d%2C+-%28d+as+i32%29%2C+e%2C+f%29%3B%0A%7D%0A%0A
   content_markdown: >
-    Rust are o varietate de tipuri de date familiare dumneavoastră:
+    Tipuri de date de bază
+    - bool
+    - u8
+    - u16
+    - u32
+    - u64
+    - u128
+    - i8
+    - i16
+    - i32
+    - i64
+    - i128
+    - usize
+    - isize
+    - f32
+    - f64
+    
+    | u/i |  semn            | sign                                 |semn |
+    | --- | ---------------- | ------------------------------------ | --- |
+    | `u` | numere fără semn | doar numere pozitive                 |  +  |
+    | `i` | numere cu semn   | atâ numere pozitive, cât și negative |  ±  |
 
+    Rust are o varietate de tipuri de date familiare dumneavoastră:
 
     * variabilă booleană - `bool` pentru a reprezenta adevărat și fals
 
@@ -101,6 +174,9 @@
 
 
     Tipurile numerice pot fi specificate explicit prin adăugarea tipului la finalul numărului (ex: `13u32`, `2u8`).
+    
+    > nu se poate aplica operatorul unar `-` pe `u8`, `u17`, `u64`, `u128` si `usize`
+
 - title: Conversia tipurilor de bază
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
@@ -129,6 +205,48 @@
 
 
     Numele constantelor sunt mereu scrise în format `SCREAMING_SNAKE_CASE` (ex: MY\_FIRST\_CONSTANT).
+
+- title: Colecți
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use+std%3A%3Acollections%3A%3AHashMap%3B%0Ause+std%3A%3Acollections%3A%3AHashSet%3B%0A%0Afn+main%28%29+%7B%0A%0A++++%2F%2F+array%0A++++let+array%3A+%5Bi32%3B+3%5D+%3D+%5B1%2C+2%2C+3%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+array%29%3B%0A++++%0A++++%2F%2F+vector%0A++++let+vector%3A+Vec%3Ci32%3E+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+vector%29%3B%0A%0A++++%2F%2F+slice+%28from+other+collection%29%0A++++let+slice+%3D+%26array%5B1..3%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+slice%29%3B%0A++++%0A++++%2F%2F+string%0A++++let+string%3A+String+%3D+String%3A%3Afrom%28%22Hello%2C+Rust%21%22%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+string%29%3B%0A++++%0A++++%2F%2F+tuple%0A++++let+tuple%3A+%28i32%2C+f64%2C+u8%29+%3D+%2842%2C+3.14%2C+5%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+tuple%29%3B%0A%0A++++%2F%2F+map%0A++++let+mut+map+%3D+HashMap%3A%3Anew%28%29%3B%0A++++map.insert%28%22one%22%2C+1%29%3B%0A++++map.insert%28%22two%22%2C+2%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+map%29%3B%0A++++%0A++++%2F%2F+set%0A++++let+mut+set+%3D+HashSet%3A%3Anew%28%29%3B%0A++++set.insert%281%29%3B%0A++++set.insert%282%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+set%29%3B%0A%7D%0A
+  content_markdown: >
+    Rust oferă o varietate de tipuri de colecție care vă permit să stocați și
+    manipula datele.
+
+    Principalele colecții din Rust:
+    - Matrice
+    - Vectori
+    - Felii
+    - Siruri de caractere
+    - Tuplu
+    - Hărți hash
+    - Seturi de hash
+      
+    Vom discuta pe fiecare dintre ele mai târziu.
+
+- title: Afişarea cu `{:?}`
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A%0A++++let+my_vector+%3D+vec%21%5B1%2C+2%2C+3%5D%3B%0A++++%2F%2F+println%21%28%22%7B%7D%22%2C+my_vector%29%3B+++%2F%2F+will+generate+an+error%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+my_vector%29%3B%0A++++println%21%28%22%7B%3A%23%3F%7D%22%2C+my_vector%29%3B+++%2F%2F+debug+mode%0A++++%0A++++let+x%3A+i32+%3D+-12%3B%0A++++println%21%28%22%7B%7D%22%2C+x%29%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+x%29%3B%0A++++println%21%28%22%7B%3A%23%3F%7D%22%2C+x%29%3B%09%0A%7D%0A
+  content_markdown: >
+    Observați că atunci când afișați o colecție, `println!("{}", collection);` nu merge.
+
+    În Rust, `:?` este un specificator de format folosit cu trăsătura `Debug` when
+    imprimarea valorilor / colecţiilor de valori.
+    
+    Când utilizați `println!("{:?}", x);`, compilatorul Rust formatează variabila
+    în consecinţă.
+
+    Acest lucru este util în special pentru „colecții” precum vectori, matrice, structuri
+    si enumerari.
+
+    `{:#?}` le va tipări într-un mod care este conceput pentru a fi informativ în timpul
+    depanare.
+    
+    | Printing              | tip de bază | colecție |
+    | --------------------- | ----------- | -------- |
+    | println!("{}", x);    |     ✅       |     ❌    |
+    | println!("{:?}", x);  |     ✅       |     ✅    |
+    | println!("{:#?}", x); |     ✅       |     ✅    |
 - title: Tablouri
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
@@ -147,6 +265,22 @@
 
     Colecțiile cu dimensiune dinamică, deseori numite tablouri dinamice sau variabile, vă
     vor fi prezentate într-un capitol viitor numit **Vectori**.
+
+
+- title: Vectori
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%2F%2F+vec%21%5B%5D+este+un+macor%0A++++let+v1+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+v1%29%3B%0A++++%0A++++let+mut+v2+%3D+Vec%3A%3Anew%28%29%3B%0A++++v2.push%281%29%3B%0A++++v2.push%282%29%3B%0A++++v2.push%283%29%3B%0A++++%0A++++%2F%2F+folosim+o+bucla+%60for%60%0A++++for+el+in+%26v1+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++%2F%2F+folosim+metoda+%60.iter%28%29%60%0A++++for+el+in+v1.iter%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++for+i+in+0..v1.len%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+v1%5Bi%5D%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A++++%0A++++%0A++++%2F%2F+vom+vorbi+mai+tarziu+despre+Some+%C5%9Fi+Result%0A++++if+let+Some%28element%29+%3D+v1.get%281%29+%7B%0A++++++++println%21%28%22Second+element%3A+%7B%7D%22%2C+element%29%3B%0A++++%7D+else+%7B%0A++++++++println%21%28%22Index+out+of+bounds.%22%29%3B%0A++++%7D%0A++++%0A%7D%0A
+  content_markdown: >
+    Vectorii sunt unul dintre cele mai flexibile și mai frecvent utilizate tipuri de colecție în Rust.
+
+    Ele reprezintă un tablou dinamic, care poate fi extins și fac parte din
+    biblioteca standard Rust (`std::vec::Vec`). Nu este nevoie să-l „utilizați”. :)
+
+- ttile: Strings
+  code: >-
+  content_markdown: >
+  
+
 - title: Funcții
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
