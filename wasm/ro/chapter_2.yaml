@@ -168,7 +168,7 @@
     alocat.
 
     4. Să anunțăm programul nostru că am pus textul în memoria sa la un
-    anumit indice de început și lungime în bytes.
+    anumit indice de început și lungime specificată în octeți.
 
 
     Iată un exemplu de cum ar arăta acea inițializare:
