@@ -164,7 +164,7 @@
 
     2. Să alocăm suficientă memorie pentru a stoca textul nostru.
 
-    3. Să copiem bytes în memoria programului nostru la începutul spațiului
+    3. Să copiem octeții în memoria programului nostru la începutul spațiului
     alocat.
 
     4. Să anunțăm programul nostru că am pus textul în memoria sa la un
