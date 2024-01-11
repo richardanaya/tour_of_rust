@@ -160,7 +160,7 @@
 
     Este necesar:
 
-    1. Să determinăm lungimea în bytes a textului pe care vrem să-l dăm.
+    1. Să determinăm lungimea în octeți a textului pe care vrem să îl furnizăm.
 
     2. Să alocăm suficientă memorie pentru a stoca textul nostru.
 
