@@ -64,7 +64,7 @@
     pentru a interacționa cu el.
 
     ```JavaScript
-    // crează un șir de 8 octeți
+    // creează un șir de 8 octeți
     let bytes = new ArrayBuffer(8);
     // vezi acei 8 octeți ca numere întregi fără semn
     // pe 8 biți
