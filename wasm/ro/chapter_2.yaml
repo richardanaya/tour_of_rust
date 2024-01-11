@@ -69,7 +69,7 @@
     // vezi acei 8 octeți ca numere întregi fără semn
     // pe 8 biți
     let u8_bytes = new Uint8Array(bytes);
-    // modifica array buffer-ul
+    // modifică array buffer-ul
     u8_bytes[0] = 16; // 00010000
     u8_bytes[1] = 1; // 00000001
     // reinterpretează array buffer-ul u8_bytes ca
