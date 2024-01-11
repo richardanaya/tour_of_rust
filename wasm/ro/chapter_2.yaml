@@ -81,7 +81,7 @@
     ```
 - title: Codificarea/decodificarea UTF-8
   content_markdown: >
-    Javascript oferă funcții de utilitate pentru a scrie/citi string-uri UTF-8
+    Javascript oferă funcții utilitare pentru a scrie/citi string-uri UTF-8
     în/din
 
     octeți din obiecte de tip `ArrayBuffer`.
