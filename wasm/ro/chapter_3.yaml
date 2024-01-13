@@ -43,7 +43,7 @@
     drept șir de caractere
 
     * trebuie să primim înapoi un identificator pentru a putea apela acea funcție
-    mai târziu cu parametrii
+    mai târziu cu parametri
 
 
     ```rust
