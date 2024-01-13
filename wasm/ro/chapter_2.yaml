@@ -33,7 +33,7 @@
     * f32/f64
 
 
-    Așadar, pentru a comunica între Javascript și WebAssembly, va trebui
+    Așadar, pentru a comunica între JavaScript și WebAssembly, va trebui
     să găsim un artificiu inteligent pentru semnificația numerelor!
 
 
