@@ -1,6 +1,6 @@
 - title: Capitolul 2 - Partajarea structurilor de date
   content_markdown: >
-    Javascript și programul dumneavoastră de WebAssembly au reprezentări
+    JavaScript și programul dumneavoastră de WebAssembly au reprezentări
     foarte diferite ale datelor la nivelul memoriei.
 
     Pentru a complica lucrurile și mai mult, interacțiunea cu mediul gazdă
