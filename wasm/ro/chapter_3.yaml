@@ -5,7 +5,7 @@
 - title: De ce invocare dinamică?
   content_markdown: >
     Am văzut în primele capitole că putem foarte ușor să scriem manual propriile
-    funcții JavaScript în fișierele noaste `.js`. Așa că
+    funcții JavaScript în fișierele noastre `.js`. Așa că
 
     de ce am crea funcții dinamice?
 
