@@ -33,7 +33,7 @@
     * Avem nevoie de o modalitate de a apela acea funcție.
 
     * Avem nevoie ca acea funcție dinamică să aibă acces la memorie (de exemplu,
-    pentru a extrage octeți utf-8).
+    pentru a extrage octeți UTF-8).
 - title: Înregistrarea funcțiilor
   content_markdown: >
     Pentru a înregistra o funcție avem nevoie de două lucruri:
@@ -70,7 +70,7 @@
     aceste funcții să fie reale.
 - title: Apelarea funcțiilor
   content_markdown: >
-    Când mai târziu dorim să apelăm funcția noastră dinamică, vom avea nevoie de
+    Mai târziu, când dorim să apelăm funcția noastră dinamică, vom avea nevoie de
     o funcție de invocare care să poată lua
 
     identificatorul funcției și argumentele.
@@ -107,7 +107,7 @@
 
 
     Veți observa că există o problemă cu funcția noastră JavaScript. Are
-    începutul și sfârșitul șirului utf-8, dar nu și memoria acestuia!
+    începutul și sfârșitul șirului UTF-8, dar nu și memoria acestuia!
 - title: Contextul invocării dinamice
   code: "https://webassembly.studio/?embed&f=70lhg7nwda9"
   content_markdown: >
