@@ -19,7 +19,7 @@
     (yours :) ), consider setting up a Rust environment on your personal computer and
     familiarise yourself with the terminal.
 
-    Also, consider using a `IDE`, such as `VS Code` or `RustRover`
+    Also, consider using an `IDE`, such as `VS Code` or `RustRover`
     and familiarise yourself with the [terminal](https://www.youtube.com/watch?v=lZ7Kix9bjPI).
 
 - title: Standard Input (stdin)
@@ -50,7 +50,7 @@
 
 - title: Standard Error (stdout)
   content_markdown: >
-    In order to separate error reporting from common printing, you can use `eprint!` and
+    In order to separate error reporting from common printing, you can use the `eprint!` and
     `eprintln!` macros that will display text in the standard error (`stderr`) channel,
     instead of `stdout`. Use this macro with an informative message.
 

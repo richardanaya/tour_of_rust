@@ -2,7 +2,7 @@
   content_markdown: >
     În informatică, `I/O` este o abreviere pentru operația de `Input/Output`.
 
-    `Input-ul` reprezintă datele primite de calculator și algoritm,
+    `Input-ul` reprezintă datele primite de calculator sau de algoritm,
     iar `output-ul` reprezintă rezultatul generat pe baza `input-ului`.
 
     Gândește-te la `I/O` ca la un flux de informații.
@@ -19,7 +19,7 @@
     familiarizează-te cu terminalul.
 
     De asemenea, consideră utilizarea unui `IDE`, cum ar fi `VS Code` sau `RustRover`
-    și familiarizați-vă cu [terminalul](https://www.youtube.com/watch?v=lZ7Kix9bjPI).
+    și familiarizează-te cu [terminalul](https://www.youtube.com/watch?v=lZ7Kix9bjPI).
 
 - title: Intrarea Standard (stdin)
   content_markdown: >
@@ -51,7 +51,7 @@
     poți utiliza macro-urile `eprint!` și `eprintln!` care vor
     afișa text pe canalul de eroare standard (`stderr`),
     în loc de `stdout`.
-    Utilizați aceast macro cu un mesaj informativ.
+    Utilizați acest macro cu un mesaj informativ.
 
     În sisteme asemănătoare UNIX, cum ar fi macOS sau LINUX,
     poți separa cele două tipuri de ieșire prin utilizarea redirecționărilor:
@@ -68,10 +68,11 @@
 
 - tile: Descriptori de Fișiere
   content_markdown: >
-    Acum că știm care sunt operațiunile de bază `I/O`, intrăm mai în detaliu.
+    Acum că știm care sunt operațiunile de bază `I/O`, hai să intrăm mai în detaliu.
 
-    Ai mai văzut deja: `stdin` (intrare standard), `stdout` (ieșire standard) și `stderr` (eroare standard).
-    Pentru fiecare dintre ele i se asociază un număr întreg pozitiv, un identificator unic
+    Ai văzut deja: `stdin` (intrare standard), `stdout` (ieșire standard) și `stderr` (eroare standard).
+
+    Fiecare dintre ele are asociat un număr întreg pozitiv, un identificator unic
     pentru un canal `I/O` (de exemplu: fișier), cunoscut sub numele de `descriptor de fișier (fd)`.
 
     Prin urmare:
@@ -86,20 +87,20 @@
 
     Ați învățat deja să deschideți un fișier text și să citiți conținutul acestuia.
 
-    Dar ce zici de a scrie date în el, ca un canal `I/O`.
+    Dar ce zici de a scrie date în el, folosindu-l pe post de canal `I/O`?
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use+std%3A%3Afs%3A%3A%7Bself%2C+File%7D%3B++++++%2F%2F+sistemul+de+fi%C5%9Fiere%0Ause+std%3A%3Aio%3A%3A%7Bself%2C+Write%7D%3B+++++%2F%2F+input+output%0A%0Afn+main%28%29+-%3E+io%3A%3AResult%3C%28%29%3E+%7B%0A++++let+nume_fi%C5%9Fier+%3D+%22output.txt%22%3B%0A%0A++++%2F%2F+creaz%C4%83+un+fi%C5%9Fier+dac%C4%83+nu+exist%C4%83+deja%0A++++let+mut+fi%C5%9Fier+%3D+File%3A%3Acreate%28nume_fi%C5%9Fier%29%3F%3B%0A%0A++++let+text_to_write+%3D+%22Buna%2C+lume%21%5Cn%5C%0A++++++++++++++++++++++++++++Aceasta+este+o+linie+de+text.%5Cn%22%3B%0A++++fi%C5%9Fier.write_all%28text_to_write.as_bytes%28%29%29%3F%3B%0A%0A++++let+absolute_path+%3D+fs%3A%3Acanonicalize%28nume_fi%C5%9Fier%29%3F%3B%0A++++println%21%28%22Textul+a+fost+scris+%C3%AE+fi%C5%9Fierul%3A+%7B%3A%3F%7D%22%2C+absolute_path%29%3B%0A%0A++++return+Ok%28%28%29%29%3B%0A%7D%0A
 - title: Argumentele din Linia de Comandă
   content_markdown: >
-    Un program Rust este capabil să primească „input” din argumentele în linie.
+    Un program Rust este capabil să primească informații de intrare din argumentele furnizate în linia de comandă.
 
     Pentru a face acest lucru, deschideți un [terminal](https://www.youtube.com/watch?v=lZ7Kix9bjPI),
-    compilați-l și transmiteți argumentele executabilului din promptul de comandă.
+    compilați programul și transmiteți argumentele executabilului din promptul de comandă.
 
     Aceste argumente pot fi fișiere relevante, steaguri și așa mai departe.
     Dezvoltatorul trebuie să documenteze scopul lor.
 
-    Dacă ca sistem de operare LINUX sau macOS, ține minte aceste comenzi:
+    Dacă utilizezi un sistem de operare LINUX sau macOS, ține minte aceste comenzi:
     ```bash
     $ touch main.rs
     $ rustc main.rs
@@ -135,8 +136,8 @@
 
 - title: Capitolul 10 - Concluzii
   content_markdown: >
-    Acum că ști elementele de bază ale operațiunilor de Intrare/Ieșire, ai folosit doar două
-    Rust biblioteci pe parcurs și sunt standard, apropo: `std::env` și `std::fs`.
+    Acum că știi elementele de bază ale operațiunilor de Intrare/Ieșire, ai folosit doar două    
+    module de Rust pe parcurs și acestea fac parte din cutia standard, apropo: `std::env` și `std::fs`.
 
     Acum, poți construi propriul sistem de gestionare a fișierelor, aplicație web sau chiar API.
     
