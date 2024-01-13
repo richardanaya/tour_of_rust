@@ -6,7 +6,7 @@
     și modul în care Rust poate fi folosit pentru a dezvolta web-ul. Dacă este prima oară
     când folosiți Rust, s-ar putea
 
-    să vă placă [Turul Rust](https://tourofrust.com/)! În mare parte, exemplele noastre
+    să vă placă [Turul limbajului Rust](https://tourofrust.com/)! În mare parte, exemplele noastre
     vor fi suficient de ușoare pentru
     
     a fi urmărite de oricine. Acest tur este disponibil și în limbajul C.
@@ -34,4 +34,4 @@
     verificați [repository-ul de Github](https://github.com/richardanaya/tour_of_rust).
 
 
-    Puteți naviga prin tur cu tastatura <span class="emoji">⬅️</span> și <span class="emoji">➡️</span>
+    Puteți naviga prin tur folosind tastele <span class="emoji">⬅️</span> și <span class="emoji">➡️</span>
