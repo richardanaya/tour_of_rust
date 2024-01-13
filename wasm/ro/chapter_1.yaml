@@ -90,7 +90,7 @@
 
 
     `#[no_mangle]` spune compilatorului nostru să păstreze numele funcției
-    într-un format "human readable".
+    într-un format inteligibil pentru oameni ("human readable").
 - title: Concluzia capitolului 1
   content_markdown: >
     Sperăm că este clar că WebAssembly nu este chiar atât de complex la bază! În următorul
