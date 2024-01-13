@@ -232,7 +232,7 @@
     Este important să ne amintim că WebAssembly este un cod executabil low-level,
     care se preocupă de structuri de memorie
     
-    care sunt mult mai fin definite decât în Javascript. Verificați
+    care sunt mult mai fin definite decât în JavaScript. Verificați
     dacă limbajul dumneavoastră de programare oferă funcționalități care să vă
     ajute la rezolvarea problemei!
 
