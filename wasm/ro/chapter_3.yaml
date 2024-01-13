@@ -4,7 +4,7 @@
     dinamice la runtime pentru a le apela din WebAssembly.
 - title: De ce invocare dinamică?
   content_markdown: >
-    Am văzut în primele capitole că putem foarte ușpr să scriem manual propriile
+    Am văzut în primele capitole că putem foarte ușor să scriem manual propriile
     funcții JavaScript în fișierele noaste `.js`. Așa că
 
     de ce am crea funcții dinamice?
