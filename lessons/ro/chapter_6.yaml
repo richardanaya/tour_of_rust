@@ -135,7 +135,7 @@
     Atunci când un șir de caractere este eliminat (drop), este eliminată și memoria heap a acestuia.
 
 
-    Șirile de caractere au un operator `+` care extinde șirul cu un `&str`. (Șirul din stânga este `consumat`, iar buffer-ul lui
+    Șirurile de caractere au un operator `+` care extinde șirul cu un `&str`. (Șirul din stânga este `consumat`, iar buffer-ul lui
     este refolosit pentru a stoca valoarea finală. Șirul din dreapta este doar împrumutat pentru a efectua concatenarea.)
     dar s-ar putea să nu fie atât de ergonomic pe cât sperați.
   code: >-
