@@ -58,7 +58,7 @@
     principalul mijloc de intrare și ieșire a tipurilor de date non-primitive.
 - title: ArrayBuffer
   content_markdown: |
-    Javascript reprezintă un șir lung de octeți ca un `ArrayBuffer`.
+    JavaScript reprezintă un șir lung de octeți ca un `ArrayBuffer`.
 
     Puteți obține o vedere tipizată a acestui buffer care este foarte eficientă
     pentru a interacționa cu el.
