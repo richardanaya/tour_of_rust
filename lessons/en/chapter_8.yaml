@@ -353,13 +353,15 @@
 
 - title: Chapter 8 - Conclusion
   content_markdown: >
-    Pointerii inteligenți sunt expresiile de programare Rust și ne permite să nu recreem
-        modele foarte comune de utilizare a memoriei. Cu ele sunteți gata să abordați
-        cel mai dificile
+    Smart pointers are the idioms of Rust programming and let us not have to
+    re-create the 
 
-        provocări! Acum că avem bazele Rust, hai să vorbim puțin despre
-        cum facem
+    very common patterns of memory usage. With them you are ready to tackle the
+    toughest of
 
-        proiecte mai mari. În capitolul 9 ne eliberăm de o singură pagină de
+    challenges! Now that we have the foundations of Rust, let's talk a bit about
+    how we make 
 
-        linii de cod.
+    larger projects. In chapter 9 we break free of single page
+
+    lines of code.
