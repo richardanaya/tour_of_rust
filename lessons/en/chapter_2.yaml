@@ -106,11 +106,25 @@
       Deconstructing 'tuples' allows us to extract individual elements from the group.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=330cce03a942deef101e8a818e09368a
-- title: Destructing arrays/slices
+- title: Destructuring Arrays/Slices
   content_markdown: >
       'Arrays' and 'slices' in Rust can be destructured similarly.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=2b4e115dfcc4e0ecfdc6da202f9b7dd9
+- title: Destructuring Enums
+  content_markdown: >
+      'Enums' require a little more effort, since they have multiple
+
+      fields of different types.
+  code: >-
+    https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&gist=fb9a2b07856cca58228e1a4f7052aea6
+- title: Destructuring Structs
+  content_markdown: >
+      'Structs' DO NOT NEED match blocks to be destructured, but destructuring
+
+      them works on the same logic as those before.
+  code: >-
+    https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&gist=b5ec9bcb420987e46639bd4f8c1a06db
 - title: Returning Values From loop
   content_markdown: |
     `loop` can break to return a value.
