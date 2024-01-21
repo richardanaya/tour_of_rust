@@ -1,0 +1,224 @@
+- title: Kapitel 5 - Eigentums- und Kreditdaten
+  content_markdown: >
+    Rust verfügt im Vergleich zu anderen Programmen über ein einzigartiges Paradigma für die
+    Speicherverwaltung Sprachen. Wir werden uns das ansehen
+
+    die Verhaltensweisen und Validierungen des Compilers nacheinander, also nicht
+    überwältigend. Es ist wichtig, sich daran zu erinnern
+
+    Letztlich dienen die Regeln, die wir aufzeigen, nicht dazu, Ihnen das Leben schwer zu machen, sondern um Ihnen zu helfen
+    Sie machen Ihren Code weniger fehleranfällig!
+- title: Eigentum
+  content_markdown: >
+    Durch die Instanziierung eines Typs und dessen **Bindung** an einen Variablennamen wird ein Speicher erstellt
+    Ressource, die der Rust-Compiler validiert
+    
+    durch sein ganzes **Leben**. Die gebundene Variable wird als Ressource bezeichnet
+    **Eigentümer**.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Instan%C8%9Biem%20structuri%20(Foo)%20%C8%99i%20le%20leg%C4%83m%20de%20variabile%20(foo)%0A%20%20%20%20%2F%2F%20pentru%20a%20crea%20resurse%20%C3%AEn%20memorie%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20este%20proprietarul%0A%7D%0A
+- title: Bereichsbasiertes Ressourcenmanagement
+  content_markdown: |
+    Rust verwendet das Ende des Gültigkeitsbereichs als Ort zum Dekonstruieren und Freigeben einer Ressource.
+
+    Der Begriff für diese Dekonstruktion und Freigabe wird **Drop** genannt.
+
+    Speicherdetail:
+    * Rust verfügt über keine Garbage Collection.
+    * Dies wird in C++ auch als Ressourcenbelegung ist Initialisierung (RAII) bezeichnet.
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo_b%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo_a%20aici%0A%7D%0A
+- title: Das Löschen ist hierarchisch
+  content_markdown: >
+    Wenn eine Struktur gelöscht wird, wird zuerst die Struktur selbst und dann die Struktur selbst gelöscht
+    Kinder werden einzeln abgesetzt und so weiter.
+
+
+    Speicherdetails:
+
+    * Durch die automatische Freigabe von Speicher trägt Rust dazu bei, dass es weniger Speicher gibt
+    Speicherlecks.
+
+    * Speicherressourcen können nur einmal gelöscht werden.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20mai%20%C3%AEnt%C3%A2i%0A%20%20%20%20%2F%2F%20apoi%20se%20renun%C8%9B%C4%83%20la%20foo.bar%0A%7D%0A
+- title: Eigentumsübertragung
+  content_markdown: >
+    Wenn ein Eigentümer als Argument an eine Funktion übergeben wird, wird der Eigentümer dorthin verschoben
+    der Funktionsparameter.
+
+    Nach einer **Verschiebung** kann die Variable in der ursprünglichen Funktion nicht mehr vorhanden sein
+    gebraucht.
+
+
+    Speicherdetails:
+
+    * Während einer **Verschiebung** wird der Stapelspeicher des Eigentümerwerts in den kopiert
+    Parameterstapelspeicher des Funktionsaufrufs.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20f%20aici%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20este%20cedat%20func%C8%9Biei%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20nu%20mai%20poate%20fi%20folosit%0A%7D%0A
+- title: Rückgabe des Eigentums
+  content_markdown: |
+    Der Besitz kann auch von einer Funktion zurückgegeben werden.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20proprietatea%20este%20cedat%C4%83%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20devine%20proprietar%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20din%20cauza%20termin%C4%83rii%20func%C8%9Biei%0A%7D%0A
+- title: Eigentumsleihe mit Referenzen
+  content_markdown: |
+    Referenzen ermöglichen uns den Zugriff auf eine Ressource mit dem Operator '&'.
+
+    Referenzen werden ebenso gelöscht wie andere Ressourcen.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20f%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20aici%0A%7D%0A
+- title: Veränderliches Eigentum mit Referenzen ausleihen
+  content_markdown: >
+    Mit dem Operator „&mut“ können wir auch veränderlichen Zugriff auf eine Ressource ausleihen.
+
+
+    Ein Ressourceneigentümer kann nicht verschoben oder geändert werden, während er veränderlich ausgeliehen ist.
+
+
+    Speicherdetail:
+
+    * Rust verhindert, dass es zwei Möglichkeiten gibt, einen eigenen Wert zu ändern
+    führt die Möglichkeit eines Datenwettlaufs ein.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20f%20aici%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%0A%20%20%20%20%2F%2F%20E%C8%98EC%3A%20do_something(foo)%20va%20e%C8%99ua%20pentru%20c%C4%83%0A%20%20%20%20%2F%2F%20foo%20nu%20poate%20fi%20mutat%20%C3%AEn%20timp%20ce%20este%20%C3%AEmprumutat%20%C3%AEn%20mod%20mutabil%0A%0A%20%20%20%20%2F%2F%20E%C8%98EC%3A%20foo.x%20%3D%2013%3B%20va%20e%C8%99ua%20aici%20pentru%20c%C4%83%0A%20%20%20%20%2F%2F%20foo%20nu%20poate%20fi%20modificat%20%C3%AEn%20timp%20ce%20este%20%C3%AEmprumutat%20%C3%AEn%20mod%20mutabil%0A%0A%20%20%20%20f.x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20f%20aici%20pentru%20c%C4%83%20nu%20mai%20este%20folosit%20dupa%20acest%20moment%0A%20%20%20%20%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.x)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20acest%20lucru%20func%C8%9Bioneaz%C4%83%20pentru%20s-a%20renun%C8%9Bat%20la%20toate%20referin%C8%9Bele%20mutabile%0A%20%20%20%20foo.x%20%3D%207%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20ced%C4%83m%20proprietatea%20lui%20foo%20%C3%AEntr-o%20func%C8%9Bie%0A%20%20%20%20do_something(foo)%3B%0A%7D%0A
+- title: Dereferenzierung
+  content_markdown: >
+    Mithilfe von '&mut'-Referenzen können Sie den Wert des Eigentümers mithilfe des '*'' festlegen
+    Operator.
+
+
+    Sie können auch eine Kopie eines eigenen Werts erhalten, indem Sie den Operator '*'' verwenden (wenn der Wert
+    können kopiert werden (wir werden kopierbare Typen in späteren Kapiteln besprechen).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20primim%20o%20copie%20a%20valorii%20proprietarului%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%C4%83m%20valoarea%20proprietarului%20prin%20referin%C8%9B%C4%83%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
+- title: Weitergabe geliehener Daten
+  content_markdown: >
+    Rusts Regeln für Referenzen lassen sich am besten wie folgt zusammenfassen:
+
+    * Rust erlaubt nur eine veränderbare Referenz **oder** mehrere
+    nicht veränderliche Referenzen **aber nicht beides**.
+
+    * Eine Referenz darf niemals **länger leben** als ihr Besitzer.
+
+
+    Dies stellt in der Regel kein Problem dar, wenn Verweise weitergegeben werden Funktionen.
+
+
+    Speicherdetails:
+
+    * Die erste Referenzregel verhindert Datenwettläufe. Was ist ein Datenwettlauf? A
+    Beim Datenwettlauf kann es beim Lesen von Daten zu Abweichungen kommen
+    aufgrund der gleichzeitigen Existenz eines Schreibers für die Daten. Das passiert
+    häufig in der Multithread-Programmierung.
+
+    * Die zweite Referenzregel verhindert den Missbrauch von Referenzen, die verweisen
+    auf nicht vorhandene Daten (in C baumelnde Zeiger genannt).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20referin%C8%9Ba%20mutabil%C4%83%20f%20aici%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20pentru%20c%C4%83%20se%20renun%C8%9B%C4%83%20la%20toate%20referin%C8%9Bele%20mutabile%0A%20%20%20%20%2F%2F%20%C3%AEn%20cadrul%20func%C8%9Biei%20do_something%2C%20putem%20crea%20alta%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20aici%0A%7D%0A
+- title: Referenzen von Referenzen
+  content_markdown: |
+    Referenzen können sogar auf Referenzteile verwendet werden.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20x%20aici%20%C8%99i%20putem%20crea%20o%20referin%C8%9B%C4%83%20imutabil%C4%83%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20y%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20aici%0A%7D%0A
+- title: Explizite Lebenszeiten
+  content_markdown: >
+    Auch wenn Rust es nicht immer im Code anzeigt, versteht der Compiler es
+    die Lebensdauer jeder Variablen und wird versucht
+
+    um zu bestätigen, dass eine Referenz nie länger existiert als ihr Besitzer.
+
+    Funktionen können explizit sein, indem die Funktionssignatur mit parametrisiert wird
+    Symbole, die bei der Identifizierung helfen
+
+    welche Parameter und Rückgabewerte dieselbe Lebensdauer haben.
+
+
+    Lebensdauerspezifizierer beginnen immer mit einem `'` (z. B. `'a`, `'b`, `'c`).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20parametrul%20foo%20%C8%99i%20valoarea%20de%20retur%20au%20aceea%C8%99i%20durat%C4%83%20de%20via%C8%9B%C4%83%0Afn%20do_something%3C%27a%3E(foo%3A%20%26%27a%20Foo)%20-%3E%20%26%27a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20x%20aici%2C%20deci%20putem%20crea%20o%20referin%C8%9B%C4%83%20imutabil%C4%83%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20y%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20aici%0A%7D%0A
+- title: Mehrere Leben
+  content_markdown: >
+    Lebensdauerspezifizierer ermöglichen es uns, bestimmte Szenarien explizit zu definieren
+    Der Compiler kann sich nicht selbst auflösen
+
+    durch Unterscheidung aller Lebensdauern einer Funktionssignaturkomponente.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20foo_b%20%C8%99i%20valoarea%20de%20retur%20au%20aceea%C8%99i%20durat%C4%83%20de%20via%C8%9B%C4%83%0A%2F%2F%20foo_a%20are%20o%20durat%C4%83%20de%20via%C8%9B%C4%83%20f%C4%83r%C4%83%20leg%C4%83tur%C4%83%20cu%20foo_b%0Afn%20do_something%3C'a%2C%20'b%3E(foo_a%3A%20%26'a%20Foo%2C%20foo_b%3A%20%26'b%20Foo)%20-%3E%20%26'b%20i32%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20return%20%26foo_b.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2012%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20do_something(%26foo_a%2C%20%26foo_b)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo_a%20aici%20pentru%20c%C4%83%20numai%20durata%20de%20via%C8%9B%C4%83%0A%20%20%20%20%2F%2F%20a%20lui%20foo_b%20%C8%99i%20a%20valorii%20de%20retur%20continu%C4%83%20de%20aici%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20x%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo_b%20aici%0A%7D%0A
+- title: Statische Lebensdauern
+  content_markdown: >
+    Eine **statische** Variable ist eine Speicherressource, die zur Kompilierungszeit erstellt wird
+    existiert durch einen Programmstart
+
+    beenden. Ihre Typen müssen explizit angegeben werden.
+
+    
+    Eine **statische Lebensdauer** ist eine Speicherressource, die unbegrenzt vorhanden ist
+    Ende eines Programms. Beachten Sie, dass nach dieser Definition
+
+    Einige statische Lebenszeitressourcen können zur Laufzeit erstellt werden.
+
+    
+    Ressourcen mit statischer Lebensdauer haben einen speziellen Lebensdauerspezifizierer `'static`.
+
+
+    `'static` Ressourcen werden niemals **verloren**.
+
+
+    Wenn statische Lebenszeitressourcen Referenzen enthalten, müssen sie alle `'statisch` sein
+    (Alles andere würde nicht lange genug leben).
+
+
+    Speicherdetail:
+
+
+    * Das Ändern statischer Variablen ist von Natur aus gefährlich, weil sie es sind
+    weltweit zugänglich und für jedermann lesbar
+      Einführung der Möglichkeit eines Datenwettlaufs. Wir werden später über die Herausforderungen globaler Daten sprechen.
+    * Rust erlaubt die Verwendung von „unsafe { ... }“-Blöcken, um einige Operationen auszuführen
+    dass der Compiler keine Speichergarantien geben kann. Die [<span
+    style="color:red; Schriftstärke:
+    fett;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐ ͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+    darüber sollte nicht beiläufig gesprochen werden.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20variabilele%20statice%20pot%20fi%20%C3%AEncadrate%20%C3%AEntr-o%20func%C8%9Bie%0A%20%20%20%20static%20mut%20SECRET%3A%20%26%27static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string-urile%20%C3%AEntre%20ghilimele%20au%20durat%C4%83%20de%20via%C8%9B%C4%83%20static%C4%83%0A%20%20%20%20let%20msg%3A%20%26%27static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26%27static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20Pute%C8%9Bi%20%C3%AEnc%C4%83lca%20unele%20reguli%2C%20dar%20trebuie%20s%C4%83%20fi%C8%9Bi%20explici%C8%9Bi%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20seta%20SECRET%20cu%20un%20string%20%C3%AEntre%20ghilimele%0A%20%20%20%20%20%20%20%20%2F%2F%20pentru%20c%C4%83%20are%20de%20asemenea%20durat%C4%83%20de%20via%C8%9B%C4%83%20static%C4%83%20(%60static)%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Lebensdauern in Datentypen
+  content_markdown: >
+    Ähnlich wie bei Funktionen können Datentypen mit der Lebensdauer parametrisiert werden
+    Spezifizierer seiner Mitglieder.
+
+
+    Rust validiert, dass die enthaltende Datenstruktur der Referenzen niemals vorhanden ist
+    hält länger als die Besitzer, auf die seine Referenzen hinweisen.
+
+
+    Wir können keine Strukturen herumlaufen lassen, auf die Referenzen verweisen
+    Nichts!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.i)%3B%0A%7D%0A
+- title: Kapitel 5 - Abschluss
+  content_markdown: >
+    Puh, herzlichen Glückwunsch, dass du es geschafft hast! Ich weiß, es ist eine Menge zu verdauen, aber du
+    sind gut
+
+    auf dem Weg, ein Rustaceaner zu werden. Hoffentlich ist klar, wie Rust als
+    Sprache zielt darauf ab
+
+    Lösen Sie viele dieser häufigen Herausforderungen in der Systemprogrammierung:
+
+    * Unbeabsichtigte Änderung von Ressourcen
+
+    * Vergessen, Ressourcen abzubauen
+
+    * Ressourcen wurden versehentlich zweimal dekonstruiert
+
+    * Nutzung von Ressourcen, nachdem sie dekonstruiert wurden
+
+    * Datenwettläufe, die dadurch verursacht werden, dass auf Ressourcen geschrieben wird, während andere lesen
+    Ressourcen
+
+    * Klare Sicht auf Bereiche des Codes, für die der Compiler keine Garantien geben kann
+
+
+    Im nächsten Kapitel werden wir einen Teil dieses Wissens anwenden und uns ansehen, wie
+    Rust verarbeitet Text.
