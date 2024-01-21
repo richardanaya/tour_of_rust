@@ -28,11 +28,11 @@
 
     * Structurile nu pot moșteni câmpuri de la o structura părinte.
 
-    * Structurile nu pot moșteni funcții de la o structura părinte.
+    * Structurile nu pot moșteni funcții de la o structură părinte.
 
     Acestea fiind spuse, Rust implementează o mulțime de caracteristici ale unui limbaj de programare,
-    deci probabail nu vă vor deranja aceste lipsuri.
-- title: Încapsulare prin matode
+    deci probabil nu vă vor deranja aceste lipsuri.
+- title: Încapsulare prin metode
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creatura.luare_zgomot())%3B%0A%7D%0A
   content_markdown: >
@@ -61,7 +61,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_sunet(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creatura.luare_sunet())%3B%0A%7D%0A
   content_markdown: >
-    Rust poate ascude implementările interioare ale obiectelor.
+    Rust poate ascunde implementările interioare ale obiectelor.
 
     În mod implicit, câmpurile și metodele sunt accesibile doar modulului de care aparțin.
 
@@ -106,7 +106,7 @@
     Trăsăturile pot avea metode implementate.
 
     Funcțiile nu au acces direct asupra câmpurilor interioare ale unei structuri, dar aceste metode implementate
-    trăsăturilor pot fi folositoare în distribuirea comportamentelor între mai mulți implementarori ai trăsăturilor.
+    trăsăturilor pot fi folositoare în distribuirea comportamentelor între mai mulți implementatori ai trăsăturilor.
 - title: Moștenirea Trăsăturilor
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Atrait%20FacatorDeZgomotGalagios%3A%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_mult_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomotGalagios%20for%20CreaturaMaritima%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creatura.fa_mult_zgomot()%3B%0A%7D%0A
@@ -131,7 +131,7 @@
 
     Detalii cu privire la memorie:
 
-    * Expedierea dinamică este puțîn mai lentă, din cauza urmăririi prin pointeri pentru a determina
+    * Expedierea dinamică este puțin mai lentă, din cauza urmăririi prin pointeri pentru a determina
     apelul de funcție real.
 - title: Trait Objects
   content_markdown: >
@@ -145,7 +145,7 @@
 
     Detalii:
 
-    * Această lista de funcții este cunoscută în C++ sub denumirea de *vtable*.
+    * Această listă de funcții este cunoscută în C++ sub denumirea de *vtable*.
 - title: Manevrarea Tipurilor de Date Fără Dimensiune Fixă
   content_markdown: >
     Trăsăturile introduc o provocare interesantă când dorim să le stocăm în interiorul altei structuri.
@@ -161,8 +161,8 @@
     * indirecție - Punerea instanțelor pe heap ne oferă avantajul de a nu fi necesar să cunoaștem dimensiunea
     tipului de date la compilare, aceasta fiind folosita doar în momentul rulării, când programatorul poate
     
-    folosi orice tip de date care se portivește. Accesarea valorii efective se realizează printr-un pointer
-    (presupune o indirectie), iar acest lucru poate fi considerat un dezavantaj.
+    folosi orice tip de date care se potrivește. Accesarea valorii efective se realizează printr-un pointer
+    (presupune o indirecție), iar acest lucru poate fi considerat un dezavantaj.
     
     Mai există și alte modalități!
 - title: Funcții Generice
