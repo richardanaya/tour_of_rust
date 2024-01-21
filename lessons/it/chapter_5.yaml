@@ -1,0 +1,229 @@
+- title: Capitolo 5 - Dati sulla proprietà e sui prestiti
+  content_markdown: >
+    Rust ha un paradigma unico per la gestione della memoria rispetto ad altri programmi
+    le lingue. Stiamo andando a guardare
+
+    i comportamenti e le convalide del compilatore uno per uno, quindi non lo è
+    travolgente. È importante ricordarlo
+
+    in definitiva le regole che mostriamo non esistono per renderti la vita difficile, ma per aiutarti
+    rendi il tuo codice meno soggetto a errori!
+- title: Proprietà
+  content_markdown: >
+    Istanziare un tipo e **associarlo** a un nome di variabile crea una memoria
+    risorsa che il compilatore Rust convaliderà
+
+    per tutta la sua **vita**. La variabile associata è chiamata risorsa
+    **proprietario**.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Gestione delle risorse basata sull'ambito
+  content_markdown: |
+    Rust utilizza la fine dell'ambito come luogo in cui decostruire e deallocare una risorsa.
+
+    Il termine per questa decostruzione e deallocazione è chiamato **drop**.
+
+    Dettagli della memoria:
+    * Rust non prevede la raccolta dei rifiuti.
+    * In C++ questa operazione viene anche chiamata Resource Acquisition Is Inizializzazione (RAII).
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: L'eliminazione è gerarchica
+  content_markdown: >
+    Quando una struttura viene eliminata, viene eliminata prima la struttura stessa, poi la sua
+    i bambini vengono abbandonati individualmente e così via.
+
+
+    Dettagli sulla memoria:
+
+    * Liberando automaticamente la memoria, Rust aiuta a garantire che ce ne siano di meno
+    perdite di memoria.
+
+    * Le risorse di memoria possono essere eliminate solo una volta.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Trasferimento di proprietà
+  content_markdown: >
+    Quando un proprietario viene passato come argomento a una funzione, la proprietà viene spostata su
+    il parametro della funzione.
+
+
+    Dopo uno **spostamento** la variabile nella funzione originale non può più essere
+    usato.
+
+
+    Dettagli della memoria:
+
+    * Durante uno **spostamento** la memoria dello stack del valore del proprietario viene copiata nel file
+    memoria dello stack dei parametri della chiamata di funzione.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Restituzione della proprietà
+  content_markdown: |
+    La proprietà può anche essere restituita da una funzione.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Proprietà in prestito con referenze
+  content_markdown: |
+    I riferimenti ci consentono di prendere in prestito l'accesso a una risorsa con l'operatore "&".
+
+    Anche i riferimenti vengono eliminati come le altre risorse.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Prestito di proprietà mutevole con referenze
+  content_markdown: >
+    Possiamo anche prendere in prestito l'accesso mutabile a una risorsa con l'operatore `&mut`.
+
+
+    Un proprietario di una risorsa non può essere spostato o modificato mentre è preso in prestito in modo mutabile.
+
+
+    Dettagli della memoria:
+
+    * Rust impedisce di avere due modi per modificare un valore posseduto perché
+    introduce la possibilità di una gara di dati.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Dereferenziazione
+  content_markdown: >
+    Utilizzando i riferimenti `&mut`, puoi impostare il valore del proprietario utilizzando `*`
+    operatore.
+
+
+    Puoi anche ottenere una copia di un valore posseduto utilizzando l'operatore "*" (se value
+    possono essere copiati - discuteremo dei tipi copiabili nei capitoli successivi).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Passaggio di dati presi in prestito
+  content_markdown: >
+   Le regole di Rust per i riferimenti potrebbero essere meglio riassunte da:
+
+
+    * Rust permette che ci sia solo un riferimento mutabile **o** multiplo
+    riferimenti non mutabili **ma non entrambi**.
+
+    * Un riferimento non deve mai **vivere più a lungo** del suo proprietario.
+
+
+    Questo non tende a essere un problema quando si passano riferimenti a
+    funzioni.
+
+
+    Dettagli della memoria:
+
+    * La prima regola di riferimento previene le gare di dati. Cos'è una corsa ai dati? UN
+    la corsa dei dati durante la lettura dei dati può non essere sincronizzata
+    a causa dell'esistenza di un autore dei dati allo stesso tempo. Questo succede
+    spesso nella programmazione multi-thread.
+
+    * La seconda regola dei riferimenti impedisce l'uso improprio dei riferimenti che rimandano
+    a dati inesistenti (chiamati puntatori pendenti in C).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Riferimenti di riferimenti
+  content_markdown: |
+    I riferimenti possono essere utilizzati anche su pezzi di riferimento.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Vite di vita esplicite
+  content_markdown: >
+    Anche se Rust non sempre lo mostra nel codice, il compilatore lo capisce
+    la durata di ogni variabile e tenterà
+
+    per convalidare che un riferimento non esiste mai più a lungo del suo proprietario.
+
+
+    Le funzioni possono essere esplicite parametrizzando la firma della funzione con
+    simboli che aiutano a identificare
+
+    quali parametri e valori restituiti condividono la stessa durata.
+
+
+    Gli identificatori di durata iniziano sempre con `'` (ad esempio `'a`, `'b`, `'c`)
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Vite multiple
+  content_markdown: >
+    Gli specificatori di durata ci consentono di essere espliciti con determinati scenari
+    il compilatore non può risolversi da solo
+
+    distinguendo tutte le durate di un componente della firma di funzione.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Durata statica
+  content_markdown: >
+    Una variabile **statica** è una risorsa di memoria creata in fase di compilazione
+    esiste attraverso un programma start to
+
+    fine. I tipi devono essere specificati esplicitamente.
+
+
+    Una **durata statica** è una risorsa di memoria che dura indefinitamente
+    fine di un programma. Si noti che con questa definizione
+
+    alcune risorse a durata statica possono essere create in fase di esecuzione.
+
+
+    Le risorse con durate statiche hanno uno speciale specificatore di durata "static".
+
+
+    Le risorse `'statiche` non verranno mai **cadute**.
+
+
+    Se le risorse con durata statica contengono riferimenti, devono essere tutte "statiche".
+    (niente di meno non vivrebbe abbastanza a lungo).
+
+
+    Dettagli della memoria:
+
+
+    * La modifica delle variabili statiche è intrinsecamente pericolosa perché lo sono
+    accessibile a livello globale per essere letto da chiunque
+      introducendo la possibilità di una corsa ai dati. Parleremo più tardi delle sfide poste dai dati globali.
+    * Rust consente l'uso di blocchi `unsafe { ... }` per eseguire alcune operazioni
+    su cui il compilatore non può fornire garanzie di memoria. Il [<intervallo
+    style="colore:rosso; peso-carattere:
+    grassetto;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐ ͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
+    non se ne dovrebbe parlare casualmente.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Durata nei tipi di dati
+  content_markdown: >
+    Analogamente alle funzioni, i tipi di dati possono essere parametrizzati con durata
+    specificatori dei suoi membri.
+
+
+    Rust verifica che la struttura dati contenente i riferimenti non sia mai presente
+    dura più a lungo dei proprietari a cui fanno riferimento i suoi riferimenti.
+
+
+    Non possiamo avere strutture che vanno in giro con riferimenti che puntano a
+    il nulla!
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+- title: Capitolo 5 - Conclusione
+  content_markdown: >
+    Wow, congratulazioni per avercela fatta! So che è molto da accettare, ma tu
+    stanno bene
+
+    in procinto di diventare un Rustacean. Speriamo che sia chiaro come Rust as a
+    il linguaggio mira a
+
+    risolvere molte di queste sfide comuni nella programmazione dei sistemi:
+
+
+    * Modifica involontaria delle risorse
+
+    * Dimenticare di decostruire le risorse
+
+    * Le risorse sono state demolite accidentalmente due volte
+
+    * Utilizzo delle risorse dopo che sono state decostruite
+
+    * Gara di dati causata dalla scrittura su risorse mentre altri leggono
+    risorse
+
+    * Vedere chiaramente le aree del codice in cui il compilatore non può fornire garanzie
+
+
+    Nel prossimo capitolo applicheremo parte di questa conoscenza mentre vedremo come
+    Rust gestisce il testo.
