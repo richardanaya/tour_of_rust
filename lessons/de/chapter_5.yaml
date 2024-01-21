@@ -99,7 +99,7 @@
     * Rust erlaubt nur eine veränderbare Referenz **oder** mehrere
     nicht veränderliche Referenzen **aber nicht beides**.
 
-    * Eine Referenz darf niemals **länger leben** als ihr Besitzer.Eine Referenz darf niemals **länger leben** als ihr Besitzer.
+    * Eine Referenz darf niemals **länger leben** als ihr Besitzer.
 
 
     Dies stellt in der Regel kein Problem dar, wenn Verweise weitergegeben werden Funktionen.
