@@ -162,7 +162,7 @@
     Ressourcen mit statischer Lebensdauer haben einen speziellen Lebensdauerspezifizierer `'static`.
 
 
-    '`Statische' Ressourcen werden niemals **verloren**.
+    `'static` Ressourcen werden niemals **verloren**.
 
 
     Wenn statische Lebenszeitressourcen Referenzen enthalten, müssen sie alle `'statisch` sein
