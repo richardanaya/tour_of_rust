@@ -1,4 +1,4 @@
-- title: Capitolul 1 - Ideiile și conceptele de bază
+- title: Capitolul 1 - Ideile și conceptele de bază
   content_markdown: >
     În acest prim capitol vom explora ideile și conceptele de bază despre
     funcții, variabile și tipurile primare de date. Ne bucurăm că
@@ -53,7 +53,7 @@
     fac parte din două categorii:
 
 
-    * **mutabile** (mutable) - compilatorul va lăsa utilizatorul să modifice șî
+    * **mutabile** (mutable) - compilatorul va lăsa utilizatorul să modifice și
     să citească valoarea acestui tip de variabile.
 
     * **imutabile** (immutable) - compilatorul va lăsa utilizatorul doar să citească valoarea acestei variabile.
@@ -66,7 +66,7 @@
     atenți la acest cuvânt cheie.
 - title: Tipuri de date de bază
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20acesta%20este%20un%20i32%20%C3%AEn%20mod%20implicit%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20acesta%20este%20un%20f64%20%C3%AEn%20mod%20implicit%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+x+%3D+12%3B+%2F%2F+acesta+este+un+i32+%C3%AEn+mod+implicit%0A++++let+a+%3D+12u8%3B%0A++++let+b+%3D+4.3%3B+%2F%2F+acesta+este+un+f64+%C3%AEn+mod+implicit%0A++++let+c+%3D+4.3f32%3B%0A++++let+d+%3D+%27r%27%3B+%2F%2F+caracter+unicode%0A++++let+ferris+%3D+%27%F0%9F%A6%80%27%3B+%2F%2F+tot+un+caracter+unicode%0A++++let+bv+%3D+true%3B%0A++++let+t+%3D+%2813%2C+false%29%3B%0A++++let+sentence+%3D+%22hello+world%21%22%3B%0A++++println%21%28%0A++++++++%22%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++x%2C+a%2C+b%2C+c%2C+d%2C+ferris%2C+bv%2C+t.0%2C+t.1%2C+sentence%0A++++%29%3B%0A%7D%0A
   content_markdown: >
     Rust are o varietate de tipuri de date familiare dumneavoastră:
 
@@ -78,11 +78,13 @@
 
     * numere întregi cu semn - `i8` `i16` `i32` `i64` `i128` pentru a reprezentare numere întregi
 
-    * numere întregi de dimensiunea unui pointer - `usize` `isize` pentru a reprezenta indexi
+    * numere întregi de dimensiunea unui pointer - `usize` `isize` pentru a reprezenta indecși
 
     și dimensiunea datelor în memorie
 
     * numere cu virgulă mobilă - `f32` `f64` pentru a reprezenta numere reale
+
+    * caractere - `char` pentru reprezentarea unui singur caracter Unicode
 
     * tuplu - `(valoare, valoare, ...)` pentru trecerea unor secvențe fixe de valori pe stivă
 
