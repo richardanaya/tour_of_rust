@@ -28,7 +28,7 @@
 
     * Structurile nu pot moșteni câmpuri de la o structura părinte.
 
-    * Structurile nu pot moșteni funcții de la o structura părinte.
+    * Structurile nu pot moșteni funcții de la o structură părinte.
 
 
     Acestea fiind spuse, Rust implementează o mulțime de caracteristici ale unui limbaj de programare,
@@ -65,7 +65,6 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_sunet(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creatura.luare_sunet())%3B%0A%7D%0A
   content_markdown: >
     Rust poate ascunde implementările interioare ale obiectelor.
-
 
     În mod implicit, câmpurile și metodele sunt accesibile doar modulului de care aparțin.
 
@@ -180,7 +179,7 @@
 
     folosi orice tip de date care se potrivește. Accesarea valorii efective se realizează printr-un pointer
     (presupune o indirecție), iar acest lucru poate fi considerat un dezavantaj.
-
+    
     Mai există și alte modalități!
 - title: Funcții generice
   code: >-

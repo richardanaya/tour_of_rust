@@ -3,74 +3,74 @@
     Acum că înțelegem puțin modul în care Rust gestionează memoria, suntem pregătiți să discutăm
     mai detaliat despre folosirea textelor.
 
-    Limbajul Rust acorda multă importanță folosirii textelor în diverse limbi și modului în care sunt reprezentate
-    acestea la  nivel de octeți, lucruri cu care s-ar putea să nu fiți familiarizați din alte limbaje.
+    Limbajul Rust acordă o importanță deosebită folosirii textelor în diverse limbi și modului în care sunt reprezentate
+    acestea la nivel de octeți, lucruri cu care s-ar putea să nu fiți familiarizați din alte limbaje.
 
-    Acestea fiind spuse, Rust dispune de numeroase unelte pentru gestionarea lor.
+    Acestea fiind spuse, Rust dispune de numeroase unelte pentru gestionarea acestor aspecte.
 - title: Șiruri de caractere literale
   content_markdown: >
     Șirurile de caractere literale (în engleză *string literals*) sunt întotdeauna reprezentate
     folosind codificarea **utf-8** al setului de caractere Unicode.
-
 
     Șirurile de caractere literale sunt de tipul `&'static str`:
 
     * `&` înseamnă că referențiază o locație din memorie, neavând `&mut` compilatorul
     nu va permite modificări.
 
-    * `'static` înseamnă că datele șirului vor fi disponibile până la sfârșitul
+    * `'static` înseamnă că datele șirului de caractere vor fi disponibile până la sfârșitul
     programului (nu se dă `drop` niciodată).
 
-    * `str` înseamnă o secvență de octeți ce formează întotdeauna un text valid in formatul **utf-8**
+    * `str` înseamnă că indică o secvență de octeți ce formează întotdeauna un text valid în formatul **utf-8**
+
 
 
     Detalii legate de memorie:
 
-    * Compilatorul de Rust probabil va pune șirul de caractere în segmentul de date al
-    memoriei programului.
+    * Compilatorul de Rust va pune probabil șirul de caractere în segmentul de date al
+    memoriei programului dumneavoastră.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22hi%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20a.len())%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+a%3A+%26%27static+str+%3D+%22salut+%F0%9F%A6%80%22%3B%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+a%2C+a.len%28%29%29%3B%0A%7D%0A
 - title: Ce este utf-8
   content_markdown: "Pe măsură ce tot mai multe limbi au început a fi folosite pe calculatoare, lumea a avut nevoie de modalități de reprezentare a mai multor caractere de text\ndecat ASCII permitea (1 byte permitea numai 256 de caractere). \n\nA fost introdus **utf-8**, având o lungime variabilă de bytes (1-4 bytes), lucru ce a crescut considerabil gama de caractere posibile.\n\nUn avantaj al caracterelor de dimensiuni variabile este că textul nu mai are octeți inutili pentru caractere ASCII foarte comune (necesitând doar 1 octet în **utf-8**).\n\nUn dezavantaj al caracterelor de dimensiuni variabile este faptul că căutarea caracterelor nu se mai poate face rapid \n(timp constant **O(1)**) cu o simplă indexare (exemplu: `my_text[3]` pentru a obține al patrulea caracter). Este posibil ca\ncaracterele anterioare să aibă lățimi variabile, modificând locul în care începe de fapt al 4-lea caracter în secvența de octeți.\n\nTrebuie în schimb să parcurgem o secvență **utf-8** de octeți pentru a înțelege unde încep de fapt caracterele Unicode (timp liniar **O(n)**).\n\nFerris: \"În mare parte, doar mă bucur că am **utf-8** pentru a reprezenta emoticoane cu prietenii mei subacvatici.\"\n\n<span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
-- title: Secvențe escape
+- title: Secvențe Escape
   content_markdown: >
-    Este o provocare să reprezinți vizual anumite caractere, așa că secvențele escape (în engleză *escape codes*)
-    ne permit să punem un simbol în locul lor.
+    Este o provocare să reprezinți vizual anumite caractere, așa că **secvențele escape** (eng. *escape codes*)
+    ne permit să le înlocuim cu un simbol.
 
 
-    Rust suportă codurile de escape comune ale limbajelor bazate pe C:
+    Rust permite folosirea secvențelor escape comune ale limbajelor bazate pe C:
 
-    * `\n` - linie nouă
+    * `\n` - linie nouă (eng. *newline*)
 
-    * `\r` - carriage return
+    * `\r` - carriage return 
 
     * `\t` - tab
 
-    * `\\\` - backslash
+    * `\\` - bară oblică inversă (eng. *backslash*)
 
-    * `\0` - nul
+    * `\0` - nul (eng. *null*)
 
-    * `\'` - ghilimele singulare
+    * `\'` - apostrof (eng. *single-quote*)
 
 
-    Lista completă există
+    Lista completă poate fi consultată
     [aici](https://doc.rust-lang.org/reference/tokens.html).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%20spune%3A%5Ct%5C%22salut%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
 - title: Șiruri de caractere literale pe mai multe linii
   content_markdown: |
-    Șirurile de caractere din Rust sunt în mod implicit pe mai multe linii.
+    Șirurile de caractere din Rust se întind, în mod implicit, pe mai multe linii.
 
     Folosiți un `\` la sfârșitul rândului dacă nu doriți să se facă o întrerupere de rând.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20haiku%3A%20%26'static%20str%20%3D%20%22%0A%20%20%20%20%20%20%20%20I%20write%2C%20erase%2C%20rewrite%0A%20%20%20%20%20%20%20%20Erase%20again%2C%20and%20then%0A%20%20%20%20%20%20%20%20A%20poppy%20blooms.%0A%20%20%20%20%20%20%20%20-%20Katsushika%20Hokusai%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20haiku)%3B%0A%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20println!(%22salutare%20%5C%0A%20%20%20%20lume%22)%20%2F%2F%20observati%20cum%20spatierea%20de%20dinainte%20de%20%22l%22%20este%20ignorata%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+haiku%3A+%26%27static+str+%3D+%22%0A++++++++Scriu%2C+%C8%99terg%2C+rescriu%0A++++++++%C8%98terg+iar%C4%83%C8%99i%2C+%C8%99i+apoi%0A++++++++%C3%8Enflore%C8%99te+un+mac.%0A++++++++-+Katsushika+Hokusai%22%3B%0A++++println%21%28%22%7B%7D%22%2C+haiku%29%3B%0A++++%0A++++%0A++++println%21%28%22salutare+%5C%0A++++lume%22%29+%2F%2F+observa%C8%9Bi+cum+spa%C8%9Bierea+de+dinainte+de+%E2%80%9El%E2%80%9D+este+ignorat%C4%83%0A%7D%0A
 - title: Șiruri de caractere literale brute
   content_markdown: >
-    Șiruri de caractere brute (în engleză *raw strings*) ne permit scrierea unei secvente de caractere,
+    Șirurile de caractere brute (eng. *raw strings*) ne permit scrierea unei secvențe de caractere,
     cuvânt cu cuvânt, începând cu `r#"` și terminând cu `"#`. Acest lucru ne permite să inserăm
 
     caractere care altfel ne-ar putea face să confundăm un șir de caractere normal cu unul literal
-    (cum ar fi ghilimele duble și backslash-urile).
+    (cum ar fi ghilimele duble și backslash-uri).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20r%23%22%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22sfat%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20Sirurile%20de%20caractere%20brute%20sunt%20folositoare%20in%20unele%20situatii.%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%22%23%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a)%3B%0A%7D%0A
 - title: Șiruri de caractere literale din fișiere
@@ -86,12 +86,10 @@
     ```
 - title: Subșiruri de caractere
   content_markdown: >
-    Un subșir de caractere (în engleză *string slice*) este o referință la o secvență de octeți din memorie ce trebuie
-    întotdeauna să fie în format utf-8 valid.
-
+    Un subșir de caractere (eng. *string slice*) este o referință la o secvență de octeți din memorie ce trebuie
+    să fie întotdeauna în format utf-8 valid.
 
     Un subșir al unui subșir (în engleză *sub-slice*) de `str`, trebuie să fie, de asemenea, în format utf-8 valid.
-
 
     Metode comune ale `&str`:
 
@@ -112,10 +110,10 @@
 
     Un `char` are întotdeauna o lungime de 4 octeți (ceea ce permite o căutare eficientă după caractere individuale).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20colecteaza%20caracterele%20ca%20vector%20de%20char-uri%0A%20%20%20%20let%20chars%20%3D%20%22salut%20%F0%9F%A6%80%22.chars().collect%3A%3A%3CVec%3Cchar%3E%3E()%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars.len())%3B%20%2F%2F%20ar%20trebui%20sa%20fie%207%0A%20%20%20%20%2F%2F%20cum%20un%20char%20ocupa%204%20biti%2C%20putem%20converti%20la%20u32%0A%20%20%20%20println!(%22%7B%7D%22%2C%20chars%5B3%5D%20as%20u32)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++%2F%2F+colecteaz%C4%83+caracterele+ca+vector+de+char-uri%0A++++let+chars+%3D+%22salut+%F0%9F%A6%80%22.chars%28%29.collect%3A%3A%3CVec%3Cchar%3E%3E%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+chars.len%28%29%29%3B+%2F%2F+ar+trebui+s%C4%83+fie+7%0A++++%2F%2F+cum+un+char+ocup%C4%83+4+octe%C8%9Bi%2C+putem+converti+la+u32%0A++++println%21%28%22%7B%7D%22%2C+chars%5B3%5D+as+u32%29%3B%0A%7D%0A
 - title: Șiruri de caractere
   content_markdown: >
-    Un șir de caractere (**String**) este o structură care deține o secvență de octeți utf-8 în memoria heap.
+    Un **șir de caractere** (eng. *string*) este o structură care deține o secvență de octeți utf-8 în memoria heap.
 
 
     Deoarece memoria sa se află în heap, aceasta poate fi extinsă, modificată etc. în moduri în care șirurile
@@ -131,11 +129,10 @@
 
     * `to_lowercase`/`to_uppercase` pentru a schimba între majuscule și minuscule.
 
-    * `trim` pentru eliminarea spatiilor.
+    * `trim` pentru eliminarea spațiilor.
 
 
     Atunci când un șir de caractere este eliminat (drop), este eliminată și memoria heap a acestuia.
-
 
     Șirurile de caractere au un operator `+` care extinde șirul cu un `&str` și se returnează pe sine însuși,
     dar s-ar putea să nu fie atât de ergonomic pe cât sperați (șirul din stânga este consumat, iar buffer-ul
@@ -150,7 +147,7 @@
     Acest lucru oferă o mare flexibilitate în majoritatea scenariilor, când nu este nevoie
     să transmiteți de fapt proprietatea (ownership).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20spune_tare(msg%3A%26str)%7B%0A%20%20%20%20println!(%22%7B%7D!!!%22%2Cmsg.to_string().to_uppercase())%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20spune_tare%20poate%20imprumuta%20un%20%26'static%20str%20ca%20%26str%0A%20%20%20%20spune_tare(%22salut%22)%3B%0A%20%20%20%20%2F%2F%20spune_tare%20poate%2C%20de%20asemenea%2C%20imprumuta%20un%20String%20ca%20%26str%0A%20%20%20%20spune_tare(%26String%3A%3Afrom(%22la%20revedere%22))%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+spune_tare%28mesaj%3A%26str%29%7B%0A++++println%21%28%22%7B%7D%21%21%21%22%2Cmesaj.to_string%28%29.to_uppercase%28%29%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++%2F%2F+spune_tare+poate+%C3%AEmprumuta+un+%26%27static+str+ca+%26str%0A++++spune_tare%28%22salut%22%29%3B%0A++++%2F%2F+spune_tare+poate%2C+de+asemenea%2C+%C3%AEmprumuta+un+String+ca+%26str%0A++++spune_tare%28%26String%3A%3Afrom%28%22la+revedere%22%29%29%3B%0A%7D%0A
 - title: Construirea șirurilor de caractere
   content_markdown: |
     `concat` și `join` sunt două moduri simple, dar eficiente de a construi șiruri de caractere.
@@ -159,16 +156,16 @@
 - title: Formatarea șirurilor de caractere
   content_markdown: >
     Macroul `format!` ne permite să creăm un șir de caractere prin definirea unui șir parametrizat
-    cu poziții pentru locul și modul în care trebuie plasate valorile (exemplu: `{}`).
+    cu poziții pentru locul și modul în care trebuie plasate valorile (ex.: `{}`).
 
 
     `format!` utilizează aceleași șiruri parametrizate ca și `println!`.
 
 
     Capabilitățile acestei funcții sunt de o amploare prea mare pentru *Turul limbajului Rust*;
-    consultați documentația [aici](https://doc.rust-lang.org/std/fmt/).
+    puteți consulta documentația [aici](https://doc.rust-lang.org/std/fmt/).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20format!(%22secretul%20vietii%3A%20%7B%7D%22%2Ca)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cf)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+a+%3D+42%3B%0A++++let+f+%3D+format%21%28%22secretul+vie%C8%9Bii%3A+%7B%7D%22%2Ca%29%3B%0A++++println%21%28%22%7B%7D%22%2Cf%29%3B%0A%7D%0A
 - title: Convertirea șirurilor de caractere
   content_markdown: |
     Multe tipuri pot fi convertite într-un șir de caractere folosind `to_string`.
@@ -188,5 +185,5 @@
     Până acum, am privit limbajul Rust în mare parte prin prisma unei paradigme procedurale
     (adică doar funcții și date),
 
-    dar este momentul să vorbim acum despre trăsături și despre capacitățile dezvăluite de
+    dar este momentul să vorbim acum despre trăsături (eng. *traits*) și despre capacitățile oferite de
     paradigma orientată pe obiecte a limbajului Rust.
