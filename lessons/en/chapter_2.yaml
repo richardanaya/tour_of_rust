@@ -105,26 +105,26 @@
   content_markdown: >
       Deconstructing 'tuples' allows us to extract individual elements from the group.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=330cce03a942deef101e8a818e09368a
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++++++let+point+%3D+%283%2C+4%29%3B%0A%0A++++++++match+point+%7B%0A++++++++++++%2F%2Fchecks+if+the+first+value+is+3%2C+and+prints+the+second+regardless+of+its+value%0A++++++++++++%283%2C+y%29+%3D%3E+%7B%0A++++++++++++println%21%28%22When+the+first+value+is+3%2C+the+second+is+%7B%3A%3F%7D%22%2C+y%29%0A++++++++++++++++%0A++++++++++++%7D%2C%0A++++++++++++%2F%2Fchecks+if+the+last+value+is+4%2C+and+completely+ignores+the+first%0A++++++++++++%28..%2C+4%29+%3D%3E+%7B%0A++++++++++++println%21%28%22The+last+value+is+4%2C+the+others+are+irelevant%22%29%7D%0A++++++++++++%2C%0A++++++++++++%2F%2Fwe+do+not+use+a+default+match%2C+since+the+last+arm+handles+all+cases%0A++++++++++++%28x%2C+y%29+%3D%3E+%7B%0A++++++++++++println%21%28%22The+two+values+are+%7B%3A%3F%7D+and+%7B%3A%3F%7D%22%2C+x+%2C+y%29%0A++++++++++++++++%0A++++++++++++%7D%2C%0A++++++++%7D%0A++++%7D
 - title: Destructuring Arrays/Slices
   content_markdown: >
       'Arrays' and 'slices' in Rust can be destructured similarly.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=2b4e115dfcc4e0ecfdc6da202f9b7dd9
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=++++fn+main%28%29+%7B%0A++++++++let+numbers+%3D+%5B1%2C+-3%2C+7%2C+4%5D%3B%0A%0A++++++++match+numbers+%7B%0A++++++++++++%2F%2Fmatches+the+first+element%2C+prints+the+second%2C+and+ignores+the+rest%0A++++++++++++%5B1%2C+second%2C+..%5D+%3D%3E+%7B%0A++++++++++++++++println%21%28%22First+two+elements%3A+1%2C+%7B%7D%22%2C+second%29%3B%0A++++++++++++%7D%0A++++++++++++%2F%2Fsingle+values+can+be+ignored+with+%22_%22%2C+larger+groups+utilising+%22..%22%22%0A++++++++++++%5B2%2C+_%2C+third%2C+..%5D+%3D%3E+%7B%0A++++++++++++println%21%28+%22First+is+2%2C+second+we+ignore%2C+third+is+%7B%7D%22%2C+third%29%3B%0A++++++++++++%7D%0A++++++++++++%2F%2Fyou+can+bind+and+store+the+other+elements+in+a+different+array+even%21%0A++++++++++++%5B3%2C+other+%40+..%5D+%3D%3E+%7B%0A++++++++++++println%21%28%0A++++++++++++%22First+is+3%2C+and+the+other+elements+were+%7B%3A%3F%7D%22%2C+other%29%3B%0A++++++++++++%7D%2C%0A++++++++++++_+%3D%3E+%7B%0A++++++++++++++++println%21%28%22Other+cases%22%29%3B%0A++++++++++++%7D%0A++++++++%7D%0A++++%7D
 - title: Destructuring Enums
   content_markdown: >
       'Enums' require a little more effort, since they have multiple
 
       fields of different types.
   code: >-
-    https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&gist=fb9a2b07856cca58228e1a4f7052aea6
+    https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&code=%2F%2Fthis+allows+us+to+NOT+construct+certain+parts+of+enums%0A%23%5Ballow%28dead_code%29%5D%0Aenum+Cars+%7B%0A++++%2F%2FCar+names+are+Strings%0A++++Mercedes%2C%0A++++WolksWagen%2C%0A++++Opel%2C%0A++++%2F%2Fthe+next+are+fabrication+years%2C+and+the+years+they+changed+owners%0A++++MERC+%28u32%2C+u32%29%2C%0A++++WW+%28u32%2C+u32%2C+u32%2C+u32%29%2C%0A++++OPL+%28u32%2C+u32%2C+u32%29%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+car_for_sale+%3D+Cars%3A%3AWW+%282006%2C+2011%2C+2014%2C+2019%29%3B%0A++++match+car_for_sale+%7B%0A++++++++%2F%2Fwe+check+to+see+if+the+enum+contains+the+car+make+we+want%0A++++++++Cars%3A%3AWolksWagen+%3D%3E+%7B%0A++++++++++++println%21%28%22There+is+a+WolksWagen+for+sale%21%22%29%3B%0A++++++++%7D%2C%0A++++++++%2F%2Fwe+print+what+year+the+WW+is+made+in%0A++++++++Cars%3A%3AWW%28first_year%2C+..%29+%3D%3E+%7B%0A++++++++++++println%21%28%22The+WW+was+made+in+%7B%7D%22%2C+first_year%29%3B%0A++++++++%7D%2C%0A++++++++%2F%2Fwe+print+the+text+ONLY+IF+the+Opel+was+last+bought+in+2012%0A++++++++Cars%3A%3AOPL%28_%2C+_%2C+2012%29+%3D%3E+%7B%0A++++++++++++println%21%28%22The+last+owner+bought+the+Opel+in+2012.%22%29%3B%0A++++++++%7D%2C%0A++++++++%2F%2Fcovering+other+options%0A++++++++_+%3D%3E+%7B%0A++++++++++++++++println%21%28%22No+WolksWagen+was+for+sale%21%22%29%3B%0A++++++++++++%7D%0A++++%7D%0A%7D
 - title: Destructuring Structs
   content_markdown: >
       'Structs' DO NOT NEED match blocks to be destructured, but destructuring
 
       them works on the same logic as those before.
   code: >-
-    https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&gist=b5ec9bcb420987e46639bd4f8c1a06db
+    https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&code=fn+main%28%29+%7B%0A++++struct+Foo+%7B%0A++++++++x%3A+u32%2C%0A++++++++y%3A+String%2C%0A++++%7D%0A%0A++++%2F%2F+Try+changing+the+values+in+the+struct+to+see+what+happens%0A++++let+foo+%3D+Foo+%7B+x%3A+20%2C+y%3A+String%3A%3Afrom%28%22Foo%22%29+%7D%3B%0A%0A++++match+foo+%7B%0A++++++++%2F%2F+you+can+rename+and+reorder+the+variables%2C%0A++++++++Foo+%7B+y%3A+temp%2C+x%3A+2+%7D+%3D%3E+%7B%0A++++++++++++println%21%28%22The+number+is+2%2C+and+the+String+is+%7B%7D.%22%2C+temp%29%3B%0A++++++++%7D%2C%0A%0A++++++++%2F%2For+you+can+only+account+for+the+variable+you+are+interested+in%0A++++++++Foo+%7B+y%2C+..+%7D+%3D%3E+%7B%0A++++++++println%21%28%22Whatever+the+number+is%2C+the+name+is+%7B%7D.%22%2C+y%29%3B%0A++++++++%7D%2C%0A++++++++%2F%2Fwe+do+not+need+the+default+case%2C+since+the+arm+above+works+for+any+y%0A++++%7D%0A%0A++++%2F%2Fas+mentioned%2C+you+can+destructure+the+struct+without+a+match+block%0A++++let+clone+%3D+Foo+%7B+x%3A+25%2C+y%3A+String%3A%3Afrom%28%22Clone%22%29+%7D%3B%0A++++let+Foo+%7B+x+%3A+temp1%2C+y%3A+temp2+%7D+%3D+clone%3B%0A++++println%21%28%22Number+is+%7Btemp1%7D%2C+and+the+String+is+%7Btemp2%7D.%22%29%3B%0A%7D
 - title: Returning Values From loop
   content_markdown: |
     `loop` can break to return a value.
