@@ -25,7 +25,7 @@
 
     Speicherdetail:
     * Rust verfügt über keine Garbage Collection.
-    * Dies wird in C++ auch als Resource Acquisition Is Initialization (RAII) bezeichnet.
+    * Dies wird in C++ auch als Ressourcenbelegung ist Initialisierung (RAII) bezeichnet.
   code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo_b%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo_a%20aici%0A%7D%0A
 - title: Das Löschen ist hierarchisch
   content_markdown: >
