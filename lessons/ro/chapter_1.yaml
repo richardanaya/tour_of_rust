@@ -1,4 +1,4 @@
-- title: Capitolul 1 - Ideiile și conceptele de bază
+- title: Capitolul 1 - Ideile și conceptele de bază
   content_markdown: >
     În acest prim capitol vom explora ideile și conceptele de bază despre
     funcții, variabile și tipurile primare de date. Ne bucurăm că
@@ -53,7 +53,7 @@
     fac parte din două categorii:
 
 
-    * **mutabile** (mutable) - compilatorul va lăsa utilizatorul să modifice șî
+    * **mutabile** (mutable) - compilatorul va lăsa utilizatorul să modifice și
     să citească valoarea acestui tip de variabile.
 
     * **imutabile** (immutable) - compilatorul va lăsa utilizatorul doar să citească valoarea acestei variabile.
@@ -78,7 +78,7 @@
 
     * numere întregi cu semn - `i8` `i16` `i32` `i64` `i128` pentru a reprezentare numere întregi
 
-    * numere întregi de dimensiunea unui pointer - `usize` `isize` pentru a reprezenta indexi
+    * numere întregi de dimensiunea unui pointer - `usize` `isize` pentru a reprezenta indecși
 
     și dimensiunea datelor în memorie
 
