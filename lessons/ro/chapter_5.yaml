@@ -1,4 +1,4 @@
-- title: Capitolul 5 - Proprietatea și împrumutul Datelor
+- title: Capitolul 5 - Proprietatea și împrumutul datelor
   content_markdown: >
     Rust are o paradigmă unică pentru gestionarea memoriei în comparație cu alte limbaje
     de programare. O să analizăm
@@ -12,7 +12,7 @@
   content_markdown: >
     Instanțiind un tip și **legându-l** de un nume de variabilă vom crea o resursă în memorie
     pe care compilatorul de Rust o va valida
-    
+
     pe tot parcursul **duratei sale de viață**. Variabila de care a fost legată resursa este considerată
     **proprietarul** resursei.
   code: >-
@@ -32,6 +32,7 @@
     Atunci când se renunță la o structură (drop), mai întâi se renunță la structura efectivă, apoi la
     copiii acesteia individual și așa mai departe.
 
+
     Detalii despre memorie:
 
     * Prin eliberarea automată a memoriei, Rust ne asigură că vor fi mai
@@ -42,8 +43,9 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20mai%20%C3%AEnt%C3%A2i%0A%20%20%20%20%2F%2F%20apoi%20se%20renun%C8%9B%C4%83%20la%20foo.bar%0A%7D%0A
 - title: Cedarea proprietății
   content_markdown: >
-    Proprietatea unei resurse din memorie (a cărei proprietar este o variabilă) poate fi cedată atunci când folosim 
-    variabila respectivă ca argument în interiorul unei funcții, noul proprietar fiind paramentrul funcției.
+    Proprietatea unei resurse din memorie (a cărei proprietar este o variabilă) poate fi cedată atunci când folosim
+    variabila respectivă ca argument în interiorul unei funcții, noul proprietar fiind parametrul funcției.
+
 
     După o **cedare a proprietății**, variabila din funcția originală nu mai poate fi
     folosită.
@@ -60,14 +62,14 @@
     Proprietatea poate fi de asemenea returnată de o funcție.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something()%20-%3E%20Foo%20%7B%0A%20%20%20%20Foo%20%7B%20x%3A%2042%20%7D%0A%20%20%20%20%2F%2F%20proprietatea%20este%20cedat%C4%83%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20do_something()%3B%0A%20%20%20%20%2F%2F%20foo%20devine%20proprietar%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20din%20cauza%20termin%C4%83rii%20func%C8%9Biei%0A%7D%0A
-- title: Împrumutul proprietății prin Referințe
+- title: Împrumutul proprietății prin referințe
   content_markdown: |
     Referințele ne permit să împrumutăm accesul la o resursă din memorie prin operatorul `&`.
 
     Asemănător altor resurse, se poate renunța (drop) și la referințe.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20f%20%3D%20%26foo%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20f%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20aici%0A%7D%0A
-- title: Împrumutul proprietății mutabile prin Referințe
+- title: Împrumutul proprietății mutabile prin referințe
   content_markdown: >
     Putem de asemenea să împrumutăm accesul mutabil la o resursă cu ajutorul operatorului `&mut`.
 
@@ -90,7 +92,7 @@
     poate fi copiată - vom discuta despre tipuri care se pot copia în capitole viitoare).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20primim%20o%20copie%20a%20valorii%20proprietarului%0A%20%20%20%20*f%20%3D%2013%3B%20%20%20%20%20%20%2F%2F%20set%C4%83m%20valoarea%20proprietarului%20prin%20referin%C8%9B%C4%83%0A%20%20%20%20println!(%22%7B%7D%22%2C%20bar)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo)%3B%0A%7D%0A
-- title: Trimiterea Datelor Împrumutate
+- title: Trimiterea datelor împrumutate
   content_markdown: >
     Regulile din Rust pentru referințe pot fi rezumate foarte bine de:
 
@@ -121,10 +123,11 @@
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(a%3A%20%26Foo)%20-%3E%20%26i32%20%7B%0A%20%20%20%20return%20%26a.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20x%20aici%20%C8%99i%20putem%20crea%20o%20referin%C8%9B%C4%83%20imutabil%C4%83%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20y%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20aici%0A%7D%0A
 - title: Durate de viață explicite
   content_markdown: >
-    Cu toate că Rust nu arată acest lucu în cod, compilatorul înțelege
+    Cu toate că Rust nu arată acest lucru în cod, compilatorul înțelege
     duratele de viață a fiecărei variabile sau resurse și va încerca
-    
+
     să se asigure că nu există nicio referință cu durată de viață mai mare decât proprietarul ei.
+
 
     Funcțiile pot fi explicite prin parametrizarea semnăturii cu
     simboluri care ajută la identificarea
@@ -147,20 +150,20 @@
   content_markdown: >
     O variabilă **statică** e o resursă în memorie creată la momentul compilării care
     există de la începutul rulării unui program și până la
-    
+
     sfârșit. Acestea trebuie să aibă tip explicit.
 
-    
+
     O **resursă cu durată de viață statică** e o resursă în memorie care poate exista dincolo
     de terminarea programului. Observați că după această definiție
-    
+
     unele resurse cu durată de viață statică pot fi create în timpul rulării.
 
-    
+
     Resursele cu durată de viață statică au specificatorul special `'static`.
 
 
-    **Nu se renunță niciodată** la resursele cu durată de viață statică (drop).
+    **Nu se renunță niciodată (drop)** la resursele cu durată de viață statică.
 
 
     Dacă o resursă cu durată de viață statică conține referințe, atunci toate trebuie să fie `'static`.
@@ -173,6 +176,7 @@
     * Modificarea variabilelor statice ar trebui evitată, pentru că pot fi
     accesate global și pot fi citite de oricine, introducând
     posibilitatea intercalării datelor. Vom vorbi despre provocările aduse de date globale mai târziu.
+
     * Rust permite folosirea blocurilor `unsafe { ... }` pentru a face operații
     pentru care compilatorul nu poate garanta că sunt sigure din punctul de vedere al memoriei. Despre [<span
     style="color:red; font-weight:
@@ -180,9 +184,9 @@
     nu ar trebui să se vorbească fără grijă.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20variabilele%20statice%20pot%20fi%20%C3%AEncadrate%20%C3%AEntr-o%20func%C8%9Bie%0A%20%20%20%20static%20mut%20SECRET%3A%20%26%27static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string-urile%20%C3%AEntre%20ghilimele%20au%20durat%C4%83%20de%20via%C8%9B%C4%83%20static%C4%83%0A%20%20%20%20let%20msg%3A%20%26%27static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26%27static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20Pute%C8%9Bi%20%C3%AEnc%C4%83lca%20unele%20reguli%2C%20dar%20trebuie%20s%C4%83%20fi%C8%9Bi%20explici%C8%9Bi%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20seta%20SECRET%20cu%20un%20string%20%C3%AEntre%20ghilimele%0A%20%20%20%20%20%20%20%20%2F%2F%20pentru%20c%C4%83%20are%20de%20asemenea%20durat%C4%83%20de%20via%C8%9B%C4%83%20static%C4%83%20(%60static)%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A
-- title: Durate de viață în interiorul Structurilor de Date
+- title: Durate de viață în interiorul structurilor de date
   content_markdown: >
-    Similiar funcțiilor, structurile de date pot fi parametrizate cu specificatorul duratei 
+    Similar funcțiilor, structurile de date pot fi parametrizate cu specificatorul duratei
     de viață al membrilor lor.
 
 
@@ -194,26 +198,26 @@
     nimic!
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.i)%3B%0A%7D%0A
-- title: Capitolul 5 - Încheiere
+- title: Capitolul 5 - Concluzie
   content_markdown: >
-    Pfiu, felicitări că ai ajuns până aici! Știu că este foarte mult de digerat, dar sunteți 
+    Pfiu, felicitări că ai ajuns până aici! Știu că este foarte mult de digerat, dar sunteți
     deja
-    
+
     pe drumul cel bun pentru a deveni un Rustaceu. Sper că este clar cum Rust ca
     limbaj de programare încearcă să
-    
+
     rezolve multe provocări obișnuite din programarea sistemelor:
 
 
     * Modificarea neintenționată a resurselor
 
-    * Neglijarea eliberării resurselor 
+    * Neglijarea eliberării resurselor
 
     * Eliberarea accidentală a resurselor de două ori
 
     * Folosirea resurselor după ce acestea au fost eliberate
 
-    * Intercalări de date cauzate de modificarea resurselor citite în același timp de către alți 
+    * Intercalări de date cauzate de modificarea resurselor citite în același timp de către alți
     utilizatori
 
     * Distingerea zonelor din cod unde compilatorul nu poate garanta anumite lucruri

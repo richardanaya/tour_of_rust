@@ -1,34 +1,35 @@
-- title: Capitolul 7 - Programare Orientată pe Obiecte
+- title: Capitolul 7 - Programare orientată pe obiecte
   content_markdown: >
     Exprimarea ideilor cu ajutorul funcțiilor este o metodă dovedită de a reprezenta
-    comportamente și date (Limbajul C o face de decenii!). 
-    
-    Din punct de vedere istoric, știință calculatoarelor a găsit alte agregatii și abstractizări
+    comportamente și date (Limbajul C o face de decenii!).
+
+    Din punct de vedere istoric, știință calculatoarelor a găsit alte agregări și abstractizări
     expresive folositoare pentru date.
-    
+
     Ați putea fi familiarizați cu programarea orientată pe obiecte (POO) ca fiind
     una dintre acestea. În acest capitol vom explora limbajul Rust dincolo de funcții.
 - title: Ce este POO?
   content_markdown: >
-    Programarea orientată pe obiecte se referă, în linii mari, la limbajele de programare ce 
+    Programarea orientată pe obiecte se referă, în linii mari, la limbajele de programare ce
     prezintă anumite caracteristici reprezentative:
 
     * Încapsularea - Asocierea datelor și funcțiilor într-o unitate conceptuală de un singur tip
     numită *obiect*.
 
-    * Abstractizarea - Ascunderea datelor și funcțiilor pentru a acoperi detaliile 
+    * Abstractizarea - Ascunderea datelor și funcțiilor pentru a acoperi detaliile
     implementării unui obiect
 
     * Polimorfismul - Abilitatea de a interacționa cu obiecte de tipuri diferite prin intermediul unei interfețe.
 
     * Moștenirea - Abilitatea de a moșteni date și comportamente de la alte obiecte.
-- title: Rust Nu Este POO
+- title: Rust nu este POO
   content_markdown: >
     Rust nu dispune de o metodă semnificativă de moștenire a datelor și comportamentelor.
 
     * Structurile nu pot moșteni câmpuri de la o structura părinte.
 
     * Structurile nu pot moșteni funcții de la o structură părinte.
+
 
     Acestea fiind spuse, Rust implementează o mulțime de caracteristici ale unui limbaj de programare,
     deci probabil nu vă vor deranja aceste lipsuri.
@@ -38,18 +39,20 @@
   content_markdown: >
     Rust suportă conceptul de *obiect* ce reprezintă o structură asociată unor funcții (cunoscute și ca *metode*).
 
+
     Primul parametru al oricărei metode trebuie să fie o referință la instanța asociată apelului de metodă
     (exemplu: `instantaObiectului.foo()`). Rust folosește:
 
-    * `&self` - Referință imutabilă la instanța.
+    * `&self` - Referință imutabilă la instanță.
 
-    * `&mut self` - Referință mutabilă la instanța.
+    * `&mut self` - Referință mutabilă la instanță.
+
 
     Metodele sunt definite în cadrul unuia sau mai multor blocuri de implementare prin cuvântul cheie `impl`:
 
     ```rust
 
-    impl StructuraMea { 
+    impl StructuraMea {
         ...
         fn foo(&self) {
             ...
@@ -57,7 +60,7 @@
     }
 
     ```
-- title: Abstracție prin Expunere Selectivă
+- title: Abstracție prin expunere selectivă
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_sunet(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creatura.luare_sunet())%3B%0A%7D%0A
   content_markdown: >
@@ -65,17 +68,20 @@
 
     În mod implicit, câmpurile și metodele sunt accesibile doar modulului de care aparțin.
 
+
     Cuvântul cheie `pub` expune câmpurile și metodele structurii în afara modulului.
-- title: Polimorfismul prin Trăsături
+- title: Polimorfismul prin trăsături
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creatura.fa_zgomot()%3B%0A%7D%0A
   content_markdown: >
     Rust suportă polimorfismul prin trăsături (în engleză *traits*). Trăsăturile ne permit asocierea unui set
     de metode cu o structura.
 
+
     Prima dată definim semnăturile metodelor unei trăsături în:
 
-     ```
+
+    ```
 
     trait TrasaturaMea {
         fn foo(&self);
@@ -83,70 +89,80 @@
     }
 
     ```
-    Când o structură implementează o trăsătură, este stabilit un contract ce permite interacțiunea noastră 
+
+
+    Când o structură implementează o trăsătură, este stabilit un contract ce permite interacțiunea noastră
     indirectă cu structura, prin tipul trăsăturii (exemplu: `&dyn TrasaturaMea` ), fără a fi nevoie
     să cunoaștem tipul real al structurii.
 
+
     Metodele trăsăturii implementate de structură sunt definite în cadrul unui bloc de implementare:
+
 
     ```rust
 
-    impl TrasaturaMea for StructuraMea { 
+    impl TrasaturaMea for StructuraMea {
         fn foo(&self) {
             ...
         }
-        ... 
+        ...
     }
 
     ```
-- title: Metode Implementate Trăsăturilor
+- title: Metode implementate trăsăturilor
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20fa_mult_zgomot(%26self)%7B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creatura.fa_mult_zgomot()%3B%0A%7D%0A
   content_markdown: >
     Trăsăturile pot avea metode implementate.
 
+
     Funcțiile nu au acces direct asupra câmpurilor interioare ale unei structuri, dar aceste metode implementate
     trăsăturilor pot fi folositoare în distribuirea comportamentelor între mai mulți implementatori ai trăsăturilor.
-- title: Moștenirea Trăsăturilor
+- title: Moștenirea trăsăturilor
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Atrait%20FacatorDeZgomotGalagios%3A%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_mult_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%20%20%20%20self.fa_zgomot()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20FacatorDeZgomotGalagios%20for%20CreaturaMaritima%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creatura.fa_mult_zgomot()%3B%0A%7D%0A
   content_markdown: |
     Trăsăturile pot moșteni metode de la alte trăsături.
-- title: Expediere Dinamică vs Statică
+- title: Expediere dinamică vs statică
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20static_fa_zgomot(creatura%3A%20%26CreaturaMaritima)%20%7B%0A%20%20%20%20%2F%2F%20cunoastem%20tipul%20real%0A%20%20%20%20creatura.fa_zgomot()%3B%0A%7D%0A%0Afn%20dinamic_fa_zgomot(facator_de_zgomot%3A%20%26dyn%20FacatorDeZgomot)%20%7B%0A%20%20%20%20%2F%2F%20nu%20cunoastem%20tipul%20real
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct+CreaturaMaritima+%7B%0A++++pub+nume%3A+String%2C%0A++++zgomot%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMaritima+%7B%0A++++pub+fn+luare_zgomot%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.zgomot%0A++++%7D%0A%7D%0A%0Atrait+FacatorDeZgomot+%7B%0A++++fn+fa_zgomot%28%26self%29%3B%0A%7D%0A%0Aimpl+FacatorDeZgomot+for+CreaturaMaritima+%7B%0A++++fn+fa_zgomot%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.luare_zgomot%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+static_fa_zgomot%28creatura%3A+%26CreaturaMaritima%29+%7B%0A++++%2F%2F+cunoastem+tipul+real%0A++++creatura.fa_zgomot%28%29%3B%0A%7D%0A%0Afn+dinamic_fa_zgomot%28facator_de_zgomot%3A+%26dyn+FacatorDeZgomot%29+%7B%0A++++%2F%2F+nu+cunoastem+tipul+real%0A++++facator_de_zgomot.fa_zgomot%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMaritima+%7B%0A++++++++nume%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++zgomot%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++static_fa_zgomot%28%26creatura%29%3B%0A++++dinamic_fa_zgomot%28%26creatura%29%3B%0A%7D
   content_markdown: >
     Metodele sunt executate în două moduri:
 
-    * expediere statică (static dispatch)- Când tipul instanței este cunoscut,
+    * expediere statică (static dispatch) - când tipul instanței este cunoscut,
     știm în mod direct ce funcție să apelăm.
 
-    * expediere dinamică (dynamic dispatch)- Când tipul instanței nu este cunoscut trebuie
+    * expediere dinamică (dynamic dispatch) - când tipul instanței nu este cunoscut trebuie
     să găsim o modalitate de a apela funcția corectă.
+
 
     Tipurile trăsăturilor `&dyn TrasaturaMea` ne dau abilitatea de a lucra cu instanțe ale obiectelor
     în mod indirect, folosind expedierea dinamică.
 
+
     Când expedierea dinamică este folosită, este necesar să puneți `dyn` înaintea trăsăturii.
+
 
     Detalii cu privire la memorie:
 
     * Expedierea dinamică este puțin mai lentă, din cauza urmăririi prin pointeri pentru a determina
     apelul de funcție real.
-- title: Trait Objects
+- title: Trait objects
   content_markdown: >
-    Când pasăm o instanța a unui obiect ca parametru de tipul `&dyn TrasaturaMea`, 
+    Când pasăm o instanța a unui obiect ca parametru de tipul `&dyn TrasaturaMea`,
     pasăm ceea ce se numește obiect al trăsăturii (în engleză `trait object`).
 
-    Acestea sunt ceea ce ne permite să apelăm în mod indirect metodele corecte ale unei instanțe. 
+
+    Acestea sunt ceea ce ne permite să apelăm în mod indirect metodele corecte ale unei instanțe.
 
     Un obiect al trăsăturii este o structura ce conține un pointer al instanței noastre, alături de o lista
     de pointeri la funcții către metodele acesteia.
 
-    Detalii:
 
-    * Această listă de funcții este cunoscută în C++ sub denumirea de *vtable*.
-- title: Manevrarea Tipurilor de Date Fără Dimensiune Fixă
+    Detalii cu privire la memorie:
+
+    * Această lista de funcții este cunoscută în C++ sub denumirea de *vtable*.
+- title: Manevrarea tipurilor de date fără dimensiune fixă
   content_markdown: >
     Trăsăturile introduc o provocare interesantă când dorim să le stocăm în interiorul altei structuri.
 
@@ -155,24 +171,25 @@
 
     * tipuri generice - Folosind tipuri parametrizate creăm structuri/funcții cu tipuri de date generice,
     a căror dimensiune va fi cunoscută în momentul folosirii lor, când programatorul va specifica un tip de date
-    
+
     efectiv, care va avea și dimensiuni cunoscute.
 
     * indirecție - Punerea instanțelor pe heap ne oferă avantajul de a nu fi necesar să cunoaștem dimensiunea
     tipului de date la compilare, aceasta fiind folosita doar în momentul rulării, când programatorul poate
-    
+
     folosi orice tip de date care se potrivește. Accesarea valorii efective se realizează printr-un pointer
     (presupune o indirecție), iar acest lucru poate fi considerat un dezavantaj.
     
     Mai există și alte modalități!
-- title: Funcții Generice
+- title: Funcții generice
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_fa_zgomot%3CT%3E(creatura%3A%20%26T)%0Awhere%0A%20%20%20%20T%3A%20FacatorDeZgomot%2C%0A%7B%0A%20%20%20%20%2F%2F%20cunoastem%20tipul%20real%20in%20momentul%20compilarii%0A%20%20%20%20creatura.fa_zgomot()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_fa_zgomot(%26creatura)%3B%0A%7D%0A
   content_markdown: >
     Tipurile generice în Rust funcționează mâna în mâna cu trăsăturile. Când descriem un tip parametrizat `T`, putem
     constrânge ce tipuri pot fi folosite ca argumente,
-    
-    listând trăsăturile necesare (în engleză `trait bound`) pe care argumentul trebuie să le implementeze.
+
+    listând trăsăturile necesare (în engleză „trait bound”) pe care argumentul trebuie să le implementeze.
+
 
     În acest exemplu, tipul `T` trebuie să implementeze trăsătură `Foo`:
 
@@ -188,29 +205,35 @@
 
     ```
 
+
     Folosind tipurile generice, creăm șabloane de funcții care au tipuri de date ce vor fi înlocuite la momentul
     compilării cu tipuri de date cunoscute, permițându-ne să utilizăm apelarea statică.
-- title: Prescurtare a Funcțiilor Generice
+- title: Prescurtare a funcțiilor generice
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20nume%3A%20String%2C%0A%20%20%20%20zgomot%3A%20String%2C%0A%7D%0A%0Aimpl%20CreaturaMaritima%20%7B%0A%20%20%20%20pub%20fn%20luare_zgomot(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.zgomot%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20FacatorDeZgomot%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%3B%0A%7D%0A%0Aimpl%20FacatorDeZgomot%20for%20CreaturaMaritima%20%7B%0A%20%20%20%20fn%20fa_zgomot(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.luare_zgomot())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20generic_fa_zgomot(creatura%3A%20%26impl%20FacatorDeZgomot)%0A%7B%0A%20%20%20%20%2F%2F%20cunoastem%20tipul%20real%20in%20momentul%20compilarii%0A%20%20%20%20creatura.fa_zgomot()%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creatura%20%3D%20CreaturaMaritima%20%7B%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20zgomot%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20generic_fa_zgomot(%26creatura)%3B%0A%7D%0A
   content_markdown: >
     Rust are o prescurtare pentru exprimarea tipurilor generice constrânse de o trăsătură:
 
     ```rust
+
     fn functia_mea(foo: impl Foo) {
         ...
     }
+
     ```
 
     Este echivalent cu a scrie:
 
     ```rust
+
     fn functia_mea<T>(foo: T)
+
     where
         T:Foo
     {
         ...
     }
+
     ```
 - title: Box
   code: >-
@@ -218,13 +241,16 @@
   content_markdown: >
     `Box` este o structura de date ce ne permite să mutăm date de pe stivă în heap.
 
+
     `Box` este o structura cunoscută sub denumirea de *smart pointer*, ce conține pointerul către
     datele noastre în heap.
+
 
     Deoarece `Box` este o structură de dimensiune cunoscută (conține doar un pointer), este adesea folosit
     atunci când o structură trebuie să cunoască dimensiunea câmpurilor sale. Astfel, în interiorul structurii,
 
     vom stoca o referință prin intermediul lui `Box`.
+
 
     `Box` este atât de comun încât poate fi utilizat de oriunde:
 
@@ -233,7 +259,7 @@
     Box::new(Foo { ... })
 
     ```
-- title: Structuri Generice Revizuite
+- title: Structuri generice revizuite
   content_markdown: >
     Structurile generice pot, de asemenea, să-și aibă tipurile parametrizate constrânse de trăsături:
 
@@ -263,13 +289,14 @@
   content_markdown: >
     Acum avem mai multe particularități ale limbajului prin care să ne exprimăm ideile într-un mod clar!
 
-    Abstractizările făcutre de limbajul pot fi simple, însă sunt suficient de puternice pentru a face lucrul cu codul o bucurie.
+    Abstractizările făcute de limbajul pot fi simple, însă sunt suficient de puternice pentru a face lucrul cu codul o bucurie.
 
     În acest capitol am aruncat o privire asupra smart pointerilor prin `Box`. În următorul capitol vom învață
     despre cum aceștia ne pot ajuta în alte situații de memorie specializate.
 
+
     Resurse:
-    
+
     * [Video - Object-oriented Programming in 7
     minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
 

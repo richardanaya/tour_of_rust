@@ -21,7 +21,7 @@
     Playground](https://play.rust-lang.org).
 
 
-    E o modalitate bună de a vă juca cu Rust și a arăta altora 
+    E o modalitate bună de a vă juca cu Rust și a arăta altora
     creativitatea și provocările dumneavoastră!
 - title: Variabile
   code: >-
@@ -43,7 +43,7 @@
     la acel nume de variabilă.
 
 
-    Numele de variabile sunt mereu scrise sub formă `snake_case` (ex: my\_first\_variable).
+    Numele de variabile sunt mereu scrise sub formă `snake_case` (ex: `my_first_variable`).
 - title: Modificarea variabilelor
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
@@ -78,7 +78,7 @@
 
     * numere întregi cu semn - `i8` `i16` `i32` `i64` `i128` pentru a reprezentare numere întregi
 
-    * numere întregi de dimensiunea unui pointer - `usize` `isize` pentru a reprezenta indecși
+    * numere întregi de dimensiunea unui pointer - `usize` `isize` pentru a reprezenta indici
 
     și dimensiunea datelor în memorie
 
@@ -123,14 +123,14 @@
     Constantele ne permit să specificăm o valoare folosită uzual de-a lungul
 
     codului nostru în mod eficient. În loc să copieze valori, constantele înlocuiesc direct,
-    
+
     acolo unde sunt utilizate, identificatorul de text cu valoarea sa, la momentul compilării.
 
 
     Spre deosebire de variabile, constantelor trebuie să li se specifice explicit tipul la declarare.
 
 
-    Numele constantelor sunt mereu scrise în format `SCREAMING_SNAKE_CASE` (ex: MY\_FIRST\_CONSTANT).
+    Numele constantelor sunt mereu scrise în format `SCREAMING_SNAKE_CASE` (ex: `MY_FIRST_CONSTANT`).
 - title: Tablouri
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
@@ -156,33 +156,33 @@
     O funcție admite zero sau mai mulți parametri.
 
 
-    În acest exemplu, funcția *add* admite doi parametri de tip `i32` 
+    În acest exemplu, funcția *add* admite doi parametri de tip `i32`
     (număr întreg cu semn cu dimensiune de 32 de biți).
 
 
-    La returnarea unei expresii se poate omite cuvântul cheie 'return' și 
+    La returnarea unei expresii se poate omite cuvântul cheie `return` și
     simbolul punct-virgulă de la final, așa cum s-a procedat în funcția *subtract*.
 
 
     Numele funcțiilor sunt mereu scrise în format `snake_case`.
 
 
-    Hint: dacă definiți o funcție, datele pe care le admite se numesc parametrii formali.
+    Sfat: dacă definiți o funcție, datele pe care le admite se numesc parametrii formali.
     Dacă apelați o funcție și îi transmiteți niște date, atunci ele se numesc parametrii actuali.
 - title: Returnarea mai multor valori
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20returneaz%C4%83%20un%20tuplu%20de%20valori%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructureaz%C4%83%20tuplul%20%C3%AEn%20dou%C4%83%20variabile%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
   content_markdown: >
-    Funcțiile pot returna mai multe valori prin returnarea unui **tuplu** 
+    Funcțiile pot returna mai multe valori prin returnarea unui **tuplu**
 
     de valori.
 
 
-    Elementele unui tuplu pot fi accesate folosind indexul acestora. (ex: my\_tuple.0)
+    Elementele unui tuplu pot fi accesate folosind indexul acestora. (ex: `my_tuple.0`)
 
 
     Rust suportă diferite tipuri de destructurări pe care le vom vedea în multe contexte,
-    permințându-ne
+    permițându-ne
 
     să extragem fracțiuni ale unor structuri de date în moduri ingenioase. Fiți pe fază!
 - title: A nu returna nimic
@@ -198,7 +198,7 @@
     ce se întâmplă.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20tipul%20pe%20care%20%C3%AEl%20returneaz%C4%83%20este%20%C3%AEn%20mod%20implicit%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20aceast%C4%83%20func%C8%9Bie%20va%20returna%20()%2C%20dac%C4%83%20nu%20este%20specificat%20altceva%20pentru%20returnare%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Afi%C8%99area%20unui%20text%20de%20depanare%20pentru%20a%20%C8%99i%20b%0A%20%20%20%20%2F%2F%20Pentru%20c%C4%83%20e%20greu%20s%C4%83%20print%C4%83m%20nimicul%0A%20%20%20%20println!(%22Valoarea%20lui%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22Valoarea%20lui%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
-- title: Capitolul 1 - Concluzii
+- title: Capitolul 1 - Concluzie
   content_markdown: >
     Până acu', e bine! Bazele Rust-ului nu sunt așa de rele, nu-i așa?  Am
 
