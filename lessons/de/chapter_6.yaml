@@ -55,7 +55,7 @@
     Die vollständige Liste ist vorhanden
     [Hier](https://doc.rust-lang.org/reference/tokens.html).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%26'static%20str%20%3D%20%22Ferris%20spune%3A%5Ct%5C%22salut%5C%22%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Ca)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a%3A+%26%27static+str+%3D+%22Ferris+sagt%3A%5Ct%5C%22hallo%5C%22%22%3B%0A++++println%21%28%22%7B%7D%22%2C+a%29%3B%0A%7D%0A
 - title: String-Literale in mehreren Zeilen
   content_markdown: |
     Strings in Rust sind standardmäßig mehrzeilig.
