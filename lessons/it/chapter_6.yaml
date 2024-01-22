@@ -31,7 +31,7 @@
     * Il compilatore Rust probabilmente inserirà la tua stringa nel segmento dati del tuo file
     memoria del programma
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a%3A+%26%27static+str+%3D+%22hi+%F0%9F%A6%80%22%3B%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+a%2C+a.len%28%29%29%3B%0A%7D%0A
 - title: Cos'è utf-8
   content_markdown: "Poiché sui computer venivano utilizzate più lingue, il mondo aveva bisogno di rappresentare più caratteri di testo\ndi quelli consentiti dall'ASCII (1 byte consentiva solo 256 caratteri). \n\n**utf-8** è stato introdotto con una lunghezza in byte variabile di 1 -4 byte aumentando notevolmente la gamma di caratteri possibili.\n\nUn vantaggio dei caratteri di dimensione variabile è che il testo non ha byte non necessari per ASCII molto comuni (richiede solo 1 byte ancora in **utf-8**).\n\ nUno svantaggio dei caratteri di dimensione variabile è che la ricerca dei caratteri non può più essere eseguita rapidamente \n(**O(1)** tempo costante) con una semplice indicizzazione (ad esempio `mio_testo[3]` per ottenere il quarto carattere). possibile che i \ncaratteri precedenti possano avere larghezze variabili, alterando il punto in cui inizia effettivamente il 4° carattere nella sequenza di byte.\n\nDobbiamo invece scorrere una sequenza di byte **utf-8** per capire dove iniziano effettivamente i caratteri Unicode (**O(n)** tempo lineare).\n\nFerris: \"Per lo più sono semplicemente felice di avere **utf-8** per rappresentare gli emoji dei miei amici sott'acqua.\"\n\n< span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
 - title: Personaggi in fuga
@@ -58,14 +58,14 @@
     L'elenco completo esiste
     [here](https://doc.rust-lang.org/reference/tokens.html).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a%3A+%26%27static+str+%3D+%22Ferris+says%3A%5Ct%5C%22hello%5C%22%22%3B%0A++++println%21%28%22%7B%7D%22%2Ca%29%3B%0A%7D%0A
 - title: Stringhe letterali su più righe
   content_markdown: |
     Le stringhe di ruggine sono multiline per impostazione predefinita.
 
     Usa un `\` alla fine di una riga se non si desidera una pausa.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+haiku%3A+%26%27static+str+%3D+%22%0A++++++++I+write%2C+erase%2C+rewrite%0A++++++++Erase+again%2C+and+then%0A++++++++A+poppy+blooms.%0A++++++++-+Tachibana+Hokushi%22%3B%0A++++println%21%28%22%7B%7D%22%2C+haiku%29%3B%0A++++%0A++++%0A++++println%21%28%22hello+%5C%0A++++world%22%29+%2F%2F+nota+che+la+spaziatura+prima+di+w+viene+ignorata%0A%7D%0A
 - title: Stringhe letterali grezze
   content_markdown: >
     Le stringhe grezze ci consentono di scrivere una sequenza di caratteri parola per parola iniziando
@@ -74,7 +74,7 @@
     caratteri che altrimenti potrebbero confondere una stringa normale come letterali (come
     virgolette doppie e barre rovesciate).
   code: >-
-   https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+   https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a%3A+%26%27static+str+%3D+r%23%22%0A++++++++%3Cdiv+class%3D%22advice%22%3E%0A++++++++++++Raw+strings+are+useful+for+some+situations.%0A++++++++%3C%2Fdiv%3E%0A++++++++%22%23%3B%0A++++println%21%28%22%7B%7D%22%2C+a%29%3B%0A%7D%0A
 - title: Stringhe letterali da file
   content_markdown: >
     Se hai del testo molto grande, considera l'utilizzo della macro `include_str!` per
@@ -106,7 +106,7 @@
 
     * `find` restituisce una `Option<usize>` della prima posizione di del testo.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a+%3D+%22hi+%F0%9F%A6%80%22%3B%0A++++println%21%28%22%7B%7D%22%2C+a.len%28%29%29%3B%0A++++let+first_word+%3D+%26a%5B0..2%5D%3B%0A++++let+second_word+%3D+%26a%5B3..7%5D%3B%0A++++%2F%2F+lascia+mezzo_granchio+%3D+%26a%5B3..5%5D%3B+NON+RIESCE%0A++++%2F%2F+Rust+non+accetta+porzioni+di+caratteri+Unicode+non+validi%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+first_word%2C+second_word%29%3B%0A%7D%0A
 - title: Caratteri
   content_markdown: >
     Con così tante difficoltà nel lavorare con Unicode, Rust offre un modo per farlo
@@ -116,7 +116,7 @@
     Un "char" è sempre lungo 4 byte (consentendo una ricerca efficiente dei singoli file
     caratteri).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++%2F%2F+raccoglie+i+caratteri+come+vettore+di+char%0A++++let+chars+%3D+%22hi+%F0%9F%A6%80%22.chars%28%29.collect%3A%3A%3CVec%3Cchar%3E%3E%28%29%3B%0A++++println%21%28%22%7B%7D%22%2C+chars.len%28%29%29%3B+%2F%2F+dovrebbe+essere+4%0A++++%2F%2F+poich%C3%A9+i+caratteri+sono+4+byte%2C+possiamo+convertirli+in+u32%0A++++println%21%28%22%7B%7D%22%2C+chars%5B3%5D+as+u32%29%3B%0A%7D%0A
 - title: Corda
   content_markdown: >
     Una **String** è una struttura che possiede una sequenza di byte utf-8 nella memoria heap.
@@ -144,7 +144,7 @@
     `String` ha un operatore `+` che estende la stringa con un `&str` e
     ritorna da solo, ma potrebbe non essere ergonomico come speri.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+helloworld+%3D+String%3A%3Afrom%28%22hello%22%29%3B%0A++++helloworld.push_str%28%22+world%22%29%3B%0A++++helloworld+%3D+helloworld+%2B+%22%21%22%3B%0A++++println%21%28%22%7B%7D%22%2C+helloworld%29%3B%0A%7D%0A
 - title: Testo come parametri di funzione
   content_markdown: >
     Le stringhe letterali e le stringhe vengono generalmente passate come porzioni di stringhe
@@ -152,12 +152,12 @@
 
     nella maggior parte degli scenari in cui non è necessario trasferire effettivamente la proprietà.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+say_it_loud%28msg%3A%26str%29%7B%0A++++println%21%28%22%7B%7D%21%21%21%22%2Cmsg.to_string%28%29.to_uppercase%28%29%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++%2F%2F+say_it_loud+pu%C3%B2+prendere+in+prestito+%26%27static+str+come+%26str%0A++++say_it_loud%28%22hello%22%29%3B%0A++++%2F%2F+say_it_loud+pu%C3%B2+anche+prendere+in+prestito+String+come+%26str%0A++++say_it_loud%28%26String%3A%3Afrom%28%22goodbye%22%29%29%3B%0A%7D%0A
 - title: Costruire stringhe
   content_markdown: |
     "concat" e "join" sono due modi semplici ma potenti per creare stringhe.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+helloworld+%3D+%5B%22hello%22%2C+%22+%22%2C+%22world%22%2C+%22%21%22%5D.concat%28%29%3B%0A++++let+abc+%3D+%5B%22a%22%2C+%22b%22%2C+%22c%22%5D.join%28%22%2C%22%29%3B%0A++++println%21%28%22%7B%7D%22%2C+helloworld%29%3B%0A++++println%21%28%22%7B%7D%22%2Cabc%29%3B%0A%7D%0A
 - title: Stringhe di formattazione
   content_markdown: >
     La macro `format!` ci consente di creare una stringa definendo un file parametrizzato
@@ -171,7 +171,7 @@
     Le capacità di questa funzione sono troppo ampie per *Tour of Rust*;
     consulta la documentazione [qui](https://doc.rust-lang.org/std/fmt/).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a+%3D+42%3B%0A++++let+f+%3D+format%21%28%22secret+to+life%3A+%7B%7D%22%2Ca%29%3B%0A++++println%21%28%22%7B%7D%22%2Cf%29%3B%0A%7D%0A
 - title: Conversione di stringhe
   content_markdown: |
     Molti tipi possono essere convertiti in una stringa utilizzando "to_string".
@@ -180,7 +180,7 @@
     o valori letterali stringa in un valore tipizzato. Questa funzione ritorna
     un "Risultato" perché potrebbe fallire.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+-%3E+Result%3C%28%29%2C+std%3A%3Anum%3A%3AParseIntError%3E+%7B%0A++++let+a+%3D+42%3B%0A++++let+a_string+%3D+a.to_string%28%29%3B%0A++++let+b+%3D+a_string.parse%3A%3A%3Ci32%3E%28%29%3F%3B%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+a%2C+b%29%3B%0A++++Ok%28%28%29%29%0A%7D%0A
 - title: Capitolo 6 - Conclusione
   content_markdown: >
     Ora conosci le basi del testo! Come hai visto, Unicode fa funzionare
