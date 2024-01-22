@@ -61,6 +61,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-family: "Neuton", serif;
+  color-scheme: light dark;
   color: #333;
 }
 
@@ -438,3 +439,10 @@ h1 {
 .header:moz-full-screen {
   display: none;
 }
+
+@media (prefers-color-scheme: dark){
+  b,  h1,  .bottomnav a,  .toc a,  .next a, .back a, html, body, a, .title a {
+    color: initial;
+  }
+}
+
