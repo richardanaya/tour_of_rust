@@ -16,7 +16,7 @@
     per tutta la sua **vita**. La variabile associata è chiamata risorsa
     **proprietario**.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++%2F%2F+Istanziamo+le+strutture+e+le+leghiamo+alle+variabili%0A++++%2F%2F+per+creare+risorse+di+memoria%0A++++let+foo+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++%2F%2F+foo+%C3%A8+il+proprietario%0A%7D%0A
 - title: Gestione delle risorse basata sull'ambito
   content_markdown: |
     Rust utilizza la fine dell'ambito come luogo in cui decostruire e deallocare una risorsa.
@@ -26,7 +26,7 @@
     Dettagli della memoria:
     * Rust non prevede la raccolta dei rifiuti.
     * In C++ questa operazione viene anche chiamata Resource Acquisition Is Inizializzazione (RAII).
-  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+  code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+foo_a+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++let+foo_b+%3D+Foo+%7B+x%3A+13+%7D%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+foo_a.x%29%3B%0A%0A++++println%21%28%22%7B%7D%22%2C+foo_b.x%29%3B%0A++++%2F%2F+foo_b+viene+rilasciato+qui%0A++++%2F%2F+foo_a+viene+rilasciato+qui%0A%7D%0A
 - title: L'eliminazione è gerarchica
   content_markdown: >
     Quando una struttura viene eliminata, viene eliminata prima la struttura stessa, poi la sua
@@ -40,7 +40,7 @@
 
     * Le risorse di memoria possono essere eliminate solo una volta.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Bar+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Astruct+Foo+%7B%0A++++bar%3A+Bar%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+foo+%3D+Foo+%7B+bar%3A+Bar+%7B+x%3A+42+%7D+%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+foo.bar.x%29%3B%0A++++%2F%2F+foo+viene+eliminato+per+primo%0A++++%2F%2F+quindi+foo.bar+viene+eliminato%0A%7D%0A
 - title: Trasferimento di proprietà
   content_markdown: >
     Quando un proprietario viene passato come argomento a una funzione, la proprietà viene spostata su
@@ -56,19 +56,19 @@
     * Durante uno **spostamento** la memoria dello stack del valore del proprietario viene copiata nel file
     memoria dello stack dei parametri della chiamata di funzione.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+do_something%28f%3A+Foo%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+f.x%29%3B%0A++++%2F%2F+f+is+dropped+here%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+foo+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++%2F%2F+foo+viene+spostato+in+do_qualcosa%0A++++do_something%28foo%29%3B%0A++++%2F%2F+foo+non+pu%C3%B2+pi%C3%B9+essere+utilizzato%0A%7D%0A
 - title: Restituzione della proprietà
   content_markdown: |
     La proprietà può anche essere restituita da una funzione.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+do_something%28%29+-%3E+Foo+%7B%0A++++Foo+%7B+x%3A+42+%7D%0A++++%2F%2F+la+propriet%C3%A0+viene+spostata%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+foo+%3D+do_something%28%29%3B%0A++++%2F%2F+foo+diventa+il+proprietario%0A++++%2F%2F+foo+viene+eliminato+a+causa+della+fine+dell%27ambito+della+funzione%0A%7D%0A
 - title: Proprietà in prestito con referenze
   content_markdown: |
     I riferimenti ci consentono di prendere in prestito l'accesso a una risorsa con l'operatore "&".
 
     Anche i riferimenti vengono eliminati come le altre risorse.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+foo+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++let+f+%3D+%26foo%3B%0A++++println%21%28%22%7B%7D%22%2C+f.x%29%3B%0A++++%2F%2F+f+viene+rilasciato+qui%0A++++%2F%2F+foo+viene+rilasciato+qui%0A%7D%0A
 - title: Prestito di proprietà mutevole con referenze
   content_markdown: >
     Possiamo anche prendere in prestito l'accesso mutabile a una risorsa con l'operatore `&mut`.
@@ -82,7 +82,7 @@
     * Rust impedisce di avere due modi per modificare un valore posseduto perché
     introduce la possibilità di una gara di dati.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+do_something%28f%3A+Foo%29+%7B%0A++++println%21%28%22%7B%7D%22%2C+f.x%29%3B%0A++++%2F%2F+f+viene+rilasciato+qui%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+foo+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++let+f+%3D+%26mut+foo%3B%0A%0A+++%2F%2F+FAILURE%3A+do_something%28foo%29+fallirebbe+perch%C3%A9%0A++++%2F%2F+foo+non+pu%C3%B2+essere+spostato+mentre+%C3%A8+preso+in+prestito+in+modo+mutabile%0A%0A++++%2F%2F+ERRORE%3A+foo.x+%3D+13%3B+fallirebbe+qui+perch%C3%A9%0A++++%2F%2F+foo+non+%C3%A8+modificabile+se+preso+in+prestito+in+modo+mutabile%0A%0A++++f.x+%3D+13%3B%0A++++%2F%2F+f+viene+eliminato+qui+perch%C3%A9+non+viene+pi%C3%B9+utilizzato+da+questo+punto%0A++++%0A++++println%21%28%22%7B%7D%22%2C+foo.x%29%3B%0A++++%0A++++%2F%2F+ora+funziona+perch%C3%A9+tutti+i+riferimenti+modificabili+sono+stati+eliminati%0A++++foo.x+%3D+7%3B%0A++++%0A++++%2F%2F+sposta+la+propriet%C3%A0+di+foo+su+una+funzione%0A++++do_something%28foo%29%3B%0A%7D%0A
 - title: Dereferenziazione
   content_markdown: >
     Utilizzando i riferimenti `&mut`, puoi impostare il valore del proprietario utilizzando `*`
@@ -92,7 +92,7 @@
     Puoi anche ottenere una copia di un valore posseduto utilizzando l'operatore "*" (se value
     possono essere copiati - discuteremo dei tipi copiabili nei capitoli successivi).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+mut+foo+%3D+42%3B%0A++++let+f+%3D+%26mut+foo%3B%0A++++let+bar+%3D+*f%3B+%2F%2F+ottiene+una+copia+del+valore+del+proprietario%0A++++*f+%3D+13%3B++++++%2F%2F+imposta+il+valore+del+proprietario+del+riferimento%0A++++println%21%28%22%7B%7D%22%2C+bar%29%3B%0A++++println%21%28%22%7B%7D%22%2C+foo%29%3B%0A%7D%0A
 - title: Passaggio di dati presi in prestito
   content_markdown: >
    Le regole di Rust per i riferimenti potrebbero essere meglio riassunte da:
@@ -118,12 +118,12 @@
     * La seconda regola dei riferimenti impedisce l'uso improprio dei riferimenti che rimandano
     a dati inesistenti (chiamati puntatori pendenti in C).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+do_something%28f%3A+%26mut+Foo%29+%7B%0A++++f.x+%2B%3D+1%3B%0A++++%2F%2F+il+riferimento+mutabile+f+viene+eliminato+qui%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+foo+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++do_something%28%26mut+foo%29%3B%0A++++%2F%2F+perch%C3%A9+tutti+i+riferimenti+mutabili+vengono+eliminati+all%27interno%0A++++%2F%2F+la+funzione+fai_qualcosa%2C+possiamo+crearne+un%27altra.%0A++++do_something%28%26mut+foo%29%3B%0A++++%2F%2F+foo+viene+rilasciato+qui%0A%7D%0A
 - title: Riferimenti di riferimenti
   content_markdown: |
     I riferimenti possono essere utilizzati anche su pezzi di riferimento.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0Afn+do_something%28a%3A+%26Foo%29+-%3E+%26i32+%7B%0A++++return+%26a.x%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+foo+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++let+x+%3D+%26mut+foo.x%3B%0A++++*x+%3D+13%3B%0A++++%2F%2F+x+viene+rilasciato+qui+ci+permette+di+creare+un+riferimento+non+mutabile%0A++++let+y+%3D+do_something%28%26foo%29%3B%0A++++println%21%28%22%7B%7D%22%2C+y%29%3B%0A++++%2F%2F+y+viene+rilasciato+qui%0A++++%2F%2F+foo+viene+rilasciato+qui%0A%7D%0A
 - title: Vite di vita esplicite
   content_markdown: >
     Anche se Rust non sempre lo mostra nel codice, il compilatore lo capisce
@@ -140,7 +140,7 @@
 
     Gli identificatori di durata iniziano sempre con `'` (ad esempio `'a`, `'b`, `'c`)
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0A%2F%2F+il+parametro+foo+e+il+valore+restituito+condividono+la+stessa+durata%0Afn+do_something%3C%27a%3E%28foo%3A+%26%27a+Foo%29+-%3E+%26%27a+i32+%7B%0A++++return+%26foo.x%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+foo+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++let+x+%3D+%26mut+foo.x%3B%0A++++*x+%3D+13%3B%0A++++%2F%2F+x+viene+rilasciato+qui%2C+permettendoci+di+creare+un+riferimento+non+mutabile%0A++++let+y+%3D+do_something%28%26foo%29%3B%0A++++println%21%28%22%7B%7D%22%2C+y%29%3B%0A++++%2F%2F+y+viene+rilasciato+qui%0A++++%2F%2F+foo+viene+rilasciato+qui%0A%7D%0A
 - title: Vite multiple
   content_markdown: >
     Gli specificatori di durata ci consentono di essere espliciti con determinati scenari
@@ -148,7 +148,7 @@
 
     distinguendo tutte le durate di un componente della firma di funzione.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo+%7B%0A++++x%3A+i32%2C%0A%7D%0A%0A%2F%2F+foo_b+e+il+valore+restituito+condividono+la+stessa+durata%0A%2F%2F+foo_a+ha+una+durata+non+correlata%0Afn+do_something%3C%27a%2C+%27b%3E%28foo_a%3A+%26%27a+Foo%2C+foo_b%3A+%26%27b+Foo%29+-%3E+%26%27b+i32+%7B%0A++++println%21%28%22%7B%7D%22%2C+foo_a.x%29%3B%0A++++println%21%28%22%7B%7D%22%2C+foo_b.x%29%3B%0A++++return+%26foo_b.x%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+foo_a+%3D+Foo+%7B+x%3A+42+%7D%3B%0A++++let+foo_b+%3D+Foo+%7B+x%3A+12+%7D%3B%0A++++let+x+%3D+do_something%28%26foo_a%2C+%26foo_b%29%3B%0A++++%2F%2F+foo_a+viene+eliminato+qui+perch%C3%A9+oltre+qui+esiste+solo+la+vita+di+foo_b%0A++++println%21%28%22%7B%7D%22%2C+x%29%3B%0A++++%2F%2F+x+viene+rilasciato+qui%0A++++%2F%2F+foo_b+viene+rilasciato+qui%0A%7D%0A
 - title: Durata statica
   content_markdown: >
     Una variabile **statica** è una risorsa di memoria creata in fase di compilazione
@@ -185,7 +185,7 @@
     grassetto;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐ ͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span>](https://doc.rust-lang.org/nomicon/)
     non se ne dovrebbe parlare casualmente.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=static+PI%3A+f64+%3D+3.1415%3B%0A%0Afn+main%28%29+%7B%0A++++%2F%2F+le+variabili+statiche+possono+anche+avere+come+ambito+una+funzione%0A++++static+mut+SECRET%3A+%26%27static+str+%3D+%22swordfish%22%3B%0A%0A++++%2F%2F+i+valori+letterali+delle+stringhe+hanno+una+durata+statica%0A++++let+msg%3A+%26%27static+str+%3D+%22Hello+World%21%22%3B%0A++++let+p%3A+%26%27static+f64+%3D+%26PI%3B%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+msg%2C+p%29%3B%0A%0A++++%2F%2F+Puoi+infrangere+alcune+regole%2C+ma+devi+essere+esplicito%0A++++unsafe+%7B%0A++++++++%2F%2F+possiamo+impostare+SECRET+su+una+stringa+letterale+perch%C3%A9+%C3%A8+anche+%60statico%0A++++++++SECRET+%3D+%22abracadabra%22%3B%0A++++++++println%21%28%22%7B%7D%22%2C+SECRET%29%3B%0A++++%7D%0A%7D%0A
 - title: Durata nei tipi di dati
   content_markdown: >
     Analogamente alle funzioni, i tipi di dati possono essere parametrizzati con durata
@@ -199,7 +199,7 @@
     Non possiamo avere strutture che vanno in giro con riferimenti che puntano a
     il nulla!
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20Foo%3C'a%3E%20%7B%0A%20%20%20%20i%3A%26'a%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%0A%20%20%20%20%20%20%20%20i%3A%20%26x%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2Cfoo.i)%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Foo%3C%27a%3E+%7B%0A++++i%3A%26%27a+i32%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+x+%3D+42%3B%0A++++let+foo+%3D+Foo+%7B%0A++++++++i%3A+%26x%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2Cfoo.i%29%3B%0A%7D%0A
 - title: Capitolo 5 - Conclusione
   content_markdown: >
     Wow, congratulazioni per avercela fatta! So che è molto da accettare, ma tu
