@@ -193,7 +193,7 @@
 
     fn mia_funzione<T>(foo: T)
 
-    Dove
+    where
         T:Foo
     {
         ...
@@ -222,7 +222,7 @@
 
     ```rust
     fn mia_funzione<T>(foo: T)
-    Dove
+    where
         T:Foo
     {
         ...
@@ -267,10 +267,10 @@
 
     struct MiaStruct<T>
 
-    Dove
-        T: Il mio tratto
+    where
+        T: MiaStruct
     {
-        piede
+        foo: T
         ...
     }
 
