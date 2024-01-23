@@ -1,31 +1,31 @@
 - title: Capitolul 4 - Tipuri generice
   content_markdown: >
-    Tipurile generice sunt incredibil de importante în Rust. Sunt folosite pentru a 
-    reprezenta 
+    Tipurile generice sunt incredibil de importante în Rust. Sunt folosite pentru a
+    reprezenta
 
     valori care pot fi nule (ex: variabile care poate nu au încă o valoare), abordarea
-    erorilor, 
+    erorilor,
 
     colecții și multe altele! În această secțiune vom învăța despre
-    tipurile generice fundamentale 
+    tipurile generice fundamentale
 
     pe care le veți folosi în majoritatea timpului.
 - title: Ce sunt tipurile generice?
   content_markdown: >
     Tipurile generice ne lasă să definim parțial o structură (`struct`) sau o enumerare (`enum`), permițând
-    compilatorului să creeze o 
+    compilatorului să creeze o
 
     versiune definită complet în timpul compilării, bazată pe modul în care am folosit codul.
 
 
     În general, Rust poate deduce tipul final analizând instanțierea noastră, dar
-    dacă are nevoie de ajutor, 
+    dacă are nevoie de ajutor,
 
     puteți oricând să instanțiați explicit folosind operatorul `::<T>`, cunoscut sub numele de
     `turbofish` (e un bun prieten de-ai mei!).
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20Un%20tip%20de%20structur%C4%83%20definit%20par%C8%9Bial%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Observa%C8%9Bi%3A%20folosind%20tipuri%20generice%2C%20gener%C4%83m%20tipuri%20create%20la%20momentul%20compil%C4%83rii%0A%20%20%20%20%2F%2F%20Turbofish%20ne%20las%C4%83%20s%C4%83%20fim%20explici%C8%9Bi%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Rust%20poate%20deduce%20tipuri%20%C8%99i%20pentru%20cele%20generice!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20Aten%C8%9Bie%3A%20nu%20pune%C8%9Bi%20niciodat%C4%83%20o%20geant%C4%83%20%C3%AEn%20alt%C4%83%20geant%C4%83%20%C3%AEn%20via%C8%9Ba%20real%C4%83%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A
-- title: Reprezentarea "nimicului"
+- title: Reprezentarea nimicului
   content_markdown: >
     În alte limbaje, cuvântul cheie `null` este folosit pentru a reprezenta absența unei
     valori. El creează
@@ -37,7 +37,7 @@
 
 
     Rust nu are tipul `null`, dar nu este ignorant când vine vorba de importanța
-    reprezentării nimicului! 
+    reprezentării nimicului!
 
     Gândiți-vă la o reprezentare naivă folosind o unealtă pe care o cunoaștem deja.
 
@@ -52,7 +52,7 @@
 - title: Option
   content_markdown: >
     Rust are o enumerare deja implementată numită `Option` care ne permite să reprezentăm
-    valori care pot fi nule (nullable) 
+    valori care pot fi nule (nullable)
 
     fără să folosim `null`.
 
@@ -89,7 +89,7 @@
     ```
 
 
-    Observăm ca aceste tipuri generice au multiple *tipuri parametrizate* separate prin 
+    Observăm ca aceste tipuri generice au multiple *tipuri parametrizate* separate prin
     virgulă.
 
 
@@ -125,17 +125,17 @@
     ```
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20execut%C4%83_ceva_ce_poate_e%C8%99ua(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22acesta%20nu%20este%20num%C4%83rul%20corect%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20Uita%C8%9Bi%20c%C3%A2t%20spa%C8%9Biu%20am%20salvat%20prin%20aceast%C4%83%20metod%C4%83%0A%20%20%20%20let%20v%20%3D%20execut%C4%83_ceva_ce_poate_e%C8%99ua(42)%3F%3B%0A%20%20%20%20println!(%22g%C4%83sit%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20Ok(())%0A%7D%0A
-- title: Gestionarea inadecvată a enumerărilor `Option` / `Result`
+- title: Gestionarea inadecvată a enumerărilor Option/Result
   content_markdown: >
-    Folosirea `Option` / `Result` poate fi obositoare când încercați doar să
-    scrieți rapid niște cod.  Și `Option`, și `Result` au o 
+    Folosirea `Option`/`Result` poate fi obositoare când încercați doar să
+    scrieți rapid niște cod.  Și `Option`, și `Result` au o
 
     funcție numită `unwrap` care poate fi utilă pentru a primi o valoare rapid,
     dar în mod periculos. `unwrap` va fi:
-     
-    1. valoare din `Option` / `Result`
 
-    2. `panic!`, dacă enumerarea este de tip `None` / `Err`
+    1. valoare din `Option`/`Result`
+
+    2. `panic!`, dacă enumerarea este de tip `None`/`Err`
 
 
     Următoarele bucăți de cod sunt echivalente:
@@ -178,7 +178,7 @@
     ```
 
 
-    Fiți un bun rustaceu și folosiți-vă de `match` când puteți face asta!
+    Fiți un bun Rustaceu și folosiți-vă de `match` când puteți face asta!
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20execut%C4%83_ceva_ce_poate_e%C8%99ua(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22acesta%20nu%20este%20num%C4%83rul%20corect%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concis%2C%20dar%20este%20o%20presupunere%20%C8%99i%20poate%20fi%20periculos%0A%20%20%20%20let%20v%20%3D%20execut%C4%83_ceva_ce_poate_e%C8%99ua(42).unwrap()%3B%0A%20%20%20%20println!(%22g%C4%83sit%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20aceasta%20va%20returna%20panic!%0A%20%20%20%20let%20v%20%3D%20execut%C4%83_ceva_ce_poate_e%C8%99ua(1).unwrap()%3B%0A%20%20%20%20println!(%22g%C4%83sit%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
 - title: Vectori
@@ -189,7 +189,7 @@
     reprezentate de structura `Vec`.
 
 
-    Macro-ul `vec!` ne permite să creăm mai ușor un vector decât 
+    Macro-ul `vec!` ne permite să creăm mai ușor un vector decât
     l-am construi manual.
 
 
@@ -205,19 +205,19 @@
     a elementelor sale din heap.
 
     * Un vector începe cu o capacitate implicită; când sunt adăugate mai multe elemente decât
-    poate conține, acesta 
+    poate conține, acesta
       realocă elementele sale pe heap pentru a avea o nouă listă fixă mai mare.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Putem%20fi%20explici%C8%9Bi%20cu%20privire%20la%20tip%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20este%20foarte%20inteligent%20c%C3%A2nd%20vine%20vorba%20de%20determinarea%20automat%C4%83%20a%20tipului%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20Este%20un%20macro%20superb!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Salutare%22)%2C%20String%3A%3Afrom(%22Lume%22)%5D%3B%0A%0A%20%20%20%20for%20cuv%C3%A2nt%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20cuv%C3%A2nt)%3B%0A%20%20%20%20%7D%0A%7D%0A
 - title: Capitolul 4 - Concluzie
   content_markdown: >
     Într-un singur capitol, am învățat câtă putere ne oferă tipurile generice! Nu vă
-    îngrijorați dacă nu  
+    îngrijorați dacă nu
 
     știți încă pe deplin cum să folosiți tot ce ați văzut în acest capitol, deocamdată este bine doar să fiți conștienți
     de aceste concepte majore pe care
 
     le veți vedea des în cod. Funcțiile noastre devin destul de lungi! În următorul
-    capitol vom  
+    capitol vom
 
     vorbi despre un alt concept important în Rust: proprietatea datelor (data ownership).

@@ -50,19 +50,19 @@
 
 
     Vom explora acest lucru într-un capitol viitor. Între timp, țineți minte că Rust
-    poate 
+    poate
 
-    creea ușor iteratori care generează o secvență de numere întregi.
+    crea ușor iteratori care generează o secvență de numere întregi.
 
 
     Operatorul `..` creează un iterator care generează numere de la un
-    număr pâna la
+    număr până la
 
     alt număr, din unu în unu, fără să îl includă pe cel din urmă.
 
 
     Operatorul `..=` creează un iterator care generează numere de la un
-    număr pâna la 
+    număr până la
 
     alt număr, din unu în unu, inclusiv cel din urmă.
   code: >-
@@ -117,7 +117,7 @@
     Observăm cum acest lucru permite unui `if` să funcționeze ca o expresie ternară concisă.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20expresia%20ternar%C4%83%20concis%C4%83%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22din%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22hamburger%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22hotdog%22%20%3D%3E%20%22este%20un%20hotdog%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20observa%C8%9Bi%20c%C4%83%20acoladele%20sunt%20op%C8%9Bionale%20c%C3%A2nd%20exist%C4%83%0A%20%20%20%20%20%20%20%20%2F%2F%20o%20expresie%20simpl%C4%83%20de%20returnare%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22nu%20este%20un%20hotdog%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22tipul%20de%20m%C3%A2ncare%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Acest%20domeniu%20de%20vizibilitate%20ne%20permite%20s%C4%83%20nu%20polu%C4%83m%20spa%C8%9Biul%20func%C8%9Biilor%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22din%20bloc%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20Modul%20idiomatic%20de%20a%20returna%20o%20valoare%20%C3%AEn%20Rust%20la%20sf%C3%A2%C8%99itul%20unei%20func%C8%9Bii%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22din%20func%C8%9Bie%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A
-- title: Capitolul 2 - Concluzii
+- title: Capitolul 2 - Concluzie
   content_markdown: >
     Sper că v-am arătat o părticică din puterea Rust-ului chiar și prin cele mai
 

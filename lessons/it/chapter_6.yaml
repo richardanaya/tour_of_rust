@@ -1,0 +1,196 @@
+- title: Capitolo 6 - Testo
+  content_markdown: >
+    Ora che abbiamo capito un po' come Rust pensa alla memoria, siamo pronti
+    parlare del testo in modo più dettagliato.
+
+    Rust si preoccupa molto del testo internazionale e il livello dei byte ti preoccupa
+    potrebbe non avere familiarità con
+
+    da altre lingue. Detto questo, Rust ha molti ottimi strumenti per la gestione
+    quelle preoccupazioni.
+- title: Stringhe letterali
+  content_markdown: >
+    Le stringhe letterali sono sempre Unicode.
+
+
+    I tipi di stringhe letterali sono `&'static str`:
+
+
+    * `&` significa che si riferisce a un luogo nella memoria e manca a
+    `&mut` significa che il compilatore non consentirà modifiche
+
+    * `'statico` significa che i dati della stringa saranno disponibili fino alla fine del nostro
+    programma (non si interrompe mai)
+
+    * `str` significa che punta a una sequenza di byte sempre validi
+    **utf-8**
+
+
+    Dettagli della memoria:
+
+    * Il compilatore Rust probabilmente inserirà la tua stringa nel segmento dati del tuo file
+    memoria del programma
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Cos'è utf-8
+  content_markdown: "Poiché sui computer venivano utilizzate più lingue, il mondo aveva bisogno di rappresentare più caratteri di testo\ndi quelli consentiti dall'ASCII (1 byte consentiva solo 256 caratteri). \n\n**utf-8** è stato introdotto con una lunghezza in byte variabile di 1 -4 byte aumentando notevolmente la gamma di caratteri possibili.\n\nUn vantaggio dei caratteri di dimensione variabile è che il testo non ha byte non necessari per ASCII molto comuni (richiede solo 1 byte ancora in **utf-8**).\n\ nUno svantaggio dei caratteri di dimensione variabile è che la ricerca dei caratteri non può più essere eseguita rapidamente \n(**O(1)** tempo costante) con una semplice indicizzazione (ad esempio `mio_testo[3]` per ottenere il quarto carattere). possibile che i \ncaratteri precedenti possano avere larghezze variabili, alterando il punto in cui inizia effettivamente il 4° carattere nella sequenza di byte.\n\nDobbiamo invece scorrere una sequenza di byte **utf-8** per capire dove iniziano effettivamente i caratteri Unicode (**O(n)** tempo lineare).\n\nFerris: \"Per lo più sono semplicemente felice di avere **utf-8** per rappresentare gli emoji dei miei amici sott'acqua.\"\n\n< span class=\"emoji\">\U0001F420\U0001F419\U0001F41F\U0001F42C\U0001F40B</span>\n"
+- title: Personaggi in fuga
+  content_markdown: >
+    È difficile rappresentare visivamente alcuni personaggi, quindi **scappare
+    i codici** ci permettono di mettere un simbolo al loro posto.
+
+
+    Rust supporta i comuni codici di escape dei linguaggi basati su C:
+
+    * `\n` - nuova riga
+
+    * `\r` - ritorno a capo
+
+    * `\t` - tab
+
+    * `\\` - barra rovesciata
+
+    * `\0` - nullo
+
+    * `\'` - virgoletta singola
+
+
+    L'elenco completo esiste
+    [here](https://doc.rust-lang.org/reference/tokens.html).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Stringhe letterali su più righe
+  content_markdown: |
+    Le stringhe di ruggine sono multiline per impostazione predefinita.
+
+    Usa un `\` alla fine di una riga se non si desidera una pausa.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Stringhe letterali grezze
+  content_markdown: >
+    Le stringhe grezze ci consentono di scrivere una sequenza di caratteri parola per parola iniziando
+    con `r#"` e termina con `"#`. Ci consente di inserire
+
+    caratteri che altrimenti potrebbero confondere una stringa normale come letterali (come
+    virgolette doppie e barre rovesciate).
+  code: >-
+   https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Stringhe letterali da file
+  content_markdown: >
+    Se hai del testo molto grande, considera l'utilizzo della macro `include_str!` per
+    includi testo da file locali nel tuo programma:
+
+
+    "ruggine".
+
+    let ciao_html = include_str!("ciao.html");
+
+    ```
+- title: Fetta di corda
+  content_markdown: >
+    Una porzione di stringa è un riferimento a una sequenza di byte in memoria che deve
+    essere sempre valido utf-8.
+
+
+    Anche una porzione di stringa (una sotto-fetta) di una porzione `str` deve essere utf-8 valida.
+
+
+    Metodi comuni di `&str`:
+
+    * `len` ottiene la lunghezza della stringa letterale in byte (non il numero di
+    caratteri).
+
+    * `starts_with`/`ends_with` per test di base.
+
+    * `is_empty` restituisce vero se la lunghezza è zero.
+
+    * `find` restituisce una `Option<usize>` della prima posizione di del testo.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Caratteri
+  content_markdown: >
+    Con così tante difficoltà nel lavorare con Unicode, Rust offre un modo per farlo
+    recupera una sequenza di byte utf-8 come vettore di caratteri di tipo "char".
+
+
+    Un "char" è sempre lungo 4 byte (consentendo una ricerca efficiente dei singoli file
+    caratteri).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Corda
+  content_markdown: >
+    Una **String** è una struttura che possiede una sequenza di byte utf-8 nella memoria heap.
+
+
+    Poiché la sua memoria è nell'heap, può essere estesa, modificata, ecc
+    modi in cui i letterali stringa non possono.
+
+
+    Metodi comuni:
+
+
+    * `push_str` per aggiungere più byte utf-8 alla fine di una stringa.
+
+    * `replace` per sostituire sequenze di byte utf-8 con altre.
+
+    * `to_lowercase`/`to_uppercase` per le modifiche alle maiuscole.
+
+    * `trim` per tagliare lo spazio
+
+
+    Quando una String viene eliminata, viene eliminata anche la sua memoria heap.
+
+
+    `String` ha un operatore `+` che estende la stringa con un `&str` e
+    ritorna da solo, ma potrebbe non essere ergonomico come speri.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Testo come parametri di funzione
+  content_markdown: >
+    Le stringhe letterali e le stringhe vengono generalmente passate come porzioni di stringhe
+    funzioni. Questo offre molta flessibilità per
+
+    nella maggior parte degli scenari in cui non è necessario trasferire effettivamente la proprietà.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Costruire stringhe
+  content_markdown: |
+    "concat" e "join" sono due modi semplici ma potenti per creare stringhe.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Stringhe di formattazione
+  content_markdown: >
+    La macro `format!` ci consente di creare una stringa definendo un file parametrizzato
+    stringa con segnaposto per dove e come posizionare i valori (ad es.
+    "{}`).
+
+
+    `format!` utilizza le stesse stringhe parametrizzate di `println!`
+
+
+    Le capacità di questa funzione sono troppo ampie per *Tour of Rust*;
+    consulta la documentazione [qui](https://doc.rust-lang.org/std/fmt/).
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Conversione di stringhe
+  content_markdown: |
+    Molti tipi possono essere convertiti in una stringa utilizzando "to_string".
+
+    La funzione generica "parse" può essere utilizzata per convertire stringhe
+    o valori letterali stringa in un valore tipizzato. Questa funzione ritorna
+    un "Risultato" perché potrebbe fallire.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+- title: Capitolo 6 - Conclusione
+  content_markdown: >
+    Ora conosci le basi del testo! Come hai visto, Unicode fa funzionare
+    con testo un po' complicato, ma la libreria standard
+
+    ha molte funzionalità per renderlo facile da gestire.
+
+
+    Finora abbiamo guardato Rust principalmente dalla lente di un procedurale
+    paradigma (cioè solo funzioni e dati),
+
+    ma è giunto il momento di parlare dei tratti e delle capacità sbloccate da
+    Il paradigma orientato agli oggetti di Rust.

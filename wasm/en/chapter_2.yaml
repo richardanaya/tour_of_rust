@@ -22,7 +22,7 @@
     Notice that calling an imported function is considered `unsafe` in Rust
     because the compiler
 
-    can make no gaurantees about what happens within it's implementation.
+    can make no guarantees about what happens within it's implementation.
 - title: Limitations of Functions
   content_markdown: >
     Parameter and return types of functions are limited to:
