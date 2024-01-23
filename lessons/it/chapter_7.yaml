@@ -283,7 +283,7 @@
 
     ```rust
 
-    impl<T> MiaStruttura<T> {
+    impl<T: MiaCaratteristica> MiaStruttura<T> {
         ...
     }
 
