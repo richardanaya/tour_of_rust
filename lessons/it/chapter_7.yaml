@@ -58,7 +58,7 @@
 
     ```rust
 
-    impl MyStruct {
+    impl MiaStruttura {
         ...
         fn foo(&self) {
             ...
@@ -91,7 +91,7 @@
 
     ```
 
-    tratto Il mio tratto {
+    trait MiaCaratteristica {
         fn foo(&self);
         ...
     }
@@ -112,7 +112,7 @@
 
     ```rust
 
-    impl MyTrait per MyStruct {
+    impl MiaCaratteristica per MiaStruttura {
         fn foo(&self) {
             ...
         }
@@ -265,10 +265,10 @@
 
     ```rust
 
-    struct MiaStruct<T>
+    struct MiaStruttura<T>
 
     where
-        T: MiaStruct
+        T: MiaCaratteristica
     {
         foo: T
         ...
@@ -283,7 +283,7 @@
 
     ```rust
 
-    impl<T> MiaStruct<T> {
+    impl<T> MiaStruttura<T> {
         ...
     }
 
