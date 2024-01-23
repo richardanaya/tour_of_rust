@@ -40,7 +40,7 @@
     potrebbe non dispiacere questa mancanza.
 - title: Incapsulamento con metodi
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+creatura.ottieni_suono%28%29%29%3B%0A%7D%0A
   content_markdown: >
   Rust supporta il concetto di *oggetto* a cui è associata una struttura
     alcune funzioni (conosciute anche come *metodi*).
@@ -68,7 +68,7 @@
     ```
 - title: Astrazione con esposizione selettiva
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+creatura.ottieni_suono%28%29%29%3B%0A%7D%0A
   content_markdown: >
   Rust può nascondere il funzionamento interno degli oggetti.
 
@@ -80,7 +80,7 @@
     La parola chiave "pub" espone campi e metodi della struttura all'esterno del modulo.
 - title: Polimorfismo con tratti
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_noise()%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A++++%0A++++fn+fare_molto_rumore%28%26self%29%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A
   content_markdown: >
   Rust supporta il polimorfismo con i tratti. I tratti ci permettono di associare un insieme
     di metodi con un tipo struct.
@@ -110,7 +110,7 @@
     bloccare:
 
 
-    "ruggine".
+    ```rust
 
     impl MyTrait per MyStruct {
         fn foo(&self) {
@@ -122,7 +122,7 @@
     ```
 - title: Metodi implementati sui tratti
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%20%20%20%20%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A++++%0A++++fn+fare_molto_rumore%28%26self%29%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A
   content_markdown: >
     I tratti possono avere metodi implementati.
 
@@ -133,12 +133,12 @@
     essere utile per condividere il comportamento tra molti implementatori di tratti.
 - title: Eredità dei tratti
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Atrait%20LoudNoiseMaker%3A%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_alot_of_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%20%20%20%20self.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20LoudNoiseMaker%20for%20SeaCreature%20%7B%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20creature.make_alot_of_noise()%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Atrait+ForteRumoroso%3A+Rumoroso+%7B%0A++++fn+fare_molto_rumore%28%26self%29+%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+ForteRumoroso+for+CreaturaMarina+%7B%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A
   content_markdown: >
     I tratti possono ereditare metodi da altri tratti.
 - title: Invio dinamico e statico
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+SeaCreature+%7B%0A++++pub+name%3A+String%2C%0A++++noise%3A+String%2C%0A%7D%0A%0Aimpl+SeaCreature+%7B%0A++++pub+fn+get_sound%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.noise%0A++++%7D%0A%7D%0A%0Atrait+NoiseMaker+%7B%0A++++fn+make_noise%28%26self%29%3B%0A%7D%0A%0Aimpl+NoiseMaker+for+SeaCreature+%7B%0A++++fn+make_noise%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.get_sound%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+static_make_noise%28creature%3A+%26SeaCreature%29+%7B%0A++++%2F%2F+conosciamo+il+vero+tipo%0A++++creature.make_noise%28%29%3B%0A%7D%0A%0Afn+dynamic_make_noise%28noise_maker%3A+%26dyn+NoiseMaker%29+%7B%0A++++%2F%2F+noi+no%0A++++%7D
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+static_fare_rumore%28creatura%3A+%26CreaturaMarina%29+%7B%0A++++%2F%2F+conosciamo+il+vero+tipo%0A++++creatura.fare_rumore%28%29%3B%0A%7D%0A%0Afn+dynamic_fare_rumore%28rumoroso%3A+%26dyn+Rumoroso%29+%7B%0A++++%2F%2F+non+conosciamo+il+vero+tipo%0A++++rumoroso.fare_rumore%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++static_fare_rumore%28%26creatura%29%3B%0A++++dynamic_fare_rumore%28%26creatura%29%3B%0A%7D%0A
   content_markdown: >
     I metodi vengono eseguiti in due modi:
 
@@ -178,7 +178,7 @@
     * Questo elenco di funzioni è noto in C++ come *vtable*.
 - title: Funzioni generiche
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+SeaCreature+%7B%0A++++pub+name%3A+String%2C%0A++++noise%3A+String%2C%0A%7D%0A%0Aimpl+SeaCreature+%7B%0A++++pub+fn+get_sound%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.noise%0A++++%7D%0A%7D%0A%0Atrait+NoiseMaker+%7B%0A++++fn+make_noise%28%26self%29%3B%0A%7D%0A%0Aimpl+NoiseMaker+for+SeaCreature+%7B%0A++++fn+make_noise%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.get_sound%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+generic_make_noise%3CT%3E%28creature%3A+%26T%29%0Awhere%0A++++T%3A+NoiseMaker%2C%0A%7B%0A++++%2F%2F+conosciamo+il+tipo+reale+in+fase+di+compilazione%0A++++creature.make_noise%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creature+%3D+SeaCreature+%7B%0A++++++++name%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++noise%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++generic_make_noise%28%26creature%29%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+generic_fare_rumore%3CT%3E%28creatura%3A+%26T%29%0Awhere%0A++++T%3A+Rumoroso%2C%0A%7B%0A++++%2F%2F+conosciamo+il+tipo+reale+in+fase+di+compilazione%0A++++creatura.fare_rumore%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++generic_fare_rumore%28%26creatura%29%3B%0A%7D%0A
   content_markdown: >
     I generici in Rust lavorano di pari passo con i tratti. Quando descriviamo a
     tipo parametrizzato "T" possiamo limitare quali tipi
@@ -208,21 +208,21 @@
     eseguire l'invio statico e archiviarlo come valore dimensionato.
 - title: Abbreviazione di funzioni generiche
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+SeaCreature+%7B%0A++++pub+name%3A+String%2C%0A++++noise%3A+String%2C%0A%7D%0A%0Aimpl+SeaCreature+%7B%0A++++pub+fn+get_sound%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.noise%0A++++%7D%0A%7D%0A%0Atrait+NoiseMaker+%7B%0A++++fn+make_noise%28%26self%29%3B%0A%7D%0A%0Aimpl+NoiseMaker+for+SeaCreature+%7B%0A++++fn+make_noise%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.get_sound%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+generic_make_noise%28creature%3A+%26impl+NoiseMaker%29%0A%7B%0A++++%2F%2F+conosciamo+il+tipo+reale+in+fase+di+compilazione%0A++++creature.make_noise%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creature+%3D+SeaCreature+%7B%0A++++++++name%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++noise%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++generic_make_noise%28%26creature%29%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+generic_fare_rumore%28creatura%3A+%26impl+Rumoroso%29%0A%7B%0A++++%2F%2F+conosciamo+il+tipo+reale+in+fase+di+compilazione%0A++++creatura.fare_rumore%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++generic_fare_rumore%28%26creatura%29%3B%0A%7D%0A
   content_markdown: >
-    Rust has a shorthand for expressing generics constrained by a trait:
+    Rust ha una scorciatoia per esprimere i generici vincolati da un tratto:
 
     ```rust
-    fn my_function(foo: impl Foo) {
+    fn mia_funzione(foo: impl Foo) {
         ...
     }
     ```
 
-    This is equivalent to writing:
+    Ciò equivale a scrivere:
 
     ```rust
-    fn my_function<T>(foo: T)
-    where
+    fn mia_funzione<T>(foo: T)
+    Dove
         T:Foo
     {
         ...
@@ -230,7 +230,7 @@
     ```
 - title: Box
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20SeaCreature%20%7B%0A%20%20%20%20pub%20name%3A%20String%2C%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20pub%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Atrait%20NoiseMaker%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%3B%0A%7D%0A%0Aimpl%20NoiseMaker%20for%20SeaCreature%20%7B%0A%20%20%20%20fn%20make_noise(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20%26self.get_sound())%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20Ocean%20%7B%0A%20%20%20%20animals%3A%20Vec%3CBox%3Cdyn%20NoiseMaker%3E%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22swish%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20ocean%20%3D%20Ocean%20%7B%0A%20%20%20%20%20%20%20%20animals%3A%20vec!%5BBox%3A%3Anew(ferris)%2C%20Box%3A%3Anew(sarah)%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20for%20a%20in%20ocean.animals.iter()%20%7B%0A%20%20%20%20%20%20%20%20a.make_noise()%3B%0A%20%20%20%20%7D%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Astruct+Oceano+%7B%0A++++animali%3A+Vec%3CBox%3Cdyn+Rumoroso%3E%3E%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+ferris+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++let+sarah+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Sarah%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22swish%22%29%2C%0A++++%7D%3B%0A++++let+oceano+%3D+Oceano+%7B%0A++++++++animali%3A+vec%21%5BBox%3A%3Anew%28ferris%29%2C+Box%3A%3Anew%28sarah%29%5D%2C%0A++++%7D%3B%0A++++for+a+in+oceano.animali.iter%28%29+%7B%0A++++++++a.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A
   content_markdown: >
     `Box` è una struttura dati che ci consente di spostare i nostri dati dallo stack a
     il mucchio.
