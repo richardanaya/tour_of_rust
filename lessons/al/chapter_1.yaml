@@ -14,8 +14,8 @@
      si e quajnë veten njerëzit që përdorin, kontribuojnë ose janë të interesuar për Rust.
 - title: Sheshi i Lojërave Rust
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Mireseerdhe%20ne%20sheshin%20e%20lojerave!%20Ti%20mund%20te%20modifikosh%20kodin%20ketu.%22)%3B%0A%7D%0A
-  content_markdown: >
+ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021  
+content_markdown: >
     Ky tur përdor një mjet kodimi ndërveprues nga [Rust
     Playground](https://play.rust-lang.org).
 
@@ -24,7 +24,7 @@
      dhe te maresh pjese ne sfida!
 - title: Variablat
   code: >-
-   https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20nxjerr%20n%C3%AB%20pah%20llojin%20e%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20gjithashtu%20mund%20t%C3%AB%20jet%C3%AB%20i%20qart%C3%AB%20p%C3%ABr%20llojin%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20rust%20gjithashtu%20mund%20t%C3%AB%20deklarohet%20dhe%20inicializohet%20m%C3%AB%20von%C3%AB%2C%20por%20kjo%20b%C3%ABhet%20rrall%C3%AB%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+   https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Variablat deklarohen duke përdorur fjalën kyçe **let**.
 
@@ -45,7 +45,7 @@
     Emrat e variabilave jane sa here ne `snake_case`.
 - title: Ndryshimi i variabilava
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+   https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
    Rust kujdeset shumë për variablat që mund të modifikohen. vlerat
 
@@ -65,8 +65,8 @@
      jashtë për këtë fjalë kyçe.
 - title: Tipet Bazike
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+x+%3D+12%3B+%2F%2F+p%C3%ABr+shkak+t%C3%AB+parazgjedhur%2C+kjo+%C3%ABsht%C3%AB+i32%0A++++let+a%3A+u8+%3D+12%3B%0A++++let+b+%3D+4.3%3B+%2F%2F+p%C3%ABr+shkak+t%C3%AB+parazgjedhur%2C+kjo+%C3%ABsht%C3%AB+f64%0A++++let+c%3A+f32+%3D+4.3%3B%0A++++let+d+%3D+%27r%27%3B+%2F%2F+karakter+unicode%0A++++let+ferris+%3D+%27%F0%9F%A6%80%27%3B+%2F%2F+gjithashtu+nj%C3%AB+karakter+unicode%0A++++let+bv+%3D+true%3B%0A++++let+t+%3D+%2813%2C+false%29%3B%0A++++let+sentence+%3D+%22P%C3%ABrshendetje%2C+bota%21%22%3B%0A++++println%21%28%0A++++++++%22%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++x%2C+a%2C+b%2C+c%2C+d%2C+ferris%2C+bv%2C+t.0%2C+t.1%2C+sentence%0A++++%29%3B%0A%7D%0A  
-  
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+
   content_markdown: >
     Rust ka një sërë llojesh të njohura:
 
@@ -108,7 +108,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%
      të numrit (p.sh. "13u32", "2u8").
 - title: Konvertimi i tipit bazë
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Ndryshku kërkon qartësi kur bëhet fjalë për llojet numerike. Një nuk mund
 
@@ -121,7 +121,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%
      **as**.
 - title: Konstantet
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22P%C3%ABr%20t%C3%AB%20b%C3%ABr%C3%AB%20nj%C3%AB%20moll%C3%AB%20nga%20e%20para%2C%20duhet%20t%C3%AB%20krijosh%20nj%C3%AB%20univers.%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Konstantet na lejojnë të specifikojmë një vlerë të përbashkët që përdoret gjatë gjithë kohës
 
@@ -139,7 +139,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20
      Emrat konstant janë gjithmonë ne `SCREAMING_SNAKE_CASE`.
 - title: Vargjet
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Një *array/varg* është një **përmbledhje me gjatësi fikse** të elementeve të të dhënave të gjitha të te njëjta
      lloji.
@@ -157,7 +157,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20
      prezantuar në një kapitull të mëvonshëm rreth **Vektorëve**.
 - title: Funksionet
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20mblidh(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20zbrit(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20mblidh(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20abrit(42%2C%2013))%3B%0A%7D%0A
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Një funksion ka zero ose më shumë parametra.
 
@@ -177,7 +177,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20
      Nëse e thërrisni atë funksion dhe i kaloni të dhëna, atëherë ai quhet argumente.
 - title: Vlerat e shumëfishta të kthimit
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20kthe%20nj%C3%AB%20tuple%20t%C3%AB%20vlerave%20t%C3%AB%20kthimit%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20shkat%C3%ABrro%20tuple%20n%C3%AB%20dy%20variabla%20t%C3%AB%20em%C3%ABrtuara%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Funksionet mund të kthejnë vlera të shumta duke kthyer një **tuple**
 
@@ -204,7 +204,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20
      Përdorimi i `()` është i pazakontë, por do të shfaqet aq shpesh sa është mirë të dihet
      cfare po ndodh.
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20tipi%20i%20kthimit%20%C3%ABsht%C3%AB%20i%20p%C3%ABrcaktuar%20implicitisht%20si%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20kjo%20funksion%20do%20t%C3%AB%20kthej%C3%AB%20()%20n%C3%ABse%20nuk%20%C3%ABsht%C3%AB%20specifikuar%20t%C3%AB%20kthehet%20ndonj%C3%AB%20gj%C3%AB%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Printimi%20i%20nj%C3%AB%20fjale%20debug%20p%C3%ABr%20a%20dhe%20b%0A%20%20%20%20%2F%2F%20Sepse%20%C3%ABsht%C3%AB%20e%20v%C3%ABshtir%C3%AB%20t%C3%AB%20printohet%20asgj%C3%ABsia%0A%20%20%20%20println!(%22Vlera%20e%20a%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22Vlera%20e%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
 - title: Chapter 1 - Conclusion
   content_markdown: >
     Punë e bukur deri tani! Bazat e Rust nuk janë aq të këqija, apo jo? ne jemi
