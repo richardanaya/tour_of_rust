@@ -30,7 +30,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a%3A+i32+%3D+12i32%3B%0A++++let+b%3A+%26i32+%3D+%26a%3B+++%2F%2F+pointer+to+i32%0A++++let+c%3A+%26%26i32+%3D+%26b%3B++%2F%2F+pointer+to+pointer+to+i32%0A++++let+d%3A+%26%26%26i32+%3D+%26c%3B%09%2F%2F+pointer+to+pointer+to+pointer+to+i32%0A++++%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C+a%2C+b%2C+c%2C+d%29%3B%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C+a%2C+*b%2C+**c%2C+***d%29%3B%0A%7D%0A
   content_markdown: >
-    A pointer is a variable.
+    A pointer is a variable that stores a memory address.
 
     Each variable:
       - has a name

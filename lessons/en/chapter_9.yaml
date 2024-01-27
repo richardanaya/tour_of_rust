@@ -13,7 +13,7 @@
     writing code, which is `std` (the standard Rust library).
 
 
-    Therefore, there are two type of crates in Rust:
+    Therefore, there are two types of crates in Rust:
     - `binary crates`  : contain a `main.rs` file
     - `library crates` : contain a `lib.rs` file
 
@@ -35,8 +35,7 @@
 
     In Rust there is not a 1 to 1 mapping of files to the module tree hierarchy. We must build the module tree explicitly by hand in our code.
     
-    
-    More information about how to split you code in different files / moduels
+    More information about how to split you code into different files / modules
     can be found [here](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/crates-and-modules.html).
 - title: Writing a Program
   content_markdown: |
@@ -57,7 +56,7 @@
     Cool!
 
     A `binary crate` will depend on the `main.rs`.
-    Btw, do not try to create a `lib.rs` here.
+    By the way, do not try to create a `lib.rs` here.
     Our friend `cargo` will be confused.
 
 - title: Writing a Library
@@ -234,7 +233,7 @@
 - title: Internal Module Referencing
   content_markdown: >
     Rust has several keywords you can use in your `use` path to quickly get
-    ahold of the module you want:
+    a hold of the module you want:
     
     * `crate` - the root module of your crate
 
