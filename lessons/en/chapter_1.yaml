@@ -111,7 +111,7 @@
     out for this keyword.
 - title: Basic Types
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a+%3D+13u8%3B%0A++++let+b+%3D+7u32%3B%0A++++let+c+%3D+a+as+u32+%2B+b%3B%0A++++println%21%28%22%7B%7D%22%2C+c%29%3B%0A%0A++++let+t+%3D+true%3B%0A++++println%21%28%22%7B%7D%22%2C+t+as+u8%29%3B%0A%0A++++let+d%3A+u32+%3D+12%3B%0A++++%2F%2F+let+e%3A+u32+%3D+-12%3B++%2F%2F+unsinged+nubers+include+only+positive+numbers%0A++++let+e%3A+i32+%3D+12%3B%0A++++let+f%3A+i32+%3D+-12%3B%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C+d%2C+-%28d+as+i32%29%2C+e%2C+f%29%3B%0A%7D%0A
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+x+%3D+12%3B+%2F%2F+by+default+this+is+i32%0A++++let+a+%3D+12u8%3B%0A++++let+b+%3D+4.3%3B+%2F%2F+by+default+this+is+f64%0A++++let+c+%3D+4.3f32%3B%0A++++let+d+%3D+%27r%27%3B+%2F%2F+unicode+character%0A++++let+ferris+%3D+%27%F0%9F%A6%80%27%3B+%2F%2F+also+a+unicode+character%0A++++let+bv+%3D+true%3B%0A++++let+t+%3D+%2813%2C+false%29%3B%0A++++let+sentence+%3D+%22hello+world%21%22%3B%0A++++println%21%28%0A++++++++%22%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++x%2C+a%2C+b%2C+c%2C+d%2C+ferris%2C+bv%2C+t.0%2C+t.1%2C+sentence%0A++++%29%3B%0A%7D%0A
   content_markdown: >
     Basic data types:
     - bool
@@ -137,28 +137,41 @@
   
   
     Rust has a variety of familiar types:
-    
-    - `booleans` - bool for representing true/false
-    
-    - unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing positive whole numbers
-    
-    - signed integers - i8 i16 i32 i64 i128 for representing whole numbers
-    pointer sized integers - usize isize for representing indexes and sizes of things in memory
-    
-    - floating point - `f32` `f64`
-    
-    - tuple - `(value, value, ...)` for passing fixed sequences of values on the stack
-    
-    - arrays - `[value, value, ...]` a collection of similar elements with fixed length known at compile time
-    
-    - slices - a collection of similar elements with length known at runtime
-    
-    - `str` (string slice) - text with a length known at runtime
-      
-    Text might be more complex than you are used to in other languages; since
-    Rust is a system programming language, it cares about memory issues you
-    might not be used to. We will be going into this in detail later.
-    
+
+
+    * booleans - `bool` for representing true/false
+
+    * unsigned integers - `u8` `u16` `u32` `u64` `u128` for representing
+    nonnegative whole numbers
+
+    * signed integers - `i8` `i16` `i32` `i64` `i128` for representing whole numbers
+
+    * pointer sized integers - `usize` `isize` for representing indexes
+
+    and sizes of things in memory
+
+    * floating point - `f32` `f64`
+
+    * characters - `char` for representing a single Unicode character
+
+    * tuple - `(value, value, ...)` for passing fixed sequences of values on the
+    stack
+
+    * arrays - `[value, value, ...]` a collection of similar elements with fixed
+    length known at compile time
+
+    * slices - a collection of similar elements with length known at runtime
+
+    * `str`(string slice) - text with a length known at runtime
+
+
+    Text might be more complex than you are used to in other languages;
+
+    since Rust is a system programming language, it cares about memory 
+
+    issues you might not be used to. We will be going into this in detail later.
+
+
     Numeric types can be explicitly specified by appending the type to the end
     of the number (e.g. `13u32`, `2u8`).
     
