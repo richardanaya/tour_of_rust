@@ -1,4 +1,4 @@
-- title: Capitolul 9 - Organizarea și Structurarea Proiectului
+- title: Capitolul 9 - Organizarea și structurarea proiectului
   content_markdown: >
     Până acum, toate exemplele noastre de cod au fost un singur fișier. Haideți să discutăm cum
     codul nostru poate fi mai bine organizat și partajat de alții!
@@ -13,17 +13,17 @@
     Un modul poate conține variabile globale, funcții, structuri, trăsături sau chiar alte module!
 
     În Rust nu există o corespondență unu la unu între fișiere și ierarhia de module. Trebuie să construim arborele de module în mod explicit și manual în codul nostru.
-- title: Scrierea unui Program
+- title: Scrierea unui program
   content_markdown: |
     Un program are un modul rădăcină într-un fișier numit `main.rs`.
-- title: Scrierea unei Biblioteci
+- title: Scrierea unei biblioteci
   content_markdown: |
     O bibliotecă are un modul rădăcină într-un fișier numit `lib.rs`.
-- title: Referințierea de către alte module și cutii
+- title: Referențierea de către alte module și cutii
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22Bun%20venit%20la%20locul%20de%20joac%C4%83!%22)%3B%0A%20%20%20%20println!(%22PI%20este%20echivalent%20cu%20%7B%7D%22%2C%20PI)%3B%0A%7D%0A
   content_markdown: >
-    Elementele din module pot fi refererențiate cu calea completă a acestora.
+    Elementele din module pot fi referențiate cu calea completă a acestora.
     `std::f64::consts::PI`.
 
 
@@ -51,7 +51,7 @@
     ```
 
      **TAU**r și **PI**sces sunt semnele zodiacale cele mai compatibile cu Ferris.
-- title: Crearea de Module
+- title: Crearea de module
   content_markdown: |
     Când ne gândim la cod, ne imaginăm de obicei o ierarhie de fișiere organizate
     în directoare. Rust vă permite să creați module organizate într-un mod similar
@@ -61,7 +61,7 @@
     `foo` poate fi reprezentat ca:
       * un fișier numit `foo.rs`
       * un director numit `foo` cu un fișier `mod.rs` în interior
-- title: Ierarhia Modulelor
+- title: Ierarhia modulelor
   content_markdown: >
     Un modul poate depinde de un alt modul. Pentru a stabili o relație
 
@@ -79,7 +79,7 @@
     și
 
     va insera conținutul acestuia în interiorul unui modul numit `foo`, în domeniul de vizibilitate al acestuia.
-- title: Modul *Inline*
+- title: Modul inclus direct (inline)
   content_markdown: >
     Un submodul poate fi inclus direct în codul unui modul.
 
@@ -90,7 +90,7 @@
 
     ```
 
-    // Aceast macro elimină acest modul inline atunci când Rust
+    // Acest macro elimină acest modul inline atunci când Rust
 
     // nu se află în modul de testare
 
@@ -101,11 +101,11 @@
         // modulul părinte. Trebuie să fim expliciți.
         use super::*;
 
-        ... tests go here ...
+        ... teste scrise aici ...
     }
 
     ```
-- title: Referențierea Modulelor Interne
+- title: Referențierea modulelor interne
   content_markdown: >
     Rust are câteva cuvinte cheie pe care le puteți folosi în calea `use` pentru a obține rapid
     rapid modulul pe care îl doriți:
@@ -128,7 +128,7 @@
 
     cutii accesibilă prin marcarea lor ca `pub` în modulul rădăcină (în engleză *root module*) al
     cutiei dvs. (`lib.rs` sau `main.rs`).
-- title: Vizibilitatea Structurilor
+- title: Vizibilitatea structurilor
   content_markdown: >
     La fel ca și funcțiile, structurile pot declara ceea ce doresc să fie expus
     în afara modulului lor folosind `pub`.
@@ -144,7 +144,7 @@
     `std::prelude::*` este automat disponibil pentru fiecare parte a Rust.
     Acesta este cazul pentru `Vec` și `Box`, dar și pentru altele (`Option`, `Copy`,
     etc.).
-- title: Preludiul Propriu
+- title: Preludiul propriu
   content_markdown: >
     Datorită preludiului bibliotecii standard, este normal ca biblioteca dvs. să aibă
     propriul său modul preludiu. Aceasta poate fi un punct de plecare pentru
@@ -158,9 +158,9 @@
     să știe de unde să înceapă.
 
 
-    Ferris spune: "Fiți un rustacean bun și ajutați alți crabi cu un
+    Ferris spune: "Fiți un Rustaceu bun și ajutați alți crabi cu un
     preludiu bun!"
-- title: Capitolul 9 - Concluzii
+- title: Capitolul 9 - Concluzie
   content_markdown: >
     Acum aveți câteva trucuri în mânecă atunci când vine vorba de crearea de aplicații Rust
     pregătite pentru lume. Nu
