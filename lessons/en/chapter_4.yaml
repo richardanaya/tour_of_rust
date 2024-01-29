@@ -132,7 +132,7 @@
 
     function called `unwrap` that can be useful for getting a value in a quick
     and dirty manner.  `unwrap` will:
-     
+    
     1. Get the value inside Option/Result
 
     2. If the enum is of type None/Err, `panic!`
