@@ -38,6 +38,39 @@
 
     That said, Rust implements many programming language features, so that you
     might not mind this lacking.
+- title: self and Self
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Coordinates+%7B%0A++++x%3A+i32%2C%0A++++y%3A+i32%2C%0A%7D%0A%0Aimpl+Coordinates+%7B%0A++++%2F%2F+the+return+value%2C+Self%2C+has+the+data+type+as+the+implemented+struct+%0A++++%2F%2F+this+method+is+static%0A++++fn+new%28xval%3A+i32%2C+yval%3A+i32%29+-%3E+Self+%7B%0A++++++++return+Coordinates+%7B%0A++++++++++++x%3A+xval%2C%0A++++++++++++y%3A+yval%2C%0A++++++++%7D%0A++++%7D%0A++++%0A++++fn+setx%28%26mut+self%2C+xval%3A+i32%29+%7B%0A++++++++self.x+%3D+xval%3B%0A++++%7D%0A++++%0A++++fn+sety%28%26mut+self%2C+yval%3A+i32%29+%7B%0A++++++++self.y+%3D+yval%3B%0A++++%7D%0A++++%0A++++fn+disp%28%26self%29+%7B%0A++++++++println%21%28%22Point+located+at+%3A+%7B%7D+on+OX++%7B%7D+on+OY%22%2C%0A++++++++++++++++self.x%2C+self.y%29%3B%0A++++%7D%0A++++%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+mut+p+%3D+Coordinates%3A%3Anew%28-1i32%2C+1i32%29%3B%0A++++p.disp%28%29%3B%0A++++p.setx%2810++as+i32%29%3B%0A++++p.sety%28-10+as+i32%29%3B%0A++++p.disp%28%29%3B%0A%7D%0A
+  content_markdown: >
+      In Rust, `self` and `Self` are fundamental concepts in ownership and
+      borrowing system. Both of them are used in `impl` and `trait` blocks.
+      
+      `self`:
+      - refers to an **instance of struct**
+      - reference to itself
+      - is the first parameter of the method
+      - methods containing the `self` parameter are called using the name of the instance, the operator `.` and the name of the method
+    
+      
+      `Self`:
+      - refers to **return type** of the method
+      - has the same data type as the `struct` that is implemented in a `impl` block
+    - can be used for static methods using the operator `::` (they do not depend on a instance of a struct or contain `self` as a parameter)
+- title: Defining a macro
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+Coordinates+%7B%0A++++x%3A+i32%2C%0A++++y%3A+i32%2C%0A%7D%0A%0Aimpl+Coordinates+%7B%0A++++%2F%2F+original+copy+constructor%2C+a+static+method%0A++++fn+new%28xval%3A+i32%2C+yval%3A+i32%29+-%3E+Self+%7B%0A++++++++Coordinates+%7B+x%3A+xval%2C+y%3A+yval+%7D%0A++++%7D%0A%7D%0A%0Aimpl+Coordinates+%7B%0A++++fn+disp%28%26self%29+%7B%0A++++++++println%21%28%22Point+located+at%3A+%7B%7D+on+OX%2C+%7B%7D+on+OY%22%2C+self.x%2C+self.y%29%3B%0A++++%7D%0A%7D%0A%0A%2F%2F+the+coord%21+macro%0Amacro_rules%21+coord+%7B%0A++++%28%24x%3Aexpr%2C+%24y%3Aexpr%29+%3D%3E+%7B%0A++++++++Coordinates%3A%3Anew%28%24x%2C+%24y%29%0A++++%7D%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++%2F%2F+Use+the+coord%21+macro+to+create+a+new+Coordinates+instance%0A++++let+p1%3A+Coordinates+%3D+coord%21%281%2C+2%29%3B%0A%0A++++%2F%2F+Alternatively%2C+you+can+use+the+coord%21+macro+with+square+brackets%0A++++let+p2+%3D+coord%21%5B2%2C+2%5D%3B%0A++++%0A++++let+p3+%3D+Coordinates+%7B%0A++++++++x%3A+10i32%2C%0A++++++++y%3A+11+as+i32%2C%0A++++%7D%3B%0A++++%0A++++let+p4+%3D+Coordinates%3A%3Anew%28-10%2C+11%29%3B%0A%0A++++p1.disp%28%29%3B%0A++++p2.disp%28%29%3B%0A++++p3.disp%28%29%3B%0A++++p4.disp%28%29%3B%0A%7D%0A
+  content_markdown: >
+      We talked before that we can use `macros` to simplify abstractions of our code.
+      
+      Let us define a `macro` that has the functionality of a copy constructor 
+      for a struct.
+      
+      Notice that we group the macro's parameters using either `()` or `[]`.
+      
+      The choice between using `()` and `[]` for `macro` invocations in Rust 
+      often depends on the expected syntax and visual aesthetics. While `()` is more commonly associated with function calls and grouping expressions, `[]` is often associated with array indexing or indexing-like operations.
+
+
 - title: Encapsulation With Methods
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A
