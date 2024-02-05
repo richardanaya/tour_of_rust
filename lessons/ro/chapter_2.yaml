@@ -106,21 +106,21 @@ title: Destructurarea
       din tuplu.
   code: >-
     https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&code=fn+main%28%29+%7B%0A++++++++let+point+%3D+%283%2C+4%29%3B%0A%0A++++++++match+point+%7B%0A++++++++++++%2F%2Fverific%C4%83+dac%C4%83+prima+valoare+este+3+%C8%99i+o+tip%C4%83re%C8%99te+pe+a+doua%2C+indiferent+de+valoarea+ei.%0A++++++++++++%283%2C+y%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Atunci+c%C3%A2nd+prima+valoare+este+3%2C+a+doua+este+%7B%3A%3F%7D%22%2C+y%29%0A++++++++++++++++%0A++++++++++++%7D%2C%0A++++++++++++%2F%2Fverific%C4%83+dac%C4%83+ultima+valoare+este+4+%C8%99i+ignor%C4%83+complet+prima+valoare.%0A++++++++++++%28..%2C+4%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Ultima+valoare+este+4%2C+restul+sunt+irelevante%22%29%7D%0A++++++++++++%2C%0A++++++++++++%2F%2Fnu+folosim+nici+un+caz+%22default%22+din+moment+ce+ultimul+brat+se+ocupa+de+orice+caz+ramas%0A++++++++++++%28x%2C+y%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Cele+dou%C4%83+valori+sunt+%7B%3A%3F%7D+%C8%99i+%7B%3A%3F%7D%22%2C+x+%2C+y%29%0A++++++++++++++++%0A++++++++++++%7D%2C%0A++++++++%7D%0A++++%7D
-- title: Destructurarea Arrays/Slices
+- title: Destructurarea Sirurilor/Slice-urilor
   content_markdown: >
-      'Array'-urile și 'slice'-urile din Rust pot fi destructurate în mod similar.
+      Sirurile și 'slice'-urile din Rust pot fi destructurate în mod similar.
   code: >-
    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=++++fn+main%28%29+%7B%0A++++++++let+numbers+%3D+%5B1%2C+-3%2C+7%2C+4%5D%3B%0A%0A++++++++match+numbers+%7B%0A++++++++++++%2F%2Fse+potrive%C8%99te+primul+element%2C+atunci+%C3%AEl+tip%C4%83re%C8%99te+pe+al+doilea+%C8%99i+ignor%C4%83+restul.%0A++++++++++++%5B1%2C+second%2C+..%5D+%3D%3E+%7B%0A++++++++++++++++println%21%28%22Primele+2+elemente+sunt%3A+1%2C+%7B%7D%22%2C+second%29%3B%0A++++++++++++%7D%0A++++++++++++%2F%2Fvalorile+individuale+pot+fi+ignorate+cu+%22_%22%2C+iar+grupurile+mai+mari+cu+%22..%22.%0A++++++++++++%5B2%2C+_%2C+third%2C+..%5D+%3D%3E+%7B%0A++++++++++++println%21%28%22Primul+este+2%2C+pe+al+doilea+%C3%AEl+ignor%C4%83m%2C+al+treilea+este+%7B%7D%22%2C+third%29%3B%0A++++++++++++%7D%0A++++++++++++%2F%2Fpute%C8%9Bi+s%C4%83+lega%C8%9Bi+%C8%99i+s%C4%83+stoca%C8%9Bi+celelalte+elemente+%C3%AEntr-un+array+diferit%21%0A++++++++++++%5B3%2C+other+%40+..%5D+%3D%3E+%7B%0A++++++++++++println%21%28%22Primul+este+3%2C+iar+celelalte+elemente+sunt+%7B%3A%3F%7D%22%2C+other%29%3B%0A++++++++++++%7D%2C%0A++++++++++++_+%3D%3E+%7B%0A++++++++++++++++println%21%28%22Alte+cazuri%22%29%3B%0A++++++++++++%7D%0A++++++++%7D%0A++++%7D
-- title: Destructurarea Enums
+- title: Destructurarea Enums-urilor
   content_markdown: >
       'Enums'-urile necesită un efort ceva mai mare, deoarece au mai multe
 
       câmpuri de tipuri diferite.
   code: >-
     https://play.rust-lang.org/?version=beta&mode=debug&edition=2015&code=%2F%2Faceast%C4%83+linie+de+cod+ne+permite+s%C4%83+NU+construim+anumite+p%C4%83r%C8%9Bi+ale+enumera%C8%9Biilor%0A%23%5Ballow%28dead_code%29%5D%0Aenum+Cars+%7B%0A++++%2F%2Fnumele+ma%C8%99inilor+sunt+STRING%0A++++Mercedes%2C%0A++++WolksWagen%2C%0A++++Opel%2C%0A++++%2F%2Furm%C4%83torii+sunt+anii+de+fabrica%C8%9Bie+%C8%99i+anii+%C3%AEn+care+au+schimbat+proprietarii%0A++++MERC+%28u32%2C+u32%29%2C%0A++++WW+%28u32%2C+u32%2C+u32%2C+u32%29%2C%0A++++OPL+%28u32%2C+u32%2C+u32%29%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+car_for_sale+%3D+Cars%3A%3AWW+%282006%2C+2011%2C+2014%2C+2019%29%3B%0A++++match+car_for_sale+%7B%0A++++++++%2F%2Fverific%C4%83m+dac%C4%83+enum-ul+con%C8%9Bine+marca+ma%C8%99inii+pe+care+o+dorim%0A++++++++Cars%3A%3AWolksWagen+%3D%3E+%7B%0A++++++++++++println%21%28%22Este+un+WolksWagen+de+v%C3%A2nzare%21%22%29%3B%0A++++++++%7D%2C%0A++++++++%2F%2Fprint%C4%83m+%C3%AEn+ce+an+este+fabricat+WW%0A++++++++Cars%3A%3AWW%28first_year%2C+..%29+%3D%3E+%7B%0A++++++++++++println%21%28%22WW-ul+a+fost+f%C4%83cut+%C3%AEn+%7B%7D%22%2C+first_year%29%3B%0A++++++++%7D%2C%0A++++++++%2F%2Fimprim%C4%83m+textul+NUMAI+%C3%8EN+CAZUL+%C3%AEn+care+Opel+a+fost+cump%C4%83rat+ultima+dat%C4%83+%C3%AEn+2012%0A++++++++Cars%3A%3AOPL%28_%2C+_%2C+2012%29+%3D%3E+%7B%0A++++++++++++println%21%28%22Ultimul+proprietar+a+cump%C4%83rat+Opel-ul+%C3%AEn+2012.%22%29%3B%0A++++++++%7D%2C%0A++++++++%2F%2Facoperim+celelalte+cazuri%0A++++++++_+%3D%3E+%7B%0A++++++++++++++++println%21%28%22Nici+un+WolksWagen+nu+era+de+v%C3%A2nzare%21%22%29%3B%0A++++++++++++%7D%0A++++%7D%0A%7D
-- title: Destructurarea Structs
+- title: Destructurarea Structurilor
   content_markdown: >
-      'Structurile' NU AU NEVOIE de blocuri 'match' pentru a fi destructurate, dar destructurarea
+      Structurile nu au nevoie de blocuri 'match' pentru a fi destructurate, dar destructurarea
 
       acestora funcționează după aceeași logică ca și cele anterioare.
   code: >-
