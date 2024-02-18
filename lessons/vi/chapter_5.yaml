@@ -85,7 +85,7 @@
     (nếu giá trị có thể được sao chép - chúng ta sẽ thảo luận về các loại có thể 
     sao chép trong các chương sau).
   code: >-
-    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%2042%3B%0A%20%20%20%20let%20f%20%3D%20%26mut%20foo%3B%0A%20%20%20%20let%20bar%20%3D%20*f%3B%20%2F%2F%20nh%E1%BA%ADn%20m%E1%BB%99t%20b%E1%BA%A3n%20sao%20c%E1%BB%A7a%20quy%E1%BB%81n%20s%E1%BB%9F%20h%E1%BB%AFu
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+mut+foo+%3D+42%3B%0A++++let+f+%3D+%26mut+foo%3B%0A++++let+bar+%3D+*f%3B+%2F%2F+nh%E1%BA%ADn+m%E1%BB%99t+b%E1%BA%A3n+sao+c%E1%BB%A7a+quy%E1%BB%81n+s%E1%BB%9F+h%E1%BB%AFu%0A++++println%21%28%22%7B%7D%22%2C+bar%29%3B%0A++++println%21%28%22%7B%7D%22%2C+foo%29%3B%0A%7D
 - title: Truyền xung quanh dữ liệu đã mượn
   content_markdown: >
     Các quy tắc tham chiếu của Rust tốt nhất có thể được tóm tắt bằng:
