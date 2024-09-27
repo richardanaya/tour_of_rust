@@ -26,6 +26,55 @@
     will validate the lifetime of references doesn't last longer than what
 
     it refers to (otherwise we'd get an error when we used it!).
+- title: What is a pointer?
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+a%3A+i32+%3D+12i32%3B%0A++++let+b%3A+%26i32+%3D+%26a%3B+++%2F%2F+pointer+to+i32%0A++++let+c%3A+%26%26i32+%3D+%26b%3B++%2F%2F+pointer+to+pointer+to+i32%0A++++let+d%3A+%26%26%26i32+%3D+%26c%3B%09%2F%2F+pointer+to+pointer+to+pointer+to+i32%0A++++%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C+a%2C+b%2C+c%2C+d%29%3B%0A++++println%21%28%22%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C+a%2C+*b%2C+**c%2C+***d%29%3B%0A%7D%0A
+  content_markdown: >
+    A pointer is a variable that stores a memory address.
+
+    Each variable:
+      - has a name
+      - has a data type
+      - has an address (in the RAM memory)
+      - stores an value
+
+    Why do use data types?
+
+    By using data types, we basically tell the CPU how much memory to
+    allocate for the variables we declare. For instance, the compiler
+    allocates 8 bytes for each `i8` and `u8` variable. Without pointers, a variables stores a `value`.
+
+    You've seen `u16`, `f64`, `usize`. These are data types.
+    So are `&i32`, `&&i32` `&&&i32` and so on.
+
+    The same logic applies to pointers. A pointer is a data type itself and
+    when we use pointer, the variables stores the `address` of the variable
+    instead of `value`. For pointer, the stored `value` is an `address`.
+
+
+    | variable name | data type | address | stored value    |
+    | ------------- | --------- | ------- | --------------- |
+    |      a        |    i32    |  0x100  |      12         |
+    |    b = &a     |   &i32    |  0x132  |  0x100 (addr)   |
+    |    c = &b     |  &&i32    |  0x2a1  |  0x132 (addr)   |
+    |    d = &c     | &&&i32    |  0x712  |  0x2a1 (addr)   |
+
+    > The CPU chooses the address of a variable at runtime
+    > Do not expect to have the same address at different executions
+    
+    All variables `i32`, `&i32`, `&&i32`, `&&&i32` are 32-bit variable.
+
+    `i32`      -> stores a concrete value
+    `&...&i32` -> stores an address
+
+
+    However, when you try to print references (like `&i32`, `&&i32`, `&&&i32`),
+    Rust automatically `dereferences` them when using the `{}` format specifier in a `println!` `macro`. This means that the `values` themselves are
+    printed, not their `addresses`.
+    
+    [![Pointer](https://i.redd.it/swszegbgpbr71.jpg)
+    This is for `C`.
+    For Rust, think that `int` is `u128`, and `*` is Rust's `&`.
 - title: Raw Pointers
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
