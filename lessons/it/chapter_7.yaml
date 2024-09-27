@@ -1,6 +1,6 @@
 - title: Capitolo 7 - Programmazione orientata agli oggetti
   content_markdown: >
-  Esprimere idee con funzioni è un modo comprovato di rappresentare il comportamento e
+    Esprimere idee con funzioni è un modo comprovato di rappresentare il comportamento e
     dati (C
 
     lo fa da decenni!). Storicamente, l'informatica ha trovato
@@ -13,7 +13,7 @@
     funzioni.
 - title: Cos'è l'OOP?
   content_markdown: >
-  La programmazione orientata agli oggetti si riferisce approssimativamente ai linguaggi di programmazione che
+    La programmazione orientata agli oggetti si riferisce approssimativamente ai linguaggi di programmazione che
     hanno una serie di caratteristiche iconiche:
 
     * Incapsulamento - Associazione di dati e funzioni nell'unità concettuale di
@@ -28,7 +28,7 @@
     * Ereditarietà: la capacità di ereditare dati e comportamenti da altri oggetti.
 - title: Rust non è OOP
   content_markdown: >
-  A Rust manca l'ereditarietà dei dati e del comportamento in modo significativo.
+    A Rust manca l'ereditarietà dei dati e del comportamento in modo significativo.
 
 
     * Le strutture non possono ereditare i campi da una struttura genitore.
@@ -42,7 +42,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+creatura.ottieni_suono%28%29%29%3B%0A%7D%0A
   content_markdown: >
-  Rust supporta il concetto di *oggetto* a cui è associata una struttura
+    Rust supporta il concetto di *oggetto* a cui è associata una struttura
     alcune funzioni (conosciute anche come *metodi*).
 
 
@@ -70,7 +70,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+creatura.ottieni_suono%28%29%29%3B%0A%7D%0A
   content_markdown: >
-  Rust può nascondere il funzionamento interno degli oggetti.
+    Rust può nascondere il funzionamento interno degli oggetti.
 
 
     Per impostazione predefinita campi e metodi sono accessibili solo al modulo a cui appartengono
@@ -82,7 +82,7 @@
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A++++%0A++++fn+fare_molto_rumore%28%26self%29%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A
   content_markdown: >
-  Rust supporta il polimorfismo con i tratti. I tratti ci permettono di associare un insieme
+    Rust supporta il polimorfismo con i tratti. I tratti ci permettono di associare un insieme
     di metodi con un tipo struct.
 
 
@@ -290,7 +290,7 @@
     ```
 - title: Capitolo 7 - Conclusione
   content_markdown: >
-  Ora abbiamo più funzionalità linguistiche a portata di mano per rappresentare chiaramente le nostre idee!
+    Ora abbiamo più funzionalità linguistiche a portata di mano per rappresentare chiaramente le nostre idee!
 
     Le astrazioni di Rust potrebbero essere semplici ma sono abbastanza potenti da essere realizzate
 
