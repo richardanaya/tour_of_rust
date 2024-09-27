@@ -82,6 +82,10 @@ Windows users should use `make.bat` instead.
 
 # Releases
 
+## Releases 6 - Sept, 2024
+* Lots of fixes for Albanian and Italian
+* Adding Dutch
+
 ## Release 5 - May 30, 2020
 * Chapter 6 released on text in English, Occidental
 * Chapter 5 released in French and Brazillian Portuguese
