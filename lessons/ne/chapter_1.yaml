@@ -1,0 +1,186 @@
+- title: Hoofdstuk 1 - Ideeën en basisconcepten
+  content_markdown: >
+    In dit eerste hoofdstuk zullen we de basisideeën
+     en -concepten verkennen met betrekking tot functies,
+      variabelen en primaire gegevenstypen. 
+    We zijn blij dat u bij ons bent!
+    
+Ook, voor het geval u zich afvraagt wie de schattige
+krab is die tegen u praat, mijn naam is **Ferris**,
+de onofficiële mascotte van de Rust-taal.
+Leuk je te ontmoeten!
+
+    Zodra u bekend bent met Rust, kunt u zichzelf een **Rustacean** noemen.
+    Zo worden alle mensen genoemd die Rust gebruiken,
+    bijdragen leveren of geïnteresseerd zijn in Rust.
+- title: Rust Playground
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Welkom%20in%20de%20speeltuin!%20Hier%20kun%20je%20de%20code%20aanpassen.%22)%3B%0A%7D%0A
+  content_markdown: >
+    In deze cursus zult u een interactief hulpprogramma gebruiken om code te schrijven [Rust
+    Playground](https://play.rust-lang.org).
+
+    Het is een goede manier om met Rust te spelen
+    en anderen uw creativiteit en uitdagingen te laten zien!
+- title: Variabile
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Rust%20raadt%20het%20gegevenstype%20van%20x%20aan%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20kan%20ook%20expliciet%20zijn%20bij%20het%20instellen%20van%20het%20gegevenstype%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20kan%20een%20variabele%20declareren%20en%20deze%20later%20initialiseren%2C%0A%20%20%20%20%2F%2F%20maar%20dit%20wordt%20niet%20vaak%20gedaan%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    Variabelen worden gedeclareerd met het sleutelwoord **let**.
+
+    Wanneer u een waarde aan een variabele toewijst, kan Rust in 99% van de gevallen
+    het gegevenstype afleiden. Als dat niet lukt, kunt u het gegevenstype toevoegen aan
+    de declaratie van de variabele.
+
+    Merk op hoe we dezelfde variabelnaam (dezelfde identificator) meerdere keren kunnen
+    gebruiken. Dit fenomeen wordt "variable shadowing" genoemd, en het gegevenstype
+    kan veranderen voor latere verwijzingen naar die variabelnaam.
+
+    Variabelnamen worden altijd geschreven in de vorm van `snake_case` (ex: my\_first\_variable).
+- title: Modificarea variabilelor
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%2042%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A
+  content_markdown: >
+    De programmeertaal Rust hecht veel waarde aan welke variabelen
+    kunnen worden gewijzigd. Variabelen vallen in twee categorieën:
+
+    * **wijzigbaar** (mutable) - de compiler staat de gebruiker toe om de
+    waarde van dit type variabele te wijzigen en te lezen.
+
+    * **onveranderlijk** (immutable) - de compiler staat de gebruiker alleen toe om de waarde
+    van deze variabele te lezen.
+
+    Wijzigbare waarden worden gedeclareerd met behulp van het sleutelwoord **mut**.
+
+    We zullen later meer praten over dit concept, maar voor nu, wees gewoon opmerkzaam
+    op dit sleutelwoord.
+- title: Basisdatatypes
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20dit%20is%20impliciet%20een%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20dit%20is%20impliciet%20een%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Rust heeft een verscheidenheid aan datatypes die u bekend zullen voorkomen:
+
+    * booleaanse variabele - bool om waar en onwaar te vertegenwoordigen
+
+    * ongesigneerde gehele getallen - `u8` `u16` `u32` `u64` `u128` om natuurlijke getallen voor te stellen
+
+    * getallen met teken - `i8` `i16` `i32` `i64` `i128` om gehele getallen voor te stellen
+
+    * gehele getallen van de grootte van een pointer - usize isize om indexen
+
+      en geheugengrootte voor te stellen
+
+    * komma getallen - `f32` `f64` om reële getallen voor te stellen
+
+    * tupel - `(waarde, waarde, ...)` voor het doorgeven van vaste sequenties van waarden op de stack
+
+    * array - `[waarde, waarde, ...]` een verzameling van elementen van hetzelfde type; de grootte van de verzameling is vast en wordt alleen bij compilatie bekend.
+
+    * slice - een deel van een verzameling elementen van hetzelfde type; de grootte van het deel wordt pas tijdens de uitvoering bekend
+
+    * `str` (reeks van tekens) - tekst van bekende lengte tijdens uitvoering
+
+    De syntaxis kan complexer zijn in Rust in vergelijking met andere programmeertalen waaraan u gewend bent;
+
+    gezien het feit dat Rust een systeemprogrammeertaal is, geeft het om geheugenkwesties waar u mogelijk
+
+    niet aan gewend bent. We zullen hier later dieper op ingaan.
+
+    Numerieke types kunnen expliciet worden gespecificeerd door het type aan het einde van het nummer toe te voegen (bijv. `13u32`, `2u8`).
+- title: Type conversies
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2013u8%3B%0A%20%20%20%20let%20b%20%3D%207u32%3B%0A%20%20%20%20let%20c%20%3D%20a%20as%20u32%20%2B%20b%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20c)%3B%0A%0A%20%20%20%20let%20t%20%3D%20true%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20t%20as%20u8)%3B%0A%7D%0A
+  content_markdown: >
+    Rust vereist duidelijkheid als het gaat om numerieke types.
+    
+    Je kunt niet zomaar een `u8` gebruiken voor een `u32` zonder
+    
+    een foutmelding te krijgen.
+
+    Gelukkig kan Rust de conversie van het ene numerieke type
+
+    naar het andere heel gemakkelijk doen met het sleutelwoord **as**.
+- title: Constante
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=const%20PI%3A%20f32%20%3D%203.14159%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22Om%20een%20appel%20%7B%7D%2C%20te%20creëren%2C%20moet%20je%20eerst%20een%20universum%20creëren%22%2C%0A%20%20%20%20%20%20%20%20PI%0A%20%20%20%20)%3B%0A%7D%0A
+  content_markdown: >
+    Constanten stellen ons in staat om op een efficiënte manier een waarde te specificeren die vaak in onze code wordt gebruikt.
+    
+    In plaats van waarden te kopiëren, vervangen constanten op het moment van compilatie direct,
+    
+    waar ze worden gebruikt, de tekstidentificator door zijn waarde.
+    
+    In tegenstelling tot variabelen moet het type bij de declaratie expliciet aan
+
+    constanten worden opgegeven. De namen van constanten worden altijd geschreven in de vorm van
+
+    `SCREAMING_SNAKE_CASE` (bijv. MY_FIRST_CONSTANT).
+- title: Arrays
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20nums%3A%20%5Bi32%3B%203%5D%20%3D%20%5B1%2C%202%2C%203%5D%3B%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20nums)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20nums%5B1%5D)%3B%0A%7D%0A
+  content_markdown: >
+    Een *array* is een **verzameling van een vaste grootte** van elementen die
+    gegevens van hetzelfde type bevatten.
+
+    Het gegevenstype voor een *array* wordt geschreven als `[T;N]`,
+    waar T het type van de elementen vertegenwoordigt, en N de vaste grootte die bekend is bij compilatie.
+
+    Individuele elementen kunnen worden benaderd met behulp van de operator `[x]`,
+    waarbij *x* een *usize*-index (beginnend bij 0) is van het element dat u wilt benaderen.
+
+    Verzamelingen met een dynamische grootte, vaak aangeduid als dynamische arrays of vectoren,
+    zullen aan u worden gepresenteerd in een later hoofdstuk genaamd **Vectoren**.
+- title: Functies
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20add(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20return%20x%20%2B%20y%3B%0A%7D%0A%0Afn%20subtract(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20i32%20%7B%0A%20%20%20%20x%20-%20y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%2242%20%2B%2013%20%3D%20%7B%7D%22%2C%20add(42%2C%2013))%3B%0A%20%20%20%20println!(%2242%20-%2013%20%3D%20%7B%7D%22%2C%20subtract(42%2C%2013))%3B%0A%7D%0A
+  content_markdown: >
+    Een functie kan nul of meer parameters accepteren.
+
+    In dit voorbeeld accepteert de functie add twee parameters
+    van het type i32 (een getal met teken van 32 bits).
+
+    Bij het retourneren van een expressie kunnen het sleutelwoord 'return' en
+    de puntkomma aan het einde worden weggelaten, zoals gedaan is in de functie *subtract*.
+
+    De namen van functies worden altijd geschreven in de vorm van `snake_case`.
+
+    Hint: als u een functie definieert, worden de gegevens die het accepteert formele parameters genoemd.
+    Als u een functie aanroept en gegevens doorgeeft, worden ze actuele parameters genoemd.
+- title: Het teruggeven van meerdere waarden
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20swap(x%3A%20i32%2C%20y%3A%20i32)%20-%3E%20(i32%2C%20i32)%20%7B%0A%20%20%20%20return%20(y%2C%20x)%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20returneert%20een%20tuple%20van%20waarden%0A%20%20%20%20let%20result%20%3D%20swap(123%2C%20321)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20result.0%2C%20result.1)%3B%0A%0A%20%20%20%20%2F%2F%20destructureert%20het%20tuple%20in%20twee%20variabelen%0A%20%20%20%20let%20(a%2C%20b)%20%3D%20swap(result.0%2C%20result.1)%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20a%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+Functies kunnen meerdere waarden retourneren door een **tuple** van waarden terug te geven.
+
+    De elementen van een tuple kunnen worden benaderd met behulp van hun index. (bijv: my_tuple.0)
+
+    Rust ondersteunt verschillende vormen van destructurering die we in veel contexten zullen zien,
+    waardoor het mogelijk is om delen van gegevensstructuren op slimme manieren te extraheren.
+    Wees alert!
+- title: Niets retourneren
+  content_markdown: >
+    Als voor een functie niet wordt gespecificeerd welk type het retourneert,
+    zal deze een lege tuple retourneren, ook wel bekend als *unit* (unit).
+
+    Een lege tuple wordt gerepresenteerd door `()`.
+
+    Het gebruik van `()` komt niet vaak voor, maar het zal vaak genoeg voorkomen, dus het is goed om te weten wat er gebeurt.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20make_nothing()%20-%3E%20()%20%7B%0A%20%20%20%20return%20()%3B%0A%7D%0A%0A%2F%2F%20Het%20retourtype%20is%20impliciet%20()%0Afn%20make_nothing2()%20%7B%0A%20%20%20%20%2F%2F%20Het%20impliciete%20retourtype%20is%20()%20deze%20functie%20zal%20()%20retourneren%2C%20tenzij%20expliciet%20iets%20anders%20wordt%20gespecificeerd%20als%20retourtype%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20make_nothing()%3B%0A%20%20%20%20let%20b%20%3D%20make_nothing2()%3B%0A%0A%20%20%20%20%2F%2F%20Weergave%20van%20een%20debugtekst%20voor%20a%20en%20b%0A%20%20%20%20%2F%2F%20Omdat%20het%20moeilijk%20is%20om%20niets%20af%20te%20drukken%0A%20%20%20%20println!(%22De%20waarde%20van%20a:%3A%20%7B%3A%3F%7D%22%2C%20a)%3B%0A%20%20%20%20println!(%22De%20waarde%20van%20b%3A%20%7B%3A%3F%7D%22%2C%20b)%3B%0A%7D%0A
+- title: Hoofdstuk 1 - Conclusies
+  content_markdown: >
+    Tot dusver, gaat het goed! De basisprincipes van Rust zijn niet zo slecht, toch?
+    We hebben gekeken naar de manier waarop de Rust-compiler denkt.
+    Als systeemprogrammeertaal geeft Rust veel om de grootte van waarden in het geheugen,
+    of ze nu veranderbaar zijn of niet, en om de wiskundige correctheid van de toegepaste bewerkingen.
+    In het vervolg zullen we kennismaken met enkele oude bekenden: `if`-tests en `for`-lussen.
+
+    Bibliografie:
+
+    * [Youtube: Rust Cast - A deeper dive on Rust's primitive number
+    types](https://www.youtube.com/watch?v=n5TRBkbystY)
+
+    * [Website: Rust Book 2018 - A deeper description on basic data
+    types](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch03-02-data-types.html)
+
+    * [Website: Rust Cheat Sheet - Data Types](https://cheats.rs/#basic-types)
