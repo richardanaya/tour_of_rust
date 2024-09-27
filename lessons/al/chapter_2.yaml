@@ -18,7 +18,7 @@
      Të gjithë operatorët tuaj të zakonshëm relacionalë dhe logjikë ende funksionojnë: `==`, `!=`, `<`,
     `>`, `<=`, `>=`, `!`, `||`, `&&`.
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22M%C3%AB%20pak%20se%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%C3%8Bsht%C3%AB%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22M%C3%AB%20shum%C3%AB%20se%2042%22)%3B%0A%20%20%20%20%7D%0A%7D)
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20if%20x%20%3C%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22M%C3%AB%20pak%20se%2042%22)%3B%0A%20%20%20%20%7D%20else%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%C3%8Bsht%C3%AB%2042%22)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22M%C3%AB%20shum%C3%AB%20se%2042%22)%3B%0A%20%20%20%20%7D%0A%7D)
 - title: loop/lak
   content_markdown: |
    Keni nevojë për një lak të pafund?
@@ -29,14 +29,14 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20mai
 
      "loop" ka një sekret për të cilin do të flasim së shpejti.
   code: >-
-ttps://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D
 - title: while
   content_markdown: |
     "while" ju lejon të shtoni me lehtësi një kusht në një lak.
 
      Nëse kushti vlerësohet në "false", cikli do të dalë.
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22x%20is%20%7B%7D%22%2C%20x)%3B%0A%7D)
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20while%20x%20!%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%20%20%20%20println!(%22x%20is%20%7B%7D%22%2C%20x)%3B%0A%7D)
 - title: for
   content_markdown: >
     Cikli 'for' i Rust është një përmirësim i fuqishëm. Ajo
@@ -67,7 +67,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20mai
 
      dhe duke përfshirë një numër fundor.
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D)
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20for%20x%20in%200..5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20for%20x%20in%200..%3D5%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%20%20%20%20%7D%0A%7D)
 - title: match
   content_markdown: >
     Të mungon deklarata switch? Rust ka një fjalë kyçe tepër të dobishme
@@ -93,12 +93,12 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20mai
 
      modelet më të zakonshme që do të shihni në të gjithë Rust.
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mund%20t%C3%AB%20p%C3%ABrputhet%20me%20shum%C3%AB%20vlera%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%201%20ose%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mund%20t%C3%AB%20p%C3%ABrputhet%20me%20interval%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20nj%C3%AB%20num%C3%ABr%20nga%203%20deri%20n%C3%AB%209%20p%C3%ABrfshir%C3%AB%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mund%20t%C3%AB%20lidhet%20numri%20gjetur%20me%20nj%C3%AB%20variab%C3%ABl%0A%20%20%20%20%20%20%20%20numri_gjetur%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20numrin%20nga%2010%20deri%20n%C3%AB%20100!%22%2C%20numri_gjetur)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20kjo%20%C3%ABsht%C3%AB%20nje%20lidhje%20e%20p%C3%ABrgjithshme%20q%C3%AB%20duhet%20t%C3%AB%20ekzistoj%C3%AB%20n%C3%AB%20rast%20se%20t%C3%AB%20gjitha%20rastet%20nuk%20jan%C3%AB%20t%C3%AB%20mbuluara%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20di%C3%A7ka%20tjet%C3%ABr!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D)
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mund%20t%C3%AB%20p%C3%ABrputhet%20me%20shum%C3%AB%20vlera%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%201%20ose%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mund%20t%C3%AB%20p%C3%ABrputhet%20me%20interval%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20nj%C3%AB%20num%C3%ABr%20nga%203%20deri%20n%C3%AB%209%20p%C3%ABrfshir%C3%AB%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20mund%20t%C3%AB%20lidhet%20numri%20gjetur%20me%20nj%C3%AB%20variab%C3%ABl%0A%20%20%20%20%20%20%20%20numri_gjetur%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20numrin%20nga%2010%20deri%20n%C3%AB%20100!%22%2C%20numri_gjetur)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20kjo%20%C3%ABsht%C3%AB%20nje%20lidhje%20e%20p%C3%ABrgjithshme%20q%C3%AB%20duhet%20t%C3%AB%20ekzistoj%C3%AB%20n%C3%AB%20rast%20se%20t%C3%AB%20gjitha%20rastet%20nuk%20jan%C3%AB%20t%C3%AB%20mbuluara%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22gjeta%20di%C3%A7ka%20tjet%C3%ABr!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D)
 - title: Kthimi i nje vlere nga loop-i
   content_markdown: |
     `loop` mund te ndaloje (break) qe te ktheje nje vlere.
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22gjeta%20numrin%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22nga%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A)
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20x%20%3D%200%3B%0A%20%20%20%20let%20v%20%3D%20loop%20%7B%0A%20%20%20%20%20%20%20%20x%20%2B%3D%201%3B%0A%20%20%20%20%20%20%20%20if%20x%20%3D%3D%2013%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%20%22gjeta%20numrin%2013%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22nga%20loop%3A%20%7B%7D%22%2C%20v)%3B%0A%7D%0A)
 - title: Kthimi i vlerave nga shprehjet e bllokut
   content_markdown: >
     `if`, `match`, funksionet dhe blloqet e fushëveprimit kanë të gjitha një mënyrë unike

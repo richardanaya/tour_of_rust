@@ -14,13 +14,13 @@
      si e quajnë veten njerëzit që përdorin, kontribuojnë ose janë të interesuar për Rust.
 - title: Sheshi i Lojërave Rust
   code: >-
- https://play.rust-lang.org/?version=stable&mode=debug&edition=2021  
-content_markdown: >
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021  
+  content_markdown: >
     Ky tur përdor një mjet kodimi ndërveprues nga [Rust
     Playground](https://play.rust-lang.org).
 
 
-   Është një mënyrë e shkëlqyer për të luajtur me Rust dhe për t'u treguar të tjerëve kreativitetin tuaj
+    Është një mënyrë e shkëlqyer për të luajtur me Rust dhe për t'u treguar të tjerëve kreativitetin tuaj
      dhe te maresh pjese ne sfida!
 - title: Variablat
   code: >-
@@ -29,10 +29,10 @@ content_markdown: >
     Variablat deklarohen duke përdorur fjalën kyçe **let**.
 
 
-   Kur caktoni një vlerë, Rust do të jetë në gjendje të konkludojë llojin e variabiles tuaj
+    Kur caktoni një vlerë, Rust do të jetë në gjendje të konkludojë llojin e variabiles tuaj
      99% te rasteve.
 
-   Nëse nuk mundet, mund të shtoni llojin në deklaratën tuaj të variabiles.
+    Nëse nuk mundet, mund të shtoni llojin në deklaratën tuaj të variabiles.
 
 
     Vini re se si mund t'i caktojmë të njëjtit emër variabël shumë herë. Kjo është
@@ -65,7 +65,7 @@ content_markdown: >
      jashtë për këtë fjalë kyçe.
 - title: Tipet Bazike
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
 
   content_markdown: >
     Rust ka një sërë llojesh të njohura:
@@ -108,7 +108,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
      të numrit (p.sh. "13u32", "2u8").
 - title: Konvertimi i tipit bazë
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Ndryshku kërkon qartësi kur bëhet fjalë për llojet numerike. Një nuk mund
 
@@ -121,7 +121,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
      **as**.
 - title: Konstantet
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Konstantet na lejojnë të specifikojmë një vlerë të përbashkët që përdoret gjatë gjithë kohës
 
@@ -139,7 +139,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
      Emrat konstant janë gjithmonë ne `SCREAMING_SNAKE_CASE`.
 - title: Vargjet
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Një *array/varg* është një **përmbledhje me gjatësi fikse** të elementeve të të dhënave të gjitha të te njëjta
      lloji.
@@ -157,7 +157,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
      prezantuar në një kapitull të mëvonshëm rreth **Vektorëve**.
 - title: Funksionet
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Një funksion ka zero ose më shumë parametra.
 
@@ -177,7 +177,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
      Nëse e thërrisni atë funksion dhe i kaloni të dhëna, atëherë ai quhet argumente.
 - title: Vlerat e shumëfishta të kthimit
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
   content_markdown: >
     Funksionet mund të kthejnë vlera të shumta duke kthyer një **tuple**
 
@@ -204,7 +204,7 @@ https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
      Përdorimi i `()` është i pazakontë, por do të shfaqet aq shpesh sa është mirë të dihet
      cfare po ndodh.
   code: >-
-https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021
 - title: Chapter 1 - Conclusion
   content_markdown: >
     Punë e bukur deri tani! Bazat e Rust nuk janë aq të këqija, apo jo? ne jemi
