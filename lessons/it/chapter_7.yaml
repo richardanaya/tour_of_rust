@@ -1,0 +1,312 @@
+- title: Capitolo 7 - Programmazione orientata agli oggetti
+  content_markdown: >
+  Esprimere idee con funzioni è un modo comprovato di rappresentare il comportamento e
+    dati (C
+
+    lo fa da decenni!). Storicamente, l'informatica ha trovato
+    altro
+
+    utili aggregazioni espressive e astrazioni per i dati. Potresti essere
+    familiarità con la programmazione orientata agli oggetti (OOP) come tale
+
+    in questo modo. In questo capitolo esploreremo il linguaggio di programmazione Rust oltre
+    funzioni.
+- title: Cos'è l'OOP?
+  content_markdown: >
+  La programmazione orientata agli oggetti si riferisce approssimativamente ai linguaggi di programmazione che
+    hanno una serie di caratteristiche iconiche:
+
+    * Incapsulamento - Associazione di dati e funzioni nell'unità concettuale di
+    un singolo tipo chiamato *oggetto*.
+
+    * Astrazione: nascondere dati e membri di funzioni per offuscare l'implementazione
+    dettagli di un oggetto.
+
+    * Polimorfismo - La capacità di interagire con oggetti di diverso tipo attraverso
+    un'unica interfaccia.
+
+    * Ereditarietà: la capacità di ereditare dati e comportamenti da altri oggetti.
+- title: Rust non è OOP
+  content_markdown: >
+  A Rust manca l'ereditarietà dei dati e del comportamento in modo significativo.
+
+
+    * Le strutture non possono ereditare i campi da una struttura genitore.
+
+    * Le strutture non possono ereditare funzioni da una struttura genitore.
+
+
+    Detto questo, Rust implementa molte funzionalità del linguaggio di programmazione, in modo che tu
+    potrebbe non dispiacere questa mancanza.
+- title: Incapsulamento con metodi
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+creatura.ottieni_suono%28%29%29%3B%0A%7D%0A
+  content_markdown: >
+  Rust supporta il concetto di *oggetto* a cui è associata una struttura
+    alcune funzioni (conosciute anche come *metodi*).
+
+
+    Il primo parametro di qualsiasi metodo deve essere un riferimento all'istanza
+    associato alla chiamata del metodo (ad esempio `instanceOfObj.foo()`). La ruggine utilizza:
+
+    * `&self` - Riferimento immutabile all'istanza.
+
+    * `&mut self` - Riferimento mutabile all'istanza.
+
+
+    I metodi sono definiti all'interno di un blocco di implementazione con la parola chiave "impl":
+
+    ```rust
+
+    impl MiaStruttura {
+        ...
+        fn foo(&self) {
+            ...
+        }
+    }
+
+    ```
+- title: Astrazione con esposizione selettiva
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++println%21%28%22%7B%7D%22%2C+creatura.ottieni_suono%28%29%29%3B%0A%7D%0A
+  content_markdown: >
+  Rust può nascondere il funzionamento interno degli oggetti.
+
+
+    Per impostazione predefinita campi e metodi sono accessibili solo al modulo a cui appartengono
+    A.
+
+
+    La parola chiave "pub" espone campi e metodi della struttura all'esterno del modulo.
+- title: Polimorfismo con tratti
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A++++%0A++++fn+fare_molto_rumore%28%26self%29%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A
+  content_markdown: >
+  Rust supporta il polimorfismo con i tratti. I tratti ci permettono di associare un insieme
+    di metodi con un tipo struct.
+
+
+    Per prima cosa definiamo le firme dei metodi di un tratto all'interno di:
+
+
+    ```
+
+    trait MiaCaratteristica {
+        fn foo(&self);
+        ...
+    }
+
+    ```
+
+
+    Quando una struttura implementa un tratto, stabilisce un contratto che ce lo consente
+    per interagire indirettamente con la struttura
+
+    attraverso il tipo di tratto (ad esempio `&dyn MyTrait`) senza dover conoscere il reale
+    tipo.
+
+
+    I metodi dei tratti implementati di una struttura sono definiti all'interno di un'implementazione
+    bloccare:
+
+
+    ```rust
+
+    impl MiaCaratteristica per MiaStruttura {
+        fn foo(&self) {
+            ...
+        }
+        ...
+    }
+
+    ```
+- title: Metodi implementati sui tratti
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A++++%0A++++fn+fare_molto_rumore%28%26self%29%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A
+  content_markdown: >
+    I tratti possono avere metodi implementati.
+
+
+    Le funzioni non hanno accesso diretto ai campi interni di una struttura, ma esso
+    Potere
+
+    essere utile per condividere il comportamento tra molti implementatori di tratti.
+- title: Eredità dei tratti
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Atrait+ForteRumoroso%3A+Rumoroso+%7B%0A++++fn+fare_molto_rumore%28%26self%29+%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+ForteRumoroso+for+CreaturaMarina+%7B%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A
+  content_markdown: >
+    I tratti possono ereditare metodi da altri tratti.
+- title: Invio dinamico e statico
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+static_fare_rumore%28creatura%3A+%26CreaturaMarina%29+%7B%0A++++%2F%2F+conosciamo+il+vero+tipo%0A++++creatura.fare_rumore%28%29%3B%0A%7D%0A%0Afn+dynamic_fare_rumore%28rumoroso%3A+%26dyn+Rumoroso%29+%7B%0A++++%2F%2F+non+conosciamo+il+vero+tipo%0A++++rumoroso.fare_rumore%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++static_fare_rumore%28%26creatura%29%3B%0A++++dynamic_fare_rumore%28%26creatura%29%3B%0A%7D%0A
+  content_markdown: >
+    I metodi vengono eseguiti in due modi:
+
+    * invio statico: quando il tipo di istanza è noto, abbiamo direct
+    conoscenza di quale funzione chiamare.
+
+    * invio dinamico: quando un tipo di istanza non è noto, dobbiamo scoprirlo
+    un modo per chiamare la funzione corretta.
+
+
+    I tipi di tratto "&dyn MyTrait" ci danno la possibilità di lavorare con istanze di
+    oggetti indirettamente utilizzando l'invio dinamico.
+
+
+    Quando viene utilizzato l'invio dinamico, Rust ti incoraggerà a mettere `dyn` prima
+    il tuo tipo di tratto in modo che le persone ne siano consapevoli.
+
+
+    Dettagli della memoria:
+
+    * L'invio dinamico è leggermente più lento a causa del puntatore che cerca di trovare
+    la vera chiamata di funzione.
+- title: Oggetti tratti
+  content_markdown: >
+    Quando passiamo un'istanza di un oggetto a un parametro di tipo `&dyn MyTrait`
+    passiamo quello che viene chiamato *oggetto tratto*.
+
+
+    Un oggetto tratto è ciò che ci consente di chiamare indirettamente i metodi corretti di
+    un caso. Un oggetto tratto è una struttura che contiene il puntatore di
+
+    la nostra istanza con un elenco di puntatori a funzioni ai metodi della nostra istanza.
+
+
+    Dettagli della memoria:
+
+    * Questo elenco di funzioni è noto in C++ come *vtable*.
+- title: Funzioni generiche
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+generic_fare_rumore%3CT%3E%28creatura%3A+%26T%29%0Awhere%0A++++T%3A+Rumoroso%2C%0A%7B%0A++++%2F%2F+conosciamo+il+tipo+reale+in+fase+di+compilazione%0A++++creatura.fare_rumore%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++generic_fare_rumore%28%26creatura%29%3B%0A%7D%0A
+  content_markdown: >
+    I generici in Rust lavorano di pari passo con i tratti. Quando descriviamo a
+    tipo parametrizzato "T" possiamo limitare quali tipi
+
+    può essere utilizzato come argomento elencando i tratti richiesti dall'argomento
+    strumento.
+
+
+    In questo esempio il tipo "T" deve implementare il tratto "Foo":
+
+    ```rust
+
+    fn mia_funzione<T>(foo: T)
+
+    where
+        T:Foo
+    {
+        ...
+    }
+
+    ```
+
+
+    Utilizzando i generici creiamo funzioni tipizzate statiche in fase di compilazione che lo faranno
+    hanno tipologie e dimensioni conosciute, permettendocelo
+
+    eseguire l'invio statico e archiviarlo come valore dimensionato.
+- title: Abbreviazione di funzioni generiche
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+generic_fare_rumore%28creatura%3A+%26impl+Rumoroso%29%0A%7B%0A++++%2F%2F+conosciamo+il+tipo+reale+in+fase+di+compilazione%0A++++creatura.fare_rumore%28%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++generic_fare_rumore%28%26creatura%29%3B%0A%7D%0A
+  content_markdown: >
+    Rust ha una scorciatoia per esprimere i generici vincolati da un tratto:
+
+    ```rust
+    fn mia_funzione(foo: impl Foo) {
+        ...
+    }
+    ```
+
+    Ciò equivale a scrivere:
+
+    ```rust
+    fn mia_funzione<T>(foo: T)
+    where
+        T:Foo
+    {
+        ...
+    }
+    ```
+- title: Box
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Astruct+Oceano+%7B%0A++++animali%3A+Vec%3CBox%3Cdyn+Rumoroso%3E%3E%2C%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+ferris+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++let+sarah+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Sarah%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22swish%22%29%2C%0A++++%7D%3B%0A++++let+oceano+%3D+Oceano+%7B%0A++++++++animali%3A+vec%21%5BBox%3A%3Anew%28ferris%29%2C+Box%3A%3Anew%28sarah%29%5D%2C%0A++++%7D%3B%0A++++for+a+in+oceano.animali.iter%28%29+%7B%0A++++++++a.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A
+  content_markdown: >
+    `Box` è una struttura dati che ci consente di spostare i nostri dati dallo stack a
+    il mucchio.
+
+
+    `Box` è una struttura conosciuta come *puntatore intelligente* che contiene il puntatore a our
+    dati nell'heap.
+
+
+    Poiché `Box` è una struttura con una dimensione nota (perché contiene solo un file
+    puntatore), lo è
+
+    spesso usato come modo per memorizzare un riferimento a qualcosa in una struttura che deve
+    conoscere la dimensione
+
+    dei suoi campi.
+
+
+    `Box` è così comune che può essere utilizzato ovunque:
+
+
+    ```rust
+
+    Casella::new(Foo { ... })
+
+    ```
+- title: Strutture generiche rivisitate
+  content_markdown: >
+    Le strutture generiche possono anche avere i propri tipi parametrizzati vincolati da
+    tratti.
+
+
+    ```rust
+
+    struct MiaStruttura<T>
+
+    where
+        T: MiaCaratteristica
+    {
+        foo: T
+        ...
+    }
+
+    ```
+
+
+    Le strutture generiche hanno il loro tipo parametrizzato nella loro implementazione
+    blocchi:
+
+
+    ```rust
+
+    impl<T: MiaCaratteristica> MiaStruttura<T> {
+        ...
+    }
+
+    ```
+- title: Capitolo 7 - Conclusione
+  content_markdown: >
+  Ora abbiamo più funzionalità linguistiche a portata di mano per rappresentare chiaramente le nostre idee!
+
+    Le astrazioni di Rust potrebbero essere semplici ma sono abbastanza potenti da essere realizzate
+
+    lavorare con il codice è una gioia. In questo capitolo abbiamo intravisto il concetto di smart
+    puntatori
+
+    con "Scatola". Nel prossimo capitolo impareremo come possono farlo i puntatori intelligenti
+    aiutaci con altro
+
+    situazioni di memoria specializzate.
+
+
+    Risorse:
+
+    * [Video - Object-oriented Programming in 7
+    minutes](https://www.youtube.com/watch?v=pTB0EiLXUC8)
+
+    * [Articolo - "The faster you unlearn OOP, the better for you and your
+    software"](https://dpc.pw/the-faster-you-unlearn-oop-the-better-for-you-and-your-software)
