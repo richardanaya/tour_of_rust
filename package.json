@@ -10,7 +10,7 @@
     "watch": "nodemon -w lessons/**/* -w wasm/**/* -e yaml --exec npm run serve"
   },
   "dependencies": {
-    "js-yaml": "^3.14.0",
+    "js-yaml": "4.1.0",
     "showdown": "^1.9.1"
   },
   "devDependencies": {
