@@ -143,14 +143,6 @@ const getHead = (words, lang) => {
         <link rel="manifest" href="./site.webmanifest">
 
         <script src="./tour.js" defer></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155199982-1"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-155199982-1', { 'anonymize_ip': true });
-        </script>
     </head>`;
 };
 
