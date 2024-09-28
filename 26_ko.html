@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>메모리에 데이터 생성하기</h1>
+            <p>코드에서 <strong>struct</strong>를 <strong>인스턴스화(instantiate)</strong> 하면 프로그램은 연관된 field 데이터들을 메모리 상에 나란히 생성합니다.</p>
+<p><code>StructName { ... }</code>.</p>
+<p>와 같이 안에 모든 field 값을 지정함으로써 instantiate 합니다.</p>
+<p>struct의 field 값들은 <code>.</code> 연산자를 통해 접근합니다.</p>
+<p>이 예제의 메모리 상세:</p>
+<ul>
+<li>큰따옴표 안의 텍스트는 읽기 전용 데이터이므로 (예: "ferris"), <em>data memory 영역</em>에
+위치합니다.</li>
+<li><code>String::from</code> 함수 호출은 <code>String</code> struct를 생성하며 <em>stack</em>에 SeaCreature의 field들과 나란히 위치시킵니다.
+String은 변경될 수 있는 텍스트를 의미하며 이는 다음에 의해 이루어집니다:</li>
+</ul>
+<ol>
+<li>텍스트가 수정될 수 있도록 <em>heap</em>에 메모리를 생성</li>
+<li>해당 메모리 위치에 대한 참조를 <em>heap</em>에 저장하고 이를 <code>String</code> struct에 저장
+(앞으로 강의에서 더 자세히)</li>
+</ol>
+<ul>
+<li>마지막으로 우리의 두 친구 <em>Ferris</em>와 <em>Sarah</em>는 우리 프로그램에서 언제나 고정된 위치를 가지는
+자료 구조를 가지게 되었고, 따라서 <em>stack</em>에 위치하게 되었습니다.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="25_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="27_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature%EC%9D%98%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%8A%94%20stack%EC%97%90%20%EC%9E%88%EC%9D%8C%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%EB%8F%84%20stack%EC%97%90%20%EC%9E%88%EC%A7%80%EB%A7%8C%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20heap%EC%97%90%20%EC%9E%88%EB%8A%94%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%97%90%20%EB%8C%80%ED%95%9C%20%EC%B0%B8%EC%A1%B0%EB%A5%BC%20%EA%B0%96%EA%B3%A0%20%EC%9E%88%EC%9D%8C%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22%EA%B2%8C%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22%EC%A7%91%EA%B2%8C%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22%EB%AC%B8%EC%96%B4%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22%EC%97%86%EC%9D%8C%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%EB%8A%94%20%7B%7D%EC%9D%B4%EB%8B%A4.%20%7B%7D%EA%B0%9C%EC%9D%98%20%ED%8C%94%EA%B3%BC%2C%20%7B%7D%EA%B0%9C%EC%9D%98%20%EB%8B%A4%EB%A6%AC%EC%99%80%2C%20%7B%7D%EB%A5%BC%20%EB%AC%B4%EA%B8%B0%EB%A1%9C%20%EA%B0%96%EA%B3%A0%20%EC%9E%88%EB%8B%A4.%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%EB%8A%94%20%7B%7D%EC%9D%B4%EB%8B%A4.%20%7B%7D%EA%B0%9C%EC%9D%98%20%ED%8C%94%EA%B3%BC%2C%20%7B%7D%EA%B0%9C%EC%9D%98%20%EB%8B%A4%EB%A6%AC%EB%A5%BC%20%EA%B0%96%EA%B3%A0%20%EC%9E%88%EB%8B%A4.%20%EB%AC%B4%EA%B8%B0%EB%8A%94%20%EC%97%86%EB%8B%A4..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

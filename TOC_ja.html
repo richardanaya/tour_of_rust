@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="ja" dir="ltr">
+    <head>
+        <title>Rust ツアー - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ja.html">Rust ツアー</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>レッスン</h1>
+            <ul>
+        <li><a href="00_ja.html">こんにちは、<img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_ja.html">第 1 章 - 基礎</a></h3><ul>
+<li><a href="02_ja.html">Rust Playground</a></li>
+<li><a href="03_ja.html">変数</a></li>
+<li><a href="04_ja.html">変数の変更</a></li>
+<li><a href="05_ja.html">基本的な型</a></li>
+<li><a href="06_ja.html">基本型の変換</a></li>
+<li><a href="07_ja.html">定数</a></li>
+<li><a href="08_ja.html">配列</a></li>
+<li><a href="09_ja.html">関数</a></li>
+<li><a href="10_ja.html">複数の戻り値</a></li>
+<li><a href="11_ja.html">空の戻り値</a></li>
+<li><a href="12_ja.html">第 1 章 - まとめ</a></li>
+</ul><h3><a href="chapter_2_ja.html">第 2 章 - 基本制御フロー</a></h3><ul>
+<li><a href="14_ja.html">if/else if/else</a></li>
+<li><a href="15_ja.html">loop</a></li>
+<li><a href="16_ja.html">while</a></li>
+<li><a href="17_ja.html">for</a></li>
+<li><a href="18_ja.html">match</a></li>
+<li><a href="19_ja.html">loop から値を返す</a></li>
+<li><a href="20_ja.html">ブロック式から値を返す</a></li>
+<li><a href="21_ja.html">第 2 章 - まとめ</a></li>
+</ul><h3><a href="chapter_3_ja.html">第 3 章 - 基本的なデータ構造体</a></h3><ul>
+<li><a href="23_ja.html">構造体</a></li>
+<li><a href="24_ja.html">メソッドの定義</a></li>
+<li><a href="25_ja.html">メモリ</a></li>
+<li><a href="26_ja.html">メモリの中でデータを作成する</a></li>
+<li><a href="27_ja.html">タプルライクな構造体</a></li>
+<li><a href="28_ja.html">ユニットライクな構造体</a></li>
+<li><a href="29_ja.html">列挙型</a></li>
+<li><a href="30_ja.html">データを持つ列挙型</a></li>
+<li><a href="31_ja.html">第 3 章 - まとめ</a></li>
+</ul><h3><a href="chapter_4_ja.html">第 4 章 - ジェネリック型</a></h3><ul>
+<li><a href="33_ja.html">ジェネリック型とは？</a></li>
+<li><a href="34_ja.html">値がないことの表現</a></li>
+<li><a href="35_ja.html">Option</a></li>
+<li><a href="36_ja.html">Result</a></li>
+<li><a href="37_ja.html">失敗するかもしれない main</a></li>
+<li><a href="38_ja.html">簡潔なエラー処理</a></li>
+<li><a href="39_ja.html">やっつけな Option/Result 処理</a></li>
+<li><a href="40_ja.html">ベクタ型</a></li>
+<li><a href="41_ja.html">第 4 章 - まとめ</a></li>
+</ul><h3><a href="chapter_5_ja.html">第 5 章 - データの所有権と借用</a></h3><ul>
+<li><a href="43_ja.html">所有権</a></li>
+<li><a href="44_ja.html">スコープベースのリソース管理</a></li>
+<li><a href="45_ja.html">ドロップは階層的</a></li>
+<li><a href="46_ja.html">所有権の移動</a></li>
+<li><a href="47_ja.html">所有権を返す</a></li>
+<li><a href="48_ja.html">参照による所有権の借用</a></li>
+<li><a href="49_ja.html">参照による所有権の可変な借用</a></li>
+<li><a href="50_ja.html">参照外し</a></li>
+<li><a href="51_ja.html">借用したデータの受け渡し</a></li>
+<li><a href="52_ja.html">参照の参照</a></li>
+<li><a href="53_ja.html">明示的なライフタイム</a></li>
+<li><a href="54_ja.html">複数のライフタイム</a></li>
+<li><a href="55_ja.html">スタティックライフタイム</a></li>
+<li><a href="56_ja.html">データ型のライフタイム</a></li>
+<li><a href="57_ja.html">第 5 章 - まとめ</a></li>
+</ul><h3><a href="chapter_6_ja.html">第 6 章 - テキスト</a></h3><ul>
+<li><a href="59_ja.html">文字列リテラル</a></li>
+<li><a href="60_ja.html">utf-8とは</a></li>
+<li><a href="61_ja.html">エスケープ文字</a></li>
+<li><a href="62_ja.html">複数行の文字列リテラル</a></li>
+<li><a href="63_ja.html">生文字列リテラル</a></li>
+<li><a href="64_ja.html">ファイルから文字列リテラルを読み込む</a></li>
+<li><a href="65_ja.html">文字列スライス</a></li>
+<li><a href="66_ja.html">Chars</a></li>
+<li><a href="67_ja.html">String</a></li>
+<li><a href="68_ja.html">関数パラメータとしてのテキスト</a></li>
+<li><a href="69_ja.html">文字列の構築</a></li>
+<li><a href="70_ja.html">文字列のフォーマット</a></li>
+<li><a href="71_ja.html">文字列変換</a></li>
+<li><a href="72_ja.html">第 6 章 - まとめ</a></li>
+</ul><h3><a href="chapter_7_ja.html">第 7 章 - オブジェクト指向プログラミング</a></h3><ul>
+<li><a href="74_ja.html">オブジェクト指向プログラミングとは？</a></li>
+<li><a href="75_ja.html">Rustはオブジェクト指向プログラミング言語ではない</a></li>
+<li><a href="76_ja.html">メソッドによるカプセル化</a></li>
+<li><a href="77_ja.html">選択的な公開による抽象化</a></li>
+<li><a href="78_ja.html">トレイトを用いたポリモーフィズム</a></li>
+<li><a href="79_ja.html">トレイトに実装されたメソッド</a></li>
+<li><a href="80_ja.html">トレイトの継承</a></li>
+<li><a href="81_ja.html">動的ディスパッチと静的ディスパッチ</a></li>
+<li><a href="82_ja.html">トレイトオブジェクト</a></li>
+<li><a href="83_ja.html">サイズの合わないデータの処理</a></li>
+<li><a href="84_ja.html">ジェネリック関数</a></li>
+<li><a href="85_ja.html">ジェネリクス関数の省略記法</a></li>
+<li><a href="86_ja.html">ボックス</a></li>
+<li><a href="87_ja.html">ジェネリクス構造体のおさらい</a></li>
+<li><a href="88_ja.html">第 7 章 - まとめ</a></li>
+</ul><h3><a href="chapter_8_ja.html">[未翻訳] Chapter 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_ja.html">[未翻訳] References Revisited</a></li>
+<li><a href="91_ja.html">[未翻訳] Raw Pointers</a></li>
+<li><a href="92_ja.html">[未翻訳] Dereferencing</a></li>
+<li><a href="93_ja.html">[未翻訳] The * Operator</a></li>
+<li><a href="94_ja.html">[未翻訳] The . Operator</a></li>
+<li><a href="95_ja.html">[未翻訳] Smart Pointers</a></li>
+<li><a href="96_ja.html">[未翻訳] Smart Unsafe Code</a></li>
+<li><a href="97_ja.html">[未翻訳] Familiar Friends</a></li>
+<li><a href="98_ja.html">[未翻訳] Heap Allocated Memory</a></li>
+<li><a href="99_ja.html">[未翻訳] Failable Main Revisited</a></li>
+<li><a href="100_ja.html">[未翻訳] Referencing Counting</a></li>
+<li><a href="101_ja.html">[未翻訳] Sharing Access</a></li>
+<li><a href="102_ja.html">[未翻訳] Sharing Across Threads</a></li>
+<li><a href="103_ja.html">[未翻訳] Combining Smart Pointers</a></li>
+<li><a href="104_ja.html">[未翻訳] Chapter 8 - Conclusion</a></li>
+</ul><h3><a href="chapter_9_ja.html">[未翻訳] Chapter 9 - Project Organization and Structure</a></h3><ul>
+<li><a href="106_ja.html">[未翻訳] Modules</a></li>
+<li><a href="107_ja.html">[未翻訳] Writing a Program</a></li>
+<li><a href="108_ja.html">[未翻訳] Writing a Library</a></li>
+<li><a href="109_ja.html">[未翻訳] Referencing Other Modules and Crates</a></li>
+<li><a href="110_ja.html">[未翻訳] Referencing Multiple Items</a></li>
+<li><a href="111_ja.html">[未翻訳] Creating Modules</a></li>
+<li><a href="112_ja.html">[未翻訳] Module Hierarchy</a></li>
+<li><a href="113_ja.html">[未翻訳] Inline Module</a></li>
+<li><a href="114_ja.html">[未翻訳] Internal Module Referencing</a></li>
+<li><a href="115_ja.html">[未翻訳] Exporting</a></li>
+<li><a href="116_ja.html">[未翻訳] Structure Visibility</a></li>
+<li><a href="117_ja.html">[未翻訳] Prelude</a></li>
+<li><a href="118_ja.html">[未翻訳] Your Own Prelude</a></li>
+<li><a href="119_ja.html">[未翻訳] Chapter 9 - Conclusion</a></li>
+</ul><h3><a href="chapter_10_ja.html">第 10 章 - 終わりに</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

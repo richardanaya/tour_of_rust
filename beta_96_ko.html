@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>위험한 스마트 코드</h1>
+            <p>smart pointer는 <em>unsafe</em>한 코드를 꽤 자주 쓰는 경향이 있습니다.
+앞서 말했듯이, smart pointer는 Rust에서 가장 저수준의 메모리를 다루기 위한 일반적인 도구입니다.</p>
+<p>뭐가 unsafe한 코드일까요?
+unsafe한 코드는 Rust 컴파일러가 보증할 수 없는 몇 가지 기능이 있다는 예외사항을 제외하고는 일반적인 코드와 완전히 똑같이 동작합니다.</p>
+<p>unsafe한 코드의 주기능은 <em>raw pointer를 역참조</em>하는 것입니다.
+이는 <em>raw pointer</em>를 메모리 상의 위치에 가져다 놓고 "데이터 구조가 여깄다!"고 선언한 뒤 사용할 수 있는 데이터 표현으로 변환하는 것을 의미합니다 (i.e. <code>*const u8</code>을 <code>u8</code>로).
+Rust에는 메모리에 쓰여지는 모든 바이트의 의미를 추적하는 방법은 없습니다.
+Rust는 <em>raw pointer</em>로 쓰이는 임의의 숫자에 무엇이 존재하는지 보증할 수 없기 때문에, 역참조를 <code>unsafe { ... }</code> 블록 안에 넣습니다.</p>
+<p>smart pointer는 <em>raw pointer를 역참조</em>하는데 널리 쓰이지만, 그 기능은 잘 입증 되었습니다.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_95_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="beta_97_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20%EC%9D%B4%EA%B2%8C%20%EC%9B%90%EC%8B%9C%20pointer%EC%9E%85%EB%8B%88%EB%8B%A4.%0A%20%20%20%20%2F%2F%20%EB%AC%B4%EC%96%B8%EA%B0%80%EC%9D%98%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EC%A3%BC%EC%86%8C%EB%A5%BC%20%EC%88%AB%EC%9E%90%EB%A1%9C%20%EA%B0%80%EC%A0%B8%EC%98%A4%EB%8A%94%20%EA%B2%83%EC%9D%80%20%EC%99%84%EC%A0%84%ED%9E%88%20%EC%95%88%EC%A0%84%ED%95%9C%20%EC%9D%BC%EC%9E%85%EB%8B%88%EB%8B%A4%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EC%A3%BC%EC%86%8C%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20%EC%88%AB%EC%9E%90%EB%A5%BC%20%EC%9B%90%EC%8B%9C%20pointer%EB%A1%9C%2C%20%EB%8B%A4%EC%8B%9C%20f32%EB%A1%9C%20%EB%B3%80%ED%99%98%ED%95%98%EB%8A%94%20%EA%B2%83%20%EC%97%AD%EC%8B%9C%0A%20%20%20%20%2F%2F%20%EC%95%88%EC%A0%84%ED%95%9C%20%EC%9D%BC%EC%9E%85%EB%8B%88%EB%8B%A4.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%9D%B4%EA%B1%B4%20unsafe%ED%95%9C%EB%8D%B0%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC%EC%97%90%EA%B2%8C%20%EC%9A%B0%EB%A6%AC%EC%9D%98%20pointer%EA%B0%80%20%EC%9C%A0%ED%9A%A8%ED%95%9C%20f32%EB%9D%BC%EA%B3%A0%20%EA%B0%80%EC%A0%95%ED%95%98%EA%B3%A0%0A%20%20%20%20%20%20%20%20%2F%2F%20%EA%B7%B8%20%EA%B0%92%EC%9D%84%20%EB%B3%80%EC%88%98%20b%EB%A1%9C%20%EC%97%AD%EC%B0%B8%EC%A1%B0%20%ED%95%98%EB%9D%BC%EA%B3%A0%20%ED%95%98%EA%B3%A0%20%EC%9E%88%EA%B8%B0%20%EB%95%8C%EB%AC%B8%EC%9E%85%EB%8B%88%EB%8B%A4.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%EB%8A%94%20%EC%9D%B4%EB%9F%B0%20%EA%B0%80%EC%A0%95%EC%9D%B4%20%EC%B0%B8%EC%9D%B8%EC%A7%80%20%EA%B2%80%EC%A6%9D%ED%95%A0%20%EB%B0%A9%EB%B2%95%EC%9D%B4%20%EC%97%86%EC%8A%B5%EB%8B%88%EB%8B%A4.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%EB%A7%B9%EC%84%B8%ED%95%98%EA%B1%B4%EB%8C%80%20%EC%9D%B4%EA%B1%B4%20%ED%8C%8C%EC%9D%B4%EB%8B%A4!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

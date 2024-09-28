@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <html lang="al" dir="ltr">
+    <head>
+        <title>Tut i Rustit - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_al.html">Tut i Rustit</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_al.html">Tabela e permbajtjeve</a></span>
+            </div>
+            <div class="page">
+            <h1>Enumerations With Data</h1>
+            <p>Elementet "enum" mund të kenë gjithashtu një ose më shumë lloje të dhënash që i lejojnë ata të sillen
+ si <em>union</em> nga C.</p>
+<p>Kur një model "enum" përputhet duke përdorur "match", ju mund të lidhni një ndryshore
+ emër për secilën vlerë të të dhënave.</p>
+<p>Detajet e memories së <code>enum</code>:</p>
+<ul>
+<li><p>Një vlerë e të dhënave enum do të ketë një madhësi memorie të barabartë me elementin e saj më të madh.
+Kjo lejon që të gjitha vlerat potenciale të përshtaten në të njëjtën hapësirë të memories.</p></li>
+<li><p>Përveç llojeve të të dhënave të elementit (nëse ka), çdo element ka gjithashtu një
+vlerë numerike që përfaqëson se cili etiketë është.</p>
+<p>Detaje të tjera:</p></li>
+<li><p>'Enum' i Rust është diçka e njohur gjithashtu si një bashkim <em>etiketuar</em>.</p></li>
+<li><p>Kombinimi i llojeve për të krijuar një lloj të ri është ajo që njerëzit nënkuptojnë kur ata
+Ndryshku ka <em>lloje algjebrike</em>.</p></li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="29_al.html" rel="prev">❮ Paraardhesi</a></span>
+                <span class="next"><a href="31_al.html" rel="next">Tjetri ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=%23!%5Blejohet(dead_code)%5D%20%2F%2F%20ky%20rresht%20parandalon%20sinjalizimet%20e%20kompiluesit%0A%0Aenum%20Lloji%20%7B%20Karkalec%2C%20Zogu%20i%20detit%2C%20Peshku%2C%20Palura%20%7D%0Aenum%20LlojiVeneni%20%7B%20Acid%2C%20Dhimbshme%2C%20Vdekjeprurese%20%7D%0Aenum%20Madhesia%20%7B%20Madhe%2C%20Vogel%20%7D%0Aenum%20Arma%20%7B%0A%20%20%20%20Krah%28i32%2C%20Madhesia%29%2C%0A%20%20%20%20Venin%28LlojiVeneni%29%2C%0A%20%20%20%20Asnje%0A%7D%0A%0Astruct%20KrijesaDeti%20%7B%0A%20%20%20%20lloji%3A%20Lloji%2C%0A%20%20%20%20emri%3A%20String%2C%0A%20%20%20%20krah%C3%ABt%3A%20i32%2C%0A%20%20%20%20kembe%3A%20i32%2C%0A%20%20%20%20arma%3A%20Arma%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Te%20dhenat%20e%20Krijes%D0%91eDeti%20jane%20ne%20stek%0A%20%20%20%20let%20ferris%20%3D%20KrijesaDeti%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Struktura%20String%20gjithashtu%20eshte%20ne%20stek%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20por%20mban%20nje%20referenc%20ne%20te%20dhena%20ne%20heap%0A%20%20%20%20%20%20%20%20lloji%3A%20Lloji%3A%3AKarkalec%2C%0A%20%20%20%20%20%20%20%20emri%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20krah%C3%ABt%3A%202%2C%0A%20%20%20%20%20%20%20%20kembe%3A%204%2C%0A%20%20%20%20%20%20%20%20arma%3A%20Arma%3A%3AKrah(2%2C%20Madhesia%3A%3AVogel)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20match%20ferris.lloji%20%7B%0A%20%20%20%20%20%20%20%20Lloji%3A%3AKarkalec%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20match%20ferris.arma%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Arma%3A%3AKrah(nr_krah%C3%ABve%2Cmadhesia)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20pershkrim_madh%C3%ABsie%20%3D%20match%20madhesia%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Madhesia%3A%3AMadhe%20%3D%3E%20%22madhe%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Madhesia%3A%3AVogel%20%3D%3E%20%22vogel%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20println!(%22ferris%20%C3%ABsht%C3%AB%20nj%C3%AB%20karkalec%20me%20%7B%7D%20%7B%7D%20krah%C3%AB%22%2C%20nr_krah%C3%ABve%2C%20pershkrim_madh%C3%ABsie)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20%C3%ABsht%C3%AB%20nj%C3%AB%20karkalec%20me%20nj%C3%AB%20arm%C3%AB%20tjet%C3%ABr%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20println!(%22ferris%20%C3%ABsht%C3%AB%20nj%C3%AB%20kafsh%C3%AB%20tjet%C3%ABr%22)%2C%0A%20%20%20%20%7D%0A%7D)" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

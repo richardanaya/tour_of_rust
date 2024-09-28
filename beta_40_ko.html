@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>벡터</h1>
+            <p>가장 유용한 generic 자료형들 중 하나가 collection 자료형입니다.
+vector는 <code>Vec</code> struct로 표현되는 가변 크기의 리스트입니다.</p>
+<p><code>vec!</code> macro는 vector를 수동으로 일일이 만드는 대신, 손쉽게 생성할 수 있게 해줍니다.</p>
+<p><code>Vec</code>는 vector를 <code>for</code> 반복문에 손쉽게 넣을 수 있도록
+vector로부터 반복자를 생성할 수 있는 <code>iter()</code> 메소드를 갖고 있습니다.</p>
+<p>메모리 상세:</p>
+<ul>
+<li><code>Vec</code>은 struct이나, 내부적으로는 내용물이 heap에 있는 고정 리스트에 대한 참조를 포함하고 있습니다.</li>
+<li>vector는 기본 용량을 갖고 시작하는데, 용량보다 많은 내용물이 추가될 경우,
+큰 용량을 가진 새 고정 리스트를 위해 heap에 데이터를 재할당합니다.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_39_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="beta_41_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EB%AA%85%EC%8B%9C%EC%A0%81%EC%9C%BC%EB%A1%9C%20%ED%95%A0%20%EC%88%98%20%EC%9E%88%EC%9D%8C%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20%ED%95%98%EC%A7%80%EB%A7%8C%20Rust%EA%B0%80%20%EC%96%BC%EB%A7%88%EB%82%98%20%EB%98%91%EB%98%91%ED%95%98%EA%B2%8C%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C%20%EA%B2%B0%EC%A0%95%ED%95%98%EB%8A%94%EC%A7%80%20%EB%B3%B4%EC%8B%AD%EC%8B%9C%EC%98%A4%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4%20macro%EC%9E%85%EB%8B%88%EB%8B%A4!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

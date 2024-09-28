@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <html lang="zh-cn" dir="ltr">
+    <head>
+        <title>Rust 语言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-cn.html">Rust 语言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-cn.html">目录</a></span>
+            </div>
+            <div class="page">
+            <h1>基本类型</h1>
+            <p>Rust 有多种常见的类型：</p>
+<ul>
+<li>布尔型 - <code>bool</code> 表示 true 或 false</li>
+<li>无符号整型- <code>u8</code> <code>u32</code> <code>u64</code> <code>u128</code> 表示非负整数</li>
+<li>有符号整型 - <code>i8</code> <code>i32</code> <code>i64</code> <code>i128</code> 表示整数</li>
+<li>指针大小的整数 - <code>usize</code> <code>isize</code> 表示内存中内容的索引和大小</li>
+<li>浮点数 - <code>f32</code> <code>f64</code></li>
+<li>元组（tuple） - <code>(value, value, ...)</code> 用于在栈上传递固定序列的值</li>
+<li>数组 - 在编译时已知的具有固定长度的相同元素的集合</li>
+<li>切片（slice） - 在运行时已知长度的相同元素的集合</li>
+<li><code>str</code>(string slice) - 在运行时已知长度的文本</li>
+</ul>
+<p>文本可能比你在其他语言中学到的更复杂，因为 Rust 是一种系统编程语言，它关心的是你可能不太习惯的内存问题。
+我们之后将详细讨论这个问题。</p>
+<p>另外，你也可以通过将类型附加到数字的末尾来明确指定数字类型（如 <code>13u32</code> 和 <code>2u8</code>）</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_04_zh-cn.html" rel="prev">❮ 上一页</a></span>
+                <span class="next"><a href="beta_06_zh-cn.html" rel="next">下一页 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20%E9%BB%98%E8%AE%A4%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E8%BF%99%E6%98%AFi32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20%E9%BB%98%E8%AE%A4%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E8%BF%99%E6%98%AFf64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

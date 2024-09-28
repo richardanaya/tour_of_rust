@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+    <html lang="es" dir="ltr">
+    <head>
+        <title>Tour de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_es.html">Tour de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
+            </div>
+            <div class="page">
+            <h1>Punteros Sin Procesar</h1>
+            <p>Las referencias pueden convertirse en un tipo más primitivo llamado <em>puntero sin procesar</em>. Al igual que un número, se puede copiar y mover sin mucha restricción. Rust no asegura la validez de la ubicación de la memoria a la que apunta.</p>
+<p>Existen dos tipos de punteros sin procesar:</p>
+<ul>
+<li><code>*const T</code> - para los datos tipo T que no deben cambiar.</li>
+<li><code>*mut T</code> - para datos tipo T que pueden cambiar.</li>
+</ul>
+<p>Los punteros sin procesar se pueden convertir en números y a partir de números. (Por ejemplo, <code>usize</code>).</p>
+<p>Los punteros sin procesar pueden acceder a los datos con un código no seguro <em>unsafe</em> (Lo veremos más adelante).</p>
+<p>Detalles de la memoria:</p>
+<ul>
+<li>Una referencia en Rust es muy similar a un puntero en C en términos de uso, pero con muchas más restricciones  en tiempo de compilación en cuanto a cómo se puede almacenar y trasladar a otras funciones. * Un puntero sin procesar  en Rust es similar a un puntero en C que representa un número que se puede copiar,  pasar de un lado a otro, e incluso convertir en tipos numéricos donde se pueden modificar como un número para hacer aritmética de punteros.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="90_es.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="92_es.html" rel="next">Siguiente ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

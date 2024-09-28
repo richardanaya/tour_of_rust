@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="ja" dir="ltr">
+    <head>
+        <title>Rust ツアー - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ja.html">Rust ツアー</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ja.html">目次</a></span>
+            </div>
+            <div class="page">
+            <h1>明示的なライフタイム</h1>
+            <p>Rust では、常にコードに表れるわけではありませんが、コンパイラはすべての変数のライフタイムを管理しており、参照がその所有者よりも長く存在しないことを検証しようとします。</p>
+<p>関数は、どの引数と戻り値とがライフタイムを共有しているかを、識別のための指定子で明示的に指定できます。</p>
+<p>ライフタイム指定子は常に <code>'</code> で始まります（例: <code>'a</code>, <code>'b</code>, <code>'c</code>）。</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_52_ja.html" rel="prev">❮ 前</a></span>
+                <span class="next"><a href="beta_54_ja.html" rel="next">次 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20%E5%BC%95%E6%95%B0%20foo%20%E3%81%A8%E6%88%BB%E3%82%8A%E5%80%A4%E3%81%AF%E3%83%A9%E3%82%A4%E3%83%95%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%92%E5%85%B1%E6%9C%89%0Afn%20do_something%3C%27a%3E(foo%3A%20%26%27a%20Foo)%20-%3E%20%26%27a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20%E3%81%AF%E3%81%93%E3%81%93%E3%81%A7%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%E3%81%95%E3%82%8C%E3%82%8B%E3%81%9F%E3%82%81%E3%80%81%E4%B8%8D%E5%A4%89%E3%81%AA%E5%8F%82%E7%85%A7%E3%81%8C%E4%BD%9C%E6%88%90%E5%8F%AF%E8%83%BD%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20%E3%81%AF%E3%81%93%E3%81%93%E3%81%A7%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%0A%20%20%20%20%2F%2F%20foo%20%E3%81%AF%E3%81%93%E3%81%93%E3%81%A7%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

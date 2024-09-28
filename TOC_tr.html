@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="tr" dir="ltr">
+    <head>
+        <title>Rust Turu - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_tr.html">Rust Turu</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Dersler</h1>
+            <ul>
+        <li><a href="00_tr.html">Merhaba <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom">,</a></li>
+</ul><h3><a href="chapter_1_tr.html">Bölüm 1 - Temel Bilgiler</a></h3><ul>
+<li><a href="02_tr.html">Rust Oyun Alanı</a></li>
+<li><a href="03_tr.html">Değişkenler</a></li>
+<li><a href="04_tr.html">Değişkenlerin Değiştirilmesi</a></li>
+<li><a href="05_tr.html">Temel Türler</a></li>
+<li><a href="06_tr.html">Temel Türleri Dönüştürmek</a></li>
+<li><a href="07_tr.html">Sabitler</a></li>
+<li><a href="08_tr.html">Diziler</a></li>
+<li><a href="09_tr.html">İşlevler</a></li>
+<li><a href="10_tr.html">Çoklu Dönüş Değerleri</a></li>
+<li><a href="11_tr.html">Boş Değer Döndürmek</a></li>
+<li><a href="12_tr.html">Bölüm 1 - Sonuç</a></li>
+</ul><h3><a href="chapter_2_tr.html">Bölüm 2 - Temel Kontrol Akışı</a></h3><ul>
+<li><a href="14_tr.html">if/else if/else</a></li>
+<li><a href="15_tr.html">loop</a></li>
+<li><a href="16_tr.html">while</a></li>
+<li><a href="17_tr.html">for</a></li>
+<li><a href="18_tr.html">match</a></li>
+<li><a href="19_tr.html">loop İçinden Değer Döndürmek</a></li>
+<li><a href="20_tr.html">Blok İfadelerinden Değer Döndürmek</a></li>
+<li><a href="21_tr.html">Bölüm 2 - Sonuç</a></li>
+</ul><h3><a href="chapter_3_tr.html">Bölüm 3 - Temel Veri Yapıları</a></h3><ul>
+<li><a href="23_tr.html">Yapılar</a></li>
+<li><a href="24_tr.html">Çağrı Yöntemleri</a></li>
+<li><a href="25_tr.html">Bellek</a></li>
+<li><a href="26_tr.html">Bellekte Veri Oluşturmak</a></li>
+<li><a href="27_tr.html">Çokuzlu Benzeri Yapılar</a></li>
+<li><a href="28_tr.html">Birim Benzeri Yapılar</a></li>
+<li><a href="29_tr.html">Numaralandırmalar</a></li>
+<li><a href="30_tr.html">Veriler ve Numaralandırmalar</a></li>
+<li><a href="31_tr.html">Bölüm 3 - Sonuç</a></li>
+</ul><h3><a href="chapter_4_tr.html">Bölüm 4 - Genel Türler</a></h3><ul>
+<li><a href="33_tr.html">Genel TürLer Nelerdir?</a></li>
+<li><a href="34_tr.html">Boş Değer Gösterimi</a></li>
+<li><a href="35_tr.html">Option</a></li>
+<li><a href="36_tr.html">Result</a></li>
+<li><a href="37_tr.html">Main İşlevinden Hata Döndürmek</a></li>
+<li><a href="38_tr.html">Hataları Zarif Şekilde İşlemek</a></li>
+<li><a href="39_tr.html">Option/Result Türlerini Üstünkörü İşlemek</a></li>
+<li><a href="40_tr.html">Vektörler</a></li>
+<li><a href="41_tr.html">Bölüm 4 - Sonuç</a></li>
+</ul><h3><a href="chapter_5_tr.html">Bölüm 5 - Mülkiyet ve Borçlanma</a></h3><ul>
+<li><a href="43_tr.html">Mülkiyet</a></li>
+<li><a href="44_tr.html">Kapsam Tabanlı Kaynak Yönetimi</a></li>
+<li><a href="45_tr.html">Düşürmek Hiyerarşiktir</a></li>
+<li><a href="46_tr.html">Mülkiyetin Taşınması</a></li>
+<li><a href="47_tr.html">Mülkiyetin İade Edilmesi</a></li>
+<li><a href="48_tr.html">Referanslar Yardımıyla Mülkiyeti Ödünç Almak</a></li>
+<li><a href="49_tr.html">Referanslar Yardımıyla Değişebilen Mülkiyeti Ödünç Almak</a></li>
+<li><a href="50_tr.html">Referansı Kaldırmak</a></li>
+<li><a href="51_tr.html">Ödünç Alınan Verinin Taşınması</a></li>
+<li><a href="52_tr.html">Referansların Referansları</a></li>
+<li><a href="53_tr.html">Yaşam Sürelerini Açık Şekilde Belirtmek</a></li>
+<li><a href="54_tr.html">Çoklu Yaşam Süreleri</a></li>
+<li><a href="55_tr.html">Statik Yaşam Süreleri</a></li>
+<li><a href="56_tr.html">Veri Türlerinin Yaşam Süresi</a></li>
+<li><a href="57_tr.html">Bölüm 5 - Sonuç</a></li>
+</ul><h3><a href="chapter_6_tr.html">Bölüm 6 - Metin Verileriyle Çalışmak</a></h3><ul>
+<li><a href="59_tr.html">Dizgi Değişmezleri</a></li>
+<li><a href="60_tr.html">UTF-8 Nedir?</a></li>
+<li><a href="61_tr.html">Kaçış Karakterleri</a></li>
+<li><a href="62_tr.html">Çok Satırlı Dizgi Değişmezleri</a></li>
+<li><a href="63_tr.html">Ham Dizgi Değişmezleri</a></li>
+<li><a href="64_tr.html">Dosyadan Edinilen Dizgi Değişmezleri</a></li>
+<li><a href="65_tr.html">Dizgi Dilimleri</a></li>
+<li><a href="66_tr.html">Karakterler</a></li>
+<li><a href="67_tr.html">String</a></li>
+<li><a href="68_tr.html">İşlev Parametrelerinde Kullanılan Metinler</a></li>
+<li><a href="69_tr.html">Dizgiyi Oluşturmak</a></li>
+<li><a href="70_tr.html">Dizgileri Biçimlendirmek</a></li>
+<li><a href="71_tr.html">Dizgileri Dönüştürmek</a></li>
+<li><a href="72_tr.html">Bölüm 6 - Sonuç</a></li>
+</ul><h3><a href="chapter_7_tr.html">Bölüm 7 - Nesne Yönelimli Programlama</a></h3><ul>
+<li><a href="74_tr.html">Nesne Yönelimli Programlama Nedir?</a></li>
+<li><a href="75_tr.html">Rust Bir Nesne Yönelimli Programlama Dili Değildir</a></li>
+<li><a href="76_tr.html">Metotlarla Kapsülleme</a></li>
+<li><a href="77_tr.html">Farklı Görünürlük Seviyelerindeki Soyutlamalar</a></li>
+<li><a href="78_tr.html">Özellikler ve Çok Biçimlilik</a></li>
+<li><a href="79_tr.html">Özelliklere Uygulanan Yöntemler</a></li>
+<li><a href="80_tr.html">Özellik Kalıtımı</a></li>
+<li><a href="81_tr.html">Ya Dinamik Ya Statik İletim</a></li>
+<li><a href="82_tr.html">Özellik Nesneleri</a></li>
+<li><a href="83_tr.html">Boyutlandırılmamış Verilerle Çalışmak</a></li>
+<li><a href="84_tr.html">Genel İşlevler</a></li>
+<li><a href="85_tr.html">Genel İşlev Kısaltmaları</a></li>
+<li><a href="86_tr.html">Box</a></li>
+<li><a href="87_tr.html">Genellenmiş Yapılara Yeniden Bakış</a></li>
+<li><a href="88_tr.html">Bölüm 7 - Sonuç</a></li>
+</ul><h3><a href="chapter_8_tr.html">Bölüm 8 - Akıllı İşaretçiler</a></h3><ul>
+<li><a href="90_tr.html">Referanslara Yeniden Bakış</a></li>
+<li><a href="91_tr.html">Ham İşaretçiler</a></li>
+<li><a href="92_tr.html">Referansı Kaldırmak</a></li>
+<li><a href="93_tr.html">Yıldız İmi * İşleci</a></li>
+<li><a href="94_tr.html">Nokta . İşleci</a></li>
+<li><a href="95_tr.html">Akıllı İşaretçiler</a></li>
+<li><a href="96_tr.html">Akıllı Güvensiz Kodlar</a></li>
+<li><a href="97_tr.html">Yakın Arkadaşlarımız</a></li>
+<li><a href="98_tr.html">Öbek Üzerinde Bellek Ayırmak</a></li>
+<li><a href="99_tr.html">Main İşlevine Yeniden Bakış</a></li>
+<li><a href="100_tr.html">Referans Sayımı</a></li>
+<li><a href="101_tr.html">Erişim Paylaşımı</a></li>
+<li><a href="102_tr.html">İş Parçacıkları Arasında Paylaşım</a></li>
+<li><a href="103_tr.html">Akıllı İşaretçileri Bir Araya Getirmek</a></li>
+<li><a href="104_tr.html">Bölüm 8 - Sonuç</a></li>
+</ul><h3><a href="chapter_9_tr.html">Bölüm 9 - Proje Organizasyonu ve Yapısı</a></h3><ul>
+<li><a href="106_tr.html">Modüller</a></li>
+<li><a href="107_tr.html">Bir Program Yazmak</a></li>
+<li><a href="108_tr.html">Bir Kütüphane Yazmak</a></li>
+<li><a href="109_tr.html">Başka Modül ve Sandıklara Referans Vermek</a></li>
+<li><a href="110_tr.html">Çok Sayıda Öğeye Başvurmak</a></li>
+<li><a href="111_tr.html">Modüller Oluşturmak</a></li>
+<li><a href="112_tr.html">Modül Hiyerarşisi</a></li>
+<li><a href="113_tr.html">Satır İçi Modül</a></li>
+<li><a href="114_tr.html">Yerleşik Modüllere Başvurmak</a></li>
+<li><a href="115_tr.html">Dışa Aktarmak</a></li>
+<li><a href="116_tr.html">Yapısal Görünürlük</a></li>
+<li><a href="117_tr.html">Ön Yükleme Modülü</a></li>
+<li><a href="118_tr.html">Kendi Ön Yükleme Kütüphaneniz</a></li>
+<li><a href="119_tr.html">Bölüm 9 - Sonuç</a></li>
+</ul><h3><a href="chapter_10_tr.html">Bölüm 10 - Bitti</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html lang="it" dir="ltr">
+    <head>
+        <title>Tour di Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_it.html">Tour di Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_it.html">Indice dei Contenuti</a></span>
+            </div>
+            <div class="page">
+            <h1>Durata statica</h1>
+            <p>Una variabile <strong>statica</strong> è una risorsa di memoria creata in fase di compilazione esiste attraverso un programma start to
+fine. I tipi devono essere specificati esplicitamente.</p>
+<p>Una <strong>durata statica</strong> è una risorsa di memoria che dura indefinitamente fine di un programma. Si noti che con questa definizione
+alcune risorse a durata statica possono essere create in fase di esecuzione.</p>
+<p>Le risorse con durate statiche hanno uno speciale specificatore di durata "static".</p>
+<p>Le risorse <code>'statiche</code> non verranno mai <strong>cadute</strong>.</p>
+<p>Se le risorse con durata statica contengono riferimenti, devono essere tutte "statiche". (niente di meno non vivrebbe abbastanza a lungo).</p>
+<p>Dettagli della memoria:</p>
+<ul>
+<li>La modifica delle variabili statiche è intrinsecamente pericolosa perché lo sono accessibile a livello globale per essere letto da chiunque
+introducendo la possibilità di una corsa ai dati. Parleremo più tardi delle sfide poste dai dati globali.</li>
+<li>Rust consente l'uso di blocchi <code>unsafe { ... }</code> per eseguire alcune operazioni su cui il compilatore non può fornire garanzie di memoria. Il <a href="https://doc.rust-lang.org/nomicon/"><intervallo style="colore:rosso; peso-carattere: grassetto;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐ ͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span></a> non se ne dovrebbe parlare casualmente.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="54_it.html" rel="prev">❮ Precedente</a></span>
+                <span class="next"><a href="56_it.html" rel="next">Prossimo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=static+PI%3A+f64+%3D+3.1415%3B%0A%0Afn+main%28%29+%7B%0A++++%2F%2F+le+variabili+statiche+possono+anche+avere+come+ambito+una+funzione%0A++++static+mut+SECRET%3A+%26%27static+str+%3D+%22swordfish%22%3B%0A%0A++++%2F%2F+i+valori+letterali+delle+stringhe+hanno+una+durata+statica%0A++++let+msg%3A+%26%27static+str+%3D+%22Hello+World%21%22%3B%0A++++let+p%3A+%26%27static+f64+%3D+%26PI%3B%0A++++println%21%28%22%7B%7D+%7B%7D%22%2C+msg%2C+p%29%3B%0A%0A++++%2F%2F+Puoi+infrangere+alcune+regole%2C+ma+devi+essere+esplicito%0A++++unsafe+%7B%0A++++++++%2F%2F+possiamo+impostare+SECRET+su+una+stringa+letterale+perch%C3%A9+%C3%A8+anche+%60statico%0A++++++++SECRET+%3D+%22abracadabra%22%3B%0A++++++++println%21%28%22%7B%7D%22%2C+SECRET%29%3B%0A++++%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

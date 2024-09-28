@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+    <html lang="zh-tw" dir="ltr">
+    <head>
+        <title>Rust 語言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-tw.html">Rust 語言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-tw.html">目錄</a></span>
+            </div>
+            <div class="page">
+            <h1>基本類型 (Primitive types)</h1>
+            <p>Rust 具有多種常見的類型：</p>
+<ul>
+<li>(布林值)booleans - <code>bool</code> 來表達 true/false</li>
+<li>(無符號整數) unsigned integers - <code>u8</code> <code>u16</code> <code>u32</code> <code>u64</code> <code>u128</code> 來表達正整數</li>
+<li>(有符號整數) signed integers - <code>i8</code> <code>i16</code> <code>i32</code> <code>i64</code> <code>i128</code> 來表達正負整數</li>
+<li>(指針大小的整數) pointer sized integers - <code>usize</code> <code>isize</code> 來表達索引或記憶體內的東西大小</li>
+<li>(浮點) floating point - <code>f32</code> <code>f64</code></li>
+<li>(元組) tuple - <code>(value, value, ...)</code> 用於在傳遞多個固定的值</li>
+<li>(陣列) array - <code>[value, value, ...]</code> 在編譯時已知具有固定長度的相似元素的集合</li>
+<li>(片段) slices - 在運行時已知長度的相似元素的集合</li>
+<li><code>str</code>(字串片段 string slice) - 在運行時已知長度的字串
+在 Rust 裡面，文字處理可能比您在其他程式語言中所理解到的複雜
+Rust 是一個系統程式語言 (system programming language)，所以它所關注的記憶體問題
+對於您可能是前所未見。我們遲一點會深入了解。
+數字類型可以在後邊這樣明確標明它的類型： <code>13u32</code>, <code>2u8</code></li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="04_zh-tw.html" rel="prev">❮ 上一頁</a></span>
+                <span class="next"><a href="06_zh-tw.html" rel="next">下一頁 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20by%20default%20this%20is%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20by%20default%20this%20is%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

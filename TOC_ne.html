@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="ne" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ne.html">Tour of Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Lessons</h1>
+            <ul>
+        <li><a href="00_ne.html">Hallo, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_ne.html">Hoofdstuk 1 - Ideeën en basisconcepten</a></h3><ul>
+<li><a href="02_ne.html">Rust Playground</a></li>
+<li><a href="03_ne.html">Variabile</a></li>
+<li><a href="04_ne.html">Modificarea variabilelor</a></li>
+<li><a href="05_ne.html">Basisdatatypes</a></li>
+<li><a href="06_ne.html">Type conversies</a></li>
+<li><a href="07_ne.html">Constante</a></li>
+<li><a href="08_ne.html">Arrays</a></li>
+<li><a href="09_ne.html">Functies</a></li>
+<li><a href="10_ne.html">Het teruggeven van meerdere waarden</a></li>
+<li><a href="11_ne.html">Niets retourneren</a></li>
+<li><a href="12_ne.html">Hoofdstuk 1 - Conclusies</a></li>
+</ul><h3><a href="chapter_2_ne.html">[Untranslated] Chapter 2 - Basic Control Flow</a></h3><ul>
+<li><a href="14_ne.html">[Untranslated] if/else</a></li>
+<li><a href="15_ne.html">[Untranslated] loop</a></li>
+<li><a href="16_ne.html">[Untranslated] while</a></li>
+<li><a href="17_ne.html">[Untranslated] for</a></li>
+<li><a href="18_ne.html">[Untranslated] match</a></li>
+<li><a href="19_ne.html">[Untranslated] Returning Values From loop</a></li>
+<li><a href="20_ne.html">[Untranslated] Returning Values From Block Expressions</a></li>
+<li><a href="21_ne.html">[Untranslated] Chapter 2 - Conclusion</a></li>
+</ul><h3><a href="chapter_3_ne.html">[Untranslated] Chapter 3 - Basic Data Structure Types</a></h3><ul>
+<li><a href="23_ne.html">[Untranslated] Structures</a></li>
+<li><a href="24_ne.html">[Untranslated] Calling Methods</a></li>
+<li><a href="25_ne.html">[Untranslated] Memory</a></li>
+<li><a href="26_ne.html">[Untranslated] Creating Data In Memory</a></li>
+<li><a href="27_ne.html">[Untranslated] Tuple-like Structs</a></li>
+<li><a href="28_ne.html">[Untranslated] Unit-like Structs</a></li>
+<li><a href="29_ne.html">[Untranslated] Enumerations</a></li>
+<li><a href="30_ne.html">[Untranslated] Enumerations With Data</a></li>
+<li><a href="31_ne.html">[Untranslated] Chapter 3 - Conclusion</a></li>
+</ul><h3><a href="chapter_4_ne.html">[Untranslated] Chapter 4 - Generic Types</a></h3><ul>
+<li><a href="33_ne.html">[Untranslated] What Are Generic Types?</a></li>
+<li><a href="34_ne.html">[Untranslated] Representing Nothing</a></li>
+<li><a href="35_ne.html">[Untranslated] Option</a></li>
+<li><a href="36_ne.html">[Untranslated] Result</a></li>
+<li><a href="37_ne.html">[Untranslated] Failable Main</a></li>
+<li><a href="38_ne.html">[Untranslated] Graceful Error Handling</a></li>
+<li><a href="39_ne.html">[Untranslated] Ugly Option/Result Handling</a></li>
+<li><a href="40_ne.html">[Untranslated] Vectors</a></li>
+<li><a href="41_ne.html">[Untranslated] Chapter 4 - Conclusion</a></li>
+</ul><h3><a href="chapter_5_ne.html">[Untranslated] Chapter 5 - Ownership & Borrowing Data</a></h3><ul>
+<li><a href="43_ne.html">[Untranslated] Ownership</a></li>
+<li><a href="44_ne.html">[Untranslated] Scope-Based Resource Management</a></li>
+<li><a href="45_ne.html">[Untranslated] Dropping is Hierarchical</a></li>
+<li><a href="46_ne.html">[Untranslated] Moving Ownership</a></li>
+<li><a href="47_ne.html">[Untranslated] Returning Ownership</a></li>
+<li><a href="48_ne.html">[Untranslated] Borrowing Ownership with References</a></li>
+<li><a href="49_ne.html">[Untranslated] Borrowing Mutable Ownership with References</a></li>
+<li><a href="50_ne.html">[Untranslated] Dereferencing</a></li>
+<li><a href="51_ne.html">[Untranslated] Passing Around Borrowed Data</a></li>
+<li><a href="52_ne.html">[Untranslated] References Of References</a></li>
+<li><a href="53_ne.html">[Untranslated] Explicit Lifetimes</a></li>
+<li><a href="54_ne.html">[Untranslated] Multiple Lifetimes</a></li>
+<li><a href="55_ne.html">[Untranslated] Static Lifetimes</a></li>
+<li><a href="56_ne.html">[Untranslated] Lifetimes In Data Types</a></li>
+<li><a href="57_ne.html">[Untranslated] Chapter 5 - Conclusion</a></li>
+</ul><h3><a href="chapter_6_ne.html">[Untranslated] Chapter 6 - Text</a></h3><ul>
+<li><a href="59_ne.html">[Untranslated] String Literals</a></li>
+<li><a href="60_ne.html">[Untranslated] What is utf-8</a></li>
+<li><a href="61_ne.html">[Untranslated] Escaping Characters</a></li>
+<li><a href="62_ne.html">[Untranslated] Multi-line String Literals</a></li>
+<li><a href="63_ne.html">[Untranslated] Raw String Literals</a></li>
+<li><a href="64_ne.html">[Untranslated] String Literals From Files</a></li>
+<li><a href="65_ne.html">[Untranslated] String Slice</a></li>
+<li><a href="66_ne.html">[Untranslated] Chars</a></li>
+<li><a href="67_ne.html">[Untranslated] String</a></li>
+<li><a href="68_ne.html">[Untranslated] Text As Function Parameters</a></li>
+<li><a href="69_ne.html">[Untranslated] Building Strings</a></li>
+<li><a href="70_ne.html">[Untranslated] Formatting Strings</a></li>
+<li><a href="71_ne.html">[Untranslated] Converting Strings</a></li>
+<li><a href="72_ne.html">[Untranslated] Chapter 6 - Conclusion</a></li>
+</ul><h3><a href="chapter_7_ne.html">[Untranslated] Chapter 7 - Object Oriented Programming</a></h3><ul>
+<li><a href="74_ne.html">[Untranslated] What Is OOP?</a></li>
+<li><a href="75_ne.html">[Untranslated] Rust Is Not OOP</a></li>
+<li><a href="76_ne.html">[Untranslated] Encapsulation With Methods</a></li>
+<li><a href="77_ne.html">[Untranslated] Abstraction With Selective Exposure</a></li>
+<li><a href="78_ne.html">[Untranslated] Polymorphism With Traits</a></li>
+<li><a href="79_ne.html">[Untranslated] Implemented Methods On Traits</a></li>
+<li><a href="80_ne.html">[Untranslated] Trait Inheritance</a></li>
+<li><a href="81_ne.html">[Untranslated] Dynamic vs Static Dispatch</a></li>
+<li><a href="82_ne.html">[Untranslated] Trait Objects</a></li>
+<li><a href="83_ne.html">[Untranslated] Handling Unsized Data</a></li>
+<li><a href="84_ne.html">[Untranslated] Generic Functions</a></li>
+<li><a href="85_ne.html">[Untranslated] Generic Function Shorthand</a></li>
+<li><a href="86_ne.html">[Untranslated] Box</a></li>
+<li><a href="87_ne.html">[Untranslated] Generic Structs Revisited</a></li>
+<li><a href="88_ne.html">[Untranslated] Chapter 7 - Conclusion</a></li>
+</ul><h3><a href="chapter_8_ne.html">[Untranslated] Chapter 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_ne.html">[Untranslated] References Revisited</a></li>
+<li><a href="91_ne.html">[Untranslated] Raw Pointers</a></li>
+<li><a href="92_ne.html">[Untranslated] Dereferencing</a></li>
+<li><a href="93_ne.html">[Untranslated] The * Operator</a></li>
+<li><a href="94_ne.html">[Untranslated] The . Operator</a></li>
+<li><a href="95_ne.html">[Untranslated] Smart Pointers</a></li>
+<li><a href="96_ne.html">[Untranslated] Smart Unsafe Code</a></li>
+<li><a href="97_ne.html">[Untranslated] Familiar Friends</a></li>
+<li><a href="98_ne.html">[Untranslated] Heap Allocated Memory</a></li>
+<li><a href="99_ne.html">[Untranslated] Failable Main Revisited</a></li>
+<li><a href="100_ne.html">[Untranslated] Referencing Counting</a></li>
+<li><a href="101_ne.html">[Untranslated] Sharing Access</a></li>
+<li><a href="102_ne.html">[Untranslated] Sharing Across Threads</a></li>
+<li><a href="103_ne.html">[Untranslated] Combining Smart Pointers</a></li>
+<li><a href="104_ne.html">[Untranslated] Chapter 8 - Conclusion</a></li>
+</ul><h3><a href="chapter_9_ne.html">[Untranslated] Chapter 9 - Project Organization and Structure</a></h3><ul>
+<li><a href="106_ne.html">[Untranslated] Modules</a></li>
+<li><a href="107_ne.html">[Untranslated] Writing a Program</a></li>
+<li><a href="108_ne.html">[Untranslated] Writing a Library</a></li>
+<li><a href="109_ne.html">[Untranslated] Referencing Other Modules and Crates</a></li>
+<li><a href="110_ne.html">[Untranslated] Referencing Multiple Items</a></li>
+<li><a href="111_ne.html">[Untranslated] Creating Modules</a></li>
+<li><a href="112_ne.html">[Untranslated] Module Hierarchy</a></li>
+<li><a href="113_ne.html">[Untranslated] Inline Module</a></li>
+<li><a href="114_ne.html">[Untranslated] Internal Module Referencing</a></li>
+<li><a href="115_ne.html">[Untranslated] Exporting</a></li>
+<li><a href="116_ne.html">[Untranslated] Structure Visibility</a></li>
+<li><a href="117_ne.html">[Untranslated] Prelude</a></li>
+<li><a href="118_ne.html">[Untranslated] Your Own Prelude</a></li>
+<li><a href="119_ne.html">[Untranslated] Chapter 9 - Conclusion</a></li>
+</ul><h3><a href="chapter_10_ne.html">[Untranslated] Chapter 10 - The End</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>Generic 자료형이란?</h1>
+            <p>generic 자료형은 <code>struct</code>나 <code>enum</code>을 부분적으로 정의하여, 컴파일러가
+컴파일 타임에 코드 사용을 기반으로 완전히 정의된 버전을 만들 수 있게 해줍니다.</p>
+<p>Rust는 일반적으로 인스턴스화 하는 것을 보고 최종 자료형을 유추할 수 있으나,
+여러분의 도움이 필요한 경우에는 <code>turbofish</code> (내 친한 친구입니다!)로도 알려진 <code>::&lt;T&gt;</code> 연산자를 사용해 언제든 명시적으로 지정할 수 있습니다.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_chapter_4_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="beta_34_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20%EC%9D%BC%EB%B6%80%EB%A7%8C%20%EC%A0%95%EC%9D%98%EB%90%9C%20struct%20%EC%9E%90%EB%A3%8C%ED%98%95%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EC%A4%91%EC%9A%94%3A%20%EC%97%AC%EA%B8%B0%EC%84%9C%20generic%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%93%B0%EB%A9%B4%2C%20%EC%BB%B4%ED%8C%8C%EC%9D%BC%20%ED%83%80%EC%9E%84%EC%97%90%20%EC%83%9D%EC%84%B1%EB%90%9C%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%83%9D%EC%84%B1%ED%95%98%EA%B2%8C%20%EB%90%A8.%0A%20%20%20%20%2F%2F%20Turbofish%EB%A5%BC%20%EC%93%B0%EB%A9%B4%20%EB%AA%85%EC%8B%9C%EC%A0%81%EC%9D%BC%20%EC%88%98%20%EC%9E%88%EB%8B%A4.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Rust%EB%8A%94%20generic%EC%97%90%EB%8F%84%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%9C%A0%EC%B6%94%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20%EC%A4%91%EC%9A%94%3A%20%EC%8B%A4%EC%83%9D%ED%99%9C%EC%97%90%EC%84%9C%EB%8A%94%20%EA%B0%80%EB%B0%A9%20%EC%86%8D%EC%97%90%20%EA%B0%80%EB%B0%A9%EC%9D%84%20%EB%84%A3%EC%A7%80%20%EB%A7%88%EC%8B%9C%EC%98%A4%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22%EC%BE%85!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

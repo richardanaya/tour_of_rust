@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="es" dir="ltr">
+    <head>
+        <title>Tour de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_es.html">Tour de Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Unidades</h1>
+            <ul>
+        <li><a href="00_es.html">Hola, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_es.html">Capítulo 1 - Lo Básico</a></h3><ul>
+<li><a href="02_es.html">Familiarízate con Rust</a></li>
+<li><a href="03_es.html">Variables</a></li>
+<li><a href="04_es.html">Modificar Variables</a></li>
+<li><a href="05_es.html">Tipos Básicos</a></li>
+<li><a href="06_es.html">Conversión de Tipos Básica</a></li>
+<li><a href="07_es.html">Constantes</a></li>
+<li><a href="08_es.html">Arrays</a></li>
+<li><a href="09_es.html">Funciones</a></li>
+<li><a href="10_es.html">Múltiples Variables de Retorno</a></li>
+<li><a href="11_es.html">No Devolver Nada</a></li>
+<li><a href="12_es.html">Capítulo 1 - Conclusión</a></li>
+</ul><h3><a href="chapter_2_es.html">Capítulo 2 - Estructuras de Control Básicas</a></h3><ul>
+<li><a href="14_es.html">if/else if/else</a></li>
+<li><a href="15_es.html">loop</a></li>
+<li><a href="16_es.html">while</a></li>
+<li><a href="17_es.html">for</a></li>
+<li><a href="18_es.html">match</a></li>
+<li><a href="19_es.html">Devolviendo Valores en loop</a></li>
+<li><a href="20_es.html">Devolviendo Valores en Bloques de Expresiones</a></li>
+<li><a href="21_es.html">Capítulo 2 - Conclusión</a></li>
+</ul><h3><a href="chapter_3_es.html">Capítulo 3 - Tipos Básicos de Estructuras de Datos</a></h3><ul>
+<li><a href="23_es.html">Estructuras</a></li>
+<li><a href="24_es.html">Llamadas a Métodos</a></li>
+<li><a href="25_es.html">Memoria</a></li>
+<li><a href="26_es.html">Creación de Datos en Memoria</a></li>
+<li><a href="27_es.html">Estructuras en Forma de Tupla</a></li>
+<li><a href="28_es.html">Estructuras Tipo-Unitario</a></li>
+<li><a href="29_es.html">Enumeraciones</a></li>
+<li><a href="30_es.html">Enumeraciones con Datos</a></li>
+<li><a href="31_es.html">Capítulo 3 - Conclusión</a></li>
+</ul><h3><a href="chapter_4_es.html">Capítulo 4 - Tipos Genéricos</a></h3><ul>
+<li><a href="33_es.html">¿Qué Son los Tipos Genéricos?</a></li>
+<li><a href="34_es.html">Ausencia de Valor</a></li>
+<li><a href="35_es.html">Option</a></li>
+<li><a href="36_es.html">Result</a></li>
+<li><a href="37_es.html">Main Fallido</a></li>
+<li><a href="38_es.html">Gestionar Errores de Forma Elegante</a></li>
+<li><a href="39_es.html">Gestionar Errores Option y Result de Forma Poco Elegante</a></li>
+<li><a href="40_es.html">Vectores</a></li>
+<li><a href="41_es.html">Capítulo 4 - Conclusión</a></li>
+</ul><h3><a href="chapter_5_es.html">Capítulo 5 - Pertenencia y Préstamo de Datos</a></h3><ul>
+<li><a href="43_es.html">Pertenencia</a></li>
+<li><a href="44_es.html">Gestión de Recursos Basada en el Alcance</a></li>
+<li><a href="45_es.html">Liberación (drop) Jerárquica</a></li>
+<li><a href="46_es.html">Cesión de Pertenencia</a></li>
+<li><a href="47_es.html">Devolver la Pertenencia</a></li>
+<li><a href="48_es.html">Préstamo de Pertenencias con Referencias</a></li>
+<li><a href="49_es.html">Préstamo de Pertenencias Mutables con Referencias</a></li>
+<li><a href="50_es.html">Indirección</a></li>
+<li><a href="51_es.html">Mover los Datos Prestados</a></li>
+<li><a href="52_es.html">Referencias de las Referencias</a></li>
+<li><a href="53_es.html">Tiempo de Vida Explícito</a></li>
+<li><a href="54_es.html">Tiempos de Vida Múltiples</a></li>
+<li><a href="55_es.html">Tiempo de Vida Estático ( static )</a></li>
+<li><a href="56_es.html">Tiempos de Vida en los Tipos de Datos</a></li>
+<li><a href="57_es.html">Capítulo 5 - Conclusión</a></li>
+</ul><h3><a href="chapter_6_es.html">Capítulo 6 - Texto</a></h3><ul>
+<li><a href="59_es.html">Cadenas de Caracteres Literales</a></li>
+<li><a href="60_es.html">¿Qué es UTF-8?</a></li>
+<li><a href="61_es.html">Caracteres de Escape</a></li>
+<li><a href="62_es.html">Cadenas de Texto Multilínea</a></li>
+<li><a href="63_es.html">Cadenas de Texto sin Formato</a></li>
+<li><a href="64_es.html">Cadenas de Texto desde Archivos</a></li>
+<li><a href="65_es.html">Cadena Slice</a></li>
+<li><a href="66_es.html">Chars</a></li>
+<li><a href="67_es.html">String</a></li>
+<li><a href="68_es.html">El Texto como Parámetros de Función</a></li>
+<li><a href="69_es.html">Construir Strings</a></li>
+<li><a href="70_es.html">Formatear Strings</a></li>
+<li><a href="71_es.html">Conversión de Strings</a></li>
+<li><a href="72_es.html">Capítulo 6 - Conclusión</a></li>
+</ul><h3><a href="chapter_7_es.html">Capítulo 7 - Programación Orientada a Objetos</a></h3><ul>
+<li><a href="74_es.html">¿Qué Es POO?</a></li>
+<li><a href="75_es.html">Rust No Es POO</a></li>
+<li><a href="76_es.html">Encapsulación Con Métodos</a></li>
+<li><a href="77_es.html">Abstracción Con Exposición Selectiva</a></li>
+<li><a href="78_es.html">Polimorfismo Con Traits</a></li>
+<li><a href="79_es.html">Métodos Implementados en Traits</a></li>
+<li><a href="80_es.html">Herencia de Traits</a></li>
+<li><a href="81_es.html">Resolución Dinámica y Estática</a></li>
+<li><a href="82_es.html">Objetos Trait</a></li>
+<li><a href="83_es.html">Manejo de Datos Sin Tamaño (Unsized)</a></li>
+<li><a href="84_es.html">Funciones Genéricas</a></li>
+<li><a href="85_es.html">Función Genérica Abreviada</a></li>
+<li><a href="86_es.html">Box</a></li>
+<li><a href="87_es.html">Repaso de Estructuras Genéricas</a></li>
+<li><a href="88_es.html">Capítulo 7 - Conclusión</a></li>
+</ul><h3><a href="chapter_8_es.html">Capítulo 8 - Punteros Inteligentes</a></h3><ul>
+<li><a href="90_es.html">Repaso de Referencias</a></li>
+<li><a href="91_es.html">Punteros Sin Procesar</a></li>
+<li><a href="92_es.html">Indirección</a></li>
+<li><a href="93_es.html">El operador *</a></li>
+<li><a href="94_es.html">El operador .</a></li>
+<li><a href="95_es.html">Punteros Inteligentes</a></li>
+<li><a href="96_es.html">Código Inteligente No Seguro</a></li>
+<li><a href="97_es.html">Viejos Conocidos</a></li>
+<li><a href="98_es.html">Memoria Asignada al Montículo</a></li>
+<li><a href="99_es.html">Repaso de Errores en Main</a></li>
+<li><a href="100_es.html">Rc (Referencing Counting)</a></li>
+<li><a href="101_es.html">Acceso Compartido</a></li>
+<li><a href="102_es.html">Compartir Datos Entre Hilos</a></li>
+<li><a href="103_es.html">Combinación de Punteros Inteligentes</a></li>
+<li><a href="104_es.html">Capítulo 8 - Conclusión</a></li>
+</ul><h3><a href="chapter_9_es.html">Capítulo 9 - Organización y Estructura de Proyectos</a></h3><ul>
+<li><a href="106_es.html">Módulos</a></li>
+<li><a href="107_es.html">Escribir un Programa</a></li>
+<li><a href="108_es.html">Escribir una Librería</a></li>
+<li><a href="109_es.html">Referenciar Otros Módulos y Crates</a></li>
+<li><a href="110_es.html">Referenciar Múltiples Elementos</a></li>
+<li><a href="111_es.html">Crear Módulos</a></li>
+<li><a href="112_es.html">Jerarquía de Módulos</a></li>
+<li><a href="113_es.html">Módulo en Línea</a></li>
+<li><a href="114_es.html">Referenciar Módulos Internos</a></li>
+<li><a href="115_es.html">Exportar</a></li>
+<li><a href="116_es.html">Visibilidad de Estructuras</a></li>
+<li><a href="117_es.html">Prelude</a></li>
+<li><a href="118_es.html">Prelude Propio</a></li>
+<li><a href="119_es.html">Capítulo 9 - Conclusión</a></li>
+</ul><h3><a href="chapter_10_es.html">Capítulo 10 - Fin</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+    <html lang="gr" dir="ltr">
+    <head>
+        <title>Ξενάγηση στη Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_gr.html">Ξενάγηση στη Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_gr.html">Πίνακας Περιεχομένων</a></span>
+            </div>
+            <div class="page">
+            <h1>Τι είναι οι γενικοί τύποι;</h1>
+            <p>Οι γενικοί τύποι μας επιτρέπουν να ορίσουμε τμηματικά μία δομή ή μία απαρίθμηση (<code>struct</code> ή <code>enum</code> αντιστοίχως), επιτρέποντας στο μεταφραστή να δημιουργήσει μία πλήρως ορισμένη εκδοχή την ώρα της μετάφρασης ανάλογα με το πώς τη χρησιμοποιούμε όντως.</p>
+<p>Η Rust γενικότερα μπορεί να συμπεράνει τον τελικό τύπο κοιτώντας το πώς το χρησιμοποιούμε, αλλά αν χρειαστεί βοήθεια μπορείτε πάντοτε να το ορίσετε ρητά χρησιμοποιώντας τον τελεστή <code>::&lt;T&gt;</code>, γνωστό επίσης και με το όνομα <em>τουρμπόψαρο</em>. Είμαστε καλοί φίλοι!</p>
+            <div class="bottomnav">
+                <span class="back"><a href="chapter_4_gr.html" rel="prev">❮ Προηγούμενο</a></span>
+                <span class="next"><a href="34_gr.html" rel="next">Επόμενο ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20%CE%88%CE%BD%CE%B1%CF%82%20%CE%BC%CE%B5%CF%81%CE%B9%CE%BA%CF%8E%CF%82%20%CE%BF%CF%81%CE%B9%CF%83%CE%BC%CE%AD%CE%BD%CE%BF%CF%82%20%CF%84%CF%8D%CF%80%CE%BF%CF%82%20%CE%B4%CE%BF%CE%BC%CE%AE%CF%82%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20item%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%CE%A3%CE%B7%CE%BC%CE%B5%CE%AF%CF%89%CF%83%CE%B7%3A%20%CE%A7%CF%81%CE%B7%CF%83%CE%B9%CE%BC%CE%BF%CF%80%CE%BF%CE%B9%CF%8E%CE%BD%CF%84%CE%B1%CF%82%20%CE%B3%CE%B5%CE%BD%CE%B9%CE%BA%CE%BF%CF%8D%CF%82%20%CF%84%CF%8D%CF%80%CE%BF%CF%85%CF%82%20%CE%B5%CE%B4%CF%8E%2C%20%CE%B4%CE%B7%CE%BC%CE%B9%CE%BF%CF%85%CF%81%CE%B3%CE%BF%CF%8D%CE%BC%CE%B5%20%0A%20%20%20%20%2F%2F%20%CE%BD%CE%AD%CE%BF%CF%85%CF%82%20%CF%84%CF%8D%CF%80%CE%BF%CF%85%CF%82%20%CF%84%CE%B7%CE%BD%20%CF%8E%CF%81%CE%B1%20%CF%84%CE%B7%CF%82%20%CE%BC%CE%B5%CF%84%CE%AC%CF%86%CF%81%CE%B1%CF%83%CE%B7%CF%82.%20%0A%20%20%20%20%2F%2F%20%CE%A4%CE%BF%20%CE%A4%CE%BF%CF%85%CF%81%CE%BC%CF%80%CF%8C%CF%88%CE%B1%CF%81%CE%BF%20%CE%BC%CE%B1%CF%82%20%CE%B5%CF%80%CE%B9%CF%84%CF%81%CE%AD%CF%80%CE%B5%CE%B9%20%CE%BD%CE%B1%20%27%CE%BC%CE%B1%CF%83%CF%84%CE%B5%20%CF%83%CE%B1%CF%86%CE%B5%CE%AF%CF%82.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%2042%20%7D%3B%0A%20%20%20%20let%20bool_bag%20%3D%20BagOfHolding%3A%3A%3Cbool%3E%20%7B%20item%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%CE%A3%CF%85%CF%87%CE%BD%CE%AC%20%CE%B7%20Rust%20%CF%83%CF%85%CE%BC%CF%80%CE%B5%CF%81%CE%B1%CE%AF%CE%BD%CE%B5%CE%B9%20%CF%84%CE%BF%CE%BD%20%CF%84%CF%8D%CF%80%CE%BF%20%CF%80%CE%BF%CF%85%20%CE%B8%CE%AD%CE%BB%CE%BF%CF%85%CE%BC%CE%B5!%0A%20%20%20%20let%20float_bag%20%3D%20BagOfHolding%20%7B%20item%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%CE%A3%CE%B7%CE%BC%CE%B5%CE%AF%CF%89%CF%83%CE%B7%3A%20%CE%91%CF%85%CF%84%CF%8C%20%CF%83%CF%84%CE%B7%CE%BD%20%CF%80%CF%81%CE%B1%CE%B3%CE%BC%CE%B1%CF%84%CE%B9%CE%BA%CE%AE%20%CE%B6%CF%89%CE%AE%20%CE%BC%CE%B7%CE%BD%20%CF%84%CE%BF%20%CE%BA%CE%AC%CE%BD%CE%B5%CF%84%CE%B5%20%CF%80%CE%BF%CF%84%CE%AD%2C%0A%20%20%20%20%2F%2F%20%CE%B1%CE%BA%CF%8C%CE%BC%CE%B1%20%CE%BA%CE%B9%20%CE%B1%CE%BD%20%CE%B2%CF%81%CE%B5%CE%AF%CF%84%CE%B5%20%CF%85%CF%80%CE%B1%CF%81%CE%BA%CF%84%CF%8C%20Bag%20of%20Holding!%0A%20%20%20%20let%20bag_in_bag%20%3D%20BagOfHolding%20%7B%0A%20%20%20%20%20%20%20%20item%3A%20BagOfHolding%20%7B%20item%3A%20%22%CE%9C%CE%A0%CE%9F%CE%A5%CE%9C!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20i32_bag.item%2C%20bool_bag.item%2C%20float_bag.item%2C%20bag_in_bag.item.item%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

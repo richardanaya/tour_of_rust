@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <html lang="al" dir="ltr">
+    <head>
+        <title>Tut i Rustit - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_al.html">Tut i Rustit</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_al.html">Tabela e permbajtjeve</a></span>
+            </div>
+            <div class="page">
+            <h1>Tipet Bazike</h1>
+            <p>Rust ka një sërë llojesh të njohura:</p>
+<ul>
+<li><p>booleans - <code>bool</code> për paraqitjen e vërtetë/false</p></li>
+<li><p>numra të plotë të panënshkruar - <code>u8</code> <code>u16</code> <code>u32</code> <code>u64</code> <code>u128</code> për përfaqësim
+numra të plotë jonegativë</p></li>
+<li><p>numra të plotë të nënshkruar - <code>i8</code> <code>i16</code> <code>i32</code> <code>i64</code> <code>i128</code> për përfaqësimin e numrave të plotë</p></li>
+<li><p>Numrat e plotë të madhësisë së treguesit - <code>usize</code> <code>isize</code> për paraqitjen e indekseve</p>
+<p>dhe madhësive të gjërave në kujtesë</p></li>
+<li><p>pikë lundruese - <code>f32</code> <code>f64</code></p></li>
+<li><p>karaktere - <code>char</code> për përfaqësimin e një karakteri të vetëm Unicode</p></li>
+<li><p>tuple - <code>(vlera, vlera, ...)</code> për kalimin e sekuencave fikse të vlerave në
+rafte</p></li>
+<li><p>vargje - <code>[vlera, vlera, ...]</code> një koleksion elementësh të ngjashëm me fikse
+gjatësia e njohur në kohën e përpilimit</p></li>
+<li><p>slices - një koleksion elementësh të ngjashëm me gjatësi të njohur në kohën e ekzekutimit</p></li>
+<li><p><code>str</code> (prerja e vargut) - tekst me një gjatësi të njohur në kohën e ekzekutimit</p>
+<p>Teksti mund të jetë më kompleks se sa jeni mësuar në gjuhë të tjera;</p>
+<p>meqenëse Rust është një gjuhë programimi e sistemit, ajo kujdeset për kujtesën</p>
+<p>çështje me të cilat mund të mos jeni mësuar. Ne do të hyjmë në këtë në detaje më vonë.</p>
+<p>Llojet numerike mund të specifikohen në mënyrë eksplicite duke i bashkangjitur tipit në fund
+të numrit (p.sh. "13u32", "2u8").</p></li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="04_al.html" rel="prev">❮ Paraardhesi</a></span>
+                <span class="next"><a href="06_al.html" rel="next">Tjetri ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

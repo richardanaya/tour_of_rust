@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+    <html lang="es" dir="ltr">
+    <head>
+        <title>Tour de WebAssembly - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_es.html">Tour de WebAssembly</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
+            </div>
+            <div class="page">
+            <h1>[Untranslated] Allocators</h1>
+            <p>As we can see to properly communicate objects, we need to have some kind of storage mechanism for objects:</p>
+<ul>
+<li><code>storeObject(object) -&gt; f64</code> - Stores an object and returns a numerical handle.</li>
+<li><code>getObject(f64) -&gt; object</code> - Get a reference to an object by it's numerical handle.</li>
+<li><code>releaseObject(f64) -&gt; object</code> - Release a reference to an object from storage, allowing it's memory to be freed.</li>
+</ul>
+<p>The implementation of something like this is called an <em>allocator</em>. This is beyond the scope of this tutorial. We
+could imagine a very naive implementation of this which is essentially just an ever growing vector where 
+when an object is stored in the vector and it's index is returned as the handle.</p>
+<pre><code>let storage = [];
+
+function storeObject(obj){
+  let index = storage.length;
+  storage.push(obj);
+  return index;
+}
+
+function getObject(handle){
+  return storage[handle];
+}
+
+function releaseObject(handle){
+  return storage[handle] = null;
+}
+</code></pre>
+<p>There are many issues for you to consider with your implementation.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="24_es.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="26_es.html" rel="next">Siguiente ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://webassembly.studio/?embed&f=mz2gu9y29tn" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+    <head>
+        <title>Tour de WebAssembly - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_fr.html">Tour de WebAssembly</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_fr.html">Table des Matières</a></span>
+            </div>
+            <div class="page">
+            <h1>Pourquoi l'invocation dynamique?</h1>
+            <p>Nous avons vu dans les premiers chapitres que nous pouvions facilement
+écrire nos propres fonctions JavaScript à la main dans nos fichiers <code>.js</code>,
+alors pourquoi vouloir créer dynamiquement ces fonctions?</p>
+<ul>
+<li>Un certain nombre de développeurs sont attirés par WebAssembly pour échapper
+à JavaScript. On pourrait imaginer des librairies natives Rust qui facilitent
+la liaison avec JavaScript et nous évite tout simplement d'écrire du code
+JavaScript.</li>
+<li>Cela simplifie la configuration et l'amorçage d'un module WebAssembly.
+Nous avons seulement besoin de donner à WebAssembly un moyen de pouvoir
+déclarer et exécuter nos fonctions JavaScript. Nous n'avons dès lors plus
+besoin de spécifier une pléthore de fonctions dans notre code JavaScript.</li>
+<li>Il est difficile pour JavaScript de savoir quelles dépendances le module
+a besoin et en donnant la possibilité au programme WebAssembly de créer
+ses propres fonctions, ce dernier crée lui-même ce dont il a besoin.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_chapter_3_fr.html" rel="prev">❮ Précédant</a></span>
+                <span class="next"><a href="beta_20_fr.html" rel="next">Suivant ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="ua" dir="ltr">
+    <head>
+        <title>Тур по Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ua.html">Тур по Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Заняття</h1>
+            <ul>
+        <li><a href="00_ua.html">Привіт, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_ua.html">Розділ 1 - Основи</a></h3><ul>
+<li><a href="02_ua.html">The Rust Playground</a></li>
+<li><a href="03_ua.html">Змінні</a></li>
+<li><a href="04_ua.html">Змінюваність змінних</a></li>
+<li><a href="05_ua.html">Базові типи</a></li>
+<li><a href="06_ua.html">Перетворення базових типів (Type Conversion)</a></li>
+<li><a href="07_ua.html">Константи</a></li>
+<li><a href="08_ua.html">Масиви</a></li>
+<li><a href="09_ua.html">Функції</a></li>
+<li><a href="10_ua.html">Повернення декількох значень (Tuple)</a></li>
+<li><a href="11_ua.html">Повернення пустого значення</a></li>
+<li><a href="12_ua.html">Розділ 1 - Заключна частина</a></li>
+</ul><h3><a href="chapter_2_ua.html">Розділ 2 - Контроль потоку виконання</a></h3><ul>
+<li><a href="14_ua.html">if/else if/else</a></li>
+<li><a href="15_ua.html">Цикли</a></li>
+<li><a href="16_ua.html">while</a></li>
+<li><a href="17_ua.html">for</a></li>
+<li><a href="18_ua.html">match</a></li>
+<li><a href="19_ua.html">Певернення значень з циклів</a></li>
+<li><a href="20_ua.html">Повернення значень з блокових виразів</a></li>
+<li><a href="21_ua.html">Розділ 2 - Висновки</a></li>
+</ul><h3><a href="chapter_3_ua.html">Розділ 3 - Базові структури даних</a></h3><ul>
+<li><a href="23_ua.html">Структури</a></li>
+<li><a href="24_ua.html">Виклик методів</a></li>
+<li><a href="25_ua.html">Пам'ять</a></li>
+<li><a href="26_ua.html">Створення даних у пам'яті</a></li>
+<li><a href="27_ua.html">Кортежні структури (Tuple-like Structs)</a></li>
+<li><a href="28_ua.html">Юніт-структури (Unit-like Structs)</a></li>
+<li><a href="29_ua.html">Переліки (Enumerations)</a></li>
+<li><a href="30_ua.html">Переліки з даними</a></li>
+<li><a href="31_ua.html">Розділ 3 - Висновки</a></li>
+</ul><h3><a href="chapter_4_ua.html">Розділ 4 - Узагальнені типи</a></h3><ul>
+<li><a href="33_ua.html">Що таке узагальнені типи (Generic Types)?</a></li>
+<li><a href="34_ua.html">Представлення відсутності значення</a></li>
+<li><a href="35_ua.html">Тип Option</a></li>
+<li><a href="36_ua.html">Тип Result</a></li>
+<li><a href="37_ua.html">Повернення результату з Main</a></li>
+<li><a href="38_ua.html">Елегантна обробка помилок</a></li>
+<li><a href="39_ua.html">Брудна обробка Option/Result</a></li>
+<li><a href="40_ua.html">Вектори</a></li>
+<li><a href="41_ua.html">Розділ 4 - Висновки</a></li>
+</ul><h3><a href="chapter_5_ua.html">Розділ 5 - Володіння та позичання</a></h3><ul>
+<li><a href="43_ua.html">Володіння</a></li>
+<li><a href="44_ua.html">Управління даними на основі розміру.</a></li>
+<li><a href="45_ua.html">Видалення відбувається по іерархії</a></li>
+<li><a href="46_ua.html">Передача володіння</a></li>
+<li><a href="47_ua.html">Повернення володіння</a></li>
+<li><a href="48_ua.html">Отримання володіння через посилання</a></li>
+<li><a href="49_ua.html">Отримання володіння через мутабельні посилання</a></li>
+<li><a href="50_ua.html">Розіменування посилань</a></li>
+<li><a href="51_ua.html">Передача запозичених даних</a></li>
+<li><a href="52_ua.html">Посилання на посилання</a></li>
+<li><a href="53_ua.html">Явний час життя</a></li>
+<li><a href="54_ua.html">Кілька модифікаторів пріорітету</a></li>
+<li><a href="55_ua.html">Статичний час життя</a></li>
+<li><a href="56_ua.html">Час життя в типах даних</a></li>
+<li><a href="57_ua.html">Розділ 5 - Висновки</a></li>
+</ul><h3><a href="chapter_6_ua.html">Розділ 6 - Текст</a></h3><ul>
+<li><a href="59_ua.html">Рядкові літерали</a></li>
+<li><a href="60_ua.html">Що таке utf-8</a></li>
+<li><a href="61_ua.html">Екранування символів</a></li>
+<li><a href="62_ua.html">Багаторядкові рядкові літерали</a></li>
+<li><a href="63_ua.html">Необроблені рядкові літерали</a></li>
+<li><a href="64_ua.html">Рядкові літерали з файлів</a></li>
+<li><a href="65_ua.html">Рядкові зрізи (String Slice)</a></li>
+<li><a href="66_ua.html">Тип Char</a></li>
+<li><a href="67_ua.html">Структура String</a></li>
+<li><a href="68_ua.html">Текст,як параметр функції</a></li>
+<li><a href="69_ua.html">Побудова рядків</a></li>
+<li><a href="70_ua.html">Форматування рядків</a></li>
+<li><a href="71_ua.html">Конвертація рядків</a></li>
+<li><a href="72_ua.html">Розділ 6 - Висновки</a></li>
+</ul><h3><a href="chapter_7_ua.html">Розділ 7 - Об'єктно Орієнтоване Програмування</a></h3><ul>
+<li><a href="74_ua.html">Що таке ООП?</a></li>
+<li><a href="75_ua.html">Rust не є ООП-орієнтованим</a></li>
+<li><a href="76_ua.html">Інкапсуляція в методах</a></li>
+<li><a href="77_ua.html">Абстракція з вибірковою експозицією</a></li>
+<li><a href="78_ua.html">Поліморфізм у Traits</a></li>
+<li><a href="79_ua.html">Імплементація методів у Traits</a></li>
+<li><a href="80_ua.html">Наслідування у Traits</a></li>
+<li><a href="81_ua.html">Динамічна та статична диспетчеризації.</a></li>
+<li><a href="82_ua.html">Об'єкти в Traits</a></li>
+<li><a href="83_ua.html">Обробка нерозмірних даних</a></li>
+<li><a href="84_ua.html">Узагальнені функції</a></li>
+<li><a href="85_ua.html">Скорочення в узагальнених функціях</a></li>
+<li><a href="86_ua.html">Box</a></li>
+<li><a href="87_ua.html">Узагальнені структури</a></li>
+<li><a href="88_ua.html">Розділ 7 - Висновки</a></li>
+</ul><h3><a href="chapter_8_ua.html">Розділ 8 - Розумні покажчики (Smart Pointers)</a></h3><ul>
+<li><a href="90_ua.html">Про посилання</a></li>
+<li><a href="91_ua.html">Необробленні покажчики (Raw Pointers)</a></li>
+<li><a href="92_ua.html">Розіменування</a></li>
+<li><a href="93_ua.html">Оператор *</a></li>
+<li><a href="94_ua.html">Оператор .</a></li>
+<li><a href="95_ua.html">Розумні вказівники (Smart Pointers)</a></li>
+<li><a href="96_ua.html">Розумний небезпечний код (Smart Unsafe Code)</a></li>
+<li><a href="97_ua.html">Наші старі друзі</a></li>
+<li><a href="98_ua.html">Пам'ять у купі (Heap Allocated Memory)</a></li>
+<li><a href="99_ua.html">Обробка помилок функції main</a></li>
+<li><a href="100_ua.html">Лічильник посилань</a></li>
+<li><a href="101_ua.html">Спільний доступ</a></li>
+<li><a href="102_ua.html">Спільне доступ до даних у різних потоках</a></li>
+<li><a href="103_ua.html">Поєднання розумних покажчиків</a></li>
+<li><a href="104_ua.html">Розділ 8 - Висновок</a></li>
+</ul><h3><a href="chapter_9_ua.html">Розділ 9 - Організація проекту, та його структура</a></h3><ul>
+<li><a href="106_ua.html">Модулі</a></li>
+<li><a href="107_ua.html">Написання програм</a></li>
+<li><a href="108_ua.html">Написання бібліотеки</a></li>
+<li><a href="109_ua.html">Зсилання на crate та модулі</a></li>
+<li><a href="110_ua.html">Посилання на декілька елементів</a></li>
+<li><a href="111_ua.html">Створення модулів</a></li>
+<li><a href="112_ua.html">Ієрархія модулів</a></li>
+<li><a href="113_ua.html">Вбудований модуль</a></li>
+<li><a href="114_ua.html">Внутрішнє посилання на модулі</a></li>
+<li><a href="115_ua.html">Експорт</a></li>
+<li><a href="116_ua.html">Видимість структури</a></li>
+<li><a href="117_ua.html">Прелюдія</a></li>
+<li><a href="118_ua.html">Ваша особиста прелюдія</a></li>
+<li><a href="119_ua.html">Розділ 9 - Висновки</a></li>
+</ul><h3><a href="chapter_10_ua.html">Розділ 10 - Заключне слово</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

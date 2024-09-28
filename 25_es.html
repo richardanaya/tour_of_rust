@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <html lang="es" dir="ltr">
+    <head>
+        <title>Tour de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_es.html">Tour de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_es.html">Tabla de Contenidos</a></span>
+            </div>
+            <div class="page">
+            <h1>Memoria</h1>
+            <p>Los programas Rust tienen 3 regiones de memoria donde almacenar los datos:</p>
+<ul>
+<li><strong>Data memory (o memoria de datos)</strong> - Para datos de tamaño fijo y <strong>estáticos</strong> (es decir, siempre disponibles a lo largo
+de la vida del programa). Considera el texto del programa (por ejemplo, "¡Hola, Mundo!"), los bytes de este texto son de sólo
+lectura, por lo tanto se almacenan en esta región. Los compiladores hacen muchas optimizaciones
+con este tipo de datos, generalmente se consideran muy rápidos de usar ya que
+las ubicaciones son conocidas y fijas.</li>
+<li><strong>stack memory (o memoria de pila)</strong> - Para los datos que se declaran como variables dentro de
+una función. La ubicación de esta memoria nunca cambia durante la duración de la llamada a la función, debido a esto los
+compiladores pueden optimizar el código para que los datos de la pila sean rápidos de usar.</li>
+<li><strong>heap memory (memoria de montículo o dinámica)</strong> - Para los datos que se crean mientras la aplicación se está ejecutando.
+Los datos de esta región pueden ser añadidos, movidos, eliminados, redimensionados, etc.
+Debido a su naturaleza dinámica, se considera generalmente más lento de usar, pero permite
+usos mucho más creativos de la memoria. Cuando se añaden datos a esta región, lo llamamos
+<strong>asignación</strong>. Cuando los datos se eliminan de esta sección lo llamamos <strong>desasignación</strong>.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="24_es.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="26_es.html" rel="next">Siguiente ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

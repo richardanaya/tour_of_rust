@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>옵션</h1>
+            <p>Rust에는 <code>null</code>을 쓰지 않고도 nullable한 값을 표현할 수 있는
+<code>Option</code>이라 불리는 내장된 generic enum이 있습니다.</p>
+<pre><code>enum Option&lt;T&gt; {
+    None,
+    Some(T),
+}
+</code></pre>
+<p>이 enum은 매우 흔해서, 어디서나 <code>Some</code>과 <code>None</code>으로 enum을 인스턴스화 할 수 있습니다.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="34_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="36_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20%EC%9D%BC%EB%B6%80%EB%A7%8C%20%EC%A0%95%EC%9D%98%EB%90%9C%20struct%20%EC%9E%90%EB%A3%8C%ED%98%95%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20%EC%9E%90%EB%A3%8C%ED%98%95%20T%EC%9D%98%20%EC%9D%B8%EC%9E%90%EB%8A%94%20%EB%8B%A4%EB%A5%B8%20%EA%B3%B3%EC%9C%BC%EB%A1%9C%20%EB%84%98%EA%B2%A8%EC%A7%88%20%EC%88%98%20%EC%9E%88%EC%9D%8C%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%EC%A4%91%EC%9A%94%3A%20i32%EB%A5%BC%20%EC%9C%84%ED%95%9C%20%EA%B0%80%EB%B0%A9%EC%97%90%20%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%95%88%EB%93%A4%EC%97%88%EB%8B%A4!%0A%20%20%20%20%2F%2F%20Rust%EA%B0%80%20%EB%AC%B4%EC%8A%A8%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%98%20%EA%B0%80%EB%B0%A9%EC%9D%B8%EC%A7%80%20%EC%95%8C%20%EC%88%98%EA%B0%80%20%EC%97%86%EC%9C%BC%EB%AF%80%EB%A1%9C%20%EC%9E%90%EB%A3%8C%ED%98%95%EC%9D%84%20%EC%A7%80%EC%A0%95%ED%95%B4%EC%95%BC%20%ED%95%A8.%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%97%86%EB%8B%A4!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EB%AD%94%EA%B0%80%20%EC%9E%88%EB%8B%A4!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EB%AD%94%EA%B0%80%20%EC%9E%88%EB%8B%A4!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%20%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%97%86%EB%8B%A4!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%EB%8A%94%20Option%EC%9D%84%20%EC%9A%B0%EC%95%84%ED%95%98%EA%B2%8C%20%EB%B6%84%ED%95%B4%ED%95%98%EA%B3%A0%2C%20%EB%AA%A8%EB%93%A0%20%EC%BC%80%EC%9D%B4%EC%8A%A4%EB%A5%BC%20%EC%B2%98%EB%A6%AC%ED%95%98%EB%8F%84%EB%A1%9D%20%ED%95%B4%EC%A4%80%EB%8B%A4!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22%EA%B0%80%EB%B0%A9%EC%97%90%EC%84%9C%20%7B%7D%EB%A5%BC%20%EC%B0%BE%EC%95%98%EB%8B%A4!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22%EC%95%84%EB%AC%B4%20%EA%B2%83%EB%8F%84%20%EC%B0%BE%EC%A7%80%20%EB%AA%BB%ED%96%88%EB%8B%A4%22)%2C%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

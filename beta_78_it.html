@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="it" dir="ltr">
+    <head>
+        <title>Tour di Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_it.html">Tour di Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_it.html">Indice dei Contenuti</a></span>
+            </div>
+            <div class="page">
+            <h1>Polimorfismo con tratti</h1>
+            <p>Rust supporta il polimorfismo con i tratti. I tratti ci permettono di associare un insieme di metodi con un tipo struct.</p>
+<p>Per prima cosa definiamo le firme dei metodi di un tratto all'interno di:</p>
+<pre><code>trait MiaCaratteristica {
+    fn foo(&amp;self);
+    ...
+}
+</code></pre>
+<p>Quando una struttura implementa un tratto, stabilisce un contratto che ce lo consente per interagire indirettamente con la struttura
+attraverso il tipo di tratto (ad esempio <code>&amp;dyn MyTrait</code>) senza dover conoscere il reale tipo.</p>
+<p>I metodi dei tratti implementati di una struttura sono definiti all'interno di un'implementazione bloccare:</p>
+<pre><code class="rust language-rust">impl MiaCaratteristica per MiaStruttura {
+    fn foo(&amp;self) {
+        ...
+    }
+    ...
+}
+</code></pre>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_77_it.html" rel="prev">❮ Precedente</a></span>
+                <span class="next"><a href="beta_79_it.html" rel="next">Prossimo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct+CreaturaMarina+%7B%0A++++pub+nome%3A+String%2C%0A++++rumore%3A+String%2C%0A%7D%0A%0Aimpl+CreaturaMarina+%7B%0A++++pub+fn+ottieni_suono%28%26self%29+-%3E+%26str+%7B%0A++++++++%26self.rumore%0A++++%7D%0A%7D%0A%0Atrait+Rumoroso+%7B%0A++++fn+fare_rumore%28%26self%29%3B%0A++++%0A++++fn+fare_molto_rumore%28%26self%29%7B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++++++self.fare_rumore%28%29%3B%0A++++%7D%0A%7D%0A%0Aimpl+Rumoroso+for+CreaturaMarina+%7B%0A++++fn+fare_rumore%28%26self%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+%26self.ottieni_suono%28%29%29%3B%0A++++%7D%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+creatura+%3D+CreaturaMarina+%7B%0A++++++++nome%3A+String%3A%3Afrom%28%22Ferris%22%29%2C%0A++++++++rumore%3A+String%3A%3Afrom%28%22blub%22%29%2C%0A++++%7D%3B%0A++++creatura.fare_molto_rumore%28%29%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

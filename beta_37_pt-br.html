@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Main Falível</h1>
+            <p>O <code>main</code> tem a capacidade de retornar um <code>Result</code>!</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_36_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="beta_38_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20faz_alguma_coisa_que_pode_falhar(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22este%20n%C3%A3o%20%C3%A9%20o%20n%C3%BAmero%20correto%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20o%20Main%20n%C3%A3o%20retorna%20um%20valor%2C%20mas%20pode%20retornar%20um%20erro!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20faz_alguma_coisa_que_pode_falhar(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22encontrei%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20lida%20com%20o%20erro%20normalmente%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20retorna%20um%20novo%20erro%20do%20main%20que%20nos%20informa%20o%20que%20houve!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22alguma%20coisa%20deu%20errado%20em%20main!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Observe%20que%20usamos%20um%20valor%20unit%20dentro%20de%20um%20Result%20Ok%0A%20%20%20%20%2F%2F%20para%20representar%20que%20est%C3%A1%20tudo%20bem%0A%20%20%20%20Ok(())%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
+            </div>
+            <div class="page">
+            <h1>Raw Pointers</h1>
+            <p>References can be converted into a more primitive type called a <em>raw pointer</em>. Much like a number, it
+can be copied and moved around with little restriction. Rust
+makes no assurances of the validity of the memory location it points to.</p>
+<p>Two kinds of raw pointers exist:</p>
+<ul>
+<li><code>*const T</code> - A raw pointer to data of type T that should never change.</li>
+<li><code>*mut T</code> - A raw pointer to data of type T that can change.</li>
+</ul>
+<p>Raw pointers can be converted to and from numbers (e.g. <code>usize</code>).</p>
+<p>Raw pointers can access data with <em>unsafe</em> code (more on this later).</p>
+<p>Memory Details:</p>
+<ul>
+<li>A reference in Rust is very similar to a pointer in C in terms of usage, but with much more compile time restrictions on
+how it can be stored and moved around to other functions.</li>
+<li>A raw pointer in Rust is similar to a pointer in C that it represents a number that can be
+copied or passed around, and even turned into numerical types where it can be modified as a
+number to do pointer math.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="90_en.html" rel="prev">❮ Previous</a></span>
+                <span class="next"><a href="92_en.html" rel="next">Next ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

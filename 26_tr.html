@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+    <html lang="tr" dir="ltr">
+    <head>
+        <title>Rust Turu - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_tr.html">Rust Turu</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_tr.html">İçindekiler</a></span>
+            </div>
+            <div class="page">
+            <h1>Bellekte Veri Oluşturmak</h1>
+            <p>Bir yapıyı <strong>örneklediğimizde</strong> programımız tarafından o yapının birbiriyle ilişkili alanları, bellekte yan yana gelecek şekilde yerleştirilir.</p>
+<p>Bir yapının örneğini, bildirdiği tüm alan değerlerini belirleyerek oluştururuz: </p>
+<p><code>YapininAdi {alan1, alan2, ...}</code>.</p>
+<p>Yapı alanlarına ise <code>.</code> nokta işlecini kullanarak erişebiliyoruz.</p>
+<p>Örneğimiz için bellek aşağıdaki gibi şekillenecektir:</p>
+<ul>
+<li>Örneğimizdeki "Ferris" benzeri tırnak içindeki metinler, salt okunur veriler olduğundan Belleğin Veri Bölgesine yerleştirilir.</li>
+<li><code>String::from</code> işlevine yapılan çağrı, yığındaki DenizCanlisi alanlarıyla yan yana yerleştirilen bir String yapısı oluşturur. 
+String yani dilimizdeki karşılığıyla dizgi, değiştirilebilir metni temsil eder ve bu değişim şu şekilde mümkün olur:</li>
+</ul>
+<ol>
+<li><p>Öbek Bölgesi üzerinde ayrılan belleğin boyutu değişebilir olduğundan, metin için gereken düzenlenebilir alan belleğin bu bölgesinde oluşturulur.</p></li>
+<li><p>Öbek üzerinde ayrılmış bulunan bu bellek konumuna bir başvuru oluşturulur ve bu başvuru daha sonra değineceğimiz bir <code>String</code> yapısında depolanır. </p></li>
+</ol>
+<ul>
+<li>Nihayetinde, <em>Ferris</em> ve <em>Sarah</em> adlı bu arkadaşlarımız, bellekte daima sabit biçimde konumlandırılacaklarından, <em>stack memory</em> 
+yani <strong>yığın bölümüne</strong> yerleştirilecek veri yapılarına sahip olacaklardır.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="25_tr.html" rel="prev">❮ Önceki</a></span>
+                <span class="next"><a href="27_tr.html" rel="next">Sonraki ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=706295cdac14dbc8beaf8fc4967c1efe" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

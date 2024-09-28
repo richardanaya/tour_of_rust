@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html lang="zh-cn" dir="ltr">
+    <head>
+        <title>Rust 语言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-cn.html">Rust 语言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-cn.html">目录</a></span>
+            </div>
+            <div class="page">
+            <h1>在内存中创建数据</h1>
+            <p>当我们在代码中<strong>实例化</strong>一个<strong>结构体</strong>时，我们的程序会在内存中并排创建关联的字段数据。</p>
+<p>当我们通过制定所有字段值的方式来实例化时：</p>
+<p><code>结构体名 { ... }</code>.</p>
+<p>结构体字段可以通过 <code>.</code> 运算符来获取。</p>
+<p>我们例子的内存详情：</p>
+<ul>
+<li>引号内的文本是只读数据（例如“ferris”），因此它位于<em>数据内存区</em>。</li>
+<li>函数调用 <code>String::from</code> 创建一个结构体 <code>String</code>，该结构体与 SeaCreature 的字段并排放置在<em>栈</em>中。
+字符串容器通过如下步骤表示可更改的文本：<ol>
+<li>在<em>堆</em>上创建可修改文本的内存。</li>
+<li>将<em>堆</em>中存储对象的内存位置的引用存储在 <code>String</code> 结构体中（在以后的课程中会详细介绍）。</li></ol></li>
+<li>最后，我们的两个朋友 <em>Ferris</em> 和 <em>Sarah</em> 有在程序中总是固定的位置的数据结构，所以它们被放在<em>栈</em>上。</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_25_zh-cn.html" rel="prev">❮ 上一页</a></span>
+                <span class="next"><a href="beta_27_zh-cn.html" rel="next">下一页 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature%E7%9A%84%E6%95%B0%E6%8D%AE%E5%9C%A8%E6%A0%88%E4%B8%8A%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20%E7%BB%93%E6%9E%84%E4%BD%93%E4%B9%9F%E5%9C%A8%E6%A0%88%E4%B8%8A%EF%BC%8C%0A%20%20%20%20%20%20%20%20%2F%2F%20%E4%BD%86%E4%B9%9F%E5%AD%98%E6%94%BE%E4%BA%86%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%9C%A8%E5%A0%86%E4%B8%8A%E7%9A%84%E5%BC%95%E7%94%A8%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22%E8%9E%83%E8%9F%B9%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22%E5%A4%A7%E9%92%B3%E5%AD%90%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22%E7%AB%A0%E9%B1%BC%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22%E6%97%A0%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%E6%98%AF%E5%8F%AA%7B%7D%E3%80%82%E5%AE%83%E6%9C%89%20%7B%7D%20%E5%8F%AA%E8%83%B3%E8%86%8A%20%7B%7D%20%E6%9D%A1%E8%85%BF%EF%BC%8C%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AA%7B%7D%E3%80%82%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%E6%98%AF%E5%8F%AA%7B%7D%E3%80%82%E5%AE%83%E6%9C%89%20%7B%7D%20%E5%8F%AA%E8%83%B3%E8%86%8A%20%7B%7D%20%E6%9D%A1%E8%85%BF%E3%80%82%E5%AE%83%E6%B2%A1%E6%9C%89%E6%9D%80%E4%BC%A4%E6%80%A7%E6%AD%A6%E5%99%A8%E2%80%A6%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

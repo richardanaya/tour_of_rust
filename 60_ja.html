@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="ja" dir="ltr">
+    <head>
+        <title>Rust ツアー - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ja.html">Rust ツアー</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ja.html">目次</a></span>
+            </div>
+            <div class="page">
+            <h1>utf-8とは</h1>
+            <p>様々な言語がコンピューター上で使われるようになるにつれて, ASCIIで許可されている以上のテキスト文字を表現する必要が出てきました。（ASCIIで許可されているのは1バイト、つまり256文字です）</p>
+<p><strong>utf-8</strong> は1～4バイトの可変バイト長で導入され、それによって表現可能な文字の範囲が大幅に広がりました。</p>
+<p>可変サイズ文字の利点として挙げられるのは、一般的なASCIIで使われる文字について余計なバイトを必要としなかったことです。（一般的なASCIIで使われる文字について<strong>utf-8</strong> で必要とするのはASCIIと変わらずたった1バイトです）</p>
+<p>可変サイズの文字の欠点として挙げられるのは、簡単なインデキシング（例：4番目の文字を取得するために <code>my_text[3]</code> を使用すること）における文字の検索が（<strong>O(1)</strong> 定数時間で）素早くできなくなることです。すぐ前にある文字が可変幅を持つことで、4番目の文字がバイト列のどこから実際に始まるのかが変わってしまう可能性があります。</p>
+<p>その代わり、Unicode文字が実際にどこから始まるのかを知るために <strong>utf-8</strong> バイトのシーケンスを繰り返さなければなりません。（計算量は線形時間 <strong>O(n)</strong>）</p>
+<p>Ferris「水中にいるお友達の絵文字を表現するのに <strong>utf-8</strong> があると嬉しいね！」</p>
+<p><span class="emoji">🐠🐙🐟🐬🐋</span></p>
+            <div class="bottomnav">
+                <span class="back"><a href="59_ja.html" rel="prev">❮ 前</a></span>
+                <span class="next"><a href="61_ja.html" rel="next">次 ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

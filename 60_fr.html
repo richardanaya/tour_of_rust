@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+    <head>
+        <title>Tour de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_fr.html">Tour de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_fr.html">Table des matières</a></span>
+            </div>
+            <div class="page">
+            <h1>Introduction à l'utf-8</h1>
+            <p>De plus en plus de langues doivent être supportées par les ordinateurs d'aujourd'hui.
+Malheureusement, le système d'encodage ASCII initialement utilisé sur les premiers ordinateurs ne suffit plus
+pour représenter tout les caractères. L'encodage ASCII ne permet d'encoder seulement 256 caractères sur 1 byte.</p>
+<p>L'introduction du standard unicode <strong>utf-8</strong> a permis d'augmenter grandement le nombre caractères utilisable en
+offrant un encodage pouvant varier de 1 à 4 bytes.</p>
+<p>Un avantage d'avoir des caractères à taille variable est qu'on n'utilise pas de bytes superflues
+pour représenter les caractères communs ASCII (requiert un seul byte même avec l'encodage <strong>utf-8</strong>).</p>
+<p>Un désavantage d'avoir des caractères à taille variable est que l'accès ne peut plus être fait
+rapidemment (temps constant <strong>O(1)</strong>) avec un simple accès par index (e.g.
+<code>my_text[3]</code> pour récupérer le 4ème caractère). 
+En effet, il est possible que les caractères précédants le caractère que l'on souhaite lire aient une taille variable, altérant
+la position où le 4ème caractère se situe dans la séquence d'octets.</p>
+<p>Au lieu de cela, nous devons itérer sur la séquence de byte <strong>utf-8</strong> pour trouver où se situe
+le caractère unicode (temps linéaire <strong>O(n)</strong>).</p>
+<p>Ferris: "Je suis surtout content d'avoir l'encodage ** utf-8 ** pour représenter les emojis de mes amis sous-marins!"</p>
+<p><span class="emoji">🐠🐙🐟🐬🐋</span></p>
+            <div class="bottomnav">
+                <span class="back"><a href="59_fr.html" rel="prev">❮ Précédent</a></span>
+                <span class="next"><a href="61_fr.html" rel="next">Suivant ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

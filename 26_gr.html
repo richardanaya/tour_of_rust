@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+    <html lang="gr" dir="ltr">
+    <head>
+        <title>Ξενάγηση στη Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_gr.html">Ξενάγηση στη Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_gr.html">Πίνακας Περιεχομένων</a></span>
+            </div>
+            <div class="page">
+            <h1>Δημιουργία δεδομένων στη μνήμη</h1>
+            <p>Όταν <strong>αρχικοποιούμε</strong> μία <strong>δομή</strong> στον κώδικά μας, το πρόγραμμα δημιουργεί τα αντίστοιχα πεδία δεδομένων δίπλα-δίπλα στη μνήμη.</p>
+<p>Αρχικοποιούμε ορίζοντας όλες τις τιμές των πεδίων μέσα.</p>
+<p><code>ΌνομαΠεδίου { ... }</code>.</p>
+<p>Τα πεδία των δομών προσπελαύνονται με τον τελεστή τελείας <code>.</code>.</p>
+<p>Λεπτομέρειες μνήμης για το παράδειγμά μας:</p>
+<ul>
+<li>Το κείμενο μέσα στα εισαγωγικά είναι δεδομένα που μόνο αναγιγνώσκονται (π.χ. "Ferris"), και άρα τοποθετείται στην <em>περιοχή μνήμης δεδομένων</em>.</li>
+<li>Η κλήση της συνάρτησης <code>String::from</code> δημιουργεί μία δομή <code>String</code> που τοποθετείται πλάι-πλάι με τα πεδία του <code>SeaCreature</code> στη <em>στοίβα</em>. Τα περιεχόμενα του κειμένου της <code>String</code>, όμως, δεν τοποθετούνται στη στοίβα αλλά στο <em>σωρό</em>, και λόγω αυτού μπορούν ν' αλλάξουν. Η ακριβής διαδικασία έχει ως εξής:<ol>
+<li>Δεσμεύεται μνήμη στο <em>σωρό</em> για το κείμενο, όπου και μπορεί να αλλαχθεί</li>
+<li>Μία αναφορά στην εν λόγω περιοχή μνήμης του σωρού διατηρείται και αποθηκεύεται στη δομή <code>String</code> που βρίσκεται ήδη στη στοίβα (περισσότερες λεπτομέρειες σε μετέπειτα μαθήματα)</li></ol></li>
+<li>Τέλος οι δύο φίλοι μας ο <em>Ferris</em> κι η <em>Sarah</em> έχουν δομές δεδομένων που θα έχουν πάντοτε πάγιες τοποθεσίες στο πρόγραμμά μας, οπότε τοποθετούνται στη <em>στοίβα</em>.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="25_gr.html" rel="prev">❮ Προηγούμενο</a></span>
+                <span class="next"><a href="27_gr.html" rel="next">Επόμενο ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%CE%A4%CE%B1%20%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CE%B1%20%CF%84%CE%BF%CF%85%20SeaCreature%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CF%83%CF%84%CE%B7%20%CF%83%CF%84%CE%BF%CE%AF%CE%B2%CE%B1%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%CE%97%20%CE%B4%CE%BF%CE%BC%CE%AE%20String%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CE%BA%CE%B9%20%CE%B1%CF%85%CF%84%CE%AE%20%CF%83%CF%84%CE%B7%20%CF%83%CF%84%CE%BF%CE%AF%CE%B2%CE%B1%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%CE%B1%CE%BB%CE%BB%CE%AC%20%CF%84%CE%B7%CF%81%CE%B5%CE%AF%20%CE%BC%CE%AF%CE%B1%20%CE%B1%CE%BD%CE%B1%CF%86%CE%BF%CF%81%CE%AC%20%CF%83%CE%B5%20%CE%B4%CE%B5%CE%B4%CE%BF%CE%BC%CE%AD%CE%BD%CE%B1%20%CF%83%CF%84%CE%BF%20%CF%83%CF%89%CF%81%CF%8C%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22%CE%9A%CE%B1%CE%B2%CE%BF%CF%8D%CF%81%CE%B9%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22%CE%B4%CE%B1%CE%B3%CE%BA%CE%AC%CE%BD%CE%B1%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22%CE%A7%CF%84%CE%B1%CF%80%CF%8C%CE%B4%CE%B9%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%200%2C%0A%20%20%20%20%20%20%20%20legs%3A%208%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22%CE%B5%CF%85%CF%86%CF%85%CE%90%CE%B1%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%3A%20%7B%7D.%20%CE%88%CF%87%CE%B5%CE%B9%20%7B%7D%20%CF%87%CE%AD%CF%81%CE%B9%CE%B1%2C%20%7B%7D%20%CF%80%CF%8C%CE%B4%CE%B9%CE%B1%2C%20%CE%BA%CE%B1%CE%B9%20%CF%8C%CF%80%CE%BB%CE%BF%20%CF%84%CE%BF%CF%85%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CE%B7%20%7B%7D.%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%3A%20%7B%7D.%20%CE%88%CF%87%CE%B5%CE%B9%20%7B%7D%20%CF%87%CE%AD%CF%81%CE%B9%CE%B1%2C%20%7B%7D%20%CF%80%CF%8C%CE%B4%CE%B9%CE%B1%2C%20%CE%BA%CE%B1%CE%B9%20%CE%B4%CE%B5%CE%BD%20%CE%AD%CF%87%CE%B5%CE%B9%20%CF%8C%CF%80%CE%BB%CE%BF%20%CF%80%CE%AD%CF%81%CE%B1%20%CE%B1%CF%80%CF%8C%20%CF%84%CE%B7%CE%BD%20%7B%7D.%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%2C%20sarah.weapon%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

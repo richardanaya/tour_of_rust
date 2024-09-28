@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="pl" dir="ltr">
+    <head>
+        <title>Przewodnik po Języku Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pl.html">Przewodnik po Języku Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pl.html">Spis Treści</a></span>
+            </div>
+            <div class="page">
+            <h1>Zmienne</h1>
+            <p>Zmienne są w Ruscie deklarowane przy użyciu słowa kluczowego <strong>let</strong>.</p>
+<p>Podczas przypisywania wartości zmiennej, w 99% przypadków Rust będzie w stanie domyśleć się jakiego powinna być ona typu.
+W przypadku kiedy automatyczne wykrycie typu się nie uda, możesz zawsze dodać  typ ręcznie, dopisując go przy deklaracji zmiennej.</p>
+<p>Zauważ, że jesteśmy w stanie dokonać przypisania do tej samej zmiennej wielokrotnie. Taki manewr jest nazywany <em>przyćmiewaniem zmiennej</em> (ang. <em>variable shadowing</em>), i można w ramach niego dokonać również zmiany typu zmiennej.</p>
+<p>Nazwy zmiennych są zawsze zapisywane <code>małymi_literami_z_podkreślnikami_zamiast_spacji</code>, czyli inaczej mówiąc stylem <code>snake_case</code>.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="02_pl.html" rel="prev">❮ Wstecz</a></span>
+                <span class="next"><a href="04_pl.html" rel="next">Dalej ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20rust%20jest%20w%20stanie%20wywnioskowa%C4%87%20typ%20x%0A%20%20%20%20let%20x%20%3D%2013%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20mo%C5%BCemy%20te%C5%BC%20jasno%20okre%C5%9Bli%C4%87%20typ%20naszej%20zmiennej%0A%20%20%20%20let%20x%3A%20f64%20%3D%203.14159%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%0A%20%20%20%20%2F%2F%20w%20ruscie%20mo%C5%BCemy%20r%C3%B3wnie%C5%BC%20dokona%C4%87%20deklaracji%20i%20inicjalizacji%20osobno%2C%0A%20%20%20%20%2F%2F%20cho%C4%87%20takie%20rozwi%C4%85zanie%20jest%20raczej%20rzadko%20spotykane%0A%20%20%20%20let%20x%3B%0A%20%20%20%20x%20%3D%200%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20x)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

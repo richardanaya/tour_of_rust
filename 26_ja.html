@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="ja" dir="ltr">
+    <head>
+        <title>Rust ツアー - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ja.html">Rust ツアー</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ja.html">目次</a></span>
+            </div>
+            <div class="page">
+            <h1>メモリの中でデータを作成する</h1>
+            <p>コードの中で <strong>構造体</strong> を <strong>インスタンス化</strong> する際に、プログラムはフィールドデータをメモリ上で隣り合うように作成します。</p>
+<p>全てのフィールドの値を指定してインスタンス化をする際：</p>
+<p><code>構造体名 {...}</code>.</p>
+<p>構造体のフィールドは演算子 <code>.</code> で取り出すことができます。</p>
+<p>例に示したコードのメモリ状況について：</p>
+<ul>
+<li>ダブルクオートに囲まれたテキスト(例: "Ferris")は読み取り専用データであるため、 <strong>データメモリ</strong> に入ります。</li>
+<li>関数の呼び出し <code>String::from</code> では構造体 <code>String</code> を作成し、この構造体と SeaCreature のフィールドを隣り合う形で <em>スタック</em> に入れられます。
+　フィールドの値は変更可能であり、メモリ上では以下の様に変更されます。</li>
+</ul>
+<ol>
+<li><em>ヒープ</em> に変更可能なメモリを作り、テキストを入れます。</li>
+<li>1.で作成した参照アドレスを <em>ヒープ</em> に保存し、それを <code>String</code> に保存します(後の章でまた詳しく紹介します。)。</li>
+</ol>
+<ul>
+<li>最後に、我々の友である <em>Ferris</em> と <em>Sarah</em> はプログラムの中では固定な位置であるため、<em>スタック</em> に入ります。</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="25_ja.html" rel="prev">❮ 前</a></span>
+                <span class="next"><a href="27_ja.html" rel="next">次 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20SeaCreature%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AF%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AB%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%E6%A7%8B%E9%80%A0%E4%BD%93%E3%82%82%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AB%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%99%E3%81%8C%E3%80%81%0A%20%20%20%20%20%20%20%20%2F%2F%20%E3%83%92%E3%83%BC%E3%83%97%E3%81%AB%E5%85%A5%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%82%E7%85%A7%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%8C%E4%B8%80%E3%81%A4%E5%85%A5%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22claw%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22octopus%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22none%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20%7B%7D%20legs%2C%20and%20a%20%7B%7D%20weapon%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20is%20a%20%7B%7D.%20They%20have%20%7B%7D%20arms%2C%20and%20%7B%7D%20legs.%20They%20have%20no%20weapon..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

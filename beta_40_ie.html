@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="ie" dir="ltr">
+    <head>
+        <title>Tur de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ie.html">Tur de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ie.html">Tabelle de contenete</a></span>
+            </div>
+            <div class="page">
+            <h1>Vectors</h1>
+            <p>Li tipes por colectiones es un del max util tipes géneric. Un vector es un variabilmen mesurat 
+liste de articules representat per li struct <code>Vec</code>.</p>
+<p>Li macro <code>vec!</code> lassa nos facilmen crear un vector vice crear un manualmen.</p>
+<p><code>Vec</code> have li metode <code>iter()</code> quel crea un iterator de un vector, con quel noi posse facilmen
+plazzar un vector in un loop <code>for</code>.</p>
+<p>Detallies pri memorie:</p>
+<ul>
+<li><code>Vec</code> es un struct, ma internmen it contene un referentie a un fix liste de su articules sur li heap.</li>
+<li>Un vector comensa con un capacitá decidet, ma quande on adjunte coses a it queles superpassa su capacitá, it
+realoca li data sur li heap por haver un nov liste fix con un plu grand capacitá</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_39_ie.html" rel="prev">❮ Precedent</a></span>
+                <span class="next"><a href="beta_41_ie.html" rel="next">Sequent ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Noi%20posse%20esser%20explicit%20pri%20tipes%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbopisc%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20Ma%20vide%20quam%20inteligent%20es%20Rust%20pri%20automaticmen%20determinar%20li%20lip%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20Quam%20bell%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Salute%22)%2C%20String%3A%3Afrom(%22Munde%22)%5D%3B%0A%0A%20%20%20%20for%20parol%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20parol)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

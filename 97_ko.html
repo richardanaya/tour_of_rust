@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>익숙한 친구들</h1>
+            <p>이미 본 적 있는 <code>Vec&lt;T&gt;</code>나 <code>String</code> 같은 smart pointer를 생각해 봅시다.</p>
+<p><code>Vec&lt;T&gt;</code>는 바이트들의 메모리 영역을 소유하는 smart pointer입니다.
+Rust 컴파일러는 이 바이트들에 뭐가 존재하는지 모릅니다.
+smart pointer는 관리하는 메모리 영역에서 내용물을 꺼내기 위해 자기가 뭘 의미하는지 해석하고,
+데이터 구조가 그 바이트들 내 어디에서 시작하고 끝나는지 추적하며,
+마지막으로 raw pointer를 데이터 구조로, 또 쓰기 편한 멋지고 깔끔한 인터페이스로 역참조 합니다. (e.g. <code>my_vec[3]</code>)</p>
+<p>유사하게, <code>String</code>은 바이트들의 메모리 영역을 추적하며, 쓰여지는 내용물이 언제나 유효한 <code>utf-8</code>이도록 프로그램적으로 제한하며,
+그 메모리 영역을 <code>&amp;str</code> 자료형으로 역참조할 수 있도록 도와줍니다.</p>
+<p>이 데이터 구조들 둘 다, 자기 할 일을 하기 위해 raw pointer에 대한 unsafe한 역참조를 사용합니다.</p>
+<p>메모리 상세:</p>
+<ul>
+<li>Rust는 C의 <code>malloc</code>에 상응하는  <a href="https://doc.rust-lang.org/std/alloc/fn.alloc.html">alloc</a>과 관리할 메모리 영역을 가져오기 위한 <a href="https://doc.rust-lang.org/std/alloc/struct.Layout.html">Layout</a>을 갖고 있습니다.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="96_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="98_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%204%20%EB%B0%94%EC%9D%B4%ED%8A%B8%EB%A5%BC%20%EC%9A%94%EC%B2%AD%ED%95%B4%20%EB%B4%85%EC%8B%9C%EB%8B%A4%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20%EC%9C%84%EC%B9%98%EB%A5%BC%20%EC%88%AB%EC%9E%90%EB%A1%9C%20%ED%95%A0%EB%8B%B9%ED%95%98%EA%B3%A0%20%EC%A0%80%EC%9E%A5%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20pointer%20%EC%97%B0%EC%82%B0%EC%9D%84%20%EC%82%AC%EC%9A%A9%ED%95%B4%20u8%20%EA%B0%92%20%EB%AA%87%20%EA%B0%9C%EB%A5%BC%20%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%97%90%20%EC%8D%A8%EB%B4%85%EC%8B%9C%EB%8B%A4%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20secret_recipe%3A%20ptr%20as%20usize%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20secret_recipe%20pointer%EB%A5%BC%20f32%20raw%20pointer%EB%A1%9C%20%EB%B3%80%ED%99%98%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%97%AD%EC%B0%B8%EC%A1%B0%20%ED%95%98%EC%97%AC%20%26f32%20%EA%B0%92%EC%9C%BC%EB%A1%9C%20%EB%A6%AC%ED%84%B4%ED%95%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20Pie%20struct%EC%9D%98%20smart%20pointer%EB%A5%BC%20%EC%97%AD%EC%B0%B8%EC%A1%B0%20%ED%95%98%EC%97%AC%0A%20%20%20%20%2F%2F%20%22%ED%8C%8C%EC%9D%B4%EB%A5%BC%20%EB%A7%8C%EB%93%AD%EB%8B%88%EB%8B%A4%22%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

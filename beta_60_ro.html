@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="ro" dir="ltr">
+    <head>
+        <title>Turul limbajului Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ro.html">Turul limbajului Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ro.html">Cuprins</a></span>
+            </div>
+            <div class="page">
+            <h1>Ce este utf-8</h1>
+            <p>Pe măsură ce tot mai multe limbi au început a fi folosite pe calculatoare, lumea a avut nevoie de modalități de reprezentare a mai multor caractere de text
+decat ASCII permitea (1 byte permitea numai 256 de caractere). </p>
+<p>A fost introdus <strong>utf-8</strong>, având o lungime variabilă de bytes (1-4 bytes), lucru ce a crescut considerabil gama de caractere posibile.</p>
+<p>Un avantaj al caracterelor de dimensiuni variabile este că textul nu mai are octeți inutili pentru caractere ASCII foarte comune (necesitând doar 1 octet în <strong>utf-8</strong>).</p>
+<p>Un dezavantaj al caracterelor de dimensiuni variabile este faptul că căutarea caracterelor nu se mai poate face rapid 
+(timp constant <strong>O(1)</strong>) cu o simplă indexare (exemplu: <code>my_text[3]</code> pentru a obține al patrulea caracter). Este posibil ca
+caracterele anterioare să aibă lățimi variabile, modificând locul în care începe de fapt al 4-lea caracter în secvența de octeți.</p>
+<p>Trebuie în schimb să parcurgem o secvență <strong>utf-8</strong> de octeți pentru a înțelege unde încep de fapt caracterele Unicode (timp liniar <strong>O(n)</strong>).</p>
+<p>Ferris: "În mare parte, doar mă bucur că am <strong>utf-8</strong> pentru a reprezenta emoticoane cu prietenii mei subacvatici."</p>
+<p><span class="emoji">🐠🐙🐟🐬🐋</span></p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_59_ro.html" rel="prev">❮ Înapoi</a></span>
+                <span class="next"><a href="beta_61_ro.html" rel="next">Înainte ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

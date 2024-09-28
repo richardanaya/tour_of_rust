@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <html lang="zh-tw" dir="ltr">
+    <head>
+        <title>Rust 語言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-tw.html">Rust 語言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-tw.html">目錄</a></span>
+            </div>
+            <div class="page">
+            <h1>封裝方法 (encapsulation with methods)</h1>
+            <p>Rust 支援<em>物件</em>的概念，即是一個結構與它的一些函式 (或稱<em>方法</em>)。</p>
+<p>方法呼叫時的第一個參數一定要是一個指向該實體的參考 (例如：<code>instanceOfObj.foo()</code>)。 Rust 使用：</p>
+<ul>
+<li><code>&amp;self</code> - 指向該實體不可變動的參考</li>
+<li><code>&amp;mut self</code> - 指向該實體可變動的參考</li>
+</ul>
+<p>方法定義在實作區塊裡，並且用關鍵字 <code>impl</code> 包起來：</p>
+<pre><code class="rust language-rust">impl MyStruct { 
+    ...
+    fn foo(&amp;self) {
+        ...
+    }
+}
+</code></pre>
+            <div class="bottomnav">
+                <span class="back"><a href="75_zh-tw.html" rel="prev">❮ 上一頁</a></span>
+                <span class="next"><a href="77_zh-tw.html" rel="next">下一頁 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20noise%3A%20String%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20get_sound(%26self)%20-%3E%20%26str%20%7B%0A%20%20%20%20%20%20%20%20%26self.noise%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20creature%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20noise%3A%20String%3A%3Afrom(%22blub%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20creature.get_sound())%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>utf-8이란 무엇인가</h1>
+            <p>컴퓨터로 점점 더 많은 나라의 언어가 사용되면서, 세계는 ASCII가 허용하던 것보다 
+(1 바이트는 256 문자 밖에 허용하지 않음) 더 많은 문자를 필요로 하게 되었습니다. </p>
+<p><strong>utf-8</strong>은 1에서 4 바이트의 가변 길이 바이트로 도입되어, 사용 가능한 문자의 범위를 엄청나게 늘려 주었습니다. </p>
+<p>가변 크기 문자의 한 가지 장점은 매우 흔한 ASCII 문자(<strong>utf-8</strong>에서도 여전히 1 바이트만 필요로 함)에 쓸데 없는 바이트를 필요로 하지 않는다는 점입니다. </p>
+<p>한 가지 단점은 단순한 인덱싱(예: <code>my_text[3]</code>으로 네 번째 문자를 가져옴)으로는 
+더 이상 빠르게(<strong>O(1)</strong> 상수 시간으로) 문자를 찾을 수 없다는 점입니다. 
+바로 앞의 글자가 가변 길이를 가질 수 있어, 바이트 열에서 4번째 문자가 실제로 시작하는 위치가 달라질 수도 있습니다. </p>
+<p>우리는 그 대신에 <strong>utf-8</strong> 바이트 열을 하나하나 돌면서 각각의 유니코드 문자가 실제로 어디에서 시작하는지 찾아야 합니다 (<strong>O(n)</strong> 선형 시간). </p>
+<p>Ferris: "<strong>utf-8</strong>로 내 물밑 친구들의 이모지를 보여줄 수 있어서 기쁩니다."</p>
+<p><span class="emoji">🐠🐙🐟🐬🐋</span></p>
+            <div class="bottomnav">
+                <span class="back"><a href="59_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="61_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

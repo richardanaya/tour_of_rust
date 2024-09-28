@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Amigos familiares</h1>
+            <p>Considere alguns ponteiros inteligentes que já vimos como <code>Vec&lt;T&gt;</code> e <code>String</code>.</p>
+<p>O <code>Vec&lt;T&gt;</code> é um ponteiro inteligente que simplesmente possui uma região da memória em bytes. O compilador Rust não tem ideia do que existe nesses bytes. O ponteiro inteligente interpreta o que significa pegar os itens da região da memória que ele gerencia, mantém o controle de onde os bytes das estruturas de dados começam e terminam e, finalmente, desreferencia um ponteiro bruto para uma estrutura de dados com uma interface ergonômica, limpa e fácil para nós usarmos (por exemplo, <code>my_vec[3]</code>).</p>
+<p>Da mesma forma, <code>String</code> mantém o controle de uma região de memória em bytes, restringe programaticamente o conteúdo escrito nele para ser sempre <code>utf-8</code> válido, e ajuda a desreferenciar essa região de memória em um tipo <code>&amp;str</code>.</p>
+<p>Ambas as estruturas de dados usam desreferenciamento inseguro de ponteiros brutos para fazer seu trabalho.</p>
+<p>Detalhes da memória:</p>
+<ul>
+<li>O Rust tem um equivalente ao <code>malloc</code> do C usando <a href="https://doc.rust-lang.org/std/alloc/fn.alloc.html">alloc</a> e <a href="https://doc.rust-lang.org/std/alloc/struct.Layout.html">Layout</a> para obter suas próprias regiões de memória para gerenciar.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_96_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="beta_98_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pizza%20%7B%0A%20%20%20%20receita_secreta%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20vamos%20pedir%20por%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20alocar%20e%20salvar%20a%20localiza%C3%A7%C3%A3o%20da%20mem%C3%B3ria%20como%20um%20n%C3%BAmero%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20a%20artm%C3%A9tica%20de%20ponteiros%20e%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20escreva%20alguns%20valores%20u8%20na%20mem%C3%B3ria%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pizza%20%7B%20receita_secreta%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pizza%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interprete%20o%20ponteiro%20receita_secreta%20como%20um%20ponteiro%20bruto%20f32%0A%20%20%20%20%20%20%20%20let%20ponteiro%20%3D%20self.receita_secreta%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20desreferencie%20em%20um%20valor%20de%20retorno%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*ponteiro%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pizza%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22Fa%C3%A7a%20uma%20pizza%22%20desreferenciando%20o%20nosso%20%0A%20%20%20%20%2F%2F%20ponteiro%20inteligente%20da%20struct%20Pizza%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

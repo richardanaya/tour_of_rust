@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>utf-8 là gì?</h1>
+            <p>Khi nhiều ngôn ngữ được sử dụng trên máy tính, thế giới cần phải biểu diễn nhiều ký tự văn bản hơn ASCII cho phép (1 byte chỉ cho phép 256 ký tự). </p>
+<p><strong>utf-8</strong> đã được giới thiệu với độ dài byte thay đổi từ 1-4 byte làm tăng đáng kể phạm vi ký tự có thể có.</p>
+<p>Một lợi thế của các ký tự có kích thước thay đổi là văn bản không có các byte không cần thiết cho những mã ASCII rất phổ biến (chỉ yêu cầu 1 byte vẫn ở trong <strong>utf-8</strong>).</p>
+<p>Nhược điểm của các ký tự có kích thước thay đổi là việc tra cứu ký tự không còn được thực hiện nhanh chóng. 
+ (<strong>O(1)</strong> thời gian không đổi) với một lập chỉ mục đơn giản (ví dụ: <code>my_text[3]</code> để lấy ký tự thứ 4).  Việc các ký tự trước đó có thể có độ rộng thay đổi là khả thi, thay đổi vị trí của ký tự thứ 4 thực sự bắt đầu trong chuỗi byte.</p>
+<p>Thay vào đó, chúng ta phải lặp qua chuỗi byte <strong>utf-8</strong> để hiểu vị trí các ký tự Unicode thực sự bắt đầu (<strong>O(n)</strong> thời gian tuyến tính).</p>
+<p>Ferris: "Tớ rất vui vẻ với <strong>utf-8</strong>, tớ có các emoji thú vị để đại diện cho những người bạn dưới nước của tớ."</p>
+<p><span class="emoji">🐠🐙🐟🐬🐋</span></p>
+            <div class="bottomnav">
+                <span class="back"><a href="59_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="61_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

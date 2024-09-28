@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="fi" dir="ltr">
+    <head>
+        <title>Rustin ympäriajo - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_fi.html">Rustin ympäriajo</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Oppitunnit</h1>
+            <ul>
+        <li><a href="00_fi.html">Hello World!</a></li>
+</ul><h3><a href="chapter_1_fi.html">Kappale 1 - Perusteet</a></h3><ul>
+<li><a href="02_fi.html">Rust-leikkikenttä</a></li>
+<li><a href="03_fi.html">Muuttujat</a></li>
+<li><a href="04_fi.html">Muuttumattomat muuttujat</a></li>
+<li><a href="05_fi.html">Perustietotyypit</a></li>
+<li><a href="06_fi.html">Perustietotyypin muunnokset</a></li>
+<li><a href="07_fi.html">Vakiot</a></li>
+<li><a href="08_fi.html">Taulukot</a></li>
+<li><a href="09_fi.html">Funktiot</a></li>
+<li><a href="10_fi.html">Monta paluuarvoa</a></li>
+<li><a href="11_fi.html">Tyhjän palauttaminen</a></li>
+<li><a href="12_fi.html">Kappaleen 1 yhteenveto</a></li>
+</ul><h3><a href="chapter_2_fi.html">Kapple 2 - Perusohjausvirta</a></h3><ul>
+<li><a href="14_fi.html">if/else</a></li>
+<li><a href="15_fi.html">loop</a></li>
+<li><a href="16_fi.html">while</a></li>
+<li><a href="17_fi.html">for</a></li>
+<li><a href="18_fi.html">match</a></li>
+<li><a href="19_fi.html">Paluuarvon palauttaminen loopista</a></li>
+<li><a href="20_fi.html">Palautetaan Arvoja Blokkilausekkeesta</a></li>
+<li><a href="21_fi.html">Kappale 2 - Päätelmä</a></li>
+</ul><h3><a href="chapter_3_fi.html">[Kääntämätön] Chapter 3 - Basic Data Structure Types</a></h3><ul>
+<li><a href="23_fi.html">[Kääntämätön] Structures</a></li>
+<li><a href="24_fi.html">[Kääntämätön] Calling Methods</a></li>
+<li><a href="25_fi.html">[Kääntämätön] Memory</a></li>
+<li><a href="26_fi.html">[Kääntämätön] Creating Data In Memory</a></li>
+<li><a href="27_fi.html">[Kääntämätön] Tuple-like Structs</a></li>
+<li><a href="28_fi.html">[Kääntämätön] Unit-like Structs</a></li>
+<li><a href="29_fi.html">[Kääntämätön] Enumerations</a></li>
+<li><a href="30_fi.html">[Kääntämätön] Enumerations With Data</a></li>
+<li><a href="31_fi.html">[Kääntämätön] Chapter 3 - Conclusion</a></li>
+</ul><h3><a href="chapter_4_fi.html">[Kääntämätön] Chapter 4 - Generic Types</a></h3><ul>
+<li><a href="33_fi.html">[Kääntämätön] What Are Generic Types?</a></li>
+<li><a href="34_fi.html">[Kääntämätön] Representing Nothing</a></li>
+<li><a href="35_fi.html">[Kääntämätön] Option</a></li>
+<li><a href="36_fi.html">[Kääntämätön] Result</a></li>
+<li><a href="37_fi.html">[Kääntämätön] Failable Main</a></li>
+<li><a href="38_fi.html">[Kääntämätön] Graceful Error Handling</a></li>
+<li><a href="39_fi.html">[Kääntämätön] Ugly Option/Result Handling</a></li>
+<li><a href="40_fi.html">[Kääntämätön] Vectors</a></li>
+<li><a href="41_fi.html">[Kääntämätön] Chapter 4 - Conclusion</a></li>
+</ul><h3><a href="chapter_5_fi.html">[Kääntämätön] Chapter 5 - Ownership & Borrowing Data</a></h3><ul>
+<li><a href="43_fi.html">[Kääntämätön] Ownership</a></li>
+<li><a href="44_fi.html">[Kääntämätön] Scope-Based Resource Management</a></li>
+<li><a href="45_fi.html">[Kääntämätön] Dropping is Hierarchical</a></li>
+<li><a href="46_fi.html">[Kääntämätön] Moving Ownership</a></li>
+<li><a href="47_fi.html">[Kääntämätön] Returning Ownership</a></li>
+<li><a href="48_fi.html">[Kääntämätön] Borrowing Ownership with References</a></li>
+<li><a href="49_fi.html">[Kääntämätön] Borrowing Mutable Ownership with References</a></li>
+<li><a href="50_fi.html">[Kääntämätön] Dereferencing</a></li>
+<li><a href="51_fi.html">[Kääntämätön] Passing Around Borrowed Data</a></li>
+<li><a href="52_fi.html">[Kääntämätön] References Of References</a></li>
+<li><a href="53_fi.html">[Kääntämätön] Explicit Lifetimes</a></li>
+<li><a href="54_fi.html">[Kääntämätön] Multiple Lifetimes</a></li>
+<li><a href="55_fi.html">[Kääntämätön] Static Lifetimes</a></li>
+<li><a href="56_fi.html">[Kääntämätön] Lifetimes In Data Types</a></li>
+<li><a href="57_fi.html">[Kääntämätön] Chapter 5 - Conclusion</a></li>
+</ul><h3><a href="chapter_6_fi.html">[Kääntämätön] Chapter 6 - Text</a></h3><ul>
+<li><a href="59_fi.html">[Kääntämätön] String Literals</a></li>
+<li><a href="60_fi.html">[Kääntämätön] What is utf-8</a></li>
+<li><a href="61_fi.html">[Kääntämätön] Escaping Characters</a></li>
+<li><a href="62_fi.html">[Kääntämätön] Multi-line String Literals</a></li>
+<li><a href="63_fi.html">[Kääntämätön] Raw String Literals</a></li>
+<li><a href="64_fi.html">[Kääntämätön] String Literals From Files</a></li>
+<li><a href="65_fi.html">[Kääntämätön] String Slice</a></li>
+<li><a href="66_fi.html">[Kääntämätön] Chars</a></li>
+<li><a href="67_fi.html">[Kääntämätön] String</a></li>
+<li><a href="68_fi.html">[Kääntämätön] Text As Function Parameters</a></li>
+<li><a href="69_fi.html">[Kääntämätön] Building Strings</a></li>
+<li><a href="70_fi.html">[Kääntämätön] Formatting Strings</a></li>
+<li><a href="71_fi.html">[Kääntämätön] Converting Strings</a></li>
+<li><a href="72_fi.html">[Kääntämätön] Chapter 6 - Conclusion</a></li>
+</ul><h3><a href="chapter_7_fi.html">[Kääntämätön] Chapter 7 - Object Oriented Programming</a></h3><ul>
+<li><a href="74_fi.html">[Kääntämätön] What Is OOP?</a></li>
+<li><a href="75_fi.html">[Kääntämätön] Rust Is Not OOP</a></li>
+<li><a href="76_fi.html">[Kääntämätön] Encapsulation With Methods</a></li>
+<li><a href="77_fi.html">[Kääntämätön] Abstraction With Selective Exposure</a></li>
+<li><a href="78_fi.html">[Kääntämätön] Polymorphism With Traits</a></li>
+<li><a href="79_fi.html">[Kääntämätön] Implemented Methods On Traits</a></li>
+<li><a href="80_fi.html">[Kääntämätön] Trait Inheritance</a></li>
+<li><a href="81_fi.html">[Kääntämätön] Dynamic vs Static Dispatch</a></li>
+<li><a href="82_fi.html">[Kääntämätön] Trait Objects</a></li>
+<li><a href="83_fi.html">[Kääntämätön] Handling Unsized Data</a></li>
+<li><a href="84_fi.html">[Kääntämätön] Generic Functions</a></li>
+<li><a href="85_fi.html">[Kääntämätön] Generic Function Shorthand</a></li>
+<li><a href="86_fi.html">[Kääntämätön] Box</a></li>
+<li><a href="87_fi.html">[Kääntämätön] Generic Structs Revisited</a></li>
+<li><a href="88_fi.html">[Kääntämätön] Chapter 7 - Conclusion</a></li>
+</ul><h3><a href="chapter_8_fi.html">[Kääntämätön] Chapter 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_fi.html">[Kääntämätön] References Revisited</a></li>
+<li><a href="91_fi.html">[Kääntämätön] Raw Pointers</a></li>
+<li><a href="92_fi.html">[Kääntämätön] Dereferencing</a></li>
+<li><a href="93_fi.html">[Kääntämätön] The * Operator</a></li>
+<li><a href="94_fi.html">[Kääntämätön] The . Operator</a></li>
+<li><a href="95_fi.html">[Kääntämätön] Smart Pointers</a></li>
+<li><a href="96_fi.html">[Kääntämätön] Smart Unsafe Code</a></li>
+<li><a href="97_fi.html">[Kääntämätön] Familiar Friends</a></li>
+<li><a href="98_fi.html">[Kääntämätön] Heap Allocated Memory</a></li>
+<li><a href="99_fi.html">[Kääntämätön] Failable Main Revisited</a></li>
+<li><a href="100_fi.html">[Kääntämätön] Referencing Counting</a></li>
+<li><a href="101_fi.html">[Kääntämätön] Sharing Access</a></li>
+<li><a href="102_fi.html">[Kääntämätön] Sharing Across Threads</a></li>
+<li><a href="103_fi.html">[Kääntämätön] Combining Smart Pointers</a></li>
+<li><a href="104_fi.html">[Kääntämätön] Chapter 8 - Conclusion</a></li>
+</ul><h3><a href="chapter_9_fi.html">[Kääntämätön] Chapter 9 - Project Organization and Structure</a></h3><ul>
+<li><a href="106_fi.html">[Kääntämätön] Modules</a></li>
+<li><a href="107_fi.html">[Kääntämätön] Writing a Program</a></li>
+<li><a href="108_fi.html">[Kääntämätön] Writing a Library</a></li>
+<li><a href="109_fi.html">[Kääntämätön] Referencing Other Modules and Crates</a></li>
+<li><a href="110_fi.html">[Kääntämätön] Referencing Multiple Items</a></li>
+<li><a href="111_fi.html">[Kääntämätön] Creating Modules</a></li>
+<li><a href="112_fi.html">[Kääntämätön] Module Hierarchy</a></li>
+<li><a href="113_fi.html">[Kääntämätön] Inline Module</a></li>
+<li><a href="114_fi.html">[Kääntämätön] Internal Module Referencing</a></li>
+<li><a href="115_fi.html">[Kääntämätön] Exporting</a></li>
+<li><a href="116_fi.html">[Kääntämätön] Structure Visibility</a></li>
+<li><a href="117_fi.html">[Kääntämätön] Prelude</a></li>
+<li><a href="118_fi.html">[Kääntämätön] Your Own Prelude</a></li>
+<li><a href="119_fi.html">[Kääntämätön] Chapter 9 - Conclusion</a></li>
+</ul><h3><a href="chapter_10_fi.html">[Kääntämätön] Chapter 10 - The End</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

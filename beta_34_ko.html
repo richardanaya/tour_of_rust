@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>아무 것도 없는 것을 표현하기</h1>
+            <p>다른 언어에서 <code>null</code> 키워드는 값이 없음을 나타내기 위해 사용됩니다.
+이는 프로그래밍 언어에 어려움을 유발하는데, 변수나 field를 처리하는 중에
+프로그램이 실패할 수도 있기 때문입니다.</p>
+<p>Rust에는 <code>null</code>이 없습니다만, 아무 것도 없음을 표현하는 것의 중요성을 무시하는 것은 아닙니다!
+우리가 이미 아는 도구를 사용한 순수한 표현법을 고려해봅시다.</p>
+<p>이렇게 한 개 이상의 선택 가능한 값에 대해 <code>None</code> 선택지를 제공하는 방법은
+<code>null</code> 값이 없는 Rust에서 매우 흔한 패턴입니다. generic 자료형은 이러한 어려움을 해결하는 데에 도움을 줍니다.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_33_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="beta_35_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=enum%20Item%20%7B%0A%20%20%20%20Inventory(String)%2C%0A%20%20%20%20%2F%2F%20None%EC%9D%80%20%ED%95%AD%EB%AA%A9%EC%9D%98%20%EB%B6%80%EC%9E%AC%EB%A5%BC%20%EB%82%98%ED%83%80%EB%83%84%0A%20%20%20%20None%2C%0A%7D%0A%0Astruct%20BagOfHolding%20%7B%0A%20%20%20%20item%3A%20Item%2C%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

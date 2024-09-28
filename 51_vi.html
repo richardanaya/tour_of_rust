@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Truyền xung quanh dữ liệu đã mượn</h1>
+            <p>Các quy tắc tham chiếu của Rust tốt nhất có thể được tóm tắt bằng:</p>
+<ul>
+<li>Rust chỉ cho phép có một tham chiếu có thể thay đổi <strong>hoặc</strong> nhiều tham  chiếu không thể thay đổi <strong>chứ không phải cả hai</strong>.</li>
+<li>Tham chiếu không bao giờ được <strong>tồn tại lâu hơn</strong> so với chủ sở hữu của nó.</li>
+</ul>
+<p>Điều này không có xu hướng là một vấn đề khi chuyển xung quanh các tham chiếu đến các hàm.</p>
+<p>Chi tiết bộ nhớ:</p>
+<ul>
+<li>Quy tắc tham chiếu đầu tiên ngăn chặn các cuộc chạy đua dữ liệu(data race).  Cuộc đua dữ liệu là gì?  Một cuộc chạy đua dữ liệu khi đọc từ dữ liệu có khả năng không đồng bộ do sự tồn tại  của người ghi vào dữ liệu cùng một lúc. Điều này xảy ra thường xuyên trong lập trình đa luồng.</li>
+<li>Quy tắc thứ hai về tham chiếu ngăn chặn việc lạm dụng  tham chiếu tham chiếu đến dữ liệu không tồn tại (được gọi là con trỏ treo-dangling pointer trong C).</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="50_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="52_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20%26mut%20Foo)%20%7B%0A%20%20%20%20f.x%20%2B%3D%201%3B%0A%20%20%20%20%2F%2F%20mutable%20reference%20f%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20b%E1%BB%9Fi%20v%C3%AC%20t%E1%BA%A5t%20c%E1%BA%A3%20c%C3%A1c%20tham%20chi%E1%BA%BFu%20c%C3%B3%20th%E1%BB%83%20thay%20%C4%91%E1%BB%95i%20trong%20h%C3%A0m%20do_something%20%C4%91%E1%BB%81u%20%C4%91%C3%A3%20b%E1%BB%8B%20drop%2C%20%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20t%E1%BA%A1o%20m%E1%BB%99t%20tham%20chi%E1%BA%BFu%20kh%C3%A1c.%0A%20%20%20%20do_something(%26mut%20foo)%3B%0A%20%20%20%20%2F%2F%20foo%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

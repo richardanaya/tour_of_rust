@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>크기를 알 수 없는 데이터 다루기</h1>
+            <p>trait을 다른 struct에 저장하는 것도 흥미로운 도전과제입니다.
+trait은 원본 struct를 알기 어렵게 하느라 원래 크기 또한 알기 어렵게 합니다. Rust에서 크기를 알 수 없는 값이 struct에 저장될 때는 다음의 두 가지 방법으로 처리됩니다:</p>
+<ul>
+<li><code>generics</code> - 매개변수의 자료형을 효과적으로 활용하여 알려진 자료형 및 크기의 struct/함수를 생성합니다.</li>
+<li><code>indirection</code> - 인스턴스를 heap에 올림으로써 실제 자료형의 크기 걱정 없이 그 포인터만 저장할 수 있는 간접적인 방법을 제공합니다. 또 다른 방법도 있습니다!</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_82_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="beta_84_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Tạo dữ liệu trong bộ nhớ</h1>
+            <p>Khi chúng ta <strong>khởi tạo</strong> một <strong>struct</strong>,  chương trình của chúng ta sẽ tạo dữ liệu trường liên kết cạnh nhau trong bộ nhớ.</p>
+<p>Chúng ta khởi tạo bằng cách chỉ định tất cả các giá trị trường bên trong </p>
+<p><code>StructName { ... }</code>.</p>
+<p>Các trường cấu trúc được truy cập bằng toán tử dấu chấm <code>.</code>.</p>
+<p>Chi tiết về bộ nhớ trong phần ví dụ:</p>
+<ul>
+<li>Văn bản bên trong dấu ngoặc kép là dữ liệu chỉ đọc (ví dụ: "Ferris"), 
+do đó nó được đặt trong <em>vùng bộ nhớ dữ liệu</em>(data memory region).</li>
+<li>Lệnh gọi hàm <code>String :: from</code> tạo ra một struct <code>String</code> 
+được đặt cạnh nhau với các trường của SeaCreature trong <em>stack</em>. 
+Một String đại diện cho đoạn text có thể được thay đổi và thực hiện điều này bằng cách:</li>
+</ul>
+<ol>
+<li>Tạo bộ nhớ trên <em>heap</em> cho đoạn text nơi nó có thể được sửa đổi</li>
+<li>Lưu trữ một tham chiếu đến vị trí bộ nhớ đó trên <em>heap</em> và lưu trữ nó trong struct <code>String</code> 
+(Điều này sẽ được làm rõ hơn trong những phần sau) </li>
+</ol>
+<ul>
+<li>Cuối cùng thì hai người bạn <em>Ferris</em> và <em>Sarah</em> của chúng ta 
+có cấu trúc dữ liệu mà sẽ luôn có vị trí cố định 
+trong chương trình, vì vậy chúng được đặt trên <em>stack</em>.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_25_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="beta_27_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20d%E1%BB%AF%20li%E1%BB%87u%20c%E1%BB%A7a%20SeaCreature%20n%E1%BA%B1m%20%E1%BB%9F%20tr%C3%AAn%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20c%C5%A9ng%20%E1%BB%9F%20tr%C3%AAn%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20nh%C6%B0ng%20gi%E1%BB%AF%20m%E1%BB%99t%20tham%20chi%E1%BA%BFu%20%C4%91%E1%BA%BFn%20d%E1%BB%AF%20li%E1%BB%87u%20tr%C3%AAn%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22con%20cua%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22m%C3%B3ng%20vu%E1%BB%91t%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22con%20b%E1%BA%A1ch%20tu%E1%BB%99c%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22n%C3%A3o%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20%7B%7D.%20Ch%C3%BAng%20c%C3%B3%20%7B%7D%20tay%2C%20%7B%7D%20ch%C3%A2n%2C%20v%C3%A0%20c%C3%B3%20c%E1%BA%A3%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20l%C3%A0%20m%E1%BB%99t%20%7B%7D.%20Ch%C3%BAng%20c%C3%B3%20%7B%7D%20tay%2C%20v%C3%A0%20%7B%7D%20legs.%20V%C3%A0%20ch%C3%BAng%20kh%C3%B4ng%20c%C3%B3%20v%C5%A9%20kh%C3%AD...%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="zh-cn" dir="ltr">
+    <head>
+        <title>Rust 语言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-cn.html">Rust 语言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-cn.html">目录</a></span>
+            </div>
+            <div class="page">
+            <h1>引用其他模块和 crate</h1>
+            <p>你可以使用完整的模块路径路径引用模块中的项目： <code>std::f64::consts::PI</code>。</p>
+<p>更简单的方法是使用<strong>use</strong>关键字。此关键字可以让我们在代码中使用模块中的项目而无需指定完整路径。例如 <code>use std::f64::consts::PI</code>
+这样我在 main 函数中只需要写 <code>PI</code> 就可以了。</p>
+<p><strong>std</strong> 是 Rust 的<strong>标准库</strong>。这个库中包含了大量有用的数据结构和与操作系统交互的函数。</p>
+<p>由社区创建的 crate 的搜索索引可以在这里找到： <a href="https://crates.io/">https://crates.io</a>.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="108_zh-cn.html" rel="prev">❮ 上一页</a></span>
+                <span class="next"><a href="110_zh-cn.html" rel="next">下一页 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Af64%3A%3Aconsts%3A%3API%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E7%BB%83%E4%B9%A0%E5%9C%BA%EF%BC%81%22)%3B%0A%20%20%20%20println!(%22%E6%88%91%E6%83%B3%E8%A6%81%E4%B8%80%E5%9D%97%20%7B%7D%EF%BC%81%22%2C%20PI)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

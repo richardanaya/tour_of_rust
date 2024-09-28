@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="gr" dir="ltr">
+    <head>
+        <title>Ξενάγηση στη Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_gr.html">Ξενάγηση στη Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Μαθήματα</h1>
+            <ul>
+        <li><a href="00_gr.html">Γεια, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_gr.html">Κεφάλαιο 1 - Τα βασικά</a></h3><ul>
+<li><a href="02_gr.html">Η Παιδική Χαρά της Rust</a></li>
+<li><a href="03_gr.html">Μεταβλητές</a></li>
+<li><a href="04_gr.html">Αλλαγή μεταβλητών</a></li>
+<li><a href="05_gr.html">Βασικοί τύποι</a></li>
+<li><a href="06_gr.html">Βασική μετατροπή τύπων</a></li>
+<li><a href="07_gr.html">Σταθερές</a></li>
+<li><a href="08_gr.html">Πίνακες</a></li>
+<li><a href="09_gr.html">Συναρτήσεις</a></li>
+<li><a href="10_gr.html">Πολλαπλές τιμές επιστροφής</a></li>
+<li><a href="11_gr.html">Επιστροφή του τίποτε</a></li>
+<li><a href="12_gr.html">Κεφάλαιο 1 - Κατάληξη</a></li>
+</ul><h3><a href="chapter_2_gr.html">Κεφάλαιο 2 - Βασικός έλεγχος ροής</a></h3><ul>
+<li><a href="14_gr.html">if/else if/else</a></li>
+<li><a href="15_gr.html">loop</a></li>
+<li><a href="16_gr.html">while</a></li>
+<li><a href="17_gr.html">for</a></li>
+<li><a href="18_gr.html">match</a></li>
+<li><a href="19_gr.html">Επιστροφή τιμών από βρόχους</a></li>
+<li><a href="20_gr.html">Επιστροφή τιμών από φραγμένες εκφράσεις</a></li>
+<li><a href="21_gr.html">Κεφάλαιο 2 - Κατάληξη</a></li>
+</ul><h3><a href="chapter_3_gr.html">Κεφάλαιο 3 - Βασικοί τύποι δομών δεδομένων</a></h3><ul>
+<li><a href="23_gr.html">Δομές</a></li>
+<li><a href="24_gr.html">Κλήση μεθόδων</a></li>
+<li><a href="25_gr.html">Μνήμη</a></li>
+<li><a href="26_gr.html">Δημιουργία δεδομένων στη μνήμη</a></li>
+<li><a href="27_gr.html">Πολλαπλοτητοειδείς δομές</a></li>
+<li><a href="28_gr.html">Μοναδοειδείς δομές</a></li>
+<li><a href="29_gr.html">Απαριθμήσεις</a></li>
+<li><a href="30_gr.html">Απαριθμήσεις με δεδομένα</a></li>
+<li><a href="31_gr.html">Κεφάλαιο 3 - Κατάληξη</a></li>
+</ul><h3><a href="chapter_4_gr.html">Κεφάλαιο 4 - Γενικοί τύποι</a></h3><ul>
+<li><a href="33_gr.html">Τι είναι οι γενικοί τύποι;</a></li>
+<li><a href="34_gr.html">Αναπαράσταση του τίποτε</a></li>
+<li><a href="35_gr.html">Option</a></li>
+<li><a href="36_gr.html">Result</a></li>
+<li><a href="37_gr.html">Ενδεχομένως εσφαλμένη Main</a></li>
+<li><a href="38_gr.html">Κομψός χειρισμός σφαλμάτων</a></li>
+<li><a href="39_gr.html">Τσαπατσούλικος χειρισμός των `Option` και `Result`</a></li>
+<li><a href="40_gr.html">Ανύσματα (Vectors)</a></li>
+<li><a href="41_gr.html">Κεφάλαιο 4 - Κατάληξη</a></li>
+</ul><h3><a href="chapter_5_gr.html">Κεφάλαιο 5 - Κυριότητα και δανεισμός δεδομένων</a></h3><ul>
+<li><a href="43_gr.html">Κυριότητα</a></li>
+<li><a href="44_gr.html">Διαχείριση πόρων βάσει ορατότητας</a></li>
+<li><a href="45_gr.html">Η απόρριψη είναι ιεραρχική</a></li>
+<li><a href="46_gr.html">Μεταβίβαση κυριότητας</a></li>
+<li><a href="47_gr.html">Επιστροφή κυριότητας</a></li>
+<li><a href="48_gr.html">Δανεισμός κυριότητας μέσω αναφορών</a></li>
+<li><a href="49_gr.html">Μεταβίβαση επικαρπίας κυριότητας («μεταβλητός δανεισμός») μέσω αναφορών</a></li>
+<li><a href="50_gr.html">Dereferencing</a></li>
+<li><a href="51_gr.html">Passing Around Borrowed Data</a></li>
+<li><a href="52_gr.html">References Of References</a></li>
+<li><a href="53_gr.html">Explicit Lifetimes</a></li>
+<li><a href="54_gr.html">Multiple Lifetimes</a></li>
+<li><a href="55_gr.html">Static Lifetimes</a></li>
+<li><a href="56_gr.html">Lifetimes In Data Types</a></li>
+<li><a href="57_gr.html">Chapter 5 - Conclusion</a></li>
+</ul><h3><a href="chapter_6_gr.html">[Αμετάφραστο] Chapter 6 - Text</a></h3><ul>
+<li><a href="59_gr.html">[Αμετάφραστο] String Literals</a></li>
+<li><a href="60_gr.html">[Αμετάφραστο] What is utf-8</a></li>
+<li><a href="61_gr.html">[Αμετάφραστο] Escaping Characters</a></li>
+<li><a href="62_gr.html">[Αμετάφραστο] Multi-line String Literals</a></li>
+<li><a href="63_gr.html">[Αμετάφραστο] Raw String Literals</a></li>
+<li><a href="64_gr.html">[Αμετάφραστο] String Literals From Files</a></li>
+<li><a href="65_gr.html">[Αμετάφραστο] String Slice</a></li>
+<li><a href="66_gr.html">[Αμετάφραστο] Chars</a></li>
+<li><a href="67_gr.html">[Αμετάφραστο] String</a></li>
+<li><a href="68_gr.html">[Αμετάφραστο] Text As Function Parameters</a></li>
+<li><a href="69_gr.html">[Αμετάφραστο] Building Strings</a></li>
+<li><a href="70_gr.html">[Αμετάφραστο] Formatting Strings</a></li>
+<li><a href="71_gr.html">[Αμετάφραστο] Converting Strings</a></li>
+<li><a href="72_gr.html">[Αμετάφραστο] Chapter 6 - Conclusion</a></li>
+</ul><h3><a href="chapter_7_gr.html">[Αμετάφραστο] Chapter 7 - Object Oriented Programming</a></h3><ul>
+<li><a href="74_gr.html">[Αμετάφραστο] What Is OOP?</a></li>
+<li><a href="75_gr.html">[Αμετάφραστο] Rust Is Not OOP</a></li>
+<li><a href="76_gr.html">[Αμετάφραστο] Encapsulation With Methods</a></li>
+<li><a href="77_gr.html">[Αμετάφραστο] Abstraction With Selective Exposure</a></li>
+<li><a href="78_gr.html">[Αμετάφραστο] Polymorphism With Traits</a></li>
+<li><a href="79_gr.html">[Αμετάφραστο] Implemented Methods On Traits</a></li>
+<li><a href="80_gr.html">[Αμετάφραστο] Trait Inheritance</a></li>
+<li><a href="81_gr.html">[Αμετάφραστο] Dynamic vs Static Dispatch</a></li>
+<li><a href="82_gr.html">[Αμετάφραστο] Trait Objects</a></li>
+<li><a href="83_gr.html">[Αμετάφραστο] Handling Unsized Data</a></li>
+<li><a href="84_gr.html">[Αμετάφραστο] Generic Functions</a></li>
+<li><a href="85_gr.html">[Αμετάφραστο] Generic Function Shorthand</a></li>
+<li><a href="86_gr.html">[Αμετάφραστο] Box</a></li>
+<li><a href="87_gr.html">[Αμετάφραστο] Generic Structs Revisited</a></li>
+<li><a href="88_gr.html">[Αμετάφραστο] Chapter 7 - Conclusion</a></li>
+</ul><h3><a href="chapter_8_gr.html">[Αμετάφραστο] Chapter 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_gr.html">[Αμετάφραστο] References Revisited</a></li>
+<li><a href="91_gr.html">[Αμετάφραστο] Raw Pointers</a></li>
+<li><a href="92_gr.html">[Αμετάφραστο] Dereferencing</a></li>
+<li><a href="93_gr.html">[Αμετάφραστο] The * Operator</a></li>
+<li><a href="94_gr.html">[Αμετάφραστο] The . Operator</a></li>
+<li><a href="95_gr.html">[Αμετάφραστο] Smart Pointers</a></li>
+<li><a href="96_gr.html">[Αμετάφραστο] Smart Unsafe Code</a></li>
+<li><a href="97_gr.html">[Αμετάφραστο] Familiar Friends</a></li>
+<li><a href="98_gr.html">[Αμετάφραστο] Heap Allocated Memory</a></li>
+<li><a href="99_gr.html">[Αμετάφραστο] Failable Main Revisited</a></li>
+<li><a href="100_gr.html">[Αμετάφραστο] Referencing Counting</a></li>
+<li><a href="101_gr.html">[Αμετάφραστο] Sharing Access</a></li>
+<li><a href="102_gr.html">[Αμετάφραστο] Sharing Across Threads</a></li>
+<li><a href="103_gr.html">[Αμετάφραστο] Combining Smart Pointers</a></li>
+<li><a href="104_gr.html">[Αμετάφραστο] Chapter 8 - Conclusion</a></li>
+</ul><h3><a href="chapter_9_gr.html">[Αμετάφραστο] Chapter 9 - Project Organization and Structure</a></h3><ul>
+<li><a href="106_gr.html">[Αμετάφραστο] Modules</a></li>
+<li><a href="107_gr.html">[Αμετάφραστο] Writing a Program</a></li>
+<li><a href="108_gr.html">[Αμετάφραστο] Writing a Library</a></li>
+<li><a href="109_gr.html">[Αμετάφραστο] Referencing Other Modules and Crates</a></li>
+<li><a href="110_gr.html">[Αμετάφραστο] Referencing Multiple Items</a></li>
+<li><a href="111_gr.html">[Αμετάφραστο] Creating Modules</a></li>
+<li><a href="112_gr.html">[Αμετάφραστο] Module Hierarchy</a></li>
+<li><a href="113_gr.html">[Αμετάφραστο] Inline Module</a></li>
+<li><a href="114_gr.html">[Αμετάφραστο] Internal Module Referencing</a></li>
+<li><a href="115_gr.html">[Αμετάφραστο] Exporting</a></li>
+<li><a href="116_gr.html">[Αμετάφραστο] Structure Visibility</a></li>
+<li><a href="117_gr.html">[Αμετάφραστο] Prelude</a></li>
+<li><a href="118_gr.html">[Αμετάφραστο] Your Own Prelude</a></li>
+<li><a href="119_gr.html">[Αμετάφραστο] Chapter 9 - Conclusion</a></li>
+</ul><h3><a href="chapter_10_gr.html">Κεφάλαιο 10 - Το Τέλος</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html lang="ro" dir="ltr">
+    <head>
+        <title>Turul limbajului Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ro.html">Turul limbajului Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ro.html">Cuprins</a></span>
+            </div>
+            <div class="page">
+            <h1>match</h1>
+            <p>Vă lipsește <code>switch</code>-ul din C? Rust are un cuvânt cheie incredibil de folositor
+pentru analiza tuturor valorilor posibile ale unei variabile și executarea unei bucăți de cod dacă o anumită
+valoare corespunde condițiilor puse. Hai să vedem cum merge asta pentru numere. Avem de discutat mai multe
+în capitolele viitoare despre potrivirea șabloanelor (<em>pattern matching</em>) pentru date mai complexe. Vă promit că
+va merita așteptarea.</p>
+<p><code>match</code> este exhaustiv, deci toate cazurile
+trebuie să fie abordate și implementate.</p>
+<p>Matching, combinat cu destructurarea datelor, este de departe unul din
+cele mai întâlnite șabloane de programare pe care le veți vedea în Rust.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="17_ro.html" rel="prev">❮ Înapoi</a></span>
+                <span class="next"><a href="19_ro.html" rel="next">Înainte ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20zero%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20face%20un%20caz%20pentru%20mai%20multe%20valori%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%201%20sau%202!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20face%20un%20caz%20pentru%20o%20mul%C8%9Bime%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20un%20num%C4%83r%20%C3%AEntre%203%20%C8%99i%209%20inclusiv%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20pune%20num%C4%83rul%20care%20respect%C4%83%20cazul%20%C3%AEntr-o%20variabil%C4%83%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20num%C4%83rul%20%7B%7D%20%C3%AEntre%2010%20%C8%99i%20100!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20acesta%20este%20cazul%20implicit%20care%20trebuie%20s%C4%83%20existe%20dac%C4%83%0A%20%20%20%20%20%20%20%20%2F%2F%20nu%20sunt%20abordate%20toate%20cazurile%20posibile%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22am%20g%C4%83sit%20alt%20num%C4%83r!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

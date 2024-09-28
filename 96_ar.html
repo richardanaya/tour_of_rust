@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <title>دورة تعلم رست (Rust) - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ar.html">دورة تعلم رست (Rust)</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ar.html">جدول المحتويات</a></span>
+            </div>
+            <div class="page">
+            <h1>التعليمة البرمجية الذكية غير آمن (Smart Unsafe Code)</h1>
+            <p>تميل المؤشرات الذكية (Smart pointers) إلى استخدام التعليمة البرمجية <em>غير آمن (unsafe)</em> كثيرًا. كما ذكرنا سابقًا، فهي أداة شائعة للتفاعل مع أدنى مستويات الذاكرة في رست (Rust).</p>
+<p>ما هي التعليمة البرمجية غير آمن (unsafe)؟ تتصرف التعليمات البرمجية غير الآمنة تمامًا مثل رست (Rust) العادي باستثناء بعض القدرات التي لا يستطيع مترجم رست (Rust) تقديم ضمانات بشأنها.</p>
+<p>القدرة الأساسية للتعليمات البرمجية غير آمن (unsafe) هي <em>الوصول لمحتويات المؤشر الخام (dereferencing a raw pointer)</em>. وهذا يعني أخذ <em>مؤشر الخام</em> إلى موضع في الذاكرة والإعلان عن "يوجد هيكل بيانات هنا!" ثم تحويلها إلى تمثيل للبيانات التي يمكنك استخدامها (على سبيل المثال، <span dir="ltr"><code>*const u8</code></span> إلى <span dir="ltr"><code>u8</code></span>).</p>
+<p>ليس لدى رست (Rust) طريقة لتتبع معنى كل بايت يتم كتابته في الذاكرة. نظرًا لأن رست (Rust) لا يمكنه تقديم ضمانات حول ما هو موجود عندما يكون هناك رقم عشوائي مستخدم كـ <em>مؤشر الخام</em>، فإنه يضع إلغاء المرجعية في كتلة <span dir="ltr"><code>unsafe { ... }</code></span>.
+المؤشرات الذكية (Smart pointers) <em>تصل لمحتويات المؤشر الخام</em> على نطاق واسع، لكنها متأكدة جيدًا في ما تفعله.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="95_ar.html" rel="prev">❮ السابق</a></span>
+                <span class="next"><a href="97_ar.html" rel="next">التالي ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

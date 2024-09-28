@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+    <html lang="al" dir="ltr">
+    <head>
+        <title>Tut i Rustit - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_al.html">Tut i Rustit</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_al.html">Tabela e permbajtjeve</a></span>
+            </div>
+            <div class="page">
+            <h1>Krijimi i të dhënave në memorie</h1>
+            <p>Kur ne <strong>instantojmë</strong> një <strong>struktur</strong> në kodin tonë programi ynë krijon
+ të dhënat e fushës shoqëruese krah për krah në memorie.</p>
+<p>Ne instantojmë duke specifikuar të gjitha vlerat e fushës brenda</p>
+<p><code>Emri i strukturës { ... }</code>.</p>
+<p>Fushat e strukturës aksesohen duke përdorur një operator me pika <code>.</code>.</p>
+<p>Detajet e kujtesës të shembullit tonë:</p>
+<ul>
+<li>Teksti brenda thonjëzave është vetëm të dhëna për lexim (p.sh. "Ferris"), prandaj
+është
+vendosur në <em>regjionin e memories së të dhënave</em>.</li>
+<li>Thirrja e funksionit <code>String::from</code> krijon një strukturë <code>String</code> që vendoset
+anësor
+krah për krah me fushat e SeaCreature në <em>stack</em>. Një varg paraqet tekst që mund të ndryshohet
+dhe e bën këtë duke:</li>
+</ul>
+<ol>
+<li>Krijimi i memories në <em>grumbull</em> për tekstin ku mund të modifikohet</li>
+<li>Ruajtja e një referimi në atë vendndodhje memorie në <em>grumbull</em> dhe ruajtja e saj në <code>String</code>
+struct (Më shumë për këtë në mësimet e ardhshme)</li>
+</ol>
+<ul>
+<li>Më në fund dy miqtë tanë <em>Ferris</em> dhe <em>Sara</em> kanë struktura të dhënash që
+do të ketë gjithmonë
+vendndodhje fikse në programin tonë, kështu që ato vendosen në <em>stack</em>.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_25_al.html" rel="prev">❮ Paraardhesi</a></span>
+                <span class="next"><a href="beta_27_al.html" rel="next">Tjetri ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20T%C3%AB%20dhenat%20e%20SeaCreature%20jan%C3%AB%20n%C3%AB%20stack%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20String%20struct%20%C3%ABsht%C3%AB%20gjithashtu%20n%C3%AB%20stack%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20por%20mban%20nj%C3%AB%20referenc%C3%AB%20n%C3%AB%20t%C3%AB%20dh%C3%ABnat%20n%C3%AB%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22karkalec%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22kong%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22qent%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22truri%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%ABsht%C3%AB%20nje%20%7B%7D.%20Ata%20kan%C3%AB%20%7B%7D%20krah%C3%AB%2C%20%7B%7D%20kembe%2C%20dhe%20nje%20%7B%7D%20arm%C3%AB%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%ABsht%C3%AB%20nje%20%7B%7D.%20Ata%20kan%C3%AB%20%7B%7D%20krah%C3%AB%2C%20dhe%20%7B%7D%20kembe.%20Nuk%20kan%C3%AB%20arme..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D)" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

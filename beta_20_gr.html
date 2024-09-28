@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="gr" dir="ltr">
+    <head>
+        <title>Ξενάγηση στη Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_gr.html">Ξενάγηση στη Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_gr.html">Πίνακας Περιεχομένων</a></span>
+            </div>
+            <div class="page">
+            <h1>Επιστροφή τιμών από φραγμένες εκφράσεις</h1>
+            <p>Το <code>if</code>, το <code>match</code>, οι συναρτήσεις, και τα φράγματα κώδικα έχουν όλα στη Rust ένα μοναδικό τρόπο να επιστρέφουν τιμές. Το <code>if</code> λοιπόν μπορεί να χρησιμοποιηθεί στη θέση αυτού που άλλες γλώσσες αποκαλούν «τριαδικό τελεστή».</p>
+<p>Σημείωση: «Φράγμα» κώδικα θεωρείται οτιδήποτε οριοθετείται από άγκιστρα: <code>{}</code>, επειδή δεν αφήνει στον υπόλοιπο κώδικα να βλέπει τις μεταβλητές που ορίζονται εσωτερικά του. Γι' αυτόν το λόγο καλείται ενίοτε και «φράγμα ορατότητας».</p>
+<p>Αν η τελευταία έκφραση ενός φράγματος <code>if</code>, <code>match</code>, συνάρτησης, ή σκέτου <code>{}</code> είναι μία έκφραση χωρίς <code>;</code> στο τέλος, η Rust θα το επιστρέψει ως τιμή από το φράγμα αυτό. Αυτό είναι ένας θαυμάσιος τρόπος να δημιουργήσετε συνοπτική λογική που επιστρέφει μία τιμή που μπορεί να τοποθετηθεί σε μία νέα μεταβλητή.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_19_gr.html" rel="prev">❮ Προηγούμενο</a></span>
+                <span class="next"><a href="beta_21_gr.html" rel="next">Επόμενο ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20example()%20-%3E%20i32%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%20%20%20%20%2F%2F%20%CE%97%20%CF%84%CF%81%CE%B9%CE%B1%CE%B4%CE%B9%CE%BA%CE%AE%20%CE%AD%CE%BA%CF%86%CF%81%CE%B1%CF%83%CE%B7%20%CF%83%CF%84%CE%B7%20Rust%0A%20%20%20%20let%20v%20%3D%20if%20x%20%3C%2042%20%7B%20-1%20%7D%20else%20%7B%201%20%7D%3B%0A%20%20%20%20println!(%22%CE%91%CF%80%CF%8C%20%CF%84%CE%BF%20if%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20let%20food%20%3D%20%22%CE%A0%CE%B9%CF%84%CF%8C%CE%B3%CF%85%CF%81%CE%BF%22%3B%0A%20%20%20%20let%20result%20%3D%20match%20food%20%7B%0A%20%20%20%20%20%20%20%20%22%CE%A0%CE%B9%CF%84%CF%8C%CE%B3%CF%85%CF%81%CE%BF%22%20%3D%3E%20%22%CE%95%CE%AF%CE%BD%CE%B1%CE%B9%20%CF%80%CE%B9%CF%84%CF%8C%CE%B3%CF%85%CF%81%CE%BF%22%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20%CE%A4%CE%B1%20%CE%AC%CE%B3%CE%BA%CE%B9%CF%83%CF%84%CF%81%CE%B1%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CF%80%CF%81%CE%BF%CE%B1%CE%B9%CF%81%CE%B5%CF%84%CE%B9%CE%BA%CE%AC%20%CE%B1%CE%BD%20%CF%85%CF%80%CE%AC%CF%81%CF%87%CE%B5%CE%B9%20%CE%BC%CF%8C%CE%BD%CE%BF%20%CE%BC%CE%AF%CE%B1%0A%20%20%20%20%20%20%20%20%2F%2F%20%CE%AD%CE%BA%CF%86%CF%81%CE%B1%CF%83%CE%B7%20%CE%B5%CF%80%CE%B9%CF%83%CF%84%CF%81%CE%BF%CF%86%CE%AE%CF%82%20%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%22%CE%94%CE%B5%CE%BD%20%CE%B5%CE%AF%CE%BD%CE%B1%CE%B9%20%CF%80%CE%B9%CF%84%CF%8C%CE%B3%CF%85%CF%81%CE%BF%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%CE%91%CE%BD%CE%B1%CE%B3%CE%BD%CF%8E%CF%81%CE%B9%CF%83%CE%B7%20%CF%86%CE%B1%CE%B3%CE%B7%CF%84%CE%BF%CF%8D%3A%20%7B%7D%22%2C%20result)%3B%0A%0A%20%20%20%20let%20v%20%3D%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20%CE%91%CF%85%CF%84%CF%8C%20%CF%84%CE%BF%20%CF%86%CF%81%CE%AC%CE%B3%CE%BC%CE%B1%20%CE%BF%CF%81%CE%B1%CF%84%CF%8C%CF%84%CE%B7%CF%84%CE%B1%CF%82%20%CE%BC%CE%B1%CF%82%20%CE%B5%CF%80%CE%B9%CF%84%CF%81%CE%AD%CF%80%CE%B5%CE%B9%20%CE%BD%CE%B1%20%CE%B5%CE%BE%CE%B1%CE%B3%CE%AC%CE%B3%CE%BF%CF%85%CE%BC%CE%B5%20%CE%AD%CE%BD%CE%B1%20%CE%B1%CF%80%CE%BF%CF%84%CE%AD%CE%BB%CE%B5%CF%83%CE%BC%CE%B1%0A%20%20%20%20%20%20%20%20%2F%2F%20%CF%87%CF%89%CF%81%CE%AF%CF%82%20%CE%BD%CE%B1%20%CE%BC%CE%BF%CE%BB%CF%8D%CE%BD%CE%BF%CF%85%CE%BC%CE%B5%20%CF%84%CE%B7%CE%BD%20%CE%BF%CF%81%CE%B1%CF%84%CF%8C%CF%84%CE%B7%CF%84%CE%B1%20%CF%84%CE%B7%CF%82%20%CF%83%CF%85%CE%BD%CE%AC%CF%81%CF%84%CE%B7%CF%83%CE%B7%CF%82%0A%20%20%20%20%20%20%20%20let%20a%20%3D%201%3B%0A%20%20%20%20%20%20%20%20let%20b%20%3D%202%3B%0A%20%20%20%20%20%20%20%20a%20%2B%20b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22%CE%91%CF%80%CF%8C%20%CF%86%CF%81%CE%AC%CE%B3%CE%BC%CE%B1%3A%20%7B%7D%22%2C%20v)%3B%0A%0A%20%20%20%20%2F%2F%20%CE%9F%20%CE%B4%CF%8C%CE%BA%CE%B9%CE%BC%CE%BF%CF%82%20%CF%84%CF%81%CF%8C%CF%80%CE%BF%CF%82%20%CE%BD%CE%B1%20%CE%B5%CF%80%CE%B9%CF%83%CF%84%CF%81%CE%B1%CF%86%CE%B5%CE%AF%20%CE%BC%CE%AF%CE%B1%20%CF%84%CE%B9%CE%BC%CE%AE%20%CE%B1%CF%80%CF%8C%20%CE%BC%CE%AF%CE%B1%20%CF%83%CF%85%CE%BD%CE%AC%CF%81%CF%84%CE%B7%CF%83%CE%B7%20%CF%83%CF%84%CE%B7%20Rust%0A%20%20%20%20v%20%2B%204%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20println!(%22%CE%91%CF%80%CF%8C%20%CF%83%CF%85%CE%BD%CE%AC%CF%81%CF%84%CE%B7%CF%83%CE%B7%3A%20%7B%7D%22%2C%20example())%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

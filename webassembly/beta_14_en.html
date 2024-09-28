@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="en" dir="ltr">
+    <head>
+        <title>Tour of WebAssembly - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="index.html">Tour of WebAssembly</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_en.html">Table of Contents</a></span>
+            </div>
+            <div class="page">
+            <h1>Logging Text</h1>
+            <p>Let's explore a simple example of logging some text from a WebAssembly program.</p>
+<p>We must:</p>
+<ol>
+<li>Create some utf-8 compliant text in our program's memory</li>
+<li>Determine the length of our text's bytes</li>
+<li>Somehow send the starting byte start index and length in bytes of that text data to the host browser so it can call <code>console.log</code>.</li>
+</ol>
+<p>Here's an example of what that receiving JavaScript function would look like:</p>
+<pre><code class="JavaScript language-JavaScript">wasm_log(start,len) {
+  // extract text from memory location and length
+  const utf8dec = new TextDecoder("utf-8");
+  let buffer = module.instance.exports.memory.buffer;
+  let memory = new Uint8Array(buffer);
+  let text = utf8dec.decode(memory.subarray(start,start+len));
+  console.log(text);
+}
+</code></pre>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_13_en.html" rel="prev">❮ Previous</a></span>
+                <span class="next"><a href="beta_15_en.html" rel="next">Next ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://webassembly.studio/?embed&f=1gxcr004p3x" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

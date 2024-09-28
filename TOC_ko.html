@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>강의</h1>
+            <ul>
+        <li><a href="00_ko.html">안녕하세요, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_ko.html">1장 - 기초</a></h3><ul>
+<li><a href="02_ko.html">Rust 놀이터</a></li>
+<li><a href="03_ko.html">변수</a></li>
+<li><a href="04_ko.html">변수의 값 변경하기</a></li>
+<li><a href="05_ko.html">기본 자료형</a></li>
+<li><a href="06_ko.html">기본 자료형 변환</a></li>
+<li><a href="07_ko.html">상수</a></li>
+<li><a href="08_ko.html">배열</a></li>
+<li><a href="09_ko.html">함수</a></li>
+<li><a href="10_ko.html">여러개의 리턴 값</a></li>
+<li><a href="11_ko.html">아무것도 리턴하지 않기</a></li>
+<li><a href="12_ko.html">1장 - 마무리</a></li>
+</ul><h3><a href="chapter_2_ko.html">2장 - 기초적인 흐름 제어</a></h3><ul>
+<li><a href="14_ko.html">if/else if/else</a></li>
+<li><a href="15_ko.html">loop</a></li>
+<li><a href="16_ko.html">while</a></li>
+<li><a href="17_ko.html">for</a></li>
+<li><a href="18_ko.html">match</a></li>
+<li><a href="19_ko.html">loop에서 값 리턴하기</a></li>
+<li><a href="20_ko.html">블록 표현에서 값 리턴하기</a></li>
+<li><a href="21_ko.html">2장 - 마무리</a></li>
+</ul><h3><a href="chapter_3_ko.html">3장 - 기본 데이터 구조 자료형</a></h3><ul>
+<li><a href="23_ko.html">구조체</a></li>
+<li><a href="24_ko.html">메소드 호출하기</a></li>
+<li><a href="25_ko.html">메모리</a></li>
+<li><a href="26_ko.html">메모리에 데이터 생성하기</a></li>
+<li><a href="27_ko.html">Tuple 같은 구조체</a></li>
+<li><a href="28_ko.html">Unit 같은 구조체</a></li>
+<li><a href="29_ko.html">열거형</a></li>
+<li><a href="30_ko.html">열거형과 데이터</a></li>
+<li><a href="31_ko.html">3장 - 마무리</a></li>
+</ul><h3><a href="chapter_4_ko.html">4장 - Generic 자료형</a></h3><ul>
+<li><a href="33_ko.html">Generic 자료형이란?</a></li>
+<li><a href="34_ko.html">아무 것도 없는 것을 표현하기</a></li>
+<li><a href="35_ko.html">옵션</a></li>
+<li><a href="36_ko.html">결과</a></li>
+<li><a href="37_ko.html">실패할 수 있는 메인</a></li>
+<li><a href="38_ko.html">우아한 오류 처리</a></li>
+<li><a href="39_ko.html">추한 옵션/결과 처리</a></li>
+<li><a href="40_ko.html">벡터</a></li>
+<li><a href="41_ko.html">4장 - 마무리</a></li>
+</ul><h3><a href="chapter_5_ko.html">5장 - 소유권과 데이터 대여</a></h3><ul>
+<li><a href="43_ko.html">소유권</a></li>
+<li><a href="44_ko.html">범위 기반 리소스 관리</a></li>
+<li><a href="45_ko.html">Dropping은 계층적이다</a></li>
+<li><a href="46_ko.html">소유권 이전</a></li>
+<li><a href="47_ko.html">소유권 리턴하기</a></li>
+<li><a href="48_ko.html">참조로 소유권 대여하기</a></li>
+<li><a href="49_ko.html">참조로 변경 가능한 소유권 대여하기</a></li>
+<li><a href="50_ko.html">역참조</a></li>
+<li><a href="51_ko.html">대여한 데이터 전달하기</a></li>
+<li><a href="52_ko.html">참조의 참조</a></li>
+<li><a href="53_ko.html">명시적인 생명주기</a></li>
+<li><a href="54_ko.html">여러 개의 생명주기</a></li>
+<li><a href="55_ko.html">정적인 생명주기</a></li>
+<li><a href="56_ko.html">데이터 자료형의 생명주기</a></li>
+<li><a href="57_ko.html">5장 - 마무리</a></li>
+</ul><h3><a href="chapter_6_ko.html">6장 - 텍스트</a></h3><ul>
+<li><a href="59_ko.html">문자열</a></li>
+<li><a href="60_ko.html">utf-8이란 무엇인가</a></li>
+<li><a href="61_ko.html">예외처리문자</a></li>
+<li><a href="62_ko.html">여러 줄로 된 문자열</a></li>
+<li><a href="63_ko.html">원시 문자열</a></li>
+<li><a href="64_ko.html">파일에서 문자열 가져오기</a></li>
+<li><a href="65_ko.html">문자열 슬라이스</a></li>
+<li><a href="66_ko.html">문자</a></li>
+<li><a href="67_ko.html">스트링</a></li>
+<li><a href="68_ko.html">함수의 매개변수로서의 텍스트</a></li>
+<li><a href="69_ko.html">스트링 만들기</a></li>
+<li><a href="70_ko.html">스트링 양식 만들기</a></li>
+<li><a href="71_ko.html">스트링 변환</a></li>
+<li><a href="72_ko.html">6장 - 마무리</a></li>
+</ul><h3><a href="chapter_7_ko.html">7장 - 객체 지향 프로그래밍</a></h3><ul>
+<li><a href="74_ko.html">OOP란 무엇인가?</a></li>
+<li><a href="75_ko.html">Rust는 OOP가 아니다</a></li>
+<li><a href="76_ko.html">메소드 캡슐화 하기</a></li>
+<li><a href="77_ko.html">선택적 노출을 통한 추상화</a></li>
+<li><a href="78_ko.html">다형성과 Trait</a></li>
+<li><a href="79_ko.html">Trait에 구현된 메소드</a></li>
+<li><a href="80_ko.html">Trait 상속</a></li>
+<li><a href="81_ko.html">동적 vs 정적 디스패치</a></li>
+<li><a href="82_ko.html">Trait 객체</a></li>
+<li><a href="83_ko.html">크기를 알 수 없는 데이터 다루기</a></li>
+<li><a href="84_ko.html">Generic 함수</a></li>
+<li><a href="85_ko.html">Generic 함수 줄여쓰기</a></li>
+<li><a href="86_ko.html">Box</a></li>
+<li><a href="87_ko.html">Generic 구조체 다시 보기</a></li>
+<li><a href="88_ko.html">7장 - 마무리</a></li>
+</ul><h3><a href="chapter_8_ko.html">8장 - 스마트 포인터</a></h3><ul>
+<li><a href="90_ko.html">참조 다시 보기</a></li>
+<li><a href="91_ko.html">원시 포인터</a></li>
+<li><a href="92_ko.html">역참조</a></li>
+<li><a href="93_ko.html">* 연산자</a></li>
+<li><a href="94_ko.html">. 연산자</a></li>
+<li><a href="95_ko.html">스마트 포인터</a></li>
+<li><a href="96_ko.html">위험한 스마트 코드</a></li>
+<li><a href="97_ko.html">익숙한 친구들</a></li>
+<li><a href="98_ko.html">힙에 할당된 메모리</a></li>
+<li><a href="99_ko.html">실패할 수 있는 메인 다시 보기</a></li>
+<li><a href="100_ko.html">참조 카운팅</a></li>
+<li><a href="101_ko.html">접근 공유하기</a></li>
+<li><a href="102_ko.html">쓰레드 간에 공유하기</a></li>
+<li><a href="103_ko.html">스마트 포인터 조합하기</a></li>
+<li><a href="104_ko.html">8장 - 마무리</a></li>
+</ul><h3><a href="chapter_9_ko.html">9장 - 프로젝트 구성과 구조</a></h3><ul>
+<li><a href="106_ko.html">모듈</a></li>
+<li><a href="107_ko.html">프로그램 작성하기</a></li>
+<li><a href="108_ko.html">라이브러리 작성하기</a></li>
+<li><a href="109_ko.html">다른 모듈과 크레이트 참조하기</a></li>
+<li><a href="110_ko.html">여러 개의 항목을 참조하기</a></li>
+<li><a href="111_ko.html">모듈 작성하기</a></li>
+<li><a href="112_ko.html">모듈 계층구조</a></li>
+<li><a href="113_ko.html">인라인 모듈</a></li>
+<li><a href="114_ko.html">내부 모듈 참조하기</a></li>
+<li><a href="115_ko.html">내보내기</a></li>
+<li><a href="116_ko.html">구조체 가시성</a></li>
+<li><a href="117_ko.html">전주곡 (Prelude)</a></li>
+<li><a href="118_ko.html">여러분만의 Prelude</a></li>
+<li><a href="119_ko.html">9장 - 마무리</a></li>
+</ul><h3><a href="chapter_10_ko.html">10장 - 끝</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

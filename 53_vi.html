@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Thời gian tồn tại minh bạch(Explicit Lifetimes)</h1>
+            <p>Mặc dù Rust không phải lúc nào cũng hiển thị nó trong code,  trình biên dịch hiểu thời gian tồn tại của mọi biến  và sẽ cố gắng xác thực rằng một tham chiếu không bao giờ tồn tại lâu hơn chủ sở hữu của nó.</p>
+<p>Các hàm có thể minh bạch bằng cách tham số hóa chữ ký  hàm bằng các ký hiệu giúp xác định các tham số và giá trị trả về có cùng thời gian tồn tại.</p>
+<p>Các từ chỉ định thời gian tồn tại luôn bắt đầu bằng dấu <code>'</code> (ví dụ:  <code>'a</code>, <code>'b</code>, <code>'c</code>)</p>
+            <div class="bottomnav">
+                <span class="back"><a href="52_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="54_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20tham%20s%E1%BB%91%20foo%20v%C3%A0%20gi%C3%A1%20tr%E1%BB%8B%20tr%E1%BA%A3%20v%E1%BB%81%20c%C3%B3%20c%C3%B9ng%20th%E1%BB%9Di%20gian%20t%E1%BB%93n%20t%E1%BA%A1i%0Afn%20do_something%3C%27a%3E(foo%3A%20%26%27a%20Foo)%20-%3E%20%26%27a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20x%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%2C%20cho%20ph%C3%A9p%20ch%C3%BAng%20ta%20t%E1%BA%A1o%20ra%20m%E1%BB%99t%20non-mutable%20reference%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20y%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%20%20%20%20%2F%2F%20foo%20b%E1%BB%8B%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

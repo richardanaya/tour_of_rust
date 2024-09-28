@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Compartilhando entre threads</h1>
+            <p>O <code>Mutex</code> é uma estrutura de dados contêiner comumente mantida por ponteiros inteligentes que recebe os dados e nos permite emprestar referências mutáveis e imutáveis aos dados que estão dentro. Isso evita o abuso do empréstimo fazendo com que o sistema operacional restrinja o acesso aos dados a apenas uma thread de CPU por vez, bloqueando as outras threads até que a thread original seja concluída com seu empréstimo bloqueado.</p>
+<p>O multithreading está além do escopo do Tour por Rust, mas <code>Mutex</code> é uma parte fundamental da orquestração de várias threads de CPU acessando os mesmos dados.</p>
+<p>Há um ponteiro inteligente especial <code>Arc</code> que é idêntico ao<code>Rc</code>, exceto pelo uso de incrementos thread-safe de contagens de referência. Frequentemente é usado para ter muitas referências ao mesmo <code>Mutex</code>.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="101_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="103_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pizza%3B%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22s%C3%B3%20eu%20como%20a%20pizza%20agora!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pizza%20%3D%20Mutex%3A%3Anew(Pizza)%3B%0A%20%20%20%20%2F%2F%20vamos%20pegar%20emprestada%20uma%20refer%C3%AAncia%20imut%C3%A1vel%20bloqueada%20de%20Pizza%0A%20%20%20%20%2F%2F%20temos%20que%20desembrulhar%20o%20resultado%20de%20um%20bloqueio%20porque%20pode%20falhar%0A%20%20%20%20let%20ref_pizza%20%3D%20mutex_pizza.lock().unwrap()%3B%0A%20%20%20%20ref_pizza.comer()%3B%0A%20%20%20%20%2F%2F%20a%20refer%C3%AAncia%20bloqueada%20%C3%A9%20descartada%20aqui%0A%20%20%20%20%2F%2F%20e%20o%20valor%20protegido%20da%20mutex%20pode%20ser%20usado%20por%20outra%20pessoa%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

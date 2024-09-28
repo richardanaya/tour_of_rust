@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+    <html lang="ja" dir="ltr">
+    <head>
+        <title>Rust ツアー - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ja.html">Rust ツアー</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ja.html">目次</a></span>
+            </div>
+            <div class="page">
+            <h1>やっつけな Option/Result 処理</h1>
+            <p><code>Option</code>/<code>Result</code> を使って作業するのは、ちょっとしたコードを書くのには厄介です。
+<code>Option</code> と <code>Result</code> の両方には <code>unwrap</code> と呼ばれる関数があり、手っ取り早く値を取得するのには便利です。
+<code>unwrap</code> は以下のことを行います。</p>
+<ol>
+<li><code>Option</code>/<code>Result</code> 内の値を取得します。</li>
+<li>列挙型が <code>None</code>/<code>Err</code> の場合、<code>panic!</code> します。</li>
+</ol>
+<p>以下の2つのコードは等価です。</p>
+<pre><code>my_option.unwrap()
+</code></pre>
+<pre><code>match my_option {
+    Some(v) =&gt; v,
+    None =&gt; panic!("Rust によって生成されたエラーメッセージ！"),
+}
+</code></pre>
+<p>同様に:</p>
+<pre><code>my_result.unwrap()
+</code></pre>
+<pre><code>match my_result {
+    Ok(v) =&gt; v,
+    Err(e) =&gt; panic!("Rust によって生成されたエラーメッセージ！"),
+}
+</code></pre>
+<p>良い Rust 使い（Rustacean）であるためには、可能な限り適切に <code>match</code> を使用してください。</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_38_ja.html" rel="prev">❮ 前</a></span>
+                <span class="next"><a href="beta_40_ja.html" rel="next">次 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22%E6%AD%A3%E3%81%97%E3%81%84%E5%80%A4%E3%81%A7%E3%81%AF%E3%81%82%E3%82%8A%E3%81%BE%E3%81%9B%E3%82%93%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20%E7%B0%A1%E6%BD%94%E3%81%A7%E3%81%99%E3%81%8C%E3%80%81%E5%80%A4%E3%81%8C%E5%AD%98%E5%9C%A8%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%82%92%E4%BB%AE%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%8A%E3%82%8A%E3%80%81%0A%20%20%20%20%2F%2F%20%E3%81%99%E3%81%90%E3%81%AB%E3%83%80%E3%83%A1%E3%81%AB%E3%81%AA%E3%82%8B%E5%8F%AF%E8%83%BD%E6%80%A7%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22%E7%99%BA%E8%A6%8B%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20%E3%83%91%E3%83%8B%E3%83%83%E3%82%AF%E3%81%99%E3%82%8B%E3%81%A7%E3%81%97%E3%82%87%E3%81%86%EF%BC%81%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22%E7%99%BA%E8%A6%8B%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

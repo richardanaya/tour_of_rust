@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <html lang="ro" dir="ltr">
+    <head>
+        <title>Turul limbajului Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ro.html">Turul limbajului Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ro.html">Cuprins</a></span>
+            </div>
+            <div class="page">
+            <h1>Gestionarea inadecvată a enumerărilor Option/Result</h1>
+            <p>Folosirea <code>Option</code>/<code>Result</code> poate fi obositoare când încercați doar să scrieți rapid niște cod.  Și <code>Option</code>, și <code>Result</code> au o
+funcție numită <code>unwrap</code> care poate fi utilă pentru a primi o valoare rapid, dar în mod periculos. <code>unwrap</code> va fi:</p>
+<ol>
+<li>valoare din <code>Option</code>/<code>Result</code></li>
+<li><code>panic!</code>, dacă enumerarea este de tip <code>None</code>/<code>Err</code></li>
+</ol>
+<p>Următoarele bucăți de cod sunt echivalente:</p>
+<pre><code>opțiunea_mea.unwrap()
+</code></pre>
+<pre><code>match opțiunea_mea {
+    Some(v) =&gt; v,
+    None =&gt; panic!("un mesaj de eroare generat de Rust!"),
+}
+</code></pre>
+<p>În mod similar:</p>
+<pre><code>rezultatul_meu.unwrap()
+</code></pre>
+<pre><code>match rezultatul_meu {
+    Ok(v) =&gt; v,
+    Err(e) =&gt; panic!("un mesaj de eroare generat de Rust!"),
+}
+</code></pre>
+<p>Fiți un bun Rustaceu și folosiți-vă de <code>match</code> când puteți face asta!</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_38_ro.html" rel="prev">❮ Înapoi</a></span>
+                <span class="next"><a href="beta_40_ro.html" rel="next">Înainte ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20execut%C4%83_ceva_ce_poate_e%C8%99ua(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22acesta%20nu%20este%20num%C4%83rul%20corect%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concis%2C%20dar%20este%20o%20presupunere%20%C8%99i%20poate%20fi%20periculos%0A%20%20%20%20let%20v%20%3D%20execut%C4%83_ceva_ce_poate_e%C8%99ua(42).unwrap()%3B%0A%20%20%20%20println!(%22g%C4%83sit%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20aceasta%20va%20returna%20panic!%0A%20%20%20%20let%20v%20%3D%20execut%C4%83_ceva_ce_poate_e%C8%99ua(1).unwrap()%3B%0A%20%20%20%20println!(%22g%C4%83sit%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

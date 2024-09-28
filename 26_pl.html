@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="pl" dir="ltr">
+    <head>
+        <title>Przewodnik po Języku Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pl.html">Przewodnik po Języku Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pl.html">Spis Treści</a></span>
+            </div>
+            <div class="page">
+            <h1>Tworzenie Danych w Pamięci</h1>
+            <p>Kiedy tworzymy nową <strong>instancję</strong> pewnej <strong>struktury</strong> w naszym kodzie, nasz program inicjalizuje dla niej miejsce w pamięci komputera, układając dane kolejnych pól struktury w jednym ciągu, jedno obok drugiego.</p>
+<p>Nową instancję tworzymy wpisując nazwę struktury i dopisując jej elementy wewnątrz nawiasów klamrowych: <code>StructName { ... }</code>.
+Aby dostać się do pól istniejącej instancji struktury używamy operatora kropki <code>.</code>.</p>
+<p>Kilka ciekawostek dotyczących rozkładu struktur w pamięci:</p>
+<ul>
+<li>Tekst wewnątrz cudzysłowu jest rozumiany jako <em>dane tylko do odczytu</em>, przez co odpowiednio ląduje w regionie pamięci przeznaczonym dla danych statycznych</li>
+<li>Wywołanie funkcji <code>String::from</code> tworzy strukturę <code>String</code> która zostaje umieszczona obok innych pól obiektu <code>SeaCreature</code> na stosie. <code>String</code> reprezentuje tekst który może być zmieniony w trakcie trwania programu, co oznacza, że:<ul>
+<li>Stworzony zostaje obszar pamięci na stercie dla przechowania danych 
+reprezentujących modyfikowalny ciąg znaków</li>
+<li>Przechowuje się na stosie referencję do miejsca na stercie gdzie przechowywane są te dane</li></ul></li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="25_pl.html" rel="prev">❮ Wstecz</a></span>
+                <span class="next"><a href="27_pl.html" rel="next">Dalej ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20ZyjatkoMorskie%20%7B%0A%20%20%20%20rodzaj%3A%20String%2C%0A%20%20%20%20imie%3A%20String%2C%0A%20%20%20%20ramiona%3A%20i32%2C%0A%20%20%20%20nogi%3A%20i32%2C%0A%20%20%20%20uzbrojenie%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20ta%20struktura%20jest%20przechowywana%20na%20stosie%0A%20%20%20%20let%20ferris%20%3D%20ZyjatkoMorskie%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20struktura%20String%20jest%20r%C3%B3wnie%C5%BC%20przechowywana%20na%20stosie%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20cho%C4%87%20trzyma%20ona%20te%C5%BC%20referencj%C4%99%20do%20danych%20na%20stercie%0A%20%20%20%20%20%20%20%20rodzaj%3A%20String%3A%3Afrom(%22krab%22)%2C%0A%20%20%20%20%20%20%20%20imie%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20ramiona%3A%202%2C%0A%20%20%20%20%20%20%20%20nogi%3A%204%2C%0A%20%20%20%20%20%20%20%20uzbrojenie%3A%20String%3A%3Afrom(%22szczypce%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sara%20%3D%20ZyjatkoMorskie%20%7B%0A%20%20%20%20%20%20%20%20rodzaj%3A%20String%3A%3Afrom(%22o%C5%9Bmiornica%22)%2C%0A%20%20%20%20%20%20%20%20imie%3A%20String%3A%3Afrom(%22Sara%22)%2C%0A%20%20%20%20%20%20%20%20ramiona%3A%208%2C%0A%20%20%20%20%20%20%20%20nogi%3A%200%2C%0A%20%20%20%20%20%20%20%20uzbrojenie%3A%20String%3A%3Afrom(%22brak%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20to%20%7B%7D.%20Posiada%20%7B%7D%20ramion%2C%20%7B%7D%20n%C3%B3g%2C%20oraz%20jest%20uzbrojony%20w%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.imie%2C%20ferris.rodzaj%2C%20ferris.ramiona%2C%20ferris.nogi%2C%20ferris.uzbrojenie%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20to%20%7B%7D.%20Posiada%20%7B%7D%20ramion%20i%20%7B%7D%20n%C3%B3g.%20Nie%20posiada%20%C5%BCadnej%20broni..%22%2C%0A%20%20%20%20%20%20%20%20sarah.imie%2C%20sarah.rodzaj%2C%20sarah.ramiona%2C%20sarah.nogi%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

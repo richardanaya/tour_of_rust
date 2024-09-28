@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+    <html lang="zh-tw" dir="ltr">
+    <head>
+        <title>Rust 語言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-tw.html">Rust 語言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-tw.html">目錄</a></span>
+            </div>
+            <div class="page">
+            <h1>記憶體 (memory)</h1>
+            <p>Rust 程式裡有三塊記憶體區塊用來儲存資料：</p>
+<ul>
+<li><strong>資料記憶體</strong> (data memory)：有著固定大小且是<strong>靜態</strong> (即整個程式的生週期裡都可以存取) 的資料。
+例如你程式裡的一段文字 (例如："Hello World!")：這段文字的位元組 (bytes) 只會從一個固定的地方被讀取，因此它可以被儲存在這個區塊。
+編譯器在這類型的資料上做了許多優化，因為它們的位址是已知且固定，所以通常可以很快速的取得。</li>
+<li><strong>堆疊記憶體</strong> (stack memory)：在函數裡宣告為變量的資料。
+在一個函數呼叫裡，這類記憶體的位址永遠不會變動，因此編譯器可以對此做優化，使得堆疊資料可以快速被存取。</li>
+<li><strong>堆記憶體</strong> (heap memory)：當應用程式正在運行時所創建的資料。
+在此區塊的資料可能會新增、移動、移除、更改大小…等等。因為它的動態特性，使得它們一般被認為在使用上是比較慢的。
+但是也讓使用者可以有更多有創意的方式使用記憶體。
+當資料被新增到此區塊，我們稱之為<strong>分配</strong> (allocation)。當資料從此區塊被移除，我們稱之為<strong>回收</strong> (deallocation)。</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_24_zh-tw.html" rel="prev">❮ 上一頁</a></span>
+                <span class="next"><a href="beta_26_zh-tw.html" rel="next">下一頁 ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

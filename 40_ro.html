@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="ro" dir="ltr">
+    <head>
+        <title>Turul limbajului Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ro.html">Turul limbajului Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ro.html">Cuprins</a></span>
+            </div>
+            <div class="page">
+            <h1>Vectori</h1>
+            <p>Unele din cele mai utile tipuri generice sunt colecțiile. Un vector este o listă de dimensiune variabilă de elemente
+reprezentate de structura <code>Vec</code>.</p>
+<p>Macro-ul <code>vec!</code> ne permite să creăm mai ușor un vector decât l-am construi manual.</p>
+<p><code>Vec</code> are metoda <code>iter()</code> care creează un iterator dintr-un vector, fiind astfel foarte ușor să
+punem un vector în interiorul unei bucle <code>for</code>.</p>
+<p>Detalii despre memorie:</p>
+<ul>
+<li><code>Vec</code> este o structură, dar în interior conține o referință la o listă fixă a elementelor sale din heap.</li>
+<li>Un vector începe cu o capacitate implicită; când sunt adăugate mai multe elemente decât poate conține, acesta
+realocă elementele sale pe heap pentru a avea o nouă listă fixă mai mare.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="39_ro.html" rel="prev">❮ Înapoi</a></span>
+                <span class="next"><a href="41_ro.html" rel="next">Înainte ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Putem%20fi%20explici%C8%9Bi%20cu%20privire%20la%20tip%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20Rust%20este%20foarte%20inteligent%20c%C3%A2nd%20vine%20vorba%20de%20determinarea%20automat%C4%83%20a%20tipului%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20Este%20un%20macro%20superb!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Salutare%22)%2C%20String%3A%3Afrom(%22Lume%22)%5D%3B%0A%0A%20%20%20%20for%20cuv%C3%A2nt%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20cuv%C3%A2nt)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

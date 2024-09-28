@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Combinando ponteiros inteligentes</h1>
+            <p>Os ponteiros inteligentes podem parecer limitados, mas eles podem fazer algumas combinações muito poderosas.</p>
+<p><code>Rc&lt;Vec&lt;Foo&gt;&gt;</code> - permite a clonagem de vários ponteiros inteligentes que podem pegar emprestado o mesmo vetor de estruturas de dados imutáveis na heap.</p>
+<p><code>Rc&lt;RefCell&lt;Foo&gt;&gt;</code> - permite a múltiplos ponteiros inteligentes a capacidade de emprestar mutável/imutavelmente a mesma estrutura <code>Foo</code>.</p>
+<p><code>Arc&lt;Mutex&lt;Foo&gt;&gt;</code> - permite que vários ponteiros inteligentes bloqueiem empréstimos mutáveis/imutáveis temporários exclusivamente por thread de CPU.</p>
+<p>Detalhes da memória:</p>
+<ul>
+<li>Você notará um assunto em comum em muitas dessas combinações. O uso de um tipo de dado imutável (possivelmente pertencente a vários ponteiros inteligentes) para modificar dados internos. Isso é conhecido como o padrão "mutabilidade interior" no Rust. É um padrão que nos permite dobrar as regras de uso de memória em tempo de execução com o mesmo nível de segurança das verificações de tempo de compilação do Rust.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="102_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="104_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pizza%20%7B%0A%20%20%20%20fatias%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pizza%20%7B%0A%20%20%20%20fn%20comer_fatia(%26mut%20self%2C%20nome%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20pegou%20uma%20fatia!%22%2C%20nome)%3B%0A%20%20%20%20%20%20%20%20self.fatias%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20CriaturaMarinha%20%7B%0A%20%20%20%20nome%3A%20String%2C%0A%20%20%20%20pizza%3A%20Rc%3CRefCell%3CPizza%3E%3E%2C%0A%7D%0A%0Aimpl%20CriaturaMarinha%20%7B%0A%20%20%20%20fn%20comer(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20usa%20um%20ponteiro%20inteligente%20da%20pizza%20para%20um%20empr%C3%A9stimo%20mut%C3%A1vel%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pizza.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20d%C3%A1%20uma%20mordida!%0A%20%20%20%20%20%20%20%20p.comer_fatia(%26self.nome)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pizza%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pizza%20%7B%20fatias%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20e%20sarah%20recebem%20clones%20do%20ponteiro%20inteligente%20da%20pizza%0A%20%20%20%20let%20ferris%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pizza%3A%20pizza.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20CriaturaMarinha%20%7B%0A%20%20%20%20%20%20%20%20nome%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pizza%3A%20pizza.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.comer()%3B%0A%20%20%20%20sarah.comer()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pizza.borrow()%3B%0A%20%20%20%20println!(%22sobraram%20%7B%7D%20fatias%22%2C%20p.fatias)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

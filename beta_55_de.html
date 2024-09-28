@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html lang="de" dir="ltr">
+    <head>
+        <title>Tour durch Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_de.html">Tour durch Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
+            </div>
+            <div class="page">
+            <h1>Statische Lebensdauern</h1>
+            <p>Eine <strong>statische</strong> Variable ist eine Speicherressource, die zur Kompilierungszeit erstellt wird existiert durch einen Programmstart
+beenden. Ihre Typen müssen explizit angegeben werden.</p>
+<p>Eine <strong>statische Lebensdauer</strong> ist eine Speicherressource, die unbegrenzt vorhanden ist Ende eines Programms. Beachten Sie, dass nach dieser Definition
+Einige statische Lebenszeitressourcen können zur Laufzeit erstellt werden.</p>
+<p>Ressourcen mit statischer Lebensdauer haben einen speziellen Lebensdauerspezifizierer <code>'static</code>.</p>
+<p><code>'static</code> Ressourcen werden niemals <strong>verloren</strong>.</p>
+<p>Wenn statische Lebenszeitressourcen Referenzen enthalten, müssen sie alle <code>'statisch</code> sein (Alles andere würde nicht lange genug leben).</p>
+<p>Speicherdetail:</p>
+<ul>
+<li>Das Ändern statischer Variablen ist von Natur aus gefährlich, weil sie es sind weltweit zugänglich und für jedermann lesbar
+Einführung der Möglichkeit eines Datenwettlaufs. Wir werden später über die Herausforderungen globaler Daten sprechen.</li>
+<li>Rust erlaubt die Verwendung von „unsafe { … }“-Blöcken, um einige Operationen auszuführen dass der Compiler keine Speichergarantien geben kann. Die <a href="https://doc.rust-lang.org/nomicon/"><span style="color:red; Schriftstärke: fett;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐ ͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span></a> darüber sollte nicht beiläufig gesprochen werden.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_46_de.html" rel="prev">❮ Zurück</a></span>
+                <span class="next"><a href="beta_48_de.html" rel="next">Weiter ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20variabilele%20statice%20pot%20fi%20%C3%AEncadrate%20%C3%AEntr-o%20func%C8%9Bie%0A%20%20%20%20static%20mut%20SECRET%3A%20%26%27static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string-urile%20%C3%AEntre%20ghilimele%20au%20durat%C4%83%20de%20via%C8%9B%C4%83%20static%C4%83%0A%20%20%20%20let%20msg%3A%20%26%27static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26%27static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20Pute%C8%9Bi%20%C3%AEnc%C4%83lca%20unele%20reguli%2C%20dar%20trebuie%20s%C4%83%20fi%C8%9Bi%20explici%C8%9Bi%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20putem%20seta%20SECRET%20cu%20un%20string%20%C3%AEntre%20ghilimele%0A%20%20%20%20%20%20%20%20%2F%2F%20pentru%20c%C4%83%20are%20de%20asemenea%20durat%C4%83%20de%20via%C8%9B%C4%83%20static%C4%83%20(%60static)%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

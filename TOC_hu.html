@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="hu" dir="ltr">
+    <head>
+        <title>Rust-túra - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_hu.html">Rust-túra</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Egységek</h1>
+            <ul>
+        <li><a href="00_hu.html">Helló, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_hu.html">1. Fejezet - Az Alapok</a></h3><ul>
+<li><a href="02_hu.html">A Rust Homokozó</a></li>
+<li><a href="03_hu.html">Változók</a></li>
+<li><a href="04_hu.html">Változók megváltoztatása</a></li>
+<li><a href="05_hu.html">Alapvető típusok</a></li>
+<li><a href="06_hu.html">Egyszerű típusok közötti átalakítás</a></li>
+<li><a href="07_hu.html">Konstansok</a></li>
+<li><a href="08_hu.html">Tömbök</a></li>
+<li><a href="09_hu.html">Függvények</a></li>
+<li><a href="10_hu.html">Több visszatérési érték</a></li>
+<li><a href="11_hu.html">Semmivel való visszatérés</a></li>
+<li><a href="12_hu.html">1. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_2_hu.html">2. Fejezet - Egyszerű ciklusok és elágazások</a></h3><ul>
+<li><a href="14_hu.html">if/else if/else</a></li>
+<li><a href="15_hu.html">loop</a></li>
+<li><a href="16_hu.html">while</a></li>
+<li><a href="17_hu.html">for</a></li>
+<li><a href="18_hu.html">match</a></li>
+<li><a href="19_hu.html">Értékkel való visszatérés ciklusokból</a></li>
+<li><a href="20_hu.html">Értékkel való visszatérés blokk kifejezésekből</a></li>
+<li><a href="21_hu.html">2. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_3_hu.html">3. Fejezet - Alapvető adatstruktúra típusok</a></h3><ul>
+<li><a href="23_hu.html">Struktúrák</a></li>
+<li><a href="24_hu.html">Metódusok hívása</a></li>
+<li><a href="25_hu.html">Memória</a></li>
+<li><a href="26_hu.html">Adatok létrehozása a memóriában</a></li>
+<li><a href="27_hu.html">Tuple-szerű Struct-ok</a></li>
+<li><a href="28_hu.html">Unit-szerű struct-ok</a></li>
+<li><a href="29_hu.html">Enumerációk (felsorolások)</a></li>
+<li><a href="30_hu.html">Adatokat tartalmazó Enumerációk</a></li>
+<li><a href="31_hu.html">3. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_4_hu.html">4. Fejezet - Generikus Típusok</a></h3><ul>
+<li><a href="33_hu.html">De mik is azok a generikus típusok?</a></li>
+<li><a href="34_hu.html">A Semmi reprezentációja</a></li>
+<li><a href="35_hu.html">Option - Opcinális értékek</a></li>
+<li><a href="36_hu.html">Result - Sikert kifejező értékek</a></li>
+<li><a href="37_hu.html">Hibát dobó Main</a></li>
+<li><a href="38_hu.html">Kíméletes hibakezelés</a></li>
+<li><a href="39_hu.html">Egy ronda mód az Option/Result értékének kinyerésére</a></li>
+<li><a href="40_hu.html">Vektorok</a></li>
+<li><a href="41_hu.html">4. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_5_hu.html">5. Fejezet - Birtoklás & Az adatok kölcsönkérése</a></h3><ul>
+<li><a href="43_hu.html">Birtoklás</a></li>
+<li><a href="44_hu.html">Hatáskör-alapú erőforráskezelés</a></li>
+<li><a href="45_hu.html">A drop-olás hierarchikus</a></li>
+<li><a href="46_hu.html">A birtoklás átadása</a></li>
+<li><a href="47_hu.html">A birtoklás visszaadása</a></li>
+<li><a href="48_hu.html">Kölcsönkérés referenciák használatával</a></li>
+<li><a href="49_hu.html">Megváltoztatásra is jogosult birtoklás kölcsönkérése referenciák használatával</a></li>
+<li><a href="50_hu.html">Dereferenciálás</a></li>
+<li><a href="51_hu.html">A kölcsönkért adatok ide-oda helyezése</a></li>
+<li><a href="52_hu.html">Referenciák referenciái</a></li>
+<li><a href="53_hu.html">Explicit élettartamok</a></li>
+<li><a href="54_hu.html">Több élettartam</a></li>
+<li><a href="55_hu.html">Statikus élettartam</a></li>
+<li><a href="56_hu.html">Élettartamok adattípusokban</a></li>
+<li><a href="57_hu.html">5. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_6_hu.html">6. Fejezet - Szövegek</a></h3><ul>
+<li><a href="59_hu.html">Szöveg értékek</a></li>
+<li><a href="60_hu.html">Mi is az az utf-8?</a></li>
+<li><a href="61_hu.html">Escape-elt karakterek</a></li>
+<li><a href="62_hu.html">Többsoros szöveg értékek</a></li>
+<li><a href="63_hu.html">Nyers szöveg értékek</a></li>
+<li><a href="64_hu.html">Fájlokból betöltött szöveg értékek</a></li>
+<li><a href="65_hu.html">Szöveg szeletek</a></li>
+<li><a href="66_hu.html">Char-ok</a></li>
+<li><a href="67_hu.html">String-ek</a></li>
+<li><a href="68_hu.html">Szöveg mint funkció-paraméter</a></li>
+<li><a href="69_hu.html">Szövegek építése</a></li>
+<li><a href="70_hu.html">Szövegek formázása</a></li>
+<li><a href="71_hu.html">Szövegek átalakítása</a></li>
+<li><a href="72_hu.html">6. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_7_hu.html">7. Fejezet - Objektum-Orientált Programozás</a></h3><ul>
+<li><a href="74_hu.html">Mi az az OOP?</a></li>
+<li><a href="75_hu.html">A Rust nem OOP</a></li>
+<li><a href="76_hu.html">Egységbezárás metódusok segítségével</a></li>
+<li><a href="77_hu.html">Absztrakció csak bizonyos mezők elérhetővé tételével</a></li>
+<li><a href="78_hu.html">Polimorfizmus Trait-ek segítségével</a></li>
+<li><a href="79_hu.html">Trait-ek által megvalósított metódusok</a></li>
+<li><a href="80_hu.html">Trait-ek öröklése</a></li>
+<li><a href="81_hu.html">Dinamikus és statikus meghívás</a></li>
+<li><a href="82_hu.html">Trait objektumok</a></li>
+<li><a href="83_hu.html">Ismeretlen méretű adatok kezelése</a></li>
+<li><a href="84_hu.html">Generikus függvények</a></li>
+<li><a href="85_hu.html">A generikus függvények rövidebb írásmódja</a></li>
+<li><a href="86_hu.html">Box - Doboz</a></li>
+<li><a href="87_hu.html">Visszatekintés a generikus struct-okra</a></li>
+<li><a href="88_hu.html">7. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_8_hu.html">8. Fejezet - Okos Mutatók</a></h3><ul>
+<li><a href="90_hu.html">Referenciák Ismét</a></li>
+<li><a href="91_hu.html">Nyers Mutatók</a></li>
+<li><a href="92_hu.html">Lekövetés</a></li>
+<li><a href="93_hu.html">A * Operátor</a></li>
+<li><a href="94_hu.html">A . Operátor</a></li>
+<li><a href="95_hu.html">Okos Mutatók</a></li>
+<li><a href="96_hu.html">Okos Nem Biztonságos Kód</a></li>
+<li><a href="97_hu.html">Ismerős Barátok</a></li>
+<li><a href="98_hu.html">Kupacmemória</a></li>
+<li><a href="99_hu.html">Hibával Visszatérő Main Függvény, Ismét</a></li>
+<li><a href="100_hu.html">Referenciaszámlálás</a></li>
+<li><a href="101_hu.html">Hozzáférés Megosztása</a></li>
+<li><a href="102_hu.html">Megosztás Szálak Között</a></li>
+<li><a href="103_hu.html">Okos Mutatók Kombinálása</a></li>
+<li><a href="104_hu.html">8. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_9_hu.html">9. Fejezet - Projektszervezés És Struktúra</a></h3><ul>
+<li><a href="106_hu.html">Modulok</a></li>
+<li><a href="107_hu.html">Hogyan Írjunk Futtatható Programot</a></li>
+<li><a href="108_hu.html">Hogyan Írjunk Programkönyvtárat</a></li>
+<li><a href="109_hu.html">Hogyan Hivatkozzunk Más Modulokra és Ládákra</a></li>
+<li><a href="110_hu.html">Hivatkozás Több Elemre</a></li>
+<li><a href="111_hu.html">Modulok Készítése</a></li>
+<li><a href="112_hu.html">Modul Hierarchia</a></li>
+<li><a href="113_hu.html">Beágyazott Modulok</a></li>
+<li><a href="114_hu.html">Beágyazott Modulokra Hivatkozás</a></li>
+<li><a href="115_hu.html">Exportálás</a></li>
+<li><a href="116_hu.html">Struktúra Láthatóság</a></li>
+<li><a href="117_hu.html">Bevezetés (Prelude)</a></li>
+<li><a href="118_hu.html">A Saját Bevezetésed</a></li>
+<li><a href="119_hu.html">9. Fejezet - Konklúzió</a></li>
+</ul><h3><a href="chapter_10_hu.html">10. Fejezet - Vége</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

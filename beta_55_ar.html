@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <title>دورة تعلم رست (Rust) - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ar.html">دورة تعلم رست (Rust)</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ar.html">جدول المحتويات</a></span>
+            </div>
+            <div class="page">
+            <h1>الأعمارة الساكنة (Static Lifetimes)</h1>
+            <p>المتغير <strong>الساكن (static)</strong> هو مورد ذاكرة (memory resource) تم إنشاؤه في وقت الترجمة (compile-time)، وهو موجود من بدء البرنامج حتى نهايته. ويجب حديد أنواعه بشكل صريح.</p>
+<p><strong>العمر الساكن (static)</strong> هو مورد ذاكرة (memory resource) يبقى حتى نهاية البرنامج. ولاحظ أنه بموجب هذا التعريف فإنه يمكن إنشاء بعض الموارد ساكنة العمر (static lifetime) في وقت التشغيل (runtime).</p>
+<p>الموارد ذات الأعمار الساكنة لها محدد عمر خاص وهو <code>'static</code>.</p>
+<p>الموارد ذات الأعمار الساكنة <code>'static</code> لا <strong>تسقط (drop)</strong> أبدا.</p>
+<p>إذا كانت الموارد ذات الأعمار الساكنة تحتوي على مراجع (references)، فيجب أن تكون جميع المراجع ساكنة <code>'static</code> (ي شيء غير ذلك لن يقى طويلا بما فيه الكفاية).</p>
+<p>تفاصيل الذاكرة:</p>
+<ul>
+<li><p>يعد تعديل المتغيرات الساكنة (static variables) أمرًا خطيرًا بطبيعته لأنه يمكن الوصول من الجميع (globally accessable) ويقرأها أي شخص وهذا يمكن أن يحدث سباق بيانات (data race). سنتحدث عن تحديات البيانات المتاحة للجميع (global data) لاحقًا.</p></li>
+<li><p>يسمح رست (Rust) باستخدام الكتل الغير آمنة عن طريق <code>unsafe { ... }</code> لتنفيذ بعض العمليات التي لا يستطيع المترجم (compiler) تقديم ضمانات للذاكرة بشأنها.لا ينبغي لـ <a href="https://doc.rust-lang.org/nomicon/"><span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span></a> التحدث عن هذا الموضوع بشكل عرضي.</p></li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_54_ar.html" rel="prev">❮ السابق</a></span>
+                <span class="next"><a href="beta_56_ar.html" rel="next">التالي ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

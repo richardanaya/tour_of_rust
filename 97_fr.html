@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+    <head>
+        <title>Tour de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_fr.html">Tour de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_fr.html">Table des matières</a></span>
+            </div>
+            <div class="page">
+            <h1>Amis familiers</h1>
+            <p>Revenons sur quelques pointeurs intelligents que tu connais déjà: <code>Vec&lt;T&gt;</code> et <code>String</code>.</p>
+<p><code>Vec &lt;T&gt;</code> est un pointeur intelligent vers des octets en mémoire. Le
+compilateur Rust n'a aucune idée de la manière dont il faut interpréter ces octets.
+Le pointeur intelligent est capable d'interpréter ces octets en gardant
+une trace de l'endroit dans ces octets où une structures de données commence
+et se termine. Le pointeur intelligent déréférence un pointeur brut pour
+exposer la structure de données dans une belle interface ergonomique propre
+que nous utilisons (par exemple <code>my_vec [3]</code>).</p>
+<p>De même, <code>String</code> garde une trace des octets en mémoire et restreint par
+programmation le contenu qui y est écrit à toujours être de l'<code>utf-8</code>
+valide. Il déréférence cette région de mémoire dans un type<code>&amp;str</code>.</p>
+<p>Ces deux structures de données doivent procéder à un déréférencement
+dangereux de pointeurs bruts.</p>
+<p>Détails de la mémoire:</p>
+<ul>
+<li>Rust possède l'équivalent de <code>malloc</code> du langage C avec
+<a href="https://doc.rust-lang.org/std/alloc/fn.alloc.html">alloc</a> et
+<a href="https://doc.rust-lang.org/std/alloc/struct.Layout.html">Layout</a>
+pour allouer soi-même une région de la mémoire.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="96_fr.html" rel="prev">❮ Précédent</a></span>
+                <span class="next"><a href="98_fr.html" rel="next">Suivant ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20On%20d%C3%A9finit%20l'agencement%20que%20doit%20avoir%20la%20m%C3%A9moire%0A%20%20%20%20%20%20%20%20%2F%2F%20pour%20pouvoir%20allouer%204%20octets.%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Alloue%20nos%204%20octets%20en%20m%C3%A9moire%20et%20sauvegarde%20la%20position%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20de%20d%C3%A9but%20en%20tant%20qu'entier.%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20On%20%C3%A9crit%20quelques%20valeurs%20u8%20en%20m%C3%A9moire%20avec%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20un%20peu%20d'arithm%C3%A9tique%20des%20pointeurs.%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Interpr%C3%A8te%20le%20pointeur%20secret_recipe%20en%20tant%20que%0A%20%20%20%20%20%20%20%20%2F%2F%20pointeur%20brut%20f32.%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20D%C3%A9r%C3%A9f%C3%A9rence%20le%20pointeur%20brut%20et%20retourne%20une%0A%20%20%20%20%20%20%20%20%2F%2F%20valeur%20%26f32.%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20On%20d%C3%A9r%C3%A9f%C3%A9rence%20le%20pointeur%20intelligent%20de%20notre%0A%20%20%20%20%2F%2F%20structure%20Pie.%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

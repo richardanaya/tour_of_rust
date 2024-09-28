@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Bài học</h1>
+            <ul>
+        <li><a href="00_vi.html">Hello World!</a></li>
+</ul><h3><a href="chapter_1_vi.html">Chapter 1 - Những điều cơ bản</a></h3><ul>
+<li><a href="02_vi.html">Sân chơi của bạn</a></li>
+<li><a href="03_vi.html">Biến</a></li>
+<li><a href="04_vi.html">Thay đổi biến</a></li>
+<li><a href="05_vi.html">Những kiểu biến cơ bản</a></li>
+<li><a href="06_vi.html">Chuyển đổi loại cơ bản</a></li>
+<li><a href="07_vi.html">Hằng</a></li>
+<li><a href="08_vi.html">Mảng</a></li>
+<li><a href="09_vi.html">Hàm</a></li>
+<li><a href="10_vi.html">Trả lại nhiều giá trị</a></li>
+<li><a href="11_vi.html">Không trả về gì cả</a></li>
+<li><a href="12_vi.html">Chương 1 - Tổng kết</a></li>
+</ul><h3><a href="chapter_2_vi.html">Chapter 2 - Luồng điều khiển cơ bản</a></h3><ul>
+<li><a href="14_vi.html">Điều kiện if/else</a></li>
+<li><a href="15_vi.html">loop(vòng lặp)</a></li>
+<li><a href="16_vi.html">while</a></li>
+<li><a href="17_vi.html">for</a></li>
+<li><a href="18_vi.html">match</a></li>
+<li><a href="19_vi.html">Trả lại giá trị từ vòng lặp</a></li>
+<li><a href="20_vi.html">Trả về giá trị từ những Block Expression</a></li>
+<li><a href="21_vi.html">Chapter 2 - Tổng kết</a></li>
+</ul><h3><a href="chapter_3_vi.html">Chương 3 - Các kiểu cấu trúc dữ liệu cơ bản</a></h3><ul>
+<li><a href="23_vi.html">Kiểu cấu trúc</a></li>
+<li><a href="24_vi.html">Gọi phương thức(Method)</a></li>
+<li><a href="25_vi.html">Bộ nhớ(Memory)</a></li>
+<li><a href="26_vi.html">Tạo dữ liệu trong bộ nhớ</a></li>
+<li><a href="27_vi.html">Cấu trúc giống như là Tuple</a></li>
+<li><a href="28_vi.html">Cấu trúc giống như là Unit</a></li>
+<li><a href="29_vi.html">Kiểu dữ liệu liệt kê(Enumerations)</a></li>
+<li><a href="30_vi.html">Liệt kê với dữ liệu</a></li>
+<li><a href="31_vi.html">Chapter 3 - Tổng kết</a></li>
+</ul><h3><a href="chapter_4_vi.html">Chương 4 - Generic Type</a></h3><ul>
+<li><a href="33_vi.html">Generic type là gì?</a></li>
+<li><a href="34_vi.html">Đại diện cho "Nothing"</a></li>
+<li><a href="35_vi.html">Option</a></li>
+<li><a href="36_vi.html">Result</a></li>
+<li><a href="37_vi.html">Main lo được!</a></li>
+<li><a href="38_vi.html">Xử lý lỗi một cách duyên dáng</a></li>
+<li><a href="39_vi.html">Xử lý Option/Result xấu</a></li>
+<li><a href="40_vi.html">Vector</a></li>
+<li><a href="41_vi.html">Chương 4 - Tổng kết</a></li>
+</ul><h3><a href="chapter_5_vi.html">Chương 5 - Quyền sở hữu và mượn dữ liệu</a></h3><ul>
+<li><a href="43_vi.html">Quyền sỡ hữu</a></li>
+<li><a href="44_vi.html">Quản lý tài nguyên dựa trên phạm vi(Scope-Based)</a></li>
+<li><a href="45_vi.html">Việc Drop là có thứ bậc</a></li>
+<li><a href="46_vi.html">Chuyển quyền sở hữu</a></li>
+<li><a href="47_vi.html">Hoàn trả quyền sở hữu</a></li>
+<li><a href="48_vi.html">Mượn quyền sở hữu với Tham chiếu</a></li>
+<li><a href="49_vi.html">Mượn quyền sở hữu có thể thay đổi(Mutable Ownership) với tham chiếu</a></li>
+<li><a href="50_vi.html">Dereferencing</a></li>
+<li><a href="51_vi.html">Truyền xung quanh dữ liệu đã mượn</a></li>
+<li><a href="52_vi.html">Tham chiếu của tham chiếu</a></li>
+<li><a href="53_vi.html">Thời gian tồn tại minh bạch(Explicit Lifetimes)</a></li>
+<li><a href="54_vi.html">Đa thời gian tồn tại(Multiple Lifetimes)</a></li>
+<li><a href="55_vi.html">Thời gian tồn tại tĩnh(Static Lifetimes)</a></li>
+<li><a href="56_vi.html">Thời gian tồn tại trong các loại dữ liệu</a></li>
+<li><a href="57_vi.html">Chương 5 - Tổng kết</a></li>
+</ul><h3><a href="chapter_6_vi.html">Chương 6 - Văn bản</a></h3><ul>
+<li><a href="59_vi.html">Chuỗi ký tự(String Literal)</a></li>
+<li><a href="60_vi.html">utf-8 là gì?</a></li>
+<li><a href="61_vi.html">Ký tự thoát(Escaping Characters)</a></li>
+<li><a href="62_vi.html">Chuỗi ký tự nhiều dòng</a></li>
+<li><a href="63_vi.html">Chuỗi thô(Raw String Literals)</a></li>
+<li><a href="64_vi.html">Chuỗi ký tự từ File</a></li>
+<li><a href="65_vi.html">Lát cắt chuỗi (String Slice)</a></li>
+<li><a href="66_vi.html">Ký tự (Chars)</a></li>
+<li><a href="67_vi.html">Chuỗi(String)</a></li>
+<li><a href="68_vi.html">Văn bản dưới dạng tham số hàm</a></li>
+<li><a href="69_vi.html">Xây dựng chuỗi</a></li>
+<li><a href="70_vi.html">Định dạng chuỗi</a></li>
+<li><a href="71_vi.html">Chuyển đổi chuỗi</a></li>
+<li><a href="72_vi.html">Chương 6 - Tổng kết</a></li>
+</ul><h3><a href="chapter_7_vi.html">Chương 7 - Lập trình hướng đối tượng(Object-oriented programming-OOP)</a></h3><ul>
+<li><a href="74_vi.html">OOP là gì?</a></li>
+<li><a href="75_vi.html">Rust không phải là OOP</a></li>
+<li><a href="76_vi.html">Đóng gói với các phương thức</a></li>
+<li><a href="77_vi.html">Trừu tượng hóa với sự tiếp xúc có chọn lọc</a></li>
+<li><a href="78_vi.html">Tính đa hình với các đặc điểm</a></li>
+<li><a href="79_vi.html">Các phương thức được triển khai trên các đặc điểm</a></li>
+<li><a href="80_vi.html">Thừa kế đặc điểm</a></li>
+<li><a href="81_vi.html">Điều phối động vs điều phối tĩnh</a></li>
+<li><a href="82_vi.html">Đối tượng đặc điểm(trait object)</a></li>
+<li><a href="83_vi.html">Xử lý dữ liệu unsized</a></li>
+<li><a href="84_vi.html">Hàm Generic</a></li>
+<li><a href="85_vi.html">Tốc ký hàm generic</a></li>
+<li><a href="86_vi.html">Box</a></li>
+<li><a href="87_vi.html">Các cấu trúc generic đã được duyệt lại(Generic Structs Revisited)</a></li>
+<li><a href="88_vi.html">Chương 7 - Tổng kết</a></li>
+</ul><h3><a href="chapter_8_vi.html">Chương 8 - Con trỏ thông minh(Smart Pointers)</a></h3><ul>
+<li><a href="90_vi.html">Tham chiếu đã duyệt lại</a></li>
+<li><a href="91_vi.html">Con trỏ thô(Raw Pointer)</a></li>
+<li><a href="92_vi.html">Dereferencing</a></li>
+<li><a href="93_vi.html">Toán tử *</a></li>
+<li><a href="94_vi.html">Toán tử .</a></li>
+<li><a href="95_vi.html">Con trỏ thông minh</a></li>
+<li><a href="96_vi.html">Code không an toàn thông minh(Smart Unsafe Code)</a></li>
+<li><a href="97_vi.html">Những người bạn quen thuộc</a></li>
+<li><a href="98_vi.html">Bộ nhớ được phân bổ Heap</a></li>
+<li><a href="99_vi.html">Failable Main Revisited</a></li>
+<li><a href="100_vi.html">Đếm tham chiếu</a></li>
+<li><a href="101_vi.html">Chia sẻ quyền truy cập</a></li>
+<li><a href="102_vi.html">Chia sẻ qua các luồng</a></li>
+<li><a href="103_vi.html">Kết hợp nhiều con trỏ thông minh</a></li>
+<li><a href="104_vi.html">Chương 8 - Tổng kết</a></li>
+</ul><h3><a href="chapter_9_vi.html">Chương 9 - Tổ chức và cấu trúc dự án</a></h3><ul>
+<li><a href="106_vi.html">Mô-đun(Module)</a></li>
+<li><a href="107_vi.html">Viết chương trình</a></li>
+<li><a href="108_vi.html">Viết thư viện</a></li>
+<li><a href="109_vi.html">Tham chiếu các mô-đun và crate khác</a></li>
+<li><a href="110_vi.html">Tham chiếu nhiều mục</a></li>
+<li><a href="111_vi.html">Tạo Mô-đun</a></li>
+<li><a href="112_vi.html">Cấu trúc phân cấp mô-đun</a></li>
+<li><a href="113_vi.html">Mô-đun nội tuyến</a></li>
+<li><a href="114_vi.html">Tham chiếu mô-đun nội bộ</a></li>
+<li><a href="115_vi.html">Xuất(Exporting)</a></li>
+<li><a href="116_vi.html">Khả năng hiển thị cấu trúc</a></li>
+<li><a href="117_vi.html">Phần dạo đầu(Prelude)</a></li>
+<li><a href="118_vi.html">Phần dạo đầu của riêng bạn</a></li>
+<li><a href="119_vi.html">Chương 9 - Tổng kết</a></li>
+</ul><h3><a href="chapter_10_vi.html">Chương 10 - Kết thúc</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html lang="pl" dir="ltr">
+    <head>
+        <title>Przewodnik po Języku Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pl.html">Przewodnik po Języku Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pl.html">Spis Treści</a></span>
+            </div>
+            <div class="page">
+            <h1>Zawodna Funkcja Main</h1>
+            <p>Główna funkcja wejściowa programu, <code>main</code>, posiada możliwość zwrócenia typu <code>Result</code>!</p>
+            <div class="bottomnav">
+                <span class="back"><a href="36_pl.html" rel="prev">❮ Wstecz</a></span>
+                <span class="next"><a href="38_pl.html" rel="next">Dalej ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22to%20nie%20jest%20liczba%20kt%C3%B3rej%20szukasz%22))%0A%20%20%20%20%7D%0A%7D%0A%0A%2F%2F%20main%20nie%20zwraca%20%C5%BCadnej%20warto%C5%9Bci%2C%20cho%C4%87%20mo%C5%BCe%20potencjalnie%20zwr%C3%B3ci%C4%87%20b%C5%82%C4%85d!%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20let%20result%20%3D%20do_something_that_might_fail(12)%3B%0A%0A%20%20%20%20match%20result%20%7B%0A%20%20%20%20%20%20%20%20Ok(v)%20%3D%3E%20println!(%22znaleziono%20%7B%7D%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20Err(_e)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20obs%C5%82u%C5%BCmy%20ten%20b%C5%82%C4%85d%20z%20gracj%C4%85%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20zwr%C3%B3%C4%87my%20nowy%20b%C5%82%C4%85d%20kt%C3%B3ry%20opisze%20co%20posz%C5%82o%20nie%20tak!%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20Err(String%3A%3Afrom(%22funkcja%20main%20zawiod%C5%82a!%22))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20zauwa%C5%BC%2C%20%C5%BCe%20do%20rezultatu%20Ok%20wk%C5%82adamy%20pust%C4%85%20krotk%C4%99%0A%20%20%20%20%2F%2F%20w%20ten%20spos%C3%B3b%20zaznaczaj%C4%85c%2C%20%C5%BCe%20funkcja%20wykona%C5%82a%20swoje%20zadanie%20bezb%C5%82%C4%99dnie%0A%20%20%20%20Ok(())%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

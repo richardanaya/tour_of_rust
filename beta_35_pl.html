@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html lang="pl" dir="ltr">
+    <head>
+        <title>Przewodnik po Języku Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pl.html">Przewodnik po Języku Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pl.html">Spis Treści</a></span>
+            </div>
+            <div class="page">
+            <h1>Opcja (Option)</h1>
+            <p>Wbudowany w język Rust został specjalny generyczny typ wyliczenia o nazwie <code>Option</code> (ang. <em>opcja</em>), który pozwala na korzystanie z <em>pustych</em> wartości bez użycia <code>null</code>.</p>
+<pre><code>enum Option&lt;T&gt; {
+    None,
+    Some(T),
+}
+</code></pre>
+<p>To wyliczenie jest niezwykle powszechne w Ruscie. Możemy z niego korzystać w jakimkolwiek miejscu w naszym kodzie, przywołując jego warianty <code>Some</code> (ang. <em>coś</em>) oraz <code>None</code> (ang. <em>nic</em>).</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_34_pl.html" rel="prev">❮ Wstecz</a></span>
+                <span class="next"><a href="beta_36_pl.html" rel="next">Dalej ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20cz%C4%99%C5%9Bciowo%20zdefiniowany%20typ%20struct%0Astruct%20PojemnikNaRzecz%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20parametr%20T%20mo%C5%BCe%20by%C4%87%20przekazany%20dalej%0A%20%20%20%20rzecz%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Oto%20pojemnik%20na%20i32%2C%20kt%C3%B3ry%20jednak%20nie%20ma%20nic%20w%20%C5%9Brodku!%0A%20%20%20%20%2F%2F%20Zauwa%C5%BC%2C%20%C5%BCe%20tutaj%20musimy%20koniecznie%20sprecyzowa%C4%87%20typ%20pojemnika%2C%0A%20%20%20%20%2F%2F%20bo%20rust%20sam%20si%C4%99%20go%20nie%20domy%C5%9Bli.%0A%20%20%20%20let%20poj_i32%20%3D%20PojemnikNaRzecz%3A%3A%3Ci32%3E%20%7B%20rzecz%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20poj_i32.rzecz.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pusto!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pe%C5%82no!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20poj_i32%20%3D%20PojemnikNaRzecz%3A%3A%3Ci32%3E%20%7B%20rzecz%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20poj_i32.rzecz.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pe%C5%82no!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22pusto!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20pozwala%20wygodnie%20roz%C5%82o%C5%BCy%C4%87%20Option%20na%20czynniki%20pierwsze%0A%20%20%20%20%2F%2F%20obs%C5%82uguj%C4%85c%20wszystkie%20mo%C5%BCliwe%20przypadki%0A%20%20%20%20match%20poj_i32.rzecz%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22pojemnik%20zawiera%20%7B%7D!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22pojemnik%20jest%20pusty%22)%2C%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+    <html lang="zh-tw" dir="ltr">
+    <head>
+        <title>Rust 語言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-tw.html">Rust 語言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-tw.html">目錄</a></span>
+            </div>
+            <div class="page">
+            <h1>靜態生命週期 (static lifetimes)</h1>
+            <p>一個<strong>靜態</strong>變量是在編譯時間就被產生的記憶體資源，它從程式一開始就存在，直到結束。它們一定要明確的表示型別。</p>
+<p>一個<strong>靜態生命週期</strong>為一塊記憶體資源，它永遠存在直到程式結束。要注意的是，根據這項定義，有些靜態生命週期可以在執行時間才被產生出來。</p>
+<p>有著靜態生命週期的資源，會有一個特殊的標示 <code>'static'</code>。</p>
+<p><code>'static'</code> 資源永遠不會被<strong>徹下</strong> (drop)。</p>
+<p>如果靜態生命週期資源包含了參考，那它們必須都得是 <code>'static'</code> (少了任何東西則將活得不夠久)。</p>
+<p>記憶體細節：</p>
+<ul>
+<li>修改靜態變量本質上就是危險的，因為任何人在任何地方都可以存取它們，而這有可能會造成資料競爭 (data race)。我們後續會再探討全域資料的問題。</li>
+<li>Rust 允許使用 <code>unsafe { ... }</code> 區塊來操作一些編譯器無法確保的記憶體行為。<a href="https://doc.rust-lang.org/nomicon/"><span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span></a> 不應該輕易的被討論。</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_54_zh-tw.html" rel="prev">❮ 上一頁</a></span>
+                <span class="next"><a href="beta_56_zh-tw.html" rel="next">下一頁 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20static%20variables%20can%20also%20be%20scoped%20to%20a%20function%0A%20%20%20%20static%20mut%20SECRET%3A%20%26'static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20literals%20have%20a%20'static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20You%20can%20break%20some%20rules%2C%20but%20you%20must%20be%20explicit%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20we%20can%20set%20SECRET%20to%20a%20string%20literal%20because%20it%20is%20also%20%60static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

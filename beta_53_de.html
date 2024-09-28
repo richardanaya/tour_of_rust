@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+    <html lang="de" dir="ltr">
+    <head>
+        <title>Tour durch Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_de.html">Tour durch Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
+            </div>
+            <div class="page">
+            <h1>Explizite Lebenszeiten</h1>
+            <p>Auch wenn Rust es nicht immer im Code anzeigt, versteht der Compiler es die Lebensdauer jeder Variablen und wird versucht
+um zu bestätigen, dass eine Referenz nie länger existiert als ihr Besitzer.
+Funktionen können explizit sein, indem die Funktionssignatur mit parametrisiert wird Symbole, die bei der Identifizierung helfen
+welche Parameter und Rückgabewerte dieselbe Lebensdauer haben.</p>
+<p>Lebensdauerspezifizierer beginnen immer mit einem <code>'</code> (z. B. <code>'a</code>, <code>'b</code>, <code>'c</code>).</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_44_de.html" rel="prev">❮ Zurück</a></span>
+                <span class="next"><a href="beta_46_de.html" rel="next">Weiter ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0A%2F%2F%20parametrul%20foo%20%C8%99i%20valoarea%20de%20retur%20au%20aceea%C8%99i%20durat%C4%83%20de%20via%C8%9B%C4%83%0Afn%20do_something%3C%27a%3E(foo%3A%20%26%27a%20Foo)%20-%3E%20%26%27a%20i32%20%7B%0A%20%20%20%20return%20%26foo.x%3B%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mut%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20x%20%3D%20%26mut%20foo.x%3B%0A%20%20%20%20*x%20%3D%2013%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20x%20aici%2C%20deci%20putem%20crea%20o%20referin%C8%9B%C4%83%20imutabil%C4%83%0A%20%20%20%20let%20y%20%3D%20do_something(%26foo)%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20y)%3B%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20y%20aici%0A%20%20%20%20%2F%2F%20se%20renun%C8%9B%C4%83%20la%20foo%20aici%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

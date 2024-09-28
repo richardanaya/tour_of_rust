@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Ponteiros inteligentes</h1>
+            <p>Além da possibilidade de criar referências a dados tipados existentes usando o operador <code>&amp;</code>, o Rust nos dá a possibilidade de criar structs <em>reference-like</em> chamadas <strong>ponteiros inteligentes</strong>.</p>
+<p><em>Grosso modo</em>, podemos pensar nas referências como um tipo que nos dá acesso a outro tipo. Os ponteiros inteligentes são diferentes em seu comportamento das referências normais, pois operam com base na lógica interna que um programador escreve. Você — o programador — é a parte <em>inteligente</em>.</p>
+<p>Normalmente os ponteiros inteligentes implementam as traits <code>Deref</code>, <code>DerefMut</code> e <code>Drop</code> para especificar a lógica do que deve acontecer quando a estrutura é desreferenciada com os operadores <code>*</code> e <code>.</code>.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="94_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="96_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20Linguarudo%3CT%3E%20%7B%0A%20%20%20%20valor%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20Linguarudo%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20foi%20usado!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.valor%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Linguarudo%20%7B%0A%20%20%20%20%20%20%20%20valor%3A%20%22mensagem%20secreta%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20o%20desreferenciamento%20acontece%20aqui%20imediatamente%0A%20%20%20%20%2F%2F%20depois%20foo%20%C3%A9%20auto-referenciado%20para%20a%20%0A%20%20%20%20%2F%2F%20fun%C3%A7%C3%A3o%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

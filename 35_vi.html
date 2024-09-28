@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Option</h1>
+            <p>Rust có một enum chung được tích hợp sẵn gọi là <code>Option</code>  cho phép chúng tôi biểu diễn các giá trị có thể null mà không cần sử dụng <code>null</code>.</p>
+<pre><code>enum Option&lt;T&gt; {
+    None,
+    Some(T),
+}
+</code></pre>
+<p>Enum này rất phổ biến,  các trường hợp của enum có thể được tạo ở bất kỳ đâu với các biến thể enum là <code>Some</code> và<code>None</code>.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="34_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="36_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20M%E1%BB%99t%20ki%E1%BB%83u%20stuct%20%C4%91%C6%B0%E1%BB%A3c%20x%C3%A1c%20%C4%91%E1%BB%8Bnh%20m%E1%BB%99t%20ph%E1%BA%A7n%0Astruct%20BagOfHolding%3CT%3E%20%7B%0A%20%20%20%20%2F%2F%20Ki%E1%BB%83u%20tham%20s%E1%BB%91%20T%20c%E1%BB%A7a%20ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20chuy%E1%BB%83n%20cho%20nh%E1%BB%AFng%20c%C3%A1i%20kh%C3%A1c%0A%20%20%20%20item%3A%20Option%3CT%3E%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20L%C6%B0u%20%C3%BD%3A%20M%E1%BB%99t%20bag(t%C3%BAi)%20d%C3%A0nh%20cho%20i32%2C%20kh%C3%B4ng%20%C4%91%E1%BB%B1ng%20%C4%91%C6%B0%E1%BB%A3c%20g%C3%AC!%20Ch%C3%BAng%20ta%20ph%E1%BA%A3i%20ch%E1%BB%89%20%C4%91%E1%BB%8Bnh%20lo%E1%BA%A1i%0A%20%20%20%20%20%2F%2F%20b%E1%BB%9Fi%20v%C3%AC%20n%E1%BA%BFu%20kh%C3%B4ng%2C%20Rust%20s%E1%BA%BD%20kh%C3%B4ng%20bi%E1%BA%BFt%20n%C3%B3%20l%C3%A0%20lo%E1%BA%A1i%20t%C3%BAi%20g%C3%AC.%0Alet%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20None%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_none()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Ch%E1%BA%B3ng%20c%C3%B3%20g%C3%AC%20trong%20t%C3%BAi%20c%E1%BA%A3!%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Trong%20t%C3%BAi%20c%C3%B3%20g%C3%AC%20%C4%91%C3%B3%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20let%20i32_bag%20%3D%20BagOfHolding%3A%3A%3Ci32%3E%20%7B%20item%3A%20Some(42)%20%7D%3B%0A%0A%20%20%20%20if%20i32_bag.item.is_some()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Trong%20t%C3%BAi%20c%C3%B3%20g%C3%AC%20%C4%91%C3%B3%22)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20println!(%22Ch%E1%BA%B3ng%20c%C3%B3%20g%C3%AC%20trong%20t%C3%BAi%20c%E1%BA%A3!%22)%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20match%20lets%20us%20deconstruct%20Option%20elegantly%20and%20ensure%20we%20handle%20all%20cases!%0A%20%20%20%20match%20i32_bag.item%20%7B%0A%20%20%20%20%20%20%20%20Some(v)%20%3D%3E%20println!(%22T%C3%ACm%20th%E1%BA%A5y%20%7B%7D%20trong%20t%C3%BAi!%22%2C%20v)%2C%0A%20%20%20%20%20%20%20%20None%20%3D%3E%20println!(%22Kh%C3%B4ng%20t%C3%ACm%20th%E1%BA%A5y%20g%C3%AC%20c%E1%BA%A3%22)%2C%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

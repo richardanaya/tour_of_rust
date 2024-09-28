@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>스마트 포인터</h1>
+            <p><code>&amp;</code> 연산자로 이미 존재하는 데이터의 참조를 생성하는 기능과 더불어,
+Rust에서는 <strong>smart pointer</strong>라 불리는 <em>참조 같은</em> struct를 생성하는 기능을 제공합니다.</p>
+<p>고수준에서 보자면 참조는 다른 자료형에 대한 접근을 제공하는 자료형이라고 볼 수 있습니다.
+smart pointer가 일반적인 참조와 다른 점은, 프로그래머가 작성하는 내부 로직에 기반해 작동한다는 것입니다.
+여러분(프로그래머)이 바로 <em>smart</em>한 부분을 담당하는 겁니다.</p>
+<p>일반적으로 smart pointer는 struct가 <code>*</code>와 <code>.</code> 연산자로 역참조될 때 무슨 일이 발생할지
+지정하기 위해 <code>Deref</code>, <code>DerefMut</code>, 그리고 <code>Drop</code> trait을 구현합니다.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_94_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="beta_96_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%EA%B0%80%20%60len%60%20%ED%95%A8%EC%88%98%EB%A5%BC%20%EC%9C%84%ED%95%B4%20%EC%9E%90%EB%8F%99%EC%B0%B8%EC%A1%B0%EB%90%9C%20%ED%9B%84%0A%20%20%20%20%2F%2F%20%EC%97%AC%EA%B8%B0%EC%84%9C%20%EC%97%AD%EC%B0%B8%EC%A1%B0%EA%B0%80%20%EC%A6%89%EC%8B%9C%20%EC%9D%BC%EC%96%B4%EB%82%A9%EB%8B%88%EB%8B%A4%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

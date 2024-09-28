@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>기본 자료형</h1>
+            <p>Rust에는 다양하지만 익숙한 자료형들이 있습니다:</p>
+<ul>
+<li>부울 값 - 참/거짓 값을 나타내는 <code>bool</code></li>
+<li>부호가 없는 정수형 - 양의 정수를 나타내는 <code>u8</code> <code>u16</code> <code>u32</code> <code>u64</code> <code>u128</code></li>
+<li>부호가 있는 정수형 - 양/음의 정수를 나타내는 <code>i8</code> <code>i16</code> <code>i32</code> <code>i64</code> <code>i128</code></li>
+<li>포인터 사이즈 정수 - 메모리에 있는 값들의 인덱스와 크기를 나타내는 <code>usize</code> <code>isize</code></li>
+<li>부동 소수점 - <code>f32</code> <code>f64</code></li>
+<li>튜플(tuple) - stack에 있는 값들의 고정된 순서를 전달하기 위한 <code>(값, 값, ...)</code></li>
+<li>배열(array) - 컴파일 타임에 정해진 길이를 갖는 유사한 원소들의 모음(collection)인 <code>[값, 값, ...]</code></li>
+<li>슬라이스(slice) - 런타임에 길이가 정해지는 유사한 원소들의 collection</li>
+<li><code>str</code>(문자열 slice) - 런타임에 길이가 정해지는 텍스트</li>
+</ul>
+<p>텍스트는 다른 익숙한 언어에서보다 복잡한데, 이는 Rust가 시스템 프로그래밍 언어이며
+여러분이 지금까지 익숙하지 않았을 메모리 문제에 신경쓰기 때문입니다.
+이에 대해서는 나중에 더 자세히 다루겠습니다.</p>
+<p>숫자형 자료형들은 숫자 뒤에 자료형 이름을 붙여 명시적으로 지정할 수 있습니다 (예: <code>13u32</code>, <code>2u8</code>).</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_04_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="beta_06_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%20%2F%2F%20%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9C%BC%EB%A1%9C%20i32%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%20%2F%2F%20%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9C%BC%EB%A1%9C%20f64%0A%20%20%20%20let%20c%20%3D%204.3f32%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20sentence%20%3D%20%22hello%20world!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20sentence%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

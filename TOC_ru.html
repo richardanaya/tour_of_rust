@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="ru" dir="ltr">
+    <head>
+        <title>Тур по Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ru.html">Тур по Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Занятия</h1>
+            <ul>
+        <li><a href="00_ru.html">Привет, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_ru.html">Глава 1 - Основы</a></h3><ul>
+<li><a href="02_ru.html">The Rust Playground</a></li>
+<li><a href="03_ru.html">Переменные (Variables)</a></li>
+<li><a href="04_ru.html">Изменение переменных</a></li>
+<li><a href="05_ru.html">Базовые типы (Basic Types)</a></li>
+<li><a href="06_ru.html">Преобразование базовых типов (Type Conversion)</a></li>
+<li><a href="07_ru.html">Константы (Constants)</a></li>
+<li><a href="08_ru.html">Массивы (Arrays)</a></li>
+<li><a href="09_ru.html">Функции (Functions)</a></li>
+<li><a href="10_ru.html">Возврат нескольких значений (Tuple)</a></li>
+<li><a href="11_ru.html">Возврат пустого значения (Nothing)</a></li>
+<li><a href="12_ru.html">Раздел 1 - Заключение</a></li>
+</ul><h3><a href="chapter_2_ru.html">Глава 2 - Управление потоком исполнения</a></h3><ul>
+<li><a href="14_ru.html">if/else if/else</a></li>
+<li><a href="15_ru.html">loop</a></li>
+<li><a href="16_ru.html">while</a></li>
+<li><a href="17_ru.html">for</a></li>
+<li><a href="18_ru.html">match</a></li>
+<li><a href="19_ru.html">Возвращение значений из loop</a></li>
+<li><a href="20_ru.html">Возвращение значений из выражений блоков</a></li>
+<li><a href="21_ru.html">Глава 2. Заключение</a></li>
+</ul><h3><a href="chapter_3_ru.html">Глава 3 - Базовые структуры данных</a></h3><ul>
+<li><a href="23_ru.html">Структуры (Structures)</a></li>
+<li><a href="24_ru.html">Вызов методов</a></li>
+<li><a href="25_ru.html">Память (Memory)</a></li>
+<li><a href="26_ru.html">Создание структур в памяти</a></li>
+<li><a href="27_ru.html">Кортежи-структуры (Tuple-like Structs)</a></li>
+<li><a href="28_ru.html">Юнит-структуры (Unit-like Structs)</a></li>
+<li><a href="29_ru.html">Перечисления (Enumerations)</a></li>
+<li><a href="30_ru.html">Перечисления с данными</a></li>
+<li><a href="31_ru.html">Глава 3 - Заключение</a></li>
+</ul><h3><a href="chapter_4_ru.html">Глава 4 - Обобщённые типы</a></h3><ul>
+<li><a href="33_ru.html">Что такое обобщённые типы (Generic Types)?</a></li>
+<li><a href="34_ru.html">Представление отсутствия значения (Representing Nothing)</a></li>
+<li><a href="35_ru.html">Тип Option</a></li>
+<li><a href="36_ru.html">Тип Result</a></li>
+<li><a href="37_ru.html">Возврат результата в Main</a></li>
+<li><a href="38_ru.html">Элегантная обработка ошибок</a></li>
+<li><a href="39_ru.html">Грязная обработка Option/Result</a></li>
+<li><a href="40_ru.html">Векторы</a></li>
+<li><a href="41_ru.html">Глава 4 - Заключение</a></li>
+</ul><h3><a href="chapter_5_ru.html">Глава 5 - Владение и Заимствование данными (Ownership & Borrowing)</a></h3><ul>
+<li><a href="43_ru.html">Владение (Ownership)</a></li>
+<li><a href="44_ru.html">Управление ресурсами на основе области видимости</a></li>
+<li><a href="45_ru.html">Иерархическое удаление (Dropping is Hierarchical)</a></li>
+<li><a href="46_ru.html">Передача владения (Moving Ownership)</a></li>
+<li><a href="47_ru.html">Возвращение владения (Returning Ownership)</a></li>
+<li><a href="48_ru.html">Заимствование во владение с помощью ссылок</a></li>
+<li><a href="49_ru.html">Заимствование во владение с правами на изменение (Mutable Borrow)</a></li>
+<li><a href="50_ru.html">Разыменование (Dereferencing)</a></li>
+<li><a href="51_ru.html">Передача заимствованных данных</a></li>
+<li><a href="52_ru.html">Ссылки на ссылки (References Of References)</a></li>
+<li><a href="53_ru.html">Явное указание времени жизни (Explicit Lifetimes)</a></li>
+<li><a href="54_ru.html">Несколько времён жизни (Multiple Lifetimes)</a></li>
+<li><a href="55_ru.html">Статические времена жизни (Static Lifetimes)</a></li>
+<li><a href="56_ru.html">Времена жизни у типов данных (Lifetimes In Data Types)</a></li>
+<li><a href="57_ru.html">Глава 5 - Заключение</a></li>
+</ul><h3><a href="chapter_6_ru.html">Глава 6 - Текст</a></h3><ul>
+<li><a href="59_ru.html">Тип строковые литералы (String Literals)</a></li>
+<li><a href="60_ru.html">Что такое utf-8</a></li>
+<li><a href="61_ru.html">Экранирующие символы (Escaping Characters)</a></li>
+<li><a href="62_ru.html">Многострочные строковые литералы (Multi-line)</a></li>
+<li><a href="63_ru.html">Сырые (необработанные) строковые литералы (Raw String Literals)</a></li>
+<li><a href="64_ru.html">Строковые литераты из файлов</a></li>
+<li><a href="65_ru.html">Строковые срезы (String Slice)</a></li>
+<li><a href="66_ru.html">Символы (Chars)</a></li>
+<li><a href="67_ru.html">Строковый тип (String)</a></li>
+<li><a href="68_ru.html">Текст как параметр функции (Function Parameter)</a></li>
+<li><a href="69_ru.html">Создание строк</a></li>
+<li><a href="70_ru.html">Форматирование строк (Formatting)</a></li>
+<li><a href="71_ru.html">Преобразование строк (Converting Strings)</a></li>
+<li><a href="72_ru.html">Глава 6 - Заключение</a></li>
+</ul><h3><a href="chapter_7_ru.html">Глава 7 - Объектно-ориентированное программирование (OOP)</a></h3><ul>
+<li><a href="74_ru.html">Что такое ООП (OOP)?</a></li>
+<li><a href="75_ru.html">Rust не является ООП (OOP) языком</a></li>
+<li><a href="76_ru.html">Инкапсуляция с помощью методов</a></li>
+<li><a href="77_ru.html">Абстракция с выборочной экспозицией (Abstraction With Selective Exposure)</a></li>
+<li><a href="78_ru.html">Полиморфизм с помощью типажей (Traits)</a></li>
+<li><a href="79_ru.html">Реализация методов в самих типажах</a></li>
+<li><a href="80_ru.html">Наследование типажа (Trait Inheritance)</a></li>
+<li><a href="81_ru.html">Динамическая vs Статическая диспетчеризация (Dynamic vs Static Dispatch)</a></li>
+<li><a href="82_ru.html">Типаж объекты (Trait Objects)</a></li>
+<li><a href="83_ru.html">Обработка не размерных данных (Unsized Data)</a></li>
+<li><a href="84_ru.html">Обобщенные функции (Generic Functions)</a></li>
+<li><a href="85_ru.html">Сокращение в обобщенной функции (Generic Function Shorthand)</a></li>
+<li><a href="86_ru.html">Тип умного указателя Box</a></li>
+<li><a href="87_ru.html">Обощенные структуры снова (Generic Structs Revisited)</a></li>
+<li><a href="88_ru.html">Глава 7 - Заключение</a></li>
+</ul><h3><a href="chapter_8_ru.html">Chapter 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_ru.html">Ссылки снова (References Revisited)</a></li>
+<li><a href="91_ru.html">Сырые указатели (Raw Pointers)</a></li>
+<li><a href="92_ru.html">Разыменование (Dereferencing)</a></li>
+<li><a href="93_ru.html">Оператор * (звездочка)</a></li>
+<li><a href="94_ru.html">Оператор . (точка)</a></li>
+<li><a href="95_ru.html">Умные указатели (Smart Pointers)</a></li>
+<li><a href="96_ru.html">Умный небезопасный код (Smart Unsafe Code)</a></li>
+<li><a href="97_ru.html">Знакомые друзья (Familiar Friends)</a></li>
+<li><a href="98_ru.html">Память, выделяемая в куче (Heap Allocated Memory)</a></li>
+<li><a href="99_ru.html">Сигнатура ошибки в функции main(). Cнова (Failable Main Revisited)</a></li>
+<li><a href="100_ru.html">Подсчет ссылок (Referencing Counting)</a></li>
+<li><a href="101_ru.html">Разделяемый доступ (Sharing Access)</a></li>
+<li><a href="102_ru.html">Разделение данных между потоками (Sharing Across Threads)</a></li>
+<li><a href="103_ru.html">Комбинирование умных указателей (Combining Smart Pointers)</a></li>
+<li><a href="104_ru.html">Глава 8 - Заключение</a></li>
+</ul><h3><a href="chapter_9_ru.html">Глава 9 - Организация и структура проекта (Project Organization and Structure)</a></h3><ul>
+<li><a href="106_ru.html">Модули (Modules)</a></li>
+<li><a href="107_ru.html">Написание программы (Writing a Program)</a></li>
+<li><a href="108_ru.html">Написание библиотеки (Writing a Library)</a></li>
+<li><a href="109_ru.html">Подключение других модулей и крейтов (Referencing Other Modules and Crates)</a></li>
+<li><a href="110_ru.html">Подключение нескольких элементов (Referencing Multiple Items)</a></li>
+<li><a href="111_ru.html">Создание модулей (Creating Modules)</a></li>
+<li><a href="112_ru.html">Иерархия модуля (Module Hierarchy)</a></li>
+<li><a href="113_ru.html">Встроенный модуль (Inline Module)</a></li>
+<li><a href="114_ru.html">Ссылка на встроенный модуль (Internal Module Referencing)</a></li>
+<li><a href="115_ru.html">Экспорт (Exporting)</a></li>
+<li><a href="116_ru.html">Область видимости структур (Structure Visibility)</a></li>
+<li><a href="117_ru.html">Автоимпорт (Prelude)</a></li>
+<li><a href="118_ru.html">Ваш собственный автоимпорт (Your Own Prelude)</a></li>
+<li><a href="119_ru.html">Глава 9 - Заключение</a></li>
+</ul><h3><a href="chapter_10_ru.html">Глава 10 - Конец</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

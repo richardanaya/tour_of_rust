@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+    <html lang="it" dir="ltr">
+    <head>
+        <title>Tour di Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_it.html">Tour di Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_it.html">Indice dei Contenuti</a></span>
+            </div>
+            <div class="page">
+            <h1>Stringhe letterali su più righe</h1>
+            <p>Le stringhe di ruggine sono multiline per impostazione predefinita.</p>
+<p>Usa un <code>\</code> alla fine di una riga se non si desidera una pausa.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_61_it.html" rel="prev">❮ Precedente</a></span>
+                <span class="next"><a href="beta_63_it.html" rel="next">Prossimo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++let+haiku%3A+%26%27static+str+%3D+%22%0A++++++++I+write%2C+erase%2C+rewrite%0A++++++++Erase+again%2C+and+then%0A++++++++A+poppy+blooms.%0A++++++++-+Tachibana+Hokushi%22%3B%0A++++println%21%28%22%7B%7D%22%2C+haiku%29%3B%0A++++%0A++++%0A++++println%21%28%22hello+%5C%0A++++world%22%29+%2F%2F+nota+che+la+spaziatura+prima+di+w+viene+ignorata%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

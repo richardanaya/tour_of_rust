@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Lát cắt chuỗi (String Slice)</h1>
+            <p>Một lát cắt chuỗi là một tham chiếu đến một chuỗi byte trong bộ nhớ mà phải luôn có giá trị utf-8.</p>
+<p>Một lát chuỗi (một lát con) của một lát <code>str</code>- một <code>str</code> slice, cũng phải là utf-8 hợp lệ.</p>
+<p>Các phương thức phổ biến của <code>&amp;str</code>:</p>
+<ul>
+<li><code>len</code> nhận độ dài của chuỗi theo nghĩa đen tính bằng byte (không phải số ký tự).</li>
+<li><code>starts_with</code>/<code>ends_with</code> để thử nghiệm cơ bản.</li>
+<li><code>is_empty</code> trả về true nếu độ dài bằng không.</li>
+<li><code>find</code> trả về một <code>Option&lt;usize&gt;</code> của vị trí đầu tiên của một số văn bản.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="64_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="66_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%20%22ch%C3%A0o%20%F0%9F%A6%80%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20a.len())%3B%0A%20%20%20%20let%20first_word%20%3D%20%26a%5B0..2%5D%3B%0A%20%20%20%20let%20second_word%20%3D%20%26a%5B3..7%5D%3B%0A%20%20%20%20%2F%2F%20let%20half_crab%20%3D%20%26a%5B3..5%5D%3B%20L%E1%BB%97i%0A%20%20%20%20%2F%2F%20Rust%20kh%C3%B4ng%20ch%E1%BA%A5p%20nh%E1%BA%ADn%20c%C3%A1c%20%C4%91o%E1%BA%A1n%20k%C3%BD%20t%E1%BB%B1%20unicode%20kh%C3%B4ng%20h%E1%BB%A3p%20l%E1%BB%87%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20first_word%2C%20second_word)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

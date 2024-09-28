@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Ponteiros brutos</h1>
+            <p>As referências podem ser convertidas em um tipo mais primitivo chamado <em>ponteiro bruto</em>. Muito parecido com um número, ele pode ser copiado e movido com poucas restrições. O Rust não garante a validade da localização da memória para o qual aponta.</p>
+<p>Há dois tipos de indicadores brutos:</p>
+<ul>
+<li><code>*const T</code> - um ponteiro bruto para dados do tipo T que nunca deve mudar.</li>
+<li><code>*mut T</code> - um ponteiro bruto para dados do tipo T que podem mudar.</li>
+</ul>
+<p>Os ponteiros brutos podem ser convertidos de e para números (por exemplo, <code>usize</code>).</p>
+<p>Os ponteiros brutos podem acessar dados com código <em>inseguro</em> (falaremos a respeito mais tarde).</p>
+<p>Detalhes da memória:</p>
+<ul>
+<li>Uma referência em Rust é muito semelhante a um ponteiro em C em termos de uso, mas com muito mais restrições de tempo de compilação sobre como pode ser armazenado e movido para outras funções.</li>
+<li>Um ponteiro bruto em Rust é semelhante a um ponteiro em C, pois representa um número que pode ser copiado, passado e até transformado em tipos numéricos onde pode ser modificado como um número para fazer cálculos de ponteiro.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="90_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="92_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20locacao_de_memoria%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22O%20dado%20est%C3%A1%20aqui%20%7B%7D%22%2C%20locacao_de_memoria)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

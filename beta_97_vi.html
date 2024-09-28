@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Những người bạn quen thuộc</h1>
+            <p>Hãy xem xét một số con trỏ thông minh mà chúng ta đã thấy như <code>Vec&lt;T&gt;</code> và <code>String</code>.</p>
+<p><code>Vec&lt;T&gt;</code> là một con trỏ thông minh chỉ sở hữu một số vùng nhớ byte.  Trình biên dịch Rust không biết những gì tồn tại trong những byte này.  Con trỏ thông minh giải thích ý nghĩa của việc lấy các mục từ vùng bộ nhớ mà nó quản lý, theo dõi vị trí các cấu trúc dữ liệu trong các byte đó bắt đầu và kết thúc,  sau đó cuối cùng tham chiếu một con trỏ thô vào các cấu trúc dữ liệu thành một giao diện đẹp để chúng ta sử dụng (ví dụ: <code>my_vec[3]</code>).</p>
+<p>Tương tự, <code>String</code> theo dõi vùng nhớ byte và lập trình hạn  chế nội dung được ghi vào vùng nhớ đó để luôn có giá trị <code>utf-8</code> và giúp dereference vùng nhớ đó thành kiểu <code>&amp;str</code>.</p>
+<p>Cả hai cấu trúc dữ liệu này đều sử dụng dereferencing không an toàn của các con trỏ thô để thực hiện công việc của chúng.</p>
+<p>Chi tiết bộ nhớ:</p>
+<ul>
+<li>Rust có một cái tương đương với <code>malloc</code> của C bằng cách sử dụng <a href="https://doc.rust-lang.org/std/alloc/fn.alloc.html">alloc</a> và <a href="https://doc.rust-lang.org/std/alloc/struct.Layout.html">Layout</a> để nhận được các vùng bộ nhớ của riêng bạn để quản lý.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_96_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="beta_98_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%2F%2F%20let%27s%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20c%E1%BA%A5p%20ph%C3%A1t%20v%C3%A0%20l%C6%B0u%20v%E1%BB%8B%20tr%C3%AD%20b%E1%BB%99%20nh%E1%BB%9B%20d%C6%B0%E1%BB%9Bi%20d%E1%BA%A1ng%20s%E1%BB%91%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20s%E1%BB%AD%20d%E1%BB%A5ng%20to%C3%A1n%20h%E1%BB%8Dc%20con%20tr%E1%BB%8F%20v%C3%A0%20vi%E1%BA%BFt%20m%E1%BB%99t%20v%C3%A0i%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20gi%C3%A1%20tr%E1%BB%8B%20u8%20v%C3%A0o%20b%E1%BB%99%20nh%E1%BB%9B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20gi%E1%BA%A3i%20th%C3%ADch%20con%20tr%E1%BB%8F%20secret_recipe%20d%C6%B0%E1%BB%9Bi%20d%E1%BA%A1ng%20con%20tr%E1%BB%8F%20th%C3%B4%20f32%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20n%C3%B3%20th%C3%A0nh%20gi%C3%A1%20tr%E1%BB%8B%20tr%E1%BA%A3%20v%E1%BB%81%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20b%E1%BA%B1ng%20c%C3%A1ch%20dereferencing%20%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20th%C3%A0nh%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

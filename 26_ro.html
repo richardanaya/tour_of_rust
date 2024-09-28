@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+    <html lang="ro" dir="ltr">
+    <head>
+        <title>Turul limbajului Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ro.html">Turul limbajului Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ro.html">Cuprins</a></span>
+            </div>
+            <div class="page">
+            <h1>Crearea datelor în memorie</h1>
+            <p>Când <strong>instanțiem</strong> o <strong>structură</strong> în codul nostru, aplicația creează câmpurile de date unul lângă altul în memorie.</p>
+<p>Instanțiem o structură specificând toate valorile câmpurilor în interiorul</p>
+<p><code>NumeleStructurii { ... }</code>.</p>
+<p>Câmpurile unei structuri sunt accesate folosind operatorul <code>.</code>.</p>
+<p>Detalii despre memorie în exemplul nostru:</p>
+<ul>
+<li>Textul din interiorul ghilimelelor este o dată care poate fi numai citită (ex: "Ferris"), deci acesta este
+pus în zona <em>memoriei pentru date</em>.</li>
+<li>Apelul funcției <code>String::from</code> creează o structură de tip <code>String</code> ale cărei câmpuri sunt depuse, unul lângă altul, lângă câmpurile structurii, pe <em>stivă</em>. Un String reprezintă text care poate fi modificat
+în următoarele moduri:</li>
+</ul>
+<ol>
+<li>Se alocă memorie pe <em>heap</em> pentru text și acolo va putea fi modificat</li>
+<li>Stochează o referință la acea locație de pe <em>heap</em> în structura <code>String</code>
+(Mai multe despre acest concept în următoarele lecții)</li>
+</ol>
+<ul>
+<li>Așadar, cei doi prieteni ai noștri, <em>Ferris</em> și <em>Sarah</em>, sunt structuri de date care vor avea mereu
+locații fixe în aplicația noastră, deci vor fi puși în <em>stivă</em>.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="25_ro.html" rel="prev">❮ Înapoi</a></span>
+                <span class="next"><a href="27_ro.html" rel="next">Înainte ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20tip_animal%3A%20String%2C%0A%20%20%20%20nume%3A%20String%2C%0A%20%20%20%20nr_m%C3%A2ini%3A%20i32%2C%0A%20%20%20%20nr_picioare%3A%20i32%2C%0A%20%20%20%20arm%C4%83%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20datele%20din%20Creatur%C4%83Marin%C4%83%20sunt%20pe%20stiv%C4%83%0A%20%20%20%20let%20ferris%20%3D%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Struct-ul%20String%20este%20de%20asemenea%20pe%20stiv%C4%83%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20dar%20%C8%9Bine%20o%20referin%C8%9B%C4%83%20a%20informa%C8%9Biei%20pe%20heap%0A%20%20%20%20%20%20%20%20tip_animal%3A%20String%3A%3Afrom(%22crab%22)%2C%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20nr_m%C3%A2ini%3A%202%2C%0A%20%20%20%20%20%20%20%20nr_picioare%3A%204%2C%0A%20%20%20%20%20%20%20%20arm%C4%83%3A%20String%3A%3Afrom(%22ghiar%C4%83%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20Creatur%C4%83Marin%C4%83%20%7B%0A%20%20%20%20%20%20%20%20tip_animal%3A%20String%3A%3Afrom(%22caracati%C8%9B%C4%83%22)%2C%0A%20%20%20%20%20%20%20%20nume%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20nr_m%C3%A2ini%3A%208%2C%0A%20%20%20%20%20%20%20%20nr_picioare%3A%200%2C%0A%20%20%20%20%20%20%20%20arm%C4%83%3A%20String%3A%3Afrom(%22creier%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20este%20%7B%7D.%20Are%20%7B%7D%20m%C3%A2ini%2C%20%7B%7D%20picioare%2C%20%C8%99i%20%7B%7D%20pe%20post%20de%20arm%C4%83%22%2C%0A%20%20%20%20%20%20%20%20ferris.nume%2C%20ferris.tip_animal%2C%20ferris.nr_m%C3%A2ini%2C%20ferris.nr_picioare%2C%20ferris.arm%C4%83%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20este%20%7B%7D.%20Are%20%7B%7D%20m%C3%A2ini%2C%20%7B%7D%20picioare.%20Nu%20are%20nicio%20arm%C4%83..%22%2C%0A%20%20%20%20%20%20%20%20sarah.nume%2C%20sarah.tip_animal%2C%20sarah.nr_m%C3%A2ini%2C%20sarah.nr_picioare%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

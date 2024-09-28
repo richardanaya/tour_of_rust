@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="ro" dir="ltr">
+    <head>
+        <title>Turul limbajului Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ro.html">Turul limbajului Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Lecții</h1>
+            <ul>
+        <li><a href="00_ro.html">Salut, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_ro.html">Capitolul 1 - Ideile și conceptele de bază</a></h3><ul>
+<li><a href="02_ro.html">Rust Playground</a></li>
+<li><a href="03_ro.html">Variabile</a></li>
+<li><a href="04_ro.html">Modificarea variabilelor</a></li>
+<li><a href="05_ro.html">Tipuri de date de bază</a></li>
+<li><a href="06_ro.html">Conversia tipurilor de bază</a></li>
+<li><a href="07_ro.html">Constante</a></li>
+<li><a href="08_ro.html">Tablouri</a></li>
+<li><a href="09_ro.html">Funcții</a></li>
+<li><a href="10_ro.html">Returnarea mai multor valori</a></li>
+<li><a href="11_ro.html">A nu returna nimic</a></li>
+<li><a href="12_ro.html">Capitolul 1 - Concluzie</a></li>
+</ul><h3><a href="chapter_2_ro.html">Capitolul 2 - Controlul de bază al fluxului</a></h3><ul>
+<li><a href="14_ro.html">if/else</a></li>
+<li><a href="15_ro.html">Bucle</a></li>
+<li><a href="16_ro.html">while</a></li>
+<li><a href="17_ro.html">for</a></li>
+<li><a href="18_ro.html">match</a></li>
+<li><a href="19_ro.html">Returnarea unor valori dintr-o buclă</a></li>
+<li><a href="20_ro.html">Returnarea unor valori din expresii bloc</a></li>
+<li><a href="21_ro.html">Capitolul 2 - Concluzie</a></li>
+</ul><h3><a href="chapter_3_ro.html">Capitolul 3 - Tipuri de structuri de date de bază</a></h3><ul>
+<li><a href="23_ro.html">Structuri</a></li>
+<li><a href="24_ro.html">Apelarea metodelor</a></li>
+<li><a href="25_ro.html">Memorie</a></li>
+<li><a href="26_ro.html">Crearea datelor în memorie</a></li>
+<li><a href="27_ro.html">Structuri de tip tuplu</a></li>
+<li><a href="28_ro.html">Structuri de tip unitate</a></li>
+<li><a href="29_ro.html">Enumerări</a></li>
+<li><a href="30_ro.html">Enumerările care conțin tipuri de date</a></li>
+<li><a href="31_ro.html">Capitolul 3 - Concluzie</a></li>
+</ul><h3><a href="chapter_4_ro.html">Capitolul 4 - Tipuri generice</a></h3><ul>
+<li><a href="33_ro.html">Ce sunt tipurile generice?</a></li>
+<li><a href="34_ro.html">Reprezentarea nimicului</a></li>
+<li><a href="35_ro.html">Option</a></li>
+<li><a href="36_ro.html">Result</a></li>
+<li><a href="37_ro.html">Main-ul care poate eșua</a></li>
+<li><a href="38_ro.html">Gestionare grațioasă a erorilor</a></li>
+<li><a href="39_ro.html">Gestionarea inadecvată a enumerărilor Option/Result</a></li>
+<li><a href="40_ro.html">Vectori</a></li>
+<li><a href="41_ro.html">Capitolul 4 - Concluzie</a></li>
+</ul><h3><a href="chapter_5_ro.html">Capitolul 5 - Proprietatea și împrumutul datelor</a></h3><ul>
+<li><a href="43_ro.html">Proprietate</a></li>
+<li><a href="44_ro.html">Gestionarea resurselor bazată pe domeniul de existență</a></li>
+<li><a href="45_ro.html">Drop-ul este o acțiune ierarhică</a></li>
+<li><a href="46_ro.html">Cedarea proprietății</a></li>
+<li><a href="47_ro.html">Returnarea proprietății</a></li>
+<li><a href="48_ro.html">Împrumutul proprietății prin referințe</a></li>
+<li><a href="49_ro.html">Împrumutul proprietății mutabile prin referințe</a></li>
+<li><a href="50_ro.html">Dereferențiere</a></li>
+<li><a href="51_ro.html">Trimiterea datelor împrumutate</a></li>
+<li><a href="52_ro.html">Referințele unor referințe</a></li>
+<li><a href="53_ro.html">Durate de viață explicite</a></li>
+<li><a href="54_ro.html">Durate de viață multiple</a></li>
+<li><a href="55_ro.html">Durate de viață statice</a></li>
+<li><a href="56_ro.html">Durate de viață în interiorul structurilor de date</a></li>
+<li><a href="57_ro.html">Capitolul 5 - Concluzie</a></li>
+</ul><h3><a href="chapter_6_ro.html">Capitolul 6 - Text</a></h3><ul>
+<li><a href="59_ro.html">Șiruri de caractere literale</a></li>
+<li><a href="60_ro.html">Ce este utf-8</a></li>
+<li><a href="61_ro.html">Secvențe Escape</a></li>
+<li><a href="62_ro.html">Șiruri de caractere literale pe mai multe linii</a></li>
+<li><a href="63_ro.html">Șiruri de caractere literale brute</a></li>
+<li><a href="64_ro.html">Șiruri de caractere literale din fișiere</a></li>
+<li><a href="65_ro.html">Subșiruri de caractere</a></li>
+<li><a href="66_ro.html">Tipul char</a></li>
+<li><a href="67_ro.html">Șiruri de caractere</a></li>
+<li><a href="68_ro.html">Text ca parametru de funcție</a></li>
+<li><a href="69_ro.html">Construirea șirurilor de caractere</a></li>
+<li><a href="70_ro.html">Formatarea șirurilor de caractere</a></li>
+<li><a href="71_ro.html">Convertirea șirurilor de caractere</a></li>
+<li><a href="72_ro.html">Capitolul 6 - Concluzie</a></li>
+</ul><h3><a href="chapter_7_ro.html">Capitolul 7 - Programare orientată pe obiecte</a></h3><ul>
+<li><a href="74_ro.html">Ce este POO?</a></li>
+<li><a href="75_ro.html">Rust nu este POO</a></li>
+<li><a href="76_ro.html">Încapsulare prin metode</a></li>
+<li><a href="77_ro.html">Abstracție prin expunere selectivă</a></li>
+<li><a href="78_ro.html">Polimorfismul prin trăsături</a></li>
+<li><a href="79_ro.html">Metode implementate trăsăturilor</a></li>
+<li><a href="80_ro.html">Moștenirea trăsăturilor</a></li>
+<li><a href="81_ro.html">Expediere dinamică vs statică</a></li>
+<li><a href="82_ro.html">Trait objects</a></li>
+<li><a href="83_ro.html">Manevrarea tipurilor de date fără dimensiune fixă</a></li>
+<li><a href="84_ro.html">Funcții generice</a></li>
+<li><a href="85_ro.html">Prescurtare a funcțiilor generice</a></li>
+<li><a href="86_ro.html">Box</a></li>
+<li><a href="87_ro.html">Structuri generice revizuite</a></li>
+<li><a href="88_ro.html">Capitolul 7 - Concluzie</a></li>
+</ul><h3><a href="chapter_8_ro.html">Capitolul 8 - Pointeri "inteligenți"</a></h3><ul>
+<li><a href="90_ro.html">Să revizuim referințele</a></li>
+<li><a href="91_ro.html">Pointeri simpli</a></li>
+<li><a href="92_ro.html">Dereferențierea</a></li>
+<li><a href="93_ro.html">Operatorul `*`</a></li>
+<li><a href="94_ro.html">Operatorul `.`</a></li>
+<li><a href="95_ro.html">Pointeri inteligenți</a></li>
+<li><a href="96_ro.html">Cod nesigur inteligent</a></li>
+<li><a href="97_ro.html">Amici comuni</a></li>
+<li><a href="98_ro.html">Memoria alocată pe heap</a></li>
+<li><a href="99_ro.html">Să revizuim main-ul care poate eșua</a></li>
+<li><a href="100_ro.html">Numărarea referențierilor</a></li>
+<li><a href="101_ro.html">Partajarea accesului</a></li>
+<li><a href="102_ro.html">Partajarea între thread-uri</a></li>
+<li><a href="103_ro.html">Combinarea pointerilor inteligenți</a></li>
+<li><a href="104_ro.html">Chapter 8 - Concluzii</a></li>
+</ul><h3><a href="chapter_9_ro.html">Capitolul 9 - Organizarea și structurarea proiectului</a></h3><ul>
+<li><a href="106_ro.html">Module</a></li>
+<li><a href="107_ro.html">Scrierea unui program</a></li>
+<li><a href="108_ro.html">Scrierea unei biblioteci</a></li>
+<li><a href="109_ro.html">Referențierea de către alte module și cutii</a></li>
+<li><a href="110_ro.html">Referința la mai multe elemente</a></li>
+<li><a href="111_ro.html">Crearea de module</a></li>
+<li><a href="112_ro.html">Ierarhia modulelor</a></li>
+<li><a href="113_ro.html">Modul inclus direct (inline)</a></li>
+<li><a href="114_ro.html">Referențierea modulelor interne</a></li>
+<li><a href="115_ro.html">Exportarea</a></li>
+<li><a href="116_ro.html">Vizibilitatea structurilor</a></li>
+<li><a href="117_ro.html">Preludiu</a></li>
+<li><a href="118_ro.html">Preludiul propriu</a></li>
+<li><a href="119_ro.html">Capitolul 9 - Concluzie</a></li>
+</ul><h3><a href="chapter_10_ro.html">Chapter 10 - Sfârșit</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

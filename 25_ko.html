@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>메모리</h1>
+            <p>Rust 프로그램에는 데이터가 저장되는 세 가지의 메모리 영역이 있습니다:</p>
+<ul>
+<li><strong>데이터 메모리(data memory)</strong> - 크기가 고정 되었으며 <strong>static</strong> (i.e.  프로그램이 실행되는 동안 항상 사용 가능)한 데이터용.
+프로그램의 텍스트를 생각해봅시다(예: "Hello World!"): 이 텍스트의 바이트들은 오직 한 곳에서만 읽히므로
+이 영역에 저장될 수 있습니다. 이런 종류의 데이터는 컴파일러가 많은 최적화를 하며,
+위치가 알려져 있고 고정되어 있기 때문에 일반적으로 사용하기에 매우 빠르다고 여깁니다.</li>
+<li><strong>스택 메모리(stack memory)</strong> - 함수 내에서 변수로 선언되는 데이터용.
+이 메모리의 위치는 함수 호출 동안에는 절대 변하지 않기 때문에 컴파일러가
+코드를 최적화할 수 있으며, 이로 인해 접근하기에 매우 빠릅니다.</li>
+<li><strong>힙 메모리(heap memory)</strong> - 애플리케이션이 실행되는 동안 생성되는 데이터용.
+이 영역의 데이터는 추가하거나, 이동하거나, 제거하거나, 크기를 바꾸거나, 등을
+할 수 있습니다. 이런 동적 속성 때문에 일반적으로 사용하기에 느리다고 여기지만,
+훨씬 더 창의적인 메모리 사용이 가능합니다. 데이터가 이 영역에 추가되면
+<strong>할당(allocation)</strong>이라고 부릅니다. 데이터가 이 영역에서 제거되면 <strong>해제(deallocation)</strong>라고 부릅니다.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="24_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="26_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

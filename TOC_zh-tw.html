@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="zh-tw" dir="ltr">
+    <head>
+        <title>Rust 語言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-tw.html">Rust 語言之旅</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>課堂</h1>
+            <ul>
+        <li><a href="00_zh-tw.html">您好, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_zh-tw.html">第一章 - 基礎概念</a></h3><ul>
+<li><a href="02_zh-tw.html">The Rust Playground (Rust 語言遊樂場)</a></li>
+<li><a href="03_zh-tw.html">變量 (Variables)</a></li>
+<li><a href="04_zh-tw.html">改變變數的值</a></li>
+<li><a href="05_zh-tw.html">基本類型 (Primitive types)</a></li>
+<li><a href="06_zh-tw.html">基本的數據類型轉換</a></li>
+<li><a href="07_zh-tw.html">常數 (Constant)</a></li>
+<li><a href="08_zh-tw.html">陣列 (Array)</a></li>
+<li><a href="09_zh-tw.html">函數 (Functions)</a></li>
+<li><a href="10_zh-tw.html">多個回傳值</a></li>
+<li><a href="11_zh-tw.html">沒有回傳類型</a></li>
+<li><a href="12_zh-tw.html">第一章 - 總結</a></li>
+</ul><h3><a href="chapter_2_zh-tw.html">第二章 - 基本流程控制</a></h3><ul>
+<li><a href="14_zh-tw.html">if/else if/else</a></li>
+<li><a href="15_zh-tw.html">loop</a></li>
+<li><a href="16_zh-tw.html">while</a></li>
+<li><a href="17_zh-tw.html">for</a></li>
+<li><a href="18_zh-tw.html">match</a></li>
+<li><a href="19_zh-tw.html">從迴圈回傳數值</a></li>
+<li><a href="20_zh-tw.html">從區塊表達式回傳數值</a></li>
+<li><a href="21_zh-tw.html">第二章 - 總結</a></li>
+</ul><h3><a href="chapter_3_zh-tw.html">第三章 - 基本資料結構 (data structures)</a></h3><ul>
+<li><a href="23_zh-tw.html">結構 (structures)</a></li>
+<li><a href="24_zh-tw.html">呼叫方法 (method)</a></li>
+<li><a href="25_zh-tw.html">記憶體 (memory)</a></li>
+<li><a href="26_zh-tw.html">在記憶體裡創建資料</a></li>
+<li><a href="27_zh-tw.html">數組型結構 (tuple-like)</a></li>
+<li><a href="28_zh-tw.html">單組型結構 (unit-like)</a></li>
+<li><a href="29_zh-tw.html">列舉 (enumerations)</a></li>
+<li><a href="30_zh-tw.html">列舉與資料</a></li>
+<li><a href="31_zh-tw.html">第三章 - 總結</a></li>
+</ul><h3><a href="chapter_4_zh-tw.html">第四章 - 泛型 (generic types)</a></h3><ul>
+<li><a href="33_zh-tw.html">什麼是泛型？</a></li>
+<li><a href="34_zh-tw.html">空值表示</a></li>
+<li><a href="35_zh-tw.html">選項 (option)</a></li>
+<li><a href="36_zh-tw.html">結果 (result)</a></li>
+<li><a href="37_zh-tw.html">失敗的主函式 (failable main)</a></li>
+<li><a href="38_zh-tw.html">優雅的錯誤處理</a></li>
+<li><a href="39_zh-tw.html">醜陋的選項 (optino)/結果 (result) 處理</a></li>
+<li><a href="40_zh-tw.html">向量 (vectors)</a></li>
+<li><a href="41_zh-tw.html">第四章 - 總結</a></li>
+</ul><h3><a href="chapter_5_zh-tw.html">第五章 - 擁有權 (ownership) 與借資料 (borrowing data)</a></h3><ul>
+<li><a href="43_zh-tw.html">擁有權 (ownership)</a></li>
+<li><a href="44_zh-tw.html">範圍 (scope-based) 資源管理</a></li>
+<li><a href="45_zh-tw.html">徹下是有階級的</a></li>
+<li><a href="46_zh-tw.html">擁有權轉移</a></li>
+<li><a href="47_zh-tw.html">擁有權歸還</a></li>
+<li><a href="48_zh-tw.html">從參考 (references) 借擁有權</a></li>
+<li><a href="49_zh-tw.html">從參考借可變 (mutable) 的擁有權</a></li>
+<li><a href="50_zh-tw.html">解參考 (dereferencing)</a></li>
+<li><a href="51_zh-tw.html">傳遞借來的資料 (borrowed data)</a></li>
+<li><a href="52_zh-tw.html">參考的參考 (references of references)</a></li>
+<li><a href="53_zh-tw.html">明確的生命週期</a></li>
+<li><a href="54_zh-tw.html">多個生命週期</a></li>
+<li><a href="55_zh-tw.html">靜態生命週期 (static lifetimes)</a></li>
+<li><a href="56_zh-tw.html">資料型別的生命週期</a></li>
+<li><a href="57_zh-tw.html">第五章 - 總結</a></li>
+</ul><h3><a href="chapter_6_zh-tw.html">第六章 - 文字</a></h3><ul>
+<li><a href="59_zh-tw.html">字串常量 (string literals)</a></li>
+<li><a href="60_zh-tw.html">什麼是 utf-8</a></li>
+<li><a href="61_zh-tw.html">跳脫字元</a></li>
+<li><a href="62_zh-tw.html">多行字串常量</a></li>
+<li><a href="63_zh-tw.html">原始字串常量 (raw string literals)</a></li>
+<li><a href="64_zh-tw.html">從檔案來的字串常量</a></li>
+<li><a href="65_zh-tw.html">字串切片 (string slice)</a></li>
+<li><a href="66_zh-tw.html">字元 (chars)</a></li>
+<li><a href="67_zh-tw.html">字串 (string)</a></li>
+<li><a href="68_zh-tw.html">將文字當作函式參數</a></li>
+<li><a href="69_zh-tw.html">建立字串</a></li>
+<li><a href="70_zh-tw.html">字串格式化</a></li>
+<li><a href="71_zh-tw.html">字串轉換</a></li>
+<li><a href="72_zh-tw.html">第六章 - 總結</a></li>
+</ul><h3><a href="chapter_7_zh-tw.html">第七章 - 物件導向程式 (object oriented programming)</a></h3><ul>
+<li><a href="74_zh-tw.html">什麼是 OOP？</a></li>
+<li><a href="75_zh-tw.html">Rust 不是 OOP</a></li>
+<li><a href="76_zh-tw.html">封裝方法 (encapsulation with methods)</a></li>
+<li><a href="77_zh-tw.html">暴露指定的抽象化 (abstraction with selective exposure)</a></li>
+<li><a href="78_zh-tw.html">特徵多型 (polymorphism with traits)</a></li>
+<li><a href="79_zh-tw.html">特徵上的方法 (implemented methods on traits)</a></li>
+<li><a href="80_zh-tw.html">特徵繼承 (trait inheritance)</a></li>
+<li><a href="81_zh-tw.html">動態與靜態的發送 (dynamic vs static ispatch)</a></li>
+<li><a href="82_zh-tw.html">特徵物件 (trait objects)</a></li>
+<li><a href="83_zh-tw.html">處理末知大小的資料 (handling unsized data)</a></li>
+<li><a href="84_zh-tw.html">泛型函式 (generic functions)</a></li>
+<li><a href="85_zh-tw.html">泛型函式簡寫 (generic function shorthand)</a></li>
+<li><a href="86_zh-tw.html">Box</a></li>
+<li><a href="87_zh-tw.html">重訪泛型結構 (generic structs revisited)</a></li>
+<li><a href="88_zh-tw.html">第七章 - 總結</a></li>
+</ul><h3><a href="chapter_8_zh-tw.html">[沒有翻譯] Chapter 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_zh-tw.html">[沒有翻譯] References Revisited</a></li>
+<li><a href="91_zh-tw.html">[沒有翻譯] Raw Pointers</a></li>
+<li><a href="92_zh-tw.html">[沒有翻譯] Dereferencing</a></li>
+<li><a href="93_zh-tw.html">[沒有翻譯] The * Operator</a></li>
+<li><a href="94_zh-tw.html">[沒有翻譯] The . Operator</a></li>
+<li><a href="95_zh-tw.html">[沒有翻譯] Smart Pointers</a></li>
+<li><a href="96_zh-tw.html">[沒有翻譯] Smart Unsafe Code</a></li>
+<li><a href="97_zh-tw.html">[沒有翻譯] Familiar Friends</a></li>
+<li><a href="98_zh-tw.html">[沒有翻譯] Heap Allocated Memory</a></li>
+<li><a href="99_zh-tw.html">[沒有翻譯] Failable Main Revisited</a></li>
+<li><a href="100_zh-tw.html">[沒有翻譯] Referencing Counting</a></li>
+<li><a href="101_zh-tw.html">[沒有翻譯] Sharing Access</a></li>
+<li><a href="102_zh-tw.html">[沒有翻譯] Sharing Across Threads</a></li>
+<li><a href="103_zh-tw.html">[沒有翻譯] Combining Smart Pointers</a></li>
+<li><a href="104_zh-tw.html">[沒有翻譯] Chapter 8 - Conclusion</a></li>
+</ul><h3><a href="chapter_9_zh-tw.html">[沒有翻譯] Chapter 9 - Project Organization and Structure</a></h3><ul>
+<li><a href="106_zh-tw.html">[沒有翻譯] Modules</a></li>
+<li><a href="107_zh-tw.html">[沒有翻譯] Writing a Program</a></li>
+<li><a href="108_zh-tw.html">[沒有翻譯] Writing a Library</a></li>
+<li><a href="109_zh-tw.html">[沒有翻譯] Referencing Other Modules and Crates</a></li>
+<li><a href="110_zh-tw.html">[沒有翻譯] Referencing Multiple Items</a></li>
+<li><a href="111_zh-tw.html">[沒有翻譯] Creating Modules</a></li>
+<li><a href="112_zh-tw.html">[沒有翻譯] Module Hierarchy</a></li>
+<li><a href="113_zh-tw.html">[沒有翻譯] Inline Module</a></li>
+<li><a href="114_zh-tw.html">[沒有翻譯] Internal Module Referencing</a></li>
+<li><a href="115_zh-tw.html">[沒有翻譯] Exporting</a></li>
+<li><a href="116_zh-tw.html">[沒有翻譯] Structure Visibility</a></li>
+<li><a href="117_zh-tw.html">[沒有翻譯] Prelude</a></li>
+<li><a href="118_zh-tw.html">[沒有翻譯] Your Own Prelude</a></li>
+<li><a href="119_zh-tw.html">[沒有翻譯] Chapter 9 - Conclusion</a></li>
+</ul><h3><a href="chapter_10_zh-tw.html">[沒有翻譯] Chapter 10 - The End</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

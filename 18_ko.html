@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+    <html lang="ko" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ko.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ko.html">목차</a></span>
+            </div>
+            <div class="page">
+            <h1>match</h1>
+            <p>switch 구문이 그리우십니까? Rust는 모든 가능한 조건의 값들을 대조하고
+그 결과가 true인 경우 해당 코드 경로를 실행하는, 엄청나게 유용한 키워드를 갖고 있습니다.
+앞으로의 장에서는 더 복잡한 데이터의 패턴을 대조하는 방법에 대해 얘기할 것입니다.
+약속컨대, 기다린 보람이 있을겁니다.</p>
+<p><code>match</code>의 조건은 빠짐 없이 모든 케이스를 처리해야 합니다.</p>
+<p>match와 분해의 조합은 현재까지 Rust에서 가장 흔하게 사용하는 패턴입니다.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="17_ko.html" rel="prev">❮ 이전</a></span>
+                <span class="next"><a href="19_ko.html" rel="next">다음 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2042%3B%0A%0A%20%20%20%20match%20x%20%7B%0A%20%20%20%20%20%20%20%200%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%220%20%EB%B0%9C%EA%B2%AC%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%97%AC%EB%9F%AC%20%EA%B0%9C%20%EA%B0%92%EA%B3%BC%20%EB%8C%80%EC%A1%B0%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4%0A%20%20%20%20%20%20%20%201%20%7C%202%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%221%20%EB%98%90%EB%8A%94%202%20%EB%B0%9C%EA%B2%AC!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EB%B2%94%EC%9C%84%EB%A1%9C%20%EB%8C%80%EC%A1%B0%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4%0A%20%20%20%20%20%20%20%203..%3D9%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%223%EC%97%90%EC%84%9C%209%EA%B9%8C%EC%A7%80%EC%9D%98%20%EC%88%AB%EC%9E%90%20%EB%B0%9C%EA%B2%AC%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EC%B0%BE%EC%9D%80%20%EC%88%AB%EC%9E%90%EB%A5%BC%20%EB%B3%80%EC%88%98%EC%97%90%20%EB%B0%94%EC%9D%B8%EB%94%A9%ED%95%A0%20%EC%88%98%20%EC%9E%88%EB%8B%A4%0A%20%20%20%20%20%20%20%20matched_num%20%40%2010..%3D100%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%2210%EC%97%90%EC%84%9C%20100%EA%B9%8C%EC%A7%80%EC%9D%98%20%EC%88%AB%EC%9E%90%20%7B%7D%20%EB%B0%9C%EA%B2%AC!%22%2C%20matched_num)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%2F%2F%20%EB%AA%A8%EB%93%A0%20%EC%BC%80%EC%9D%B4%EC%8A%A4%EA%B0%80%20%EC%B2%98%EB%A6%AC%EB%90%98%EC%A7%80%20%EC%95%8A%EC%95%98%EC%9D%84%20%EA%B2%BD%EC%9A%B0%20%EB%B0%98%EB%93%9C%EC%8B%9C%20%EC%A1%B4%EC%9E%AC%ED%95%B4%EC%95%BC%20%ED%95%98%EB%8A%94%20%EA%B8%B0%EB%B3%B8%20match%0A%20%20%20%20%20%20%20%20_%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20println!(%22%EB%AD%94%EA%B0%80%20%EB%8B%A4%EB%A5%B8%EA%B1%B0%20%EB%B0%9C%EA%B2%AC!%22)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

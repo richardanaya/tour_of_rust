@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Criando Dados na Memória</h1>
+            <p>Quando nós <strong>instanciamos</strong> uma <strong>struct</strong> no nosso código o programa cria os campos associados lado-a-lado na memória.</p>
+<p>Nós instanciamos uma estrutura especificando todos os valores dos campos dentro de</p>
+<p><code>StructName { ... }</code>.</p>
+<p>Os campos são acessados usando o operador de ponto <code>.</code>.</p>
+<p>Detalhes da memória do nosso exemplo:</p>
+<ul>
+<li>O texto dentro das aspas é somente leitura (por exemplo, "Ferris"), portanto é colocado na <em>região da memória de dados</em>.</li>
+<li>A chamada da função <code>String::from</code> cria uma struct <code>String</code> que é colocada lado-a-lado com os campos de SeaCreature na <em>pilha</em>. Uma String representa um texto que pode ser alterado e faz assim:</li>
+</ul>
+<ol>
+<li><p>Criando memória no <em>heap</em> para o texto onde ele pode ser modificado.</p></li>
+<li><p>Armazenando uma referência a esse local de memória no <em>heap</em> e armazenando-o no struct <code>String</code> (mais a respeito em lições futuras).</p></li>
+</ol>
+<ul>
+<li>Finalmente, nossos dois amigos <em>Ferris</em> e <em>Sarah</em> têm estruturas de dados que sempre terão locais fixos em nosso programa, portanto, eles são colocados na <em>pilha</em>.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="25_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="27_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20SeaCreature%20%7B%0A%20%20%20%20animal_type%3A%20String%2C%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20arms%3A%20i32%2C%0A%20%20%20%20legs%3A%20i32%2C%0A%20%20%20%20weapon%3A%20String%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20Os%20dados%20de%20SeaCreature%20est%C3%A3o%20na%20pilha%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20A%20struct%20da%20String%20tamb%C3%A9m%20est%C3%A1%20na%20pilha%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20mas%20mant%C3%A9m%20uma%20refer%C3%AAncia%20dos%20dados%20na%20heap%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22caranguejo%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Ferris%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%202%2C%0A%20%20%20%20%20%20%20%20legs%3A%204%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22garra%22)%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20animal_type%3A%20String%3A%3Afrom(%22polvo%22)%2C%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22Sarah%22)%2C%0A%20%20%20%20%20%20%20%20arms%3A%208%2C%0A%20%20%20%20%20%20%20%20legs%3A%200%2C%0A%20%20%20%20%20%20%20%20weapon%3A%20String%3A%3Afrom(%22nenhum%22)%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%A9%20um%20%7B%7D.%20Eles%20t%C3%AAm%20%7B%7D%20bra%C3%A7os%2C%20%7B%7D%20patas%2C%20e%20uma%20arma%20de%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20ferris.name%2C%20ferris.animal_type%2C%20ferris.arms%2C%20ferris.legs%2C%20ferris.weapon%0A%20%20%20%20)%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%C3%A9%20um%20%7B%7D.%20Eles%20t%C3%AAm%20%7B%7D%20bra%C3%A7os%20e%20%7B%7D%20patas.%20Eles%20n%C3%A3o%20t%C3%AAm%20armas..%22%2C%0A%20%20%20%20%20%20%20%20sarah.name%2C%20sarah.animal_type%2C%20sarah.arms%2C%20sarah.legs%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Chia sẻ qua các luồng</h1>
+            <p><code>Mutex</code> là một cấu trúc dữ liệu vùng chứa thường được giữ bởi các con trỏ thông minh lấy dữ liệu và cho phép  chúng ta mượn các tham chiếu có thể thay đổi và bất biến đến dữ liệu bên trong.  Điều này ngăn không cho việc vay mượn bị lạm dụng bằng cách hệ điều hành chỉ hạn chế một luồng CPU  tại một thời điểm để có quyền truy cập vào dữ liệu, chặn các luồng khác cho đến khi luồng gốc đó được thực hiện với phần mượn bị khóa của nó.</p>
+<p>Đa luồng nằm ngoài phạm vi của Tour of Rust, nhưng <code>Mutex</code> là một phần cơ bản của việc sắp xếp nhiều luồng CPU truy cập vào cùng một dữ liệu.</p>
+<p>Có một con trỏ thông minh đặc biệt <code>Arc</code> giống hệt với<code>Rc</code> ngoại trừ việc sử dụng cách tăng số lượng tham chiếu một cách an toàn cho luồng. </p>
+<p>Nó thường được sử dụng để có nhiều tham chiếu đến cùng một <code>Mutex</code>.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="101_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="103_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20h%C3%A3y%20m%C6%B0%E1%BB%A3n%20m%E1%BB%99t%20tham%20chi%E1%BA%BFu%20b%E1%BA%A5t%20bi%E1%BA%BFn%20c%C3%B3%20kh%C3%B3a%20v%E1%BB%81%20pie%0A%20%20%20%20%2F%2F%20ch%C3%BAng%20ta%20ph%E1%BA%A3i%20m%E1%BB%9F%20k%E1%BA%BFt%20qu%E1%BA%A3%20c%E1%BB%A7a%20m%E1%BB%99t%20kh%C3%B3a%0A%20%20%20%20%2F%2F%20v%C3%AC%20n%C3%B3%20c%C3%B3%20th%E1%BB%83%20th%E1%BA%A5t%20b%E1%BA%A1i%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20tham%20chi%E1%BA%BFu%20b%E1%BB%8B%20kh%C3%B3a%20drop%20%E1%BB%9F%20%C4%91%C3%A2y%20v%C3%A0%20gi%C3%A1%20tr%E1%BB%8B%20%C4%91%C6%B0%E1%BB%A3c%20b%E1%BA%A3o%20v%E1%BB%87%20b%E1%BA%B1ng%20mutex%20c%C3%B3%20th%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20ng%C6%B0%E1%BB%9Di%20kh%C3%A1c%20s%E1%BB%AD%20d%E1%BB%A5ng%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

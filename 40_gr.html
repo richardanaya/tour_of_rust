@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="gr" dir="ltr">
+    <head>
+        <title>Ξενάγηση στη Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_gr.html">Ξενάγηση στη Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_gr.html">Πίνακας Περιεχομένων</a></span>
+            </div>
+            <div class="page">
+            <h1>Ανύσματα (Vectors)</h1>
+            <p>Κάποιοι απ' τους πιο χρήσιμους γενικούς τύπους είναι οι λεγόμενοι «τύποι συλλογών». Για παράδειγμα, ένα άνυσμα είναι μία αυθαιρέτου μήκους λίστα ομοειδών αντικειμένων που αντιπροσωπεύεται απ' τη δομή <code>Vec</code>.</p>
+<p>Η μακροεντολή <code>vec!</code> μας επιτρέπει να δημιουργούμε εύκολα ένα άνυσμα αντί να το ορίζουμε με το χέρι στοιχείο-προς-στοιχείο.</p>
+<p>Τα ανύσματα έχουν τη μέθοδο <code>iter()</code> η οποία μετατρέπει ένα άνυσμα σε διαδρομέα, επιτρέποντάς μας έτσι να χρησιμοποιήσουμε πολύ εύκολα ένα άνυσμα μέσα σε ένα βρόχο <code>for</code>.</p>
+<p>Λεπτομέρειες μνήμης:</p>
+<ul>
+<li>Τα ανύσματα είναι δομές, και άρα αποθηκεύονται στη στοίβα· τα <em>περιεχόμενα</em> ενός ανύσματος όμως αποθηκεύονται στο σωρό ώστε να μπορούν ν' αυξομειώνονται σε μήκος. Στη στοίβα αποθηκεύεται η αναφορά στην εν λόγω θέση μνήμης του σωρού.</li>
+<li>Ένα άνυσμα ξεκινάει με μία προεπιλεγμένη χωρητικότητα. Όταν προστεθούν περισσότερα στοιχεία απ' όσα αντιστοιχούν σε αυτήν, αναδεσμεύει μνήμη στο σωρό για τα δεδομένα του ώστε να έχει ένα νέο διαθέσιμο χώρο με μεγαλύτερη χωρητικότητα, συνήθως τη διπλάσια.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="39_gr.html" rel="prev">❮ Προηγούμενο</a></span>
+                <span class="next"><a href="41_gr.html" rel="next">Επόμενο ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%CE%9C%CF%80%CE%BF%CF%81%CE%BF%CF%8D%CE%BC%CE%B5%20%CE%BD%CE%B1%20%CE%B4%CE%B7%CE%BB%CF%8E%CF%83%CE%BF%CF%85%CE%BC%CE%B5%20%CF%81%CE%B7%CF%84%CE%AC%20%CF%84%CE%BF%CE%BD%20%CF%84%CF%8D%CF%80%CE%BF%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20%CE%A4%CE%BF%CF%85%CF%81%CE%BC%CF%80%CF%8C%CF%88%CE%B1%CF%81%CE%BF%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20%CE%91%CE%BB%CE%BB%CE%AC%20%CE%BA%CE%BF%CE%B9%CF%84%CE%AC%CE%BE%CF%84%CE%B5%20%CF%80%CF%8C%CF%83%CE%BF%20%CE%AD%CE%BE%CF%85%CF%80%CE%BD%CE%B1%20%CE%BC%CF%80%CE%BF%CF%81%CE%B5%CE%AF%20%CE%B7%20Rust%0A%20%20%20%20%2F%2F%20%CE%BD%CE%B1%20%CF%83%CF%85%CE%BC%CF%80%CE%B5%CF%81%CE%AC%CE%BD%CE%B5%CE%B9%20%CE%B1%CF%85%CF%84%CF%8C%CE%BC%CE%B1%CF%84%CE%B1%20%CF%84%CE%BF%CE%BD%20%CF%84%CF%8D%CF%80%CE%BF!%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20%CE%9D%CE%B1%20%CE%BA%CE%B1%CE%B9%20%CE%BC%CE%B9%CE%B1%20%CF%8C%CE%BC%CE%BF%CF%81%CF%86%CE%B7%20%CE%BC%CE%B1%CE%BA%CF%81%CE%BF%CE%B5%CE%BD%CF%84%CE%BF%CE%BB%CE%AE!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22%CE%93%CE%B5%CE%B9%CE%B1%20%CF%83%CE%BF%CF%85%22)%2C%20String%3A%3Afrom(%22%CE%9A%CF%8C%CF%83%CE%BC%CE%B5!%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

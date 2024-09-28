@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="ie" dir="ltr">
+    <head>
+        <title>Tur de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ie.html">Tur de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ie.html">Tabelle de contenete</a></span>
+            </div>
+            <div class="page">
+            <h1>String</h1>
+            <p>Un <strong>String</strong> es un struct quel possede un sequentie de bytes in utf-8 in memorie sur li heap.</p>
+<p>Essente sur li heap, on posse extender e modificar it etc. con un flexibilitá quel ne trova se in string literals.</p>
+<p>Metodes comun:</p>
+<ul>
+<li><code>push_str</code> por adjunter plu bytes utf-8 al fine de un catene.</li>
+<li><code>replace</code> por remplazzar sequenties de bytes utf-8 con altris.</li>
+<li><code>to_lowercase</code>/<code>to_uppercase</code> por maju-/minusculisation.</li>
+<li><code>trim</code> por remover spacies</li>
+</ul>
+<p>Quande un String cade, su memorie sur li heap cade junt con it.</p>
+<p><code>String</code> have un operator <code>+</code> con quel on extende it con un <code>&amp;str</code> e retorna se self, ma it ne es tam ergonomic quam on vell esperar.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="66_ie.html" rel="prev">❮ Precedent</a></span>
+                <span class="next"><a href="68_ie.html" rel="next">Sequent ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20mut%20salute_munde%20%3D%20String%3A%3Afrom(%22salute%22)%3B%0A%20%20%20%20salute_munde.push_str(%22%20munde%22)%3B%0A%20%20%20%20salute_munde%20%3D%20salute_munde%20%2B%20%22!%22%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20salute_munde)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

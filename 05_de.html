@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <html lang="de" dir="ltr">
+    <head>
+        <title>Tour durch Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_de.html">Tour durch Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_de.html">Inhaltsverzeichnis</a></span>
+            </div>
+            <div class="page">
+            <h1>Basistypen</h1>
+            <p>Rust besitzt eine vielzahl an bekannten Datentypen</p>
+<ul>
+<li>booleans - <code>bool</code> für true/false bzw. wahr/falsch Werte</li>
+<li>unsigned integers - <code>u8</code> <code>u32</code> <code>u64</code> für positive Ganzzahlen (inkl. 0 für die Mathematiker)</li>
+<li>signed integers - <code>i8</code> <code>i32</code> <code>i64</code> für vorzeichenbehaftete Ganzzahlen</li>
+<li>pointer sized integers - <code>usize</code> <code>isize</code> für Indizes und Größen im Speicher</li>
+<li>floating point - <code>f32</code> <code>f64</code> für Dezimalzahlen</li>
+<li>tuple - <code>(Wert, Wert, ...)</code> um festgelegte Sequenzen von Werten auf dem Stack zu speichern</li>
+<li>arrays - <code>[Wert, Wert, ...]</code>eine Kollektion von ähnlichen Elementen mit zur Compile-Zeit festgelegter Länge</li>
+<li>slices - eine Kollektion von ähnlichen Elementen mit Länge bekannt zur Laufzeit</li>
+<li><code>str</code> (string slice) - Text mit zur Laufzeit bekannter Länge</li>
+</ul>
+<p>Wir sehen schon, dass es einiges zum Anpacken geben wird!</p>
+<p>Eine Warnung vorweg: Text wird etwas komplexer sein als du es vielleicht von anderen
+Programmiersprachen gewohnt bist, da Rust eine Systemprogrammiersprache ist und daher mehr
+auf effektives Speichermanagement fokussiert. Keine Panik auf der Titanic aber, wir werden unser
+Bestes geben, dich darauf vorzubereiten!</p>
+<p>Noch ein Hinweis: Numerische Datentypen können auch nach dem Zahlenliteral spezifiziert werden
+(z.B. <code>13u32</code>)</p>
+            <div class="bottomnav">
+                <span class="back"><a href="04_de.html" rel="prev">❮ Zurück</a></span>
+                <span class="next"><a href="06_de.html" rel="next">Weiter ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+x+%3D+12%3B+%2F%2F+by+default+this+is+i32%0A++++let+a+%3D+12u8%3B%0A++++let+b+%3D+4.3%3B+%2F%2F+by+default+this+is+f64%0A++++let+c+%3D+4.3f32%3B%0A++++let+d+%3D+%27r%27%3B+%2F%2F+unicode+character%0A++++let+ferris+%3D+%27%F0%9F%A6%80%27%3B+%2F%2F+also+a+unicode+character%0A++++let+bv+%3D+true%3B%0A++++let+t+%3D+%2813%2C+false%29%3B%0A++++let+sentence+%3D+%22hello+world%21%22%3B%0A++++println%21%28%0A++++++++%22%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D+%7B%7D%22%2C%0A++++++++x%2C+a%2C+b%2C+c%2C+d%2C+ferris%2C+bv%2C+t.0%2C+t.1%2C+sentence%0A++++%29%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

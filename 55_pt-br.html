@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+    <html lang="pt-br" dir="ltr">
+    <head>
+        <title>Um tour por Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pt-br.html">Um tour por Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pt-br.html">Índice</a></span>
+            </div>
+            <div class="page">
+            <h1>Tempos de Vida Estáticos</h1>
+            <p>Uma variável <strong>estática</strong> é um recurso de memória criado em tempo de compilação que existe do início ao fim dentro de um programa. Eles devem ter seus tipos especificados explicitamente.</p>
+<p>Um recurso com <strong>tempo de vida estático</strong> é um recurso de memória que dura indefinidamente até o término de um programa. Observe que, por essa definição, alguns recursos com tempo de vida estático podem ser criados em tempo de execução.</p>
+<p>Recursos com tempo de vida estático têm o especificador de tempo de vida especial <code>'static</code>.</p>
+<p>Recursos <code>'static</code> nunca serão <strong>descartados</strong>.</p>
+<p>Se os recursos com tempo de vida estático contiverem referências, todos deverão ser <code>'static</code> (nada menos do que isso viveria tempo suficiente).</p>
+<p>Detalhes da memória:</p>
+<ul>
+<li>A modificação de variáveis estáticas é inerentemente perigosa, porque elas são acessíveis globalmente para serem lidas por qualquer um introduzindo a possibilidade de uma corrida de dados. Falaremos sobre os desafios dos dados globais mais tarde.</li>
+<li>O Rust permite o uso do bloco <code>unsafe {...}</code> para executar algumas operações sobre as quais o compilador não pode garantir a integridade do que está guardado na memória. O <a href="https://doc.rust-lang.org/nomicon/"><span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span></a> não deve ser mencionado em vão.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="54_pt-br.html" rel="prev">❮ Anterior</a></span>
+                <span class="next"><a href="56_pt-br.html" rel="next">Próximo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20vari%C3%A1veis%20est%C3%A1ticas%20tamb%C3%A9m%20podem%20ter%20escopo%20definido%20para%20uma%20fun%C3%A7%C3%A3o%0A%20%20%20%20static%20mut%20SECRETO%3A%20%26'static%20str%20%3D%20%22senha%22%3B%0A%0A%20%20%20%20%2F%2F%20strings%20t%C3%AAm%20o%20mesmo%20tempo%20de%20vida%20que%20as%20vari%C3%A1veis%20est%C3%A1ticas%0A%20%20%20%20let%20msg%3A%20%26'static%20str%20%3D%20%22Ol%C3%A1%20Mundo!%22%3B%0A%20%20%20%20let%20p%3A%20%26'static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20voc%C3%AA%20pode%20quebrar%20algumas%20regras%2C%20mas%20deve%20ser%20expl%C3%ADcito%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20podemos%20atribuir%20uma%20string%20a%20SECRETO%20porque%20ela%20tamb%C3%A9m%20%C3%A9%20est%C3%A1tica%0A%20%20%20%20%20%20%20%20SECRETO%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRETO)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

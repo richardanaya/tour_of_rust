@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="th" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_th.html">Tour of Rust</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Lessons</h1>
+            <ul>
+        <li><a href="00_th.html">สวัสดี, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_th.html">บทที่ 1 - พื้นฐาน</a></h3><ul>
+<li><a href="02_th.html">The Rust Playground</a></li>
+<li><a href="03_th.html">ตัวแปร</a></li>
+<li><a href="04_th.html">การเปลี่ยนแปลงค่าในตัวแปร</a></li>
+<li><a href="05_th.html">Types พื้นฐาน</a></li>
+<li><a href="06_th.html">การแปลงประเภทของตัวแปรแบบพื้นฐาน</a></li>
+<li><a href="07_th.html">ค่าคงที่</a></li>
+<li><a href="08_th.html">Arrays</a></li>
+<li><a href="09_th.html">Functions</a></li>
+<li><a href="10_th.html">การคืนค่าหลายค่า</a></li>
+<li><a href="11_th.html">การไม่คืนอะไรเลย</a></li>
+<li><a href="12_th.html">บทที่ 1 - สรุป</a></li>
+</ul><h3><a href="chapter_2_th.html">บทที่ 2 - Basic Control Flow</a></h3><ul>
+<li><a href="14_th.html">if/else if/else</a></li>
+<li><a href="15_th.html">loop</a></li>
+<li><a href="16_th.html">while</a></li>
+<li><a href="17_th.html">for</a></li>
+<li><a href="18_th.html">match</a></li>
+<li><a href="19_th.html">Returning Values From loop</a></li>
+<li><a href="20_th.html">การคืนค่าจาก Block Expressions</a></li>
+<li><a href="21_th.html">บทที่ 2 - สรุป</a></li>
+</ul><h3><a href="chapter_3_th.html">บทที่ 3 - ประเภทโครงสร้างข้อมูลพื้นฐาน</a></h3><ul>
+<li><a href="23_th.html">Structures</a></li>
+<li><a href="24_th.html">การเรียกเมธอด</a></li>
+<li><a href="25_th.html">หน่วยความจำ</a></li>
+<li><a href="26_th.html">การสร้างข้อมูลในหน่วยความจำ</a></li>
+<li><a href="27_th.html">Tuple-like Structs</a></li>
+<li><a href="28_th.html">Unit-like Structs</a></li>
+<li><a href="29_th.html">Enumerations</a></li>
+<li><a href="30_th.html">Enumerations With Data</a></li>
+<li><a href="31_th.html">บทที่ 3 - สรุป</a></li>
+</ul><h3><a href="chapter_4_th.html">Chapter 4 - Generic Types</a></h3><ul>
+<li><a href="33_th.html">Generic Types คืออะไร?</a></li>
+<li><a href="34_th.html">ตัวแทนของความว่างเปล่า</a></li>
+<li><a href="35_th.html">Option</a></li>
+<li><a href="36_th.html">Result</a></li>
+<li><a href="37_th.html">Main ที่ผิดพลาดได้</a></li>
+<li><a href="38_th.html">การจัดการ Error แบบสวยงาม</a></li>
+<li><a href="39_th.html">การจัดการ Option/Result แบบขี้เหร่</a></li>
+<li><a href="40_th.html">Vectors</a></li>
+<li><a href="41_th.html">บทที่ 4 - สรุป</a></li>
+</ul><h3><a href="chapter_5_th.html">บทที่ 5 - ความเป็นเจ้าของ และการยืมข้อมูล</a></h3><ul>
+<li><a href="43_th.html">ความเป็นเจ้าของ</a></li>
+<li><a href="44_th.html">การจัดการรีซอร์สโดยอิงตามขอบเขตข้อมูล</a></li>
+<li><a href="45_th.html">การ drop ตามลำดับชั้น</a></li>
+<li><a href="46_th.html">การเปลี่ยนเจ้าของ</a></li>
+<li><a href="47_th.html">การกลับมาเป็นเจ้าของ</a></li>
+<li><a href="48_th.html">การยืมความเป็นเจ้าของด้วยวิธีอ้างอิง</a></li>
+<li><a href="49_th.html">การยืมความเป็นเจ้าของ กับของที่เปลี่ยนแปลงค่าได้ ด้วยวิธีอ้างอิง</a></li>
+<li><a href="50_th.html">การอ้างอิง</a></li>
+<li><a href="51_th.html">การส่งผ่านข้อมูลที่ยืมมา</a></li>
+<li><a href="52_th.html">การอ้างอิงถึงตัวอ้างอิงตัวอื่น</a></li>
+<li><a href="53_th.html">lifetimes ที่ชัดเจน</a></li>
+<li><a href="54_th.html">Lifetimes หลายตัว</a></li>
+<li><a href="55_th.html">Static Lifetimes</a></li>
+<li><a href="56_th.html">Lifetimes In Data Types</a></li>
+<li><a href="57_th.html">บทที่ 5 - สรุป</a></li>
+</ul><h3><a href="chapter_6_th.html">บทที่ 6 - ข้อความ</a></h3><ul>
+<li><a href="59_th.html">การประกาศ String</a></li>
+<li><a href="60_th.html">utf-8 คืออะไร</a></li>
+<li><a href="61_th.html">Escaping Characters</a></li>
+<li><a href="62_th.html">Multi-line String Literals</a></li>
+<li><a href="63_th.html">Raw String Literals</a></li>
+<li><a href="64_th.html">String Literals From Files</a></li>
+<li><a href="65_th.html">String Slice</a></li>
+<li><a href="66_th.html">Chars</a></li>
+<li><a href="67_th.html">String</a></li>
+<li><a href="68_th.html">การส่งพารามิเตอร์ด้วยข้อความ</a></li>
+<li><a href="69_th.html">การสร้าง Strings</a></li>
+<li><a href="70_th.html">การจัดรูปแบบ Strings</a></li>
+<li><a href="71_th.html">การแปลงค่า Strings</a></li>
+<li><a href="72_th.html">บทที่ 6 - สรุป</a></li>
+</ul><h3><a href="chapter_7_th.html">Chapter 7 - Object Oriented Programming</a></h3><ul>
+<li><a href="74_th.html">แล้ว OOP มันคืออะไร?</a></li>
+<li><a href="75_th.html">Rust ไม่ได้เป็น OOP</a></li>
+<li><a href="76_th.html">Encapsulation ด้วยการมีเมธอด</a></li>
+<li><a href="77_th.html">Abstraction ด้วยการทำ Selective Exposure</a></li>
+<li><a href="78_th.html">Polymorphism ด้วย Traits</a></li>
+<li><a href="79_th.html">การสร้างเมธอดไว้ใน Traits</a></li>
+<li><a href="80_th.html">Trait สืบทอดได้</a></li>
+<li><a href="81_th.html">Dynamic vs Static Dispatch</a></li>
+<li><a href="82_th.html">Trait Objects</a></li>
+<li><a href="83_th.html">การจัดการข้อมูลที่ไม่รู้ไซส์</a></li>
+<li><a href="84_th.html">Generic Functions</a></li>
+<li><a href="85_th.html">Generic Function แบบย่อ</a></li>
+<li><a href="86_th.html">Box</a></li>
+<li><a href="87_th.html">กลับมาหา Generic Structs อีกรอบ</a></li>
+<li><a href="88_th.html">บทที่ 7 - สรุป</a></li>
+</ul><h3><a href="chapter_8_th.html">บทที่ 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_th.html">กลับมาเรื่อง การอ้างอิง อีกรอบ</a></li>
+<li><a href="91_th.html">Raw Pointers</a></li>
+<li><a href="92_th.html">Dereferencing</a></li>
+<li><a href="93_th.html">The * Operator</a></li>
+<li><a href="94_th.html">The . Operator</a></li>
+<li><a href="95_th.html">Smart Pointers</a></li>
+<li><a href="96_th.html">Smart Unsafe Code</a></li>
+<li><a href="97_th.html">เพื่อนที่คุ้นเคย</a></li>
+<li><a href="98_th.html">การจัดสรรพื้นที่ใน Heap</a></li>
+<li><a href="99_th.html">กลับมาที่ Main ที่ผิดพลาดได้ อีกครั้ง</a></li>
+<li><a href="100_th.html">Referencing Counting</a></li>
+<li><a href="101_th.html">Sharing Access</a></li>
+<li><a href="102_th.html">Sharing Across Threads</a></li>
+<li><a href="103_th.html">Combining Smart Pointers</a></li>
+<li><a href="104_th.html">บทที่ 8 - สรุป</a></li>
+</ul><h3><a href="chapter_9_th.html">บทที่ 9 - Project Organization and Structure</a></h3><ul>
+<li><a href="106_th.html">Modules</a></li>
+<li><a href="107_th.html">Writing a Program</a></li>
+<li><a href="108_th.html">Writing a Library</a></li>
+<li><a href="109_th.html">Referencing Other Modules and Crates</a></li>
+<li><a href="110_th.html">Referencing Multiple Items</a></li>
+<li><a href="111_th.html">Creating Modules</a></li>
+<li><a href="112_th.html">Module Hierarchy</a></li>
+<li><a href="113_th.html">Inline Module</a></li>
+<li><a href="114_th.html">Internal Module Referencing</a></li>
+<li><a href="115_th.html">Exporting</a></li>
+<li><a href="116_th.html">Structure Visibility</a></li>
+<li><a href="117_th.html">Prelude</a></li>
+<li><a href="118_th.html">Your Own Prelude</a></li>
+<li><a href="119_th.html">บทที่ 9 - สรุป</a></li>
+</ul><h3><a href="chapter_10_th.html">บทที่ 10 - ตอนจบ</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

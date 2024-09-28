@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="id" dir="ltr">
+    <head>
+        <title>Rust Tur - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_id.html">Rust Tur</a></span>
+                <span class="nav">
+                </span>
+            </div>
+            <div>
+            <h1>Pelajaran</h1>
+            <ul>
+        <li><a href="00_id.html">Halo, <img src="/favicon-32x32.png" style="display:inline; vertical-align:bottom"></a></li>
+</ul><h3><a href="chapter_1_id.html">Chapter 1 - Dasar-Dasar</a></h3><ul>
+<li><a href="02_id.html">The Rust Playground</a></li>
+<li><a href="03_id.html">Variabel</a></li>
+<li><a href="04_id.html">Merubah Variabel</a></li>
+<li><a href="05_id.html">Tipe Data Dasar</a></li>
+<li><a href="06_id.html">Basic Type Conversion</a></li>
+<li><a href="07_id.html">Konstanta</a></li>
+<li><a href="08_id.html">Arrays</a></li>
+<li><a href="09_id.html">Fungsi</a></li>
+<li><a href="10_id.html">Pengembalian nilai berganda</a></li>
+<li><a href="11_id.html">Tidak mengembalikan apa-apa</a></li>
+<li><a href="12_id.html">Bab 1 - Kesimpulan</a></li>
+</ul><h3><a href="chapter_2_id.html">Bab 2 - Dasar Flow Kontrol</a></h3><ul>
+<li><a href="14_id.html">if/else if/else</a></li>
+<li><a href="15_id.html">loop</a></li>
+<li><a href="16_id.html">while</a></li>
+<li><a href="17_id.html">for</a></li>
+<li><a href="18_id.html">match</a></li>
+<li><a href="19_id.html">Mengembalikan Nilai dari Loop</a></li>
+<li><a href="20_id.html">Mengembalikan Nilai dari Expresi Blok</a></li>
+<li><a href="21_id.html">Bab 2 - Kesimpulan</a></li>
+</ul><h3><a href="chapter_3_id.html">[belum diterjemahkan] Chapter 3 - Basic Data Structure Types</a></h3><ul>
+<li><a href="23_id.html">[belum diterjemahkan] Structures</a></li>
+<li><a href="24_id.html">[belum diterjemahkan] Calling Methods</a></li>
+<li><a href="25_id.html">[belum diterjemahkan] Memory</a></li>
+<li><a href="26_id.html">[belum diterjemahkan] Creating Data In Memory</a></li>
+<li><a href="27_id.html">[belum diterjemahkan] Tuple-like Structs</a></li>
+<li><a href="28_id.html">[belum diterjemahkan] Unit-like Structs</a></li>
+<li><a href="29_id.html">[belum diterjemahkan] Enumerations</a></li>
+<li><a href="30_id.html">[belum diterjemahkan] Enumerations With Data</a></li>
+<li><a href="31_id.html">[belum diterjemahkan] Chapter 3 - Conclusion</a></li>
+</ul><h3><a href="chapter_4_id.html">[belum diterjemahkan] Chapter 4 - Generic Types</a></h3><ul>
+<li><a href="33_id.html">[belum diterjemahkan] What Are Generic Types?</a></li>
+<li><a href="34_id.html">[belum diterjemahkan] Representing Nothing</a></li>
+<li><a href="35_id.html">[belum diterjemahkan] Option</a></li>
+<li><a href="36_id.html">[belum diterjemahkan] Result</a></li>
+<li><a href="37_id.html">[belum diterjemahkan] Failable Main</a></li>
+<li><a href="38_id.html">[belum diterjemahkan] Graceful Error Handling</a></li>
+<li><a href="39_id.html">[belum diterjemahkan] Ugly Option/Result Handling</a></li>
+<li><a href="40_id.html">[belum diterjemahkan] Vectors</a></li>
+<li><a href="41_id.html">[belum diterjemahkan] Chapter 4 - Conclusion</a></li>
+</ul><h3><a href="chapter_5_id.html">[belum diterjemahkan] Chapter 5 - Ownership & Borrowing Data</a></h3><ul>
+<li><a href="43_id.html">[belum diterjemahkan] Ownership</a></li>
+<li><a href="44_id.html">[belum diterjemahkan] Scope-Based Resource Management</a></li>
+<li><a href="45_id.html">[belum diterjemahkan] Dropping is Hierarchical</a></li>
+<li><a href="46_id.html">[belum diterjemahkan] Moving Ownership</a></li>
+<li><a href="47_id.html">[belum diterjemahkan] Returning Ownership</a></li>
+<li><a href="48_id.html">[belum diterjemahkan] Borrowing Ownership with References</a></li>
+<li><a href="49_id.html">[belum diterjemahkan] Borrowing Mutable Ownership with References</a></li>
+<li><a href="50_id.html">[belum diterjemahkan] Dereferencing</a></li>
+<li><a href="51_id.html">[belum diterjemahkan] Passing Around Borrowed Data</a></li>
+<li><a href="52_id.html">[belum diterjemahkan] References Of References</a></li>
+<li><a href="53_id.html">[belum diterjemahkan] Explicit Lifetimes</a></li>
+<li><a href="54_id.html">[belum diterjemahkan] Multiple Lifetimes</a></li>
+<li><a href="55_id.html">[belum diterjemahkan] Static Lifetimes</a></li>
+<li><a href="56_id.html">[belum diterjemahkan] Lifetimes In Data Types</a></li>
+<li><a href="57_id.html">[belum diterjemahkan] Chapter 5 - Conclusion</a></li>
+</ul><h3><a href="chapter_6_id.html">[belum diterjemahkan] Chapter 6 - Text</a></h3><ul>
+<li><a href="59_id.html">[belum diterjemahkan] String Literals</a></li>
+<li><a href="60_id.html">[belum diterjemahkan] What is utf-8</a></li>
+<li><a href="61_id.html">[belum diterjemahkan] Escaping Characters</a></li>
+<li><a href="62_id.html">[belum diterjemahkan] Multi-line String Literals</a></li>
+<li><a href="63_id.html">[belum diterjemahkan] Raw String Literals</a></li>
+<li><a href="64_id.html">[belum diterjemahkan] String Literals From Files</a></li>
+<li><a href="65_id.html">[belum diterjemahkan] String Slice</a></li>
+<li><a href="66_id.html">[belum diterjemahkan] Chars</a></li>
+<li><a href="67_id.html">[belum diterjemahkan] String</a></li>
+<li><a href="68_id.html">[belum diterjemahkan] Text As Function Parameters</a></li>
+<li><a href="69_id.html">[belum diterjemahkan] Building Strings</a></li>
+<li><a href="70_id.html">[belum diterjemahkan] Formatting Strings</a></li>
+<li><a href="71_id.html">[belum diterjemahkan] Converting Strings</a></li>
+<li><a href="72_id.html">[belum diterjemahkan] Chapter 6 - Conclusion</a></li>
+</ul><h3><a href="chapter_7_id.html">[belum diterjemahkan] Chapter 7 - Object Oriented Programming</a></h3><ul>
+<li><a href="74_id.html">[belum diterjemahkan] What Is OOP?</a></li>
+<li><a href="75_id.html">[belum diterjemahkan] Rust Is Not OOP</a></li>
+<li><a href="76_id.html">[belum diterjemahkan] Encapsulation With Methods</a></li>
+<li><a href="77_id.html">[belum diterjemahkan] Abstraction With Selective Exposure</a></li>
+<li><a href="78_id.html">[belum diterjemahkan] Polymorphism With Traits</a></li>
+<li><a href="79_id.html">[belum diterjemahkan] Implemented Methods On Traits</a></li>
+<li><a href="80_id.html">[belum diterjemahkan] Trait Inheritance</a></li>
+<li><a href="81_id.html">[belum diterjemahkan] Dynamic vs Static Dispatch</a></li>
+<li><a href="82_id.html">[belum diterjemahkan] Trait Objects</a></li>
+<li><a href="83_id.html">[belum diterjemahkan] Handling Unsized Data</a></li>
+<li><a href="84_id.html">[belum diterjemahkan] Generic Functions</a></li>
+<li><a href="85_id.html">[belum diterjemahkan] Generic Function Shorthand</a></li>
+<li><a href="86_id.html">[belum diterjemahkan] Box</a></li>
+<li><a href="87_id.html">[belum diterjemahkan] Generic Structs Revisited</a></li>
+<li><a href="88_id.html">[belum diterjemahkan] Chapter 7 - Conclusion</a></li>
+</ul><h3><a href="chapter_8_id.html">[belum diterjemahkan] Chapter 8 - Smart Pointers</a></h3><ul>
+<li><a href="90_id.html">[belum diterjemahkan] References Revisited</a></li>
+<li><a href="91_id.html">[belum diterjemahkan] Raw Pointers</a></li>
+<li><a href="92_id.html">[belum diterjemahkan] Dereferencing</a></li>
+<li><a href="93_id.html">[belum diterjemahkan] The * Operator</a></li>
+<li><a href="94_id.html">[belum diterjemahkan] The . Operator</a></li>
+<li><a href="95_id.html">[belum diterjemahkan] Smart Pointers</a></li>
+<li><a href="96_id.html">[belum diterjemahkan] Smart Unsafe Code</a></li>
+<li><a href="97_id.html">[belum diterjemahkan] Familiar Friends</a></li>
+<li><a href="98_id.html">[belum diterjemahkan] Heap Allocated Memory</a></li>
+<li><a href="99_id.html">[belum diterjemahkan] Failable Main Revisited</a></li>
+<li><a href="100_id.html">[belum diterjemahkan] Referencing Counting</a></li>
+<li><a href="101_id.html">[belum diterjemahkan] Sharing Access</a></li>
+<li><a href="102_id.html">[belum diterjemahkan] Sharing Across Threads</a></li>
+<li><a href="103_id.html">[belum diterjemahkan] Combining Smart Pointers</a></li>
+<li><a href="104_id.html">[belum diterjemahkan] Chapter 8 - Conclusion</a></li>
+</ul><h3><a href="chapter_9_id.html">[belum diterjemahkan] Chapter 9 - Project Organization and Structure</a></h3><ul>
+<li><a href="106_id.html">[belum diterjemahkan] Modules</a></li>
+<li><a href="107_id.html">[belum diterjemahkan] Writing a Program</a></li>
+<li><a href="108_id.html">[belum diterjemahkan] Writing a Library</a></li>
+<li><a href="109_id.html">[belum diterjemahkan] Referencing Other Modules and Crates</a></li>
+<li><a href="110_id.html">[belum diterjemahkan] Referencing Multiple Items</a></li>
+<li><a href="111_id.html">[belum diterjemahkan] Creating Modules</a></li>
+<li><a href="112_id.html">[belum diterjemahkan] Module Hierarchy</a></li>
+<li><a href="113_id.html">[belum diterjemahkan] Inline Module</a></li>
+<li><a href="114_id.html">[belum diterjemahkan] Internal Module Referencing</a></li>
+<li><a href="115_id.html">[belum diterjemahkan] Exporting</a></li>
+<li><a href="116_id.html">[belum diterjemahkan] Structure Visibility</a></li>
+<li><a href="117_id.html">[belum diterjemahkan] Prelude</a></li>
+<li><a href="118_id.html">[belum diterjemahkan] Your Own Prelude</a></li>
+<li><a href="119_id.html">[belum diterjemahkan] Chapter 9 - Conclusion</a></li>
+</ul><h3><a href="chapter_10_id.html">[belum diterjemahkan] Chapter 10 - The End</a></h3><ul>
+            </ul>
+            </div>
+        </div>
+    </body>
+    </html>

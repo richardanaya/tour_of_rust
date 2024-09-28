@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <title>دورة تعلم رست (Rust) - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ar.html">دورة تعلم رست (Rust)</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ar.html">جدول المحتويات</a></span>
+            </div>
+            <div class="page">
+            <h1>ماهو utf-8</h1>
+            <p>نظرًا لاستخدام المزيد من اللغات على أجهزة الكمبيوتر، كان العالم بحاجة إلى تمثيل عدد أكبر من الأحرف النصية
+أكثر مما يسمح به ASCII (يسمح البايت الواحد بـ 256 حرفًا فقط). </p>
+<p><strong>utf-8</strong> تم تقديمه مع طول بايت متغير يتراوح من 1 إلى 4 بايت مما أدى إلى زيادة نطاق الأحرف الممكنة بشكل كبير.</p>
+<p>من مميزات الأحرف ذات الحجم المتغير أن النص لا يحتوي على بايتات غير ضرورية للأحرف الشائعة جدًا في ASCII (يتطلب بايت واحد فقط في <strong>utf-8</strong>).</p>
+<p>الجانب السلبي للأحرف ذات الحجم المتغير هو أنه لم يعد من الممكن إجراء البحث عن الأحرف بسرعة 
+(<strong>O(1)</strong> وقت ثابت) باستخدام فهرسة بسيطة (على سبيل المثال، <code>my_text[3]</code> للحصول على الحرف الرابع). وأنه من الممكن أن يكون للأحرف السابقة 
+عرض متغير، مما يؤدي إلى تغيير المكان الذي يبدأ فيه الحرف الرابع فعليًا في تسلسل البايتات.</p>
+<p>بدلاً من ذلك كله، فإنه يجب علينا عمل تكرار عبر تسلسل بايت <strong>utf-8</strong> لمعرفة من أين تبدأ أماكان أحرف Unicode فعليًا (<strong>O(n)</strong> الزمن الخطي).</p>
+<p>فيريس: "أنا سعيد في الغالب بوجود <strong>utf-8</strong> لتمثيل الرموز التعبيرية لأصدقائي تحت الماء."</p>
+<p><span class="emoji">🐠🐙🐟🐬🐋</span></p>
+            <div class="bottomnav">
+                <span class="back"><a href="59_ar.html" rel="prev">❮ السابق</a></span>
+                <span class="next"><a href="61_ar.html" rel="next">التالي ❯</a></span>
+            </div>
+            </div>
+            <div class="code"><center><img src="/ferris_lofi.png" alt="Mascot Ferris" width="300" height="236"></center></div>
+        </div>
+    </body>
+</html>

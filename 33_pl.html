@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+    <html lang="pl" dir="ltr">
+    <head>
+        <title>Przewodnik po Języku Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_pl.html">Przewodnik po Języku Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_pl.html">Spis Treści</a></span>
+            </div>
+            <div class="page">
+            <h1>Czym Są Typy Generyczne?</h1>
+            <p>Typy generyczne pozwalają nam na stworzenie <em>częściowej</em> definicji struktury <code>struct</code> czy wyliczenia <code>enum</code>, która pozwoli kompilatorowi na stworzenie  bardziej konkretnej implementacji naszej wersji kodu w procesie kompilacji.</p>
+<p>Ogólnie rzecz biorąc, Rust jest w stanie domyśleć się większości typów zmiennych analizując nasz kod. Jeśli jednak kompilator nie będzie w stanie samodzielnie określić typu, zawsze możemy udzielić mu wskazówki korzystając z operatora  <code>::&lt;T&gt;</code>. Ze względu na swój osobliwy wygląd przypominający tekstową reprezentację niewielkiej (choć zwinnej) ryby, operator ten jest znany pod nazwą <code>turbofish</code>.</p>
+            <div class="bottomnav">
+                <span class="back"><a href="chapter_4_pl.html" rel="prev">❮ Wstecz</a></span>
+                <span class="next"><a href="34_pl.html" rel="next">Dalej ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=%2F%2F%20cz%C4%99%C5%9Bciowo%20zdefiniowany%20typ%20struct%0Astruct%20PojemnikNaRzecz%3CT%3E%20%7B%0A%20%20%20%20rzecz%3A%20T%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20u%C5%BCywaj%C4%85c%20typ%C3%B3w%20generycznych%2C%20tworzymy%20sytuacj%C4%99%20w%20kt%C3%B3rej%20bardziej%0A%20%20%20%20%2F%2F%20konkretne%20typy%20s%C4%85%20tworzone%20w%20czasie%20kompilacji%0A%20%20%20%20let%20poj_i32%20%3D%20PojemnikNaRzecz%3A%3A%3Ci32%3E%20%7B%20rzecz%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20u%C5%BCywaj%C4%85c%20operatora%20%22turbofish%22%20mo%C5%BCemy%20okre%C5%9Bli%C4%87%20typ%20kt%C3%B3ry%20chcemy%20u%C5%BCy%C4%87%0A%20%20%20%20let%20poj_bool%20%3D%20PojemnikNaRzecz%3A%3A%3Cbool%3E%20%7B%20rzecz%3A%20true%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20kompilator%20jest%20te%C5%BC%20w%20stanie%20domy%C5%9Ble%C4%87%20si%C4%99%20konkretnego%20typu!%0A%20%20%20%20let%20poj_float%20%3D%20PojemnikNaRzecz%20%7B%20rzecz%3A%203.14%20%7D%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20nie%20r%C3%B3bcie%20tego%20w%20domu%0A%20%20%20%20let%20poj_poj%20%3D%20PojemnikNaRzecz%20%7B%0A%20%20%20%20%20%20%20%20rzecz%3A%20PojemnikNaRzecz%20%7B%20rzecz%3A%20%22boom!%22%20%7D%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20poj_i32.rzecz%2C%20poj_bool.rzecz%2C%20poj_float.rzecz%2C%20poj_poj.rzecz.rzecz%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

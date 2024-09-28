@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html lang="ie" dir="ltr">
+    <head>
+        <title>Tur de Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ie.html">Tur de Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ie.html">Tabelle de contenete</a></span>
+            </div>
+            <div class="page">
+            <h1>Basic tipes</h1>
+            <p>Rust possede un varietá de tipes familiari <ul><li>booleanes - <code>bool</code> por representar true/false (ver/fals)</li><li>unsigned integers (integrales ínsignat) - <code>u8</code><code>u32</code><code>u64</code><code>u128</code> por representar integrales positiv</li><li>signed integers (integrales signat) - <code>i8</code><code>i32</code><code>i64</code><code>i128</code> por representar integrales sive positiv sive negativ</li><li>pointer sized integers (integrales con puntator-mesurat grandore) - <code>usize</code><code>isize</code> por representar indexes e grandores de coses in memorie</li><li>floating point (punctu flottant) - <code>f32</code><code>f64</code></li><li>con relation a textu - <code>str</code><code>char</code></li><li>tuple - <code>(value, value,...)</code> por passar fixat sequenties de valore sur li stack (li cumul)<li>slices (tranches) - <code>&[T]</code> por referer visus ad-in sequenties de valores in memorie</ul></p><p>Noi va parlar pri alcunes ex ili plu detalliatmen plu tard.</p><p>Un avise in prim: textu va posser esser plu complicat quam tui experientie con altri lingues, pro que Rust es un lingue de programmation por sistemas quel orienta se pri problemas de memorie con quel fórsan tu ne ha experientie. Noi va parlar plu detalliatmen pri textu plu tard.</p><p>Nota qualmen on posse explicitmen specificar tipes numeric per afixar li tip directmen pos li numeró (p.e. <code>13u32</code>)</p>
+            <div class="bottomnav">
+                <span class="back"><a href="04_ie.html" rel="prev">❮ Precedent</a></span>
+                <span class="next"><a href="06_ie.html" rel="next">Sequent ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20x%20%3D%2012%3B%0A%20%20%20%20let%20a%20%3D%2012u8%3B%0A%20%20%20%20let%20b%20%3D%204.3%3B%0A%20%20%20%20let%20c%20%3D%204.3f64%3B%0A%20%20%20%20let%20bv%20%3D%20true%3B%0A%20%20%20%20let%20t%20%3D%20(13%2C%20false)%3B%0A%20%20%20%20let%20frase%20%3D%20%22salute%20munde!%22%3B%0A%20%20%20%20println!(%0A%20%20%20%20%20%20%20%20%22%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%20%7B%7D%22%2C%0A%20%20%20%20%20%20%20%20x%2C%20a%2C%20b%2C%20c%2C%20bv%2C%20t.0%2C%20t.1%2C%20frase%0A%20%20%20%20)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

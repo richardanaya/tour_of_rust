@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html lang="vi" dir="ltr">
+    <head>
+        <title>Tour of Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_vi.html">Tour of Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_vi.html">Mục lục</a></span>
+            </div>
+            <div class="page">
+            <h1>Thời gian tồn tại tĩnh(Static Lifetimes)</h1>
+            <p>Biến <strong>static</strong>(tĩnh) là tài nguyên bộ nhớ được tạo tại thời điểm biên dịch,  tồn tại thông qua một chương trình từ đầu đến cuối.  Loại của nó phải được chỉ định rõ ràng.</p>
+<p><strong>Thời gian tồn tại tĩnh</strong> là tài nguyên bộ nhớ tồn tại vô thời hạn cho đến cuối chương trình.  Lưu ý rằng theo định nghĩa này, một số tài nguyên lâu dài tĩnh có thể được tạo trong thời gian chạy.</p>
+<p>Các tài nguyên có vòng đời tĩnh có một chỉ định thời gian tồn tại đặc biệt là <code>'static</code>(tĩnh).</p>
+<p>Tài nguyên <code>'static</code> sẽ không bao giờ bị <strong>drop</strong>.</p>
+<p>Nếu tài nguyên thời gian tồn tại tĩnh chứa các tham chiếu thì tất cả chúng phải là <code>'static</code>  (bất kỳ thứ gì ít hơn sẽ không tồn tại đủ lâu).</p>
+<p>Chi tiết bộ nhớ:</p>
+<ul>
+<li>Việc sửa đổi các biến tĩnh vốn đã rất nguy hiểm vì chúng có thể truy cập toàn cầu  để được đọc bởi bất kỳ ai có khả năng xảy ra một cuộc chạy đua dữ liệu.  Chúng ta sẽ nói về những thách thức của dữ liệu toàn cầu ở phần sau. * Rust cho phép sử dụng những khối <code>unsafe { ... }</code>  để thực hiện một số hoạt động mà trình biên dịch không thể đảm bảo bộ nhớ về nó.  Và không nến nói về <a href="https://doc.rust-lang.org/nomicon/"><span style="color:red; font-weight: bold;">R̸͉̟͈͔̄͛̾̇͜U̶͓͖͋̅Ṡ̴͉͇̃̉̀T̵̻̻͔̟͉́͆Ơ̷̥̟̳̓͝N̶̨̼̹̲͛Ö̵̝͉̖̏̾̔M̶̡̠̺̠̐͜Î̷̛͓̣̃̐̏C̸̥̤̭̏͛̎͜O̶̧͚͖͔̊͗̇͠N̸͇̰̏̏̽̃</span></a> một cách tùy tiện.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="54_vi.html" rel="prev">❮ Quay lại</a></span>
+                <span class="next"><a href="56_vi.html" rel="next">Tiếp theo ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=static%20PI%3A%20f64%20%3D%203.1415%3B%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20C%C3%A1c%20bi%E1%BA%BFn%20t%C4%A9nh%20c%C5%A9ng%20c%C3%B3%20th%E1%BB%83%20%C4%91%C6%B0%E1%BB%A3c%20x%C3%A1c%20%C4%91%E1%BB%8Bnh%20ph%E1%BA%A1m%20vi%20th%C3%A0nh%20m%E1%BB%99t%20h%C3%A0m%0A%20%20%20%20static%20mut%20SECRET%3A%20%26%27static%20str%20%3D%20%22swordfish%22%3B%0A%0A%20%20%20%20%2F%2F%20string%20c%C3%B3%20th%E1%BB%9Di%20gian%20t%E1%BB%93n%20t%E1%BA%A1i%20t%C4%A9nh-%27static%20lifetime%0A%20%20%20%20let%20msg%3A%20%26%27static%20str%20%3D%20%22Hello%20World!%22%3B%0A%20%20%20%20let%20p%3A%20%26%27static%20f64%20%3D%20%26PI%3B%0A%20%20%20%20println!(%22%7B%7D%20%7B%7D%22%2C%20msg%2C%20p)%3B%0A%0A%20%20%20%20%2F%2F%20B%E1%BA%A1n%20c%C3%B3%20th%E1%BB%83%20ph%C3%A1%20v%E1%BB%A1%20m%E1%BB%99t%20s%E1%BB%91%20quy%20t%E1%BA%AFc%2C%20nh%C6%B0ng%20b%E1%BA%A1n%20ph%E1%BA%A3i%20r%C3%B5%20r%C3%A0ng%0A%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20Ch%C3%BAng%20ta%20c%C3%B3%20th%E1%BB%83%20%C4%91%E1%BA%B7t%20SECRET%20th%C3%A0nh%20m%E1%BB%99t%20chu%E1%BB%97i%20k%C3%BD%20t%E1%BB%B1%20v%C3%AC%20n%C3%B3%20c%C5%A9ng%20l%C3%A0%20t%C4%A9nh-%27static%0A%20%20%20%20%20%20%20%20SECRET%20%3D%20%22abracadabra%22%3B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20SECRET)%3B%0A%20%20%20%20%7D%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

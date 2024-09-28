@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <html lang="ro" dir="ltr">
+    <head>
+        <title>Turul limbajului Rust - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_ro.html">Turul limbajului Rust</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_ro.html">Cuprins</a></span>
+            </div>
+            <div class="page">
+            <h1>Pointeri simpli</h1>
+            <p>Referințele pot fi transformate într-un tip de date mai simplu, 
+numit <em>pointer simplu</em>. La fel ca un număr, acesta poate fi copiat si mutat
+fără prea multe restricții. Limbajul Rust nu ne asigură cu nimic de 
+valabilitatea zonei de memorie la care pointează.</p>
+<p>Există două feluri de pointeri simpli:</p>
+<ul>
+<li><code>*const T</code> - Un pointer simplu către un tip de date T care nu va fi modificat.</li>
+<li><code>*mut T</code> - Un pointer simplu către un tip de date T ce poate fi modificat.</li>
+</ul>
+<p>Pointerii simpli pot fi convertiți în și din numere (ex <code>usize</code>).</p>
+<p>Pointerii simpli pot accesa date din cod <em>nesigur</em> (mai multe despre acest subiect mai târziu).</p>
+<p>Detalii despre memorie:</p>
+<ul>
+<li>O referință în Rust este foarte asemănătoare cu un pointer din C în ceea ce privește utilizarea, dar cu mult mai multe restricții privind cum poate 
+fi stocat și folosit de alte funcții.</li>
+<li>Un pointer simplu în Rust este asemănător unui pointer din C ce reprezintă un număr care poate fi
+copiat și pasat ca argument, ba chiar poate fi transformat într-o valoare numerică și modificat
+pentru a face aritmetică pe pointeri.</li>
+</ul>
+            <div class="bottomnav">
+                <span class="back"><a href="beta_90_ro.html" rel="prev">❮ Înapoi</a></span>
+                <span class="next"><a href="beta_92_ro.html" rel="next">Înainte ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>

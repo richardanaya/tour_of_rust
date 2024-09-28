@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html lang="zh-cn" dir="ltr">
+    <head>
+        <title>Rust 语言之旅 - Let's go on an adventure!</title>
+
+        <meta charset="UTF-8">
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Rust, Programming, Learning">
+        <meta name="description" content="Welcome to the Tour of Rust. This is meant to be a step by step guide through the features of the Rust programming language">
+        <meta name="theme-color" content="#ff6801"/>
+
+        <link rel="stylesheet" href="tour.css">
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
+        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
+
+        <script src="./tour.js" defer></script>
+    </head>
+    <body>
+        <div class="tour">
+            <div class="header">
+                <span class="title"><a href="00_zh-cn.html">Rust 语言之旅</a></span>
+                <span class="nav">
+                <span class="toc"><a href="TOC_zh-cn.html">目录</a></span>
+            </div>
+            <div class="page">
+            <h1>所有权</h1>
+            <p>实例化一个类型并且将其<strong>绑定</strong>到变量名上将会创建一些内存资源，而这些内存资源将会在其整个<strong>生命周期</strong>中被 Rust 编译器检验。 被绑定的变量即为该资源的<strong>所有者</strong>。</p>
+            <div class="bottomnav">
+                <span class="back"><a href="chapter_5_zh-cn.html" rel="prev">❮ 上一页</a></span>
+                <span class="next"><a href="44_zh-cn.html" rel="next">下一页 ❯</a></span>
+            </div>
+            </div>
+            <div class="code">
+            <iframe width="100%" src="https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20%E6%88%91%E4%BB%AC%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%99%E4%B8%AA%E7%BB%93%E6%9E%84%E4%BD%93%E5%B9%B6%E5%B0%86%E5%85%B6%E7%BB%91%E5%AE%9A%E5%88%B0%E5%85%B7%E4%BD%93%E7%9A%84%E5%8F%98%E9%87%8F%E4%B8%8A%0A%20%20%20%20%2F%2F%20%E6%9D%A5%E5%88%9B%E5%BB%BA%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20%E5%8D%B3%E4%B8%BA%E8%AF%A5%E8%B5%84%E6%BA%90%E7%9A%84%E6%89%80%E6%9C%89%E8%80%85%0A%7D%0A" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" title="Rust Playground" loading="lazy"></iframe>
+            </div>
+        </div>
+    </body>
+</html>
