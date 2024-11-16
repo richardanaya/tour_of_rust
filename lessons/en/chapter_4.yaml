@@ -181,6 +181,44 @@
     Be a good rustacean and properly use `match` when you can!
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20do_something_that_might_fail(i%3A%20i32)%20-%3E%20Result%3Cf32%2C%20String%3E%20%7B%0A%20%20%20%20if%20i%20%3D%3D%2042%20%7B%0A%20%20%20%20%20%20%20%20Ok(13.0)%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20Err(String%3A%3Afrom(%22this%20is%20not%20the%20right%20number%22))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20String%3E%20%7B%0A%20%20%20%20%2F%2F%20concise%20but%20assumptive%20and%20gets%20ugly%20fast%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(42).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20this%20will%20panic!%0A%20%20%20%20let%20v%20%3D%20do_something_that_might_fail(1).unwrap()%3B%0A%20%20%20%20println!(%22found%20%7B%7D%22%2C%20v)%3B%0A%20%20%20%20%0A%20%20%20%20Ok(())%0A%7D%0A
+- title: if let
+  content_markdown: >
+    A much easier way to handle error propagation in Rust
+    is to use the `if let` block. It basically handles just
+    the only `match` branch that we are interested to get.
+
+    For instance, if we want to get the **error**,
+    `if let Err(..) = ..` will be used.
+
+    Otherwise, `if let Ok(..) = ..` will be chosen
+    to handle the **success** case.
+
+    `if let` can be used only for `Result` and `Option` data types.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+div%28x%3A+f64%2C+y%3A+f64%29+-%3E+Result%3Cf64%2C+String%3E+%7B%0A++++if+y+%3D%3D+0.0+%7B%0A++++++++return+Err%28String%3A%3Afrom%28%22Invalid+operation%3A+division+by+zero.%22%29%29%3B%0A++++%7D%0A++++return+Ok%28x+%2F+y%29%3B%0A%7D%0A%0A%0Afn+main%28%29+%7B%0A++++if+let+Ok%28res%29+%3D+div%2810.0%2C+1.0%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+res%29%3B++++++++%2F%2F+will+be+displayed%0A++++%7D%0A++++%0A++++if+let+Err%28err%29+%3D+div%2810.0%2C+1.0%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+err%29%3B++++++++%2F%2F+will+NOT+be+displayed%0A++++%7D%0A++++%0A%0A++++if+let+Ok%28res%29+%3D+div%2810.0%2C+0.0%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+res%29%3B++++++++%2F%2F+will+be+displayed%0A++++%7D%0A++++if+let+Err%28err%29+%3D+div%2810.0%2C+0.0%29+%7B%0A++++++++println%21%28%22%7B%7D%22%2C+err%29%3B++++++++%2F%2F+will+NOT+be+displayed%0A++++%7D%0A%7D%0A
+- title: Extracting a Result
+  content_markdown: >
+    Another brilliant way to extract a `Result<T, E> { Ok(T), Err(E), }`
+    is to use the functions `.ok()` and `.err()`, representing the specific variant.
+
+    Let's assume we are working with a function whose return type is `Result`, just like in the example.
+    Using `.ok()` and `.err()` on it will return an `Option`:
+    - `Some` if the  original function had something to return, for results like `Result<i32, i32>`.
+    - `None` if the original function returned either a `Err(())` or an `Ok(())`, for results like `Result<(), ()>`, `Result<i32, ()>` or `Result<(), i32>`
+
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+div1%28x%3A+f64%2C+y%3A+f64%29+-%3E+Result%3Cf64%2C+String%3E+%7B%0A++++if+y+%3D%3D+0.0+%7B%0A++++++++return+Err%28String%3A%3Afrom%28%22Invalid+operation%3A+division+by+zero.%22%29%29%3B%0A++++%7D%0A++++return+Ok%28x+%2F+y%29%3B%0A%7D%0A%0A%0Afn+div2%28x%3A+f64%2C+y%3A+f64%29+-%3E+Result%3Cf64%2C+%28%29%3E+%7B%0A++++if+y+%3D%3D+0.0+%7B%0A++++++++%2F%2F+notice+that+the+error+returns+%60None%60%0A++++++++%2F%2F+therefore+will+be+pattern-matched+using+%60%28%29%60%0A++++++++return+Err%28%28%29%29%3B%0A++++%7D%0A++++return+Ok%28x+%2F+y%29%3B%0A%7D%0A%0Afn+main%28%29+%7B%0A++++let+good1+%3D+div1%2810.0%2C+1.0%29%3B%0A++++let+bad1+%3D+div1%2810.0%2C+0.0%29%3B%0A++++%0A++++%2F%2F+Using+.ok%28%29+will+extract+the+Ok+variant%0A++++%2F%2F+.ok%28%29+returns+an+Option%3A+Some%0A++++if+let+Some%28value%29+%3D+good1.ok%28%29+%7B%0A++++++++println%21%28%22Result+%28Ok%29%3A+%7B%7D%22%2C+value%29%3B%0A++++%7D+else+%7B%0A++++++++println%21%28%22Result+%28Err%29%22%29%3B%0A++++%7D%0A%0A++++%2F%2F+Using+.err%28%29+to+extract+the+Err+variant%0A++++%2F%2F+.err%28%29+returns+an+Option%3A+Some%0A++++if+let+Some%28err%29+%3D+bad1.err%28%29+%7B%0A++++++++println%21%28%22Error%3A+%7B%7D%22%2C+err%29%3B%0A++++%7D+else+%7B%0A++++++++println%21%28%22No+error+%28Ok%29%22%29%3B%0A++++%7D%0A++++%0A++++%0A++++let+good2+%3D+div2%2810.0%2C+1.0%29%3B%0A++++let+bad2+%3D+div2%2810.0%2C+0.0%29%3B%0A++++%0A++++%2F%2F+Using+.ok%28%29+will+extract+the+Ok+variant%0A++++%2F%2F+.ok%28%29+returns+an+Option%3A+Some%0A++++if+let+Some%28value%29+%3D+good2.ok%28%29+%7B%0A++++++++println%21%28%22Result+%28Ok%29%3A+%7B%7D%22%2C+value%29%3B%0A++++%7D+else+%7B%0A++++++++println%21%28%22Result+%28Err%29%22%29%3B%0A++++%7D%0A%0A++++%2F%2F+Using+.err%28%29+to+extract+the+Err+variant%0A++++%2F%2F+.err%28%29+returns+an+Option%3A+None%0A++++if+let+Some%28%28%29%29+%3D+bad2.err%28%29+%7B%0A++++++++println%21%28%22Error+occured%22%29%3B%0A++++%7D+else+%7B%0A++++++++println%21%28%22No+error+%28Ok%29%22%29%3B%0A++++%7D%0A%7D%0A
+- title: About panic!
+  content_markdown: >
+    In Rust, `panic!` is a macro used to stop the execution of the program
+    without a recoverable error. When panic occurs, the program immediately
+    stops, unwinding the stack and cleaning up resources along the way.
+
+    Moreover, the code instructions written after `panic!` will no longer be executed.
+
+    Usually, `panics` can by avoided by pattern matching the error with `Result`.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&code=fn+main%28%29+%7B%0A++++println%21%28%22Reachable.%22%29%3B%0A%0A++++%2F%2F+Generates+a+panic%0A++++panic%21%28%22This+is+a+panic%21%22%29%3B%0A%0A++++%2F%2F+This+line+be+executed%0A++++println%21%28%22Unreachable%22%29%3B%0A%7D%0A
 - title: Vectors
   content_markdown: >
     Some of the most useful generic types are collection types. A vector is a
@@ -209,6 +247,28 @@
       reallocates its data on the heap to have a new fixed list with large capacity.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20%2F%2F%20We%20can%20be%20explicit%20with%20type%0A%20%20%20%20let%20mut%20i32_vec%20%3D%20Vec%3A%3A%3Ci32%3E%3A%3Anew()%3B%20%2F%2F%20turbofish%20%3C3%0A%20%20%20%20i32_vec.push(1)%3B%0A%20%20%20%20i32_vec.push(2)%3B%0A%20%20%20%20i32_vec.push(3)%3B%0A%0A%20%20%20%20%2F%2F%20But%20look%20how%20clever%20Rust%20is%20about%20determining%20the%20type%20automatically%0A%20%20%20%20let%20mut%20float_vec%20%3D%20Vec%3A%3Anew()%3B%0A%20%20%20%20float_vec.push(1.3)%3B%0A%20%20%20%20float_vec.push(2.3)%3B%0A%20%20%20%20float_vec.push(3.4)%3B%0A%0A%20%20%20%20%2F%2F%20That's%20a%20beautiful%20macro!%0A%20%20%20%20let%20string_vec%20%3D%20vec!%5BString%3A%3Afrom(%22Hello%22)%2C%20String%3A%3Afrom(%22World%22)%5D%3B%0A%0A%20%20%20%20for%20word%20in%20string_vec.iter()%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%22%2C%20word)%3B%0A%20%20%20%20%7D%0A%7D%0A
+- title: Iterators
+  content_markdown: >
+    In Rust, an iterator is an abstraction that decomposed a collection into a sequence of values.
+
+    You've seen an iterator before: in the `for` loop
+    ```rust
+    // 0..5 iterates the values from 0 to 4
+    for i in 0..5 {
+        println!("{}", x);
+    }
+    ```
+
+    If you are to modify each element of the collection,
+    iterators were designed with a very powerful function, `.map()`.
+
+    `.map()` and `.iter()` are methods provided by iterators and are commonly
+    used in working with collections (vectors and String, for instance).
+
+    The function `.iter()` iterates over a reference to each element of a collection,
+    generating a sequence of elements.
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn+main%28%29+%7B%0A++++let+numbers+%3D+vec%21%5B1%2C+2%2C+3%2C+4%2C+5%5D%3B%0A%0A++++%2F%2F+each+element+will+be+modified%0A++++let+doubled%3A+Vec%3Ci32%3E+%3D+numbers.into_iter%28%29.map%28%7Cx%7C+x+*+2%29.collect%28%29%3B%0A++++%0A++++%0A++++%2F%2F+generating+a+sequence+with+all+elements%0A++++for+%26el+in+doubled.iter%28%29+%7B%0A++++++++print%21%28%22%7B%7D+%22%2C+el%29%3B%0A++++%7D%0A++++println%21%28%29%3B%0A%7D%0A
 - title: Chapter 4 - Conclusion
   content_markdown: >
     In one chapter we've learned how much power generic types give us! Don't
