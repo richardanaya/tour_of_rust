@@ -29,32 +29,49 @@
   code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo_a%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20let%20foo_b%20%3D%20Foo%20%7B%20x%3A%2013%20%7D%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_a.x)%3B%0A%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo_b.x)%3B%0A%20%20%20%20%2F%2F%20foo_b%20is%20dropped%20here%20%0A%20%20%20%20%2F%2F%20foo_a%20is%20dropped%20here%0A%7D%0A
 - title: Dropping is Hierarchical
   content_markdown: >
-    When a struct is dropped, the struct itself is dropped first, then its
-    children are dropped individually, and so on.
+    When a struct is dropped, its fields (children) are dropped first, in the 
+    order they are defined in the struct. After all fields have been dropped, 
+    the struct itself is dropped.
 
 
     Memory Details:
 
-    * By automatically freeing memory Rust helps ensure that there are fewer
-    memory leaks.
+    * Rust ensures safe and predictable cleanup by dropping fields before the 
+    parent struct.
 
-    * Memory resources can only be dropped once.
+    * This hierarchical dropping helps prevent resource leaks and ensures that 
+    dependent resources are freed in the correct order.
+
+    * Rust guarantees that memory resources can only be dropped once, reducing 
+    the risk of double-free errors.
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Bar%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Astruct%20Foo%20%7B%0A%20%20%20%20bar%3A%20Bar%2C%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20bar%3A%20Bar%20%7B%20x%3A%2042%20%7D%20%7D%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.bar.x)%3B%0A%20%20%20%20%2F%2F%20foo%20is%20dropped%20first%0A%20%20%20%20%2F%2F%20then%20foo.bar%20is%20dropped%0A%7D%0A
 - title: Moving Ownership
   content_markdown: >
-    When an owner is passed as an argument to a function, ownership is moved to
-    the function parameter.
+    When an owner is passed as an argument to a function, ownership of the 
+    value is moved to the function parameter. This means that the original 
+    variable in the calling function loses access to the value and can no 
+    longer be used.
 
 
-    After a **move** the variable in the original function can no longer be
-    used.
+    After a move, the original variable becomes invalid, and attempting 
+    to use it will result in a compiler error. This ensures memory safety 
+    by preventing use-after-move issues.
 
 
     Memory details:
 
     * During a **move** the stack memory of the owners value is copied to the
-    function call's parameter stack memory.
+    function call's parameter stack memory. For heap-allocated data (e.g., owned 
+    types like String or Vec), the pointer to the heap memory is moved, but the 
+    actual data on the heap is not copied. Instead, the ownership of the heap 
+    memory is transferred.
+    
+
+    When values are dropped:
+    * A value is dropped (cleaned up) when it goes out of scope. For function 
+    parameters, this occurs at the end of the function's execution.
+
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20x%3A%20i32%2C%0A%7D%0A%0Afn%20do_something(f%3A%20Foo)%20%7B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20f.x)%3B%0A%20%20%20%20%2F%2F%20f%20is%20dropped%20here%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20Foo%20%7B%20x%3A%2042%20%7D%3B%0A%20%20%20%20%2F%2F%20foo%20is%20moved%20to%20do_something%0A%20%20%20%20do_something(foo)%3B%0A%20%20%20%20%2F%2F%20foo%20can%20no%20longer%20be%20used%0A%7D%0A
 - title: Returning Ownership
