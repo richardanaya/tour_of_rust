@@ -1,0 +1,237 @@
+- title: 第８章 - スマートポインタ
+  content_markdown: >
+    この章ではスマートポインタについて解説します。
+
+    メモリの最下層とやり取りが可能なデータ構造を探っていきましょう。
+
+
+    フェリス「もし一度読んで、低レベルのメモリ管理コードを書くことができないと思っても、
+
+    この章に圧倒されないでね。この章は主に、いくつか便利なツールを紹介し、それらがどのように機能するかをちょっと見るためのものだよ！」
+- title: 参照についてもう一度みてみる
+  content_markdown: >
+    参照とは基本的に、メモリ内のバイトの開始位置を示す単なる数値です。
+
+    その唯一の目的は、特定の型のデータが存在する場所の概念を表現することです。
+
+    参照が単なる数値と異なるのは、Rustが参照のライフタイムが
+
+    それが指しているものよりも長くならないように検証する点です
+
+    （そうでなければ、それを使用したときにエラーが発生します！）。
+
+- title: 生のポインタ
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%20%3D%2042%3B%0A%20%20%20%20let%20memory_location%20%3D%20%26a%20as%20*const%20i32%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20is%20here%20%7B%7D%22%2C%20memory_location)%3B%0A%7D%0A
+  content_markdown: >
+    参照は、*生ポインタ* と呼ばれるより原始的な型に変換できます。数値のように、
+
+    ほとんど制限なくコピーや移動が可能です。Rustは
+
+    それが指すメモリ位置の有効性を保証しません。
+
+
+    生ポインタには2種類あります：
+
+
+    * `*const T` - 型Tのデータへの生ポインタで、変更されるべきではありません。
+
+    * `*mut T` - 型Tのデータへの生ポインタで、変更が可能です。
+
+
+    生ポインタは数値（例：`usize`）と相互に変換できます。
+
+
+    生ポインタは *unsafe* コードを使ってデータにアクセスできます（詳細は後述）。
+
+
+    メモリの詳細：
+
+    * Rustの参照は、使用方法においてC言語のポインタに非常に似ていますが、
+      他の関数に保存したり移動したりする際のコンパイル時の制約が
+      はるかに多いです。
+    * Rustの生ポインタは、C言語のポインタに似ており、コピーしたり渡したりできる数値を表します。
+      また、数値型に変換してポインタ演算を行うために数値として変更することもできます。
+- title: 参照外し
+  content_markdown: |
+    *参照*（例：`&i32`）によって参照されているデータにアクセス/操作するプロセスを *参照外し* と呼びます。
+
+    参照は、データへのアクセス/操作に2つの方法で使用されます：
+    * 変数の代入時に参照されたデータへのアクセス。
+    * 参照されたデータのフィールドまたはメソッドへのアクセス。
+
+    Rustにはこれを可能にする強力な演算子があります。
+- title: "* 演算子"
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20i32%20%3D%2042%3B%0A%20%20%20%20let%20ref_ref_ref_a%3A%20%26%26%26i32%20%3D%20%26%26%26a%3B%0A%20%20%20%20let%20ref_a%3A%20%26i32%20%3D%20**ref_ref_ref_a%3B%0A%20%20%20%20let%20b%3A%20i32%20%3D%20*ref_a%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20b)%0A%7D
+  content_markdown: >
+    `*` 演算子は参照外しを行う明示的な方法です。
+
+    ```rust
+
+    let a: i32 = 42;
+
+    let ref_ref_ref_a: &&&i32 = &&&a;
+
+    let ref_a: &i32 = **ref_ref_ref_a;
+
+    let b: i32 = *ref_a;
+
+    ```
+
+
+    メモリの詳細：
+
+    - `i32` は `Copy` トレイトを実装しているプリミティブ型であるため、スタック上の変数 `a` のバイトが変数 `b` のバイトにコピーされます。
+- title: . 演算子
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Foo%20%7B%0A%20%20%20%20value%3A%20i32%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20f%20%3D%20Foo%20%7B%20value%3A%2042%20%7D%3B%0A%20%20%20%20let%20ref_ref_ref_f%20%3D%20%26%26%26f%3B%0A%20%20%20%20println!(%22%7B%7D%22%2C%20ref_ref_ref_f.value)%3B%0A%7D
+  content_markdown: >
+    `.` 演算子は参照のフィールドやメソッドにアクセスするために使用されます。この操作の動作は少し微妙です。
+
+
+    ```rust
+
+    let f = Foo { value: 42 };
+
+    let ref_ref_ref_f = &&&f;
+
+    println!("{}", ref_ref_ref_f.value);
+
+    ```
+
+    おや、なぜ `ref_ref_ref_f` の前に `***` を追加する必要がなかったのでしょうか？これは、`.` 演算子が一連の参照を自動的に参照外しするからです。最後の行はコンパイラによって次のように自動的に変換されます。
+
+
+    ```rust
+
+    println!("{}", (***ref_ref_ref_f).value);
+
+    ```
+- title: スマートポインタ
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aops%3A%3ADeref%3B%0Astruct%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20value%3A%20T%2C%0A%7D%0Aimpl%3CT%3E%20Deref%20for%20TattleTell%3CT%3E%20%7B%0A%20%20%20%20type%20Target%20%3D%20T%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26T%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20was%20used!%22%2C%20std%3A%3Aany%3A%3Atype_name%3A%3A%3CT%3E())%3B%0A%20%20%20%20%20%20%20%20%26self.value%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20foo%20%3D%20TattleTell%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20%22secret%20message%22%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20dereference%20occurs%20here%20immediately%20%0A%20%20%20%20%2F%2F%20after%20foo%20is%20auto-referenced%20for%20the%0A%20%20%20%20%2F%2F%20function%20%60len%60%0A%20%20%20%20println!(%22%7B%7D%22%2C%20foo.len())%3B%0A%7D%0A
+  content_markdown: >
+    `&` 演算子を使用して既存の型付きデータへの参照が行えるのに加え、Rust は **スマートポインタ** と呼ばれる *参照のような* 構造体を作る機能も提供します。
+
+
+    ハイレベルですが、参照を別の型にアクセスするための型を考えることができます。スマートポインタは通常の参照とは異なり、プログラマが書いた内部ロジックに基づいて動作します。あなた(=プログラマ) がその「スマート」な部分です。
+
+
+    通常、スマートポインタは `Deref`、`DerefMut`、および `Drop` トレイトを実装して、`*` および `.` 演算子で構造体が参照外しされたときに何が起こるべきかのロジックを指定します。
+- title: スマートアンセーフコード
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20let%20a%3A%20%5Bu8%3B%204%5D%20%3D%20%5B86%2C%2014%2C%2073%2C%2064%5D%3B%0A%20%20%20%20%2F%2F%20this%20is%20a%20raw%20pointer.%20Getting%20the%20memory%20address%0A%20%20%20%20%2F%2F%20of%20something%20as%20a%20number%20is%20totally%20safe%0A%20%20%20%20let%20pointer_a%20%3D%20%26a%20as%20*const%20u8%20as%20usize%3B%0A%20%20%20%20println!(%22Data%20memory%20location%3A%20%7B%7D%22%2C%20pointer_a)%3B%0A%20%20%20%20%2F%2F%20Turning%20our%20number%20into%20a%20raw%20pointer%20to%20a%20f32%20is%0A%20%20%20%20%2F%2F%20also%20safe%20to%20do.%0A%20%20%20%20let%20pointer_b%20%3D%20pointer_a%20as%20*const%20f32%3B%0A%20%20%20%20let%20b%20%3D%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20unsafe%20because%20we%20are%20telling%20the%20compiler%0A%20%20%20%20%20%20%20%20%2F%2F%20to%20assume%20our%20pointer%20is%20a%20valid%20f32%20and%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it's%20value%20into%20the%20variable%20b.%0A%20%20%20%20%20%20%20%20%2F%2F%20Rust%20has%20no%20way%20to%20verify%20this%20assumption%20is%20true.%0A%20%20%20%20%20%20%20%20*pointer_b%0A%20%20%20%20%7D%3B%0A%20%20%20%20println!(%22I%20swear%20this%20is%20a%20pie!%20%7B%7D%22%2C%20b)%3B%0A%7D%0A
+  content_markdown: >
+    スマートポインタは *unsafe* コードを比較的頻繁に使用する傾向があります。前述のように、これは Rust のメモリの最下層とやり取りするための一般的なツールです。
+
+
+    では、アンセーフコードとは何でしょうか？アンセーフコードは、Rust コンパイラが保証できないいくつかの能力を除いて、通常の Rust とまったく同じように動作します。
+
+
+    アンセーフコードの主な能力の一つは、*生ポインタの参照外し* です。つまり、メモリ内の位置への *生ポインタ* を取得し、「ここにデータ構造が存在する！」と宣言して、それを使用可能なデータの表現（例：`*const u8` を `u8` に）に変換することです。
+
+
+    Rust はメモリに書き込まれるすべてのバイトの意味を追跡する方法を持っていません。Rust は *生ポインタ* として使用される任意の数値に何が存在するかについて保証できないため、参照外しを `unsafe { ... }` ブロックに配置します。
+
+    スマートポインタは *生ポインタの参照外し* を広範囲に行いますが、その機能は十分に実証されています。
+- title: 親友たち
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Aalloc%3A%3A%7Balloc%2C%20Layout%7D%3B%0Ause%20std%3A%3Aops%3A%3ADeref%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20secret_recipe%3A%20usize%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20new()%20-%3E%20Self%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20let's%20ask%20for%204%20bytes%0A%20%20%20%20%20%20%20%20let%20layout%20%3D%20Layout%3A%3Afrom_size_align(4%2C%201).unwrap()%3B%0A%0A%20%20%20%20%20%20%20%20unsafe%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20allocate%20and%20save%20the%20memory%20location%20as%20a%20number%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20ptr%20%3D%20alloc(layout)%20as%20*mut%20u8%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20use%20pointer%20math%20and%20write%20a%20few%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20u8%20values%20to%20memory%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.write(86)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(1).write(14)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(2).write(73)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20ptr.add(3).write(64)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20Pie%20%7B%20secret_recipe%3A%20ptr%20as%20usize%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D%0Aimpl%20Deref%20for%20Pie%20%7B%0A%20%20%20%20type%20Target%20%3D%20f32%3B%0A%20%20%20%20fn%20deref(%26self)%20-%3E%20%26f32%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20interpret%20secret_recipe%20pointer%20as%20a%20f32%20raw%20pointer%0A%20%20%20%20%20%20%20%20let%20pointer%20%3D%20self.secret_recipe%20as%20*const%20f32%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20dereference%20it%20into%20a%20return%20value%20%26f32%0A%20%20%20%20%20%20%20%20unsafe%20%7B%20%26*pointer%20%7D%0A%20%20%20%20%7D%0A%7D%0Afn%20main()%20%7B%0A%20%20%20%20let%20p%20%3D%20Pie%3A%3Anew()%3B%0A%20%20%20%20%2F%2F%20%22make%20a%20pie%22%20by%20dereferencing%20our%20%0A%20%20%20%20%2F%2F%20Pie%20struct%20smart%20pointer%0A%20%20%20%20println!(%22%7B%3A%3F%7D%22%2C%20*p)%3B%0A%7D%0A
+  content_markdown: >
+    すでに見たことのあるスマートポインタ、例えば `Vec<T>` や `String` を考えてみましょう。
+
+
+    `Vec<T>` はバイトのメモリ領域を所有するスマートポインタです。Rust コンパイラはこれらのバイトに何が存在するかを知りません。スマートポインタは、管理しているメモリ領域からアイテムを取得する意味を解釈し、それらのバイト内のデータ構造の開始と終了位置を追跡し、最終的に生ポインタをデータ構造に参照外しして、使いやすいクリーンでエルゴノミックなインターフェース（例：`my_vec[3]`）を提供します。
+
+
+    同様に、`String` もバイトのメモリ領域を追跡し、書き込まれる内容を常に有効な `utf-8` に制限し、そのメモリ領域を型 `&str` に参照外しするのを助けます。
+
+    これら両方のデータ構造は、生ポインタのアンセーフな参照外しを使用してその役割を果たしています。
+
+    メモリの詳細：
+
+    * Rust には C の `malloc` に相当するものとして、自分のメモリ領域を管理するための [alloc](https://doc.rust-lang.org/std/alloc/fn.alloc.html) と [Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html) があります。
+
+- title: ヒープに割り当てられたメモリ
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=struct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%7D%0A
+  content_markdown: >
+    `Box` はデータをスタックからヒープに移動することを可能にするスマートポインタです。
+
+    参照外しすると、ヒープに割り当てられたデータを元の型であるかのようにエルゴノミックに使用できます。
+- title: 失敗するmainをもう一度みてみる
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Afmt%3A%3ADisplay%3B%0Ause%20std%3A%3Aerror%3A%3AError%3B%0A%0Astruct%20Pie%3B%0A%0A%23%5Bderive(Debug)%5D%0Astruct%20NotFreshError%3B%0A%0Aimpl%20Display%20for%20NotFreshError%20%7B%0A%20%20%20%20fn%20fmt(%26self%2C%20f%3A%20%26mut%20std%3A%3Afmt%3A%3AFormatter%3C%27_%3E)%20-%3E%20std%3A%3Afmt%3A%3AResult%20%7B%0A%20%20%20%20%20%20%20%20write!(f%2C%20%22This%20pie%20is%20not%20fresh!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Aimpl%20Error%20for%20NotFreshError%20%7B%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20%20%20%20%20Err(Box%3A%3Anew(NotFreshError))%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20-%3E%20Result%3C()%2C%20Box%3Cdyn%20Error%3E%3E%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Box%3A%3Anew(Pie)%3B%0A%20%20%20%20heap_pie.eat()%3F%3B%0A%20%20%20%20Ok(())%0A%7D%0A
+  content_markdown: >
+
+    Rustコードには多数のエラー表現がありますが、標準ライブラリにはエラーを記述するための普遍的なトレイト `std::error::Error` があります。
+
+
+    スマートポインタ `Box` を使用すると、型 `Box<dyn std::error::Error>` を共通のエラー返却型として利用できます。これにより、ヒープ上でエラーを伝播し、高レベルで特定の型を知らなくても操作できます。
+
+
+    Tour of Rust の初期段階で、`main` がエラーを返すことができると学びました。今では、プログラム内で発生する可能性のあるほぼすべての種類のエラーを記述できる型を返せます。ただし、そのエラーのデータ構造がRustの共通 `Error` トレイトを実装している必要があります。
+
+    ```rust
+
+    fn main() -> Result<(), Box<dyn std::error::Error>>
+
+    ```
+- title: 参照カウンタ
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20heap_pie%20%3D%20Rc%3A%3Anew(Pie)%3B%0A%20%20%20%20let%20heap_pie2%20%3D%20heap_pie.clone()%3B%0A%20%20%20%20let%20heap_pie3%20%3D%20heap_pie2.clone()%3B%0A%0A%20%20%20%20heap_pie3.eat()%3B%0A%20%20%20%20heap_pie2.eat()%3B%0A%20%20%20%20heap_pie.eat()%3B%0A%0A%20%20%20%20%2F%2F%20all%20reference%20count%20smart%20pointers%20are%20dropped%20now%0A%20%20%20%20%2F%2F%20the%20heap%20data%20Pie%20finally%20deallocates%0A%7D%0A
+  content_markdown: >
+    `Rc` はデータをスタックからヒープに移動するスマートポインタです。これにより、他の `Rc` スマートポインタをクローンでき、それらすべてがヒープ上に置かれたデータを不変的に借用することができます。
+
+
+    最後のスマートポインタが破棄されたときにのみ、ヒープ上のデータが解放されます。
+- title: 共有アクセス
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26mut%20self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22tastes%20better%20on%20the%20heap!%22)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20%2F%2F%20RefCell%20validates%20memory%20safety%20at%20runtime%0A%20%20%20%20%2F%2F%20notice%3A%20pie_cell%20is%20not%20mut!%0A%20%20%20%20let%20pie_cell%20%3D%20RefCell%3A%3Anew(Pie%7Bslices%3A8%7D)%3B%0A%20%20%20%20%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20but%20we%20can%20borrow%20mutable%20references!%0A%20%20%20%20%20%20%20%20let%20mut%20mut_ref_pie%20%3D%20pie_cell.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20mut_ref_pie.eat()%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%2F%2F%20mut_ref_pie%20is%20dropped%20at%20end%20of%20scope%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20%2F%2F%20now%20we%20can%20borrow%20immutably%20once%20our%20mutable%20reference%20drops%0A%20%20%20%20%20let%20ref_pie%20%3D%20pie_cell.borrow()%3B%0A%20%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2Cref_pie.slices)%3B%0A%7D%0A
+  content_markdown: >
+    `RefCell` は、データを取り込み、その中身に対する可変および不変の参照を借用できるようにする、スマートポインタによく保持されるコンテナデータ構造です。データを借用しようとするときに、Rustのメモリ安全性ルールを実行時に強制することで、借用の乱用を防ぎます。
+
+
+    **1つの可変参照または複数の不変参照のみが可能で、両方は不可です！**
+
+
+    これらのルールに違反すると、`RefCell` はパニックを起こします。
+- title: スレッド間共有
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Async%3A%3AMutex%3B%0A%0Astruct%20Pie%3B%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22only%20I%20eat%20the%20pie%20right%20now!%22)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20mutex_pie%20%3D%20Mutex%3A%3Anew(Pie)%3B%0A%20%20%20%20%2F%2F%20let's%20borrow%20a%20locked%20immutable%20reference%20of%20pie%0A%20%20%20%20%2F%2F%20we%20have%20to%20unwrap%20the%20result%20of%20a%20lock%0A%20%20%20%20%2F%2F%20because%20it%20might%20fail%0A%20%20%20%20let%20ref_pie%20%3D%20mutex_pie.lock().unwrap()%3B%0A%20%20%20%20ref_pie.eat()%3B%0A%20%20%20%20%2F%2F%20locked%20reference%20drops%20here%2C%20and%20mutex%20protected%20value%20can%20be%20used%20by%20someone%20else%0A%7D%0A
+  content_markdown: >
+    `Mutex` は、データを取り込み、その中のデータに対する可変および不変の参照を借用できるようにする、スマートポインタによく保持されるコンテナデータ構造です。これにより、オペレーティングシステムが1つのCPUスレッドのみがデータにアクセスできるように制限し、元のスレッドがそのロックされた借用を終えるまで他のスレッドをブロックすることで、借用の乱用を防ぎます。
+
+
+    マルチスレッドはTour of Rustの範囲外ですが、`Mutex` は複数のCPUスレッドが同じデータにアクセスする際の調整において基本的な部分です。
+
+
+    特別なスマートポインタ `Arc` は、`Rc` と同一ですが、参照カウントのスレッドセーフな増加を使用します。これは、多くの参照が同じ `Mutex` を持つためによく使われます。
+- title: スマートポインタを組み合わせる
+  code: >-
+    https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=use%20std%3A%3Acell%3A%3ARefCell%3B%0Ause%20std%3A%3Arc%3A%3ARc%3B%0A%0Astruct%20Pie%20%7B%0A%20%20%20%20slices%3A%20u8%2C%0A%7D%0A%0Aimpl%20Pie%20%7B%0A%20%20%20%20fn%20eat_slice(%26mut%20self%2C%20name%3A%20%26str)%20%7B%0A%20%20%20%20%20%20%20%20println!(%22%7B%7D%20took%20a%20slice!%22%2C%20name)%3B%0A%20%20%20%20%20%20%20%20self.slices%20-%3D%201%3B%0A%20%20%20%20%7D%0A%7D%0A%0Astruct%20SeaCreature%20%7B%0A%20%20%20%20name%3A%20String%2C%0A%20%20%20%20pie%3A%20Rc%3CRefCell%3CPie%3E%3E%2C%0A%7D%0A%0Aimpl%20SeaCreature%20%7B%0A%20%20%20%20fn%20eat(%26self)%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20use%20smart%20pointer%20to%20pie%20for%20a%20mutable%20borrow%0A%20%20%20%20%20%20%20%20let%20mut%20p%20%3D%20self.pie.borrow_mut()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%20take%20a%20bite!%0A%20%20%20%20%20%20%20%20p.eat_slice(%26self.name)%3B%0A%20%20%20%20%7D%0A%7D%0A%0Afn%20main()%20%7B%0A%20%20%20%20let%20pie%20%3D%20Rc%3A%3Anew(RefCell%3A%3Anew(Pie%20%7B%20slices%3A%208%20%7D))%3B%0A%20%20%20%20%2F%2F%20ferris%20and%20sarah%20are%20given%20clones%20of%20smart%20pointer%20to%20pie%0A%20%20%20%20let%20ferris%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22ferris%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20sarah%20%3D%20SeaCreature%20%7B%0A%20%20%20%20%20%20%20%20name%3A%20String%3A%3Afrom(%22sarah%22)%2C%0A%20%20%20%20%20%20%20%20pie%3A%20pie.clone()%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20ferris.eat()%3B%0A%20%20%20%20sarah.eat()%3B%0A%0A%20%20%20%20let%20p%20%3D%20pie.borrow()%3B%0A%20%20%20%20println!(%22%7B%7D%20slices%20left%22%2C%20p.slices)%3B%0A%7D%0A
+  content_markdown: >
+    スマートポインタは限定的に見えるかもしれませんが、非常に強力な組み合わせを作ることができます。
+
+
+    `Rc<Vec<Foo>>` - 複数のスマートポインタをクローンし、ヒープ上の不変データ構造の同じベクタを借用することができます。
+
+
+    `Rc<RefCell<Foo>>` - 複数のスマートポインタが同じ構造体 `Foo` を可変/不変に借用する能力を持つことができます。
+
+
+    `Arc<Mutex<Foo>>` - 複数のスマートポインタがCPUスレッドで排他的に一時的な可変/不変の借用をロックする能力を持つことができます。
+
+
+    メモリの詳細:
+
+    * これらの多くの組み合わせにはテーマがあります。内部データを変更するために不変データ型（おそらく複数のスマートポインタによって所有されている）を使用します。これはRustにおける「内部可変性」パターンと呼ばれます。このパターンは、Rustのコンパイル時チェックと同じレベルの安全性で、実行時にメモリ使用のルールを曲げることができます。
+
+- title: 第８章 - まとめ
+  content_markdown: >
+    スマートポインタはRustプログラミングのイディオムであり、非常に一般的なメモリ使用パターンを再作成する必要がありません。
+
+    それらを使えば、最も難しい課題にも取り組む準備が整います！
+
+    Rustの基礎を理解したところで、より大規模なプロジェクトの作り方について少し話しましょう。第9章では、一枚のページに収まるコード行から脱却します。
