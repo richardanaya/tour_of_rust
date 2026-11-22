@@ -31,7 +31,7 @@ echo.
 echo Options:
 echo    serve               Start the Python webserver
 echo    test                Start the test Python webserver
-echo    publish             Publish the website via Github pages
+echo    publish             Show how to publish (GitHub Actions)
 echo    lint                Run Prettier
 echo    clean               Remove docs and wasm html pages
 exit /b 0
@@ -46,21 +46,16 @@ exit /b 0
 :test
 call :clean
 call node generate.js lessons docs
-call node generate.js wasm docs\webassembly
+call node generate.js wasm docs/webassembly
 call cd docs && python -m http.server 8080
 exit /b 0
 
 :publish
-call :clean
-call git branch -D gh-pages
-call git checkout -b gh-pages
-call node generate.js lessons docs
-call node generate.js wasm docs/webassembly
-call mv docs\* .
-call git add . || true
-call git commit -m 'generating new html' || true
-call git push -f origin gh-pages || true
-call git checkout master
+echo The site is published automatically by GitHub Actions on push to master.
+echo To republish without a new commit:
+echo   gh workflow run pages.yml --ref master
+echo or use the Actions tab: Deploy to GitHub Pages - Run workflow.
+echo Do not force-push the gh-pages branch; it is no longer the Pages source.
 exit /b 0
 
 :lint

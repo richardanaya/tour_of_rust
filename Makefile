@@ -6,16 +6,12 @@ test: clean
 	@node generate.js lessons docs
 	@node generate.js wasm docs/webassembly
 	@cd docs && python3 -m http.server 8080
-publish: clean
-	git branch -D gh-pages
-	git checkout -b gh-pages
-	@node generate.js lessons docs
-	@node generate.js wasm docs/webassembly
-	mv docs/* .
-	git add . || true
-	git commit -m 'generating new html' || true
-	git push -f origin gh-pages || true
-	git checkout master
+publish:
+	@echo "The site is published automatically by GitHub Actions on push to master."
+	@echo "To republish without a new commit:"
+	@echo "  gh workflow run pages.yml --ref master"
+	@echo "or use the Actions tab: Deploy to GitHub Pages → Run workflow."
+	@echo "Do not force-push the gh-pages branch; it is no longer the Pages source."
 lint:
 	#prettier --write lessons/*/*.yaml
 	#prettier --write wasm/*/*.yaml
