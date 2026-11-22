@@ -1,9 +1,13 @@
 - title: >-
-    Salut, <img src="/favicon-32x32.png" style="display:inline;
+    Salut Lume! <img src="/favicon-32x32.png" style="display:inline;
     vertical-align:bottom">
   code: >-
     https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&code=fn%20main()%20%7B%0A%20%20%20%20println!(%22Salut%2C%20%F0%9F%A6%80%22)%3B%0A%7D%0A
   content_markdown: |
+    <img src="/intro.png" alt="Welcome to the Tour of Rust" style="width: 100%; margin-bottom: 20px; border-radius: 10px;">
+
+    **3 ani de TourOfRust fericiți! 🎉**
+
     Bun venit la *Turul limbajului Rust*. Acesta a fost conceput pentru a fi un
     ghid pas cu pas al caracteristicilor limbajului Rust.
     Rust este deseori considerat un limbaj greu de învățat, dar noi sperăm că, până
@@ -31,6 +35,7 @@
     * [ภาษาไทย](00_th.html)
     * [Italian](00_it.html)
     * [Tiếng Việt](00_vi.html)
+    * [العربية](00_ar.html)
 
     Dacă aveți sugestii în legătură cu conținutul sau doriți să contribuiți la
     traducere, puteți intra pe
