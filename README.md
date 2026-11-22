@@ -44,6 +44,7 @@ This project also aims to provide this book in as many languages as possible.
 * Ελληνικά - [DoubleHyphen](https://github.com/DoubleHyphen/)
 * Italian - [Andrea Manzini](https://github.com/ilmanzo/)
 * العربية - [Fethienv](https://github.com/Fethienv)
+* Українська - [Arnaghad](https://github.com/Arnaghad)
 
 
 # Looking for translators!
