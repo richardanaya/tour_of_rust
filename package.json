@@ -10,15 +10,15 @@
     "watch": "nodemon -w lessons/**/* -w wasm/**/* -e yaml --exec npm run serve"
   },
   "dependencies": {
-    "js-yaml": "4.1.0",
-    "showdown": "^1.9.1"
+    "js-yaml": "^5.5.0",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.26.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.20",
-    "prettier": "^2.2.1",
-    "rimraf": "^3.0.2"
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.10.1",
+    "rimraf": "^6.1.4"
   }
 }

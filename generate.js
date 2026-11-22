@@ -1,6 +1,6 @@
 const showdown = require("showdown");
 const fs = require("fs");
-const yaml = require("js-yaml");
+const { load } = require("js-yaml");
 
 const lessonSource = process.argv[2];
 const targetDir = process.argv[3];
@@ -48,7 +48,7 @@ const getDirectories = (source) =>
  * @param {string} path
  * @returns {any}
  */
-const getYaml = (path) => yaml.load(fs.readFileSync(path));
+const getYaml = (path) => load(fs.readFileSync(path, "utf8"));
 
 const languages = getDirectories(lessonSource);
 const commonWords = {};
