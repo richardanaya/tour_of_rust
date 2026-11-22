@@ -33,20 +33,18 @@ echo    serve               Start the Python webserver
 echo    test                Start the test Python webserver
 echo    publish             Show how to publish (GitHub Actions)
 echo    lint                Run Prettier
-echo    clean               Remove docs and wasm html pages
+echo    clean               Remove generated html pages
 exit /b 0
 
 :serve
 call :clean
 call node generate.js lessons docs beta
-call node generate.js wasm docs\webassembly beta
 call cd docs && python -m http.server 8080
 exit /b 0
 
 :test
 call :clean
 call node generate.js lessons docs
-call node generate.js wasm docs/webassembly
 call cd docs && python -m http.server 8080
 exit /b 0
 
@@ -60,10 +58,8 @@ exit /b 0
 
 :lint
 call prettier --write .\lessons\*\*.yaml
-call prettier --write .\wasm\*\*.yaml
 exit /b 0
 
 :clean
 del .\docs\*.html
-del .\docs\webassembly\*.html
 exit /b 0

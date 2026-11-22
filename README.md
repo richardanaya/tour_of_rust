@@ -104,7 +104,6 @@ The published site is the contents of `docs/` after `npm ci && npm run build`
 * Chapter 4 released in Chinese and Spanish
 * Chapter 3 released in French
 * Minor fixes
-* Chapter 2 of Tour of WebAssembly released
 
 ## Release 4 - May 30, 2020
 * Chapter 5 released on ownership and sharing
@@ -112,7 +111,6 @@ The published site is the contents of `docs/` after `npm ci && npm run build`
 * French translations for chapter 1-3
 * Brazillian portuguese translations for chapter 2-4
 * Spanish translations for chapter 3
-* Starting new section for WebAssembly
 
 ## Release 3 - May 23, 2020
 * Chapter 4 released on generic data structures
