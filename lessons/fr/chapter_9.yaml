@@ -50,7 +50,7 @@
 - title: Création d'un module
   content_markdown: |
     Lorsqu'un développeur écrit un programme, il se retrouve généralement
-    avec une hiéarchie de fichiers organisés en répertoire. Rust permet
+    avec une hiérarchie de fichiers organisés en répertoire. Rust permet
     d'organiser son code sous forme de modules tout en préservant la structure
     des fichiers.
 
