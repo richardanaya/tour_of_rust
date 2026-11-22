@@ -136,7 +136,7 @@
 
     Cela n'est pas un problème lorsque que la référence est passée en paramètre
 
-    d'une fonction puisque la référence n'exite que dans la portée de la
+    d'une fonction puisque la référence n'existe que dans la portée de la
     fonction.
 
 
