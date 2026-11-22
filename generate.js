@@ -105,12 +105,35 @@ function getWord(words, lang, w) {
   return words.en[w];
 }
 
+const SCRIPT_FONTS = {
+  ja: "family=Noto+Serif+JP:wght@400;700",
+  ko: "family=Noto+Serif+KR:wght@400;700",
+  "zh-cn": "family=Noto+Serif+SC:wght@400;700",
+  "zh-tw": "family=Noto+Serif+TC:wght@400;700",
+  th: "family=Noto+Serif+Thai:wght@400;700",
+  ar: "family=Noto+Naskh+Arabic:wght@400;700",
+  fa: "family=Noto+Naskh+Arabic:wght@400;700",
+  ru: "family=Noto+Serif:wght@400;700",
+  ua: "family=Noto+Serif:wght@400;700",
+  gr: "family=Noto+Serif:wght@400;700",
+  ne: "family=Noto+Serif+Devanagari:wght@400;700",
+};
+
 /**
- *
- * @param {string[]} words
+ * Load a script-specific Noto family only for languages Geist does not cover.
  * @param {string} lang
  * @returns {string}
  */
+function getScriptFontLinks(lang) {
+  const q = SCRIPT_FONTS[lang];
+  if (!q) {
+    return "";
+  }
+  return `<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?${q}&display=swap">`;
+}
+
 const getHead = (words, lang) => {
   let rtl_langs = ["ar"];
   let lang_dir = rtl_langs.includes(lang) ? "rtl" : "ltr";
@@ -132,10 +155,9 @@ const getHead = (words, lang) => {
         <meta name="theme-color" content="#ff6801"/>
 
         <link rel="stylesheet" href="tour.css">
-        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBQrPtMoH62xUZKdK0vfQr4LLkw6A.woff2" as="font" />
-        <link rel="preload" href="https://fonts.gstatic.com/s/neuton/v12/UMBTrPtMoH62xUZCz4g6UCj1Bg.woff2" as="font" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,400;0,700;1,400&display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&display=swap" />
+        <link rel="preload" href="fonts/GeistSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+        ${getScriptFontLinks(lang)}
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
